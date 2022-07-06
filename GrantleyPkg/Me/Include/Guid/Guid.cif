@@ -1,0 +1,10 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Include\Guid\"
+	RefName = "GrantleyPkg.Me.Include.Guid.Guid"
+[files]
+"MeFwModesGuid.h"	
+"SpsAcpiTableLocatorGuid.h"	
+"SpsInfoHobGuid.h"	
+<endComponent>

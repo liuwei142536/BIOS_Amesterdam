@@ -1,0 +1,120 @@
+TOKEN
+    Name  = "TcgStorageSecurity_SUPPORT"
+    Value  = "1" 
+    Help  = "Main switch to enable TcgStorageSecurity support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE"
+    Value  = "0"
+    Help  = "Multiple device Security setting displayed on same page. To enable this token, AMITSE Source should be present in the project."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "ENTERPRISE_SSC_DEVICE_SUPPORT"
+    Value  = "0"
+    Help  = "Enable support for Enterprise SSC device. Read CHM/Porting document on the features and limitations of these drives."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "RUBY_SSC_DEVICE_SUPPORT"
+    Value  = "0"
+    Help  = "Enable support for Ruby SSC device."
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "TCG_STORAGE_SEC_SAVE_PCI_ROOTBRIDGE_REGS"
+    Value  = "1"
+    Help = "If this token value is 1, then the PCI configuration space of PCI Root Bridge will be saved. This is for restoring the Nvme controller registers on S3 resume to unlock the Nvme devices"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TCG_STORAGE_SEC_VERBOSE_PRINT"
+    Value  = "0"
+    Help  = "Switch to enable TcgStorageSecurity Debug messages"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+TOKEN
+    Name  = "FREEZE_LOCK_OPAL"
+    Value  = "1"
+    Help  = "Switch to enable sending BlockSID command in ReadyToBoot event"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "ENABLE_DEVICE_RESET_THRU_PSID"
+    Value = "0"
+    Help = "Using the PSID value reset the device to the Original Factory State"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "ENABLE_DEVICE_RESET_THRU_PSID"
+    Value = "1"
+    Help = "By Default, Device Reset Support is enabled for Enterprise Devices alone. Using the PSID value reset the device to the Original Factory State"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "ENTERPRISE_SSC_DEVICE_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "FORCE_TCG_OPAL_PASSWORD_PROMPT"
+    Value = "1"
+    Help = "Enable to prompt for TCG password always even in warm reset when device locking is enabled. Enabled by default to avoid storing TCG password in NVRAM as it leads to Security Vulnerability."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "ATTEMPT_PADDED_PASSWORD_FOR_UNLOCK"
+    Value = "0"
+    Help = "1 - Device locked using TcgStorageSecurity_05 or less can be unlocked. 0 - Device locked using TcgStorageSecurity_05 or less cannot be unlocked."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+#Cloned to override PcdDebugPrintErrorLevel in TcgStorageSecurity module.
+PcdMapping
+    Name  = "PcdDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0xFFFFFFFF"
+    Override  = "AmiModulePkg.TcgStorageSecurity"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "TCG_STORAGE_SEC_VERBOSE_PRINT" "=" "1"
+End
+
+INFComponent
+    Name  = "TcgStorageSecurity"
+    File  = "TcgStorageSecurity.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "TcgStorageSecurity_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name = "gAmiPostManagerProtocolGuid"
+    Parent = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End

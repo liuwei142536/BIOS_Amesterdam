@@ -1,0 +1,9 @@
+<component>
+	name = "S3Resume2Pei"
+	category = ModulePart
+	RefName = "S3Resume2Pei"
+[INF]
+"S3Resume2Pei.inf"
+[files]
+"S3Resume2Pei.sdl"	
+<endComponent>

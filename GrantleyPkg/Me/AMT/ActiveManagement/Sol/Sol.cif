@@ -1,0 +1,10 @@
+<component>
+	name = "Sol"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\ActiveManagement\Sol\"
+	RefName = "GrantleyPkg.Sol"
+[INF]
+"Dxe\PciSerial.inf"
+[files]
+"Sol.sdl"	
+<endComponent>

@@ -1,0 +1,22 @@
+<component>
+	name = "UsbPei"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Usb\Pei\"
+	RefName = "UsbPei"
+[INF]
+"UsbPei.inf"
+[files]
+"UsbPei.sdl"
+"UsbPeiElinks.txt"
+"PeiUhci.c"
+"PeiOhci.c"
+"PeiOhciBoard.c"
+"PeiOhci.h"
+"PeiEhci.c"
+"PeiEhciBoard.c"
+"PeiEhci.h"
+"PeiXhci.c"
+"PeiXhci.h"
+[parts]
+"UsbPeiPpi"
+<endComponent>

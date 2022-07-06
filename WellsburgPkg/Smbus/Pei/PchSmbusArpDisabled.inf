@@ -1,0 +1,88 @@
+## @file
+#  Component description file for PchSmbus module
+#  This version will NOT include ARP support.
+#
+#@copyright
+#  Copyright (c)  1999 - 2012 Intel Corporation. All rights reserved
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#  This file contains a 'Sample Driver' and is licensed as such
+#  under the terms of your license agreement with Intel or your
+#  vendor.  This file may be modified by the user, subject to
+#  the additional terms of the license agreement
+#
+
+################################################################################
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+################################################################################
+[Defines]
+INF_VERSION          = 0x00010005
+BASE_NAME            = PchSmbusArpDisabled
+FILE_GUID            = 643DF777-F312-42ed-81CC-1B1F57E18AD6
+MODULE_TYPE          = PEIM
+VERSION_STRING       = 1.0
+ENTRY_POINT          = InitializePchSmbusPeim
+################################################################################
+#
+# Sources Section - list of files that are required for the build to succeed.
+#
+################################################################################
+[Sources]
+  PchSmbus.h
+  PchSmbusEntry.c
+  PchSmbusArpdisabled.c
+  ..\Common\PchSmbusExec.c
+  ..\Common\PchSmbusCommon.h	#AptioV server override : Adding files included in .c to INF for component download.
+  
+################################################################################
+#
+# Package Dependency Section - list of Package files that are required for
+#                              this module.
+#
+################################################################################
+[Packages]
+  MdePkg/MdePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec  
+
+################################################################################
+#
+# Library Class Section - list of Library Classes that are required for
+#                         this module.
+#
+################################################################################
+[LibraryClasses]
+  IoLib
+  PcdLib
+  DebugLib
+  PeimEntryPoint
+  PeiServicesLib
+  MemoryAllocationLib
+  PchPlatformLib
+################################################################################
+#
+# Protocol C Name Section - list of Protocol and Protocol Notify C Names
+#                           that this module uses or produces.
+#
+################################################################################
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+[Ppis]
+  gPeiSmbusPolicyPpiGuid                # PPI ALWAYS_CONSUMED
+  gEfiPeiMemoryDiscoveredPpiGuid        # PPI ALWAYS_CONSUMED
+  gEfiPeiSmbus2PpiGuid
+  gEfiPeiSmbusPpiGuid                   # PPI ALWAYS_CONSUMED
+
+[Guids]
+
+[Depex]
+  gPeiSmbusPolicyPpiGuid

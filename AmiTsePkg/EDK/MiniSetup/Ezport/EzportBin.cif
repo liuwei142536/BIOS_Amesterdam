@@ -1,0 +1,17 @@
+<component>
+	name = "TSE Sytle Binary - Ezport"
+	category = ModulePart
+	LocalRoot = "AmiTsePkg\EDK\MiniSetup\Ezport\"
+	RefName = "AMITSE.EzportBin"
+[INF]
+"EzportBin.inf"
+"EzportBinBT32.inf"
+[files]
+"EzportBin.sdl"	
+"StyleStr.uni"
+"StyleTokens.c"
+"HotkeyBin.h"
+"HotkeyBin.c"
+"HotclickBin.h"
+"HotclickBin.c"
+<endComponent>

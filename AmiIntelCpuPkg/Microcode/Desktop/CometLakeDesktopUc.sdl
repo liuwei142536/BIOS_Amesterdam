@@ -1,0 +1,87 @@
+TOKEN
+	Name  = "DESKTOP_A065X_COMETLAKE"
+	Value  = "0"
+    Help = "Intel(R) CometLake"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "DESKTOP_M22A0650_COMETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) CometLake-S62 G-0 Stepping(A0650)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M22A0651_COMETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) Comet Lake-S102 P-0 Stepping(A0651)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M22A0653_COMETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) Comet Lake-S62 G-1 Stepping(A0653)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M22A0654_COMETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) Comet Lake-S102 P-1 Stepping(A0654)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M22A0655_COMETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) Comet Lake-S102 Q-0 Stepping(A0655)"
+    TokenType = Boolean    
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22A0650_000000BE.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) CometLake-S62 G-0 Stepping(A0650)"
+    Token = "DESKTOP_M22A0650_COMETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22A0651_000000C2.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Comet Lake-S102 P-0 Stepping(A0651)"
+    Token = "DESKTOP_M22A0651_COMETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22A0653_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Comet Lake-S62 G-1 Stepping(A0653)"
+    Token = "DESKTOP_M22A0653_COMETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22A0654_000000C6.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Comet Lake-S102 P-1 Stepping(A0654)"
+    Token = "DESKTOP_M22A0654_COMETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22A0655_000000EE.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Comet Lake-S102 Q-0 Stepping(A0655)"
+    Token = "DESKTOP_M22A0655_COMETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+

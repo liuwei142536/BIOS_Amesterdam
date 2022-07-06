@@ -1,0 +1,24 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Include\Library\"
+	RefName = "AMIDebuggerPkg.Bin.IncludeLibrary"
+[files]
+"AMIpeidebug.h"	
+"AMIpeidebugX64.h"	
+"AMIPeiGUIDs.h"	
+"DbgPerf.h"
+"EHCI.h"	
+"misc.h"	
+"Pei8259.h"	
+"peidebug.h"	
+"PeiSer.h"	
+"PeiDebugSupport.h"
+"relocdbg.h"
+"ser_acc.h"	
+"ser_regs.h"	
+"ser_xp.h"	
+"transport.h"	
+"UsbDebugPort.h"	
+"xportcmd.h"		
+<endComponent>

@@ -1,0 +1,17 @@
+<component>
+    name = "AmiNetworkPkg"
+    category = eModule
+    LocalRoot = "AmiNetworkPkg\"
+    RefName = "AmiNetworkPkg"
+[INF]
+"Library\AmiNetworkPostManagerLib\AmiNetworkPostManagerLib.inf"
+"Library\AmiNetworkCommonLib\AmiNetworkCommonLib.inf"
+[files]
+"AmiNetworkPkg.sdl"	
+"AmiNetworkPkg.dec"	
+[parts]
+"AmiNetworkPkg.Guid"
+"AmiNetworkPkg.Protocol"
+"AmiNetworkPkg.Library"
+"AmiNetworkPkg.LibraryInstances"
+<endComponent>

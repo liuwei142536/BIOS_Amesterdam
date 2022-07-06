@@ -1,0 +1,316 @@
+﻿//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+//*++
+//
+//Copyright (c)  2009 Intel Corporation. All rights reserved
+//This software and associated documentation (if any) is furnished
+//under a license and may only be used or copied in accordance
+//with the terms of the license. Except as permitted by such
+//license, no part of this software or documentation may be
+//reproduced, stored in a retrieval system, or transmitted in any
+//form or by any means without the express written consent of
+//Intel Corporation.
+//
+//Module Name:
+//
+//  IccStrings.uni
+//
+//Abstract:
+//
+// Strings for Icc advanced menu.
+//
+//--*/
+
+#langdef   x-AMI "AmiMappingLanguage"
+//---------------------------------------------------------------------------
+// ICC for AMT
+//---------------------------------------------------------------------------
+#string STR_ICC_FORM                    #language en-US "Intel ICC"
+
+//
+// WDT
+//
+#string STR_ICC_WDT_ENABLE              #language en-US "ICC/OC Watchdog Timer"
+                                        #language x-AMI "ICC001"
+#string STR_ICC_WDT_ENABLE_HELP         #language en-US "When enabled, the ICC/OC watchdog timer is exposed to OS as an ACPI device. WDT HW is always used by BIOS when clock settings are changed."
+
+//
+// Set Clock Enables
+//
+#string STR_ICC_CLOCK_ENABLING          #language en-US "ICC Unused Clocks"
+                                        #language x-AMI "ICC002"
+#string STR_ICC_CLOCK_ENABLING_HELP     #language en-US "Disabled causes unused clocks to remain running and powered. Enabled causes the clocks of empty PCI/PCIe slots to be shut down and powered off."
+
+//// Lock ICC registers//
+#string STR_ICC_LOCK                    #language en-US "ICC Locks after EOP"
+                                        #language x-AMI "ICC003"
+#string STR_ICC_LOCK_HELP               #language en-US "Specifies the ICC registers that can be written after end-of-post. Default - Dynamic registers for runtime clock adjustments are left writeable. All Locked - No clock register adjustments allowed after EOP. All Unlocked - All ICC registers can be written after EOP."
+#string STR_ICC_LOCK_HELP_CUSTOM        #language en-US "Specifies the ICC registers that can be written after end-of-post. Default - Dynamic registers for runtime clock adjustments are left writeable. All Locked - No clock register adjustments allowed after EOP. All Unlocked - All ICC registers can be written after EOP. Custom - keep current settings created outside of BIOS."
+#string STR_ICC_LOCK_DEFAULT            #language en-US "Default"
+#string STR_ICC_LOCK_ALL                #language en-US "All Locked"
+#string STR_ICC_UNLOCK_ALL              #language en-US "All Unlocked"
+#string STR_ICC_LOCK_CUSTOM             #language en-US "Custom"
+
+//
+// ICC Profile
+//
+#string STR_ICC_PROFILE                 #language en-US "ICC Profile"
+                                        #language x-AMI "ICC004"
+#string STR_ICC_PROFILE_HELP            #language en-US "Select clock profile that corresponds to the platform configuration. Profiles are defined by the OEM and platform capabilites. Tpically, profile 0 has failsafe settings. Other profiles correspond to WiMax, 3G, or Overclocking settings."
+#string STR_ICC_PLL_SHUTDOWN            #language en-US "ICC PLL Shutdown"
+                                        #language x-AMI "ICC005"
+#string STR_ICC_PLL_SHUTDOWN_HELP       #language en-US "This option controls the programming of the ICC PLL shutdown flow. When enabled, this ICC PM register will be programmed on every non-Sx boot."
+
+//
+// ICC Clocking Library
+//
+#string STR_ICC_FORM_HELP               #language en-US "Integrated Clock Control options"
+#string STR_ICC_LIB_VERSION             #language en-US "ICC Clocking Library"
+#string STR_ICC_LIB_VERSION_NR          #language en-US "N/A"
+
+//
+// Clock Settings
+//
+#string STR_ICC_CLOCK_NUMBER                #language en-US "placeholder for clock number"
+#string STR_ICC_CLOCK2_TITLE                #language en-US "DMI CLOCK placeholder for clock 2 title"
+#string STR_ICC_CLOCK3_TITLE                #language en-US "PCI CLOCK placeholder for clock 3 title"
+#string STR_ICC_CLOCK_DEFAULT_SETTINGS      #language en-US "    Default Clock Settings"
+#string STR_ICC_CLOCK2_DEFAULT_TEXT         #language en-US "100.00MHz 0.50% Downspread"
+#string STR_ICC_CLOCK3_DEFAULT_TEXT         #language en-US "100.00MHz 0.50% Downspread"
+
+#string STR_ICC_CLOCK_FREQ_RANGE            #language en-US "    Frequency Range Limits"
+#string STR_ICC_CLOCK2_FREQ_RANGE_TEXT       #language en-US "uninitialized MHz"
+#string STR_ICC_CLOCK3_FREQ_RANGE_TEXT       #language en-US "uninitialized MHz"
+
+#string STR_ICC_CLOCK_MAX_SPREAD            #language en-US "    Maximum Spread %"
+#string STR_ICC_CLOCK2_MAX_SPREAD_TEXT      #language en-US "uninitialized %"
+#string STR_ICC_CLOCK3_MAX_SPREAD_TEXT      #language en-US "uninitialized %"
+
+#string STR_ICC_CLOCK_SPREAD_ADJUSTMENTS    #language en-US "    Spread Mode Adjustments"
+#string STR_ICC_CLOCK2_SPREAD_ADJUSTMENTS_TEXT #language en-US "Uninitialized"
+#string STR_ICC_CLOCK3_SPREAD_ADJUSTMENTS_TEXT #language en-US "Uninitialized"
+
+#string STR_ICC_CLOCK_FREQUENCY1            #language en-US "    Clock Frequency"
+                                            #language x-AMI "ICC006"
+#string STR_ICC_CLOCK_FREQUENCY2            #language en-US "    Clock Frequency"
+                                            #language x-AMI "ICC00A"
+#string STR_ICC_CLOCK_FREQUENCY_HELP        #language en-US "Specifies new frequency to be applied. Frequency is rounded to nearest valid value. Allowed range is limited by the Max/Min supported frequencies. Changes are not applied until settings are saved and platform resets."
+
+#string STR_ICC_CLOCK_SPREAD_PERCENT1       #language en-US "    Spread %"
+                                            #language x-AMI "ICC007"
+#string STR_ICC_CLOCK_SPREAD_PERCENT2       #language en-US "    Spread %"
+                                            #language x-AMI "ICC008"
+#string STR_ICC_CLOCK_SPREAD_PERCENT_HELP   #language en-US "Specifies the amount of spread spectrum clocking to be applied to the base clock frequency in 0.01% increments. Allowed range is limited by Maximum Spread % and supported Spread mode Adjustements. If Changes Allowed, a value between 0 and Max Spread % can be specified. Value is adjusted to settings supported by HW. If only Halt Allowed, only 0% and default spread % can be specified. Changes are not applied until settings are saved and platform resets."
+
+#string STR_ICC_CLOCK_SPREAD_MODE1          #language en-US "    Spread Mode"
+#string STR_ICC_CLOCK_SPREAD_MODE2          #language en-US "    Spread Mode"
+#string STR_ICC_CLOCK_SPREAD_MODE_HELP      #language en-US "Determines method of clock spectrum distribution applied to the base frequency. Changes are not appied until settings are saved and platform resets."
+
+#string STR_ICC_CLOCK_DMI_PEG_RATIO         #language en-US "    DMI/PEG Ratio"
+#string STR_ICC_CLOCK_DMI_PEG_RATIO_HELP    #language en-US "Sets the DMI to PEG clock ratio used when overclocking BCLK. Ratiodivides down the PEG clock from the DMI clock to keep the PEG frequency around expected 100MHz. When adjusting the ratio on Haswell CPU,  the platform utilizes a special warm reset flow to allow the ratio in the CPU and PCH to be synchronized."
+
+#string STR_ICC_DMI_PEG_RATIO_1_TO_1        #language en-US "5:5"
+#string STR_ICC_DMI_PEG_RATIO_5_TO_4        #language en-US "5:4"
+#string STR_ICC_DMI_PEG_RATIO_5_TO_3        #language en-US "5:3"
+#string STR_ICC_DMI_PEG_RATIO_5_TO_2        #language en-US "5:2"
+
+#string STR_ICC_CLOCK_2_LIB_ERROR           #language en-US "Clock 2 Settings unavailable"
+#string STR_ICC_CLOCK_3_LIB_ERROR           #language en-US "Clock 3 Settings unavailable"
+//
+// Support strings
+// 
+#string STR_ICC_CLOCK_USE_BCLK              #language en-US "BCLK"
+#string STR_ICC_CLOCK_USE_DMI               #language en-US "DMI"
+#string STR_ICC_CLOCK_USE_PEG               #language en-US "PEG"
+#string STR_ICC_CLOCK_USE_PCIE              #language en-US "PCIe"
+#string STR_ICC_CLOCK_USE_PCI33             #language en-US "PCI33"
+#string STR_ICC_CLOCK_USE_RESERVED          #language en-US ""
+#string STR_ICC_CLOCK_USE_SATA              #language en-US "SATA"
+#string STR_ICC_CLOCK_USE_USB3              #language en-US "USB3"
+#string STR_ICC_CLOCK_USE_GFX               #language en-US "GFX"
+#string STR_ICC_CLOCK_USE_GFX_NS            #language en-US "GFX NS"
+#string STR_ICC_CLOCK_USE_27_GFX            #language en-US "27Mhz down GFX"
+#string STR_ICC_CLOCK_USE_VGA               #language en-US "VGA"
+#string STR_ICC_CLOCK_USE_LEGACY_USB        #language en-US "Legacy USB"
+#string STR_ICC_CLOCK_USE_14_MHZ            #language en-US "14.31818 MHz"
+#string STR_ICC_CLOCK_USE_NOT_USED          #language en-US "Not used"
+
+#string STR_ICC_CLOCK_USAGE_1                #language en-US "clock usage1"
+#string STR_ICC_CLOCK_USAGE_2                #language en-US "clock usage2"
+
+#string STR_ICC_NEW_FREQUENCY1              #language en-US "New frequency [10kHz]"
+#string STR_ICC_NEW_FREQUENCY2              #language en-US "New frequency [10kHz]"
+#string STR_ICC_NEW_FREQUENCY_HELP          #language en-US "Frequency in 10kHz increments. Frequency will be automatically rounded to nearest valid value. Allowed range is limited by Max / Min supported frequencies. Changes will not be applied unless 'Apply settings' is pressed."
+
+#string STR_ICC_SSC_MODE_SELECTION_HELP     #language en-US "Spread Spectrum Clocking mode. Determines method of clock spectrum distribution around base frequency. Changes will not be applied unless 'Apply settings' is pressed."
+
+#string STR_ICC_DMI_PEG_RATIO               #language en-US "    DMI/PEG Ratio"
+											#language x-AMI "ICC009"
+#string STR_ICC_DMI_PEG_RATIO_HELP          #language en-US "DMI/PEG Ratio. Sets the DMI/PEG clock divider ratio for use when overclocking BCLK"
+
+//
+// spaces at the end of the following 4 strings are there on purpose.
+//
+#string STR_ICC_MODE_UP                     #language en-US "Up "
+#string STR_ICC_MODE_CENTRE                 #language en-US "Center "
+#string STR_ICC_MODE_DOWN                   #language en-US "Down "
+#string STR_ICC_MODE_NONE                   #language en-US "None "
+
+#string STR_ICC_SSC_NEW_PERCENT_HELP        #language en-US "Clock spectrum spread in 0.01% increments. Determines spectrum deviation away from base frequency. Allowed range is limited by Max supported SSC%. Changes will not be applied unless 'Apply settings' is pressed."
+
+#string STR_YES                             #language en-US "yes"
+#string STR_NO                              #language en-US "no"
+
+#string STR_ICC_MAX_FREQUENCY               #language en-US "Maximum supported frequency"
+#string STR_ICC_MIN_FREQUENCY               #language en-US "Minimum supported frequency"
+#string STR_ICC_CURRENT_FREQUENCY           #language en-US "Current frequency"
+#string STR_ICC_SSC_MODES                   #language en-US "Supported SSC modes"
+#string STR_ICC_SSC_CURRENT_MODE            #language en-US "Current SSC mode"
+#string STR_ICC_SSC_MAX                     #language en-US "Maximum supported SSC %"
+#string STR_ICC_SSC_CURRENT                 #language en-US "Current SSC %"
+
+#string STR_ICC_MAX_FREQUENCY_VALUE         #language en-US "many MHz"
+#string STR_ICC_MIN_FREQUENCY_VALUE         #language en-US "many MHz"
+#string STR_ICC_CURRENT_FREQUENCY_VALUE     #language en-US "many MHz"
+#string STR_ICC_SSC_MODES_VALUE             #language en-US "many MHz"
+#string STR_ICC_SSC_CURRENT_MODE_VALUE      #language en-US "many MHz"
+#string STR_ICC_SSC_MAX_VALUE               #language en-US "many MHz"
+#string STR_ICC_SSC_CURRENT_VALUE           #language en-US "many MHz"
+
+#string STR_ICC_ZERO                        #language en-US "0"
+
+#string STR_ICC_MSGBOX_BAD_PROTOCOL         #language en-US "Library failed to load."
+#string STR_ICC_MSGBOX_AFTER_EOP            #language en-US "Library disabled after End Of Post event."
+#string STR_ICC_MSGBOX_INIT_ERROR_FW        #language en-US "Firmware error."
+#string STR_ICC_MSGBOX_INIT_ERROR_HECI      #language en-US "HECI error."
+#string STR_ICC_MSGBOX_INIT_ERROR_STRANGE   #language en-US "Initialization error."
+#string STR_ICC_MSGBOX_FINAL                #language en-US " "
+
+
+#string STR_ICC_MSGBOX_NO_DYNAMIC           #language en-US "Error: The change cannot be performed immediately. Try using 'permanent' option to perform clock change after reboot."
+#string STR_ICC_MSGBOX_LOCKED               #language en-US "Error: Overclocking registers locked, can't apply changes."
+#string STR_ICC_MSGBOX_FREQ_HIGH            #language en-US "Error: Frequency too high."
+#string STR_ICC_MSGBOX_FREQ_LOW             #language en-US "Error: Frequency too low."
+#string STR_ICC_MSGBOX_SSC_HIGH             #language en-US "Error: SSC parameter too high."
+#string STR_ICC_MSGBOX_SSC_LOW              #language en-US "Error: SSC parameter too low. Increase it or set to 0%%."
+#string STR_ICC_MSGBOX_SSC_MODE             #language en-US "Error: Unsupported SSC mode selected."
+#string STR_ICC_MSGBOX_SSC_MODE_NOT_MATCH   #language en-US "Error: Frequency and SSC mode do not match."
+#string STR_ICC_MSGBOX_SSC_DISABLED         #language en-US "Error: SSC is not supported for selected frequency. SSC must be set to 0%%."
+#string STR_ICC_MSGBOX_SSC_CONSTANT         #language en-US "Error: SSC cannot be changed."
+#string STR_ICC_MSGBOX_HECI                 #language en-US "Error: HECI communications failed."
+#string STR_ICC_MSGBOX_SUCCESS              #language en-US "Success."
+#string STR_ICC_MSGBOX_UNKNOWN              #language en-US "Unrecognized error. Code = 0x%08x."
+#string STR_ICC_MSGBOX_SUCCESS_NEED_REBOOT  #language en-US "Success. Settings will take effect after reboot."
+#string STR_ICC_MSGBOX_PROFILE_OUT_OF_RANGE #language en-US "Error: Profile out of range."
+#string STR_ICC_MSGBOX_PROFILE_FW_ERROR     #language en-US "Error: Firmware error when setting ICC profile."
+#string STR_ICC_MSGBOX_LOCK_FW_ERROR        #language en-US "Error: Firmware error when setting ICC Lock mask."
+
+#string STR_ICC_CLOCK_NOT_FOUND             #language en-US "Clock %d not found"
+#string STR_ICC_MEI_INITIALIZATION_FAILED   #language en-US "Clock %d - MEI initializion failed"
+#string STR_ICC_MEI_CONNECTION_FAILED       #language en-US "Clock %d - MEI connection failed"
+#string STR_ICC_UNEXPECTED_FW_ERROR         #language en-US "Clock %d - Unexpected fw error"
+#string STR_ICC_UNSUPPORTED_HW              #language en-US "Clock %d - Unsupported HW"
+#string STR_ICC_DATA_NOT_AVAILABLE          #language en-US "Clock %d - data not available"
+#string STR_ICC_NO_USAGE_DEFINED_FOR_THE_CLOCK #language en-US "Clock %d - No usage defined"
+#string STR_ICC_UNKNOWN_ERROR               #language en-US "Clock %d - Library error %2X"
+
+#string STR_ICC_CLOCK_SETTINGS              #language en-US " Clock Settings"
+#string STR_ICC_SSC_CHANGE_ALLOWED          #language en-US "Change Allowed"
+#string STR_ICC_SSC_HALT_ALLOWED            #language en-US "Halt/Unhalt Allowed"
+#string STR_ICC_SSC_NOTHING_ALLOWED         #language en-US "None Allowed"
+
+#string STR_ICC_OK                          #language en-US "Enter (OK)"
+#string STR_ICC_OK_CANCEL                   #language en-US "Enter (OK) / Esc (Cancel)"
+
+//---------------------------------------------------------------------------
+// ICC for SPS
+//---------------------------------------------------------------------------
+#string STR_ME_ICC_ENABLES_OVERRIDE_PROMPT      #language en-US "Override ICC Clock Enables"
+                                                #language x-AMI "ICC000"
+#string STR_ME_ICC_ENABLES_OVERRIDE_HELP        #language en-US "This option allows customization of clock enables."
+#string STR_ME_ICC_ENABLES_BITS_HELP            #language en-US ""
+#string STR_ME_ICC_ENABLES_FLEX0_PROMPT         #language en-US "FLEX0 Output (bit 0)"
+                                                #language x-AMI "ICC00B"
+#string STR_ME_ICC_ENABLES_FLEX1_PROMPT         #language en-US "FLEX1 Output (bit 1)"
+                                                #language x-AMI "ICC00C"
+#string STR_ME_ICC_ENABLES_FLEX2_PROMPT         #language en-US "FLEX2 Output (bit 2)"
+                                                #language x-AMI "ICC00D"
+#string STR_ME_ICC_ENABLES_FLEX3_PROMPT         #language en-US "FLEX3 Output (bit 3)"
+                                                #language x-AMI "ICC00E"
+#string STR_ME_ICC_ENABLES_PCICLK0_PROMPT       #language en-US "PCICLK0 Output (bit 7)"
+                                                #language x-AMI "ICC00F"
+#string STR_ME_ICC_ENABLES_PCICLK1_PROMPT       #language en-US "PCICLK1 Output (bit 8)"
+                                                #language x-AMI "ICC010"
+#string STR_ME_ICC_ENABLES_PCICLK2_PROMPT       #language en-US "PCICLK2 Output (bit 9)"
+                                                #language x-AMI "ICC011"
+#string STR_ME_ICC_ENABLES_PCICLK3_PROMPT       #language en-US "PCICLK3 Output (bit 10)"
+                                                #language x-AMI "ICC012"
+#string STR_ME_ICC_ENABLES_PCICLK4_PROMPT       #language en-US "PCICLK4 Output (bit 11)"
+                                                #language x-AMI "ICC013"
+#string STR_ME_ICC_ENABLES_SRC0_PROMPT          #language en-US "SRC0 Output (bit 16)"
+                                                #language x-AMI "ICC014"
+#string STR_ME_ICC_ENABLES_SRC1_PROMPT          #language en-US "SRC1 Output (bit 17)"
+                                                #language x-AMI "ICC015"
+#string STR_ME_ICC_ENABLES_SRC2_PROMPT          #language en-US "SRC2 Output (bit 18)"
+                                                #language x-AMI "ICC016"
+#string STR_ME_ICC_ENABLES_SRC3_PROMPT          #language en-US "SRC3 Output (bit 19)"
+                                                #language x-AMI "ICC017"
+#string STR_ME_ICC_ENABLES_SRC4_PROMPT          #language en-US "SRC4 Output (bit 20)"
+                                                #language x-AMI "ICC018"
+#string STR_ME_ICC_ENABLES_SRC5_PROMPT          #language en-US "SRC5 Output (bit 21)"
+                                                #language x-AMI "ICC019"
+#string STR_ME_ICC_ENABLES_SRC6_PROMPT          #language en-US "SRC6 Output (bit 22)"
+                                                #language x-AMI "ICC01A"
+#string STR_ME_ICC_ENABLES_SRC7_PROMPT          #language en-US "SRC7 Output (bit 23)"
+                                                #language x-AMI "ICC01B"
+#string STR_ME_ICC_ENABLES_ITPXDP_PROMPT        #language en-US "ITPXDP Output (bit 24)"
+                                                #language x-AMI "ICC01C"
+#string STR_ME_ICC_ENABLES_PEG_A_PROMPT         #language en-US "PEG_A Output (bit 26)"
+                                                #language x-AMI "ICC01D"
+#string STR_ME_ICC_ENABLES_PEG_B_PROMPT         #language en-US "PEG_B Output (bit 27)"
+                                                #language x-AMI "ICC01E"
+#string STR_ME_ICC_ENABLES_DMI_PROMPT           #language en-US "DMI Output (bit 28)"
+                                                #language x-AMI "ICC01F"
+#string STR_ME_ICC_ENABLES_DP_PROMPT            #language en-US "DP Output (bit 29)"
+                                                #language x-AMI "ICC020"
+#string STR_ME_ICC_ENABLES_DPNS_PROMPT          #language en-US "DPNS Output (bit 30)"
+                                                #language x-AMI "ICC021"
+#string STR_ME_ICC_ENABLES_MODULATOR4ENABLE_PROMPT    #language en-US "Modulator4Enable Output (bit 31)"
+                                                #language x-AMI "ICC022"
+
+#string STR_ME_ICC_SSC_OVERRIDE_FORM            #language en-US "Override ICC Spread Spectrum Configuration"
+                                                #language x-AMI "ICC023"
+#string STR_ME_ICC_SSC_OVERRIDE_FORM_HELP       #language en-US "Override the default ICC Spread Spectrum Configuration."
+#string STR_ME_ICC_SSC_OVERRIDE_FORM_TITLE      #language en-US "Override ICC Spread Spectrum Configuration"
+
+#string STR_ME_ICC_SSC_OVERRIDE_PROMPT          #language en-US "Override ICC Spread Spectrum Configuration"
+                                                #language x-AMI "ICC024"
+#string STR_ME_ICC_SSC_OVERRIDE_HELP            #language en-US "Set non-default ICC spread spectrum configuration."
+
+#string STR_ME_ICC_SSC_HELP                     #language en-US "Select spread spectrum mode."
+#string STR_ME_ICC_SSC0_PROMPT                  #language en-US "  SSC0 mode"
+                                                #language x-AMI "ICC025"
+#string STR_ME_ICC_SSC1_PROMPT                  #language en-US "  SSC1 mode"
+                                                #language x-AMI "ICC026"
+#string STR_ME_ICC_SSC2_PROMPT                  #language en-US "  SSC2 mode"
+                                                #language x-AMI "ICC027"
+#string STR_ME_ICC_SSC3_PROMPT                  #language en-US "  SSC3 mode"
+                                                #language x-AMI "ICC028"
+#string STR_ME_ICC_SSC4_PROMPT                  #language en-US "  SSC4 mode"
+                                                #language x-AMI "ICC029"
+#string STR_ME_ICC_SSC5_PROMPT                  #language en-US "  SSC5 mode"
+                                                #language x-AMI "ICC02A"
+#string STR_ME_ICC_SSC6_PROMPT                  #language en-US "  SSC6 mode"
+                                                #language x-AMI "ICC02B"
+#string STR_ME_ICC_SSC7_PROMPT                  #language en-US "  SSC7 mode"
+                                                #language x-AMI "ICC02C"
+
+#string STR_ME_ICC_SSM_DOWN	                    #language en-US "Down"
+#string STR_ME_ICC_SSM_CENTER                   #language en-US "Center"
+#string STR_ME_ICC_SSM_DISABLE                  #language en-US "Disable"
+#string STR_ME_ICC_SSM_DONOTCHANGE              #language en-US "DoNotChange"

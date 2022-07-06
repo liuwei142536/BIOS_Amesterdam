@@ -1,0 +1,14 @@
+<component>
+	name = "UefiCpuPkg"
+	category = eModule
+	LocalRoot = "UefiCpuPkg\"
+	RefName = "UefiCpuPkg"
+[files]
+"UefiCpuPkg.sdl"	
+"UefiCpuPkg.dec"	
+"License.txt"	
+"UefiCpuPkg.chm"	
+[parts]
+"UefiCpuPkg.Include"
+"UefiCpuPkg.LibraryInstances"
+<endComponent>

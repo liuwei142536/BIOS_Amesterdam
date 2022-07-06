@@ -1,0 +1,10 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "IA32FamilyCpuPkg\Include\Guid\"
+	RefName = "IA32FamilyCpuPkg.Guid"
+	Generic Module = "SS: AptioV;$\AptioV\Source\Hardware\Cpu\Intel\IA32FamilyCpuPkg\Include\Guid;5.004_IA32FamilyCpuPkg_04"
+[files]
+"HtBistHob.h"	
+"IA32FamilyCpuPkgTokenSpace.h"	
+<endComponent>

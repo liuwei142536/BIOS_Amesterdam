@@ -1,0 +1,9 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "AmiSecureBootPkg\Include\Protocol\"
+	RefName = "AmiSecureBootPkg.Protocol"
+[files]
+"AmiDeviceGuardApi.h"	
+"AmiRedFishApi.h"	
+<endComponent>

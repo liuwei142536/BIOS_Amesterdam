@@ -1,0 +1,11 @@
+<component>
+    name = "AmiSerial"
+    category = eModule
+    LocalRoot = "Board\EM\AmiSerial\"
+    RefName = "AmiSerial"
+[INF]
+"AmiSerial.inf"
+[files]
+"AmiSerial.sdl"
+"AmiSerial.chm"
+<endComponent>

@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "DbgPerformanceLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling DbgPerformanceLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "DbgPerformanceMode_Support"
+	Value  = "1"
+	Help  = "Switch for Debug Performance Mode Check"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "PerformanceMeasurement_SUPPORT" "=" "1"
+End
+
+PATH
+	Name  = "DbgPerformanceLib_DIR"
+	Path  = "AMIDebuggerPkg\Debugger\DbgPerformanceLib"
+End
+
+INFComponent
+	Name  = "DbgPerformanceLib"
+	File  = "DbgPerformanceLib.inf"
+	Package  = "Debugger"
+End
+
+LibraryMapping
+	Class  = "DbgPerformanceLib"
+	Instance  = "Debugger.DbgPerformanceLib"
+End

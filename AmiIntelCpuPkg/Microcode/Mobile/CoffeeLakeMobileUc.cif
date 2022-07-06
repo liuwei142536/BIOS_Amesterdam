@@ -1,0 +1,11 @@
+<component>
+	name = "Mobile CoffeeLake uCode Patches (806EZ)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Mobile\"
+	RefName = "CoffeeLakeMobileUc"
+[files]
+"CoffeeLakeMobileUc.sdl"
+"MC0806EA_000000EC.pdb"	= "MOBILE MICROCODE UPDATES"
+"MD0806EB_000000EC.pdb" = "MOBILE MICROCODE UPDATES"
+"M94806EC_000000EC.pdb" = "MOBILE MICROCODE UPDATES"
+<endComponent>

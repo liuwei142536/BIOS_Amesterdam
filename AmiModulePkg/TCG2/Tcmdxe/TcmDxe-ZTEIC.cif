@@ -1,0 +1,10 @@
+<component>
+	name = "TcmDxe-ZTEIC"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\TCG2\Tcmdxe"
+	RefName = "TcmDxe-ZTEIC"
+[files]
+"TcmDxe.sdl"	
+[INF]
+"TCMDXE.inf"
+<endComponent>

@@ -1,0 +1,13 @@
+<component>
+	name = "AmiSecureBootPkg"
+	category = eModule
+	LocalRoot = "AmiSecureBootPkg\"
+	RefName = "AmiSecureBootPkg"
+[files]
+"AmiSecureBootPkg.dec"
+"AmiSecureBootPkg.sdl"
+"AmiSecureBootPkg.chm"
+[parts]
+"AmiSecureBootPkg.Include"
+"AmiSecureBootLib"
+<endComponent>

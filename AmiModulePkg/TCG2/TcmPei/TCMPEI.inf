@@ -1,0 +1,41 @@
+[Defines]
+ INF_VERSION    = 0x00010005
+ VERSION_STRING = 1.0
+ BASE_NAME      = TCMPEI
+ MODULE_TYPE    = PEIM
+ FILE_GUID      = 0135229A-EBB5-4A21-957D-1D20057CF751
+ ENTRY_POINT    = TcmPEI_EntryPoint
+
+[Sources]
+  SM3.h
+  TcmPei.c
+  TcmPei.h
+  TcmtoosPei.asm
+  TisPcPei.c
+  TisPcPei.h
+  Type.h
+
+[LibraryClasses]
+  PeimEntryPoint
+  BaseLib
+  DebugLib
+  IoLib
+  PeiServicesLib
+  ShaLib
+  TimerLib
+
+[Guids]
+  gEfiTcgTreeLogHobGuid
+
+[Ppis]
+  gPeiTcmPpiGuid
+
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  MdePkg/MdePkg.dec
+  AmiTcgPkg/AmiTcgPkg.dec
+
+[Depex]
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gTcgPeiPolicyGuid

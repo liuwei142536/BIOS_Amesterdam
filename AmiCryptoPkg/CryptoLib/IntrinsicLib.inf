@@ -1,0 +1,56 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file
+#
+#   Limited collection of missing in 32bit Microsoft C compiler intrinsics
+#
+#   The library is provided to maintain backward compatibility for the projects 
+#   with AmiModulePkg rev.38 or older (Part of AptioV Core_5_13 and older)
+#   The library provide implementation of following 32bit compiler(IA32,x86) intrinsics:
+#   - Multiplication, division operations with at least one 64-bit operand
+#   - Shift of a 64-bit value
+##
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = IntrinsicLib
+  FILE_GUID                      = 485C3E6C-529A-46E5-ADE3-CD4E881CB939
+  MODULE_TYPE                    = BASE
+  LIBRARY_CLASS                  = AmiCryptIntrinsicLib
+
+[Sources]
+# The library have to have at least one source file to build.
+# Since AmiMsftIntrinsicsLib is intended only for Microsoft compilers,
+# Stub.c is used with other tool chains to prevent a build error.
+  Stub.c
+
+# Collection of missing intrinsics in 32bit Microsoft C compiler
+# _aullshr
+# _allshl
+# _aulldiv
+# _aulldvrm
+# _allmul
+[Sources.Ia32]
+# Unsigned division
+ Ia32/Aulldvrm.asm | MSFT
+ Ia32/Aulldiv.asm | MSFT
+# Signed/Unsigned multiplication
+ Ia32/Allmul.asm | MSFT
+# Shift operations  
+ Ia32/Aullshr.asm | MSFT
+ Ia32/Allshl.asm  | MSFT
+# Ia32/MathDivU64x64.S | GCC
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+[BuildOptions.IA32]
+# Override MSFT build option to remove /GL. 
+# Causes build error instances of AmiCryptoPkg.PeiCryptLib.lib(built with /GL) and CryptoPkg.BaseCryptLib.lib(Intrinsics.lib, compiled with /GL-) are linked
+MSFT:DEBUG_*_IA32_CC_FLAGS   == $(AmiCryptoLib_GL) /nologo /c /WX /GS- /W4 /Gs32768 /O1b2 /FIAutoGen.h /EHs-c- /GR- /GF /Gy /Zi /Gm
+MSFT:RELEASE_*_IA32_CC_FLAGS == $(AmiCryptoLib_GL) /nologo /c /WX /GS- /W4 /Gs32768 /O1b2 /FIAutoGen.h /EHs-c- /GR- /GF -DMDEPKG_NDEBUG

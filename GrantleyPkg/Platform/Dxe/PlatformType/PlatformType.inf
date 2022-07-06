@@ -1,0 +1,63 @@
+## @file
+#
+#  Copyright (c) 2009 - 2015, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PlatformType
+  FILE_GUID                      = 2E6A521C-F697-402d-9774-98B2B7E140F3
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PlatformTypeInit
+
+[Sources]
+  PlatformTypes.h
+  PlatformTypes.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec  #AptioV server override: To use AMI flash for reading PDR region
+
+[LibraryClasses]
+  PcdLib
+  BaseLib
+  HobLib
+  DebugLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  IoLib
+  FlashLib #AptioV Grantley override: To use AMI flash for reading PDR region
+
+ [Protocols]
+  gEfiPlatformTypeProtocolGuid     ## Produces
+  gEfiVariableArchProtocolGuid
+  gEfiSpiProtocolGuid
+  gEfiCpuIoProtocolGuid
+  gEfiIioUdsProtocolGuid
+
+[Guids]
+  gEfiPlatformInfoGuid
+  gEfiSetupVariableGuid
+  gEfiMfgUUIDHobGuid
+  
+
+[Depex]
+  TRUE
+
+[FixedPcd.common]
+  gPlatformTokenSpaceGuid.PcdPostCompleteGpio

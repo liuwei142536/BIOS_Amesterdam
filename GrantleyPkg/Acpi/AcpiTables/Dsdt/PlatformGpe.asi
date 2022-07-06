@@ -1,0 +1,526 @@
+/*++
+  This file contains 'Framework Code' and is licensed as such
+  under the terms of your license agreement with Intel or your
+  vendor.  This file may not be modified, except as allowed by
+  additional terms of your license agreement.
+--*/
+/*++
+
+  Copyright (c)  2001 - 2013 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval 
+  system, or transmitted in any form or by any means without the express 
+  written consent of Intel Corporation.
+
+  Module Name:
+
+    PlatformGpe.asi
+
+  Abstract:
+
+    Contains root level name space objects for the platform
+
+--*/
+
+//  General Purpose Event
+Scope (\_GPE) {
+/* This below is required by WHQL but somehow SVOS breaks when we add this
+  Method (_L21, 0x0, NotSerialized) {
+    Store (0x21, IO80)
+  }
+  Method (_L22, 0x0, NotSerialized) {
+    Store (0x22, IO80)
+  }
+  Method (_L23, 0x0, NotSerialized) {
+    Store (0x23, IO80)
+  }
+  Method (_L24, 0x0, NotSerialized) {
+    Store (0x24, IO80)
+  }
+  Method (_L26, 0x0, NotSerialized) {
+    Store (0x26, IO80)
+  }
+  Method (_L27, 0x0, NotSerialized) {
+    Store (0x27, IO80)
+  }
+  Method (_L28, 0x0, NotSerialized) {
+    Store (0x28, IO80)
+  }
+  Method (_L29, 0x0, NotSerialized) {
+    Store (0x29, IO80)
+  }   
+  Method (_L2A, 0x0, NotSerialized) {
+    Store (0x2A, IO80)
+  }
+  Method (_L2B, 0x0, NotSerialized) {
+    Store (0x2B, IO80)
+  }
+  Method (_L2C, 0x0, NotSerialized) {
+    Store (0x2C, IO80)
+  }
+  Method (_L2D, 0x0, NotSerialized) {
+    Store (0x2D, IO80)
+  }
+  Method (_L2E, 0x0, NotSerialized) {
+    Store (0x2E, IO80)
+  }
+  Method (_L2F, 0x0, NotSerialized) {
+    Store (0x2F, IO80)
+  }
+  Method (_L30, 0x0, NotSerialized) {
+    Store (0x30, IO80)
+  }
+  Method (_L31, 0x0, NotSerialized) {
+    Store (0x31, IO80)
+  }
+  Method (_L32, 0x0, NotSerialized) {
+    Store (0x32, IO80)
+  }
+  Method (_L33, 0x0, NotSerialized) {
+    Store (0x33, IO80)
+  }
+  Method (_L34, 0x0, NotSerialized) {
+    Store (0x34, IO80)
+  }
+  Method (_L35, 0x0, NotSerialized) {
+    Store (0x35, IO80)
+  }
+  Method (_L36, 0x0, NotSerialized) {
+    Store (0x36, IO80)
+  }
+  Method (_L37, 0x0, NotSerialized) {
+    Store (0x37, IO80)
+  }
+  Method (_L38, 0x0, NotSerialized) {
+    Store (0x38, IO80)
+  }
+  Method (_L39, 0x0, NotSerialized) {
+    Store (0x39, IO80)
+  }
+  Method (_L3A, 0x0, NotSerialized) {
+    Store (0x3A, IO80)
+  }
+  Method (_L3B, 0x0, NotSerialized) {
+    Store (0x3B, IO80)
+  }
+  Method (_L3C, 0x0, NotSerialized) {
+    Store (0x3C, IO80)
+  }
+  Method (_L3D, 0x0, NotSerialized) {
+    Store (0x3D, IO80)
+  }
+  Method (_L3E, 0x0, NotSerialized) {
+    Store (0x3E, IO80)
+  }
+  Method (_L3F, 0x0, NotSerialized) {
+    Store (0x3F, IO80)
+  }
+*/
+
+  //
+  // ME HECI2 SCI handler
+  // Note: This SCI from HECI2 is routed to ICH9 over the DMI and it
+  // sets the DMISCI status bit in TCO block. From there it is routed
+  // to bit6 GPE0 status register.
+  //
+  OperationRegion (TCOS, SystemIO, 0x464, 2) // ICH_ACPI_BASE_ADDRESS + TCO_BASE + R_TCO1_STS
+  Field (TCOS, ByteAcc, NoLock, WriteAsZeros) {
+         Offset (0x1),
+         , 1,
+         DSCI, 1,
+  }
+
+//AptioV server override start: Add TokenAsl.h SDL output 
+#if ASL_RAS_ASL_SUPPORT
+  // Based on Socket ID to be notified, evaluate appropriate devices.
+  // Notify the UNCORE root bridge 
+  Method(NTFU, 2) {
+    If(And(Arg0, 0x01)){
+      Notify(\_SB.UNC0, Arg1)
+    }
+    If(And(Arg0, 0x02)){
+      Notify(\_SB.UNC1, Arg1)
+    }
+    If(And(Arg0, 0x04)){
+      Notify(\_SB.UNC2, Arg1)
+    }
+    If(And(Arg0, 0x08)){
+      Notify(\_SB.UNC3, Arg1)
+    }
+  } //End Method NTFU
+
+  // Based on Socket ID to be notified, evaluate appropriate devices.
+  Method(NTFC, 2){
+    If(And(Arg0, 0x01)){
+      Notify(\_SB.SCK0, Arg1)
+    }
+    If(And(Arg0, 0x02)){
+      Notify(\_SB.SCK1, Arg1)
+    }
+    If(And(Arg0, 0x04)){
+      Notify(\_SB.SCK2, Arg1)
+    }
+    If(And(Arg0, 0x08)){
+      Notify(\_SB.SCK3, Arg1)
+    }
+  } //End Method NTFC
+
+  Method(NTFM, 2){
+    // Based on Memory Board ID to be notified, evaluate appropriate devices.
+    /*If(And(Arg0, 0x01)){
+      Notify(\_SB.SCK0.M000, Arg1)
+    }
+    If(And(Arg0, 0x02)){
+      Notify(\_SB.SCK0.M001, Arg1)
+    }
+    If(And(Arg0, 0x04)){
+      Notify(\_SB.SCK1.M000, Arg1)
+    }
+    If(And(Arg0, 0x08)){
+      Notify(\_SB.SCK1.M001, Arg1)
+    }
+    If(And(Arg0, 0x10)){
+      Notify(\_SB.SCK2.M000, Arg1)
+    }
+    If(And(Arg0, 0x20)){
+      Notify(\_SB.SCK2.M001, Arg1)
+    }
+    If(And(Arg0, 0x40)){
+      Notify(\_SB.SCK3.M000, Arg1)
+    }
+    If(And(Arg0, 0x80)){
+      Notify(\_SB.SCK3.M001, Arg1)
+    }*/
+  } // End Method NTFM
+
+  Method(NTFI, 2){
+    If(And(Arg0, 0x00)){
+      //Notify(\_SB.PCI0, Arg1)  // Cannot Hot plug PCI0
+    }
+    If(And(Arg0, 0x01)){
+      //Notify(\_SB.PCI1, Arg1)  // Cannot Hot plug PCI1
+    }
+    If(And(Arg0, 0x02)){
+      //Notify(\_SB.PCI2, Arg1)  // Cannot Hot plug PCI2
+    }
+    If(And(Arg0, 0x03)){
+      //Notify(\_SB.PCI3, Arg1)  // Cannot Hot plug PCI3
+    }
+  } //End Method NTFI
+
+  // Tell OS to run thru the new status of this device (Software SCI generated from SMM for all Hot plug events)
+  Method (_L02, 0x0, NotSerialized) {
+    if(LEqual(SCI0, 3)) { // Device ejection (Invoked with _EJ0 method called)
+      NTFM  (SCI1, 3) 
+      NTFI  (SCI2, 3) 
+      NTFC  (SCI2, 3)
+      Store (0, SCI0)
+    } else {              // Device check (OS can still reject online request based on resources and capability)
+      NTFC (CPHP, 0)
+      NTFU (CPHP, 0)
+      NTFI (IIOP, 0)
+      NTFM (MEBC, 1)
+      Store (0, MEBC)
+      Store (0, CPHP)
+      Store (0, IIOP)
+    }
+    Store (0, SGPC)
+    Store (1, SGPS)
+    //If SCI is raised from WHEA notify OS 
+    If(LAnd(And(\PCAP,0x00010000),LEqual(WHEA,0x1))){
+    Notify (\_SB.WERR, 0x80) // Notify a WHEA error event (actually for all CE's)
+    }
+  }    
+#endif
+
+  // PME supported for Slots, use GPE 9 for PME
+  // Hot plug on all slots for now, change later.
+  // Slot numbers on silk screen might be different than the port number, currently use port numbers.
+  //
+  // IIO PCI_E Slot Hotplug GPE Event
+  //
+  Method (_L01, 0, NotSerialized) {
+    #include "IioPcieHotPlugGpeHandler.asl"
+    #include "MemoryHotPlugGpeHandler.asi"
+  }// end of _L01 GPE Method
+
+//AptioV server override start: _L09 will not be generated by AMISDL and used statically.
+  Method (_L09, 0, NotSerialized) {
+    //
+    // For PCH root ports: If the Root Port is enabled,
+    // 1. Run PCI_EXP_STS handler
+    // 2. Notify the Device for wake
+    //
+    If(LNotEqual(\_SB.PCI0.RP01.DEVS(),0))
+    {
+      \_SB.PCI0.RP01.HPME()
+      Notify(\_SB.PCI0.RP01, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.RP02.DEVS(),0))
+    {
+      \_SB.PCI0.RP02.HPME()
+      Notify(\_SB.PCI0.RP02, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.RP03.DEVS(),0))
+    {
+      \_SB.PCI0.RP03.HPME()
+      Notify(\_SB.PCI0.RP03, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.RP04.DEVS(),0))
+    {
+      \_SB.PCI0.RP04.HPME()
+      Notify(\_SB.PCI0.RP04, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.RP05.DEVS(),0))
+    {
+      \_SB.PCI0.RP05.HPME()
+      Notify(\_SB.PCI0.RP05, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.RP06.DEVS(),0))
+    {
+      \_SB.PCI0.RP06.HPME()
+      Notify(\_SB.PCI0.RP06, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.RP07.DEVS(),0))
+    {
+      \_SB.PCI0.RP07.HPME()
+      Notify(\_SB.PCI0.RP07, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.RP08.DEVS(),0))
+    {
+      \_SB.PCI0.RP08.HPME()
+      Notify(\_SB.PCI0.RP08, 0x02)
+    }
+
+    //
+    // For IIO root ports: If the Root Port is enabled,
+    // Notify the Device for wake
+    //
+    If(LNotEqual(\_SB.PCI0.BR1A.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR1A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.BR1B.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR1B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.BR2A.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR2A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.BR2B.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR2B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.BR2C.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR2C, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.BR2D.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR2D, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.BR3A.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR3A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.BR3B.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR3B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.BR3C.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR3C, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI0.BR3D.DEVS(),0))
+    {
+      Notify(\_SB.PCI0.BR3D, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QRP0.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QRP0, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR1A.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR1A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR1B.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR1B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR2A.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR2A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR2B.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR2B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR2C.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR2C, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR2D.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR2D, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR3A.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR3A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR3B.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR3B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR3C.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR3C, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI1.QR3D.DEVS(),0))
+    {
+      Notify(\_SB.PCI1.QR3D, 0x02)
+    }
+
+
+    If(LNotEqual(\_SB.PCI2.RRP0.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RRP0, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR1A.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR1A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR1B.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR1B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR2A.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR2A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR2B.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR2B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR2C.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR2C, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR2D.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR2D, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR3A.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR3A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR3B.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR3B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR3C.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR3C, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI2.RR3D.DEVS(),0))
+    {
+      Notify(\_SB.PCI2.RR3D, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SRP0.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SRP0, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR1A.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR1A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR1B.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR1B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR2A.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR2A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR2B.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR2B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR2C.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR2C, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR2D.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR2D, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR3A.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR3A, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR3B.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR3B, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR3C.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR3C, 0x02)
+    }
+
+    If(LNotEqual(\_SB.PCI3.SR3D.DEVS(),0))
+    {
+      Notify(\_SB.PCI3.SR3D, 0x02)
+    }
+
+  }// end of _L09 GPE Method AptioV server override end
+}// end of _GPE scope.

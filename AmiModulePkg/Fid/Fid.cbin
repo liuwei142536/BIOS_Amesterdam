@@ -1,0 +1,82 @@
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************
+
+//*****************************************************************************
+/** @file 
+    This file contains the Firmware Version Data Structure definition.  This structure
+    is filled out a build time token definitions that give information about the current 
+    BIOS code.
+*/
+
+// Module specific Includes
+#include <Token.h>
+#include <TimeStamp.h>
+#include <AmiLib.h>
+#include <Fid.h>
+
+// Added for compatibility when ACPI is removed from the project.
+#ifndef T_ACPI_OEM_ID
+    #define T_ACPI_OEM_ID   AMIAMI
+#endif
+
+#ifndef T_ACPI_OEM_TBL_ID
+    #define T_ACPI_OEM_TBL_ID   A M I 
+#endif
+
+/// macro defined to convert a integer value to a string
+#define THREE_CHAR_ARRAY(x) {(x)/10+'0',(x)%10+'0',0}
+
+/// This data structure is completed at build time and stored in a binary file in the ROM image.
+FW_VERSION  FwVersionData = {
+    "$FID",                                     //$FID signature of the FW VERSION STRUCTURE
+    0x04,                                       //Version 4
+    sizeof(FW_VERSION),                         //Size of this structure
+    CONVERT_TO_STRING(BIOS_TAG),                //8 character BIOS Tag, Plus NULL Cahracter at the end
+    FW_VERSION_GUID,                            //FW Version GUID
+    THREE_CHAR_ARRAY(CORE_MAJOR_VERSION),       //Core Major Version from BIOS Parameters
+    THREE_CHAR_ARRAY(CORE_BUILD_NUMBER),        //Core Build Number from BIOS Parameters
+    THREE_CHAR_ARRAY(PROJECT_MAJOR_VERSION),    //Project Major Version from BIOS Parameters
+    THREE_CHAR_ARRAY(PROJECT_MINOR_VERSION),    //Project Minor Version from BIOS Parameters
+    THIS_YEAR,
+    THIS_MONTH,
+    THIS_DAY,
+    THIS_HOUR,
+    THIS_MINUTE,
+    THIS_SECOND,
+    0xffff,
+    CONVERT_TO_STRING(T_ACPI_OEM_ID),
+    CONVERT_TO_STRING(T_ACPI_OEM_TBL_ID),
+    49,
+    { 
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+        0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff
+    }
+};
+
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************

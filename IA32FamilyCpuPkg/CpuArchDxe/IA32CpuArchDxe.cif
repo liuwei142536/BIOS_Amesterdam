@@ -1,0 +1,11 @@
+<component>
+	name = "CpuArchDxe"
+	category = ModulePart
+	LocalRoot = "IA32FamilyCpuPkg\CpuArchDxe\"
+	RefName = "IA32FamilyCpuPkg.CpuArchDxe"
+	Generic Module = "SS: AptioV;$\AptioV\Source\Hardware\Chipset\Intel\GrangevilleNS\Cpu\IA32FamilyCpuPkg\CpuArchDxe\;IA32CpuArchDxe_00"
+[INF]
+"CpuArchDxe.inf"
+[files]
+"IA32CpuArchDxe.sdl"	
+<endComponent>

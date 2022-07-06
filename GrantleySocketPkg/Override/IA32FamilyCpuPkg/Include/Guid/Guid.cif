@@ -1,0 +1,9 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Override\IA32FamilyCpuPkg\Include\Guid\"
+	RefName = "GrantleySocketPkg.Override.IA32FamilyCpuPkg.Include.Guid.Guid"
+[files]
+"HtBistHob.h"	
+"IA32FamilyCpuPkgTokenSpace.h"	
+<endComponent>

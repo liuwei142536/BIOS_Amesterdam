@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "CpuMpPei_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling CpuMpPei support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "CpuMpPei"
+	File  = "CpuMpPei.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "PEIM"
+	Token = "CpuMpPei_SUPPORT" "=" "1"
+End
+
+FFS_FILE 
+	Name  = "CpuMpPei"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "CpuMpPei"
+	Token = "CpuMpPei_SUPPORT" "=" "1"
+End
+

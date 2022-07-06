@@ -1,0 +1,280 @@
+﻿﻿﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+
+/** @file SmbiosElogSetupScreenVfr.uni
+    String Definitions for viewing errors in setup page from GPNV.
+
+**/
+
+#langdef   en-US "English"               // English
+#langdef   x-AMI "x-AMI"                 // AMI Configuration Language
+
+#string STR_COLUMN_TITLE_ERROR_SCREEN   #language en-US "DATE      TIME       ERROR CODE     SEVERITY"
+
+#string STR_SMBIOS_LINKS_HEADER     #language en-US "Change Smbios Event Log Settings"
+#string STR_SMBIOS_EVENT_LOG_HELP   #language en-US "Press <Enter> to change the Smbios Event Log configuration."
+
+#string STR_SMBIOS_VIEW             #language en-US "View Smbios Event Log"
+#string STR_SMBIOS_VIEW_HELP        #language en-US "Press <Enter> to view the Smbios Event Log records."
+
+#string STR_SMBIOS_EVENT_LOG_TITLE  #language en-US "Change Settings"
+//#string STR_SMBIOS_EVENT_LOG_HELP #language en-US "Press <Enter> to change the Smbios Event Log configuration."
+#string STR_EMPTY                   #language en-US ""
+
+
+// Strings for Sub Pages
+
+
+#string STR_SMBIOS_ENABLING_OPTIONS #language en-US "Enabling/Disabling Options"
+
+#string STR_SMBIOS_ENABLE         #language en-US "Smbios Event Log"
+                                  #language x-AMI "GPNV000"
+#string STR_SMBIOS_ENABLE_HELP    #language en-US "Change this to enable or disable all features of Smbios Event Logging during boot."
+#string STR_SMBIOS_DISABLED       #language en-US "Disabled"
+#string STR_SMBIOS_ENABLED        #language en-US "Enabled"
+
+
+
+
+#string STR_SMBIOS_ERASING_OPTIONS         #language en-US "Erasing Settings"
+
+#string STR_SMBIOS_ERASE                   #language en-US "Erase Event Log"
+                                           #language x-AMI "GPNV001"
+#string STR_SMBIOS_ERASE_HELP              #language en-US "Choose options for erasing Smbios Event Log.  Erasing is done prior to any logging activation during reset."
+#string STR_SMBIOS_DO_NOT_ERASE            #language en-US "No"
+#string STR_SMBIOS_ERASE_NEXT_BOOT         #language en-US "Yes, Next reset"
+#string STR_SMBIOS_ERASE_EVERY_BOOT        #language en-US "Yes, Every reset"
+
+#string STR_SMBIOS_FULL             #language en-US "When Log is Full"
+                                    #language x-AMI "GPNV002"
+#string STR_SMBIOS_FULL_HELP        #language en-US "Choose options for reactions to a full Smbios Event Log."
+#string STR_SMBIOS_DO_NOTHING       #language en-US "Do Nothing"
+#string STR_SMBIOS_ERASE_WHEN_FULL  #language en-US "Erase Immediately"
+
+#string STR_SMBIOS_EFI_SETTINGS     #language en-US "Custom Options"
+
+#string STR_LOG_EFI_ERRORS_PROMPT   #language en-US "Log OEM Codes"
+                                    #language x-AMI "GPNV003"
+#string STR_LOG_EFI_ERRORS_HELP     #language en-US "Enable or disable the logging of EFI Status Codes as OEM Codes (if not already converted to legacy)."
+
+#string STR_CONVERT_EFI_ERRORS_PROMPT        #language en-US "Convert OEM Codes"
+                                             #language x-AMI "GPNV004"
+#string STR_CONVERT_EFI_ERRORS_HELP          #language en-US "Enable or disable the converting of EFI Status Codes to Standard Smbios Types (Not all may be translated)."
+
+#string STR_LOG_SYSTEM_BOOT_RECORDS_PROMPT     #language en-US "Log System Boot Event"
+                                               #language x-AMI "GPNV005"
+#string STR_LOG_SYSTEM_BOOT_RECORDS_HELP       #language en-US "Choose option to enable/disable logging of System boot event"
+
+
+#string STR_SMBIOS_STANDARD_SETTINGS    #language en-US "Smbios Event Log Standard Settings"
+
+#string STR_MECI_PROMPT            #language en-US "MECI"
+                                   #language x-AMI "GPNV006"
+#string STR_MECI_HELP              #language en-US "Mutiple Event Count Increment:  The number of occurrences of a duplicate event that must pass before the multiple-event counter of log entry is updated.The value ranges from 1 to 255."
+
+#string STR_METW_PROMPT            #language en-US "METW"
+                                   #language x-AMI "GPNV007"
+#string STR_METW_HELP              #language en-US "Mutiple Event Time Window:  The number of minutes which must pass between duplicate log entries which utilize a multiple-event counter. The value ranges from 0 to 99 minutes."
+
+
+#string STR_ERROR_LOGGING_NOTE_1    #language en-US "NOTE: All values changed here do not take effect"
+#string STR_ERROR_LOGGING_NOTE_2    #language en-US "      until computer is restarted."
+
+#string STR_SMBIOS_MORE_VIEW        #language en-US "View remaining Smbios Event Logs"
+#string STR_SMBIOS_MORE_VIEW_HELP   #language en-US "Press <Enter> to view the remaining Smbios Event Log records."
+
+
+// Strings for Viewing Event Log
+
+
+
+#string STR_DESCRIPTION_HEADER      #language en-US "DESCRIPTION"
+
+#string STR_NO_PROTOCOL_FOUND           #language en-US "Proper components not found to view Smbios Event Log."
+#string STR_SMBIOS_NO_RECORDS_FOUND     #language en-US "No records found in the Smbios Event Log."
+
+#string STR_ERROR_MINOR             #language en-US "Minor"
+#string STR_ERROR_MAJOR             #language en-US "Major"
+#string STR_ERROR_UNRECOVERED       #language en-US "Fatal"
+#string STR_ERROR_UNCONTAINED       #language en-US "Fatal"
+#string STR_ERROR_UNRECOGNIZED      #language en-US "Unrecognized"
+
+#string STR_EFI_COMPUTING_UNIT_UNSPECIFIED          #language en-US "Unspecified processor"
+#string STR_EFI_COMPUTING_UNIT_HOST_PROCESSOR       #language en-US "Host processor"
+#string STR_EFI_COMPUTING_UNIT_FIRMWARE_PROCESSOR   #language en-US "Firmware processor"
+#string STR_EFI_COMPUTING_UNIT_SERVICE_PROCESSOR    #language en-US "Service processor"
+#string STR_EFI_COMPUTING_UNIT_IO_PROCESSOR         #language en-US "IO processor"
+#string STR_EFI_COMPUTING_UNIT_CACHE                #language en-US "Cache"
+#string STR_EFI_COMPUTING_UNIT_MEMORY               #language en-US "Memory"
+#string STR_EFI_COMPUTING_UNIT_CHIPSET              #language en-US "Chipset"
+
+#string STR_EFI_PERIPHERAL_UNSPECIFIED          #language en-US "Unspecified peripheral"
+#string STR_EFI_PERIPHERAL_KEYBOARD             #language en-US "Keyboard"
+#string STR_EFI_PERIPHERAL_MOUSE                #language en-US "Mouse"
+#string STR_EFI_PERIPHERAL_LOCAL_CONSOLE        #language en-US "Local console"
+#string STR_EFI_PERIPHERAL_REMOTE_CONSOLE       #language en-US "Remote console"
+
+#string STR_EFI_PERIPHERAL_SERIAL_PORT          #language en-US "Serial port"
+#string STR_EFI_PERIPHERAL_PARALLEL_PORT        #language en-US "Parallel port"
+#string STR_EFI_PERIPHERAL_FIXED_MEDIA          #language en-US "Fixed media"
+#string STR_EFI_PERIPHERAL_REMOVABLE_MEDIA      #language en-US "Removable media"
+#string STR_EFI_PERIPHERAL_AUDIO_INPUT          #language en-US "Audio input"
+#string STR_EFI_PERIPHERAL_AUDIO_OUTPUT         #language en-US "Audio output"
+#string STR_EFI_PERIPHERAL_LCD_DEVICE           #language en-US "LCD"
+
+#string STR_EFI_IO_BUS_UNSPECIFIED          #language en-US "Unspecified IO bus"
+#string STR_EFI_IO_BUS_PCI                  #language en-US "PCI"
+#string STR_EFI_IO_BUS_USB                  #language en-US "USB"
+#string STR_EFI_IO_BUS_IBA                  #language en-US "IBA"
+#string STR_EFI_IO_BUS_AGP                  #language en-US "AGP"
+#string STR_EFI_IO_BUS_PC_CARD              #language en-US "PC Card"
+#string STR_EFI_IO_BUS_LPC                  #language en-US "LPC"
+#string STR_EFI_IO_BUS_SCSI                 #language en-US "SCSI"
+#string STR_EFI_IO_BUS_ATA_ATAPI            #language en-US "ATA/ATAPI"
+#string STR_EFI_IO_BUS_SERIAL_ATA           #language en-US "Serial ATA"
+#string STR_EFI_IO_BUS_FC                   #language en-US "Fiber Channel"
+#string STR_EFI_IO_BUS_IP_NETWORK           #language en-US "IP Network"
+#string STR_EFI_IO_BUS_SMBUS                #language en-US "SMBUS"
+#string STR_EFI_IO_BUS_I2C                  #language en-US "I2C"
+
+#string STR_EFI_SOFTWARE_UNSPECIFIED          #language en-US "Unspecified software"
+#string STR_EFI_SOFTWARE_SEC                  #language en-US "SEC"
+#string STR_EFI_SOFTWARE_PEI_CORE             #language en-US "PEI Core"
+#string STR_EFI_SOFTWARE_PEI_MODULE           #language en-US "PEI Module"
+#string STR_EFI_SOFTWARE_DXE_CORE             #language en-US "DXE Core"
+#string STR_EFI_SOFTWARE_DXE_BS_DRIVER        #language en-US "DXE BS driver"
+#string STR_EFI_SOFTWARE_DXE_RT_DRIVER        #language en-US "DXE RT driver"
+#string STR_EFI_SOFTWARE_SMM_DRIVER           #language en-US "SMM driver"
+#string STR_EFI_SOFTWARE_EFI_APPLICATION      #language en-US "EFI application"
+#string STR_EFI_SOFTWARE_EFI_OS_LOADER        #language en-US "OS loader"
+#string STR_EFI_SOFTWARE_RT                   #language en-US "Runtime"
+#string STR_EFI_SOFTWARE_AL                   #language en-US "AfterLife"
+#string STR_EFI_SOFTWARE_EBC_EXCEPTION        #language en-US "EBC Exception"
+#string STR_EFI_SOFTWARE_IA32_EXCEPTION       #language en-US "IA32 Exception"
+#string STR_EFI_SOFTWARE_IPF_EXCEPTION        #language en-US "Itanium(TM) Processor Exception"
+#string STR_EFI_SOFTWARE_PEI_SERVICE          #language en-US "PEI Service"
+#string STR_EFI_SOFTWARE_EFI_BOOT_SERVICE     #language en-US "EFI Boot Service"
+#string STR_EFI_SOFTWARE_EFI_RUNTIME_SERVICE  #language en-US "EFI Runtime Service"
+#string STR_EFI_SOFTWARE_EFI_DXE_SERVICE      #language en-US "EFI DXE Service"
+#string STR_EFI_SOFTWARE_EFI_SECURITY         #language en-US "Password Security"
+
+#string STR_EC_NON_SPECIFIC                  #language en-US "component has encountered a non specific error."
+#string STR_EC_DISABLED                      #language en-US "component has been disabled"
+#string STR_EC_NOT_SUPPORTED                 #language en-US "component encountered a not-supported error."
+#string STR_EC_NOT_DETECTED                  #language en-US "component was not detected."
+#string STR_EC_NOT_CONFIGURED                #language en-US "component was not configured."
+#string STR_EC_INVALID_TYPE                  #language en-US "component encountered a invalid type error."
+#string STR_EC_INVALID_SPEED                 #language en-US "component encountered an invalid speed error."
+#string STR_EC_INVALID_SIZE                  #language en-US "component encountered a invalid size error."
+#string STR_EC_MISMATCH                      #language en-US "component encountered a mismatch error."
+#string STR_EC_TIMER_EXPIRED                 #language en-US "component encountered a timer expired error."
+#string STR_EC_SELF_TEST                     #language en-US "component encountered a self test error."
+#string STR_EC_INTERNAL                      #language en-US "component encountered an internal error."
+#string STR_EC_THERMAL                       #language en-US "component encountered a thermal error."
+#string STR_EC_LOW_VOLTAGE                   #language en-US "component encountered a low voltage error."
+#string STR_EC_HIGH_VOLTAGE                  #language en-US "component encountered a high voltage error."
+#string STR_EC_CACHE                         #language en-US "component encountered a cache error."
+#string STR_EC_MICROCODE_UPDATE              #language en-US "component encountered a  microcode update error."
+#string STR_EC_CORRECTABLE                   #language en-US "component encountered correctable ECC errors."
+#string STR_EC_UNCORRECTABLE                 #language en-US "component encountered un-correctable ECC errors."
+#string STR_EC_HARD_FAIL                     #language en-US "component encountered a hard failure."
+#string STR_EC_SOFT_FAIL                     #language en-US "component encountered a soft failure."
+#string STR_EC_COMM_ERROR                    #language en-US "component encountered a communication error."
+#string STR_EC_SPD_FAIL                      #language en-US "component encountered a Serial Presence Detection (SPD) fail error."
+#string STR_EC_S3_RESUME_FAIL                #language en-US "component encountered S3 resume failed."
+#string STR_EC_UPDATE_FAIL                   #language en-US "component encountered update failure."
+#string STR_EC_NONE_DETECTED                 #language en-US "component encountered a None detected error."
+#string STR_EC_NONE_USEFUL                   #language en-US "component encountered None useful error."
+#string STR_EC_INTERFACE_ERROR               #language en-US "component encountered an interface error."
+#string STR_EC_CONTROLLER_ERROR              #language en-US "component encountered a controller error."
+#string STR_EC_INPUT_ERROR                   #language en-US "component encountered an input error."
+#string STR_EC_OUTPUT_ERROR                  #language en-US "component encountered an output error."
+#string STR_EC_RESOURCE_CONFLICT             #language en-US "component encountered a resource conflict error."
+#string STR_EC_LOCKED                        #language en-US "component encountered a locked error."
+#string STR_EC_STUCK_KEY                     #language en-US "component encountered a stuck key error."
+#string STR_EC_READ_ERROR                    #language en-US "component encountered a read error."
+#string STR_EC_WRITE_ERROR                   #language en-US "component encountered a write error."
+#string STR_EC_PERR                          #language en-US "component encountered a PERR error."
+#string STR_EC_SERR                          #language en-US "component encountered a SERR error."
+#string STR_EC_LOAD_ERROR                    #language en-US "component encountered a load error."
+#string STR_EC_INVALID_PARAMETER             #language en-US "component encountered a invalid parameter error."
+#string STR_EC_UNSUPPORTED                   #language en-US "component encountered a unsupported error."
+#string STR_EC_INVALID_BUFFER                #language en-US "component encountered a invalid buffer error"
+#string STR_EC_OUT_OF_RESOURCES              #language en-US "component encountered a OUT_OF_RESOURCES error."
+#string STR_EC_ABORTED                       #language en-US "component encountered a ABORTED error."
+#string STR_EC_ILLEGAL_SOFTWARE_STATE        #language en-US "component encountered a illegal software stateerror."
+#string STR_EC_ILLEGAL_HARDWARE_STATE        #language en-US "component encountered a illegal hardware state error."
+#string STR_EC_START_ERROR                   #language en-US "component encountered a start error."
+#string STR_EC_BAD_DATE_TIME                 #language en-US "component encountered bad date or time error."
+#string STR_EC_CFG_INVALID                   #language en-US "component encountered invalid configuration."
+#string STR_EC_CFG_CLR_REQUEST               #language en-US "component encountered a request to clear configuration."
+#string STR_EC_CFG_DEFAULT                   #language en-US "component has set configuration to default."
+#string STR_EC_PWD_INVALID                   #language en-US "component had invalid password."
+#string STR_EC_PWD_CLR_REQUEST               #language en-US "component encountered password clear request."
+#string STR_EC_PWD_CLEARED                   #language en-US "component password was cleared."
+#string STR_EC_EVENT_LOG_FULL                #language en-US "event log was full."
+#string STR_EC_DXE_CORRUPT                   #language en-US "Unable to handoff to DXE as DXE core could not be found."
+#string STR_EC_NO_RECOVERY_CAPSULE           #language en-US "Unable to continue with crisis recovery because recovery capsule could not be found."
+#string STR_EC_LEG_OPROM_NO_SPACE            #language en-US "Not enough memory available to shadow a legacy option ROM."
+#string STR_EC_AUTHENTICATION_FAILED         #language en-US "component encountered a authentication failed error."
+#string STR_EC_SECURITY_COMPROMISED          #language en-US "component encountered a security compromised error."
+#string STR_EC_SECURITY_PASSWORD_FAILED      #language en-US "component encountered a Password Failed error."
+#string STR_EC_SECURITY_VARIABLES_CORRUPTED  #language en-US "component encountered a security variable corrupted error."
+#string STR_EC_CONFIGURATION_CLEARED         #language en-US "configuration cleared."
+#string STR_EC_CORRECTABLE_CUSTOM            #language en-US "Correctable ECC error encountered.  Instance field specifies DIMM number."
+#string STR_EC_UNCORRECTABLE_CUSTOM          #language en-US "Uncorrectable ECC error encountered.  Instance field specifies DIMM number."
+
+
+// Smbios Standard Types
+
+#string STR_EVENT_LOG_TYPE_SINGLE_BIT_ECC_MEMORY_ERROR      #language en-US "Single Bit ECC Memory Error"
+#string STR_EVENT_LOG_TYPE_MULTI_BIT_ECC_MEMORY_ERROR       #language en-US "Multi Bit ECC Memory Error"
+#string STR_EVENT_LOG_TYPE_PARITY_MEMORY_ERROR              #language en-US "Parity Memory Error"
+#string STR_EVENT_LOG_TYPE_BUS_TIME_OUT                     #language en-US "Bus Time Out"
+#string STR_EVENT_LOG_TYPE_IO_CHANNEL_CHECK                 #language en-US "I/O Channel Check"
+#string STR_EVENT_LOG_TYPE_SOFTWARE_NMI                     #language en-US "Software NMI"
+#string STR_EVENT_LOG_TYPE_POST_MEMORY_RESIZE               #language en-US "POST Memory Resize"
+#string STR_EVENT_LOG_TYPE_POST_ERROR                       #language en-US "POST Errors:"
+#string STR_EVENT_LOG_TYPE_PCI_PARITY_ERROR                 #language en-US "PCI Parity Error"
+#string STR_EVENT_LOG_TYPE_PCI_SYSTEM_ERROR                 #language en-US "PCI System Error"
+#string STR_EVENT_LOG_TYPE_CPU_FAILURE                      #language en-US "CPU Failure"
+#string STR_EVENT_LOG_TYPE_EISA_FAILSAFE_TIMER_TIME_OUT     #language en-US "EISA Failsafe Timer Timeout"
+#string STR_EVENT_LOG_TYPE_CORRECTABLE_MEMORY_LOG_DISABLED  #language en-US "Correctable Memory Log Disabled"
+#string STR_EVENT_LOG_TYPE_LOGGING_DISABLED_FOR_EVENT_TYPE  #language en-US "Logging Disabled for Event Type"
+#string STR_EVENT_LOG_TYPE_SYSTEM_LIMIT_EXCEEDED            #language en-US "System Limit Exceeded"
+#string STR_EVENT_LOG_TYPE_ASYN_HW_TIMER_EXPIRED            #language en-US "Asyn HW Timer Expired"
+#string STR_EVENT_LOG_TYPE_SYSTEM_CONFIG_INFORMATION        #language en-US "System Configuration Information"
+#string STR_EVENT_LOG_TYPE_HARD_DISK_INFORMATION            #language en-US "Hard Disk Information"
+#string STR_EVENT_LOG_TYPE_SYSTEM_RECONFIGURED              #language en-US "System Reconfigured"
+#string STR_EVENT_LOG_TYPE_UNCORRECTABLE_CPU_COMPLEX_ERROR  #language en-US "Uncorrectable CPU Complex Error"
+#string STR_EVENT_LOG_TYPE_LOG_AREA_RESET                   #language en-US "Log Area Reset"
+#string STR_EVENT_LOG_TYPE_SYSTEM_BOOT                      #language en-US "System Boot"
+#string STR_EVENT_LOG_TYPE_END_OF_LOG                       #language en-US "End of Log"
+
+
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

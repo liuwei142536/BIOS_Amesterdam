@@ -1,0 +1,20 @@
+<component>
+    name = "AmiStatusCode"
+    category = eCore
+    LocalRoot = "AmiModulePkg\AmiStatusCode\"
+    RefName = "AmiModulePkg.AmiStatusCode"
+[INF]
+"StatusCodePei.inf"
+"StatusCodeDxe.inf"
+"StatusCodeSmm.inf"
+[files]
+"StatusCodeAmi.chm"	
+"StatusCodeAmi.sdl"	
+"StatusCodeElinksTemplate.txt"	
+[dependency]
+IntelFrameworkPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/IntelFrameworkPkg;5.004_IntelFrameworkPkg_02"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;5.004_MdeModulePkg_09"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;5.004_MdePkg_04"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;5.004_AmiCompatibilityPkg_14"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_25"
+<endComponent>

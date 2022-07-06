@@ -1,0 +1,13 @@
+<component>
+	name = "FIT : LT-SX"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Fit\"
+	RefName = "GrantleyPkg.IntelLtsxFit"
+[INF]
+"IntelLtsxFit.inf"
+[files]
+"IntelLtsxFit.sdl"	
+"FitUtility.exe"	
+"IntelLtsxFit.dec"	
+"IntelLtsxFit.mak"	
+<endComponent>

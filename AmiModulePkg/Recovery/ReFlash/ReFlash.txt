@@ -1,0 +1,75 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:	ReFlash.txt
+//
+// Description:	
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+
+#ifdef  REFLASH_DEFINITIONS_SUPPORT
+ @Elink(REFLASH_DEFINITIONS,"#include<@Child>","%n ","%n")
+#endif
+
+#ifndef VFRCOMPILE
+
+#define REFLASH_FUNCTION_LIST @Elink(ReflashFunctions,"@Child","","%n") 
+
+typedef VOID (OEM_FLASH_UPDATE_CALLBACK) (VOID);
+@elink(OemBeforeFlashUpdateList,
+"VOID @replace(@child,@token(NVRAM_SDL_TEMPLATE_COMMA),@token(NON_EXISTENT_TOKEN))(VOID);", "%n", "")
+@elink(OemAfterFlashUpdateList,
+"VOID @replace(@child,@token(NVRAM_SDL_TEMPLATE_COMMA),@token(NON_EXISTENT_TOKEN))(VOID);", "%n", "")
+
+OEM_FLASH_UPDATE_CALLBACK *OemBeforeFlashCallbackList[] = {
+@elink(OemBeforeFlashUpdateList,
+"   @child", "%n", "%n   NULL")
+};
+OEM_FLASH_UPDATE_CALLBACK *OemAfterFlashCallbackList[] = {
+@elink(OemAfterFlashUpdateList,
+"   @child", "%n", "%n   NULL")
+};
+
+#include <Token.h>
+
+#if PRESERVE_FFS
+EFI_GUID FfsToPreserveGuidArray[] = {
+@elink(FfsToPreserve, "   @child", ",%n", "")
+};
+UINT32 FfsToPreserveGuidListSize = sizeof (FfsToPreserveGuidArray) / sizeof (EFI_GUID);
+EFI_GUID *FfsToPreserveGuidList = FfsToPreserveGuidArray;
+#else
+EFI_GUID *FfsToPreserveGuidList = NULL;
+UINT32 FfsToPreserveGuidListSize = 0;
+#endif
+
+#endif
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

@@ -1,0 +1,9 @@
+<component>
+	name = "Desktop Raptor Lake uCode Patches (B067x)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Desktop\"
+	RefName = "RaptorLakeDesktopUc"
+[files]
+"RaptorLakeDesktopUc.sdl"
+"M02B0670_00000009.pdb"	= "DESKTOP MICROCODE UPDATES"
+<endComponent>

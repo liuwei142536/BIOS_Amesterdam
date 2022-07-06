@@ -1,0 +1,11 @@
+<component>
+	name = "WheaErrorInj"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\Whea\WheaErrorInj\"
+	RefName = "GrantleyPkg.WheaErrorInj"
+[INF]
+"WheaErrorInj.inf"
+[files]
+"WheaErrorInj.h"	
+"WheaErrorInj.sdl"	
+<endComponent>

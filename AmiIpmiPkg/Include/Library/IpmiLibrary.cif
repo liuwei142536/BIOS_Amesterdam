@@ -1,0 +1,9 @@
+<component>
+    name = "IpmiLibrary"
+    category = ModulePart
+    LocalRoot = "AmiIpmiPkg\Include\Library\"
+    RefName = "AmiIpmiPkg.Include.IpmiLibrary"
+[files]
+"IpmiInterfaceLib.h"
+"AmiIpmiLib.h"
+<endComponent>

@@ -1,0 +1,147 @@
+## @file
+#  PlatformEarlyInit PEIM
+#
+#  Copyright (c) 2009 - 2014, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PlatformEarlyInit
+  FILE_GUID                      = EE685731-CFF3-4ee7-9388-7E63FC5A59B0
+  MODULE_TYPE                    = PEIM
+  ENTRY_POINT                    = PlatformEarlyInitEntry
+
+[Sources]
+  PchInitPeim.c
+  PlatformEarlyInit.c
+  
+ #AptioV Override Grangeville: below files are duplicated from WellsburgPkg and GrantleyPkg to avoid
+ #SVN check-in issues. Ensure, any modifications to the below files are done in the respecive packages as well. 
+  WellsburgPkg\PchInit\Common\PchHsioLptHC0.c
+  WellsburgPkg\PchInit\Common\PchHsioLptHC0_BeverlyCove.c
+  GrantleyPkg\Platform\Pei\PlatformInit\BootMode.c
+  GrantleyPkg\Platform\Pei\PlatformInit\CpuInitPeim.c
+  GrantleyPkg\Platform\Pei\PlatformInit\IioInitPeim.c
+  GrantleyPkg\Platform\Pei\PlatformInit\Common\FlashMap.c
+  GrantleyPkg\Platform\Pei\PlatformInit\Common\Stall.c
+  GrantleyPkg\Platform\Pei\PlatformInit\MemoryPeim.c
+  GrantleyPkg\Platform\Pei\PlatformInit\MemoryCallback.c
+  GrantleyPkg\Platform\Pei\PlatformInit\Recovery.c
+  GrantleyPkg\Platform\Pei\PlatformInit\SioInitPeim.c
+ 
+
+[Packages]
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  MdePkg/MdePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  # Aptio V server Override Grangeville 
+  # SecurityPkg/SecurityPkg.dec
+  GrangevillePkg/PlatformPkg.dec
+  CryptoPkg/CryptoPkg.dec
+  GrantleyPkg/Me/MePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   #Aptio V Server Override
+
+[LibraryClasses]
+  PeiServicesLib
+  PeimEntryPoint
+  DebugLib
+  HobLib
+  IoLib
+  PciLib
+  PlatformHooksLib
+  PcdLib
+  PchPlatformLib
+  PrintLib
+  PeiServicesTablePointerLib
+  PciExpressLib
+  BaseCryptLib
+  PchPlatformPolicyInitPeiLib
+  CmosAccessLib
+  PlatformClocksLib
+  MeTypeLib
+  AmiCspLib    # AptioV Server override
+  DebugPrintErrorLevelLib
+  ReportStatusCodeLib
+      
+[Pcd]
+  gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdBootState
+  # Aptio V server Override   grangeville 
+  #gEfiSecurityPkgTokenSpaceGuid.PcdTpmPhysicalPresence
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiPchTokenSpaceGuid.PcdPchSataInitReg78Data
+  gEfiPchTokenSpaceGuid.PcdPchSataInitReg88Data
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel
+  gEfiMePkgTokenSpaceGuid.PcdMePlatformWarmResetCounter
+  gServerCommonTokenSpaceGuid.PcdLtConfigLockEnable
+  gEfiPchTokenSpaceGuid.PcdOemSkuPHHDIndirectDevicesLo
+  gEfiPchTokenSpaceGuid.PcdOemSkuPHHDIndirectDevicesHi
+
+[FeaturePcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFrameworkCompatibilitySupport         ## CONSUMES
+
+[Guids]
+  gEfiSetupVariableGuid
+  gEfiGlobalVariableControlGuid
+  gEfiSetupVariableDefaultGuid
+  gEfiTcgWakeEventDataHobGuid
+  gEfiPlatformInfoGuid
+  gEfiMemoryTypeInformationGuid
+  gEfiFlashMapHobGuid
+  gPeiCapsuleOnDataCDGuid
+  gPeiCapsuleOnFatIdeDiskGuid
+  gPeiCapsuleOnFatUsbDiskGuid
+  gEfiMfgUUIDHobGuid
+  gEfiMdeModulePkgTokenSpaceGuid
+  gEfiPlatformTxtPolicyDataGuid
+  gEfiBiosIdGuid
+  gEfiAdminPasswordHobGuid
+  gEfiAuthenticatedVariableGuid
+  gEfiVariableGuid
+
+[Ppis]
+  gPeiBaseMemoryTestPpiGuid         ## PRODUCES
+  gPchUsbPolicyPpiGuid              ## PRODUCES
+  gEfiPeiStallPpiGuid
+  gPeiFlashMapPpiGuid
+  gEfiPeiBootInRecoveryModePpiGuid
+  gEfiPeiRecoveryModulePpiGuid
+  gEfiPeiMemoryDiscoveredPpiGuid
+  gPeiPlatformMemorySizePpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gEfiPeiMasterBootModePpiGuid
+  gEfiPeiResetPpiGuid
+  gPeiSmbusPolicyPpiGuid
+  gEfiEndOfPeiSignalPpiGuid
+  gPeiAtaPolicyPpiGuid
+  gPeiCachePpiGuid
+  gPchPlatformPolicyPpiGuid
+  gEfiPeiVirtualBlockIoPpiGuid
+  gEfiPeiDeviceRecoveryModulePpiGuid
+  gEfiPeiSmbus2PpiGuid
+  gPchInitPpiGuid
+  gPeiSpiSoftStrapsPpiGuid
+  gPchResetPpiGuid
+  gPeiMpServicePpiGuid
+  gPeiPostScriptTablePpiGuid
+  
+[Depex]
+  gPchInitPpiGuid AND
+  gPeiSpiSoftStrapsPpiGuid AND
+  gEfiPciCfg2PpiGuid AND         #Aptio V Server overrride : After core udpate,this module is getting launched before PcatSingleSegmentPciCfg2Pei
+  gEfiPeiCpuIoPpiInstalledGuid AND #Aptio V Server overrride : After core udpate,this module is getting launched before PcatSingleSegmentPciCfg2Pei
+  gEfiPeiSmbus2PpiGuid # Aptio V Server overrride

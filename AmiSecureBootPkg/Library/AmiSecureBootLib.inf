@@ -1,0 +1,48 @@
+[Defines]
+INF_VERSION     = 0x00010015
+VERSION_STRING  = 1.0
+BASE_NAME       = AmiSecureBootLib
+MODULE_TYPE     = DXE_DRIVER
+LIBRARY_CLASS   = AmiSecureBootLib|DXE_SMM_DRIVER DXE_RUNTIME_DRIVER DXE_DRIVER DXE_CORE UEFI_APPLICATION UEFI_DRIVER
+FILE_GUID       = 4A4F698B-2AFF-4c5e-BC46-8CA3BE3D3931
+
+#
+#0x4a4f698b, 0x2aff, 0x4c5e, 0xbc, 0x46, 0x8c, 0xa3, 0xbe, 0x3d, 0x39, 0x31);
+
+[Sources]
+  AmiSecureBootLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiSecureBootPkg/AmiSecureBootPkg.dec
+  AmiCryptoPkg/AmiCryptoPkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  DxeServicesLib
+  MemoryAllocationLib
+  PrintLib
+  DebugLib
+
+[Guids]
+  gEfiImageSecurityDatabaseGuid
+  gEfiGlobalVariableGuid
+  gEfiCertPkcs7Guid
+  gAmiPkFileGuid
+  gAmiKekFileGuid
+  gAmiDbFileGuid
+  gAmiDbxFileGuid
+  gAmiDbtFileGuid
+  gAmiDbrFileGuid
+  gEfiCertX509Sha256Guid
+  gEfiCertX509Sha384Guid
+  gEfiCertX509Sha512Guid
+  gEfiCertSha256Guid
+  gEfiCertRsa2048Guid
+  gEfiCertX509Guid
+  gAmiSigOwherGuid
+
+[Protocols]
+  gAmiDigitalSignatureProtocolGuid

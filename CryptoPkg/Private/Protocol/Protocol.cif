@@ -1,0 +1,9 @@
+<component>
+    name = "Protocol"
+    category = ModulePart
+    LocalRoot = "CryptoPkg\Private\Protocol\"
+    RefName = "CryptoPkg.Protocol"
+[files]
+"Crypto.h"	
+"SmmCrypto.h"	
+<endComponent>

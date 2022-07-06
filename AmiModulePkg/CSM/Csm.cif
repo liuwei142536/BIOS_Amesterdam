@@ -1,0 +1,29 @@
+<component>
+    name = "Csm"
+    category = eModule
+    LocalRoot = "AmiModulePkg\CSM\"
+    RefName = "CSM"
+[INF]
+"CsmDxe.inf"
+"x86thunk.inf"
+"CsmBlockIo\CsmBlockIo.inf"
+"CsmVideo\CsmVideo.inf"
+"CsmPolicy\CsmPolicy.inf"
+[files]
+"Csm.sdl"	
+"Csm.mak"	
+"AmiLegacy16.bin"	
+"CsmFileStatements.txt"	
+"OpRomScript.txt"	
+"csm.chm"	
+[parts]
+"CSM_SETUP"
+"CSM16_OEM"
+[dependency]
+AHCI >= "SS: AptioV;$/AptioV/Source/Modules/AHCI;5.004_AHCI_05"
+AmiModulePkg.NVRAM >= "SS: AptioV;$/AptioV/Source/Modules/NvRam;NVRAM_04"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;5.004_AmiCompatibilityPkg_13"
+IntelFrameworkPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/IntelFrameworkPkg;5.004_IntelFrameworkPkg_02"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_23"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_10"
+<endComponent>

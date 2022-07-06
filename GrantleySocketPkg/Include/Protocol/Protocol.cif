@@ -1,0 +1,13 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Include\Protocol\"
+	RefName = "GrantleySocketPkg.Protocol"
+[files]
+"CpuCsrAccess.h"	
+"IioSystem.h"	
+"IioUds.h"	
+"PlatformCpu.h"	
+"PfatFlashProtocol.h"
+"QuiesceProtocol.h"
+<endComponent>

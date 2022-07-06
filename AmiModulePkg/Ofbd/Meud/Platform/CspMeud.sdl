@@ -1,0 +1,168 @@
+TOKEN
+	Name  = CSP_MEUD_SUPPORT
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+	Help  = "Main switch to enable ME Firmware Update Chipset function in Project"
+End
+
+TOKEN
+	Name  = DISABLE_ME_WORKAROUND
+	Value  = "0"
+	TokenType = Boolean
+	TargetH = Yes
+	Help  = "Store Nonce in variable"
+End
+
+ELINK
+	Name  = "$(OFBD_MEUD_DIR)/Platform/CspMeud.c"
+	Parent  = "OFBD_FUNC_SOURCES_FILES"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "FPT_START"
+    Value  = "0x20000"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FPT_OFFSET"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FPT_LENGTH"
+    Value  = "0x10000"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MFSB_START"
+    Value  = "$(FPT_START) + $(FPT_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MFSB_LENGTH"
+    Value  = "0x10000"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FTPR_START"
+    Value  = "$(MFSB_START) + $(MFSB_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FTPR_LENGTH"
+    Value  = "0x20000"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MFS_START"
+    Value  = "$(FTPR_START) + $(FTPR_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MFS_LENGTH"
+    Value  = "0x50000"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "OPR1_START"
+    Value  = "$(MFS_START) + $(MFS_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "OPR1_LENGTH"
+    Value  = "0x1B0000"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "OPR2_START"
+    Value  = "$(OPR1_START) + $(OPR1_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "OPR2_LENGTH"
+    Value  = "0x1B0000"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "RETRY_OPR_COUNT"
+    Value  = "0"
+    TokenType = Integer
+    TargetH = Yes
+    Help  = "Retry Times, if the return status of HMRFPO LOCK is not valid when Update OPRx,0 = No Retry"
+End
+
+TOKEN
+    Name  = "CHECK_FPTR_IN_OPR"
+    Value  = "0"
+    TokenType = BOOLEAN
+    TargetH = Yes
+    Help  = "Send Lock Message after updating FPTR to OPR"
+End
+
+TOKEN
+    Name  = "RT_ME_BUFFER"
+    Value  = "0x1000000"
+    TokenType = Integer
+    TargetH = Yes
+    Help  = "Pre-allocate memory, some platform can't get such big SMM memory"
+End
+
+TOKEN
+    Name  = "RT_OPR_BUFFER"
+    Value  = "0x400000"
+    TokenType = Integer
+    TargetH = Yes
+    Help  = "Pre-allocate memory, some platform can't get such big SMM memory"
+End
+
+TOKEN
+    Name  = "BITS_OF_SPI_DENSITY"
+    Value  = "1"
+    TokenType = Integer
+    TargetH = Yes
+    Help  = "Please check Flash Descriptor Component Section in SPI Programming Guid, 0 = 3 BITs for Density , 1 = 4 BITs for Density"
+End
+
+ELINK
+	Name  = "BricklandPkg/Me/MePkg.dec"
+	Parent  = "AMI_OFBD_PACKAGES"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "gSmmHeciProtocolGuid"
+	Parent  = "AMI_OFBD_PROTOCOLS"
+	InvokeOrder = AfterParent
+End
+
+   

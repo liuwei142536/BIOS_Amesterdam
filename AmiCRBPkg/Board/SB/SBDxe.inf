@@ -1,0 +1,61 @@
+
+
+#
+# This file contains code for South Bridge initialization in the DXE stage.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SBDXE
+  FILE_GUID                      = B7D19491-E55A-470d-8508-85A5DFA41974
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SBDXE_Init
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  
+
+[Sources]  
+  ../../Chipset/SB/SBDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec   
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  AmiCRBPkg/AmiCRBPkg.dec
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  PciExpressLib
+  PcdLib
+  AmiDxeLib
+  AmiCspLib
+  PciLib
+  S3BootScriptLib  
+  AmiPciHotPlugLib
+  PchPlatformLib #Eip 481921: OEM_USB_PER_PORT_DISABLE_SUPPORT
+
+[Protocols]
+  gEfiS3SaveStateProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiUsbProtocolGuid
+  gEfiUsbIoProtocolGuid #Eip 481921: OEM_USB_PER_PORT_DISABLE_SUPPORT
+
+[Guids]
+  gEfiSetupVariableGuid 
+
+[Depex]  	
+  gEfiPciRootBridgeIoProtocolGuid 
+
+ [Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress

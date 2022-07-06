@@ -1,0 +1,138 @@
+TOKEN
+    Name  = "SERVWORK_5065X"
+    Value = "0"
+    Help  = "Intel(R) SkyLake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SERVWORK_M1350650"
+    Value  = "1"
+    Help  = "Intel(R) Server SkyLake Processor A-1 Stepping(50650)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVWORK_M1350651"
+    Value  = "1"
+    Help  = "Intel(R) Server SkyLake Processor A-2 Stepping(50651)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVWORK_M9750652"
+    Value  = "1"
+    Help  = "Intel(R) Server SkyLake Processor B-0 Stepping(50652)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVWORK_M9750653"
+    Value  = "1"
+    Help  = "Intel(R) Server SkyLake Processor B-1 Stepping(50653)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVWORK_M9750654"
+    Value  = "1"
+    Help  = "Intel(R) Server SkyLake Processor H-0, M-0, U-0 Stepping(50654)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SERVWORK_MB750654"
+    Value  = "1"
+    Help  = "Intel(R) Server SkyLake-D Processor M-1 Stepping(50654)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SERVWORK_MB750655"
+    Value  = "1"
+    Help  = "Intel(R) Server Cascade Lake A-0 Stepping(50655)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SERVWORK_MBF50656"
+    Value  = "1"
+    Help  = "Intel(R) Server Cascade Lake B-0 Stepping(50656)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SERVWORK_MBF50657"
+    Value  = "1"
+    Help  = "Intel(R) Server Cascade Lake B-1 Stepping(50657)"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M1350650_8000002B.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server SkyLake Processor A-1 Stepping(50650)"
+    Token = "SERVWORK_M1350650" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M1350651_8000002B.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server SkyLake Processor A-2 Stepping(50651)"
+    Token = "SERVWORK_M1350651" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M9750652_80000037.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server SkyLake Processor B-0, L-0 Stepping(50652)"
+    Token = "SERVWORK_M9750652" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/MB750654_02006C0A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server SkyLake Processor H-0, M-0, U-0 Stepping(50654)"
+    Token = "SERVWORK_M9750654" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/MB750654_02006C0A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server kyLake-D Processor M-1 Stepping(50654)"
+    Token = "SERVWORK_MB750654" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/MB750655_03000010.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server Cascade Lake A-0 Stepping(50655)"
+    Token = "SERVWORK_MB750655" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/MBF50656_0400320A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server Cascade Lake B-0 Stepping(50656)"
+    Token = "SERVWORK_MBF50656" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/MBF50657_0500320A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server Cascade Lake B-1 Stepping(50657)"
+    Token = "SERVWORK_MBF50657" "=" "1"
+    InvokeOrder = AfterParent
+End

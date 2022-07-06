@@ -1,0 +1,1319 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+#
+#*************************************************************************
+# $Header: $
+#
+# $Revision: $
+#
+# $Date: $
+#*************************************************************************
+# Revision History
+# ----------------
+# $Log: $
+# 
+# 
+#*************************************************************************
+#<AMI_FHDR_START>
+#
+# Name:  <CRB.SDL>
+#
+# Description:     
+#
+#<AMI_FHDR_END>
+#*************************************************************************
+
+PCIDEVICE
+    Title  = "PCIe Access ASL"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg\PCI\PCIEACCESS.ASL;After Pci Tree'"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+End
+
+#PCIDEVICE
+#   Title  = "DSM Asl  Container"
+#   Parent  = "PciHost (Virtual)"
+#   Attribute  = "0x0"
+#   Dev_type  = "Container"
+#   Dev  = 00h
+#   ASLfile  = "''Build\PciSlot.ASL;After Pci Tree'"
+#   Token = "DsmAsl_SUPPORT" "=" "1"
+#   DeviceType = Slot
+#   PCIBusSize = 32bit
+#   ROMMain = No
+#   Virtual = Yes
+#End
+
+
+#CRB (BeverlyCove)- Board specific PCI devices/slots
+PCIDEVICE
+   Title  = "On Board Video"
+   Parent  = "PCIE Root Port #3"
+   Attribute  = "0x0"
+   Dev_type  = "PciDevice"
+   Dev  = 00h
+   Fun  = 00h
+   SleepNum  = 01h
+   ROMFile  = "AmiCRBPkg\MATROXVIDEOOPROM.BIN"
+   IntA =  LNKA; 16
+   IntB =  LNKB; 17
+   IntC =  LNKC; 18
+   IntD =  LNKD; 19
+   DeviceType = OnBoard
+   PCIBusSize = 32bit
+   OptionROM = Yes
+   ROMMain = No
+   PCIExpress = Yes
+   LegacyRom = Yes
+   FFSFileName  = "ROM Storage"
+   ROMSectionGuid  = "7301762E-4BF3-4b06-ADA0-766041BE36AF"
+   Token = "EchoCanyon_SUPPORT" "=" "1"
+End
+
+#PCIDEVICE
+#   Title  = "UEFI Video"
+#   Parent  = "PCIE Root Port #3"
+#   Attribute  = "0x0"
+#   Dev_type  = "Container"
+#   Dev  = 00h
+#   Fun  = 00h
+#   SleepNum  = 01h
+#   ROMFile  = "GrantleyPkg\Platform\Dxe\OnBoardVideoEfi\OnboardVideoEfi.efi"
+#   DeviceType = OnBoard
+#   PCIBusSize = 32bit
+#   OptionROM = Yes
+#   ROMMain = No
+#   Virtual = Yes
+#   UefiRom = Yes
+#   FFSFileName  = "ROM Storage"
+#   ROMSectionGuid  = "794e15d9-bf1b-4568-99ac-dce207c022e4"
+#End
+
+PCIDEVICE
+    Title  = "Slot0D x8: (D1C:F4)PCIE Root Port #4"
+    Parent  = "PCIE Root Port #4"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 0dh
+    SleepNum  = 00h
+    IntA =  LNKA; 16
+    IntB =  LNKB; 17
+    IntC =  LNKC; 18
+    IntD =  LNKD; 19
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title  = "Slot0E x8: (D1C:F6)PCIE Root Port #6"
+    Parent  = "PCIE Root Port #6"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 0Eh
+    SleepNum  = 00h
+    IntA =  LNKA; 16
+    IntB =  LNKB; 17
+    IntC =  LNKC; 18
+    IntD =  LNKD; 19
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+
+PCIDEVICE
+    Title  = "Slot0A x8: (D2:F0)NB PCI-E Root Port #3"
+    Parent  = "NB PCI-E Root Port #3"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 0ah
+    SleepNum  = 00h
+    IntA =  LNKA; 16
+    IntB =  LNKB; 17
+    IntC =  LNKC; 18
+    IntD =  LNKD; 19
+    Token = "NB_IOxAPIC_SUPPORT" "=" "0"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title  = "Slot0A x8: (D2:F0)NB PCI-E Root Port #3"
+    Parent  = "NB PCI-E Root Port #3"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 0ah
+    SleepNum  = 00h
+    IntA =  LNKA; 32
+    IntB =  LNKB; 36
+    IntC =  LNKC; 37
+    IntD =  LNKD; 38
+    Token = "NB_IOxAPIC_SUPPORT" "=" "1"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title  = "Slot0B x8: (D1:F0)NB PCI-E Root Port #1"
+    Parent  = "NB PCI-E Root Port #1"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 0bh
+    SleepNum  = 00h
+    IntA =  LNKA; 16
+    IntB =  LNKB; 17
+    IntC =  LNKC; 18
+    IntD =  LNKD; 19
+    Token = "NB_IOxAPIC_SUPPORT" "=" "0"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title  = "Slot0B x8: (D1:F0)NB PCI-E Root Port #1"
+    Parent  = "NB PCI-E Root Port #1"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 0bh
+    SleepNum  = 01h
+    IntA =  LNKA; 26
+    IntB =  LNKB; 28
+    IntC =  LNKC; 29
+    IntD =  LNKD; 30
+    Token = "NB_IOxAPIC_SUPPORT" "=" "1"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    NoAslHpCode = Yes
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+   Title  = "Slot0F x16: (D2:F3)NB PCI-E Root Port #6"
+   Parent  = "NB PCI-E Root Port #6"
+   Attribute  = "0x0"
+   Dev_type  = "PciDevice"
+   Dev  = 00h
+   Slot  = 0Fh
+   SleepNum  = 00h
+   IntA =  LNKA; 16
+   IntB =  LNKB; 17
+   IntC =  LNKC; 18
+   IntD =  LNKD; 19
+   Token = "NB_IOxAPIC_SUPPORT" "=" "0"
+   DeviceType = Slot
+   PCIBusSize = 32bit
+   ROMMain = No
+   PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title  = "Slot0F x16: (D2:F3)NB PCI-E Root Port #6"
+    Parent  = "NB PCI-E Root Port #6"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 0Fh
+    SleepNum  = 00h
+    IntA =  LNKA; 40
+    IntB =  LNKB; 44
+    IntC =  LNKC; 45
+    IntD =  LNKD; 46
+    Token = "NB_IOxAPIC_SUPPORT" "=" "1"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+
+PCIDEVICE
+    Title  = "Slot01 x16: (D3:F0)NB PCI-E Root Port #7"
+    Parent  = "NB PCI-E Root Port #7"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 01h
+    SleepNum  = 00h
+    IntA =  LNKA; 16
+    IntB =  LNKB; 17
+    IntC =  LNKC; 18
+    IntD =  LNKD; 19
+    Token = "NB_IOxAPIC_SUPPORT" "=" "0"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title  = "Slot01 x16: (D3:F0)NB PCI-E Root Port #7"
+    Parent  = "NB PCI-E Root Port #7"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 01h
+    SleepNum  = 00h
+    IntA =  LNKA; 40
+    IntB =  LNKB; 44
+    IntC =  LNKC; 45
+    IntD =  LNKD; 46
+    Token = "NB_IOxAPIC_SUPPORT" "=" "1"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title  = "Slot06 x8: (D3:F2)NB PCI-E Root Port #9"
+    Parent  = "NB PCI-E Root Port #9"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 06h
+    SleepNum  = 00h
+    IntA =  LNKA; 16
+    IntB =  LNKB; 17
+    IntC =  LNKC; 18
+    IntD =  LNKD; 19
+    Token = "NB_IOxAPIC_SUPPORT" "=" "0"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title  = "Slot06 x8: (D3:F2)NB PCI-E Root Port #9"
+    Parent  = "NB PCI-E Root Port #9"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 06h
+    SleepNum  = 00h
+    IntA =  LNKA; 35
+    IntB =  LNKB; 36
+    IntC =  LNKC; 38
+    IntD =  LNKD; 37
+    Token = "NB_IOxAPIC_SUPPORT" "=" "1"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title = "Slot1D x4: (D1:F0)NB PCI-E Root Port #2"
+    Parent = "NB PCI-E Root Port #2"
+    Attribute = "0x0"
+    Dev_type = "PciDevice"
+    Dev = 00h
+    Slot = 0dh
+    SleepNum = 01h
+    IntA =  LNKA; 16
+    IntB =  LNKB; 17
+    IntC =  LNKC; 18
+    IntD =  LNKD; 19
+    Token = "NB_IOxAPIC_SUPPORT" "=" "0"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    NoAslHpCode = Yes
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title = "Slot1D x4: (D1:F0)NB PCI-E Root Port #2"
+    Parent = "NB PCI-E Root Port #2"
+    Attribute = "0x0"
+    Dev_type = "PciDevice"
+    Dev = 00h
+    Slot = 0dh
+    SleepNum = 01h
+    IntA = LNKA; 26
+    IntB = LNKB; 28
+    IntC = LNKC; 29
+    IntD = LNKD; 30
+    Token = "NB_IOxAPIC_SUPPORT" "=" "1"
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    NoAslHpCode = Yes
+    PCIExpress = Yes
+End
+
+TOKEN
+    Name  = "PORT_MULTIPLIER_SUPPORT"
+    Value  = "0"
+    Help  = "Switch to Enable/Disable PM Support"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CRB_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Chipset Reference Board support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+#TOKEN
+#    Name  = "EFI_SPECIFICATION_VERSION"
+#    Value  = "0x2001F"
+#    Help  = "version of the supported EFI/UEFI specification:\0x1000A - EFI 1.1\0x20000 - UEFI 2.0\0x2000A- UEFI 2.1"
+#    TokenType = Integer
+#    TargetMAK = Yes
+#    Range  = "0x1000A, 0x20000, 0x2000A"
+#End
+
+TOKEN
+    Name  = "SB_IO_DECODE_IN_SEC"
+    Value  = "1"
+    TokenType = Boolean
+    TargetEQU = Yes
+#   Token = "SIO_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "RESERVED_PAGE_ROUTE"
+    Value  = "1"
+    Help  = "Off:Enable Port 80 decoding to LPC.\On:Enable Port 80 decoding to PCI."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "NCPU"
+    Value  = "16"
+    Help  = "Maximum number of processor threads in the system."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+#TOKEN
+#    Name  = "PI_SPECIFICATION_VERSION"
+#    Value  = "0x10014"
+#    Help  = "version of the PI specification supported:\0x5B - PI 0.91\0x10000 - PI 1.0\0x1000A - PI 1.1\0x00010014 - PI 1.2"
+#    TokenType = Integer
+#    TargetEQU = Yes
+#    TargetMAK = Yes
+#    TargetH = Yes
+#    Range  = "0x5B, 0x10000, 0x1000A, 0x10014"
+#End
+
+TOKEN
+    Name  = "CURSOR_BLINK_ENABLE"
+    Value  = "0"
+    Help  = "Enables and Disables the functionality to make the cursor blink"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "CORE_MAJOR_VERSION" "=" "4"
+    Token = "CORE_MINOR_VERSION" "=" "6"
+    Token = "CORE_REVISION" "=" "4"
+    Token = "CORE_BUILD_NUMBER" "=" "0"
+End
+
+TOKEN
+    Name  = "CURSOR_BLINK_ENABLE"
+    Value  = "0"
+    Help  = "Enables and Disables the functionality to make the cursor blink"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "Shell_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable Shell support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SIO1_SERIAL_PORT1_PRESENT"
+    Value  = "0"
+    Help  = "Serial Port 1 (COMB / UART1) Present / Not Present."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CPU_MAX_IO_SIZE"
+    Value  = "0x10000"
+    Help  = "Maximum I/O size addressable by the CPU"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MEMORY_ERROR_INFO"
+    Value  = "0"
+    Help  = "ON   -> Memory Error Information (Type 18) structures will be present.\OFF  -> Memory Error Information (Type 18) structures will not be present."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "COOLING_DEVICE_INFO"
+    Value  = "1"
+    Help  = "ON  -> Cooling Device Information (Type 27) structure will be present\OFF -> Cooling Device Information (Type 27) structure will not be present"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TEMPERATURE_PROBE_INFO"
+    Value  = "1"
+    Help  = "ON  -> Temperature Probe Information (Type 28) structure will be present\OFF -> Temprature Probe Information (Type 28) structure will not be present"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+
+TOKEN
+    Name  = "MANAGEMENT_DEVICE_INFO"
+    Value  = "1"
+    Help  = "ON  -> Management Device Information (Type 34) structure will be present\OFF -> Management Device Information (Type 34) structure will not be present"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SYSTEM_POWER_SUPPLY_INFO"
+    Value  = "1"
+    Help  = "Type 39 - System Power Supply\OFF -> System Power Supply will not be Present\ON  -> System Power Supply will be Present"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PROCESSOR_INFO"
+    Value  = "0"
+    Help  = "ON  -> Processor Information (Type 4) structure will be present\OFF -> Processor Information (Type 4) structure will not be present\The number of CPU is defined in CPU.SDL as NCPU.\Total number of processors will be NCPU ( specified in CPU.SDL) \Currenty there is support for 4 Processors. \To support more processores modify in SMBDESC.DEF and SMBIOS.SDL"
+    TokenType = Boolean
+    TargetEQU = Yes
+End
+
+TOKEN
+    Name  = "NUMBER_OF_SYSTEM_SLOTS"
+    Value  = "8"
+    Help  = "Identifies the number of system slots available on the platform."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "====== Debug Rx Configuration ======"
+    TokenType = Expression
+End
+
+TOKEN
+    Name  = "AMIDEBUGGERPKG_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AMIDebuggerPkg support in the project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AMIDEBUG_RX_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling AMIDebugRxPkg support in the project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AMI_DEBUGGER_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling Debugger support in the project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "AMIDEBUGGERPKG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "USB_3_DEBUG_SUPPORT"
+    Value  = "0"
+    Help  = "Main token switch to enable the USB 3.0 Debug Port interface\installation into the project.Do Not Change this SDL Token."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "AMI_DEBUGGER_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class = "DebugAgentLib"
+    Instance = "MdeModulePkg.DebugAgentLibNull"
+    Override = "MdeModulePkg.CapsulePei"
+End
+
+LibraryMapping
+    Class = "DebugAgentLib"
+    Instance = "MdeModulePkg.DebugAgentLibNull"
+    Override = "MdeModulePkg.CapsuleX64"
+End
+
+TOKEN
+    Name  = "ME_SECOVR_MEI_MSG_SUPPORT"
+    Value  = "0"
+    Help  = "Support ME update when ME in SECOVR_MEI_MSG mode,MPG or RC please disable this."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CRB_OUT_OF_RESOURCE_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable CRB defined OUTOFRESOURCE (MMIO/IO)HANDLING support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "BoardPciRes_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable BoardPciResPoliicy support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MAX_PCIDEVICES_DISABLE_COUNT"
+    Value  = "50"
+    Help  = "Number of max devices disabled when PCI resource error happens. Depends on the system configuration you may see only few PCI Devices disabled. Here device disable means only resource are not assigned to the device."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MAX_SYSTEM_RESET_RETRYCOUNT_ON_RESOURCE_ERROR"
+    Value  = "20"
+    Help  = "Maximum number of system reset retries to fix the PCI RESOURCE GRANULARTIY issue when PCI resource error happens. Depends on the system configuration you may see only few resets."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NVRAM_RT_GARBAGE_COLLECTION_SUPPORT"
+    Value  = "1"
+    Help  = "This token enables/disables support of the NVRAM garbage collection at runtime."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "SecureBoot_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SPMI_SCOPE"
+    Value  = "\_SB.PCI0.LPC0"
+    Help  = "PLATFORM PORTING!!! Update PCI0 and LPC0 device names as defined in SB/NB.SDL"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "OPROM_MAX_ADDRESS"
+    Value  = "0xE6FFF"
+    Help  = "The last address that can be used by Option ROM."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Range  = "0xC7FFF...0xEBFFF"
+End
+
+TOKEN
+    Name  = "FDT_LOCK_ENABLE"
+    Value  = "0"
+    Help  = "Main switch to enable/disable FDT lock in the CPU/BIOS master access section"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FV_MAIN_SIZE"
+    Value  = "$(FLASH_SIZE) - $(FV_BB_SIZE) - $(BIOSAC_BINARY_SIZE) - $(SINIT_BINARY_SIZE) - $(FIT_AREA) - $(OEM_ACTIVATION_TABLE_SIZE) - $(FV_MAIN_OFFSET)"
+    Help  = "Size of the FV_MAIN area"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "From: 0 To: FLASH_SIZE - FV_BB - FV_MAIN_OFFSET"
+End
+
+
+TOKEN
+    Name  = "FV_MAIN_OFFSET"
+    Value  = "$(NVRAM_OFFSET)+$(NVRAM_SIZE)+$(FV_WHEA_SIZE)"
+    Help  = "Offset to the start of the FV_MAIN area from the start of the ROM image"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+    Token = "WHEA_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FV_MAIN_OFFSET"
+    Value  = "$(NVRAM_OFFSET)+$(NVRAM_SIZE)*2+$(FV_WHEA_SIZE)"
+    Help  = "Offset to the start of the FV_MAIN area from the start of the ROM image"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+    Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+    Token = "WHEA_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "FV_MAIN_OFFSET"
+    Value = "$(NVRAM_OFFSET) +$(NVRAM_SIZE)*1+$(GPNV_SIZE)"
+    Help = "Offset to the start of the FV_MAIN area from the start of the ROM image"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+    Token = "GpnvErrorLogging_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "FV_MAIN_OFFSET"
+    Value = "$(NVRAM_OFFSET) + $(NVRAM_SIZE)*2+$(GPNV_SIZE)"
+    Help = "Offset to the start of the FV_MAIN area from the start of the ROM image"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+    Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+    Token = "GpnvErrorLogging_SUPPORT" "=" "1"
+End
+
+
+TOKEN
+    Name = "FV_MAIN_OFFSET"
+    Value = "$(NVRAM_OFFSET) +$(NVRAM_SIZE)*2+$(FV_WHEA_SIZE)+ $(GPNV_SIZE)"
+    Help = "Offset to the start of the FV_MAIN area from the start of the ROM image"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Range = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+    Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+    Token = "GpnvErrorLogging_SUPPORT" "=" "1"
+    Token = "WHEA_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "OEM_ACTIVATION_TABLE_SIZE"
+	Value  = "0"
+	Help  = "Size of the OA_TABLE area"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Range  = "From: 0 To: FLASH_SIZE - NVRAM_SIZE - FV_MAIN_SIZE"
+	Token = "OEM_ACTIVATION_TABLE_LOCATION" "=" "0"
+End
+
+TOKEN
+    Name  = "OEM_ACTIVATION_TABLE_ADDRESS"
+    Value  = "0xFFFFFFFF - $(FV_BB_SIZE) - $(BIOSAC_BINARY_SIZE) - $(SINIT_BINARY_SIZE) - $(FIT_AREA) - $(OEM_ACTIVATION_TABLE_SIZE) + 1"
+    Help  = "OEM Activation Table address in the NCB. Port this token!"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "OEM_ACTIVATION_TABLE_LOCATION" "=" "1"  
+End
+
+TOKEN
+    Name  = "DISABLE_USB_BEFORE_BOOT"
+    Value  = "0"
+    Help  = "Token to dusable USB devices before boot and not in POST. 0: Disable in POST 1: Disable before boot"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "AMIUSB_SUPPORT" "=" "1"  
+End
+
+TOKEN
+    Name  = "HPET_SUPPORT"
+    Value  = "1"
+    Help  = "Enables High Performance Event Timer (HPET) Support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "ACPI_SUPPORT" "=" "1"
+End
+
+#ThunderBolt function support start
+TOKEN
+    Name  = "Thunderbolt_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Thunderbolt support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "HOTPLUG_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "TBT_HIGHLAND_PLATFORM_CONFIG"
+    Value  = "1"
+    Help  = "If set, it means configuration for Grantley platform"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Lock = Yes
+    Token = "Thunderbolt_SUPPORT" "=" "1"
+End
+
+#Azteccity don't get it pin.
+#TOKEN
+#    Name  = "TBT_ForcePWR"
+#    Value  = "15"
+#    Help  = "Thunderbolt Host Router ForcePWR Pin Number."
+#    TokenType = Integer
+#    TargetH = Yes
+#End
+
+TOKEN
+    Name  = "TBT_HotPlugEvt"
+    Value  = "14"
+    Help  = "Thunderbolt Host Router HotPlugEvt Pin Number."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TBT_PCI0_INI_SUPPORT"
+    Value  = "0"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Help  = "Enable/Disable put OS_UP command of RR/FR chip under _INI method of system bus in ASL code."
+    Token = "Thunderbolt_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "MAX_EXTRA_BUS_RESERVED"
+    Value = "7"
+    Help = "The Max number of extra Bus Reserved for bridges behind this Root Bridge "
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "MAX_EXTRA_BUS_RESERVED"
+    Value = "$(TBT_MAX_EXTRA_BUS_RESERVED)"
+    Help = "The Max number of extra Bus Reserved for bridges behind this Root Bridge "
+    TokenType = Integer
+    TargetH = Yes
+    Token = "Thunderbolt_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "MAX_PCIE_MEM_RESERVED"
+    Value = "1200"
+    Help = "The Max number of reserved memory range for this Root Bridge."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "MAX_PCIE_MEM_RESERVED"
+    Value = "$(TBT_MAX_PCIE_MEM_RESERVED)"
+    Help = "The Max number of reserved memory range for this Root Bridge."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "Thunderbolt_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "MAX_PCIE_PF_MEM_RESERVED"
+    Value = "1200"
+    Help = "The Max number of prefetchable memory range for this Root Bridge."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "MAX_PCIE_PF_MEM_RESERVED"
+    Value = "$(TBT_MAX_PCIE_PF_MEM_RESERVED)"
+    Help = "The Max number of prefetchable memory range for this Root Bridge."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "Thunderbolt_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "MAX_PCIE_IO_RESERVED"
+    Value = "20"
+    Help = "The Max number of IO range for this Root Bridge."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "MAX_PCIE_IO_RESERVED"
+    Value = "$(TBT_MAX_PCIE_IO_RESERVED)"
+    Help = "The Max number of IO range for this Root Bridge."
+    TokenType = Integer
+    TargetH = Yes
+    TOKEN = "Thunderbolt_SUPPORT" "=" "1"
+End
+#ThunderBolt function support end
+
+PATH
+    Name  = "CRB_DIR"
+End
+
+PATH
+    Name  = "CRB_LIBRARY_DIR"
+    Path  = "AmiCRBPkg/CRB/Library"
+End
+
+MODULE
+    Help  = "Includes CRB.mak to Project"
+    File  = "CRB.mak"
+End
+
+ELINK
+    Name  = "$(CRB_DIR)/CRB.h"
+    Parent  = "CRB_FUNC_INCLUDE_FILES"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "$(CRB_DIR)/CRBLib.c"
+    Parent  = "AMI_CSP_PEI_SOURCES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(CRB_DIR)/CRBLib.c"
+    Parent  = "AMI_CSP_DXE_SOURCES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "GrantleyPkg/PlatformPkg.dec"
+    Parent  = "AMI_OFBD_PACKAGES"
+    Token = "MEUD_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+
+#
+# PCIe slot programming for _DSM. Data goes into PciSlot.asl
+#
+ELINK
+    Name  = "PCI_SLOT_DSM(0x0B, Slot0B x8, \_SB.PCI0.BR1A),"
+    Parent  = "DsmAsl"
+    Help  = "eLink for creating platform device names with DSM method. Specify Slot number, name and current device scope"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "PCI_SLOT_DSM(0x0D, Slot0D x8, \_SB.PCI0.RP05),"
+    Parent  = "DsmAsl"
+    Help  = "eLink for creating platform device names with DSM method. Specify Slot number, name and current device scope"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "PCI_SLOT_DSM(0x0A, Slot0A x8, \_SB.PCI0.BR2A),"
+    Parent  = "DsmAsl"
+    Help  = "eLink for creating platform device names with DSM method. Specify Slot number, name and current device scope"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "PCI_SLOT_DSM(1, Slot01 x16, \_SB.PCI0.BR3A),"
+    Parent  = "DsmAsl"
+    Help  = "eLink for creating platform device names with DSM method. Specify Slot number, name and current device scope"
+    InvokeOrder = AfterParent
+End
+
+#VGA priority support using CSM Hooks.
+ELINK
+    Name  = "CRBGetPlatformVgaHandle, "
+    Parent  = "CSM_GET_PLATFORM_HANDLE_FUNCTIONS"
+    InvokeOrder = AfterParent
+End
+
+
+# Added eLink to resolve unresolved external symbol error in Setup.inf(CsmSetup.c)
+ELINK
+    Name  = "gEfiPciIoProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+
+#####    OEM Elink To change the Boot Option name Of the Hard Drive #####
+#ELINK
+#    Name  = "OEMConstructBootOptionNameByBbsDescription,"
+#    Parent  = "ConstructBootOptionNameByHandle,"
+#    Token = "CSM_SUPPORT" "=" "1"
+#    InvokeOrder = BeforeParent
+#End
+
+ELINK
+    Name  = "OEMProgramPchSvidSid,"
+    Parent  = "PROGRAM_PCH_OEM_SVID_SID"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "OEMProgramIioSvidSid,"
+    Parent  = "PROGRAM_IIO_OEM_SVID_SID"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CRB_PEI_INIT_FUNC_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "CRB_DXE_INIT_FUNC_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "CRB_FUNC_INCLUDE_FILES"
+    InvokeOrder = ReplaceParent
+End
+
+INFComponent
+    Name  = "CRBPei"
+    File  = "CRBPei.inf"
+    Package  = "AmiCRBPkg"
+    ModuleTypes  = "PEIM"
+End
+
+INFComponent
+    Name  = "CRBDxe"
+    File  = "CRBDxe.inf"
+    Package  = "AmiCRBPkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+    Name  = "CRBCspDxeLib"
+    File  = "CRBCspDxeLib.inf"
+    Package  = "AmiCRBPkg"
+    Path  = "CRB_LIBRARY_DIR"
+End
+
+
+#This INF is provided by Grantley override.
+INFComponent
+    Name  = "PiSmmCpuDxeSmm"
+    File  = "PiSmmCpuDxeSmm/PiSmmCpuDxeSmm.inf"
+    Package  = "IA32FamilyCpuPkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "SMM_SUPPORT" "=" "1"
+    Disable = Yes
+End
+
+
+#DSDT.ASL is part of intel acpi tables component
+INFComponent
+    Name  = "DsdtAsl"
+    File  = "DsdtAsl.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "USER_DEFINED"
+    Disable = Yes
+End
+
+
+###144164
+INFComponent
+    Name  = "AmiS3BootScriptLib"
+    File  = "AmiS3BootScriptLib/AmiS3BootScriptLib.inf"
+    Package  = "AmiCRBPkg"
+    Path  = "CRB_DIR"
+    Token = "A_S3" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiCRBPkg.CRBCspDxeLib"
+    Override  = "AmiModulePkg.Bds"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiCRBPkg.CRBCspDxeLib"
+    Override  = "WellsburgPkg.PchInitDxe"
+    Token = "PchInitDxe_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiCRBPkg.CRBCspDxeLib"
+    Override  = "GrantleySocketPkg.IioInit"
+    Token = "IioInit_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiCRBPkg.CRBCspDxeLib"
+    Override  = "AmiModulePkg.CsmDxe"
+End
+
+LibraryMapping
+    Class  = "CapsuleLib"
+    Instance  = "AmiModulePkg.DxeCapsuleLib"
+    ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER"
+    Disable = Yes
+End
+
+LibraryMapping
+    Class  = "SmbusLib"
+    Instance  = "MdePkg.PeiSmbusLibSmbus2Ppi"
+    ModuleTypes  = "PEIM"
+    Disable = Yes
+End
+
+LibraryMapping
+    Class  = "SmbusLib"
+    Instance  = "MdePkg.DxeSmbusLib"
+    ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+    Disable = Yes
+End
+
+LibraryMapping
+    Class  = "S3BootScriptLib"
+    Instance  = "MdePkg.BaseS3BootScriptLibNull"
+    Disable = Yes
+End
+
+LibraryMapping
+    Class  = "S3BootScriptLib"
+    Instance  = "AmiCRBPkg.AmiS3BootScriptLib"
+    Token = "A_S3" "=" "1"
+End
+
+
+#AptioV server override
+FFS_FILE
+    Name  = "NvramPei"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiModulePkg.NvramPei"
+    Index  = '"AFTER" "PcdPei"'
+    Apriori_Index  = "1"
+End
+
+FD_AREA
+    Name  = "FV_WHEA_BASE"
+    TYPE  = "RAW"
+    FD_INFO  = "AMIROM"
+    Offset  = "$(NVRAM_SIZE)"
+    Size  = "$(FV_WHEA_SIZE)"
+    Layout_Attribute  = "0x00"
+    Attributes  = "0xffff"
+    Alignment  = "16"
+    Token = "WHEA_SUPPORT" "=" "1"
+End
+
+FD_AREA
+    Name  = "FV_WHEA_BASE"
+    TYPE  = "RAW"
+    FD_INFO  = "AMIROM"
+    Offset  = "$(NVRAM_SIZE)*2"
+    Size  = "$(FV_WHEA_SIZE)"
+    Layout_Attribute  = "0x00"
+    Attributes  = "0xffff"
+    Alignment  = "16"
+    Token = "FAULT_TOLERANT_NVRAM_UPDATE" "=" "1"
+    Token = "WHEA_SUPPORT" "=" "1"
+End
+
+FD_AREA
+    Name  = "OA_TABLE"
+    TYPE  = "RAW"
+    FD_INFO  = "AMIROM"
+    Offset  = "$(FLASH_SIZE) - $(FV_BB_SIZE) - $(BIOSAC_BINARY_SIZE) - $(SINIT_BINARY_SIZE) - $(FIT_AREA) - $(OEM_ACTIVATION_TABLE_SIZE)"
+    Size  = "$(OEM_ACTIVATION_TABLE_SIZE)"
+    Token = "OEM_ACTIVATION_TABLE_LOCATION" "=" "1"
+End
+
+#FFS_FILE
+#    Name  = "SbOproms"
+#    FD_AREA  = "FV_MAIN"
+#    FILE_Stmt  = "AmiCRBPkg/GrangevilleOpRomsStatement.txt"
+#End
+
+ELINK
+	Name  = "IsCtrlHomePressed,"
+	Parent  = "IsRecovery"
+	Help  = "Ctr+Home detection"
+	Token = "KBC_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+        Name  = "CTRL_HOME_CHECK_LOOP"
+        Value  = "15"
+        Help  = "Loop count for Ctrl + Home Key Scan."
+        TokenType = Integer
+        TargetMAK = Yes
+        TargetH = Yes
+End
+
+TOKEN
+    Name = "FORCE_COMMON_MODE_FOR_DEVICES"
+    Value = "1"
+    TokenType = Boolean
+    Help = "As the console splitter binds on top of additional devices this token will force all devices to operate in a common mode.
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "IntelFrameworkPkg$(PATH_SLASH)IntelFrameworkPkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    Token = "CSM_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+## GrangevilleNS changes Starts EIP#432131 - Support for Optimize boot
+PcdMapping
+    Name  = "PcdMaxPeiPerformanceLogEntries"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "UINT8"
+    Value  = "150"
+    Offset  = 00h
+    Length  = 01h
+    TargetDSC = Yes
+    Token = "PERFORMANCE_MEASUREMENTS_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "RELATIVE_TIME"
+    Value  = "1"
+    Help  = "Use PEI start time to 0 to calculate relative time"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DEFAULT_OPTIMIZED_BOOT"
+    Value  = "0"
+    Help  = "Default value of the Optimized Boot option"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NESTED_FV_MAIN"
+    Value  = "1"
+    Help  = "Use this to turn on FV nesting for FV_MAIN"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Range = "0: Disable FV_MAIN nesting; 1: Enable FV_MAIN nesting"
+    Token = "DEFAULT_OPTIMIZED_BOOT" "=" "1"
+End
+
+TOKEN
+    Name  = "DEFAULT_BOOT_TIMEOUT"
+    Value  = "0"
+    Help  = "Number of seconds that the firmware will wait before initiating the original default boot selection. \A value of 0 indicates that the default boot selection is to be initiated immediately on boot. \A value of 65535(0xFFFF) indicates that firmware will wait for user input before booting. \This means the default boot selection is not automatically started by the firmware."
+    TokenType = Integer
+    TargetH = Yes
+    Range = "0-65535"
+    Token = "DEFAULT_OPTIMIZED_BOOT" "=" "1"
+End
+
+TOKEN
+    Name  = "SUPPORT_ZERO_BOOT_TIMEOUT"
+    Value  = "1"
+    Help  = "Enables or disables possibility to set boot timeout to 0"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEFAULT_OPTIMIZED_BOOT" "=" "1"
+End
+## GrangevilleNS changes Ends EIP#432131 - Support for Optimize boot

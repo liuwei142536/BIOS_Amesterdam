@@ -1,0 +1,35 @@
+[Defines]
+INF_VERSION       = 0x00010015
+BASE_NAME         = AmiDeviceGuardApi
+FILE_GUID         = 95ECB758-627E-4a2e-B7B8-DC863EFE3425
+MODULE_TYPE                    = DXE_DRIVER
+VERSION_STRING                 = 1.0
+PI_SPECIFICATION_VERSION       = 0x0001000A
+ENTRY_POINT                    = DeviceGuardApi_Init
+
+[Sources]
+  AmiDeviceGuardApi.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiSecureBootPkg/AmiSecureBootPkg.dec
+  AmiCryptoPkg/AmiCryptoPkg.dec
+
+[LibraryClasses]
+  MemoryAllocationLib
+  DxeServicesLib
+  AmiDxeLib
+  DebugLib
+  UefiDriverEntryPoint
+  AmiSecureBootLib
+
+[Guids]  
+  gEfiImageSecurityDatabaseGuid
+  
+[Protocols]
+  gAmiDeviceGuardSecBootApiGuid
+
+[Depex]
+  gEfiVariableArchProtocolGuid AND gEfiVariableWriteArchProtocolGuid
+

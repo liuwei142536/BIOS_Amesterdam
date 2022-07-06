@@ -1,0 +1,41 @@
+TOKEN
+	Name  = "AmiTsePkgLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmiTsePkg libraries support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AmiFileExplorerLib"
+	File  = "Library/FileBrowser/FileBrowser.inf"
+	Package  = "AmiTsePkg"
+	Token = "MDE_PKG_VERSION" ">=" "13"
+End
+
+LibraryMapping
+    Class  = "FileExplorerLib"
+    Instance  = "AmiTsePkg.AmiFileExplorerLib"
+    ModuleTypes  = "DXE_DRIVER UEFI_DRIVER UEFI_APPLICATION DXE_SMM_DRIVER"
+   	Token = "MDE_PKG_VERSION" ">=" "13"
+End
+
+LibraryMapping
+    Class  = "AmiFileBrowserLib"
+    Instance  = "AmiTsePkg.AmiFileExplorerLib"
+    ModuleTypes  = "DXE_DRIVER UEFI_DRIVER UEFI_APPLICATION DXE_SMM_DRIVER"
+   	Token = "MDE_PKG_VERSION" ">=" "13"
+End
+
+INFComponent
+    Name  = "AmiProgressReportLib"
+    File  = "Library/AmiProgressReportLib/AmiProgressReportLib.inf"
+    Package  = "AmiTsePkg"
+End
+
+LibraryMapping
+	Class  = "AmiProgressReportLib"
+	Instance  = "AmiTsePkg.AmiProgressReportLib"
+End

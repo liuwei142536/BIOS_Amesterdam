@@ -1,0 +1,30 @@
+<component>
+    name = "Usb"
+    category = eModule
+    LocalRoot = "AmiModulePkg\Usb\"
+    RefName = "AmiModulePkg.Usb"
+[INF]
+"UsbIrq.inf"
+"DxeSmmUsbSbLib.inf"
+"DxeUsbBoardLib.inf"
+"BaseUsbBoardLib.inf"
+[files]
+"Usb.sdl"	
+"UsbIrq.csm16"	
+"Usb.chm"	
+"Uhcd.inf"	
+"UsbRtDxe.inf"	
+"UsbRtSmm.inf"	
+"AmiUsbPkg.txt"	
+"UsbDevDriverElinks.txt"	
+"UsbSbPort.c"	
+[parts]
+"USBRT"
+"UHCD"
+"FRAMEWORK"
+"AmiUSBProtocols"
+"USB_SETUP"
+"USB_LEGACY"
+"UsbPei"
+"AmiUsbLib"
+<endComponent>

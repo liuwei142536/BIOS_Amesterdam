@@ -1,0 +1,9 @@
+<component>
+	name = "SMM Support"
+	category = eModule
+	LocalRoot = "AmiPkg\Configuration\"
+	RefName = "Smm"
+[files]
+"Smm.sdl"	
+"ReadMe.txt"   
+<endComponent>

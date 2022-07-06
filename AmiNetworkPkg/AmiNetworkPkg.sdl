@@ -1,0 +1,129 @@
+TOKEN
+	Name  = "AmiNetworkPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Intel Gigabit Lan network chip support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+    Name  = "AMI_NETWORK_PKG_VERSION"
+    Value  = "31"
+    Help  = "AmiNetworkPkg Version"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+PATH
+	Name  = "AmiNetworkPkg_DIR"
+End
+
+TOKEN
+	Name  = "AmiNetworkPostManagerLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmiNetworkPostManagerLib support from AmiNetworkPkg"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmiNetworkPostManagerLib"
+	File  = "Library/AmiNetworkPostManagerLib/AmiNetworkPostManagerLib.inf"
+	Package  = "AmiNetworkPkg"
+	Token = "AmiNetworkPostManagerLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmiNetworkPostManagerLib"
+	Instance  = "AmiNetworkPkg.AmiNetworkPostManagerLib"
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "AmiNetworkPostManagerLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmiNetworkCommonLib"
+    File  = "Library/AmiNetworkCommonLib/AmiNetworkCommonLib.inf"
+    Package  = "AmiNetworkPkg"
+End
+
+LibraryMapping
+    Class  = "AmiNetworkCommonLib"
+    Instance  = "AmiNetworkPkg.AmiNetworkCommonLib"
+    ModuleTypes  = "UEFI_DRIVER"
+End
+
+INFComponent
+    Name  = "DxeDpcLib"
+    File  = "LibraryInstances\DxeDpcLib\DxeDpcLib.inf"
+    Package  = "AmiNetworkPkg"
+End
+
+INFComponent
+    Name  = "DxeHttpLib"
+    File  = "LibraryInstances\DxeHttpLib\DxeHttpLib.inf"
+    Package  = "AmiNetworkPkg"
+End
+
+INFComponent
+    Name  = "DxeIpIoLib"
+    File  = "LibraryInstances\DxeIpIoLib\DxeIpIoLib.inf"
+    Package  = "AmiNetworkPkg"
+End
+
+INFComponent
+    Name  = "DxeNetLib"
+    File  = "LibraryInstances\DxeNetLib\DxeNetLib.inf"
+    Package  = "AmiNetworkPkg"
+End
+
+INFComponent
+    Name  = "DxeTcpIoLib"
+    File  = "LibraryInstances\DxeTcpIoLib\DxeTcpIoLib.inf"
+    Package  = "AmiNetworkPkg"
+End
+
+INFComponent
+    Name  = "DxeUdpIoLib"
+    File  = "LibraryInstances\DxeUdpIoLib\DxeUdpIoLib.inf"
+    Package  = "AmiNetworkPkg"
+End
+
+LibraryMapping
+    Class  = "DpcLib"
+    Instance  = "AmiNetworkPkg.DxeDpcLib"
+    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+End
+
+LibraryMapping
+    Class  = "IpIoLib"
+    Instance  = "AmiNetworkPkg.DxeIpIoLib"
+    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+End
+
+LibraryMapping
+    Class  = "NetLib"
+    Instance  = "AmiNetworkPkg.DxeNetLib"
+    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+End
+
+LibraryMapping
+    Class  = "HttpLib"
+    Instance  = "AmiNetworkPkg.DxeHttpLib"
+    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+End
+
+
+LibraryMapping
+    Class  = "TcpIoLib"
+    Instance  = "AmiNetworkPkg.DxeTcpIoLib"
+    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+End
+
+LibraryMapping
+    Class  = "UdpIoLib"
+    Instance  = "AmiNetworkPkg.DxeUdpIoLib"
+    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+End

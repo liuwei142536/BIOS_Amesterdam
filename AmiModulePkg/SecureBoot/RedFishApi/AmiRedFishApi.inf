@@ -1,0 +1,35 @@
+[Defines]
+INF_VERSION       = 0x00010015
+BASE_NAME         = AmiRedFishApi
+FILE_GUID         = D4395796-6F4C-4C6B-B9D1-92DAA7199A84
+MODULE_TYPE                    = DXE_DRIVER
+VERSION_STRING                 = 1.0
+PI_SPECIFICATION_VERSION       = 0x0001000A
+ENTRY_POINT                    = RedFishApi_Init
+
+[Sources]
+  AmiRedFishApi.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiSecureBootPkg/AmiSecureBootPkg.dec
+  AmiCryptoPkg/AmiCryptoPkg.dec
+
+[LibraryClasses]
+  DxeServicesLib
+  AmiDxeLib
+  UefiDriverEntryPoint
+  DebugLib
+  AmiSecureBootLib
+
+[Guids]  
+  gEfiImageSecurityDatabaseGuid
+  gEfiGlobalVariableGuid
+
+[Protocols]
+  gAmiRedFishSecBootApiGuid
+
+[Depex]
+ gEfiVariableArchProtocolGuid AND gEfiVariableWriteArchProtocolGuid
+

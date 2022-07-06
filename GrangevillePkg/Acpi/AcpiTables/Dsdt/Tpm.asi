@@ -1,0 +1,250 @@
+//**********************************************************************//
+//**********************************************************************//
+//**                                                                  **//
+//**        (C)Copyright 1985-2006, American Megatrends, Inc.         **//
+//**                                                                  **//
+//**                       All Rights Reserved.                       **//
+//**                                                                  **//
+//**             6145-F Northbelt Pkwy, Norcross, GA 30071            **//
+//**                                                                  **//
+//**                       Phone: (770)-246-8600                      **//
+//**                                                                  **//
+//**********************************************************************//
+//**********************************************************************//
+//**********************************************************************//
+
+/*++
+  This file contains an 'Intel Peripheral Driver' and is        
+  licensed for Intel CPUs and chipsets under the terms of your  
+  license agreement with Intel or your vendor.  This file may   
+  be modified by the user, subject to additional terms of the   
+  license agreement                                             
+--*/
+/*++
+  
+  Copyright (c) 2006-2013, Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval system, 
+  or transmitted in any form or by any means without the express written 
+  consent of Intel Corporation.
+  
+  Module Name:
+  
+    Tpm.asi
+  
+  Abstract:
+  
+--*/
+
+  
+#ifndef ICH_LPC_TPM
+#define ICH_LPC_TPM
+
+Device (TPM) {
+  //
+  // Define _HID, "PNP0C31" is defined in
+  // "Secure Startup-FVE and TPM Admin BIOS and Platform Requirements"
+  //
+  Name (_HID, EISAID ("PNP0C31"))
+
+  //
+  // Readable name of this device, don't know if this way is correct yet
+  //
+  Name (_STR, Unicode ("TPM 1.2 Device"))
+
+  //
+  // Return the resource consumed by TPM device
+  //
+  // Name (_CRS, ResourceTemplate () {
+  //    Memory32Fixed (ReadWrite, 0xfed40000, 0x5000)
+  // })
+
+  //
+  // Operational region for TPM access
+  //
+  OperationRegion (TPMR, SystemMemory, 0xfed40000, 0x5000)
+  Field (TPMR, AnyAcc, NoLock, Preserve) {
+    ACC0, 8,
+  }
+
+  Method (_STA, 0) {
+    if (TPME) {
+      if (LEqual (ACC0, 0xff)) {
+        Return (0)
+      }
+      Return (0xf)
+    }
+    Return (0)
+  }
+
+  //
+  // Operational region for extended CMOS access
+  //
+  OperationRegion (CMOS, SystemIO, 0x70, 4)
+  Field (CMOS, ByteAcc, NoLock, Preserve) {
+    IDX0,8,
+    DAT0,8,
+    IDX1,8,
+    DAT1,8
+  }
+
+  IndexField (IDX1, DAT1, ByteAcc, NoLock, Preserve) {
+    Offset (0x60),  // CMOS region for storing the PPI commands // defined in TCG_CMOS_AREA_OFFSET in Platform.h
+    CCMD, 4,        // Current command to be executed
+    LCMD, 4,        // Last executed command
+    LRET, 32,       // Returned value of last command
+    Offset(0x65),   // CMOS region for storing the MOR bit      // defined in TCG_CMOS_MOR_AREA_OFFSET in Platform.h
+    MOR, 8          // Memory Over Write
+  }
+
+  Name(PPI1, Buffer(8){})
+  CreateDWordField(PPI1, 00, INT1)
+  CreateDWordField(PPI1, 04, INT2)
+
+  Name(PPI2, Buffer(12){})
+  CreateDWordField(PPI2, 00, INT3)
+  CreateDWordField(PPI2, 04, INT4)
+  CreateDWordField(PPI2, 8, INT5)
+
+  // owning control method can't be reentrant, so _DSM must be Serialized
+  Method (_DSM, 4, Serialized)
+  {
+    //
+    // TPM ACPI Device Specific Method
+    //
+    if(LEqual(Arg0,ToUUID("cf8e16a5-c1e8-4e25-b712-4f54a96702c8"))){
+      Switch(ToInteger(Arg2)) {
+        Case (0) {
+          //
+          // Standard query, supports function 0 and 1
+          //
+          Return (Buffer () {0x3})
+        }
+        Case (1) {
+          //
+          // Return failure if no TPM present
+          //
+          if (LEqual (_STA (), 0)){
+            Return (Package () {0})
+          }
+          //
+          // Return TPM version
+          //
+          Return (Package () {1, Package () {ToBCD (1), ToBCD (20)}})
+        }
+        Default { }
+      }
+    }
+
+    //
+    // Physical Presence Interface Specification
+    //
+    if( LEqual(Arg0,ToUUID("3DDDFAA6-361B-4EB4-A424-8D10089D1653"))){
+      Switch(ToInteger(Arg2)) {
+        Case (0) {
+          //
+          // Function 0: Standard query, supports function 0-6
+          //
+          Return (Buffer () {0x7f})
+        }
+        Case (1) {
+          //
+          // Function 1: Get Physical Presence Interface Version
+          //
+          Return ("1.0")
+        }
+        Case (2) {
+          //
+          // Function 2: Submit TPM Operation Request to Pre-OS Environment
+          //
+          //Store (Index (Arg3, 0), CCMD)
+          Store(ToInteger(DeRefOf(Index(Arg3,0))), CCMD )
+          Return (0)
+        }
+        Case(3) {
+          //
+          // Function 3: Get Pending TPM Operation Requested By the OS
+          //
+          //Return (Package () {0, CCMD})
+          Store(0, INT1)         // Function Return Code
+          Store(CCMD, INT2)      // Pending TPM operation requested by the OS
+          Return(PPI1)
+        }
+        Case (4) {
+          //
+          // Function 4: Get Platform-Specific Action to Transition to Pre-OS Environment
+          //
+          Return (2) //Reboot
+        }
+        Case(5) {
+          //
+          // Function 5:  Return TPM Operation Response to OS Environment
+          //
+          //Return (Package () {0, LCMD, LRET})
+          Store(0, INT3)         // Function Return Code
+          Store(LCMD, INT4)      // Most recent TPM operation requested
+          //if (Lequal(LRET, 0xFFF0))
+          //  {Store(0xFFFFFFF0, INT5)}
+          //elseiF (Lequal(LRET, 0xFFF1))
+          //  {Store(0xFFFFFFF1, INT5)}
+          //else
+          Store(LRET, INT5)
+          Return(PPI2) 
+        }
+        Case (6) {
+          //
+          // Function 6:  Submit preferred user language
+          //
+          Return (0)
+        }
+        Default {BreakPoint}
+      }
+    }
+
+    //
+    // Reset Attack Mitigation
+    //
+    if(LEqual(Arg0,ToUUID("376054ED-CC13-4675-901C-4756D7F2D45D"))){
+      Switch (ToInteger(Arg2)){
+        Case (0) {
+          //
+          //  Function 0: Standard query, supports function 0 and 1
+          //
+          Return (Buffer () {0x3})
+        }
+
+        Case (1) {
+          //
+          // Function 1: Set MOR Bit State
+          //
+          Store (Index (Arg3, 0), MOR)
+          Return (0)
+        }
+        Default {BreakPoint}
+      }
+    }
+
+    Return (Buffer() {0})
+
+  } // Method( _DSM , 4)
+
+} // Device (TPM)
+
+#endif
+//**********************************************************************//
+//**********************************************************************//
+//**                                                                  **//
+//**        (C)Copyright 1985-2006, American Megatrends, Inc.         **//
+//**                                                                  **//
+//**                       All Rights Reserved.                       **//
+//**                                                                  **//
+//**             6145-F Northbelt Pkwy, Norcross, GA 30071            **//
+//**                                                                  **//
+//**                       Phone: (770)-246-8600                      **//
+//**                                                                  **//
+//**********************************************************************//
+//**********************************************************************//
+//**********************************************************************//

@@ -1,0 +1,47 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+    INF_VERSION  =  0x00010005
+    VERSION_STRING  =  1.0
+    BASE_NAME  = DebugCodeAddressLib
+    FILE_GUID = aab79382-2f6f-437e-99cd-68cdfbcfeb62
+    MODULE_TYPE = BASE
+    LIBRARY_CLASS = DebugCodeAddressLib
+    
+[Sources]
+    DebugCodeAddress.c
+    
+[Packages]
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    MdePkg/MdePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+    CommonDbgDbgrLib
+    
+    
+#**********************************************************************
+#**********************************************************************
+#**                                                                 **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

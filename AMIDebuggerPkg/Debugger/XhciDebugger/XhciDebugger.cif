@@ -1,0 +1,10 @@
+<component>
+	name = "XhciDebugger"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\XhciDebugger\"
+	RefName = "Debugger.XhciDebugger"
+[INF]
+"XhciDebugger.inf"
+[files]
+"XhciDebugger.sdl"	
+<endComponent>

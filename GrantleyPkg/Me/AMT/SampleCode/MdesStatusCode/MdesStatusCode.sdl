@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "MdesStatusCode_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MdesStatusCode support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "MdesStatusCodeDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MdesStatusCodeDxe support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "MdesStatusCodeDxe"
+	File  = "Dxe\MdesStatusCodeDxe.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "MdesStatusCodeDxe_SUPPORT" "=" "1"
+End
+

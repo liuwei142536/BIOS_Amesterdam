@@ -1,0 +1,65 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   DXE instance of the DxeAmiUsbHcdLib library class
+##
+[Defines]
+  INF_VERSION       = 0x00010005
+  VERSION_STRING    = 1.0
+  MODULE_TYPE       = DXE_DRIVER
+  BASE_NAME         = DxeAmiUsbHcdLib
+  FILE_GUID         = 997ecd74-3dcd-4172-8dc1-8df9b5d1daaa
+  LIBRARY_CLASS     = AmiDxeUsbHcdLib|DXE_CORE DXE_DRIVER UEFI_APPLICATION UEFI_DRIVER
+
+[Sources]
+  DxeAmiUsbHcdLib.c
+  DxeAmiUsb.c
+  DxeElib.c
+  DxeUhci.c
+  DxeOhci.c
+  DxeEhci.c
+  DxeXhci.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  Build/AmiUsbPkg.dec
+  
+[LibraryClasses]
+  UefiBootServicesTableLib
+  DevicePathLib
+  BaseMemoryLib
+  PerformanceLib
+
+[Protocols]
+  gAmiDxeUsbHcdProtocolGuid
+  gEfiPciIoProtocolGuid
+
+[Pcd]
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

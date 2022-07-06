@@ -1,0 +1,10 @@
+<component>
+	name = "CpuPei"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Pei\CpuPei\"
+	RefName = "IA32FamilyCpuPkg.CpuPei"
+[INF]
+"CpuPei.inf"
+[files]
+"CpuPei.sdl"	
+<endComponent>

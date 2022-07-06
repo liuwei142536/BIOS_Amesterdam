@@ -1,0 +1,39 @@
+@Elink(USB_DEV_EFI_DRIVER_LIST, "EFI_STATUS @Child(
+    EFI_HANDLE  ImageHandle,
+    EFI_HANDLE  ServiceHandle);
+", "", "")
+#define USB_DEV_EFI_DRIVER @Elink(USB_DEV_EFI_DRIVER_LIST, "@Child,", "", "")
+
+@Elink(USB_DEV_DELAYED_DRIVER_LIST, "VOID @Child(DEV_DRIVER *DevDriver);
+", "", "")
+#define USB_DEV_DELAYED_DRIVER @Elink(USB_DEV_DELAYED_DRIVER_LIST, "@Child,", "", "")
+
+@Elink(USB_DEV_DRIVER_LIST, "VOID @Child(DEV_DRIVER *DevDriver);
+", "", "")
+#define USB_DEV_DRIVER @Elink(USB_DEV_DRIVER_LIST, "@Child,", "", "")
+
+@Elink(CheckKeyBoardBufferForSpecialChars, "BOOLEAN @Child( 
+    DEV_INFO	*DevInfo,
+    UINT8       *Buffer);
+", "", "")
+#define KBD_BUFFER_CHECK_ELINK_LIST @Elink(CheckKeyBoardBufferForSpecialChars, "@Child,", "", "")
+
+@Elink(UsbHidTypeCheckFunctions, "BOOLEAN @Child( 
+    DEV_INFO            *DevInfo,
+    HID_REPORT_FIELD    *Field);
+", "", "")
+#define USB_HID_TYPE_CHECK_ELINK_LIST @Elink(UsbHidTypeCheckFunctions, "@Child,", "", "")
+
+@Elink(UsbHidBufferCheckFunctions, "BOOLEAN @Child( 
+    DEV_INFO    *DevInfo,
+    UINT8       *Buffer,
+    UINT16      DataLength);
+", "", "")
+#define USB_HID_BUFFER_CHECK_ELINK_LIST @Elink(UsbHidBufferCheckFunctions, "@Child,", "", "")
+
+@Elink(EhciGetRootHubPortSpeedFunctions, "VOID @Child( 
+    HC_STRUC    *HcStruc,
+    UINT8       PortNum,
+    UINT8       *PortSpeed);
+", "", "")
+#define EHCI_GET_ROOT_HUB_PORT_SPEED_ELINK_LIST @Elink(EhciGetRootHubPortSpeedFunctions, "@Child,", "", "")

@@ -1,0 +1,145 @@
+## @file
+#   This package files provides definitions for AMI specific interfaces and library classes.
+##
+
+################################################################################
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+################################################################################
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiUsbPkg
+  PACKAGE_GUID                   = abfab91e-37ea-4cb4-80a6-563dbb0bcec2
+  PACKAGE_VERSION                = 0.1
+
+################################################################################
+#
+# Include Section - list of Include Paths that are provided by this package.
+#                   Comments are used for Keywords and Module Types.
+#
+# Supported Module Types: 
+#  SEC PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_SAL_DRIVER UEFI_DRIVER
+#
+################################################################################
+[Includes]
+  ../AmiModulePkg/Usb/Rt
+
+[LibraryClasses]
+
+[Protocols]
+  gAmiDxeUsbHcdProtocolGuid = { 0x6D4A7543, 0x89A6, 0x4B3B, { 0x9B, 0x9E, 0x7E, 0x3B, 0x76, 0x5C, 0xD8, 0x86 } }
+  gAmiSmmUsbHcdProtocolGuid = { 0x17B69A95, 0xEE75, 0x4924, { 0x82, 0x26, 0xD4, 0x8C, 0xBE, 0x55, 0xB6, 0xEB } }
+  gAmiUsbHidProtocolGuid    = { 0x1fede521, 0x031c, 0x4bc5, { 0x80, 0x50, 0xf3, 0xd6, 0x16, 0x1e, 0x2e, 0x92 } }
+  gAmiUsbIsrProtocolGuid    = { 0xE39B0498, 0x59A5, 0x427A, { 0xA0, 0xAA, 0x18, 0x80, 0x3F, 0x46, 0x6A, 0x60 } }
+
+[Ppis]
+  
+[Guids]
+  ## Ami Usb package token space GUID
+  gAmiUsbPkgTokenSpaceGuid  = { 0xA13D1E82, 0x21B8, 0x4204, { 0x92, 0xBB, 0x37, 0x3A, 0xFB, 0x01, 0xC6, 0xAC } }
+
+[PcdsFixedAtBuild, PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUhciSupport|TRUE|BOOLEAN|0x00000001
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdOhciSupport|TRUE|BOOLEAN|0x00000002
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdEhciSupport|TRUE|BOOLEAN|0x00000003
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdXhciSupport|TRUE|BOOLEAN|0x00000004
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassNativeEmulation|TRUE|BOOLEAN|0x00000005
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassEmulationForNoMedia|TRUE|BOOLEAN|0x00000006
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassMediaCheck|FALSE|BOOLEAN|0x00000007
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassSkipFddMediaCheck|FALSE|BOOLEAN|0x00000008
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassSizeEmulation|FALSE|BOOLEAN|0x00000009
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbEfiMsDirectAccess|FALSE|BOOLEAN|0x0000000A
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSkipCardReaderConnectBeep|FALSE|BOOLEAN|0x0000000B
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxSkipTableCount|50|UINT8|0x0000000C
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdXhciEventServiceMode|0|UINT8|0x0000000D
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdGpiDispatchByBitmap|TRUE|BOOLEAN|0x0000000E
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHotplugFddSupport|FALSE|BOOLEAN|0x0000000F
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHotplugHddSupport|FALSE|BOOLEAN|0x00000010
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHotplugCdromSupport|FALSE|BOOLEAN|0x00000011
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdKeyRepeatDelay|2|UINT8|0x00000012
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdKeyRepeatInitialDelay|6|UINT8|0x00000013
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdKeyrepeatInterval|0|UINT8|0x00000014
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdDifferentiateMassDeviceName|FALSE|BOOLEAN|0x00000015
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMassStorageDeviceName|0|UINT8|0x00000016
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdHideHispeedSetupQuestion|TRUE|BOOLEAN|0x00000017
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbRuntimeDriverInSmm|2|UINT8|0x00000018
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbInterruptPollingPeriod|80000|UINT64|0x00000019
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdExternalUsbControllerSupport|TRUE|BOOLEAN|0x0000001A
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSpecificController|{ 0x0 }|VOID*|0x0000001B
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdExtHwSmiPin|{ 0x01, 0xFF, 0xFF, 0xFF, 0xFF }|VOID*|0x0000001C
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSetupVariableRuntimeAccess|FALSE|BOOLEAN|0x0000001D
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdControllersInitialDelayList|{ 0x0 }|VOID*|0x0000001E
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbRegisterPeriodicTimerInDxe|FALSE|BOOLEAN|0x0000001F
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdStorageDeviceRmbCheck|TRUE|BOOLEAN|0x00000020
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbIrqSupport|FALSE|BOOLEAN|0x00000021
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbResetPortPolicy|TRUE|BOOLEAN|0x00000022
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHostErrorsSupport|TRUE|BOOLEAN|0x00000023
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbBadDevices|{ 0x0 }|VOID*|0x00000024
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbKbdDevices|TRUE|BOOLEAN|0x00000025
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMouseDevices|TRUE|BOOLEAN|0x00000026
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHubDevices|TRUE|BOOLEAN|0x00000027
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassDevices|TRUE|BOOLEAN|0x00000028
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPointDevices|TRUE|BOOLEAN|0x00000029
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMemPageCount|8|UINT8|0x0000002A
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbSendCommandToKbc|0x60|UINT8|0x0000002B
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMouseUpdateEbdaData|TRUE|BOOLEAN|0x0000002C
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdEhci64bitDataStructure|TRUE|BOOLEAN|0x0000002D
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxHidDevCount|15|UINT8|0x0000002E
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxHubDevCount|12|UINT8|0x0000002F
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxMassDevCount|16|UINT8|0x00000030
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxCcidDevCount|6|UINT8|0x00000031
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxUnsupportedDevCount|16|UINT8|0x00000032
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbCcidDevice|FALSE|BOOLEAN|0x00000033
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUseT0T1Protocol|1|UINT8|0x00000034
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdCcidUseIntInsRemoval|TRUE|BOOLEAN|0x00000035
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdStartUnitBeforeMsdEnumeration|FALSE|BOOLEAN|0x00000036
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbSwSmi|0x31|UINT8|0x00000037
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbBeepEnable|TRUE|BOOLEAN|0x00000038
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSizeForFloppyEmulation|530|UINT64|0x00000039
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdHighSpeedMaxBulkDataSize|0x4000|UINT16|0x0000003A
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdFullSpeedMaxBulkDataSizePerFrame|896|UINT16|0x0000003B
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdExtraCheckDeviceReady|FALSE|BOOLEAN|0x0000003C
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdHidKeyRepeatUseSetIdle|FALSE|BOOLEAN|0x0000003D
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdBootProtocolSupport|FALSE|BOOLEAN|0x0000003E
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdClearKbBufferAtReadyToBoot|FALSE|BOOLEAN|0x0000003F
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSpecificEhciOwnershipChange|FALSE|BOOLEAN|0x00000040
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdLegacyUsbDisableForUsbMass|FALSE|BOOLEAN|0x00000041
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdXhciComplianceMoedWorkrouund|TRUE|BOOLEAN|0x00000042
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdShowSkipPortInformation|FALSE|BOOLEAN|0x00000043
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHcInterruptOutSupport|TRUE|BOOLEAN|0x00000044
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbIadProtocolSupport|FALSE|BOOLEAN|0x00000045
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbIsoctransferSupport|TRUE|BOOLEAN|0x00000046
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbItdMemAllocForAllEhci|TRUE|BOOLEAN|0x00000047
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbDcbaaMemAllocForAllXhci|TRUE|BOOLEAN|0x00000048
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbDxeEdkiiIommuProtocolSupport|FALSE|BOOLEAN|0x00000049
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiEdkiiIommuPpiSupport|FALSE|BOOLEAN|0x0000004A
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbGetBosDescSupport|FALSE|BOOLEAN|0x0000004B
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiUhciSupport|FALSE|BOOLEAN|0x0000004C
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiOhciSupport|FALSE|BOOLEAN|0x0000004D
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiEhciSupport|TRUE|BOOLEAN|0x0000004F
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciSupport|FALSE|BOOLEAN|0x00000050
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiUhciIoBase|0x4000|UINT16|0x00000051
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiUhciPciDev|{ 0x0 }|VOID*|0x00000052
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiEhciPciDev|{ 0x0 }|VOID*|0x00000053
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiEhciIoBase|{ 0x0 }|VOID*|0x00000054
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiOhciIoBase|0xFC087000|UINT32|0x00000055
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciIoBase|0xFE400000|UINT32|0x00000056
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciMmioSize|0x10000|UINT32|0x00000057
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciPciDev|{ 0x0 }|VOID*|0x00000058
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciPciRegVal|{ 0x0 }|VOID*|0x00000059
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiRecoveryReqRet|0x2|UINT8|0x0000005A
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiRecoveryReqTimeout|30|UINT8|0x0000005B
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiKeyModifierValue|{ 0x0 }|VOID*|0x0000005C
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiRecScanCode|5|UINT8|0x0000005D
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiKeyboardNumlock|TRUE|BOOLEAN|0x0000005E
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiInS3Support|FALSE|BOOLEAN|0x0000005F
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiOhciPciDev|{ 0x0 }|VOID*|0x00000060
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiOhciPciRegVal|{ 0x0 }|VOID*|0x00000061
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiKeyboardSupport|FALSE|BOOLEAN|0x00000062
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiDevConnectTimeout|1|UINT8|0x00000063
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiKbConnectDelay|0|UINT8|0x00000064
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiMassSupportPolicy|FALSE|BOOLEAN|0x00000065
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiHostErrorSupport|TRUE|BOOLEAN|0x00000066
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbDisconnectExitBootService|FALSE|BOOLEAN|0x00000067

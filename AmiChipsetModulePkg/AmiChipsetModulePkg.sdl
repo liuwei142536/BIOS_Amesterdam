@@ -1,0 +1,55 @@
+TOKEN
+	Name  = "AmiChipsetModulePkg_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmiChipsetModulePkg support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AmiChipsetPlatformHookLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmiChipsetPlatformHookLib support in Project"
+	TokenType = Boolean
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+	
+End
+
+PATH
+    Name  = "AmiChipsetModulePkg_DIR"
+End
+
+PATH
+    Name  = "AmiChipsetModulePkg_Library_DIR"
+    Path  = "AmiChipsetModulePkg/Library"
+End
+
+INFComponent
+	Name  = "AmiChipsetIoLib"
+	File  = "Library/AmiChipsetIoLib/AmiChipsetIoLib.inf"
+	Package  = "AmiChipsetModulePkg"
+End
+
+INFComponent
+	Name  = "AmiChipsetPlatformHookLib"
+	File  = "Library\AmiChipsetPlatformHookLib\AmiChipsetPlatformHookLib.inf"
+	Package  = "AmiChipsetModulePkg"
+	Token = "AmiChipsetPlatformHookLib_SUPPORT" "=" "1"
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "AmiChipsetIoLib"
+	Instance  = "AmiChipsetModulePkg.AmiChipsetIoLib"
+End
+
+LibraryMapping
+	Class  = "PlatformHookLib"
+	Instance  = "AmiChipsetModulePkg.AmiChipsetPlatformHookLib"
+	Token = "AmiChipsetPlatformHookLib_SUPPORT" "=" "1"
+	ModuleTypes  = "SEC PEI_CORE PEIM"
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+End
+

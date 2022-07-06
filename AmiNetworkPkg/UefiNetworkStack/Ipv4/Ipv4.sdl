@@ -1,0 +1,288 @@
+TOKEN
+	Name  = "Ipv4_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Ipv4 stack support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "Dhcp4Dxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Dhcp4Dxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "Ip4ConfigDxe_SUPPORT"
+	Value  = "0"
+	Help  = "OBSELETE: This module has been removed as per the UEFI 2.5 update"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "Ip4Dxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Ip4Dxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "Mtftp4Dxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Mtftp4Dxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "Tcp4Dxe_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable Tcp4Dxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "Udp4Dxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Udp4Dxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PRESERVE_IP4_CONFIG_VARIABLE_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable to Preserve IP4 Config Variable"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+ELINK
+	Name  = "PreserveIP4ConfigurationVar,"
+	Parent  = "SMIFlashPreUpdateList"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "RestoreIP4ConfigurationVar,"
+	Parent  = "SMIFlashEndUpdateList"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+        Name  = "ADDITIONAL_DHCP4_PACKAGES"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    	Parent  = "ADDITIONAL_DHCP4_PACKAGES"
+    	InvokeOrder = AfterParent   
+End
+
+ELINK
+    	Name  = "ADDITIONAL_DHCP4_LIBRARY"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkCommonLib"
+    	Parent  = "ADDITIONAL_DHCP4_LIBRARY"
+    	InvokeOrder = AfterParent
+End
+
+ELINK
+    	Name  = "ADDITIONAL_IP4CONFIG_PACKAGES"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    	Parent  = "ADDITIONAL_IP4CONFIG_PACKAGES"
+    	InvokeOrder = AfterParent   
+End
+
+ELINK
+    	Name  = "ADDITIONAL_IP4CONFIG_LIBRARY"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkCommonLib"
+    	Parent  = "ADDITIONAL_IP4CONFIG_LIBRARY"
+    	InvokeOrder = AfterParent
+End
+
+ELINK
+    	Name  = "ADDITIONAL_IP4DXE_PACKAGES"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    	Parent  = "ADDITIONAL_IP4DXE_PACKAGES"
+    	InvokeOrder = AfterParent   
+End
+
+ELINK
+    	Name  = "ADDITIONAL_IP4DXE_LIBRARY"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkCommonLib"
+    	Parent  = "ADDITIONAL_IP4DXE_LIBRARY"
+    	InvokeOrder = AfterParent
+End
+
+ELINK
+    	Name  = "ADDITIONAL_IP4DXE_GUIDS"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "MACNamesListVarDataGuid"
+    	Parent  = "ADDITIONAL_IP4DXE_GUIDS"
+    	InvokeOrder = AfterParent
+End
+
+
+ELINK
+    	Name  = "ADDITIONAL_TCP4DXE_PACKAGES"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    	Parent  = "ADDITIONAL_TCP4DXE_PACKAGES"
+    	InvokeOrder = AfterParent   
+End
+
+ELINK
+    	Name  = "ADDITIONAL_TCP4DXE_LIBRARY"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkCommonLib"
+    	Parent  = "ADDITIONAL_TCP4DXE_LIBRARY"
+    	InvokeOrder = AfterParent
+End
+
+ELINK
+    	Name  = "ADDITIONAL_MTFTP4DXE_PACKAGES"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    	Parent  = "ADDITIONAL_MTFTP4DXE_PACKAGES"
+    	InvokeOrder = AfterParent   
+End
+
+ELINK
+    	Name  = "ADDITIONAL_MTFTP4DXE_LIBRARY"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkCommonLib"
+    	Parent  = "ADDITIONAL_MTFTP4DXE_LIBRARY"
+    	InvokeOrder = AfterParent
+End
+
+
+ELINK
+    	Name  = "ADDITIONAL_UDP4DXE_PACKAGES"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    	Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    	Parent  = "ADDITIONAL_UDP4DXE_PACKAGES"
+    	InvokeOrder = AfterParent   
+End
+
+ELINK
+    	Name  = "ADDITIONAL_UDP4DXE_LIBRARY"
+    	InvokeOrder = ReplaceParent
+End
+
+ELINK
+        Name  = "AmiNetworkCommonLib"
+    	Parent  = "ADDITIONAL_UDP4DXE_LIBRARY"
+    	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "Dhcp4Dxe"
+	File  = "Dhcp4Dxe/Dhcp4Dxe.inf"
+	Package  = "AmiNetworkPkg"
+    	PreProcess = Yes
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "Dhcp4Dxe_SUPPORT" "=" "1"
+End
+
+
+INFComponent
+	Name  = "Ip4ConfigDxe"
+	File  = "Ip4ConfigDxe/Ip4ConfigDxe.inf"
+	Package  = "AmiNetworkPkg"
+    	PreProcess = Yes
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "Ip4ConfigDxe_SUPPORT" "=" "1"
+End
+
+
+INFComponent
+	Name  = "Ip4Dxe"
+	File  = "Ip4Dxe/Ip4Dxe.inf"
+	Package  = "AmiNetworkPkg"
+    	PreProcess = Yes
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "Ip4Dxe_SUPPORT" "=" "1"
+End
+
+
+INFComponent
+	Name  = "Mtftp4Dxe"
+	File  = "Mtftp4Dxe/Mtftp4Dxe.inf"
+	Package  = "AmiNetworkPkg"
+    	PreProcess = Yes
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "Mtftp4Dxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "Tcp4Dxe"
+	File  = "Tcp4Dxe/Tcp4Dxe.inf"
+	Package  = "AmiNetworkPkg"
+    	PreProcess = Yes
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "Tcp4Dxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "Udp4Dxe"
+	File  = "Udp4Dxe/Udp4Dxe.inf"
+	Package  = "AmiNetworkPkg"
+    	PreProcess = Yes
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "Udp4Dxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PreserveIP4ConfigVariable"
+	File  = "PreserveIP4ConfigVariable/PreserveIP4ConfigVariable.inf"
+	Package  = "AmiNetworkPkg"
+	ModuleTypes  = "BASE"
+	Token = "PRESERVE_IP4_CONFIG_VARIABLE_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiNetworkPkg.PreserveIP4ConfigVariable"
+	Override  = "AmiModulePkg.SmiFlash"
+End
+

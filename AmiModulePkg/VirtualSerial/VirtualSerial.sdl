@@ -1,0 +1,86 @@
+TOKEN
+    Name  = "VirtualSerial_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Virtual Serial Device support in Project"
+    TokenType = Boolean
+    Master = Yes
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+OUTPUTREGISTER
+    Name = "VIRTUAL_SERIAL_DEVICE_LIST"
+    Path = "Build"
+    File = "VirtualSerialDeviceElinks.h"
+    Template = "VirtualSerialDeviceElinks.txt"
+End
+
+ELINK
+    Name  = "VirtualSerialDeviceList"
+    InvokeOrder = ReplaceParent
+    Help  = "List of Virtual Serial Device \Format - {{AslDeviceName},UID,BaseAddress, IrqNum,InterruptMode,InterruptLevel,InterruptShareType} refer Struct VIRTUAL_SERIAL_DETAILS in VirtualSerial.h"
+End
+
+#----------------------------------------------------------------
+#  Porting Changes to add a new device
+
+PCIDEVICE
+    Title  = "Virtual Serial #1"
+    Parent  = "NB to PCI-E Root Port (D0, F0)"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = FFh
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/VirtualSerial/VirtualSerialPort.asl'"
+    ASLdeviceName  = "VS00"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    Help = "It is template definition to report the resources used by UART, Project owner is responsible to port the same based on the Platform configuration"
+End
+
+ELINK
+    Name  = "{{'V','S','0','0',0},0x00, 0x3F8,0x4,0,1,1},"
+    Parent  = "VirtualSerialDeviceList"
+    Help = "Default values for ISA IRQ, InterruptMode = 0(Level-Trigger); InterruptLevel = 1(Active-Low); InterruptShareType = 1(Shared)"
+    InvokeOrder = AfterParent
+End
+
+PCIDEVICE
+    Title  = "Virtual Serial #2"
+    Parent  = "NB to PCI-E Root Port (D0, F0)"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = FFh
+    SleepNum  = 01h
+    ASLfile  = "'AmiModulePkg/VirtualSerial/VirtualSerialPort.asl'"
+    ASLdeviceName  = "VS01"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    Help = "It is template definition to report the resources used by UART, Project owner is responsible to port the same based on the Platform configuration"
+End
+
+ELINK
+    Name  = "{{'V','S','0','1',0},0x01, 0x2F8,0x3,0,1,1},"
+    Parent  = "VirtualSerialDeviceList"
+    Help = "Default values for ISA IRQ, InterruptMode = 0(Level-Trigger); InterruptLevel = 1(Active-Low); InterruptShareType = 1(Shared)"
+    InvokeOrder = AfterParent
+End
+
+#------------------------------------------------------------------
+PATH
+    Name  = "VirtualSerial_DIR"
+    Path  = "AmiModulePkg/VirtualSerial"
+End
+
+INFComponent
+    Name  = "VirtualSerial"
+    File  = "VirtualSerial.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "VirtualSerial_SUPPORT" "=" "1"
+End
+

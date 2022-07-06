@@ -1,0 +1,8 @@
+<component>
+	name = "SmmConfMemLib Library"
+	category = ModulePart
+	LocalRoot = "MdeModulePkg\Include\Library\"
+	RefName = "MdeModulePkg.SmmConfMemLibLibrary"
+[files]
+"SmmConfidentialMemLib.h"	
+<endComponent>

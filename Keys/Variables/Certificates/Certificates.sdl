@@ -1,0 +1,283 @@
+TOKEN
+    Name  = "Certificates_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable build rules to create secure variables in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "Make_SignedVariables"
+    Value  = "0"
+    Help  = "0- Secure Boot variables are created with an empty AuthHdr.\1 - Secure Variables are signed with corresponding PK or KEK key.\NOTE: SigntTool.exe only runs under Windows OS"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AuthHdr_TimeStamp"
+    Value  = "FOUR_DIGIT_YEAR_INT, TWO_DIGIT_MONTH_INT, TWO_DIGIT_DAY_INT, TWO_DIGIT_HOUR_INT, TWO_DIGIT_MINUTE_INT, TWO_DIGIT_SECOND_INT"
+    Help  = "Current time or a desired time of creation of an authenticated variable.\4-digit YEAR, MONTH, DAY, HOUR, MINUTE, SECOND\The time shall always be expressed in GMT"
+    TokenType = Expression
+    TargetH = Yes
+    Range  = ">1979, 1-12, 1-31, 0-23, 0-59, 0-59"
+End
+
+TOKEN
+    Name  = "AUTHVAR_SIGNTOOL"
+    Value  = "1"
+    Help  = "External signing application.\1- MS SignTool.exe (Microsoft SignTool supports private keys only in PKCS#12 .pfx format)\2 - openSSL(openSSL takes keys in PEM format)\Values 0,3, etc. are not supported"
+    TokenType = Integer
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "AUTHVAR_SIGNTOOL_CMND"
+    Value  = 'signtool.exe sign /fd sha256 /p7 $(BUILD_DIR)$(PATH_SLASH) /p7co 1.2.840.113549.1.7.1 /p7ce DetachedSignedData /a /f $(5) /p "$(6)" $(4)'
+    Help  = "$(4) a file to be signed;\$(5) private key (.PFX format or PEM for openSSL);\$(6) a pass phrase to unlock the private key;\$(7) signer public key certificate (x509) in PEM format"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "AUTHVAR_SIGNTOOL" "=" "1"
+End
+
+TOKEN
+    Name  = "AUTHVAR_SIGNTOOL_CMND"
+    Value  = 'openssl smime -sign -md sha256 -binary -noattr -in $(4) -out $(4).p7 -outform DER -inkey $(5) -signer $(7) -passin pass:$(6)'
+    Help  = "$(4) a file to be signed;\$(5) private key (.PFX format or PEM for openSSL);\$(6) a pass phrase to unlock the private key;\$(7) signer public key certificate (x509) in PEM format"
+    TokenType = Expression
+    TargetMAK = Yes
+    Token = "AUTHVAR_SIGNTOOL" "=" "2"
+End
+
+TOKEN
+    Name  = "PK_signerKey"
+    Value  = "no.Priv.key"
+    Help  = "PK private key file name used for signing the PK and KEK variable image.\Provide private keys only in PKCS#12 .pfx file format for MS Signtool or\ in PEM format for openSSL."
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PK_signerCert"
+    Value  = "no.Pub.key"
+    Help  = "PK public key certificate. Only used by openSSL sign utility.\Use cert. in PEM format only"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PK_signerKey_Password"
+    Value  = " "
+    Help  = "Specifies a passphrase to unlock encrypted .PFX or .PEM key data"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "db_signerKey"
+    Value  = "$(PK_signerKey)"
+    Help  = "File name of the private key used for signing all signature database variables db(-x,-t,-r)"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "db_signerCert"
+    Value  = "$(PK_signerCert)"
+    Help  = "The public key certificate. Only used with openSSL sign utility"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "db_signerKey_Password"
+    Value  = "$(PK_signerKey_Password)"
+    Help  = "Specifies a pass phrase to unlock the private key n .PFX or .PEM format"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "KEK_Append"
+    Value  = "0"
+    Help  = "Use Append attribute while signing Secure Variable package"
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "db_Append"
+    Value  = "0"
+    Help  = "Use Append attribute while signing Secure Variable package"
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "dbt_Append"
+    Value  = "0"
+    Help  = "Use Append attribute while signing Secure Variable package"
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "dbx_Append"
+    Value  = "0"
+    Help  = "Use Append attribute while signing Secure Variable package"
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "dbr_Append"
+    Value  = "0"
+    Help  = "Use Append attribute while signing Secure Variable package"
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PKVarName"
+    Value  = "$(BUILD_DIR)$(PATH_SLASH)PK.var"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "KEKVarName"
+    Value  = "$(BUILD_DIR)$(PATH_SLASH)KEK.var"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "dbVarName"
+    Value  = "$(BUILD_DIR)$(PATH_SLASH)db.var"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "dbtVarName"
+    Value  = "$(BUILD_DIR)$(PATH_SLASH)dbt.var"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "dbxVarName"
+    Value  = "$(BUILD_DIR)$(PATH_SLASH)dbx.var"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "dbrVarName"
+    Value  = "$(BUILD_DIR)$(PATH_SLASH)dbr.var"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+PATH
+    Name  = "Certificates_DIR"
+    Help  = "Path to Certificates Module in Project"
+End
+
+MODULE
+    File  = "Certificates.mak"
+End
+
+ELINK
+    Name  = "CertList_db"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "CertList_dbt"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "CertList_dbx"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "CertList_dbr"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "CertList_KEK"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "CertList_PK"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "$(PKVarName)"
+    Parent  = "$(PkVarFile)"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "$(KEKVarName)"
+    Parent  = "$(KekVarFile)"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "$(dbVarName)"
+    Parent  = "$(dbVarFile)"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "$(dbtVarName)"
+    Parent  = "$(dbtVarFile)"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "$(dbxVarName)"
+    Parent  = "$(dbxVarFile)"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "$(dbrVarName)"
+    Parent  = "$(dbrVarFile)"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "$(SecVariables_DIR)$(PATH_SLASH)dbxupdate_x86.bin"
+    Parent  = "$(dbxVarName)"
+    InvokeOrder = ReplaceParent
+    Token = "DBX_072920_defaults" "=" "1"
+    Token = "X64_SUPPORT" "=" "0"
+    Token = "DXE_ARCHITECTURE" "=" "IA32"
+End
+
+ELINK
+    Name  = "$(SecVariables_DIR)$(PATH_SLASH)dbxupdate_x64.bin"
+    Parent  = "$(dbxVarName)"
+    InvokeOrder = ReplaceParent
+    Token = "DBX_072920_defaults" "=" "1"
+    Token = "DXE_ARCHITECTURE" "=" "X64"
+End
+
+ELINK
+    Name  = "$(SecVariables_DIR)$(PATH_SLASH)dbxupdate_arm64.bin"
+    Parent  = "$(dbxVarName)"
+    InvokeOrder = ReplaceParent
+    Token = "DBX_072920_defaults" "=" "1"
+    Token = "DXE_ARCHITECTURE" "=" "AARCH64"
+End

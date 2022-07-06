@@ -1,0 +1,10 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Override\Restricted\IA32FamilyCpuPkg\Include\Protocol\"
+	RefName = "GrantleyPkg.Override.Restricted.IA32FamilyCpuPkg.Include.Protocol.Protocol"
+[files]
+"SmmCpuService.h"	
+"SmmCpuSync.h"	
+"SmmCpuSync2.h"	
+<endComponent>

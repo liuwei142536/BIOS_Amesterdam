@@ -1,0 +1,10 @@
+<component>
+	name = "PTU Loader"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\PtuLoader\"
+	RefName = "GrantleyPkg.Me.PTU_Loader"
+[INF]
+"PtuLoader.inf"
+[files]
+"PtuLoader.sdl"	
+<endComponent>

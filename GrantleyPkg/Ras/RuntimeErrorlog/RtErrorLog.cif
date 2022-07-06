@@ -1,0 +1,16 @@
+<component>
+	name = "Runtime ErrorLog"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\RuntimeErrorlog\"
+	RefName = "RuntimeErrorlog"
+[INF]
+"RtErrorLogBoard.inf"
+[files]
+"RtErrorLog.sdl"	
+"RtErrorLog.mak"	
+"RtErrorLog.h"	
+[parts]
+"RtErrorLogBmc"
+"RtErrorLogWhea"
+"RtErrorLogGpnv"
+<endComponent>

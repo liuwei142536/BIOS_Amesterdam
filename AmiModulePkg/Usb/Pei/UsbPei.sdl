@@ -1,0 +1,694 @@
+TOKEN
+	Name  = "USBPEI_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable USB PEI support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "UHCI_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Enable/Disable UHCI controller(s) in PEI"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "OHCI_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Enable/Disable OHCI controller(s) in PEI"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "EHCI_PEI_SUPPORT"
+	Value  = "1"
+	Help  = "Enable/Disable EHCI controller(s) in PEI"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "XHCI_PEI_SUPPORT"
+	Value  = "0"
+	Help  = "Enable/Disable XHCI controller(s) in PEI"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_UHCI_IOBASE"
+	Value  = "0x4000"
+	Help  = "IO Base Address for UHCI Controller during PEI phase"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_UHCI_PCI_DEVICES"
+	Value  = "{0x03, 0x0,0x1d,0x0,  0x0,0x1d,0x1, 0x0,0x1d,0x2}"
+	Help  = "List of supported UHCI controllers in the following format: { hostcount N, (UINT8)Bus#1,(UINT8)Dev#1,(UINT8)Func#1,(UINT8)Bus#2,(UINT8)Dev#2,(UINT8)Func#2,....N},currently support the Max count is 5."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_UHCI_PCI_DEVICES"
+	Value  = "{0x0}"
+	Help  = "Default value if not using UHCI controller"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_EHCI_PCI_BDFS"
+	Value = "{0x02, 0x00, 0x1A, 0x00,  0x00, 0x1D, 0x00}"
+	Help  = "List of supported EHCI controllers in the following format: { hostcount N, (UINT8)Bus#1,(UINT8)Dev#1,(UINT8)Func#1,(UINT8)Bus#2,(UINT8)Dev#2,(UINT8)Func#2,....N},currently support the Max count is 5."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_EHCI_MEM_BASE_ADDRESSES"
+	Value  = "{0x02, 0x00, 0xF0, 0xFF, 0xDF,  0x00, 0xFC, 0xFF, 0xDF}"
+	Help  = "List of base addresses for the respective EHCI controllers specified by PEI_EHCI_PCI_BDFS"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_OHCI_IOBASE"
+	Value  = "0xFC087000"
+	Help  = "Memory Mapped IO Base Address for first Recovery module OHCI Controller during PEI phase"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_XHCI_MMIOBASE"
+	Value  = "0xFE400000"
+	Help  = "MMIO Base Address for first XHCI Controller during PEI phase"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_XHCI_MMIOSIZE"
+	Value  = "0x10000"
+	Help  = "MMIO size for XHCI Controller during PEI phase"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_XHCI_CONTROLLER_PCI_ADDRESS"
+	Value  = "{0x1, 0x1, 0x0, 0x0}"
+	Help  = "Default value if XHCI controllers are not supported, format:{ hostcount N, (UINT8)Bus#1,(UINT8)Dev#1,(UINT8)Func#1,(UINT8)Bus#2,(UINT8)Dev#2,(UINT8)Func#2,..N}"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_XHCI_CONTROLLER_PCI_REGISTER_VALUES"
+	Value  = "{0x01,  0x00,  0x1c,  0x00,  0x19,0x0,0x0,0x0,  0x08,  0x01,0x0,0x0,0x0,  0x00,0x0,0x0,0x0}"
+	Help  = "Enable PCIe slot by programming bridge with the secondary/subordinate bus number and memory window.\Information format (AccessWidth is decimal), with a comma at the end:\   {Count N, (UINT8)Bus#1, (UINT8)Device#1, (UINT8)Function#1, (UINT32)Register#1, (UINT8)AccessWidth#1, (UINT32)BitsToSet#1, (UINT32)BitsToClear#1,....N},"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_USB_RECOVERYREQUEST_RETRIES"
+	Value  = "2"
+	Help  = "Number of retries while trying to catch recovery request from USB keyboard, each up to PEI_USB_RECOVERYREQUEST_TIMEOUT milliseconds long.\Note: value of 0 disables USB keyboard recovery request."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_USB_RECOVERYREQUEST_TIMEOUT"
+	Value  = "30"
+	Help  = "USB keyboard recovery request time-out value in milliseconds.\Note: this value should be chosen depending of the project needs: the more value, the more is the timeframe for the keypress requesting recovery; at the same time recovery request timeout increases the boot time."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_USB_RECOVERYREQUEST_KEY_MODIIFIER_VALUES"
+	Value  = "{0x02, 0x08, 0x04}"
+	Help  = "Specify the key modifiers (Ctr/Alt/Shift/Win format:{ modifiers count, val1, val2...}) to be pressed along with the key combination to invoke recovery.\Separate modifiers by commas, with a comma at the end: 'Mod1, Mod2,'\Use 'ShiftState' section of AmiKeycodePpi.h for the list of supported modifiers."
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_USB_RECOVERYREQUEST_KEY_EFISCANCODE"
+	Value  = "5"
+	Help  = "Specify the EFI scan code to be used for recovery request.\Use 'EFI Scan codes' section of AmiKeycodePpi.h for the list of supported EFI scan codes."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_USB_KEYBOARD_NUMLOCK_ON"
+	Value  = "1"
+	Help  = "This token specifies whether or not turn the NumLock on during USB keyboard initialization in PEI."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "USBPEI_IN_S3_SUPPORT"
+	Value  = "0"
+	Help  = "USB PEI support in S3 resume."
+	TokenType = Boolean
+	TargetH = Yes
+#	Token = "USB_PEI_KEYBOARD_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "USBR_OHCI_CONTROLLER_PCI_ADDRESS"
+	Value = "{0x1, 0x0, 0x12, 0x0}"
+	Help  = "Specifies the location of supported OHCI controllers on the PCI bus.  Use the following format with hexadecimal values, with a comma at the end: \  {bus, device, function},"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "USBR_OHCI_CONTROLLER_PCI_REGISTER_VALUE"
+	Value = "{0x1, 0x0,  0x12,  0x0,  0x40, 0x0,0x0,0x0,  0x32,  0x3,0x0,0x0,0x0, 0x0,0x0,0x0,0x0}"
+	Help  = "Specifies the PCI register values to be programmed for each of the supported OHCI controllers specified by OHCI_CONTROLLER_PCI_ADDRESS. Use the following format with hexadecimal values (AccessWidth is decimal), with a comma at the end:\   {Count N, (UINT8)Bus#1, (UINT8)Device#1, (UINT8)Function#1, (UINT32)Register#1, (UINT8)AccessWidth#1, (UINT32)BitsToSet#1, (UINT32)BitsToClear#1,....N},"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "USB_PEI_KEYBOARD_SUPPORT"
+	Value  = "0"
+	Help  = "Enable/disable support for USB keyboards.\On - We always initial usb controllers and devices in PEI phase.\Off - We initial usb controllers and devices only if the system is in recovery mode."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_USB_DEVICE_CONNECT_TIMEOUT"
+	Value  = "1"
+	Help  = "Some devices may connect lately, polling process to wait for devices. The unit of timeout is the second."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_USB_KEYBOARD_CONNECT_DELAY_MS"
+	Value  = "0"
+	Help  = "Some devices may connect lately, add delay time to wait usb keyboard are connected. The unit of the token is MS."
+	TokenType = Integer
+	TargetH = Yes
+#	Token = "USB_PEI_KEYBOARD_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PEI_USB_MASS_STORAGE_SUPPORT_POLICY"
+	Value  = "0"
+	Help  = "This token controlls usb mass storage support in the PEI phase.\0 - Initialize usb mass storage devices only in the system is in the recovery mode.\1 - Always initialize usb mass storage devices."
+	TokenType = Integer
+	TargetH = Yes
+#	Token = "USB_PEI_KEYBOARD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PEI_USB_HOST_SYSTEM_ERRORS_SUPPORT"
+    Value = "1"
+    Help  = "Enable/Disable Usb host system errors support in the PEI phase."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "USB_PEI_DEBUG_MESSAGES"
+	Value  = "0"
+	Help  = "Enables/disables debug messages for Usb Pei."
+	TokenType = Boolean
+	Token = "DEBUG_CODE" "=" "1"
+End
+
+TOKEN
+    Name  = "USB_PEI_EDKII_IOMMU_PPI_SUPPORT"
+    Value  = "0"
+    Help  = "Enable/disable EdkiiIoMmuPpi support for Usb Pei."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+INFComponent
+	Name  = "UsbPei"
+	File  = "UsbPei.inf"
+	Package  = "AmiModulePkg"
+	ModuleTypes  = "PEIM"
+	PreProcess = Yes
+End
+
+OUTPUTREGISTER
+    Name  = "UsbPeiElinks"
+    Path  = "Build"
+    File  = "UsbPeiElinks.h"
+    Template  = "UsbPeiElinks.txt"
+End
+
+ELINK
+    Name  = "USB_PEI_SOURCES_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "USB_PEI_PACKAGES_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "USB_PEI_LIBRARYCLASSES_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "USB_PEI_PPIS_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "USB_PEI_PCDEX_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "USB_PEI_PCD_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+
+ELINK
+    Name  = "USB_PEI_DEPEX_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "USB_PEI_HOST_DRIVER_LIST"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "EhciPeiUsbEntryPoint"
+    Parent  = "USB_PEI_HOST_DRIVER_LIST"
+    InvokeOrder = AfterParent
+    Token = "EHCI_PEI_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "UhciPeiUsbEntryPoint"
+    Parent  = "USB_PEI_HOST_DRIVER_LIST"
+    InvokeOrder = AfterParent
+    Token = "UHCI_PEI_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "OhciPeiUsbEntryPoint"
+    Parent  = "USB_PEI_HOST_DRIVER_LIST"
+    InvokeOrder = AfterParent
+    Token = "OHCI_PEI_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "XhciPeiUsbEntryPoint"
+    Parent  = "USB_PEI_HOST_DRIVER_LIST"
+    InvokeOrder = AfterParent
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "../AmiModulePkg/Usb/Pei/PeiUhci.c"
+    Parent  = "USB_PEI_SOURCES_LIST"
+    Token = "UHCI_PEI_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "../AmiModulePkg/Usb/Pei/PeiOhci.c"
+    Parent  = "USB_PEI_SOURCES_LIST"
+    Token = "OHCI_PEI_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "../AmiModulePkg/Usb/Pei/PeiOhciBoard.c"
+    Parent  = "USB_PEI_SOURCES_LIST"
+    Token = "OHCI_PEI_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "../AmiModulePkg/Usb/Pei/PeiEhci.c"
+    Parent  = "USB_PEI_SOURCES_LIST"
+    Token = "EHCI_PEI_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "../AmiModulePkg/Usb/Pei/PeiEhciBoard.c"
+    Parent  = "USB_PEI_SOURCES_LIST"
+    Token = "EHCI_PEI_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "../AmiModulePkg/Usb/Pei/PeiXhci.c"
+    Parent  = "USB_PEI_SOURCES_LIST"
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+PcdMapping
+	Name  = "PcdFixedDebugPrintErrorLevel"
+	GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "0"
+	Override  = "AmiModulePkg.UsbPei"
+	Offset  = 00h
+	Length  = 00h
+	Help  = "Disables all debug messages based on USB_PEI_DEBUG_MESSAGES token value"
+	TargetDSC = Yes
+	Token = "USB_PEI_DEBUG_MESSAGES" "=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiEdkiiIommuPpiSupport"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "USB_PEI_EDKII_IOMMU_PPI_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "UsbPei"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "AmiModulePkg.UsbPei"
+	Rule_Override  = "Compressed"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiUhciSupport"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "UHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiOhciSupport"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "OHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiEhciSupport"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "EHCI_PEI_SUPPORT" "=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiXhciSupport"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiUhciIoBase"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(PEI_UHCI_IOBASE)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_UHCI_IOBASE" "!=" "0x4000"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiUhciPciDev"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    DataType  = "Pointer"
+    Value  = "$(PEI_UHCI_PCI_DEVICES)"
+    Offset  = 00h
+    Length  = 10h
+    TargetDSC = Yes
+    Token = "UHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiEhciPciDev"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    DataType  = "Pointer"
+    Value  = "$(PEI_EHCI_PCI_BDFS)"
+    Offset  = 00h
+    Length  = 10h
+    TargetDSC = Yes
+    Token = "EHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiEhciIoBase"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    DataType  = "Pointer"
+    Value  = "$(PEI_EHCI_MEM_BASE_ADDRESSES)"
+    Offset  = 00h
+    Length  = 20h
+    TargetDSC = Yes
+    Token = "EHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiOhciIoBase"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(PEI_OHCI_IOBASE)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_OHCI_IOBASE" "!=" "0xFC087000"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiXhciIoBase"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(PEI_XHCI_MMIOBASE)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_XHCI_MMIOBASE" "!=" "0xFE400000"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiXhciMmioSize"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(PEI_XHCI_MMIOSIZE)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_XHCI_MMIOSIZE" "!=" "0x10000"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiXhciPciDev"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    DataType  = "Pointer"
+    Value  = "$(PEI_XHCI_CONTROLLER_PCI_ADDRESS)"
+    Offset  = 00h
+    Length  = 10h
+    TargetDSC = Yes
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiXhciPciRegVal"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    DataType  = "Pointer"
+    Value  = "$(PEI_XHCI_CONTROLLER_PCI_REGISTER_VALUES)"
+    Offset  = 00h
+    Length  = 80h
+    TargetDSC = Yes
+    Token = "XHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiRecoveryReqRet"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(PEI_USB_RECOVERYREQUEST_RETRIES)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_USB_RECOVERYREQUEST_RETRIES" "!=" "2"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiRecoveryReqTimeout"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(PEI_USB_RECOVERYREQUEST_TIMEOUT)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_USB_RECOVERYREQUEST_TIMEOUT" "!=" "30"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiKeyModifierValue"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    DataType  = "Pointer"
+    Value  = "$(PEI_USB_RECOVERYREQUEST_KEY_MODIIFIER_VALUES)"
+    Offset  = 00h
+    Length  = 10h
+    TargetDSC = Yes
+    Token = "USB_PEI_KEYBOARD_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiRecScanCode"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(PEI_USB_RECOVERYREQUEST_KEY_EFISCANCODE)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_USB_RECOVERYREQUEST_KEY_EFISCANCODE" "!=" "5"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiKeyboardNumlock"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_USB_KEYBOARD_NUMLOCK_ON" "=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiInS3Support"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "USBPEI_IN_S3_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiOhciPciDev"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    DataType  = "Pointer"
+    Value  = "$(USBR_OHCI_CONTROLLER_PCI_ADDRESS)"
+    Offset  = 00h
+    Length  = 10h
+    TargetDSC = Yes
+    Token = "OHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiOhciPciRegVal"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    DataType  = "Pointer"
+    Value  = "$(USBR_OHCI_CONTROLLER_PCI_REGISTER_VALUE)"
+    Offset  = 00h
+    Length  = 20h
+    TargetDSC = Yes
+    Token = "OHCI_PEI_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiKeyboardSupport"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "USB_PEI_KEYBOARD_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiDevConnectTimeout"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(PEI_USB_DEVICE_CONNECT_TIMEOUT)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_USB_DEVICE_CONNECT_TIMEOUT" "!=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiKbConnectDelay"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "$(PEI_USB_KEYBOARD_CONNECT_DELAY_MS)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_USB_KEYBOARD_CONNECT_DELAY_MS" "!=" "0"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiMassSupportPolicy"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "TRUE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_USB_MASS_STORAGE_SUPPORT_POLICY" "=" "1"
+End
+
+PcdMapping
+    Name  = "AmiPcdUsbPeiHostErrorSupport"
+    GuidSpace  = "gAmiUsbPkgTokenSpaceGuid"
+    PcdType  = "PcdsDynamicExDefault"
+    Value  = "FALSE"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "PEI_USB_HOST_SYSTEM_ERRORS_SUPPORT" "=" "0"
+End

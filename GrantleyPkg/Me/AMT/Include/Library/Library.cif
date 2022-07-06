@@ -1,0 +1,15 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Include\Library\"
+	RefName = "GrantleyPkg.Me.AMT.Include.Library.Library"
+[files]
+"AlertStandardFormatTable.h"	
+"AmtPlatformPolicyUpdateDxeLib.h"	
+"AmtPlatformPolicyUpdatePeiLib.h"	
+"AtPlatformPolicyUpdateDxeLib.h"	
+"BdsLib.h"	
+"BmMachine.h"	
+"CoreBiosMsg.h"	
+"MePlatformPolicyUpdateDxeLib.h"	
+<endComponent>

@@ -1,0 +1,30 @@
+TOKEN
+	Name  = "IA32FamilyCpuPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling IA32FamilyCpuPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PiSmmCpuDxeSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PiSmmCpuDxeSmm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PiSmmCpuDxeSmm"
+	File  = "PiSmmCpuDxeSmm\PiSmmCpuDxeSmm.inf"
+	Package  = "GrantleyPkg"
+	Arch  = "IA32 X64"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "PiSmmCpuDxeSmm_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "DebugLib"
+    Instance  = "MdePkg.BaseDebugLibSerialPort"
+    Override  = "GrantleyPkg.PiSmmCpuDxeSmm"
+	Token = "PiSmmCpuDxeSmm_SUPPORT" "=" "1"
+End

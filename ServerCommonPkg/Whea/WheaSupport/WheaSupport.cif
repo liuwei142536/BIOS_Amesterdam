@@ -1,0 +1,11 @@
+<component>
+	name = "WheaSupport"
+	category = ModulePart
+	LocalRoot = "ServerCommonPkg\Whea\WheaSupport\"
+	RefName = "ServerCommonPkg.WheaSupport"
+[INF]
+"WheaSupport.inf"
+[files]
+"WheaSupport.h"	
+"WheaSupport.sdl"	
+<endComponent>

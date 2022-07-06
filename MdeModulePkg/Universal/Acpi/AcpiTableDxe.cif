@@ -1,0 +1,10 @@
+<component>
+	name = "AcpiTableDxe"
+	category = ModulePart
+	LocalRoot = "MdeModulePkg\Universal\Acpi\"
+	RefName = "MdeModulePkg.AcpiTableDxe"
+[INF]
+AcpiTableDxe\AcpiTableDxe.inf
+[files]
+"AcpiTableDxe.sdl"
+<endComponent>

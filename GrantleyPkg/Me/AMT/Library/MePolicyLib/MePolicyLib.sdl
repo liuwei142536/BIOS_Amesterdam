@@ -1,0 +1,35 @@
+TOKEN
+	Name  = "MePolicyLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MePolicyLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MePolicyLib"
+	File  = "Dxe\MePolicyLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AmtPeiPolicyLib"
+	File  = "Pei\AmtPeiPolicyLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AMT_ENABLE" "=" "1"
+End
+
+LibraryMapping
+	Class  = "MePolicyLib"
+	Instance  = "GrantleyPkg.MePolicyLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmtPeiPolicyLib"
+	Instance  = "GrantleyPkg.AmtPeiPolicyLib"
+	Token = "AMT_ENABLE" "=" "1"
+End
+

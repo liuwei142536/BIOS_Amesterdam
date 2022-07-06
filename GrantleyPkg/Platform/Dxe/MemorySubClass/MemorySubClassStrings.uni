@@ -1,0 +1,112 @@
+﻿﻿//
+// This file contains a 'Sample Driver' and is licensed as such
+// under the terms of your license agreement with Intel or your
+// vendor.  This file may be modified by the user, subject to
+// the additional terms of the license agreement
+//
+/** @file
+  String definitions for Smbios Memory SubClass data.
+
+  Copyright (c) 1999 - 2011 Intel Corporation.  All rights reserved.
+  This software and associated documentation (if any) is furnished
+  under a license and may only be used or copied in accordance
+  with the terms of the license. Except as permitted by such
+  license, no part of this software or documentation may be
+  reproduced, stored in a retrieval system, or transmitted in any
+  form or by any means without the express written consent of
+  Intel Corporation.
+
+**/
+
+/=#
+
+#langdef en-US "English"
+
+//
+// Begin English Language Strings
+//
+
+#string STR_MEMORY_SUBCLASS_UNKNOWN   #language en-US "Unknown"
+
+#string STR_MEMORY_SUBCLASS_DIMM_00   #language en-US "DIMM_A1"
+#string STR_MEMORY_SUBCLASS_DIMM_01   #language en-US "DIMM_A2"
+#string STR_MEMORY_SUBCLASS_DIMM_02   #language en-US "DIMM_A3"
+#string STR_MEMORY_SUBCLASS_DIMM_03   #language en-US "DIMM_B1"
+#string STR_MEMORY_SUBCLASS_DIMM_04   #language en-US "DIMM_B2"
+#string STR_MEMORY_SUBCLASS_DIMM_05   #language en-US "DIMM_B3"
+#string STR_MEMORY_SUBCLASS_DIMM_06   #language en-US "DIMM_C1"
+#string STR_MEMORY_SUBCLASS_DIMM_07   #language en-US "DIMM_C2"
+#string STR_MEMORY_SUBCLASS_DIMM_08   #language en-US "DIMM_C3"
+#string STR_MEMORY_SUBCLASS_DIMM_09   #language en-US "DIMM_D1"
+#string STR_MEMORY_SUBCLASS_DIMM_0A   #language en-US "DIMM_D2"
+#string STR_MEMORY_SUBCLASS_DIMM_0B   #language en-US "DIMM_D3"
+
+#string STR_MEMORY_SUBCLASS_DIMM_10   #language en-US "DIMM_E1"
+#string STR_MEMORY_SUBCLASS_DIMM_11   #language en-US "DIMM_E2"
+#string STR_MEMORY_SUBCLASS_DIMM_12   #language en-US "DIMM_E3"
+#string STR_MEMORY_SUBCLASS_DIMM_13   #language en-US "DIMM_F1"
+#string STR_MEMORY_SUBCLASS_DIMM_14   #language en-US "DIMM_F2"
+#string STR_MEMORY_SUBCLASS_DIMM_15   #language en-US "DIMM_F3"
+#string STR_MEMORY_SUBCLASS_DIMM_16   #language en-US "DIMM_G1"
+#string STR_MEMORY_SUBCLASS_DIMM_17   #language en-US "DIMM_G2"
+#string STR_MEMORY_SUBCLASS_DIMM_18   #language en-US "DIMM_G3"
+#string STR_MEMORY_SUBCLASS_DIMM_19   #language en-US "DIMM_H1"
+#string STR_MEMORY_SUBCLASS_DIMM_1A   #language en-US "DIMM_H2"
+#string STR_MEMORY_SUBCLASS_DIMM_1B   #language en-US "DIMM_H3"
+
+#string STR_MEMORY_SUBCLASS_DIMM_20   #language en-US "DIMM_I1"
+#string STR_MEMORY_SUBCLASS_DIMM_21   #language en-US "DIMM_I2"
+#string STR_MEMORY_SUBCLASS_DIMM_22   #language en-US "DIMM_I3"
+#string STR_MEMORY_SUBCLASS_DIMM_23   #language en-US "DIMM_J1"
+#string STR_MEMORY_SUBCLASS_DIMM_24   #language en-US "DIMM_J2"
+#string STR_MEMORY_SUBCLASS_DIMM_25   #language en-US "DIMM_J3"
+#string STR_MEMORY_SUBCLASS_DIMM_26   #language en-US "DIMM_K1"
+#string STR_MEMORY_SUBCLASS_DIMM_27   #language en-US "DIMM_K2"
+#string STR_MEMORY_SUBCLASS_DIMM_28   #language en-US "DIMM_K3"
+#string STR_MEMORY_SUBCLASS_DIMM_29   #language en-US "DIMM_L1"
+#string STR_MEMORY_SUBCLASS_DIMM_2A   #language en-US "DIMM_L2"
+#string STR_MEMORY_SUBCLASS_DIMM_2B   #language en-US "DIMM_L3"
+
+#string STR_MEMORY_SUBCLASS_DIMM_30   #language en-US "DIMM_M1"
+#string STR_MEMORY_SUBCLASS_DIMM_31   #language en-US "DIMM_M2"
+#string STR_MEMORY_SUBCLASS_DIMM_32   #language en-US "DIMM_M3"
+#string STR_MEMORY_SUBCLASS_DIMM_33   #language en-US "DIMM_N1"
+#string STR_MEMORY_SUBCLASS_DIMM_34   #language en-US "DIMM_N2"
+#string STR_MEMORY_SUBCLASS_DIMM_35   #language en-US "DIMM_N3"
+#string STR_MEMORY_SUBCLASS_DIMM_36   #language en-US "DIMM_O1"
+#string STR_MEMORY_SUBCLASS_DIMM_37   #language en-US "DIMM_O2"
+#string STR_MEMORY_SUBCLASS_DIMM_38   #language en-US "DIMM_O3"
+#string STR_MEMORY_SUBCLASS_DIMM_39   #language en-US "DIMM_P1"
+#string STR_MEMORY_SUBCLASS_DIMM_3A   #language en-US "DIMM_P2"
+#string STR_MEMORY_SUBCLASS_DIMM_3B   #language en-US "DIMM_P3"
+
+#string STR_MEMORY_SUBCLASS_DIMM_FF   #language en-US "DIMM_LAST"
+
+//
+// DIMM bank locator strings
+//
+#ifndef SDP_FLAG
+#string STR_MEMORY_SUBCLASS_NODE_1    #language en-US "CPU 0"
+#string STR_MEMORY_SUBCLASS_NODE_2    #language en-US "CPU 1"
+#string STR_MEMORY_SUBCLASS_NODE_3    #language en-US "CPU 2"
+#string STR_MEMORY_SUBCLASS_NODE_4    #language en-US "CPU 3"
+#else
+#string STR_MEMORY_SUBCLASS_NODE_1    #language en-US "NODE 1"
+#string STR_MEMORY_SUBCLASS_NODE_2    #language en-US "NODE 2"
+#string STR_MEMORY_SUBCLASS_NODE_3    #language en-US "NODE 3"
+#string STR_MEMORY_SUBCLASS_NODE_4    #language en-US "NODE 4"
+#endif
+//AptioV server override start: Strings added for missing nodes
+#string STR_MEMORY_SUBCLASS_NODE_5    #language en-US "NODE 5"
+#string STR_MEMORY_SUBCLASS_NODE_6    #language en-US "NODE 6"
+#string STR_MEMORY_SUBCLASS_NODE_7    #language en-US "NODE 7"
+#string STR_MEMORY_SUBCLASS_NODE_8    #language en-US "NODE 8"
+//AptioV server override end: Strings added for missing nodes
+//
+//AptioV Server Override End : Display the Nodes for the bank locator in Type17 so commenting CPU string tokens.
+//
+
+//
+// End English Language Strings
+//
+

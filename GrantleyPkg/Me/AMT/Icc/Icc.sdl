@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "ICC_ENABLE"
+	Value  = "1"
+	Help  = "Switch for Enabling AtAm support in the project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+    Name  = "IccPlatform_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable IccPlatform support in Project"
+    TokenType = Boolean
+End
+
+INFComponent
+    Name  = "IccPlatform"
+    File  = "Dxe\IccPlatform.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "IccPlatform_SUPPORT" "=" "1"
+End

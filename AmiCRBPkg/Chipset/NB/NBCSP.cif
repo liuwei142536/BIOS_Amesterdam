@@ -1,0 +1,8 @@
+<component>
+	name = "Haswell - NB Chipset"
+	category = ModulePart
+	LocalRoot = "AmiCRBPkg\Chipset\NB\"
+	RefName = "Haswell - NB Chipset"
+[files]
+"NBCspLib.h"	
+<endComponent>

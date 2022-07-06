@@ -1,0 +1,104 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+#ifdef CONTROL_DEFINITION
+
+    #define AMI_TSE_GROUP_DYNAMIC_PAGES\
+        suppressif ideqvallist DYNAMIC_PAGE_COUNT.PageCount == 0xFFFF;\
+            goto ADVANCED_MAIN,\
+                prompt = STRING_TOKEN(STR_EMPTY),\
+                help = STRING_TOKEN(STR_EMPTY);\
+        endif;
+
+    #define AMI_TSE_DRIVER_HEALTH_GOTO\
+        suppressif ideqvallist DRIVER_HEALTH_ENABLE.Enable == 0xFFFF;\
+            goto DRIVER_HEALTH_FORM,\
+                prompt = STRING_TOKEN(STR_DRV_HEALTH),\
+                help = STRING_TOKEN(STR_DRV_HEALTH_HELP);\
+        endif;
+
+#endif //CONTROL_DEFINITION
+
+
+#ifdef ADVANCED_FORM_SET
+    #ifdef FORM_SET_VARSTORE
+        #if SETUP_GROUP_DYNAMIC_PAGES
+            varstore DYNAMIC_PAGE_COUNT, key = DYNAMIC_PAGE_COUNT_KEY_ID,  
+                name = DynamicPageCount, guid = DYNAMIC_PAGE_COUNT_GUID;
+        #endif
+        
+        #if DRIVER_HEALTH_SUPPORT
+            varstore DRIVER_HEALTH_ENABLE, key = DRIVER_HEALTH_ENB_KEY_ID,
+                name = DriverHlthEnable, guid = AMITSE_DRIVER_HEALTH_ENB_GUID;
+
+            varstore DRIVER_HEALTH, key = DRIVER_HEALTH_KEY_ID,
+                name = DriverHealthCount, guid = AMITSE_DRIVER_HEALTH_GUID;
+
+            varstore DRIVER_HEALTH_CTRL_COUNT, key = DRIVER_HEALTH_CTRL_KEY_ID,
+                name = DrvHealthCtrlCnt, guid = AMITSE_DRIVER_HEALTH_CTRL_GUID;
+        #endif
+    #endif //FORM_SET_VARSTORE
+
+    #ifdef FORM_SET_GOTO
+    
+        SEPARATOR
+        #if SETUP_GROUP_DYNAMIC_PAGES
+            AMI_TSE_GROUP_DYNAMIC_PAGES
+        #endif
+
+        SEPARATOR
+        #if DRIVER_HEALTH_SUPPORT
+            AMI_TSE_DRIVER_HEALTH_GOTO
+        #endif //DRIVER_HEALTH_SUPPORT
+    #endif //FORM_SET_GOTO
+
+
+    #ifdef FORM_SET_FORM
+        #if DRIVER_HEALTH_SUPPORT
+            form formid = AUTO_ID (DRIVER_HEALTH_FORM),
+                title = STRING_TOKEN(STR_DRV_HEALTH);
+                
+                suppressif ideqvallist DRIVER_HEALTH.DrvHandleCount == 0xFFFF;
+                goto DRIVER_HEALTH_SUBFORM,
+                    prompt = STRING_TOKEN(STR_EMPTY),
+                    help = STRING_TOKEN(STR_DRV_HEALTH_HELP);
+                endif;
+            endform;
+
+            form formid = AUTO_ID (DRIVER_HEALTH_SUBFORM),
+                title = STRING_TOKEN(STR_DRV_HEALTH);
+
+                suppressif ideqvallist DRIVER_HEALTH_CTRL_COUNT.DrvHealthCtrlCnt == 0xFFFF;
+                    goto DRIVER_HEALTH_SUBFORM,
+                        prompt = STRING_TOKEN(STR_EMPTY),
+                        help = STRING_TOKEN(STR_DRV_HEALTH_HELP);
+                endif;
+            endform;
+        #endif //DRIVER_HEALTH_SUPPORT
+    #endif //FORM_SET_FORM
+#endif //ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

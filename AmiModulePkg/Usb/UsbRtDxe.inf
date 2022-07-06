@@ -1,0 +1,92 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   This is AMI UsbRtDxe driver
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UsbRtDxe
+  FILE_GUID                      = 171F43DC-C4D9-47a6-9641-65DDCDD5AA30
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x00010014
+  ENTRY_POINT                    = USBDriverEntryPoint
+
+[Sources]
+  Rt/AmiUsb.c
+  Rt/UsbKbd.c
+  Rt/Elib.c
+  Rt/Uhci.c
+  Rt/Usb.c
+  Rt/UsbHub.c
+  Rt/UsbMass.c
+  Rt/UsbMass.h
+  Rt/UsbCcid.c
+  Rt/UsbMs.c
+  Rt/UsbHid.c
+  Rt/UsbPoint.c
+  Rt/Uhci.h
+  Rt/UsbKbd.h
+  Rt/Ehci.c
+  Rt/Ehci.h
+  Rt/Ohci.c
+  Rt/Ohci.h
+  Rt/SysKbc.c
+  Rt/SysNoKbc.c
+  Rt/Xhci.h
+  Rt/Xhci.c
+  $(USB_RT_DXE_SOURCES_LIST)
+ 
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  $(USB_RT_DXE_PACKAGES_LIST)
+ 
+[LibraryClasses]
+  BaseLib
+  AmiDxeUsbHcdLib
+  BaseMemoryLib
+  UefiDriverEntryPoint
+  DebugLib
+  IoLib
+  TimerLib
+  AmiBaseUsbBoardLib
+  $(USB_RT_DXE_LIBRARYCLASSES_LIST)
+
+[Protocols]
+  gEfiUsbProtocolGuid
+  $(USB_RT_DXE_PROTOCOLS_LIST)
+  
+[Depex]
+  $(USB_RT_DXE_DEPEX_LIST)
+  gEfiUsbProtocolGuid
+
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

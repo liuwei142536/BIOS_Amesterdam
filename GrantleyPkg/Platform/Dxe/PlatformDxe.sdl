@@ -1,0 +1,136 @@
+TOKEN
+	Name  = "PlatformDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Dxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "C2FDxe_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for saving cache to flash device"
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "S3NvramSave_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for saving MRC config to NVRAM"
+	TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SaveMemoryConfig_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for saving MRC config to NVRAM"
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "OnBoardVideoEfi_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable OnBoardVideoEfi support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PlatformType_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformType support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PlatformEarlyDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformEarlyDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+    Name  = "PlatformHardwareHarden_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable PlatformHardwareHarden support in Project"
+    TokenType = Boolean
+End
+
+FFS_FILE
+	Name  = "OnBoardVideoEfi"
+	FD_AREA  = "FV_MAIN"
+	FILE_Stmt  = "GrantleyPkg\Platform\Dxe\OnBoardVideoEfiFdfFileStatement.txt"
+	Token = "OnBoardVideoEfi_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "C2FDxe"
+    File  = "C2FDxe\c2fdxe.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "STORAGE_FEATURE_EN" "=" "1"
+    Token = "C2FDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PlatformType"
+	File  = "PlatformType\PlatformType.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PlatformType_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "S3NvramSave"
+	File  = "S3NvramSave\S3NvramSave.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "S3NvramSave_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "SaveMemoryConfig"
+    File  = "SaveMemoryConfig\SaveMemoryConfig.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "SaveMemoryConfig_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "PlatformEarlyDxe"
+    File  = "PlatformEarlyDxe\PlatformEarlyDxe.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "PlatformEarlyDxe_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "CompressDxeLib"
+    Instance  = "GrantleyPkg.CompressDxeLib"
+    Override  = "GrantleyPkg.S3NvramSave"
+End
+
+LibraryMapping
+	Class  = "UefiBootServicesTableLib"
+	Instance  = "MdePkg.UefiBootServicesTableLib"
+    Override  = "GrantleyPkg.S3NvramSave"
+End
+
+INFComponent
+    Name  = "PlatformHardwareHarden"
+    File  = "PlatformHwHarden/PlatformHardwareHarden.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "PlatformHardwareHarden_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "PcdLib"
+    Instance  = "MdePkg.DxePcdLib"
+    Override  = "GrantleyPkg.PlatformHardwareHarden"
+End
+
+LibraryMapping
+    Class  = "MmPciBaseLib"
+    Instance  = "ServerCommonPkg.MmPciBaseLib"
+    Override  = "GrantleyPkg.PlatformHardwareHarden"
+End

@@ -1,0 +1,93 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+
+
+#/*++
+#
+#  Copyright (c)  2014 Intel Corporation. All rights reserved
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#  Module Name:
+#
+#    PtuLoader.inf
+#
+#  Abstract:
+#
+#    Load PTU Option ROM outside of PCI enumeration process
+#
+#--*/
+
+[defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = PtuLoader
+  FILE_GUID      = 1f77ffd9-c00d-4245-b2ac-f5f43e333c39
+  MODULE_TYPE    = UEFI_DRIVER
+  VERSION_STRING = 1.0
+  ENTRY_POINT    = PtuLoaderEntryPoint
+
+[Sources]
+  PtuLoader.c
+
+[Packages] 
+  MdePkg/MdePkg.dec
+  GrantleyPkg/Me/MePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  DebugLib
+  DevicePathLib
+  UefiLib
+  PciLib
+  FlashLib #AptioV Grantley override: To use AMI flash for reading DER region
+
+# AptioV Server OverRide Start: Commenting code not to use Intel SPI protocol. 
+#                         AMI's flash Library will be used.
+#[Protocols]
+#  gEfiSpiProtocolGuid
+# AptioV Server OverRide End: Commenting code not to use Intel SPI protocol. 
+#                         AMI's flash Library will be used.
+
+[Depex]
+# AptioV Server OverRide Start: Commenting code not to use Intel SPI protocol. 
+#                         AMI's flash Library will be used.
+#  gEfiPciEnumerationCompleteProtocolGuid 
+#  AND gEfiSpiProtocolGuid
+# AptioV Server OverRide End: Commenting code not to use Intel SPI protocol. 
+#                         AMI's flash Library will be used.
+
+  gEfiSmmConfigurationProtocolGuid AND # AptioV server override
+  gEfiSpsNmProtocolGuid # AptioV server override
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

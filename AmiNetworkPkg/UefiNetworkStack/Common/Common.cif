@@ -1,0 +1,27 @@
+<component>
+    name = "Common"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\UefiNetworkStack\Common\"
+    RefName = "AmiNetworkPkg.UefiNetworkStack.Common"
+[INF]
+"DpcDxe\DpcDxe.inf"
+"DnsDxe\DnsDxe.inf"
+"ArpDxe\ArpDxe.inf"
+"SnpDxe\SnpDxe.inf"
+"MnpDxe\MnpDxe.inf"
+"UefiPxeBcDxe\UefiPxeBcDxe.inf"
+"TcpDxe\TcpDxe.inf"
+"VlanConfigDxe\VlanConfigDxe.inf"
+"HttpBootDxe\HttpBootDxe.inf"
+"HttpDxe\HttpDxe.inf"
+"HttpUtilitiesDxe\HttpUtilitiesDxe.inf"
+"TlsAuthConfigDxe\TlsAuthConfigDxe.inf"
+"TlsDxe\TlsDxe.inf"
+"CACert\CACert.inf"
+"PreserveCACert\PreserveCACert.inf"
+"WifiConnectionManagerDxe\WifiConnectionManagerDxe.inf"
+[files]
+"AmiNetworkCommon.sdl"	
+[parts]
+"NetworkStackSetupScreen"
+<endComponent>

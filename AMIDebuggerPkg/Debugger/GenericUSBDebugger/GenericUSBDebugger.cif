@@ -1,0 +1,13 @@
+<component>
+	name = "GenericUSBDebugger"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\GenericUSBDebugger\"
+	RefName = "Debugger.GenericUSBDebugger"
+[INF]
+"GenericUSBDebugger.inf"
+"CommonGenUsbLib.inf"
+"DbgGenUsbPortLib.inf"
+"DbgGenUsbXportLib.inf"
+[files]
+"GenericUSBDebugger.sdl"	
+<endComponent>

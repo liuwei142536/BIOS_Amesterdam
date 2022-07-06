@@ -1,0 +1,1557 @@
+﻿﻿﻿//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 1999 - 2015 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   MemorySetupStrings.uni
+// 
+// Abstract:
+// 
+//   String definitions for Memory
+// 
+// Revision History:
+// 
+// --*/
+
+/=#
+
+#langdef   en-US "English"
+#langdef   x-AMI "AmiMappingLanguage"
+
+//
+// Memory Interface Configuration
+//
+#string STR_MEMORY_CONFIG_FORM_TITLE        #language en-US "Memory Configuration"
+#string STR_MEMORY_CONFIG_FORM_HELP         #language en-US "Displays and provides option to change the Memory Settings"
+
+#string STR_MEMORY_RAS_CONFIG_FORM_TITLE    #language en-US "Memory RAS Configuration"
+                                            #language x-AMI "MEM03A"
+#string STR_MEMORY_RAS_CONFIG_FORM_HELP     #language en-US "Displays and provides option to change the Memory Ras Settings"
+#string STR_RAS_CONFIG_SETUP                #language en-US "Memory RAS Configuration Setup"    
+
+#string STR_IOH_MEM_FORM_TITLE              #language en-US "Integrated Memory Controller (iMC)"
+#string STR_IOH_MEM_FORM_HELP               #language en-US "Press <Enter> to bring up the Memory Interface Configuration menu."
+
+#string STR_THERMTHRT_CONFIG_FORM_TITLE     #language en-US "Memory Thermal Throttling Configuration"
+#string STR_THERMTHRT_CONFIG_FORM_HELP      #language en-US "Displays and provides option to change the memory thermal throttling configuration"
+#string STR_THERMTHRT_CONFIG_SETUP          #language en-US "Memory Thermal Throttling Setup" 
+
+#string STR_XORMAP_CONFIG_FORM_TITLE        #language en-US "Memory Address XOR Configuration"
+#string STR_XORMAP_CONFIG_FORM_HELP         #language en-US "Displays and provides option to change the memory address XOR map"
+#string STR_XORMAP_CONFIG_SETUP             #language en-US "Memory XOR MAP Config Setup" 
+
+#string STR_VALHOOKS_CONFIG_FORM_TITLE      #language en-US "Memory Validation Hooks"
+#string STR_VALHOOKS_CONFIG_FORM_HELP       #language en-US "Displays and provides option to change the Validation Options"
+#string STR_VALHOOKS_CONFIG_SETUP           #language en-US "Memory Validation Hooks Config Setup" 
+
+#string STR_BRANCH_RANK_CONFIG_FORM_TITLE   #language en-US "Memory Branch and Rank Configuration"
+#string STR_BRANCH_RANK_CONFIG_FORM_HELP    #language en-US "Displays and provides option to change the Branch and Rank configuration"
+#string STR_BRANCH_RANK_CONFIG_SETUP        #language en-US "Memory Branch/Rank Config Setup"       
+        
+#string STR_RAS_CONFIG_FORM_TITLE           #language en-US "Memory RAS Configuration"
+#string STR_RAS_CONFIG_FORM_HELP            #language en-US "Displays and provides option to change the Ras Configuration"
+
+#string STR_MIRROR_CONFIG_FORM_TITLE        #language en-US "Memory Mirror Configuration"
+#string STR_MIRROR_CONFIG_FORM_HELP         #language en-US "Displays and provides option to change the Mirror Configuration"
+#string STR_MIRROR_CONFIG_SETUP             #language en-US "Memory Mirror Config Setup" 
+
+#string STR_SPARE_CONFIG_FORM_TITLE         #language en-US "Memory Spare Configuration"
+#string STR_SPARE_CONFIG_FORM_HELP          #language en-US "Displays and provides option to change the Spare Configuration"
+#string STR_SPARE_CONFIG_SETUP              #language en-US "Memory Spare Config Setup" 
+
+#string STR_0                               #language en-US "0"
+#string STR_2                               #language en-US "2"
+#string STR_3                               #language en-US "3"
+#string STR_4                               #language en-US "4"
+#string STR_5                               #language en-US "5"
+#string STR_6                               #language en-US "6"
+#string STR_7                               #language en-US "7"
+#string STR_9                               #language en-US "9"
+#string STR_10                              #language en-US "10"
+#string STR_11                              #language en-US "11"
+#string STR_13                              #language en-US "13"
+#string STR_14                              #language en-US "14"
+#string STR_15                              #language en-US "15"
+
+
+#string STR_ENFORCE_POR_PROMPT              #language en-US "Enforce POR"
+                                            #language x-AMI "MEM000"
+#string STR_ENFORCE_POR_HELP                #language en-US "Enable to enforce POR restrictions for DDR3 frequency and voltage programming"
+#string STR_POR                             #language en-US "Enforce POR"
+#string STR_STRETCH                         #language en-US "Enforce Stretch Goals"
+
+#string STR_NUMA_PROMPT                     #language en-US "Numa"
+#string STR_NUMA_HELP                       #language en-US "Enable NUMA, InterSocket interleaving disabled"
+
+#string STR_RASMODE_PROMPT                  #language en-US "RAS Mode"
+                                            #language x-AMI "MEM07C"
+#string STR_RASMODE_HELP                    #language en-US "Enable/Disable RAS modes. Enabling Sparing and Mirroring is not supported. Incase if enabled, Sparing will be selected." #AptioV server override
+
+#string STR_MIRROR                          #language en-US "Mirror Mode"
+#ifndef GRANGEVILLE_FLAG
+#string STR_MIRROR                          #language en-US "Mirror Mode"
+                                            #language x-AMI "MEM094"
+#string STR_LOCKSTEP                        #language en-US "Lockstep Mode"
+#endif
+
+#string STR_SRAT_PROMPT                     #language en-US "Publish SRAT"
+                                            #language x-AMI "MEM095"
+#string STR_SRAT_HELP                       #language en-US "Publish the SRAT ACPI table to the OS."
+
+#string STR_SRAT_MEM_HOT_PLUG_PROMPT        #language en-US "SRAT Memory Hot Plug"
+                                            #language x-AMI "MEM096"
+#string STR_SRAT_MEM_HOT_PLUG_HELP          #language en-US "Fix for OS that does not support memory hot plug.\nEx: SuSE SLES10 SP2. \n \nEnable by default. \nDisable will clear all hot plug bits and remove the hot plug entries in SRAT table."
+
+#string STR_SRAT_CPU_HOT_PLUG_PROMPT        #language en-US "SRAT CPU Hot Plug"
+                                            #language x-AMI "MEM097"
+#string STR_SRAT_CPU_HOT_PLUG_HELP          #language en-US "Set Processor Flag to Enabled for all processor entries in SRAT."
+
+#string STR_SLIT_1_HOP_VALUE_PROMPT         #language en-US "SLIT One Hop Value"
+                                            #language x-AMI "MEM098"
+#string STR_SLIT_1_HOP_VALUE_HELP           #language en-US "Normalized to 10 for SLIT one hop value" #AptioV server override
+
+#string STR_MPST_PROMPT                     #language en-US "Memory Power Management"
+                                            #language x-AMI "MEM089"
+#string STR_MPST_HELP                       #language en-US "Enable Memory power management for this platform"
+
+#string STR_LFO_PROMPT                      #language en-US "Runtime Lane Failover"
+#string STR_LFO_HELP                        #language en-US "Enable runtime Lane failover for this platform"
+
+#string STR_MIRR_MIG_PROMPT                 #language en-US "Mirror/Migration"
+#string STR_MIRR_MIG_HELP                   #language en-US "Enabling/Disabling Memory Node Mirroring/Migration, 4 pairs possible"
+#string STR_MIRROR                          #language en-US "Mirror"
+#string STR_MIGRATION                       #language en-US "Migration"
+
+#string STR_MIGRATION_ERR_TH_PROMPT         #language en-US "Mirror/Migration Error Threshold"
+#string STR_MIGRATION_ERR_TH_HELP           #language en-US "Set Mirror/Migration Error threshold"
+
+#string STR_MIRROR_PRI_NODE_0_PROMPT        #language en-US "Mirror/Migration Master Node 0"
+#string STR_MIRROR_PRI_NODE_0_HELP          #language en-US "Master node for Mirror/Migration configuration 0"
+
+#string STR_MIRROR_PRI_NODE_1_PROMPT        #language en-US "Mirror/Migration Master Node 1"
+#string STR_MIRROR_PRI_NODE_1_HELP          #language en-US "Master node for Mirror/Migration configuration 1"
+
+#string STR_MIRROR_PRI_NODE_2_PROMPT        #language en-US "Mirror/Migration Master Node 2"
+#string STR_MIRROR_PRI_NODE_2_HELP          #language en-US "Master node for Mirror/Migration configuration 2"
+
+#string STR_MIRROR_PRI_NODE_3_PROMPT        #language en-US "Mirror/Migration Master Node 3"
+#string STR_MIRROR_PRI_NODE_3_HELP          #language en-US "Master node for Mirror/Migration configuration 3"
+
+#string STR_MIRROR_SEC_NODE_0_PROMPT        #language en-US "Mirror/Migration Slave Node 0"
+#string STR_MIRROR_SEC_NODE_0_HELP          #language en-US "Slave node for Mirror/Migration configuration 0"
+
+#string STR_MIRROR_SEC_NODE_1_PROMPT        #language en-US "Mirror/Migration Slave Node 1"
+#string STR_MIRROR_SEC_NODE_1_HELP          #language en-US "Slave node for Mirror/Migration configuration 1"
+
+#string STR_MIRROR_SEC_NODE_2_PROMPT        #language en-US "Mirror/Migration Slave Node 2"
+#string STR_MIRROR_SEC_NODE_2_HELP          #language en-US "Slave node for Mirror/Migration configuration 2"
+
+#string STR_MIRROR_SEC_NODE_3_PROMPT        #language en-US "Mirror/Migration Slave Node 3"
+#string STR_MIRROR_SEC_NODE_3_HELP          #language en-US "Slave node for Mirror/Migration configuration 3"
+
+#string STR_MIRROR_PRI_SOCKET_0_PROMPT      #language en-US "Mirror/Migration Master Socket 0"
+#string STR_MIRROR_PRI_SOCKET_0_HELP        #language en-US "Master Socket for Mirror/Migration configuration 0"
+
+#string STR_MIRROR_PRI_SOCKET_1_PROMPT      #language en-US "Mirror/Migration Master Socket 1"
+#string STR_MIRROR_PRI_SOCKET_1_HELP        #language en-US "Master Socket for Mirror/Migration configuration 1"
+
+#string STR_MIRROR_SEC_SOCKET_0_PROMPT      #language en-US "Mirror/Migration Slave Socket 0"
+#string STR_MIRROR_SEC_SOCKET_0_HELP        #language en-US "Slave Socket for Mirror/Migration configuration 0"
+
+#string STR_MIRROR_SEC_SOCKET_1_PROMPT      #language en-US "Mirror/Migration Slave Socket 1"
+#string STR_MIRROR_SEC_SOCKET_1_HELP        #language en-US "Slave Socket for Mirror/Migration configuration 1"
+        
+#string STR_NUMA_ENABLE_WITH_HEMI           #language en-US "Numa With Hemisphere"           
+#string STR_NUMA_ENABLE_WITHOUT_HEMI        #language en-US "Numa Without Hemisphere" 
+
+#string STR_NUMA_PROMPT                     #language en-US "NUMA"
+#string STR_NUMA_HELP                       #language en-US "Enable or Disable Non Uniform Memory Access (NUMA)."  #AptioV server override        
+
+#string STR_IOT_BUFFER_PROMPT               #language en-US "IOT Memory Buffer Reservation"
+                                            #language x-AMI "MEM07A"
+#string STR_IOT_BUFFER_HELP                 #language en-US "Enable/Disable/Select IOT Memory Buffer Reservation"
+
+#string STR_INTERLEAVING_PROMPT             #language en-US "Memory Interleaving"
+#string STR_INTERLEAVING_HELP               #language en-US "Maximum Node Interleave (1,2,4-way)"
+#string STR_1WAY                            #language en-US "NUMA (1-way) Node Interleave"           
+#string STR_2WAY                            #language en-US "2-way Node Interleave"           
+#string STR_4WAY                            #language en-US "4-way Node Interleave"           
+#string STR_8WAY                            #language en-US "8 Way Interleaving, inter socket"           
+
+#string STR_MEM_HOT_PLUG_PROMPT             #language en-US "Memory Hot Plug"
+#string STR_MEM_HOT_PLUG_HELP               #language en-US "Enable/Disable Memory Hot Plug"
+
+#string STR_PAGE_POLICY_PROMPT              #language en-US "Page Policy"
+                                            #language x-AMI "MEM04C"
+#string STR_PAGE_POLICY_HELP                #language en-US "Select Page Policy"
+#string STR_CLOSED_PAGE                     #language en-US "Closed"        
+#string STR_OPEN_PAGE                       #language en-US "Open"          
+#string STR_ADAPTIVE_PAGE                   #language en-US "Adaptive"      
+#string STR_MULTI_CAS_WIDGET_PAGE           #language en-US "Multi-Cas Widget"     
+
+#string STR_MAPPER_POLICY_PROMPT            #language en-US "Mapper Policy"
+#string STR_MAPPER_POLICY_HELP              #language en-US "Select Mapper policy"
+#string STR_CLOSED                          #language en-US "Closed"        
+#string STR_OPEN                            #language en-US "Open"          
+
+#string STR_SCHED_POLICY_PROMPT             #language en-US "Scheduler Policy"
+#string STR_SCHED_POLICY_HELP               #language en-US "Select Scheduler policy"
+#string STR_STATIC_TRADE_OFF                #language en-US "Static Trade Off"        
+#string STR_STATIC_READ_PRI                 #language en-US "Static Read Primary"         
+#string STR_STATIC_WRITE_PRI                #language en-US "Static Write Primary"        
+#string STR_ADAPTIVE                        #language en-US "Adaptive"                
+
+
+#string STR_LOW_GAP_PROMPT                  #language en-US "Low MMIO Gap"
+#string STR_LOW_GAP_HELP                    #language en-US "Select size of Low MMIO"
+#string STR_1G                              #language en-US "1G"                     
+#string STR_2G                              #language en-US "2G"                     
+#string STR_3G                              #language en-US "3G"    
+#string STR_4G                              #language en-US "4G"         
+
+#string STR_HIGH_GAP_PROMPT                 #language en-US "High MMIO Gap"
+#string STR_HIGH_GAP_HELP                   #language en-US "Select Size of High MMIO"
+
+#string STR_AUTO                            #language en-US "Auto"           
+#string STR_DDR_FREQ_800_STRING             #language en-US "800"
+#string STR_DDR_FREQ_1000_STRING            #language en-US "1000"
+#string STR_DDR_FREQ_1067_STRING            #language en-US "1067"
+#string STR_DDR_FREQ_1200_STRING            #language en-US "1200"
+#string STR_DDR_FREQ_1333_STRING            #language en-US "1333"
+#string STR_DDR_FREQ_1400_STRING            #language en-US "1400"
+#string STR_DDR_FREQ_1600_STRING            #language en-US "1600"
+#string STR_DDR_FREQ_1800_STRING            #language en-US "1800"
+#string STR_DDR_FREQ_1867_STRING            #language en-US "1867"
+#string STR_DDR_FREQ_2000_STRING            #language en-US "2000"
+#string STR_DDR_FREQ_2133_STRING            #language en-US "2133"
+#string STR_DDR_FREQ_2200_STRING            #language en-US "2200"
+#string STR_DDR_FREQ_2400_STRING            #language en-US "2400"
+#string STR_DDR_FREQ_2600_STRING            #language en-US "2600"
+#string STR_DDR_FREQ_2667_STRING            #language en-US "2667"
+#string STR_DDR_FREQ_2800_STRING            #language en-US "2800"
+#string STR_DDR_FREQ_2933_STRING            #language en-US "2933"
+#string STR_DDR_FREQ_3000_STRING            #language en-US "3000"
+#string STR_DDR_FREQ_3200_STRING            #language en-US "3200"
+#string STR_DDR_FREQ_800_RESVD_STRING       #language en-US "Reserved"
+#string STR_DDR_FREQ_1000_RESVD_STRING      #language en-US "Reserved"
+#string STR_DDR_FREQ_1067_RESVD_STRING      #language en-US "Reserved"
+#string STR_DDR_FREQ_1200_RESVD_STRING      #language en-US "Reserved"
+#string STR_DDR_FREQ_2800_RESVD_STRING      #language en-US "Reserved"
+#string STR_DDR_FREQ_2933_RESVD_STRING      #language en-US "Reserved"
+#string STR_DDR_FREQ_3000_RESVD_STRING      #language en-US "Reserved"
+#string STR_DDR_FREQ_3200_RESVD_STRING      #language en-US "Reserved"
+
+#string STR_DRAM_MAINT_PROMPT               #language en-US "DRAM Maintenance"
+                                            #language x-AMI "MEM084"
+#string STR_DRAM_MAINT_HELP                 #language en-US "Select Manual to customize DRAM Maintenance settings"
+
+#string STR_DRAM_MAINT_MODE_PROMPT          #language en-US "DRAM Maintenance Mode"
+                                            #language x-AMI "MEM085"
+#string STR_DRAM_MAINT_MODE_HELP            #language en-US "Select between pTRR and TRR mode"
+
+#string STR_DRAM_MAINT_TRR_PROMPT           #language en-US "TRR Mode"
+                                            #language x-AMI "MEM086"
+#string STR_DRAM_MAINT_TRR_HELP             #language en-US "Select between TRR mode A and B"
+
+#string STR_PTRR_MODE                       #language en-US "pTRR Mode"
+#string STR_TRR_MODE                        #language en-US "TRR Mode"
+#string STR_TRR_MODE_A                      #language en-US "TRR Mode A"
+#string STR_TRR_MODE_B                      #language en-US "TRR Mode B"
+
+#string STR_PATROL_SCRUB_PROMPT             #language en-US "Patrol Scrub"
+                                            #language x-AMI "MEM087"
+#string STR_PATROL_SCRUB_HELP               #language en-US "Enable/Disable Patrol Scrub"
+
+#string STR_PATROL_SCRUB_DURATION_PROMPT    #language en-US "Patrol Scrub Interval"
+                                            #language x-AMI "MEM088"
+#string STR_PATROL_SCRUB_DURATION_HELP      #language en-US "Selects the number of hours (1-24) required to complete full scrub. A value of zero means auto!"
+
+#string STR_DEMAND_SCRUB_PROMPT             #language en-US "Demand Scrub"
+                                            #language x-AMI "MEM08A"
+#string STR_DEMAND_SCRUB_HELP               #language en-US "Enable/Disable Demand Scrub"
+
+#string STR_DEVICE_TAGGING_MODE_PROMPT      #language en-US "Device Tagging"
+                                            #language x-AMI "MEM08B"
+#string STR_DEVICE_TAGGING_MODE_HELP        #language en-US "Enable/Disable Device Tagging"
+
+#string STR_SPAREERRTH_PROMPT               #language en-US "Correctable Error Threshold"
+                                                #language x-AMI "MEM081"
+#string STR_SPAREERRTH_HELP                 #language en-US "Correctable Error Threshold (1 - 32767) used for sparing, tagging, and leaky bucket"
+
+#string STR_HANDLEHARDERRORDETECTION_EN_PROMPT      #language en-US "Handle Hard Error Detection"
+#string STR_HANDLEHARDERRORDETECTION_EN_HELP      #language en-US "Enable/Disable Hard Error Detection"
+#string STR_HANDLEHARDERRORDETECTION_THRESHOLD_EN_PROMPT      #language en-US "Threshold"
+#string STR_HANDLEHARDERRORDETECTION_THRESHOLD_EN_HELP      #language en-US "Set the threshold for Hard Error Detection feature"
+#string STR_HANDLEHARDERRORDETECTION_DURATION_EN_PROMPT      #language en-US "Duration"
+#string STR_HANDLEHARDERRORDETECTION_DURATION_EN_HELP      #language en-US "Set the Duration for Hard Error Detection feature"
+
+#string STR_LEAKY_BKT_LO_PROMPT             #language en-US "Leaky bucket low bit"
+                                            #language x-AMI "MEM082"
+#string STR_LEAKY_BKT_LO_HELP               #language en-US "Leaky bucket low bit" (1 - 63)"
+
+#string STR_LEAKY_BKT_HI_PROMPT             #language en-US "Leaky bucket high bit"
+                                            #language x-AMI "MEM083"
+#string STR_LEAKY_BKT_HI_HELP               #language en-US "Leaky bucket high bit" (1 - 63)"
+
+#string STR_WRITE_POSTING_PROMPT            #language en-US "Write Posting"
+#string STR_WRITE_POSTING_HELP              #language en-US "Enable/Disable Write Posting"
+
+#string STR_HIGH_TEMP_PROMPT                #language en-US "High Temp"
+#string STR_HIGH_TEMP_HELP                  #language en-US "Enable/Disable High Temp support"
+
+#string STR_TEMP_GB_PROMPT                  #language en-US "Temp GB"
+#string STR_TEMP_GB_HELP                    #language en-US "Select Temp GB for CLTT"
+
+#string STR_TEMP_INLET_PROMPT               #language en-US "Temp Inlet"
+#string STR_TEMP_INLET_HELP                 #language en-US "Select Temp GB for CLTT"
+
+#string STR_TEMP_RISE_PROMPT                #language en-US "Temp Rise"
+#string STR_TEMP_RISE_HELP                  #language en-US "Select Temp GB for CLTT"
+
+#string STR_AIRFLOW_PROMPT                  #language en-US "Airflow"
+#string STR_AIRFLOW_HELP                    #language en-US "Select Temp GB for CLTT"
+
+#string STR_ALTITUDE_PROMPT                 #language en-US "Altitude"
+#string STR_ALTITUDE_HELP                   #language en-US "Select Temp GB for CLTT"
+
+#string STR_DIMM_PITCH_PROMPT               #language en-US "Dimm Pitch"
+#string STR_DIMM_PITCH_HELP                 #language en-US "Select Dimm pitch for CLTT"
+
+#string STR_SOCKET_0_BRANCH_0_EN_PROMPT     #language en-US "Socket 0 Branch 0"
+#string STR_SOCKET_0_BRANCH_0_EN_HELP       #language en-US "Enable/Disable Socket 0 Branch 0"
+                                                      
+#string STR_SOCKET_0_BRANCH_1_EN_PROMPT     #language en-US "Socket 0 Branch 1"
+#string STR_SOCKET_0_BRANCH_1_EN_HELP       #language en-US "Enable/Disable Socket 0 Branch 1"
+                                                      
+#string STR_SOCKET_1_BRANCH_0_EN_PROMPT     #language en-US "Socket 1 Branch 0"
+#string STR_SOCKET_1_BRANCH_0_EN_HELP       #language en-US "Enable/Disable Socket 1 Branch 0"
+                                                      
+#string STR_SOCKET_1_BRANCH_1_EN_PROMPT     #language en-US "Socket 1 Branch 1"
+#string STR_SOCKET_1_BRANCH_1_EN_HELP       #language en-US "Enable/Disable Socket 1 Branch 1"
+                                                      
+#string STR_SOCKET_2_BRANCH_0_EN_PROMPT     #language en-US "Socket 2 Branch 0"
+#string STR_SOCKET_2_BRANCH_0_EN_HELP       #language en-US "Enable/Disable Socket 2 Branch 0"
+                                                      
+#string STR_SOCKET_2_BRANCH_1_EN_PROMPT     #language en-US "Socket 2 Branch 1"
+#string STR_SOCKET_2_BRANCH_1_EN_HELP       #language en-US "Enable/Disable Socket 2 Branch 1"
+                                                      
+#string STR_SOCKET_3_BRANCH_0_EN_PROMPT     #language en-US "Socket 3 Branch 0"
+#string STR_SOCKET_3_BRANCH_0_EN_HELP       #language en-US "Enable/Disable Socket 3 Branch 0"
+                                                      
+#string STR_SOCKET_3_BRANCH_1_EN_PROMPT     #language en-US "Socket 3 Branch 1"
+#string STR_SOCKET_3_BRANCH_1_EN_HELP       #language en-US "Enable/Disable Socket 3 Branch 1"
+                                                      
+#string STR_RANK_MASK_EN_PROMPT             #language en-US "DIMM Rank Enable Mask"
+                                            #language x-AMI "MEM03B"
+#string STR_RANK_MASK_EN_HELP               #language en-US "Selects ranks to enable/disable per DIMM"
+
+#string STR_SCKT_0_CH_0_RANK_EN_PROMPT      #language en-US "Socket 0 Channel 0 Rank Enable BitMask"
+                                            #language x-AMI "MEM03C"
+#string STR_SOCKET_0_CH_0_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 0 Channel 0, possible values from 0 to 255"
+
+#string STR_SCKT_0_CH_1_RANK_EN_PROMPT      #language en-US "Socket 0 Channel 1 Rank Enable BitMask"
+                                            #language x-AMI "MEM03D"
+#string STR_SOCKET_0_CH_1_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 0 Channel 1, possible values from 0 to 255"
+
+#string STR_SCKT_0_CH_2_RANK_EN_PROMPT      #language en-US "Socket 0 Channel 2 Rank Enable BitMask"
+                                            #language x-AMI "MEM03E"
+#string STR_SOCKET_0_CH_2_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 0 Channel 2, possible values from 0 to 255"
+
+#string STR_SCKT_0_CH_3_RANK_EN_PROMPT      #language en-US "Socket 0 Channel 3 Rank Enable BitMask"
+                                            #language x-AMI "MEM03F"
+#string STR_SOCKET_0_CH_3_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 0 Channel 3, possible values from 0 to 255"
+
+#string STR_SCKT_1_CH_0_RANK_EN_PROMPT      #language en-US "Socket 1 Channel 0 Rank Enable BitMask"
+                                            #language x-AMI "MEM040"
+#string STR_SOCKET_1_CH_0_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 1 Channel 0, possible values from 0 to 255"
+
+#string STR_SCKT_1_CH_1_RANK_EN_PROMPT      #language en-US "Socket 1 Channel 1 Rank Enable BitMask"
+                                            #language x-AMI "MEM041"
+#string STR_SOCKET_1_CH_1_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 1 Channel 1, possible values from 0 to 255"
+
+#string STR_SCKT_1_CH_2_RANK_EN_PROMPT      #language en-US "Socket 1 Channel 2 Rank Enable BitMask"
+                                            #language x-AMI "MEM042"
+#string STR_SOCKET_1_CH_2_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 1 Channel 2, possible values from 0 to 255"
+
+#string STR_SCKT_1_CH_3_RANK_EN_PROMPT      #language en-US "Socket 1 Channel 3 Rank Enable BitMask"
+                                            #language x-AMI "MEM043"
+#string STR_SOCKET_1_CH_3_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 1 Channel 3, possible values from 0 to 255"
+
+#string STR_SCKT_2_CH_0_RANK_EN_PROMPT      #language en-US "Socket 2 Channel 0 Rank Enable BitMask"
+                                            #language x-AMI "MEM044"
+#string STR_SOCKET_2_CH_0_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 2 Channel 0, possible values from 0 to 255"
+
+#string STR_SCKT_2_CH_1_RANK_EN_PROMPT      #language en-US "Socket 2 Channel 1 Rank Enable BitMask"
+                                            #language x-AMI "MEM045"
+#string STR_SOCKET_2_CH_1_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 2 Channel 1, possible values from 0 to 255"
+
+#string STR_SCKT_2_CH_2_RANK_EN_PROMPT      #language en-US "Socket 2 Channel 2 Rank Enable BitMask"
+                                            #language x-AMI "MEM046"
+#string STR_SOCKET_2_CH_2_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 2 Channel 2, possible values from 0 to 255"
+
+#string STR_SCKT_2_CH_3_RANK_EN_PROMPT      #language en-US "Socket 2 Channel 3 Rank Enable BitMask"
+                                            #language x-AMI "MEM047"
+#string STR_SOCKET_2_CH_3_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 2 Channel 3, possible values from 0 to 255"
+
+#string STR_SCKT_3_CH_0_RANK_EN_PROMPT      #language en-US "Socket 3 Channel 0 Rank Enable BitMask"
+                                            #language x-AMI "MEM048"
+#string STR_SOCKET_3_CH_0_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 3 Channel 0, possible values from 0 to 255"
+
+#string STR_SCKT_3_CH_1_RANK_EN_PROMPT      #language en-US "Socket 3 Channel 1 Rank Enable BitMask"
+                                            #language x-AMI "MEM049"
+#string STR_SOCKET_3_CH_1_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 3 Channel 1, possible values from 0 to 255"
+
+#string STR_SCKT_3_CH_2_RANK_EN_PROMPT      #language en-US "Socket 3 Channel 2 Rank Enable BitMask"
+                                            #language x-AMI "MEM04A"
+#string STR_SOCKET_3_CH_2_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 3 Channel 2, possible values from 0 to 255"
+
+#string STR_SCKT_3_CH_3_RANK_EN_PROMPT      #language en-US "Socket 3 Channel 3 Rank Enable BitMask"
+                                            #language x-AMI "MEM04B"
+#string STR_SOCKET_3_CH_3_RANK_EN_HELP      #language en-US "Enable/Disable Ranks On Socket 3 Channel 3, possible values from 0 to 255"
+    
+#string STR_MEM_SPARING_EN_PROMPT           #language en-US "Memory Rank Sparing"
+                                            #language x-AMI "MEM07F"
+#string STR_MEM_SPARING_EN_HELP             #language en-US "Enable/Disable Memory Rank Sparing"
+
+#string STR_CONTINUOUS_SPARING_PROMPT       #language en-US "continuous sparing"
+#string STR_CONTINUOUS_SPARING_HELP         #language en-US "Enable/Disable continuous sparing"
+#string STR_MEM_MULTISPARING_PROMPT         #language en-US "Multi Rank Sparing"
+                                            #language x-AMI "MEM080"
+#string STR_MEM_MULTISPARING_HELP           #language en-US "Set Multi Rank Sparing number, Auto can support 50% ranks per channel"
+#string STR_ONERANK_SPARE                   #language en-US "One Rank"
+#string STR_TWORANK_SPARE                   #language en-US "Two Rank"
+#string STR_THREERANK_SPARE                 #language en-US "Three Rank"
+#string STR_SCK0_MC0_CH0_SPARE_RANK_PROMPT  #language en-US "SCK0 MC0 CH0 Spare Rank"
+#string STR_SCK0_MC0_CH0_SPARE_RANK_HELP    #language en-US "Select Socket 0 MC 0 CH0 Spare Rank"
+
+#string STR_SCK0_MC0_CH1_SPARE_RANK_PROMPT  #language en-US "SCK0 MC0 CH1 Spare Rank"
+#string STR_SCK0_MC0_CH1_SPARE_RANK_HELP    #language en-US "Select Socket 0 MC 0 CH1 Spare Rank"
+
+#string STR_SCK0_MC0_CH2_SPARE_RANK_PROMPT  #language en-US "SCK0 MC0 CH2 Spare Rank"
+#string STR_SCK0_MC0_CH2_SPARE_RANK_HELP    #language en-US "Select Socket 0 MC 0 CH2 Spare Rank"
+                                                                                   
+#string STR_SCK0_MC0_CH3_SPARE_RANK_PROMPT  #language en-US "SCK0 MC0 CH3 Spare Rank"
+#string STR_SCK0_MC0_CH3_SPARE_RANK_HELP    #language en-US "Select Socket 0 MC 0 CH3 Spare Rank"
+
+#string STR_SCK0_MC1_CH0_SPARE_RANK_PROMPT  #language en-US "SCK0 MC1 CH0 Spare Rank"
+#string STR_SCK0_MC1_CH0_SPARE_RANK_HELP    #language en-US "Select Socket 0 MC 1 CH0 Spare Rank"
+                   
+#string STR_SCK0_MC1_CH1_SPARE_RANK_PROMPT  #language en-US "SCK0 MC1 CH1 Spare Rank"
+#string STR_SCK0_MC1_CH1_SPARE_RANK_HELP    #language en-US "Select Socket 0 MC 1 CH1 Spare Rank"
+                   
+#string STR_SCK0_MC1_CH2_SPARE_RANK_PROMPT  #language en-US "SCK0 MC1 CH2 Spare Rank"
+#string STR_SCK0_MC1_CH2_SPARE_RANK_HELP    #language en-US "Select Socket 0 MC 1 CH2 Spare Rank"
+                                                                                   
+#string STR_SCK0_MC1_CH3_SPARE_RANK_PROMPT  #language en-US "SCK0 MC1 CH3 Spare Rank"
+#string STR_SCK0_MC1_CH3_SPARE_RANK_HELP    #language en-US "Select Socket 0 MC 1 CH3 Spare Rank"
+
+#string STR_SCK1_MC0_CH0_SPARE_RANK_PROMPT  #language en-US "SCK1 MC0 CH0 Spare Rank"
+#string STR_SCK1_MC0_CH0_SPARE_RANK_HELP    #language en-US "Select Socket 1 MC 0 CH0 Spare Rank"
+               
+#string STR_SCK1_MC0_CH1_SPARE_RANK_PROMPT  #language en-US "SCK1 MC0 CH1 Spare Rank"
+#string STR_SCK1_MC0_CH1_SPARE_RANK_HELP    #language en-US "Select Socket 1 MC 0 CH1 Spare Rank"
+               
+#string STR_SCK1_MC0_CH2_SPARE_RANK_PROMPT  #language en-US "SCK1 MC0 CH2 Spare Rank"
+#string STR_SCK1_MC0_CH2_SPARE_RANK_HELP    #language en-US "Select Socket 1 MC 0 CH2 Spare Rank"
+                                                                    
+#string STR_SCK1_MC0_CH3_SPARE_RANK_PROMPT  #language en-US "SCK1 MC0 CH3 Spare Rank"
+#string STR_SCK1_MC0_CH3_SPARE_RANK_HELP    #language en-US "Select Socket 1 MC 0 CH3 Spare Rank"
+               
+#string STR_SCK1_MC1_CH0_SPARE_RANK_PROMPT  #language en-US "SCK1 MC1 CH0 Spare Rank"
+#string STR_SCK1_MC1_CH0_SPARE_RANK_HELP    #language en-US "Select Socket 1 MC 1 CH0 Spare Rank"
+                                                                                 
+#string STR_SCK1_MC1_CH1_SPARE_RANK_PROMPT  #language en-US "SCK1 MC1 CH1 Spare Rank"
+#string STR_SCK1_MC1_CH1_SPARE_RANK_HELP    #language en-US "Select Socket 1 MC 1 CH1 Spare Rank"
+                                                                                 
+#string STR_SCK1_MC1_CH2_SPARE_RANK_PROMPT  #language en-US "SCK1 MC1 CH2 Spare Rank"
+#string STR_SCK1_MC1_CH2_SPARE_RANK_HELP    #language en-US "Select Socket 1 MC 1 CH2 Spare Rank"
+                                                                                 
+#string STR_SCK1_MC1_CH3_SPARE_RANK_PROMPT  #language en-US "SCK1 MC1 CH3 Spare Rank"
+#string STR_SCK1_MC1_CH3_SPARE_RANK_HELP    #language en-US "Select Socket 1 MC 1 CH3 Spare Rank"
+
+#string STR_SCK2_MC0_CH0_SPARE_RANK_PROMPT  #language en-US "SCK2 MC0 CH0 Spare Rank"
+#string STR_SCK2_MC0_CH0_SPARE_RANK_HELP    #language en-US "Select Socket 2 MC 0 CH0 Spare Rank"
+               
+#string STR_SCK2_MC0_CH1_SPARE_RANK_PROMPT  #language en-US "SCK2 MC0 CH1 Spare Rank"
+#string STR_SCK2_MC0_CH1_SPARE_RANK_HELP    #language en-US "Select Socket 2 MC 0 CH1 Spare Rank"
+               
+#string STR_SCK2_MC0_CH2_SPARE_RANK_PROMPT  #language en-US "SCK2 MC0 CH2 Spare Rank"
+#string STR_SCK2_MC0_CH2_SPARE_RANK_HELP    #language en-US "Select Socket 2 MC 0 CH2 Spare Rank"
+                                                                    
+#string STR_SCK2_MC0_CH3_SPARE_RANK_PROMPT  #language en-US "SCK2 MC0 CH3 Spare Rank"
+#string STR_SCK2_MC0_CH3_SPARE_RANK_HELP    #language en-US "Select Socket 2 MC 0 CH3 Spare Rank"
+               
+#string STR_SCK2_MC1_CH0_SPARE_RANK_PROMPT  #language en-US "SCK2 MC1 CH0 Spare Rank"
+#string STR_SCK2_MC1_CH0_SPARE_RANK_HELP    #language en-US "Select Socket 2 MC 1 CH0 Spare Rank"
+                                                                                 
+#string STR_SCK2_MC1_CH1_SPARE_RANK_PROMPT  #language en-US "SCK2 MC1 CH1 Spare Rank"
+#string STR_SCK2_MC1_CH1_SPARE_RANK_HELP    #language en-US "Select Socket 2 MC 1 CH1 Spare Rank"
+                                                                                 
+#string STR_SCK2_MC1_CH2_SPARE_RANK_PROMPT  #language en-US "SCK2 MC1 CH2 Spare Rank"
+#string STR_SCK2_MC1_CH2_SPARE_RANK_HELP    #language en-US "Select Socket 2 MC 1 CH2 Spare Rank"
+                                                                                 
+#string STR_SCK2_MC1_CH3_SPARE_RANK_PROMPT  #language en-US "SCK2 MC1 CH3 Spare Rank"
+#string STR_SCK2_MC1_CH3_SPARE_RANK_HELP    #language en-US "Select Socket 2 MC 1 CH3 Spare Rank"
+
+#string STR_SCK3_MC0_CH0_SPARE_RANK_PROMPT  #language en-US "SCK3 MC0 CH0 Spare Rank"
+#string STR_SCK3_MC0_CH0_SPARE_RANK_HELP    #language en-US "Select Socket 3 MC 0 CH0 Spare Rank"
+               
+#string STR_SCK3_MC0_CH1_SPARE_RANK_PROMPT  #language en-US "SCK3 MC0 CH1 Spare Rank"
+#string STR_SCK3_MC0_CH1_SPARE_RANK_HELP    #language en-US "Select Socket 3 MC 0 CH1 Spare Rank"
+               
+#string STR_SCK3_MC0_CH2_SPARE_RANK_PROMPT  #language en-US "SCK3 MC0 CH2 Spare Rank"
+#string STR_SCK3_MC0_CH2_SPARE_RANK_HELP    #language en-US "Select Socket 3 MC 0 CH2 Spare Rank"
+                                                                   
+#string STR_SCK3_MC0_CH3_SPARE_RANK_PROMPT  #language en-US "SCK3 MC0 CH3 Spare Rank"
+#string STR_SCK3_MC0_CH3_SPARE_RANK_HELP    #language en-US "Select Socket 3 MC 0 CH3 Spare Rank"
+               
+#string STR_SCK3_MC1_CH0_SPARE_RANK_PROMPT  #language en-US "SCK3 MC1 CH0 Spare Rank"
+#string STR_SCK3_MC1_CH0_SPARE_RANK_HELP    #language en-US "Select Socket 3 MC 1 CH0 Spare Rank"
+                                                                                 
+#string STR_SCK3_MC1_CH1_SPARE_RANK_PROMPT  #language en-US "SCK3 MC1 CH1 Spare Rank"
+#string STR_SCK3_MC1_CH1_SPARE_RANK_HELP    #language en-US "Select Socket 3 MC 1 CH1 Spare Rank"
+                                                                                 
+#string STR_SCK3_MC1_CH2_SPARE_RANK_PROMPT  #language en-US "SCK3 MC1 CH2 Spare Rank"
+#string STR_SCK3_MC1_CH2_SPARE_RANK_HELP    #language en-US "Select Socket 3 MC 1 CH2 Spare Rank"
+                                                                                 
+#string STR_SCK3_MC1_CH3_SPARE_RANK_PROMPT  #language en-US "SCK3 MC1 CH3 Spare Rank"
+#string STR_SCK3_MC1_CH3_SPARE_RANK_HELP    #language en-US "Select Socket 3 MC 1 CH3 Spare Rank"
+
+#string STR_DIMM_SPARE_ENABLE               #language en-US "Dimm Sparing Enable"
+#string STR_RANK_SPARE_ENABLE               #language en-US "Rank Sparing Enable"
+
+#string STR_RANK0                           #language en-US "Rank 0"
+#string STR_RANK1                           #language en-US "Rank 1"
+#string STR_RANK2                           #language en-US "Rank 2"
+#string STR_RANK3                           #language en-US "Rank 3"
+#string STR_RANK4                           #language en-US "Rank 4"
+#string STR_RANK5                           #language en-US "Rank 5"
+#string STR_RANK6                           #language en-US "Rank 6"
+#string STR_RANK7                           #language en-US "Rank 7"
+
+#string STR_PROMOTE_MRC_WARNING_PROMPT      #language en-US "MRC Promote Warnings"
+                                            #language x-AMI "MEM013"
+#string STR_PROMOTE_MRC_WARNING_HELP        #language en-US "Determines if MRC warnings are promoted to system level"
+
+#string STR_AUTO_RESET_PROMPT               #language en-US "Auto Reset System"
+#string STR_AUTO_RESET_HELP                 #language en-US "Validation feature to force system resets at specific points during BIOS init"
+#string STR_MRC                             #language en-US "After MRC"
+#string STR_POST                            #language en-US "After POST"
+#string STR_ENUM                            #language en-US "After enumeration"
+#string STR_DDR_INIT                        #language en-US "After DDR Init"
+#string STR_DDR_CAL                         #language en-US "After DDR Cal"
+#string STR_DDR_MEMTEST                     #language en-US "After Membist loop"
+
+#string STR_DDR_MEMORY_TYPE_PROMPT          #language en-US "Memory Type"
+                                            #language x-AMI "MEM08C"
+#string STR_DDR_MEMORY_TYPE_HELP            #language en-US "Selects the Memory type supported by this platform."
+#string STR_UDIMM_ONLY                      #language en-US "UDIMMs only"
+#string STR_RDIMM_ONLY                      #language en-US "RDIMMs only"
+#string STR_UDIMM_RDIMM                     #language en-US "UDIMMs and RDIMMs"
+
+#string STR_SMI_RETRAIN_PROMPT              #language en-US "SMI Retraining"
+#string STR_SMI_RETRAIN_HELP                #language en-US "SMI Retraining Disable/Enable"
+
+#string STR_SMI_SCRAMBLE_PROMPT             #language en-US "SMI Scrambling"
+#string STR_SMI_SCRAMBLE_HELP               #language en-US "SMI Scrambling Disable/Enable"
+
+#string STR_ALLOW_CORRECTABLE_ERROR_EN_PROMPT #language en-US "Allow Correctables"
+                                              #language x-AMI "MEM01F"
+#string STR_ALLOW_CORRECTABLE_ERROR_EN_HELP   #language en-US "Enable to allow correctable errors during memory training"
+
+#string STR_MEMORY_LAI_PROBES_PROMPT        #language en-US "DDR3 LA Probes"
+#string STR_MEMORY_LAI_PROBES_HELP          #language en-US "Present indicates the presence of DDR3 logic analyzer probes"
+#string STR_ABSENT                          #language en-US "Absent"
+#string STR_PRESENT                         #language en-US "Present"
+
+#string STR_MEMTOPOLOGY_DISPLAY_FORM_TITLE        #language en-US "Memory Topology"
+                                                  #language x-AMI "MEM035"
+//AptioV server override:Additional data provided for mem. topology help
+#string STR_MEMTOPOLOGY_DISPLAY_FORM_HELP         #language en-US "Displays memory topology with Dimm population information. Each socket has 2 Nodes/iMC's(numbered from 0-7),each node supports upto 2 channels(0&1) and 3 DIMM's per channel(0,1&2) on EP platforms."
+#string STR_MEMTOPOLOGY_DISPLAY_TITLE_HELP        #language en-US "Displays memory topology with Dimm population information"
+
+#string STR_ECC_SUPPORT_PROMPT              #language en-US "ECC Support"
+                                            #language x-AMI "MEM007"
+#string STR_ECC_SUPPORT_HELP                #language en-US "Enable/disable DDR ECC Support" #AptioV server override
+
+#string STR_ENFORCE_TIMEOUT_PROMPT          #language en-US "Enforce Timeout"
+#string STR_ENFORCE_TIMEOUT_HELP            #language en-US "Enable/disable forcing cold reset after three months"
+
+#string STR_CMD_PATTERN_PROMPT              #language en-US "CMD Pattern Length"
+#string STR_CMD_PATTERN_HELP                #language en-US "Sets the pattern length for the Rank Margin Tool"
+
+#string STR_MEM_TEST_PROMPT                 #language en-US "MemTest"
+                                            #language x-AMI "MEM00A"
+#string STR_MEM_TEST_HELP                   #language en-US "Enable/disable memory test during normal boot"
+
+#string STR_DM_MEM_TEST_PROMPT              #language en-US "Dram Maintenance Test"
+                                            #language x-AMI "MEM00C"
+#string STR_DM_MEM_TEST_HELP                #language en-US "Dram Maintenance Test during normal boot"
+#string STR_DM_DIRECTION_TEST_PROMPT        #language en-US "Dram Maintenance Test Direction"
+                                            #language x-AMI "MEM00D"
+#string STR_DM_DIRECTION_TEST_HELP          #language en-US "Dram Maintenance Test Direction UP or DOWN"
+#string STR_UP                              #language en-US "UP Direction"
+#string STR_DOWN                            #language en-US "DOWN Direction"
+#string STR_DM_INV_TEST_PROMPT              #language en-US "Dram Maintenance Test Invertion"
+                                            #language x-AMI "MEM00E"
+#string STR_DM_INV_TEST_HELP                #language en-US "Dram Maintenance Test Invertion Enable or Disable"
+#string STR_DM_REPETITION_TEST_PROMPT       #language en-US "Dram Maintenance Test Repetitions"
+                                            #language x-AMI "MEM00F"
+#string STR_DM_REPETITION_TEST_HELP         #language en-US "Number of Dram Maintenance Test Repetitions"
+#string STR_DM_ITER_TEST_PROMPT             #language en-US "Dram Maintenance Test Interation on Row"
+                                            #language x-AMI "MEM010"
+#string STR_DM_ITER_TEST_HELP               #language en-US "Number of Dram Maintenance Test Interation on Row"
+#string STR_DM_SWIZZLE_PROMPT               #language en-US "Dram Maintenance Swizzle enabling"
+                                            #language x-AMI "MEM011"
+#string STR_DM_SWIZZLE_HELP                 #language en-US "Dram Maintenance Address Swizzling enable if needed"
+#string STR_DM_REFRESH_PROMPT               #language en-US "Dram Maintenance Refresh enabling during test"
+                                            #language x-AMI "MEM012"
+#string STR_DM_REFRESH_HELP                 #language en-US "Dram Maintenance Test can disable refresh during the test"
+
+#string STR_MEM_TEST_LOOPS_PROMPT           #language en-US "MemTestLoops"
+                                            #language x-AMI "MEM00B"
+#string STR_MEM_TEST_LOOPS_HELP             #language en-US "Number of memory test loops during normal boot, set to 0 to run memtest infinitely"
+#string STR_SW_MEM_TEST_PROMPT              #language en-US "SW MemTest"
+#string STR_SW_MEM_TEST_HELP                #language en-US "Enable/disable software memory test during normal boot"
+
+#string STR_MEM_TEST_FAST_BOOT_PROMPT       #language en-US "MemTest On Fast Boot"
+                                            #language x-AMI "MEM08D"
+#string STR_MEM_TEST_FAST_BOOT_HELP         #language en-US "Enable/disable memory test during fast boot"
+
+#string STR_ATTEMPT_FAST_BOOT_PROMPT        #language en-US "Attempt Fast Boot"
+                                            #language x-AMI "MEM016"
+#string STR_ATTEMPT_FAST_BOOT_HELP          #language en-US "When enabled, portions of memory reference code will be skipped when possible to increase boot speed"
+
+#string STR_ATTEMPT_FAST_BOOT_COLD_PROMPT   #language en-US "Attempt Fast Cold Boot"
+                                            #language x-AMI "MEM01A"
+#string STR_ATTEMPT_FAST_BOOT_COLD_HELP     #language en-US "When enabled, portions of memory reference code will be skipped when possible to increase boot speed"
+
+#string STR_SKT_INTERLEAVE_BELOW4GB         #language en-US "Socket Interleave Below 4GB"
+                                            #language x-AMI "MEM076"
+#string STR_SKT_INTERLEAVE_BELOW4GB_HELP    #language en-US "Splits the 0-4GB address space between two sockets, so that both sockets get a chunk of local memory below 4GB"
+
+#string STR_MEMMAP_SVXORINTRLV_PROMPT       #language en-US "XOR Node Interleave"
+#string STR_MEMMAP_SVXORINTRLV_PROMPT_HELP  #language en-US "Address bits to XOR for Interleave"
+
+#string STR_MEMMAP_SVXORINTRLV_MODE0_STRING #language en-US "Mode 0"
+#string STR_MEMMAP_SVXORINTRLV_MODE1_STRING #language en-US "Mode 1"
+
+#string STR_CHANNEL_INTERLEAVING_PROMPT     #language en-US "Channel Interleaving"
+                                            #language x-AMI "MEM077"
+#string STR_CHANNEL_INTERLEAVING_HELP       #language en-US "Select Channel Interleaving setting"
+                                            #language x-AMI "MEM078"
+#string STR_RANK_INTERLEAVING_PROMPT        #language en-US "Rank Interleaving"
+                                            #language x-AMI "MEM079"
+#string STR_RANK_INTERLEAVING_HELP          #language en-US "Select Rank Interleaving setting"
+
+#string STR_1WAY_STRING                     #language en-US "1-way Interleave"
+#string STR_2WAY_STRING                     #language en-US "2-way Interleave"
+#string STR_3WAY_STRING                     #language en-US "3-way Interleave"
+#string STR_4WAY_STRING                     #language en-US "4-way Interleave"
+#string STR_6WAY_STRING                     #language en-US "6-way Interleave"
+#string STR_8WAY_STRING                     #language en-US "8-way Interleave"
+
+#string STR_CKE_THROT_PROMPT                #language en-US "CKE Throttling"
+                                            #language x-AMI "MEM063"
+#string STR_CKE_THROT_PROMPT_HELP           #language en-US "Configures CKE Throttling"
+#string STR_APD                             #language en-US "APD On"
+#string STR_PPDF                            #language en-US "PPDF On"
+#string STR_PPDS                            #language en-US "PPDS On"
+#string STR_APD_PPDF                        #language en-US "APD On, PPDF On"
+#string STR_APD_PPDS                        #language en-US "APD On, PPDS On"
+
+#string STR_CK_SELF_REFRESH_PROMPT          #language en-US "CK in SR"
+                                            #language x-AMI "MEM062"
+#string STR_CK_SELF_REFRESH_PROMPT_HELP     #language en-US "Configures CK behavior during self-refresh"
+#string STR_DRIVEN                          #language en-US "Driven"
+#string STR_TRI_STATE                       #language en-US "Tri-State"
+#string STR_PULL_LOW                        #language en-US "Pulled Low"
+#string STR_PULL_HIGH                       #language en-US "Pulled High"
+
+#string STR_OPP_SR_PROMPT                   #language en-US "Opportunistic SR"
+                                            #language x-AMI "MEM065"
+#string STR_OPP_SR_PROMPT_HELP              #language en-US "Enables or disables opportunistic self-refresh"
+
+
+#string STR_DDR_VOLTAGE_PROMPT              #language en-US "DDR3 Voltage Level"
+                                            #language x-AMI "MEM002"
+#string STR_DDR_VOLTAGE_HELP                #language en-US "Auto - If all DIMMs are 1.35V capable then set to 1.35V else set to 1.50V, Force - All DIMMs forced to 1.50V operation." #AptioV server override
+#string STR_DDR_FORCE_150                   #language en-US "Force to 1.50V"
+#string STR_DDR_FORCE_135                   #language en-US "Force to 1.35V"
+
+
+#ifndef GRANGEVILLE_FLAG
+#string STR_LOCKSTEP_STRING                 #language en-US "Lockstep"
+#endif
+#string STR_MIRROR_STRING                   #language en-US "Mirror"
+
+#string STR_GDXC_PROMPT                     #language en-US "GDXC Support"
+#string STR_GDXC_HELP                       #language en-US "Selects the channel to use for GDXC"
+
+#string STR_BANK_XOR_PROMPT                 #language en-US "Bank XOR"
+#string STR_BANK_XOR_HELP                   #language en-US "Enables Bank XORing to alleviate bank thrashing" #AptioV server override
+
+#string STR_PAGE_TABLE_ALIAS_PROMPT         #language en-US "Page Table Aliasing"
+                                            #language x-AMI "MEM008"
+#string STR_PAGE_TABLE_ALIAS_HELP           #language en-US "Enables the bit to be set for Page Table Aliasing"
+#string STR_BIOS_SSA_LOADER_PROMPT          #language en-US "BSSA Module Loader"
+#string STR_BIOS_SSA_LOADER_HELP            #language en-US "Enabling BSSA and loading of the test module"
+#string STR_BACKSIDE_RMT_PROMPT             #language en-US "Backside RMT"
+#string STR_BACKSIDE_RMT_HELP                   #language en-US "Enable Backside RMT"
+#string STR_SET_TO_0                        #language en-US "Set To 0"
+#string STR_SET_TO_1                        #language en-US "Set To 1"
+
+#string	STR_LOG_PARSING_PROMPT		    #language en-US "Enhanced Log Parsing"
+#string STR_LOG_PARSING_HELP		    #language en-US "Enables additional output in debug log for easier machine parsing"
+#string STR_RX_OFFSET_CAL_PROMPT            #language en-US "Rx Offset Calibration"
+#string STR_RX_OFFSET_CAL_HELP              #language en-US "Enables Rx Offset Calibration. An offset of 0x10 is used if set to disabled"
+
+#string STR_MEMORY_LAI_PROBES_PROMPT        #language en-US "DDR3 LA Probes"
+#string STR_MEMORY_LAI_PROBES_HELP          #language en-US "Present indicates the presence of DDR3 logic analyzer probes"
+
+#string STR_PERF_STATS_PROMPT               #language en-US "Performance Statistics"
+#string STR_PERF_STATS_HELP                 #language en-US "When enabled, MRC will track statistics such as PCI accesses to so we can determine how efficient it is"
+
+#string STR_DDR_CYCLING_PROMPT              #language en-US "DDR Cycling"
+#string STR_DDR_CYCLING_HELP                #language en-US "When enabled, MRC will train the memory and then power cycle over and over to stress MRC"
+
+#string STR_ADR_ENABLE                      #language en-US "Enable ADR"
+                                            #language x-AMI "MEM021"
+#string STR_ADR_ENABLE_HELP                 #language en-US "Enables the detecting and enabling of ADR"
+#string STR_HARDWARE_ADR                    #language en-US "Hardware Triggered ADR"
+#string STR_SOFTWARE_ADR                    #language en-US "Software Triggered ADR"
+#string STR_ADR_DATA_SAVE_MODE              #language en-US "Adr data save mode"
+#string STR_ADR_DATA_SAVE_MODE_HELP         #language en-US "Enables one of many different data persistency schemes following ADR trigger."
+#string STR_ADR_BBU                         #language en-US "Batterybacked DIMMs"
+#string STR_ADR_C2F                         #language en-US "Copy to flash"
+#string STR_ADR_NVDIMM                      #language en-US "NVDIMMs"
+
+#string STR_CHECK_PM_STS                    #language en-US "Check PCH_PM_STS"
+                                            #language x-AMI "MEM022"
+#string STR_CHECK_PM_STS_HELP               #language en-US "Use the PCH_PM_STS regigister as a recovery indicator"
+
+#string STR_ADR_C2F                         #language en-US "ADR + Copy to flash"
+#string STR_C2F_ENABLE                          #language en-US "C2F Mode"
+#string STR_C2F_ENABLE_HELP                     #language en-US "Enables or Disables C2F Mode"
+
+#string STR_CHECK_PLATFORM                  #language en-US "Check PlatformDetectADR"
+                                            #language x-AMI "MEM023"
+#string STR_CHECK_PLATFORM_HELP             #language en-US "Use the PlatformDetectADR function as a recovery indicator"
+
+#string STR_ADR_CH1                         #language en-US "Battery Back Ch 1"
+#string STR_ADR_CH2                         #language en-US "Battery Back Ch 2"
+#string STR_ADR_CH3                         #language en-US "Battery Back Ch 3"
+
+#string STR_ADR_CH_HELP                     #language en-US "Contols if the given channel will be battery backed"
+
+#string STR_ADR_BBU                         #language en-US "ADR + Batterybacked DIMMs"
+#string STR_ADR_NVDIMM                      #language en-US "ADR + NVDIMMs"
+#string STR_BLOCKSCTRAFFIC                  #language en-US "Block SC traffic on ADR"
+#string STR_BLOCKSCTRAFFIC_HELP             #language en-US "Block all PCIe/South Complex Traffic on ADR. (For V0 and later steppings only)."
+
+#string STR_ADRONRESET                      #language en-US "ADR On Reset"
+#string STR_ADRONRESET_HELP                 #language en-US "Trigger ADR flow on Reset (For V0 and later steppings only)."
+
+#string STR_ERASEARM_NVDIMM                 #language en-US "Erase-Arm NVDIMMs"
+#string STR_ERASEARM_NVDIMM_HELP            #language en-US "Enables/Disables Erasing and Arming NVDIMMs"
+
+#string STR_RESTORE_NVDIMM                 #language en-US "Restore NVDIMMs"
+#string STR_RESTORE_NVDIMM_HELP            #language en-US "Enables/Disables Automatic resotring of NVDIMMs"
+
+#string STR_INTERLEAVE_NVDIMM                 #language en-US "Interleave NVDIMMs"
+#string STR_INTERLEAVE_NVDIMM_HELP            #language en-US "Controls if NVDIMMs are interleaved together or not"
+
+#string STR_BDAT_EN_PROMPT                  #language en-US "BDAT"
+                                            #language x-AMI "MEM01B"
+#string STR_BDAT_EN_HELP                    #language en-US "Enable Disables BDAT"
+
+#string STR_SCRAMBLE_EN_PROMPT              #language en-US "Data Scrambling"
+                                            #language x-AMI "MEM01C"
+#string STR_SCRAMBLE_EN_HELP                #language en-US "Enables data scrambling"
+#string STR_SCRAMBLE_SEED_LOW_PROMPT        #language en-US "Scrambling Seed Low"
+                                            #language x-AMI "MEM01D"
+#string STR_SCRAMBLE_SEED_LOW_HELP          #language en-US "Low 32 bits of the scrambling seed"
+#string STR_SCRAMBLE_SEED_HIGH_PROMPT       #language en-US "Scrambling Seed High"
+                                            #language x-AMI "MEM01E"
+#string STR_SCRAMBLE_SEED_HIGH_HELP         #language en-US "High 32 bits of the scrambling seed"
+
+#string STR_RX_SENSE_AMP_PROMPT             #language en-US "Rx Sense Amp"
+#string STR_RX_SENSE_AMP_HELP               #language en-US "Enabling means the receiver sense amp is on all the time"
+
+#string STR_XOVER_MODE_PROMPT               #language en-US "Xover Mode"
+#string STR_XOVER_MODE_HELP                 #language en-US "Sets the Xover mode"
+#string STR_1TO1                            #language en-US "1 to 1"
+#string STR_2TO2                            #language en-US "2 to 2"
+#string STR_RMT_PROMPT                      #language en-US "Rank Margin Tool"
+                                            #language x-AMI "MEM014"
+#string STR_RMT_HELP                        #language en-US "Enables the rank margin tool to run after DDR3 memory training"
+#string STR_RMT_PATTERN_PROMPT              #language en-US "RMT Pattern Length"
+                                            #language x-AMI "MEM015"
+#string STR_RMT_PATTERN_HELP                #language en-US "Sets the pattern length for the Rank Margin Tool"
+#string STR_PER_BIT_MARGINS_PROMPT          #language en-US "Per Bit Margins"
+                                            #language x-AMI "MEM019"
+#string STR_PER_BIT_MARGINS_HELP            #language en-US "Enables the per bit margining"
+#string STR_TRNG_RESULT_OFFSET_PROMPT                      #language en-US "Training Result Offset Config"
+#string STR_TRNG_RESULT_OFFSET_HELP                        #language en-US "Option to offset the final memory training results"
+#string STR_OFFSET_TXDQ_PROMPT                      #language en-US "Offset TxDq Timing"
+#string STR_OFFSET_TXDQ_HELP                        #language en-US "Offsets parameter from trained value. For negative values, add 100. Eg: 105 is  neg 5 offset, 5 is pos 5 offset."
+#string STR_OFFSET_TXVREF_PROMPT                      #language en-US "Offset TxVref"
+#string STR_OFFSET_TXVREF_HELP                        #language en-US "Offsets parameter from trained value. For negative values, add 100. Eg: 105 is  neg 5 offset, 5 is pos 5 offset."
+#string STR_OFFSET_RXDQ_PROMPT                      #language en-US "Offset RxDq Timing"
+#string STR_OFFSET_RXDQ_HELP                        #language en-US "Offsets parameter from trained value. For negative values, add 100. Eg: 105 is  neg 5 offset, 5 is pos 5 offset."
+#string STR_OFFSET_RXVREF_PROMPT                      #language en-US "Offset RxVref"
+#string STR_OFFSET_RXVREF_HELP                        #language en-US "Offsets parameter from trained value. For negative values, add 100. Eg: 105 is  neg 5 offset, 5 is pos 5 offset."
+#string STR_OFFSET_CMDALL_PROMPT                      #language en-US "Offset CMD Timing"
+#string STR_OFFSET_CMDALL_HELP                        #language en-US "Offsets parameter from trained value. For negative values, add 100. Eg: 105 is  neg 5 offset, 5 is pos 5 offset."
+#string STR_OFFSET_CMDVREF_PROMPT                      #language en-US "Offset CMDVref"
+#string STR_OFFSET_CMDVREF_HELP                        #language en-US "Offsets parameter from trained value. For negative values, add 100. Eg: 105 is  neg 5 offset, 5 is pos 5 offset."
+#string STR_OFFSET_CTLALL_PROMPT                      #language en-US "Offset CTLAll"
+#string STR_OFFSET_CTLALL_HELP                        #language en-US "Offsets parameter from trained value. For negative values, add 100. Eg: 105 is  neg 5 offset, 5 is pos 5 offset."
+
+#string STR_RANK_MULT_PROMPT                #language en-US "Rank Multiplication"
+                                            #language x-AMI "MEM009"
+#string STR_RANK_MULT_HELP                  #language en-US "Force the Rank Multiplication factor for LRDIMM"
+#string STR_1X_RM                           #language en-US "1x"
+#string STR_2X_RM                           #language en-US "2x"
+#string STR_4X_RM                           #language en-US "4x"
+
+#string STR_MODULE_DELAY_PROMPT             #language en-US "LRDIMM Module Delay"
+                                            #language x-AMI "MEM017"
+#string STR_MODULE_DELAY_HELP               #language en-US "When Disabled, MRC will not use SPD bytes 90-95 for LRDIMM Module Delay. When Auto, MRC will boundary check the values and use default values, if SPD is 0 or out of range"
+
+#string STR_PAGE_POLICY_DISPLAY_FORM_TITLE  #language en-US "Page Policy"
+                                            #language x-AMI "MEM036"
+#string STR_PAGE_POLICY_DISPLAY_FORM_HELP   #language en-US "Set memory page policy parameters"
+#string STR_IDLE_PAGE_RST_PROMPT            #language en-US "Idle Page Reset"
+#string STR_IDLE_PAGE_RST_HELP              #language en-US "This value effectively adapts. It determines what value the various ICs are set to whenever they are reset. It therefore controls the number of cycles before an automatic page close is triggered for an entire channel."
+#string STR_WIN_SIZE_PROMPT                 #language en-US "Window Size"
+#string STR_WIN_SIZE_HELP                   #language en-US "The number of requests that we track before making a decision to adapt the reset value"
+#string STR_PREMATURE_PAGE_CL_PROMPT        #language en-US "Premature Page Close TH"
+#string STR_PREMATURE_PAGE_CL_HELP          #language en-US "If the number of OPCs in a given window is larger than this threshold, we decrease the reset value"
+#string STR_OVERDUE_PAGE_CL_PROMPT          #language en-US "Overdue Page Close TH"
+#string STR_OVERDUE_PAGE_CL_HELP            #language en-US "If the number of PPCs in a given window is larger than this threshold, we increase the reset value"
+
+
+#string STR_MEMORY_TRAINING_DISPLAY_FORM_TITLE #language en-US "Memory Training"
+                                               #language x-AMI "MEM038"
+#string STR_MEMORY_TRAINING_DISPLAY_FORM_HELP  #language en-US "DDR3 training options"
+#string STR_MRC_SERIAL_DEBUG_TRAIN_PROMPT   #language en-US "Training Messages"
+                                            #language x-AMI "MEM095"
+#string STR_MRC_SERIAL_DEBUG_TRAIN_HELP     #language en-US "Enabled = set to display the training results.  Training results also get displayed if debug messages is set to Maximum."
+
+#string STR_CMD_CLK_TRAIN_PROMPT            #language en-US "CMD/CLK Training"
+#string STR_CMD_CLK_TRAIN_HELP              #language en-US "Enabled = Execute Command/Clock Training"
+#string STR_EYE_DIAGRAM_PROMPT              #language en-US "Eye Diagrams"
+#string STR_EYE_DIAGRAM_HELP                #language en-US "Enables Rx and Tx Dq eye diagrams for each rank"
+#string STR_VREF_POINTS_PROMPT              #language en-US "Multi-Vref Points"
+#string STR_VREF_POINTS_HELP                #language en-US "Number of Vref points to test during the multi-vref algorithm"
+#string STR_VREF_STEP_PROMPT                #language en-US "Multi-Vref Step Size"
+#string STR_VREF_STEP_HELP                  #language en-US "Vref step size during the multi-vref algorithm"
+#string STR_COMP_OPTIONS_PROMPT             #language en-US "COMP Options"
+#string STR_COMP_OPTIONS_HELP               #language en-US "Option 1 issues a COMP cycle before each training algorithm as well as after each JEDEC init. Option 2 issues a COMP cycle before Wr Fly By, Advanced centering and after JEDEC Inits. Option 3 disables all COMP cycles. Option 4 issues COMPs after JEDEC inits only."
+#string STR_PER_BIT_MARGIN_PROMPT           #language en-US "Per Bit Margin"
+                                            #language x-AMI "MEM096"
+#string STR_PER_BIT_MARGIN_HELP             #language en-US "Enables the logging from the serial port of DDR Per Bit Margin Data"
+#string STR_OPTION1                         #language en-US "Option 1"
+#string STR_OPTION2                         #language en-US "Option 2"
+#string STR_OPTION3                         #language en-US "Option 3"
+#string STR_OPTION4                         #language en-US "Option 4"
+#string STR_ZQ_OPTIONS_PROMPT               #language en-US "ZQ Options"
+#string STR_ZQ_OPTIONS_HELP                 #language en-US "ZQ option 1 requires a ZQ long during JEDEC init and a ZQ short before advanced training steps. ZQ option 2 requires a ZQ long during JEDEC init."
+
+#string STR_RD_DQDQS_ADV_LENGTH_PROMPT      #language en-US "RD DQS Pattern Length"
+#string STR_RD_DQDQS_ADV_LENGTH_HELP        #language en-US "Sets the pattern length for advanced centering for Rd Dq/Dqs"
+#string STR_WR_DQDQS_ADV_LENGTH_PROMPT      #language en-US "WR DQ Pattern Length"
+#string STR_WR_DQDQS_ADV_LENGTH_HELP        #language en-US "Sets the pattern length for advanced centering for Wr Dq/Dqs"
+
+//RAS
+
+#string STR_MEM_THERMAL_SUBTITLE            #language en-US "Memory Thermal"
+                                            #language x-AMI "MEM034"
+#string STR_MEM_THERMAL_SUBTITLE_HELP       #language en-US "Set memory thermal settings"
+
+#string STR_MEM_PWR_SAV_PROMPT              #language en-US "Memory Power Savings Mode"
+                                            #language x-AMI "MEM05D"
+#string STR_MEM_PWR_SAV_PROMPT_HELP         #language en-US "Configures CKE and related Memory Power Savings Features"
+#string STR_SLOW                            #language en-US "Slow"
+#string STR_FAST                            #language en-US "Fast"
+#string STR_USER_DEF                        #language en-US "User Defined"
+
+#string STR_MEM_PWR_SAVE_ADV_SUBTITLE       #language en-US "Memory Power Savings Advanced Options"
+                                            #language x-AMI "MEM090"
+#string STR_MEM_PWR_SAVE_ADV_SUBTITLE_HELP  #language en-US "Advanced Settings for CKE and related Memory Power Savings Features"
+
+#string STR_CKE_THROT_PROMPT                #language en-US "CKE Throttling"
+                                            #language x-AMI "MEM064"
+#string STR_CKE_THROT_PROMPT_HELP           #language en-US "Manually Configures CKE Throttling"
+#string STR_OFF                             #language en-US "Off"
+#string STR_APD                             #language en-US "APD On"
+#string STR_PPDF                            #language en-US "PPDF On"
+#string STR_PPDS                            #language en-US "PPDS On"
+#string STR_APD_PPDF                        #language en-US "APD On, PPDF On"
+#string STR_APD_PPDS                        #language en-US "APD On, PPDS On"
+
+#string STR_CK_SELF_REFRESH_PROMPT          #language en-US "CK in SR"
+                                            #language x-AMI "MEM091"
+#string STR_CK_SELF_REFRESH_PROMPT_HELP     #language en-US "Configures CK behavior during self-refresh"
+#string STR_DRIVEN                          #language en-US "Driven"
+#string STR_TRI_STATE                       #language en-US "Tri-State"
+#string STR_PULL_LOW                        #language en-US "Pulled Low"
+#string STR_PULL_HIGH                       #language en-US "Pulled High"
+
+#string STR_IBT_OFF_PROMPT                  #language en-US "IBT Off"
+#string STR_IBT_OFF_PROMPT_HELP             #language en-US "Configures IBT Off"
+
+#string STR_OPP_SR_PROMPT                   #language en-US "Opportunistic SR"
+                                            #language x-AMI "MEM066"
+#string STR_OPP_SR_PROMPT_HELP              #language en-US "Enables or disables opportunistic self-refresh"
+
+#string STR_MDLL_SDEN_PROMPT                #language en-US "MDLL Off"
+                                            #language x-AMI "MEM05E"
+#string STR_MDLL_SDEN_PROMPT_HELP           #language en-US "Enable to shut down MDLL during SR"
+
+#string STR_MEMHOT_THROTTLING_MODE_PROMPT   #language en-US "MEMHOT Throttling Mode"
+                                            #language x-AMI "MEM05F"
+#string STR_MEMHOT_THROTTLING_MODE_PROMPT_HELP  #language en-US "Configure MEMHOT Input and Output Modes"
+#string STR_OUTPUT_ONLY                     #language en-US "Output Only"
+#string STR_INPUT_ONLY                      #language en-US "Input Only"
+#string STR_INPUT_OUTPUT_ENABLED            #language en-US "Input and Output Enabled"
+
+#string STR_DIMMTEMPSTAT_PROMPT             #language en-US "DIMM Temp Stat"
+                                            #language x-AMI "MEM05B"
+#string STR_DIMMTEMPSTAT_PROMPT_HELP        #language en-US "Select DIMMTEMPSTAT as temp_mid or temp_hi."
+#string STR_TEMP_HI                         #language en-US "temp_hi"
+#string STR_TEMP_MID                        #language en-US "temp_mid"
+
+#string STR_ELECTRICAL_THROTTLING_MODE_PROMPT       #language en-US "Mem Electrical Throttling"
+                                                    #language x-AMI "MEM061"
+#string STR_ELECTRICAL_THROTTLING_MODE_PROMPT_HELP  #language en-US "Configure Memory Electrical Throttling"
+
+#string STR_IDLE_CNTR_PROMPT                #language en-US "Idle Counter"
+#string STR_IDLE_CNTR_HELP                  #language en-US "Rank idle period that causes power-down entrance. The number of idle cycles are based from command CS assertion. It is important to program this parameter to be greater than roundtrip latency parameter in order to avoid the CKE de-assertion sooner than data return."
+
+#string PPDS_IDLE_TIMER_PROMPT              #language en-US "PPDS idle counter."
+#string PPDS_IDLE_TIMER_HELP                #language en-US "PPDS idle counter after all rank's rank idle counters (PDWN_IDEL_CNTR) have been expired."
+
+#string STR_DDR_PHASE_SHEDDING_PROMPT       #language en-US "Phase Shedding"
+                                            #language x-AMI "MEM05C"
+#string STR_DDR_PHASE_SHEDDING_PROMPT_HELP  #language en-US "DDR3 VR Static Phase Shedding Support.  PS0: full-phase, PS1: single-phase, typically <18A load, PS2: fixed loss, typically <5A load"
+
+#string STR_MULTI_THREADED_PROMPT           #language en-US "Multi-Threaded MRC"
+                                            #language x-AMI "MEM006"
+#string STR_MULTI_THREADED_HELP             #language en-US "Enable to execute the Memory Reference Code multi-threaded"
+
+#string STR_ZQ_CAL_OPTIONS_EN_PROMPT        #language en-US "Enable ZQCal Options"
+#string STR_ZQ_CAL_OPTIONS_EN_HELP          #language en-US "Enable/Disable ZQCal Options"
+
+#string STR_REFRESH_MODE_PROMPT             #language en-US "Refresh Options"
+                                            #language x-AMI "MEM026"
+#string STR_REFRESH_MODE_HELP               #language en-US "Select self refresh mode"
+#string STR_ACCELERATED_SELF_REFRESH        #language en-US "Acc Self Refr"
+#string STR_2X_REFRESH                      #language en-US "2x Refresh"
+
+#string STR_LRDIMM_SUBRANK_CAS2CAS_TIMING_PROMPT  #language en-US "LRD SubRank CAS2CAS sup"
+#string STR_LRDIMM_SUBRANK_CAS2CAS_TIMING_HELP    #language en-US "LRDIMM SubRank CAS2CAS timing support Disable/Enable"
+
+#string STR_LRDIMM_WR_VREF_PROMPT     #language en-US "LRDIMM Write Vref Training"
+#string STR_LRDIMM_WR_VREF_HELP       #language en-US "LRDIMM Write Vref Training Disable/Enable"
+
+#string STR_LRDIMM_RD_VREF_PROMPT     #language en-US "LRDIMM Read Vref Training"
+#string STR_LRDIMM_RD_VREF_HELP       #language en-US "LRDIMM Read Vref Training Disable/Enable"
+
+#string STR_LRDIMM_RX_DQ_CENTERING_PROMPT     #language en-US "LRDIMM RX DQ Centering Training"
+#string STR_LRDIMM_RX_DQ_CENTERING_HELP       #language en-US "LRDIMM RX DQ Centering Training Disable/Enable"
+
+#string STR_LRDIMM_TX_DQ_CENTERING_PROMPT     #language en-US "LRDIMM TX DQ Centering Training"
+#string STR_LRDIMM_TX_DQ_CENTERING_HELP       #language en-US "LRDIMM TX DQ Centering Training Disable/Enable"
+
+
+
+#string STR_3DS_DIMM_LRDIMM_SUPPORT_PROMPT  #language en-US "3DS DIMM/LRDIMM support"
+#string STR_3DS_DIMM_LRDIMM_SUPPORT_HELP    #language en-US "3DS DIMM/LRDIMM support Disable/Enable"
+
+#string STR_ENABLE_PERFECT_DIRECTORY_PROMPT #language en-US "Enable Perfect Directory"
+#string STR_ENABLE_PERFECT_DIRECTORY_HELP   #language en-US "Perfect Directory Disable/Enable"
+
+#string STR_DDDC_WIREKILL_PROMPT            #language en-US "DDDC Wirekill"
+#string STR_DDDC_WIREKILL_HELP              #language en-US "DDDC Wirekill Disable/Enable"
+
+#string STR_PUSH_TO_CAS_LATENCY_PROMPT      #language en-US "Push to Cas Latency"
+                                            #language x-AMI "MEM027"
+#string STR_PUSH_TO_CAS_LATENCY_HELP        #language en-US "Select Push to CAS latency (0 - 255)"
+
+#string STR_ADR_SUPPORT_PROMPT              #language en-US "ADR support"
+#string STR_ADR_SUPPORT_HELP                #language en-US "ADR support Disable/Enable"
+
+#string STR_HIGHER_SYS_ADDR_SPACE_PROMPT    #language en-US "Higher System Addres Space"
+#string STR_HIGHER_SYS_ADDR_SPACE_HELP      #language en-US "Higher System Addres Space Disable/Enable"
+
+#string STR_MC_BGF_THRESHOLD_PROMPT         #language en-US "MC BGF threshold"
+                                            #language x-AMI "MEM028"
+#string STR_MC_BGF_THRESHOLD_HELP           #language en-US "The HA to MC BGF threshold is used for scheduling MC request in bypass condition."
+
+#string STR_MC_BYPASS_PROMPT                #language en-US "MC Bypass"
+#string STR_MC_BYPASS_HELP                  #language en-US "When enabled, MC return data can not take the bypass pipeline at HA"
+
+#string STR_HA_EARLY_WRITE_POST_MODE_PROMPT #language en-US "HA early write post mode"
+                                            #language x-AMI "MEM029"
+#string STR_HA_EARLY_WRITE_POST_MODE_HELP   #language en-US "HA early write post mode Disable/Enable"
+
+#string STR_HA_RETRY_FOREVER_PROMPT         #language en-US "HA Retry forever"
+#string STR_HA_RETRY_FOREVER_HELP           #language en-US "If enabled, allows the HA retry the memory channel forever when an memory read error occurs."
+
+#string STR_FORCE_HA_INTERLEAVE_PROMPT      #language en-US "HA Interleave"
+#string STR_FORCE_HA_INTERLEAVE_HELP        #language en-US "Used to force HA interleaving within a socket. Interlaving is enabled by default but gets overridden when COD is enabled."
+
+#string STR_FRC_ACK_CONFLICT_PROMPT         #language en-US "Frc Ack Conflict"
+#string STR_FRC_ACK_CONFLICT_HELP           #language en-US "It provides the dynamic FrcAckConflict regarding the response HA received"
+
+#string STR_MC_CANCEL_PROMPT                #language en-US "MC Cancel"
+#string STR_MC_CANCEL_HELP                  #language en-US "When enabled, HA does not issue a cancel to MC"
+
+#string STR_MC_SPECULATIVE_READS_PROMPT     #language en-US "MC Speculative Reads"
+#string STR_MC_SPECULATIVE_READS_HELP       #language en-US "When enabled, HA does not issue speculative read to MC"
+
+#string STR_ALWAYS_F_LOCAL_PROMPT           #language en-US "Always F local"
+#string STR_ALWAYS_F_LOCAL_HELP             #language en-US "When enabled, HA always sends DATA_C_F for local RdData/RdCode"
+
+#string STR_CBO_CONDITIONAL_DOWNGRADE_PROMPT  #language en-US "Cbo conditional downgrade"
+#string STR_CBO_CONDITIONAL_DOWNGRADE_HELP    #language en-US "When enabled, Cbo conditionally downgrades from F to S on remote non-ownership"
+
+#string STR_MC_CHANNEL_HASH_MODE_PROMPT     #language en-US "MC Channel hash mode"
+#string STR_MC_CHANNEL_HASH_MODE_HELP       #language en-US "MC Channel hash mode Disable/Enable"
+
+#string STR_RETAIN_MEMORY_CONTENTS_PROMPT   #language en-US "Retain Memory contents"
+#string STR_RETAIN_MEMORY_CONTENTS_HELP     #language en-US "Option to retain memory contents across warm reset for debug"
+
+#string STR_UNUSED_MEM_CHANNEL_INPUTS_PROMPT  #language en-US "Unused mem channel inputs"
+#string STR_UNUSED_MEM_CHANNEL_INPUTS_HELP    #language en-US "Enable/Disable inputs of unused memory channels"
+
+#string STR_DDR_GDXC_MODE_PROMPT            #language en-US "DDR GDXC-mode"
+#string STR_DDR_GDXC_MODE_HELP              #language en-US "Enable/Disable  DDR channel for GDXC-mode"
+
+#string STR_SAFE_TURN_AROUND_TIME_PROMPT    #language en-US "Safe Elec Turn Around Timings" 
+                                            #language x-AMI "MEM02A"
+#string STR_SAFE_TURN_AROUND_TIME_HELP      #language en-US "Safe electrical turn around timings Disable/Enable" 
+
+#string STR_READ_VREF_CENTERING_PROMPT      #language en-US "Read Vref Centering"
+                                            #language x-AMI "MEM055"
+#string STR_READ_VREF_CENTERING_HELP        #language en-US "Read Vref Centering Disable/Enable"
+
+#string STR_WRITE_VREF_CENTERING_PROMPT     #language en-US "Write Vref Centering"
+                                            #language x-AMI "MEM058"
+#string STR_WRITE_VREF_CENTERING_HELP       #language en-US "Write Vref Centering Disable/Enable"
+
+#string STR_COMMAND_VREF_CENTERING_PROMPT     #language en-US "Command Vref Centering"
+#string STR_COMMAND_VREF_CENTERING_HELP       #language en-US "Command Vref Centering Disable/Enable"
+
+#string STR_LRDIMM_BACKSIDE_VREF_CENTERING_PROMPT     #language en-US "LRDIMM Backside Vref Centering"
+#string STR_LRDIMM_BACKSIDE_VREF_CENTERING_HELP       #language en-US "LRDIMM Backside Vref Centering Disable/Enable"
+
+#string STR_COMMAND_2_DATA_TUNING_PROMPT    #language en-US "Command 2 Data Tuning"
+                                            #language x-AMI "MEM05A"
+#string STR_COMMAND_2_DATA_TUNING_HELP      #language en-US "Command 2 Data Tuning Disable/Enable"
+
+#string STR_MC_DLL_VR_BYPASS_PROMPT         #language en-US "MC DLL VR Bypass"
+#string STR_MC_DLL_VR_BYPASS_HELP           #language en-US "MC DLL VR Bypass Disable/Enable"
+
+#string STR_THERMAL_SENSOR_PROMPT           #language en-US "Thermal Sensor"
+#string STR_THERMAL_SENSOR_HELP             #language en-US "Disables all TS circuits when disabled"
+
+#string STR_CATASTROPHIC_TRIP_PROMPT        #language en-US "Catastrophic Trip"
+#string STR_CATASTROPHIC_TRIP_HELP          #language en-US "Enable = Thermal Sensor trip signal causes core to react.\nDisable = Core logic does not see the trip signal"
+
+#string STR_VUNIT_CLOCK_GATING_PROMPT       #language en-US "VUNIT Clock Gating"
+#string STR_VUNIT_CLOCK_GATING_HELP         #language en-US "When enabled, clock toggles only during a CSR write cycle"
+
+#string STR_TUNIT_CLOCK_GATING_PROMPT       #language en-US "TUNIT Clock Gating"
+#string STR_TUNIT_CLOCK_GATING_HELP         #language en-US "When enabled, clock toggles only during a CSR write cycle"
+
+#string STR_MUNIT_CLOCK_GATING_PROMPT       #language en-US "MUNIT Clock Gating"
+#string STR_MUNIT_CLOCK_GATING_HELP         #language en-US "When enabled, clock toggles only during a CSR write cycle"
+
+#string STR_DUNIT_CLOCK_GATING_PROMPT       #language en-US "DUNIT Clock Gating"
+#string STR_DUNIT_CLOCK_GATING_HELP         #language en-US "When enabled, clock toggles only during a CSR write cycle"
+
+#string STR_DIMM_WEAK_MODE_PROMPT           #language en-US "DIMM Weak mode"
+#string STR_DIMM_WEAK_MODE_HELP             #language en-US "DIMM Weak mode Disable/Enable"
+
+#string STR_HALT_ON_MEM_TRAINING_ERROR_PROMPT #language en-US "Halt on mem Training Error"
+                                              #language x-AMI "MEM005"
+#string STR_HALT_ON_MEM_TRAINING_ERROR_HELP   #language en-US "Halt on mem Training Error Disable/Enable"
+
+#string STR_READ_QUAL_SIGNAL_PROMPT         #language en-US "Read Qual signal"
+#string STR_READ_QUAL_SIGNAL_HELP           #language en-US "Read Qual signal Disable/Enable"
+
+#string STR_1066                            #language en-US "1066"
+#string STR_1333                            #language en-US "1333"
+#string STR_1600                            #language en-US "1600"
+#string STR_1866                            #language en-US "1866"
+#string STR_2133                            #language en-US "2133"
+#string STR_2667                            #language en-US "2667"
+
+#string STR_MEMORY_TEST_PROMPT              #language en-US "Memory test"
+#string STR_MEMORY_TEST_HELP                #language en-US "Memory test Disable/Enable"
+
+#string STR_DRAM_RAPL_PROMPT                #language en-US "DRAM RAPL Mode"
+                                            #language x-AMI "MEM02C"
+#string STR_DRAM_RAPL_HELP                  #language en-US "Select DRAM RAPL Mode"
+#string STR_DRAM_RAPL_ESTIMATED             #language en-US "Estimated"
+#string STR_DRAM_RAPL_VR_MEASURED           #language en-US "VR Measured"
+
+#string STR_DRAM_RAPL_EXTENDED_RANGE_PROMPT #language en-US "DRAM RAPL Extended Range"
+                                            #language x-AMI "MEM09A"
+#string STR_DRAM_RAPL_EXTENDED_RANGE_HELP   #language en-US "Select DRAM RAPL Extended Range"
+
+#string STR_TOP_OF_LOW_MEMORY_PROMPT        #language en-US "Top of low memory"
+                                            #language x-AMI "MEM02D"
+#string STR_TOP_OF_LOW_MEMORY_HELP          #language en-US "Configure Top of low memory"
+
+#string STR_FAN_SPD_CTRL_THRTL_MODE         #language en-US "Set Throttling Mode"
+                                            #language x-AMI "MEM059"
+#string STR_FAN_SPD_CTRL_THRTL_MODE_HELP    #language en-US "Configure Thermal Throttling Mode.\nSelect OLTT or CLTT mode."
+#string STR_OPEN_LOOP_THERMAL_THROTTLING    #language en-US "OLTT"
+#string STR_CLOSE_LOOP_THERMAL_THROTTLING   #language en-US "CLTT"
+
+#string STR_MEMHOT_THROTTLING_MODE_PROMPT       #language en-US "MEMHOT Throttling Mode"
+                                                #language x-AMI "MEM060"
+#string STR_MEMHOT_THROTTLING_MODE_PROMPT_HELP  #language en-US "Configure MEMHOT Input and Output Mode: Mem Hot Sense Therm Throt or Mem Hot Output Therm Throt."
+#string STR_MH_SENSE_EN_THERMAL_THROTTLING      #language en-US "Mem Hot STT"
+#string STR_MH_OUTPUT_EN_THERMAL_THROTTLING     #language en-US "Mem Hot OTT"
+
+#string STR_IBIST_ON_PASSIVE_DIMM_PROMPT    #language en-US "IBIST on passive DIMM"
+#string STR_IBIST_ON_PASSIVE_DIMM_HELP      #language en-US "Enable / Disable IBIST (CMM) to a passive DIMM card to be utilized for SI testing for channels"
+
+#string STR_MC_ODT_MODE_PROMPT              #language en-US "MC ODT Mode"
+                                            #language x-AMI "MEM02E"
+#string STR_MC_ODT_MODE_HELP                #language en-US "Select MC ODT Mode"
+#string STR_50_OHMS                         #language en-US "50 Ohms"
+#string STR_100_OHMS                        #language en-US "100 Ohms"
+
+#string STR_OVERRIDE_MEM_TIMINGS_PROMPT     #language en-US "Override Mem timings"
+#string STR_OVERRIDE_MEM_TIMINGS_HELP       #language en-US "Override Mem timings Disable/Enable"
+
+#string STR_DDR_CYCLING_PROMPT              #language en-US "DDR Cycling"
+#string STR_DDR_CYCLING_HELP                #language en-US "When enabled, MRC will train the memory and then power cycle over and over to stress MRC"
+
+#string STR_OVERRIDE_CKE_IDLE_TIMER_PROMPT  #language en-US "Override CKE Idle timer"
+#string STR_OVERRIDE_CKE_IDLE_TIMER_HELP    #language en-US "Disable/Enable Override the rank idle period that causes power-down entrance"
+
+#string STR_CKE_IDLE_TIMER_PROMPT           #language en-US "CKE Idle timer"
+#string STR_CKE_IDLE_TIMER_HELP             #language en-US "Select rank idle period that causes power-down entrance (0-255)"
+
+#string STR_WRITE_BUFFER_HIGH_WATER_MARK_PROMPT #language en-US "WR Buff High Water Mark"
+#string STR_WRITE_BUFFER_HIGH_WATER_MARK_HELP   #language en-US "Override Write Buffer High Water Mark Disable/Enable"
+
+#string STR_WMM_ENTRY_SELECT_PROMPT         #language en-US "WMM_ENTRY"
+#string STR_WMM_ENTRY_SELECT_HELP           #language en-US "wmm_enter, possible values from 0 to 255. Value 255 ignores SVHooks value"
+
+#string STR_WMM_EXIT_SELECT_PROMPT          #language en-US "WMM_EXIT"
+#string STR_WMM_EXIT_SELECT_HELP            #language en-US "wmm_exit, possible values from 0 to 255. Value 255 ignores SVHooks value"
+
+#string STR_STARVATION_COUNTER_PROMPT       #language en-US "WMM Starvation Counter"
+#string STR_STARVATION_COUNTER_HELP         #language en-US "This count is used for the starvation switch. values 0 to 65535. Value 65535 ignores SVHooks value"
+
+#string STR_OPP_READ_DURING_WMM_PROMPT      #language en-US "Opp read during WMM"
+                                            #language x-AMI "MEM02F"
+#string STR_OPP_READ_DURING_WMM_HELP        #language en-US "Enable/Disable issuing read commands opportunistically during WMM"
+
+#string STR_NORM_OPP_INTERVAL_PROMPT        #language en-US "Normal Operation Duration"
+                                            #language x-AMI "MEM030"
+#string STR_NORM_OPP_INTERVAL_HELP          #language en-US "Set normal operation duration interval (0 - 65535)"
+
+#string STR_NUM_OF_SPARING_TRANSAC_PROMPT   #language en-US "Number of Sparing Transaction"
+                                            #language x-AMI "MEM031"
+#string STR_NUM_OF_SPARING_TRANSAC_HELP     #language en-US "Set number of sparing transactions interval (0 - 65535)"
+
+#string STR_PSMI_SUPPORT_PROMPT             #language en-US "PSMI Support"
+                                            #language x-AMI "MEM032"
+#string STR_PSMI_SUPPORT_HELP               #language en-US "PSMI Support Disable/Enable"
+
+#string STR_A7_MODE_EN_PROMPT               #language en-US "A7 Mode"
+                                            #language x-AMI "MEM07B"
+#string STR_A7_MODE_EN_HELP                 #language en-US "A7 Mode Disable/Enable"
+
+#string STR_DDDC_SUPPORT_PROMPT             #language en-US "DDDC support"
+#string STR_DDDC_SUPPORT_HELP               #language en-US "DDDC support Disable/Enable"
+
+#string STR_MEMORY_MIRRORING_PROMPT         #language en-US "Memory Mirroring"
+#string STR_MEMORY_MIRRORING_HELP           #language en-US "Select Memory Mirroring mode."
+
+#string STR_MEM_MIRRORING_SCK0_MC0_PROMPT   #language en-US "Memory Mirroring SCK0 MC0"
+#string STR_MEM_MIRRORING_SCK0_MC0_HELP     #language en-US "Enable/Disable Memory Mirroring Socket0 MC0"
+
+#string STR_MEM_MIRRORING_SCK0_MC1_PROMPT   #language en-US "Memory Mirroring SCK0 MC1"
+#string STR_MEM_MIRRORING_SCK0_MC1_HELP     #language en-US "Enable/Disable Memory Mirroring Socket0 MC1"
+
+#string STR_MEM_MIRRORING_SCK1_MC0_PROMPT   #language en-US "Memory Mirroring SCK1 MC0"
+#string STR_MEM_MIRRORING_SCK1_MC0_HELP     #language en-US "Enable/Disable Memory Mirroring Socket1 MC0"
+                                                                                                        
+#string STR_MEM_MIRRORING_SCK1_MC1_PROMPT   #language en-US "Memory Mirroring SCK1 MC1"              
+#string STR_MEM_MIRRORING_SCK1_MC1_HELP     #language en-US "Enable/Disable Memory Mirroring Socket1 MC1"
+
+#string STR_MEM_MIRRORING_SCK2_MC0_PROMPT   #language en-US "Memory Mirroring SCK2 MC0"
+#string STR_MEM_MIRRORING_SCK2_MC0_HELP     #language en-US "Enable/Disable Memory Mirroring Socket2 MC0"
+                                                                                                        
+#string STR_MEM_MIRRORING_SCK2_MC1_PROMPT   #language en-US "Memory Mirroring SCK2 MC1"              
+#string STR_MEM_MIRRORING_SCK2_MC1_HELP     #language en-US "Enable/Disable Memory Mirroring Socket2 MC1"
+                                                                                                        
+#string STR_MEM_MIRRORING_SCK3_MC0_PROMPT   #language en-US "Memory Mirroring SCK3 MC0"              
+#string STR_MEM_MIRRORING_SCK3_MC0_HELP     #language en-US "Enable/Disable Memory Mirroring Socket3 MC0"
+                                                                                                       
+#string STR_MEM_MIRRORING_SCK3_MC1_PROMPT   #language en-US "Memory Mirroring SCK3 MC1"              
+#string STR_MEM_MIRRORING_SCK3_MC1_HELP     #language en-US "Enable/Disable Memory Mirroring Socket3 MC1"
+
+#string STR_XMP_FORM_SUBTITLE               #language en-US "Memory Timings & Voltage Override"
+                                            #language x-AMI "MEM08E"
+#string STR_XMP_PROFILE_PROMPT              #language en-US "XMP Profile"
+                                            #language x-AMI "MEM067"
+#string STR_XMP_PROFILE_HELP                #language en-US "Selects the XMP profile to use"
+#string STR_MANUAL                          #language en-US "Manual"
+#string STR_XMP_PROFILE1                    #language en-US "Profile 1"
+#string STR_XMP_PROFILE2                    #language en-US "Profile 2"
+#string STR_XMP_PROFILE_SUP_PROMPT          #language en-US "XMP Profile Support"
+#string STR_XMP_PROFILE_SUP_HELP            #language en-US "Select XMP Profile support"
+
+#string STR_XMP_DDR_FREQ_LIMIT_PROMPT       #language en-US "Memory Frequency"
+                                            #language x-AMI "MEM001"
+#string STR_XMP_DDR_FREQ_LIMIT_HELP         #language en-US "Maximum Memory Frequency Selections in Mhz. Do not select Reserved"
+
+#string STR_VDD_PROMPT                      #language en-US "Memory Voltage"
+                                            #language x-AMI "MEM068"
+#string STR_VDD_HELP                        #language en-US "Selects the desired memory voltage. To select 1.20V enter 120."
+#string STR_COMMAND_TIMING_PROMPT           #language en-US "Command Timing"
+                                            #language x-AMI "MEM069"
+#string STR_COMMAND_TIMING_HELP             #language en-US "Selects the desired memory controller command timing"
+#string STR_1N                              #language en-US "1N"
+#string STR_2N                              #language en-US "2N"
+#string STR_3N                              #language en-US "3N"
+#string STR_CAS_LATENCY                     #language en-US "CAS Latency"
+                                            #language x-AMI "MEM06A"
+#string STR_CAS_LATENCY_HELP                #language en-US "0 - 4 = Auto, 5 - 11 = Desired CAS latency"
+#string STR_TRP_LATENCY                     #language en-US "tRP"
+                                            #language x-AMI "MEM06C"
+#string STR_TRP_LATENCY_HELP                #language en-US "0 - 4 = Auto, 5 - 11 = Desired tRP latency"
+#string STR_TRCD_LATENCY                    #language en-US "tRCD"
+                                            #language x-AMI "MEM06D"
+#string STR_TRCD_LATENCY_HELP               #language en-US "0 - 4 = Auto, 5 - 11 = Desired tRCD latency"
+#string STR_TRAS_LATENCY                    #language en-US "tRAS"
+                                            #language x-AMI "MEM06E"
+#string STR_TRAS_LATENCY_HELP               #language en-US "0 = Auto else Desired tRAS latency"
+#string STR_TWR_LATENCY                     #language en-US "tWR"
+                                            #language x-AMI "MEM06F"
+#string STR_TWR_LATENCY_HELP                #language en-US "0 = Auto else Desired tWR latency"
+#string STR_TRFC_LATENCY                    #language en-US "tRFC"
+                                            #language x-AMI "MEM070"
+#string STR_TRFC_LATENCY_HELP               #language en-US "0 = Auto else Desired tRFC"
+#string STR_TRRD_LATENCY                    #language en-US "tRRD"
+                                            #language x-AMI "MEM071"
+#string STR_TRRD_LATENCY_HELP               #language en-US "0 = Auto else Desired tRRD"
+#string STR_TRTP_LATENCY                    #language en-US "tRTP"
+                                            #language x-AMI "MEM072"
+#string STR_TRTP_LATENCY_HELP               #language en-US "0 = Auto else Desired tRTP"
+#string STR_TWTR_LATENCY                    #language en-US "tWTR"
+                                            #language x-AMI "MEM092"
+#string STR_TWTR_LATENCY_HELP               #language en-US "0 = Auto else Desired tWTR"
+#string STR_TFAW_LATENCY                    #language en-US "tFAW"
+                                            #language x-AMI "MEM073"
+#string STR_TFAW_LATENCY_HELP               #language en-US "0 = Auto else Desired tFAW"
+#string STR_TCWL_LATENCY                    #language en-US "tCWL"
+                                            #language x-AMI "MEM074"
+#string STR_TCWL_LATENCY_HELP               #language en-US "0 = Auto else Desired tCWL"
+#string STR_TRC_LATENCY                     #language en-US "tRC"
+                                            #language x-AMI "MEM075"
+#string STR_TRC_LATENCY_HELP                #language en-US "0 = Auto else Desired tRC"
+#string STR_QCLK_RATIO                      #language en-US "QCLK Ratio"
+#string STR_QCLK_RATIO_HELP                 #language en-US "0 = Auto else set to desired QCLK Ratio. 6 = 800, 8 = 1067, 10 = 1333, 12 = 1600, 14 = 1866, 16 = 2133"
+#string STR_RANKIDLE_LATENCY                #language en-US "tRANKIDLE"
+#string STR_RANKIDLE_LATENCY_HELP           #language en-US "0 - 254 = Desired tRANKIDLE latency for NHM, 0 - 254 & 256 - 1023, = Desired tRANKIDLE latency for WSM, 0xFF = CKE Power down disabled"
+#string STR_REFRESH_RATE                    #language en-US "Refresh Rate"
+                                            #language x-AMI "MEM06B"
+#string STR_REFRESH_RATE_HELP               #language en-US "0 = Auto, else time in nano seconds"
+
+#string STR_OVR_TURNAROUND_TIMINGS_PROMPT   #language en-US "Ovr Turnaround Timings"
+#string STR_OVR_TURNAROUND_TIMINGS_HELP     #language en-US "Override Turnaround Timings Disable/Enable"
+
+#string STR_B2B_R2R_RANK_TIMING_PROMPT      #language en-US "TRRDR"                                                               
+#string STR_B2B_R2R_RANK_TIMING_HELP        #language en-US "Back to back READ to READ from different RANK separation parameter"  
+                                                                                                                                  
+#string STR_B2B_R2R_DIMM_TIMING_PROMPT      #language en-US "TRRDD"                                                               
+#string STR_B2B_R2R_DIMM_TIMING_HELP        #language en-US "Back to back READ to READ from different DIMM separation parameter"  
+                                                                                                                                  
+#string STR_B2B_W2W_RANK_TIMING_PROMPT      #language en-US "TWWDR"                                                               
+#string STR_B2B_W2W_RANK_TIMING_HELP        #language en-US "Back to back WRITE to WRITE from different RANK separation parameter"
+                                                                                                                                  
+#string STR_B2B_W2W_DIMM_TIMING_PROMPT      #language en-US "TWWDD"                                                               
+#string STR_B2B_W2W_DIMM_TIMING_HELP        #language en-US "Back to back WRITE to WRITE from different DIMM separation parameter"
+                                                                                                                                  
+#string STR_B2B_R2W_RANK_TIMING_PROMPT      #language en-US "TRWDR"                                                               
+#string STR_B2B_R2W_RANK_TIMING_HELP        #language en-US "Back to back READ to WRITE from different RANK separation parameter" 
+                                                                                                                                  
+#string STR_B2B_R2W_DIMM_TIMING_PROMPT      #language en-US "TRWDD"                                                               
+#string STR_B2B_R2W_DIMM_TIMING_HELP        #language en-US "Back to back READ to WRITE from different DIMM separation parameter" 
+                                                                                                                                  
+#string STR_B2B_R2W_SRANK_TIMING_PROMPT     #language en-US "TRWSR"                                                               
+#string STR_B2B_R2W_SRANK_TIMING_HELP       #language en-US "Back to back READ to WRITE from same RANK separation parameter"      
+                                                                                                                                  
+#string STR_B2B_W2R_RANK_TIMING_PROMPT      #language en-US "TWRDR"                                                               
+#string STR_B2B_W2R_RANK_TIMING_HELP        #language en-US "Back to back WRITE to READ from different RANK separation parameter" 
+                                                                                                                                  
+#string STR_B2B_W2R_DIMM_TIMING_PROMPT      #language en-US "TWRDD"                                                               
+#string STR_B2B_W2R_DIMM_TIMING_HELP        #language en-US "Back to back WRITE to READ from different DIMM separation parameter" 
+
+#string STR_MEMMAP_LOWMEMCHANNEL_PROMPT     #language en-US "Low Mem Channel Config"
+#string STR_MEMMAP_LOWMEMCHANNEL_HELP       #language en-US "Select Channel for low memory, Auto - 0 (BIOS select)"
+                                                      
+#string STR_MEMMAP_LOWMEMCHANNEL_0_STRING   #language en-US "Channel 0"
+#string STR_MEMMAP_LOWMEMCHANNEL_1_STRING   #language en-US "Channel 1"
+#string STR_MEMMAP_LOWMEMCHANNEL_2_STRING   #language en-US "Channel 2"
+#string STR_MEMMAP_LOWMEMCHANNEL_3_STRING   #language en-US "Channel 3"
+
+#string STR_MEMMAP_HIGHADDRBIT_PROMPT       #language en-US "High Address Region"
+#string STR_MEMMAP_HIGHADDRBIT_HELP         #language en-US "High Address Region starting bit position. Auto - 0 (not enabled). Note that the actual start of the region is 2**N - 64MB, where N is the selected bit position."
+
+#string STR_MEMMAP_HIGHADDRBIT_33_STRING    #language en-US "Bit Position 33"
+#string STR_MEMMAP_HIGHADDRBIT_34_STRING    #language en-US "Bit Position 34"
+#string STR_MEMMAP_HIGHADDRBIT_35_STRING    #language en-US "Bit Position 35"
+#string STR_MEMMAP_HIGHADDRBIT_36_STRING    #language en-US "Bit Position 36"
+#string STR_MEMMAP_HIGHADDRBIT_37_STRING    #language en-US "Bit Position 37"
+#string STR_MEMMAP_HIGHADDRBIT_38_STRING    #language en-US "Bit Position 38"
+#string STR_MEMMAP_HIGHADDRBIT_39_STRING    #language en-US "Bit Position 39"
+#string STR_MEMMAP_HIGHADDRBIT_40_STRING    #language en-US "Bit Position 40"
+#string STR_MEMMAP_HIGHADDRBIT_41_STRING    #language en-US "Bit Position 41"
+#string STR_MEMMAP_HIGHADDRBIT_42_STRING    #language en-US "Bit Position 42"
+#string STR_MEMMAP_HIGHADDRBIT_43_STRING    #language en-US "Bit Position 43"
+#string STR_MEMMAP_HIGHADDRBIT_44_STRING    #language en-US "Bit Position 44"
+#string STR_MEMMAP_HIGHADDRBIT_45_STRING    #language en-US "Bit Position 45"
+
+#string STR_ADVANCED_CLK_TRAINING_PROMPT    #language en-US "Advanced Clk Training"
+                                            #language x-AMI "MEM052"
+#string STR_ADVANCED_CLK_TRAINING_HELP      #language en-US "Enable/Disable Advanced Clock training"
+
+#string STR_ROUND_TRIP_LATENCY_PROMPT       #language en-US "Round Trip Latency"
+                                            #language x-AMI "MEM053"
+#string STR_ROUND_TRIP_LATENCY_HELP         #language en-US "Enable/Disable Round Trip Latency"
+
+#string STR_DUTY_CYCLE_PROMPT               #language en-US "Duty Cycle Training"
+                                            #language x-AMI "MEM054"
+#string STR_DUTY_CYCLE_HELP                 #language en-US "Enable/Disable duty cycle training"
+
+#string STR_ADVANCED_STROBE_CENTERING_PROMPT  #language en-US "Advanced Strobe Centering"
+                                              #language x-AMI "MEM08F"
+#string STR_ADVANCED_STROBE_CENTERING_HELP    #language en-US "Enable/Disable Advanced Strobe Centering"
+
+#string STR_EXT_DIMM_VREF_CIRCUIT_PROMPT    #language en-US "Dimm Vref Ciruit"
+                                            #language x-AMI "MEM097"
+#string STR_EXT_DIMM_VREF_CIRCUIT_HELP      #language en-US "Choose internal or external Dimm vref circuit"
+#string STR_INTERNAL                        #language en-US "Internal"
+#string STR_EXTERNAL                        #language en-US "External"
+
+#string STR_PROMOTE_WARNINGS_PROMPT         #language en-US "Promote Warnings"
+                                            #language x-AMI "MEM004"
+#string STR_PROMOTE_WARNINGS_HELP           #language en-US "Determines if warnings are promoted to system level"
+
+#string STR_EARLY_CMD_TRAINING_PROMPT       #language en-US "Early CMD Training"                                                               
+                                            #language x-AMI "MEM04F"                                                     
+#string STR_EARLY_CMD_TRAINING_HELP         #language en-US "Controls whether early CMD/CLK training is executed" 
+#string STR_EARLY_CTL_TRAINING_PROMPT       #language en-US "Early CTL Training"                                                               
+                                            #language x-AMI "MEM050"                                                                           
+#string STR_EARLY_CTL_TRAINING_HELP         #language en-US "Controls whether early CTL/CLK training is executed" 
+#string STR_CMD_NORMAL_PROMPT               #language en-US "CMD Normalization"
+                                            #language x-AMI "MEM051"
+#string STR_CMD_NORMAL_HELP                 #language en-US "Enables CMD-CLK normalization"
+#string STR_IN_SELF_REFRESH                 #language en-US "In Self Refresh"
+#string STR_IN_PRECH_PWDWN_SLOW_STATE       #language en-US "In Prech PwDwn Slow state"
+#string STR_FOLLOWED_BY_JEDECINIT           #language en-US "followed by JedecInit"
+
+#string STR_DIMM_TH_TEMP_LO_PROMPT          #language en-US "DIMM Low Temp Threshold"
+#string STR_DIMM_TH_TEMP_LO_HELP            #language en-US "Set DIMM Low temp threshold. 0 selects BIOS default value"
+
+#string STR_DIMM_TH_TEMP_MID_PROMPT         #language en-US "DIMM Mid Temp Threshold"
+#string STR_DIMM_TH_TEMP_MID_HELP           #language en-US "Set DIMM Mid temp threshold. 0 selects BIOS default value"
+
+#string STR_DIMM_TH_TEMP_HI_PROMPT          #language en-US "DIMM High Temp Threshold"
+#string STR_DIMM_TH_TEMP_HI_HELP            #language en-US "Set DIMM High temp threshold. 0 selects BIOS default value"
+
+#ifndef GRANGEVILLE_FLAG
+#string STR_LOCKSTEPX4_PROMPT               #language en-US "Lockstep x4 DIMMs"
+                                            #language x-AMI "MEM07E"
+#string STR_LOCKSTEPX4_HELP                 #language en-US "Enable/Disable Lockstep for x4 DIMMs"
+#endif
+
+#string STR_DISABLE_CHANNELS_PROMPT         #language en-US "Disable Channel Inputs"
+                                            #language x-AMI "MEM02B"
+#string STR_DISABLE_CHANNELS_HELP           #language en-US "Disable inputs of unused memory channels"
+
+#string STR_RANK_DISABLE_FORM_SUBTITLE      #language en-US "DIMM Rank Disable"
+#string STR_RANK_DISABLE_PROFILE_HELP       #language en-US "Selects ranks to diable per DIMM"
+
+#string STR_MEM_MAP_SUBTITLE                #language en-US "Memory Map"
+                                            #language x-AMI "MEM039"
+#string STR_MEM_MAP_HELP                    #language en-US "Set memory mapping settings"
+
+#string STR_ALTERNATE_ADD_MAP_PROMPT        #language en-US "Alternate Address Mapping"
+#string STR_ALTERNATE_ADD_MAP_HELP          #language en-US "Enable/disable Alternate Address Mapping mode"
+
+#string STR_PERIODIC_RCOMP_TYPE_PROMPT      #language en-US "Periodic RCOMP Type"
+                                            #language x-AMI "MEM098"
+#string STR_PERIODIC_RCOMP_TYPE_HELP        #language en-US "Selects the Periodic RCOMP type. PCODE controlled or HW controlled."
+#string STR_PCODE                           #language en-US "PCode Controlled"
+#string STR_HW                              #language en-US "Hardware Controlled"
+
+#string STR_PERIODIC_RCOMP_EN_PROMPT        #language en-US "Periodic RCOMP Enable"
+                                            #language x-AMI "MEM093"
+#string STR_PERIODIC_RCOMP_EN_HELP          #language en-US "Enable/Disable Periodic RCOMPs"
+
+#string STR_CA_PARITY_PROMPT                #language en-US "C/A Parity Enable"
+                                            #language x-AMI "MEM033"
+#string STR_CA_PARITY_HELP                  #language en-US "Enable/Disable DDR4 Command Address Parity"
+
+#string STR_SMB_SPEED_PROMPT                #language en-US "SMB Clock Frequency"
+                                            #language x-AMI "MEM037"
+#string STR_SMB_SPEED_HELP                  #language en-US "Sets DDR4 SMB Clock Frequencys For SPD Access"
+#string STR_SMB_400K                        #language en-US "400 Khz"
+#string STR_SMB_1M                          #language en-US "1 Mhz"
+
+#string STR_PER_BIT_DESKEW_PROMPT           #language en-US "Per Bit Deskew"
+#string STR_PER_BIT_DESKEW_HELP             #language en-US "Enables Per Bit Deskew Training"
+
+#string STR_XOVER_CALIB_PROMPT              #language en-US "X-OVER Calibration"
+#string STR_XOVER_CALIB_HELP                #language en-US "Enables Cross Over Calibration Training"
+
+#string STR_SENSE_AMP_PROMPT                #language en-US "Sense Amp Training"
+#string STR_SENSE_AMP_HELP                  #language en-US "Enables Sense Amp Training"
+
+#string STR_DRAM_RON_PROMPT                 #language en-US "Train DRAM Ron"
+#string STR_DRAM_RON_HELP                   #language en-US "Enables DRAM Ron training."
+
+#string STR_RX_ODT_PROMPT                   #language en-US "Train RX ODT"
+#string STR_RX_ODT_HELP                     #language en-US "Enables Rx ODT training."
+
+#string STR_RTT_WR_PROMPT                   #language en-US "Train RTT WR"
+#string STR_RTT_WR_HELP                     #language en-US "Enables RTT Wr training."
+
+#string STR_MC_RON_PROMPT                   #language en-US "Train MC Ron"
+#string STR_MC_RON_HELP                     #language en-US "Enables MC Ron training."
+
+#string STR_RX_CTLE_PROMPT                  #language en-US "RX Ctle Training"
+#string STR_RX_CTLE_HELP                    #language en-US "Enables RX Ctle training"
+
+#string STR_TX_EQ_PROMPT                    #language en-US "Tx Eq Calibration"
+                                            #language x-AMI "MEM04D"
+#string STR_TX_EQ_HELP                      #language en-US "Enables Tx equalization calibration"
+
+#string STR_IMODE_PROMPT                    #language en-US "iMode Training"
+                                            #language x-AMI "MEM04E"
+#string STR_IMODE_HELP                      #language en-US "Enables iMode training"
+
+#string STR_TURNAROUND_PROMPT               #language en-US "Turnaround Time Optimization"
+                                            #language x-AMI "MEM056"
+#string STR_TURNAROUND_HELP                 #language en-US "Enables optimal turnaround times"
+
+#string STR_PDA_PROMPT                      #language en-US "PDA"
+                                            #language x-AMI "MEM057"
+#string STR_PDA_HELP                        #language en-US "Enables Per DRAM Addressing"
+
+#string STR_CUSTOMREFRESHRATEEN_PROMPT      #language en-US "Custom Refresh Enable"
+                                            #language x-AMI "MEM024"
+#string STR_CUSTOMREFRESHRATEEN_HELP        #language en-US "Enable/disable a custom memory refresh rate"
+
+#string STR_CUSTOMREFRESHRATE_PROMPT        #language en-US "Custom Refresh Rate"
+                                            #language x-AMI "MEM025"
+#string STR_CUSTOMREFRESHRATE_HELP          #language en-US "Refresh Rate in 0.1x units of the standard 7.8 usec interval. Valid range is 20 to 40 (i.e. 2x to 4x)"
+
+#string STR_FRC_MIRR_WR_TO_FAILED_EN_PROMPT #language en-US "frcmirrwrstofailed Enable Mask"
+#string STR_FRC_MIRR_WR_TO_FAILED_EN_HELP   #language en-US "Selects frcmirrwrstofailed enable/disable"
+
+#string STR_STAGGER_REF_PROMPT              #language en-US "Stagger Ref Enable Mask"
+#string STR_STAGGER_REF_HELP                #language en-US "Selects Stagger Ref enable/disable"
+
+#string STR_ALLOW_CORRECTABLE_ERROR_EN_PROMPT #language en-US "Allow SBE during training"
+                                              #language x-AMI "MEM020"
+#string STR_ALLOW_CORRECTABLE_ERROR_EN_HELP   #language en-US "Allow SBE during training knob enable/disable"
+
+#string STR_DLL_RESET_TEST_PROMPT           #language en-US "DLL Reset Test"
+                                            #language x-AMI "MEM094"
+#string STR_DLL_RESET_TEST_HELP             #language en-US "Set this to the number of loops to execute the DDL reset test. The test will execute RMT for the provided number of loops without DLL resets and then it will exectue RMT for the same number of loops with DLL resets."
+
+#string STR_AUTO_RESVD                      #language en-US "Reserved"
+#string STR_SLOW_RESVD                      #language en-US "Reserved"
+#string STR_FAST_RESVD                      #language en-US "Reserved"
+#string STR_PPDF_RESVD                      #language en-US "Reserved"
+#string STR_PPDS_RESVD                      #language en-US "Reserved"
+#string STR_APD_PPDF_RESVD                  #language en-US "Reserved"
+#string STR_APD_PPDS_RESVD                  #language en-US "Reserved"
+
+#string STR_RMT_COLD_FAST_BOOT_PROMPT                        #language en-US "RMT On Cold Fast Boot"
+                                            #language x-AMI "MEM07D"
+#string STR_RMT_COLD_FAST_BOOT_HELP                        #language en-US "Enable/Disable Rank Margin Tool on Cold Fast Boot"
+
+//AptioV server override start: OLTT support on DDR3 platform
+#string STR_OLTT_PEAK_BW_LIMIT_PERCENT      #language en-US "OLTT Peak BW %"
+                                            #language x-AMI "MEM099"
+#string STR_OLTT_PEAK_BW_LIMIT_PERCENT_HELP #language en-US "Valid Offset 25 - 100. This is a percentage of the peak bandwidth allowed for OLTT"
+//AptioV server override end: OLTT support on DDR3 platform
+
+#string STR_HADB_RD_PROMPT                      #language en-US "HADB RD feature"
+#string STR_HADB_RD_HELP                        #language en-US "Selects HADB RD enable/disable. Knob is functinal for 2CH per HA SKUs only."
+
+#string STR_HADB_WR_PROMPT                      #language en-US "HADB WR feature"
+#string STR_HADB_WR_HELP                        #language en-US "Selects HADB WR enable/disable"
+
+#string STR_BGF_THRESHOLD_OVERIDE_PROMPT          #language en-US "BGF Threshold override feature"
+#string STR_BGF_THRESHOLD_OVERIDE_HELP            #language en-US "BGF Threshold override feature enable/disable. Default is Disabled."
+
+#string STR_CNTRL_BGF_THRESHOLD_PROMPT            #language en-US "Control BGF Threshold input knob"
+#string STR_CNTRL_BGF_THRESHOLD_HELP              #language en-US "Control BGF Threshold override value."
+
+#string STR_UPDT_BGF_THRESHOLD_PROMPT             #language en-US "Update BGF Threshold input knob"
+#string STR_UPDT_BGF_THRESHOLD_HELP               #language en-US "Update BGF Threshold override value."
+
+#string STR_WR_BGF_THRESHOLD_PROMPT               #language en-US "Write BGF Threshold input knob"
+#string STR_WR_BGF_THRESHOLD_HELP                 #language en-US "Write BGF Threshold override value."
+
+#string STR_WR_CRC_PROMPT                      #language en-US "WR CRC feature Control"
+#string STR_WR_CRC_HELP                        #language en-US "This knob controls the WRCRC feature.Disabled by Default."
+
+#string STR_CECCWA_PROMPT                   #language en-US "CECC WA Control"
+#string STR_CECCWA_HELP                     #language en-US "This knob controls the CECC WA. Disabled by Default on L0 and Later Processor."
+
+#string STR_CAP_ERR_FLOW_PROMPT             #language en-US "CAP ERR FLOW feature Control"
+#string STR_CAP_ERR_FLOW_HELP_DE               #language en-US "This knob controls the CAP ERR FLOW feature. Disabled by Default."
+#string STR_CAP_ERR_FLOW_HELP_EP               #language en-US "This knob controls the CAP ERR FLOW feature. Enabled by Default."
+
+#string STR_DDR4_PLATFORM_PROMPT           #language en-US "Platform type input for SPD page selection."
+#string STR_DDR4_PLATFORM_HELP             #language en-US "This knob controls the SPD page selection feature. Disabled by Default."
+
+#string STR_CECC_WA_CH_MASK_PROMPT        #language en-US "CECC WA CH Mask"
+#string STR_CECC_WA_CH_MASK_HELP          #language en-US "CH bitmask to apply CECC WA. 1 bit per CH. value 2 applies WA on CH1, 3 on CH0 and 1"
+
+#string STR_PPR_TYPE                      #language en-US "PPR Type"
+#string STR_PPR_TYPE_HELP                 #language en-US "Select PPR Type - Hard / Soft / Disabled"
+#string STR_PPR_TYPE_HARD                 #language en-US "Hard PPR"
+#string STR_PPR_TYPE_SOFT                 #language en-US "Soft PPR"
+#string STR_PPR_DISABLED                  #language en-US "PPR Disabled"
+
+#string STR_PPR_ERR_INJ                   #language en-US "PPR Error Injection test"
+#string STR_PPR_ERR_INJ_HELP              #language en-US "Enable / Disable support for c-script err inj test"
+
+//
+// End of file
+//

@@ -1,0 +1,9 @@
+<component>
+	name = "Server/Workstation KabyLake-H uCode Patches (906EX)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\ServWork\"
+	RefName = "KabyLakeHServerUc"
+[files]
+"KabyLakeHServerUc.sdl"
+"M2A906E9_000000EC.pdb"	= "SERVER WORKSTATION MICROCODE UPDATES"
+<endComponent>

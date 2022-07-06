@@ -1,0 +1,8 @@
+<component>
+	name = "Iio"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Include\Iio\"
+	RefName = "GrantleyPkg.Iio"
+[files]
+"IioConfigData.h"	
+<endComponent>

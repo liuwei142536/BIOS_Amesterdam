@@ -1,0 +1,17 @@
+<component>
+    name = "AmiBoardInfo"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\BoardInfo\"
+    RefName = "AmiModulePkg.AmiBoardInfo"
+[INF]
+"AMIBoardInfo2.inf"
+"BrdInfoOutput.inf"
+[files]
+"AmiBoardInfo.chm"	
+"AmiBoardInfo.sdl"	
+"PciRomTemplate.txt"	
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_07"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_18"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_24"
+<endComponent>

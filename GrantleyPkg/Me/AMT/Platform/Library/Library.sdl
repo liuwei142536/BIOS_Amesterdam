@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "Library_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AmtPlatformLib"
+	File  = "AmtPlatformLib\AmtPlatformLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AmtWrapperLib"
+	File  = "AmtWrapperLib\AmtWrapperLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "AmtPlatformLib"
+	Instance  = "GrantleyPkg.AmtPlatformLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+
+LibraryMapping
+	Class  = "AmtWrapperLib"
+	Instance  = "GrantleyPkg.AmtWrapperLib"
+End
+

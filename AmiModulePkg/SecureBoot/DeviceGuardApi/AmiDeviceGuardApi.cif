@@ -1,0 +1,10 @@
+<component>
+	name = "DeviceGuard Protocol"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\SecureBoot\DeviceGuardApi\"
+	RefName = "SecureBoot.AmiDeviceGuardApi"
+[INF]
+"AmiDeviceGuardApi.inf"
+[files]
+"AmiDeviceGuardApi.sdl"
+<endComponent>

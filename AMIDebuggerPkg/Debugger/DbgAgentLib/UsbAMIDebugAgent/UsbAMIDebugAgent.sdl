@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "UsbAMIDebugAgent_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling UsbAMIDebugAgent support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Disable = Yes
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "0"
+End
+
+TOKEN
+	Name  = "UsbDxeDebugAgent_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable UsbPeiDebugAgent support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "UsbPeiDebugAgent_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable UsbPeiDebugAgent support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "UsbDebugAgent"
+	File  = "UsbDebugAgent.inf"
+	Package  = "AMIDebuggerPkg"
+End
+
+LibraryMapping
+	Class  = "DbgAgentLib"
+	Instance  = "AMIDebuggerPkg.UsbDebugAgent"
+End

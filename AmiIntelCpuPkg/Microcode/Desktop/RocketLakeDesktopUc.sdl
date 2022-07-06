@@ -1,0 +1,56 @@
+TOKEN
+	Name  = "DESKTOP_A067X_ROCKETLAKE"
+	Value  = "0"
+    Help = "Intel(R) RocketLake"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "DESKTOP_M02A0670_ROCKETLAKE"
+    Value  = "1"
+    Help  = "1 - Intel(R) Desktop RocketLake-S A-0 Stepping(A0670)   2 - Intel(R) RocketLake-S A-0 Stepping(A0670) with CML PCH"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M02A0671_ROCKETLAKE"
+    Value  = "1"
+    Help  = "1 - Intel(R) Desktop RocketLake-S B-0 Stepping(A0671) with TGL PCH  2 - Intel(R) RocketLake-S B-0 Stepping(A0671) with CML PCH"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M02A0670_0000002A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop RocketLake-S A-0 Stepping(A0670)"
+    Token = "DESKTOP_M02A0670_ROCKETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M02A0670_00000024.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop RocketLake-S A-0 Stepping(A0670) with CML PCH"
+    Token = "DESKTOP_M02A0670_ROCKETLAKE" "=" "2"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M02A0671_00000050.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop RocketLake-S B-0 Stepping(A0671) with TGL PCH "
+    Token = "DESKTOP_M02A0671_ROCKETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M02A0671_00000050.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop RocketLake-S B-0 Stepping(A0671) with CML PCH"
+    Token = "DESKTOP_M02A0671_ROCKETLAKE" "=" "2"
+    InvokeOrder = AfterParent
+End

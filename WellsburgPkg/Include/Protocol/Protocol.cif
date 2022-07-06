@@ -1,0 +1,24 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "WellsburgPkg\Include\Protocol\"
+	RefName = "WellsburgPkg.Protocol"
+[files]
+"ActiveBios.h"	
+"PchExtendedReset.h"	
+"PchInfo.h"	
+"PchPlatformPolicy.h"	
+"PchPlatformResetPolicy.h"	
+"PchReset.h"	
+"PchS3Support.h"	
+"SerialGpio.h"	
+"SmmIchnDispatch2.h"	
+"SmmIchnDispatch2Ex.h"	
+"PchSetTmcSrcClk.h"	
+"SmmSmbus.h"	
+"Spi.h"	
+"UsbHcPortPrecondition.h"	
+"Wdt.h"	
+"PchSmmIoTrapControl.h"	
+"PchThermalLevels.h"	
+<endComponent>

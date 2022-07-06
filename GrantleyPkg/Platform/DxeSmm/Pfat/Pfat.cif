@@ -1,0 +1,12 @@
+<component>
+	name = "Pfat"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\DxeSmm\Pfat\"
+	RefName = "GrantleyPkg.Pfat"
+[INF]
+"PfatServices.inf"
+[files]
+"PfatBinary\BIOS_Guard_module.bin"	
+"Pfat.sdl"
+"PfatEfiFdfFileStatement.txt"	
+<endComponent>

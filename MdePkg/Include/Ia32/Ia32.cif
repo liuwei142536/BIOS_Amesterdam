@@ -1,0 +1,9 @@
+<component>
+	name = "Ia32"
+	category = ModulePart
+	LocalRoot = "MdePkg\Include\Ia32\"
+	RefName = "MdePkg.Ia32"
+[files]
+"Nasm.inc"	
+"ProcessorBind.h"	
+<endComponent>

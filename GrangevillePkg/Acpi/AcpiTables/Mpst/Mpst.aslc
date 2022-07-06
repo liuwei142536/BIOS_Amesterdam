@@ -1,0 +1,145 @@
+/*++
+  This file contains 'Framework Code' and is licensed as such
+  under the terms of your license agreement with Intel or your
+  vendor.  This file may not be modified, except as allowed by
+  additional terms of your license agreement.
+--*/
+/*++
+
+  Copyright (c) 2012 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval 
+  system, or transmitted in any form or by any means without the express 
+  written consent of Intel Corporation.
+ 
+Module Name:
+
+  Mpst.aslc
+
+Abstract:
+
+  This file contains a structure definition for the ACPI Memory Power State 
+  Description Table (MPST).
+
+--*/
+
+//
+// Statements that include other files
+//
+#include <Acpi\Mpst.h>
+
+//
+// MPST Table
+// Memory Power Node Structure
+//
+#define Node0   {                        \
+  EFI_ACPI_NON_POWER_MANAGED_MEMORY,     \
+  EFI_ACPI_RESERVED_BYTE,                \
+  0,                                     \
+  sizeof (EFI_ACPI_MEMORY_POWER_NODE),   \
+  0,                                     \
+  0,                                     \
+  0,                                     \
+  0,                                     \
+  EFI_ACPI_MEMORY_POWER_STATES_COUNT,    \
+  MAX_DIMM,                              \
+  {                                      \
+    {0, 0},                              \
+    {1, 1},                              \
+  }                                      \
+}
+
+// Copy nodes, each NodeId will be updated in AcpiPlatform, as well as those starting address and size
+#define Node1  Node0
+#define Node2  Node0
+#define Node3  Node0
+#define Node4  Node0
+#define Node5  Node0
+#define Node6  Node0
+#define Node7  Node0
+#define Node8  Node0
+#define Node9  Node0
+#define Node10 Node0
+#define Node11 Node0
+#define Node12 Node0
+#define Node13 Node0
+#define Node14 Node0
+#define Node15 Node0
+#define Node16 Node0
+#define Node17 Node0
+#define Node18 Node0
+#define Node19 Node0
+#define Node20 Node0
+#define Node21 Node0
+#define Node22 Node0
+#define Node23 Node0
+#define Node24 Node0
+#define Node25 Node0
+#define Node26 Node0
+#define Node27 Node0
+#define Node28 Node0
+#define Node29 Node0
+#define Node30 Node0
+#define Node31 Node0
+#define Node32 Node0
+#define Node33 Node0
+#define Node34 Node0
+#define Node35 Node0
+
+#pragma pack(1)
+
+EFI_ACPI_MEMORY_POWER_STATE_TABLE mMpstTable = {
+  // EFI_ACPI_MEMORY_POWER_STATE_TABLE_HEADER
+  { // EFI_ACPI_DESCRIPTION_HEADER
+    { EFI_ACPI_2_0_MEMORY_POWER_STATE_TABLE_SIGNATURE,
+      sizeof (EFI_ACPI_MEMORY_POWER_STATE_TABLE),   // Length
+      EFI_ACPI_MEMORY_POWER_STATE_TABLE_REVISION,   // Revision
+      0x00,                                         // CheckSum
+      'I', 'N', 'T', 'E', 'L', ' ',                 // OemId
+      0,                                            // OemTableId
+      EFI_ACPI_OEM_MPST_REVISION,                   // OemRevision
+      EFI_ACPI_CREATOR_ID,                          // CreaterId
+      EFI_ACPI_CREATOR_REVISION,                    // CreaterRevision
+    },
+    EFI_ACPI_MPST_PCC_IDENTIFIER,                   // Identifier of the MPST Platform Communication Channel
+    EFI_ACPI_RESERVED_BYTE,                         // Reserved[0]
+    EFI_ACPI_RESERVED_BYTE,                         // Reserved[1]
+    EFI_ACPI_RESERVED_BYTE,                         // Reserved[2]
+  },
+
+  EFI_ACPI_MEMORY_POWER_NODES_COUNT,                // MemPwrNodeCnt
+  EFI_ACPI_RESERVED_WORD,
+  // MemoryPowerNode[EFI_ACPI_MEMORY_POWER_NODES_COUNT]
+  // AcpiPlatform Driver will copy/append one of Template Memory Power Node 
+  // for each memory power node of the system and patch it to suit the node
+  {
+    Node0, Node1, Node2, Node3, Node4, Node5, Node6, Node7,
+    Node8, Node9, Node10, Node11, Node12, Node13, Node14, Node15,
+// AptioV Server Override Start: Added the Entries for the maximum supported nodes
+    Node16, Node17, Node18, Node19, Node20, Node21, Node22, Node23,
+    Node24, Node25, Node26, Node27, Node28, Node29, Node30, Node31,
+    Node32, Node33, Node34, Node35,
+// AptioV Server Override End: Added the Entries for the maximum supported nodes
+  },
+  (EFI_ACPI_MEMORY_POWER_NODES_COUNT)*(EFI_ACPI_MEMORY_POWER_STATES_COUNT),
+  EFI_ACPI_RESERVED_WORD,
+  //
+  // Memory Power State Characteristics Info Structure
+  //
+  {
+    { POWER_STATE_M0, POWER_STATE_M1 },
+  }
+};
+
+#pragma pack()
+
+VOID
+main (
+  VOID
+  )
+
+{
+}

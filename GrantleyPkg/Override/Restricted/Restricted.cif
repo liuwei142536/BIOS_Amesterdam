@@ -1,0 +1,8 @@
+<component>
+	name = "Restricted"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Override\Restricted\"
+	RefName = "GrantleyPkg.Restricted"
+[parts]
+"GrantleyPkg.IA32FamilyCpuPkg"
+<endComponent>

@@ -1,0 +1,138 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 1999 - 2015 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   CommonRefCode.hfr
+// 
+// Abstract:
+// 
+//   Common RefCode Setup formset.
+// 
+// Revision History: 
+// 
+// --*/
+
+  //
+  // Tylersburg Submenu
+  //
+#include "Token.h" // AptioV Server Override: Added to get the value of sdl tokens
+
+form formid = VFR_FORMID_COMMONRC,
+    title   = STRING_TOKEN(STR_RC_COMMON_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_RC_COMMON_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    
+#ifndef DYNAMIC_MMCFG_BASE_FLAG //AptioV server override: dynamic MMCFG base change support.
+suppressif TRUE; 
+#endif
+    oneof varid = SYSTEM_CONFIGURATION.MmcfgBase,
+          prompt  = STRING_TOKEN(STR_CSI_MMCFG_BASE),
+          help    = STRING_TOKEN(STR_CSI_MMCFG_BASE_HELP),
+          option text = STRING_TOKEN(STR_2G),      value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_1G),      value = 1,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_3G),      value = 2,  flags = RESET_REQUIRED;
+    endoneof;   
+#ifndef DYNAMIC_MMCFG_BASE_FLAG //AptioV server override: dynamic MMCFG base change support.
+endif;
+#endif
+
+    // HSD 4167731	remove this setup option that does not work
+    //oneof varid = SYSTEM_CONFIGURATION.MmcfgSize,
+    //      prompt  = STRING_TOKEN(STR_CSI_MMCFG_SIZE),
+    //      help    = STRING_TOKEN(STR_CSI_MMCFG_SIZE_HELP),
+    //      option text = STRING_TOKEN(STR_256M),    value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    //      option text = STRING_TOKEN(STR_128M),    value = 1,  flags = RESET_REQUIRED;
+    //      option text = STRING_TOKEN(STR_64M),     value = 2,  flags = RESET_REQUIRED;
+    //endoneof;
+
+    /*oneof varid = SYSTEM_CONFIGURATION.MmiolBase,
+          prompt  = STRING_TOKEN(STR_CSI_MMIOL_BASE),
+          help    = STRING_TOKEN(STR_CSI_MMIOL_BASE_HELP),
+          option text = STRING_TOKEN(STR_225G),     value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_125G),     value = 1,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_325G),     value = 2,  flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MmiolSize,
+          prompt  = STRING_TOKEN(STR_CSI_MMIOL_SIZE),
+          help    = STRING_TOKEN(STR_CSI_MMIOL_SIZE_HELP),
+          option text = STRING_TOKEN(STR_16875G),     value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_26875G),     value = 1,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_6875G),      value = 2,  flags = RESET_REQUIRED;
+    endoneof;*/
+
+    oneof varid = SYSTEM_CONFIGURATION.MmiohBase,
+          prompt  = STRING_TOKEN(STR_CSI_MMIOH_BASE),
+          help    = STRING_TOKEN(STR_CSI_MMIOH_BASE_HELP),
+          option text = STRING_TOKEN(STR_56T),     value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_48T),     value = 1,  flags = RESET_REQUIRED;  //AptioV server override: String name corrected.
+          option text = STRING_TOKEN(STR_24T),     value = 2,  flags = RESET_REQUIRED;
+// HSD: 4986861 SDP: PCI Devices Mapped above addressable limit (6000036274)
+          option text = STRING_TOKEN(STR_16T),     value = 3,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_12T),     value = 4,  flags = RESET_REQUIRED;  
+          option text = STRING_TOKEN(STR_4T),      value = 5,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_2T),      value = 6,  flags = RESET_REQUIRED;  
+          option text = STRING_TOKEN(STR_1T),      value = 7,  flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MmiohSize,
+          prompt  = STRING_TOKEN(STR_CSI_MMIOH_SIZE),
+          help    = STRING_TOKEN(STR_CSI_MMIOH_SIZE_HELP),
+          option text = STRING_TOKEN(STR_256G),     value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_128G),     value = 1,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_512G),     value = 2,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_1024G),    value = 3,  flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.IsocEn,
+          prompt  = STRING_TOKEN(STR_ISOCEN),
+          help    = STRING_TOKEN(STR_ISOCEN_HELP),
+#ifdef GRANGEVILLE_FLAG
+          option text = STRING_TOKEN(STR_DISABLE),      value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+#else
+          option text = STRING_TOKEN(STR_DISABLE),      value = 0,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLE),       value = 1,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_CSI_AUTO),     value = 2,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+#endif // GRANGEVILLE_FLAG
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MeSegEn,
+          prompt  = STRING_TOKEN(STR_MESEGEN),
+          help    = STRING_TOKEN(STR_MESEGEN_HELP),
+#ifdef GRANGEVILLE_FLAG
+          option text = STRING_TOKEN(STR_DISABLE),      value = 0,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_ENABLE),       value = 1,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_CSI_AUTO),     value = 2,  flags = RESET_REQUIRED;
+#else
+          option text = STRING_TOKEN(STR_DISABLE),      value = 0,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLE),       value = 1,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_CSI_AUTO),     value = 2,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+#endif // GRANGEVILLE_FLAG
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.NumaEn,
+          prompt  = STRING_TOKEN(STR_NUMAEN),
+          help    = STRING_TOKEN(STR_NUMAEN_HELP),
+          option text = STRING_TOKEN(STR_DISABLE),      value = 0,  flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLE),       value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+endform;

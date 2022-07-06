@@ -1,0 +1,19 @@
+<component>
+	name = "Ipmi"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Include\Ipmi\"
+	RefName = "GrantleyPkg.Ipmi"
+[files]
+"IpmiDefinitions.h"	
+"IpmiNetFnAppDefinitions.h"	
+"IpmiNetFnBridgeDefinitions.h"	
+"IpmiNetFnChassisDefinitions.h"	
+"IpmiNetFnFirmwareDefinitions.h"	
+"IpmiNetFnGroupExtDefinitions.h"	
+"IpmiNetFnIntelGeneralDefinitions.h"	
+"IpmiNetFnIntelPlatformSpecificDefinitions.h"	
+"IpmiNetFnIntelTPTDefinitions.h"	
+"IpmiNetFnSensorDefinitions.h"	
+"IpmiNetFnStorageDefinitions.h"	
+"IpmiNetFnTransportDefinitions.h"	
+<endComponent>

@@ -1,0 +1,31 @@
+TOKEN
+	Name  = "MeudFwCapsuleHdr_INF_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FwCapsule2Hdr support in Project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "NonBIOS_Validation" "=" "1"
+End
+
+INFComponent
+	Name  = "MeudFwCapsuleHdr"
+	File  = "MeudFwCapsuleHdr.inf"
+	Package  = "AmiModulePkg"
+    ModuleTypes  = "USER_DEFINED"
+End
+
+FFS_FILE
+    Name  = "MeudFwCapsuleHdr"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "AmiModulePkg.MeudFwCapsuleHdr"
+    Rule_Override  = "SubtypeGuidUncompressedNoChecksum"
+    Token = "NESTED_FV_MAIN" "=" "0"
+End
+
+FFS_FILE
+    Name  = "MeudFwCapsuleHdr"
+    FD_AREA  = "FV_MAIN_WRAPPER"
+    INFComponent  = "AmiModulePkg.MeudFwCapsuleHdr"
+    Rule_Override  = "SubtypeGuidUncompressedNoChecksum"
+    Token = "NESTED_FV_MAIN" "=" "1"
+End

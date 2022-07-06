@@ -1,0 +1,22 @@
+TOKEN
+    Name  = "DESKTOP_B067X_RAPTORLAKE"
+    Value = "0"
+    Help  = "Intel(R) Raptor Lake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "DESKTOP_M02B0670"
+    Value  = "1"
+    Help  = "Intel(R) Desktop Raptor Lake–S A-0 Stepping(B0670)"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M02B0670_00000009.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Raptor Lake–S A-0 Stepping(B0670)"
+    Token = "DESKTOP_M02B0670" "=" "1"
+    InvokeOrder = AfterParent
+End

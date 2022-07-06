@@ -1,0 +1,21 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Include\"
+	RefName = "GrantleyPkg.Me.Include.Include"
+[files]
+"HeciRegs.h"	
+"MeAccess.h"	
+"MeChipset.h"	
+"MeNvs.h"	
+"MeState.h"	
+"Sps.h"		
+"SpsMisc.h"
+"MeUma.h"	
+[parts]
+"GrantleyPkg.Me.Include.Guid.Guid"
+"GrantleyPkg.Me.Include.Library"
+"GrantleyPkg.Iio"
+"GrantleyPkg.Me.Include.Ppi.Ppi"
+"GrantleyPkg.Me.Include.Protocol.Protocol"
+<endComponent>

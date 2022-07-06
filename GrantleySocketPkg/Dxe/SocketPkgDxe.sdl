@@ -1,0 +1,88 @@
+TOKEN
+	Name  = "SocketPkgDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SocketPkgDxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "CpuCsrAccess_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling CpuCsrAccess support in the project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "CpuCsrAccessSMM_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling CpuCsrAccess support in the project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "CpuCsrAccess"
+	File  = "CpuCsrAccess\CpuCsrAccess.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+	Token = "CpuCsrAccess_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CpuCsrAccessSMM"
+	File  = "CpuCsrAccess\CpuCsrAccessSMM.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "CpuCsrAccessSMM_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CpuSpSmi"
+	File  = "CpuSpSmi/CpuSpSmi.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+TOKEN
+	Name  = "IioInit_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable IioInitialize support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "IioInit"
+	File  = "IioInit/IioInit.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "IioInit_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "GrantleySocketPkg.IioInit"
+	Token = "IioInit_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PpmInitialize_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PpmInitialize support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PpmInitialize"
+	File  = "PowerManagement\PpmInitialize.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PpmInitialize_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "GrantleySocketPkg.PpmInitialize"
+	Token = "PpmInitialize_SUPPORT" "=" "1"
+End

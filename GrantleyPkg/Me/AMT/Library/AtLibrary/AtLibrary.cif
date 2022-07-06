@@ -1,0 +1,10 @@
+<component>
+	name = "AtLibrary"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Library\AtLibrary\"
+	RefName = "GrantleyPkg.AtLibrary"
+[INF]
+"Dxe\AtDxeLib.inf"
+[files]
+"AtLibrary.sdl"	
+<endComponent>

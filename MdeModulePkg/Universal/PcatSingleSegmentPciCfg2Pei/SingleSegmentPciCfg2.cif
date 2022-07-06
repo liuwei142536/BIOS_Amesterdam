@@ -1,0 +1,11 @@
+<component>
+	name = "SingleSegmentPciCfg2"
+	category = ModulePart
+	LocalRoot = "MdeModulePkg\Universal\PcatSingleSegmentPciCfg2Pei\"
+	RefName = "MdeModulePkg.SingleSegmentPciCfg2"
+[INF]
+"PcatSingleSegmentPciCfg2Pei.inf"
+[files]
+"SingleSegmentPciCfg2.sdl"	
+"SingleSegmentPciCfg2.chm"	
+<endComponent>

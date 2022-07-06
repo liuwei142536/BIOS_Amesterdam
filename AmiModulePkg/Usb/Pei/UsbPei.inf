@@ -1,0 +1,122 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  INF_VERSION  =  0x00010005
+  BASE_NAME  = UsbPei
+  FILE_GUID  = 39E8CA1A-7A69-4a73-834A-D06381933286
+  MODULE_TYPE = PEIM
+  VERSION_STRING  =  1.0
+  ENTRY_POINT  = UsbPeiEntryPoint
+
+[Sources]
+  HubPeim.c
+  PeiUsbLib.c
+  UsbIoPeim.c
+  UsbPei.c
+  UsbPei.h
+  UsbPeim.c
+  UhcPeim.c
+  UhcPeim.h
+  Atapi.h
+  BotPeim.c
+  BotPeim.h
+  PeiAtapi.c
+  UsbBotPeim.c
+  UsbBotPeim.h
+  $(USB_PEI_SOURCES_LIST)
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  BaseMemoryLib
+  IoLib
+  DebugLib
+  PcdLib
+  $(USB_PEI_LIBRARYCLASSES_LIST)
+
+
+[Ppis]
+  gPeiUsbIoPpiGuid
+  gPeiUsbHostControllerPpiGuid
+  gPeiUsbControllerPpiGuid
+  gEfiEndOfPeiSignalPpiGuid
+  gEfiPeiCpuIoPpiInstalledGuid
+  gEfiPeiVirtualBlockIoPpiGuid
+  gEfiPeiStallPpiGuid
+  gEfiPeiBootInRecoveryModePpiGuid
+  gEdkiiIoMmuPpiGuid
+  $(USB_PEI_PPIS_LIST)
+  
+ [Packages]
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  Build/AmiUsbPkg.dec
+  $(USB_PEI_PACKAGES_LIST)
+
+[PcdEx]
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiEdkiiIommuPpiSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiUhciSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiOhciSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiEhciSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiUhciIoBase
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiUhciPciDev
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiEhciPciDev
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiEhciIoBase
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiOhciIoBase
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciIoBase
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciMmioSize
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciPciDev
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiXhciPciRegVal
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiRecoveryReqRet
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiRecoveryReqTimeout
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiKeyModifierValue
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiRecScanCode
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiKeyboardNumlock
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiInS3Support
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiOhciPciDev
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiOhciPciRegVal
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiKeyboardSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiDevConnectTimeout
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiKbConnectDelay
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiMassSupportPolicy
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPeiHostErrorSupport
+  $(USB_PEI_PCDEX_LIST)
+
+[Pcd]
+ $(USB_PEI_PCD_LIST)
+
+[Depex]
+  $(USB_PEI_DEPEX_LIST)
+  gEfiPeiMemoryDiscoveredPpiGuid AND
+  gEfiPeiDecompressPpiGuid AND
+  gEfiPeiCpuIoPpiInstalledGuid AND
+  gEfiPciCfg2PpiGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

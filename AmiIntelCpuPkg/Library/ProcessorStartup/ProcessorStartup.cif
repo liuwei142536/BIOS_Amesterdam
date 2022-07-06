@@ -1,0 +1,15 @@
+<component>
+	name = "ProcessorStartup"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg/Library/ProcessorStartup"
+	RefName = "AmiIntelCpuPkg.ProcessorStartup"
+
+[files]
+"ProcessorStartup.sdl"
+"ProcessorStartup.mak"
+"ProcessorStartup.c"
+"Ia32/mbiosmac.mac"
+"Ia32/mbiosequ.equ"
+"Ia32/equates.equ"
+"Ia32/ProcessorStartup.asm"
+<endComponent>

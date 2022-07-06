@@ -1,0 +1,283 @@
+/*++
+  This file contains an 'Intel Peripheral Driver' and is        
+  licensed for Intel CPUs and chipsets under the terms of your  
+  license agreement with Intel or your vendor.  This file may   
+  be modified by the user, subject to additional terms of the   
+  license agreement                                             
+--*/
+//  Copyright (c)  2001 - 2015 Intel Corporation.  All rights reserved.
+//
+//  This software and associated documentation (if any) is furnished under 
+//  a license and may only be used or copied in accordance with the terms 
+//  of the license.  Except as permitted by such license, no part of this 
+//  software or documentation may be reproduced, stored in a retrieval system, 
+//  or transmitted in any form or by any means without the express written 
+//  consent of Intel Corporation.
+//
+//*************************************************************
+//  Filename:  SC.asi
+//
+//  File contains ASL source code to control a typical UART/COM port
+//
+//*************************************************************
+//
+
+
+
+Device(UAR1) {  // 550A COM Port
+    
+    NAME(_HID, EISAID("PNP0501"))  // PnP Device ID
+    NAME(_UID, 1)			// Generic ID for COMA
+
+    //*****************************************************
+    // Method _STA:  Return Status
+    //*****************************************************
+     
+    Method(_STA,0,NotSerialized) { // Return Status of the UART
+
+  
+
+        // Check if Disable SC is not set (SC is enabled and active) and if it is then return 0xF to effectively
+
+        If(LEqual(SOLE, 0) ){ 
+           Return (0x0F)
+        }
+	
+	 
+
+      
+        // Enter Configuration Mode and Select the UART1 (Logical Device #2)
+        ENFF(0x02)
+
+        //
+        // First, read the Activate register.
+        // If this register is TRUE, then that means
+        // that the device is Present & Active.
+        //
+        If (ACTF) {
+            // Leave Configuration Mode
+            EXFF()
+
+            // Return result -- 
+            //      Device is Present & Active
+            //      did *NOT* fail self-test
+            //      SHOULD be shown to user
+            Return(0x0F)
+        } 
+        
+        //
+        // OK, so the device isn't Active, so check
+        // and see if it's at least Present.
+        //
+        Else {
+            //
+            // If the I/O Address is non-zero, then the device
+            // is Present.  Test for zero by OR'ing together
+            // the high and low bytes of the address.
+            //
+            If (LOr(AHFF,ALFF)) {
+                // Leave Configuration Mode
+                EXFF()
+
+                //
+                // Return result -- 
+                //      Device is Present, but not Active
+                //      did *NOT* fail self-test
+                //      SHOULD be shown to user
+                //
+                Return(0x0D)
+            }
+
+            Else {
+                // Leave Configuration Mode
+                EXFF()
+
+                // Return result -- Device not even Present 
+                Return(0x00)
+            }
+        }
+    } // end of Method _STA    
+
+
+    //*****************************************************
+    //  Method _DIS:  Disable the device    
+    //*****************************************************
+    Method(_DIS,0,NotSerialized) { // Disable Method 
+
+    }
+
+    //*****************************************************
+    //  Method _CRS:  Return Current Resource Settings
+    //*****************************************************
+    Method(_CRS,0,NotSerialized) { 
+	
+	
+			Name(BUF0,ResourceTemplate()
+            {
+            IO(Decode16,0x3F8,0x3F8,0x08,0x08)
+            IRQ(Level, ActiveLow, Shared){4}  
+            })
+			Name(BUF1,ResourceTemplate()
+            {
+            IO(Decode16,0x3F8,0x3F8,0x08,0x08)
+			IRQ(Level, ActiveHigh, Shared){4}  
+
+            })            
+		
+	   
+
+        //
+        // Create some ByteFields in the Buffer in order to
+        // permit saving values into the data portions of
+        // each of the descriptors above.
+        //
+        CreateByteField (BUF0, 0x02, IOLO) // IO Port Low
+        CreateByteField (BUF0, 0x03, IOHI) // IO Port Hi
+        CreateByteField (BUF0, 0x04, IORL) // IO Port Low
+        CreateByteField (BUF0, 0x05, IORH) // IO Port High
+        CreateWordField (BUF0, 0x09, IRQL) // IRQ
+        
+        // Check if Disable SC is not set (SC is enabled and active) and if it is then return resource
+        // No need to configure the resource
+        If(LEqual(SOLE, 0) ){  
+           If(LLessEqual(STEP, 2)) {
+           Return(BUF0)    //  U0 & V1 Stepping
+          }Else {
+           Return(BUF1)  // Return for rest
+          }
+        }
+        // Enter Configuration Mode and Select the UART1 (Logical Device #2)
+        ENFF(0x02)
+
+        //
+        // Get the IO setting from the chip, and copy it
+        // to both the min & max for the IO descriptor.
+        //
+        
+        // Low Bytes:
+        Store(ALFF, IOLO)    // min.
+        Store(ALFF, IORL)    // max.
+
+        // High Bytes:
+        Store(AHFF, IOHI)   // min.
+        Store(AHFF, IORH)   // max.
+
+        //
+        // Get the IRQ setting from the chip, and shift
+        // it into the Descriptor byte.
+        //
+        Store(0x01,Local0)
+        ShiftLeft(Local0,INTF,IRQL)
+
+        // Leave Configuration Mode
+        EXFF()
+	     If(LLessEqual(STEP, 2)) {
+	     Return(BUF0)    //  U0 & V1 Stepping
+		}Else {
+			   Return(BUF1)  // Return for rest
+	}    
+    } // end _CRS Method
+
+  //*****************************************************
+  //  Method _SRS:  Set Resource Setting
+  //*****************************************************
+  Method(_SRS,1,NotSerialized) {    // Set Resource Settings
+    // ARG0 is PnP Resource String to set 
+    //
+    // Define offsets into descriptor to match value 
+    // returned by descriptors in _PRS method
+    //
+    CreateByteField (Arg0, 0x02, IOLO) // IO Port Low
+    CreateByteField (Arg0, 0x03, IOHI) // IO Port Hi
+
+    CreateWordField (Arg0, 0x09, IRQL) // IRQ
+
+    // Check if Disable SC is not set (SC is enabled and active) and if it is then return 
+    // No need to configure the resource
+    If(LEqual(SOLE, 0) ){  
+        Return() // return
+    }
+
+
+    // Enter Configuration Mode and Select the UART (Logical Device #2)
+    ENFF(0x02)
+
+    // Set the IO Base Address
+    Store(IOLO, ALFF)
+    Store(IOHI, AHFF)
+
+    FindSetRightBit(IRQL,INTF)// Set IRQ
+    If (LNotEqual(IRQL,Zero)) {Decrement(INTF)}
+
+    // Activate the Device
+    Store(0x01,ACTF)
+
+    // Leave Configuration Mode
+    EXFF()
+
+  } // end _SRS Method
+ 
+
+} // end of Device UAR1        
+
+Device(UAR2) {  // 550A COM Port
+    
+    NAME(_HID, EISAID("PNP0501"))  // PnP Device ID
+    NAME(_UID, 2)			// Generic ID for COMB
+
+   
+
+    //*****************************************************
+    // Method _STA:  Return Status
+    //*****************************************************
+    Method(_STA,0,NotSerialized) { // Return Status of the UART
+
+
+
+	  Return(0x0F)
+
+	 
+
+ }
+   //*****************************************************
+    //  Method _DIS:  Disable the device    
+    //*****************************************************
+    Method(_DIS,0,NotSerialized) { // Disable Method 
+       
+    }
+
+    //*****************************************************
+    //  Method _CRS:  Return Current Resource Settings
+    //*****************************************************
+    Method(_CRS,0,NotSerialized) { 
+	
+	
+		Name(BUF0,ResourceTemplate()
+            {
+            IO(Decode16,0x2F8,0x2F8,0x08,0x08)
+            IRQ(Level, ActiveLow, Shared){3}  
+            })
+        Name(BUF1,ResourceTemplate()
+            {
+            IO(Decode16,0x2F8,0x2F8,0x08,0x08)
+			IRQ(Level, ActiveHigh, Shared){3}  
+
+            })
+	    
+	                
+        If(LLessEqual(STEP, 2)) {
+           Return(BUF0)    //  U0 & V1 Stepping
+		}Else {
+				   Return(BUF1)  // Return for rest
+     	}
+	   
+        
+    } // end _CRS Method
+
+        
+}
+
+
+
+// end of file SC.ASI
+

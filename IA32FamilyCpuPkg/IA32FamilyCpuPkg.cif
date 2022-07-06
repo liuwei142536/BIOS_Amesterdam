@@ -1,0 +1,18 @@
+<component>
+	name = "IA32FamilyCpuPkg"
+	category = CPU
+	LocalRoot = "IA32FamilyCpuPkg\"
+	RefName = "IA32FamilyCpuPkg"
+	Generic Module = "SS: AptioV;$\AptioV\Source\Hardware\Cpu\Intel\IA32FamilyCpuPkg;5.004_IA32FamilyCpuPkg_04"
+[INF]
+"PiSmmCpuDxeSmm\PiSmmCpuDxeSmm.inf"
+"PiSmmCommunication\PiSmmCommunicationPei.inf"
+"PiSmmCommunication\PiSmmCommunicationSmm.inf"
+[files]
+"IA32FamilyCpuPkg.sdl"	
+"IA32FamilyCpuPkg.dec"	
+[parts]
+"IA32FamilyCpuPkg.Include"
+"IA32FamilyCpuPkg.LibraryInstances"
+"IA32FamilyCpuPkg.CpuArchDxe"
+<endComponent>

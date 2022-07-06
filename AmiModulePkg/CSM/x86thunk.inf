@@ -1,0 +1,20 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = x86thunk
+  FILE_GUID                      = A08276EC-A0FE-4e06-8670-385336C7D093
+  MODULE_TYPE                    = USER_DEFINED
+
+[Sources]
+  x86thunk.asm16
+
+[Packages]
+  MdePkg/MdePkg.dec

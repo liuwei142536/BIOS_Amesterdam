@@ -1,0 +1,42 @@
+[Defines]
+INF_VERSION     = 0x00010015
+VERSION_STRING  = 1.0
+BASE_NAME       = AuthVariable
+MODULE_TYPE     = UEFI_DRIVER
+LIBRARY_CLASS   = NULL
+FILE_GUID       = 4FECFAA8-3439-4518-8090-B22D9E9267FA
+
+[Sources]
+  AuthService.c
+  AuthVariable.c
+  Auth2Variable.c
+  AuthVariable.h
+  AuthServiceInternal.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCryptoPkg/AmiCryptoPkg.dec
+  AmiSecureBootPkg/AmiSecureBootPkg.dec
+
+[LibraryClasses]
+  AmiSecureBootLib
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+
+[Guids]
+  gEfiGlobalVariableGuid
+  gEfiImageSecurityDatabaseGuid
+  gEfiCertRsa2048Guid
+  gEfiCertTypeRsa2048Sha256Guid
+  gEfiHashAlgorithmSha256Guid
+  gEfiCertPkcs7Guid
+  gEfiCertX509Guid
+  gAmiDeploymentModeNvGuid
+  gAmiVendorKeysNvGuid
+
+[Protocols]
+  gAmiDigitalSignatureProtocolGuid
+  gAmiSmmDigitalSignatureProtocolGuid

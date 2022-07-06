@@ -1,0 +1,8 @@
+TOKEN
+	Name  = "AT_ENABLE"
+	Value  = "0"
+	Help  = "Switch for Enabling AtAmt support in the project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	Master = Yes
+End

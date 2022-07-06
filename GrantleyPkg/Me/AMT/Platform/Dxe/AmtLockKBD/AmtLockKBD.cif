@@ -1,0 +1,12 @@
+<component>
+	name = "AmtLockKBD"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Platform\Dxe\AmtLockKBD\"
+	RefName = "GrantleyPkg.Amt.AmtLockKBD"
+[INF]
+"AmtLockKBD.inf"
+"AmtLockUsbKBD.inf"
+[files]
+"AmtLockKBD.sdl"	
+"AmtInt9.csm16"	
+<endComponent>

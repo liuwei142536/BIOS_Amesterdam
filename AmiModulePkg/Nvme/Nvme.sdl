@@ -1,0 +1,208 @@
+TOKEN
+    Name  = "NVMe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable NVMe support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "NVME_VERBOSE_PRINT"
+    Value  = "0"
+    Help  = "Switch to enable Nvme driver's debug messages.Make sure PcdDebugPrintErrorLevel in the project SDL file has BIT12 set (DEBUG_BLKIO)."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+PATH
+    Name = "NVME_DIR"
+End
+
+TOKEN
+    Name  = "NVME_SETUP"
+    Value  = "1"
+    Help  = "Enable if NVMe setup controls from NVME eModule needs to be displayed in setup"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NVMe_SMM_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable NVMe_SMM support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "SMM_SUPPORT" "=" "1"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "NVME_BUS_DRIVER_VERSION"
+    Value  = "1"
+    Help  = "NVMe Bus driver version # reported in Driver Binding Protocol"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NVME_DRIVER_VERSION"
+    Value  = "23"
+    Help  = "NVMe driver version is used to avoid compatibility problems during NVMe driver Label update"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NVME_COMMAND_TIMEOUT"
+    Value  = "1"
+    Help  = "NVMe timeout in seconds used for the execution of NVM Express Command Packet"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DO_NOT_LAUNCH_NVME_OPROM"
+    Value = "1"
+    Help  = "If this token is enabled, then the NVMe device oprom will not be launched. AMI NVMe Bus driver will manage the NVMe device. NOTE: OptionRomPolicy driver is needed for this feature and it should be ported properly."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "NVME_SWSMI"
+    Value  = "0x42"
+    Help  = "Data to be written to SW SMI port to invoke SDIO SW SMI handler."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MAX_RETRY_COUNT_FOR_FATAL_ERROR"
+    Value  = "0"
+    Help  = "Maximum count that the Nvme command is retried for FATAL error"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+INFComponent
+    Name  = "Nvme"
+    File  = "Nvme.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "UEFI_DRIVER"
+End
+
+INFComponent
+    Name  = "NvmeSmm"
+    File  = "NvmeSmm\NvmeSmm.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "NVMe_SMM_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000044"
+    Override  = "AmiModulePkg.Nvme"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Display minimal debug messages when NVME_VERBOSE_PRINT token value is disable."
+    TargetDSC = Yes
+    Token = "NVME_VERBOSE_PRINT" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80001044"
+    Override  = "AmiModulePkg.Nvme"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Display all debug messages when NVME_VERBOSE_PRINT token value is enabled.Make sure project override PCD mapping value for PcdDebugPrintErrorLevel also have these Debug Print levels enabled in order to print all debug messages."
+    TargetDSC = Yes
+    Token = "NVME_VERBOSE_PRINT" "=" "1"
+End
+
+ELINK
+    Name  = "$(NVME_DIR)/Nvme.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+    Token = "NVME_SETUP" "=" "1"
+    Token = "NvmeDynamicSetup_SUPPORT" "=" "0"
+End
+
+ELINK
+    Name  = "$(NVME_DIR)/NvmeSetup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+    Token = "NVME_SETUP" "=" "1"
+    Token = "NvmeDynamicSetup_SUPPORT" "=" "0"
+End 
+
+ELINK
+    Name  = "InitNvmeStrings,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+    Token = "NVME_SETUP" "=" "1"
+    Token = "NvmeDynamicSetup_SUPPORT" "=" "0"
+End
+
+ELINK
+    Name  = "$(NVME_DIR)/Nvme.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+    Token = "NVME_SETUP" "=" "1"
+    Token = "NvmeDynamicSetup_SUPPORT" "=" "0"
+End
+
+ELINK
+    Name  = "gEfiPciIoProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"    
+    InvokeOrder = AfterParent
+    Token = "NvmeDynamicSetup_SUPPORT" "=" "0"
+End
+
+ELINK
+    Name  = "gAmiNvmeControllerProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"    
+    InvokeOrder = AfterParent
+    Token = "NvmeDynamicSetup_SUPPORT" "=" "0"
+End
+
+ELINK
+    Name  = "gEfiComponentName2ProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"    
+    InvokeOrder = AfterParent
+    Token = "NvmeDynamicSetup_SUPPORT" "=" "0"
+End
+
+ELINK
+    Name  = "gEfiDevicePathProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"    
+    InvokeOrder = AfterParent
+    Token = "NvmeDynamicSetup_SUPPORT" "=" "0"
+End
+
+ELINK
+    Name  = "gEfiBlockIoProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"    
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "NvmeControllerLib"
+    File  = "NvmeControllerLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "NvmeControllerLib"
+    Instance  = "AmiModulePkg.NvmeControllerLib"
+End
+

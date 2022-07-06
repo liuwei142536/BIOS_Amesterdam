@@ -1,0 +1,10 @@
+<component>
+	name = "UsbAMIDebugAgent"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\DbgAgentLib\UsbAMIDebugAgent\"
+	RefName = "Debugger.UsbAMIDebugAgent"
+[INF]
+"UsbDebugAgent.inf"
+[files]
+"UsbAMIDebugAgent.sdl"	
+<endComponent>

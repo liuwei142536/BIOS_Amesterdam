@@ -1,0 +1,79 @@
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************
+/=#
+#include "VFR.uni"
+
+#string STR_TCGSEC_SECURITY_CONFIGURATION      #language eng "TCG Storage Security Configuration:"
+#string STR_TCGSEC_SECURITY_ALL_HELP           #language eng "TCG Storage device Security Configuration"
+#string STR_TCGSEC_SECURITY_HELP               #language eng "Security Configuration for selected drive"
+#string STR_TCGSEC_PASSWORD_DESCRIPTION        #language eng "TCG Storage Security Password Description :"
+#string STR_TCGSEC_PASSWORD_CONFIGURATION      #language eng "PASSWORD CONFIGURATION:"
+
+#string STR_TCGSEC_BANNER_ONE                  #language eng "Allows access to Set, Modify and Clear TCG Storage device Admin and User Password."
+#string STR_TCGSEC_BANNER_TWO                  #language eng "Admin Password must be installed at first to enable TCG Storage Security. User Password can be created only when Admin password is installed."
+#string STR_TCGSEC_BANNER_THREE                #language eng "TCG Storage device can be locked and unlocked using Admin password alone, User password acts as optional credential to unlock the Device in POST."
+#string STR_TCGSEC_BANNER_FOUR                 #language eng "Set Admin/User Password options are greyed out when System enters Setup after Boot fail as Device security is frozen. Power-off, Power-on and press hot key to enter into setup."
+
+#string STR_TCGSEC_SSC_TYPE                    #language eng "Security Subsystem Class  :"
+#string STR_TCGSEC_SUPPORTED                   #language eng "Security Supported        :"
+#string STR_TCGSEC_ENABLED                     #language eng "Security Enabled          :"
+#string STR_TCGSEC_LOCKED                      #language eng "Security Locked           :"
+#string STR_TCGSEC_FROZEN                      #language eng "Security Frozen           :"
+#string STR_TCGSEC_YES                         #language eng "Yes"
+#string STR_TCGSEC_NO                          #language eng "No"
+
+#string STR_TCGSEC_USER_PASSWORD_STS           #language eng "User Pwd Status           :"
+#string STR_TCGSEC_ADMIN_PASSWORD_STS          #language eng "Admin Pwd Status          :"
+
+#string STR_TCGSEC_USER_PASSWORD               #language eng "Set User Password"
+#string STR_TCGSEC_USER_PASSWORD_HELP          #language eng "Sets User Password. \n Important: Enter Admin Password when Enter Current Password Prompt appears. \n If 'Set User Password' option is grayed out, Set Admin password first. \n Discard or Save changes option in setup does not have any impact on PASSWORD controls."
+#string STR_TCGSEC_ADMIN_PASSWORD              #language eng "Set Admin Password"
+#string STR_TCGSEC_ADMIN_PASSWORD_HELP         #language eng "Sets Admin Password. \n Once installed enables device security and locks device immediately.\n Advisable to Power Cycle System after Password Set/Clear. \n Discard or Save changes option in setup does not have any impact on PASSWORD controls."
+
+#if ENABLE_DEVICE_RESET_THRU_PSID
+#string STR_TCGSEC_PSID_REVERT                 #language eng "Device Reset"
+#string STR_TCGSEC_PSID_REVERT_HELP            #language eng "Resets the device using 32 byte PSID (Physical Security Identification) value of the device. PSID revert resets the device to Original Factory State and it will completely erases the user data from drive. It is case sensitive"
+
+#string STR_PSID_REVET_ERROR_WARNING_MESSAGE   #language en-US "Entered PSID value is invalid."
+
+#string STR_PSID_REVET_SUCCESS_WARNING_TITLE    #language en-US "SUCCESS!!!"
+#string STR_PSID_REVET_SUCCESS_WARNING_MESSAGE  #language en-US "Device Reset succeeds."
+
+#string STR_PSID_REVERT_WARNING_MESSAGE        #language en-US "By doing PSID revert, User Data in the Device will also be lost along with Clearing Device Password.\n Select 'Yes' to Proceed."
+#endif
+
+#string STR_TCGSEC_ERROR_WARNING_TITLE         #language en-US "ERROR!!!"
+#string STR_TCGSEC_SET_PWD_FAIL_ERROR          #language en-US "Failed to set User provided Password on the Device."
+
+#string STR_TCGSEC_WARNING_TITLE               #language en-US "WARNING!!!"
+#string STR_TCGSEC_PWD_CLEAR_MESSAGE           #language en-US "Clear Password option failed as Device Security feature is not enabled yet"
+#string STR_AFTER_RESET_WARNING_MESSAGE        #language en-US "Admin Password cleared.\n Advisable to Power Cycle System."
+#string STR_ENTERPRICE_DEV_SET_PSW_HELP        #language en-US "Once password is enabled it can't be removed. Password can be changed any time later. To remove password, use Device Reset option which will erase user data on the drive."
+
+
+//#string <string name>                   #language eng ""
+
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************

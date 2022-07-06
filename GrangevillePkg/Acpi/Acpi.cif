@@ -1,0 +1,8 @@
+<component>
+	name = "Acpi"
+	category = ModulePart
+	LocalRoot = "GrangevillePkg\Acpi\"
+	RefName = "GrangevillePkg.Acpi"
+[parts]
+"GrangevillePkg.AcpiTables"
+<endComponent>

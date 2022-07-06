@@ -1,0 +1,10 @@
+<component>
+	name = "WheaPlatformBoot"
+	category = ModulePart
+	LocalRoot = "ServerCommonPkg\Whea\WheaPlatformBoot\"
+	RefName = "ServerCommonPkg.WheaPlatformBoot"
+[INF]
+"WheaPlatformBoot.inf"
+[files]
+"WheaPlatformBoot.sdl"	
+<endComponent>

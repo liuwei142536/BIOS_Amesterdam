@@ -1,0 +1,20 @@
+<component>
+	name = "PlatformDxe"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\Dxe\"
+	RefName = "GrantleyPkg.Platform.Dxe"
+[INF]
+"C2FDxe\c2fdxe.inf"
+"OnBoardVideoEfi\OnboardVideoEfi.inf"
+"PlatformType\PlatformType.inf"
+"S3NvramSave\S3NvramSave.inf"
+"SaveMemoryConfig\SaveMemoryConfig.inf"
+"PlatformEarlyDxe\PlatformEarlyDxe.inf"
+"PlatformHwHarden\PlatformHardwareHarden.inf"
+[files]
+"PlatformDxe.sdl"	
+"OnBoardVideoEfiFdfFileStatement.txt"	
+[parts]
+"GrantleyPkg.MemorySubClass"
+"GrantleyPkg.Setup"
+<endComponent>

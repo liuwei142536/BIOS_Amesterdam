@@ -1,0 +1,8 @@
+<component>
+	name = "Register"
+	category = ModulePart
+	LocalRoot = "UefiCpuPkg\Include\Register\"
+	RefName = "UefiCpuPkg.Register"
+[files]
+"LocalApic.h"	
+<endComponent>

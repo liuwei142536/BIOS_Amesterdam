@@ -1,0 +1,250 @@
+/*++
+  This file contains 'Framework Code' and is licensed as such
+  under the terms of your license agreement with Intel or your
+  vendor.  This file may not be modified, except as allowed by
+  additional terms of your license agreement.
+--*/
+/*++
+
+  Copyright (c)  2008-2013 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval system, 
+  or transmitted in any form or by any means without the express written 
+  consent of Intel Corporation.
+
+Module Name:
+
+  Iio1.asi
+
+Abstract:
+
+  Contains IIO device and register information
+
+--*/
+
+   Method(BN40, 0){          
+                   return(\BBI1) 
+    }	// AptioV server override: Patch bridge bus number method
+    
+  // PCI1 presence detect routine
+  Device (IIOP) {
+    // Within the IIO, read D0:F0 for IIO presence detect
+    Name(_ADR, 0x00000000)          // Device 00
+    Name(_UID, "IIO1PRES")          // IIO1 Present
+
+    // IIOR - Config register for Vendor ID check
+    OperationRegion(IIOR, PCI_Config, 0x00, 0x02)
+    Field(IIOR, ByteAcc, NoLock, Preserve){
+      offset(0x00),
+      VID0,16,  // Vendor ID
+    }
+
+#if ASL_DsmAsl_SUPPORT //AptioV server override start: Add TokenAsl.h SDL output
+    // owning control method can't be reentrant, so _DSM must be Serialized
+    Method (_DSM, 4, Serialized) { // Device specific method
+      if(LEqual(Arg0,ToUUID("D8C1A3A6-BE9B-4C9B-91BF-C3CB81FC5DAF"))){
+        Switch(ToInteger(Arg2)) {
+          case(0) {Return ( Buffer() {0x1F} )} // function indexes 1-4 supported
+          case(1) {Return (Buffer() {0x44, 0x52, 0x48, 0x31,
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00 } ) } // DRHD buffer containing relavent ATSR structure for I/O Hub n
+
+          case(2) {Return (Buffer()  {0x41, 0x54, 0x53, 0x31,
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00 } ) }// ATSR buffer containing relavent ATSR structure for I/O Hub n
+          case(3) {Return (Buffer()  {0x52, 0x48, 0x53, 0x31,
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00, 
+            00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00 } ) }// RHSA buffer containing relavent ATSR structure for I/O Hub n 
+          Default { }
+        }
+      }
+      Return (Buffer() {0})
+    }
+#endif    
+  }
+
+  Method(_STA){
+    // Have to account for logical offline condition which IIO1 is still in QPI fabric, but not OS visible
+    ShiftRight(IIOH, 1, Local1)
+    And(Local1, 0x1, Local1)
+    if(LEqual(Local1, 0x0)) {
+      // IIO1 logically offline
+      Return(0x00)
+    } else {
+      // IIO1 present and logically online
+      Return(0x0F) 
+    }
+  } // End Method STA
+
+
+//AptioV server override start: Add TokenAsl.h SDL output 
+#if ASL_RAS_ASL_SUPPORT
+  // All PCI-Ex ports are dependent on IIO1
+  Name(_EDL, Package() {
+    \_SB.PCI1.QRP0, \_SB.PCI1.QR2A, \_SB.PCI1.QR2B, \_SB.PCI1.QR2C, \_SB.PCI1.QR2D, 
+    \_SB.PCI1.QR3A, \_SB.PCI1.QR3B, \_SB.PCI1.QR3C, \_SB.PCI1.QR3D
+  })
+
+  Method(_EJ0, 1) {
+    Notify(\_SB.PCI1.QRP0, Arg0)
+    Notify(\_SB.PCI1.QR2A, Arg0)
+    Notify(\_SB.PCI1.QR2B, Arg0)
+    Notify(\_SB.PCI1.QR2C, Arg0)
+    Notify(\_SB.PCI1.QR2D, Arg0)
+    Notify(\_SB.PCI1.QR3A, Arg0)
+    Notify(\_SB.PCI1.QR3B, Arg0)
+    Notify(\_SB.PCI1.QR3C, Arg0)
+    Notify(\_SB.PCI1.QR3D, Arg0)
+    \_SB.GSMI(3, 1)    //EVENT_IIO_HP, IIO ID
+  }
+#endif
+
+  Name(P1RS, ResourceTemplate() {
+    //RESOURCE_CHUNK1_OFF
+    WORDBusNumber(            //Bus number resource (0); the bridge produces bus numbers for its subsequent buses
+      ResourceProducer,       // bit 0 of general flags is 1
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is fixed
+      PosDecode,              // PosDecode
+      0x4946,                 // Granularity (FIX9 - Patched by ACPI Platform Driver during POST)
+      0x3958,                 // Min         (FIX9 - Patched by ACPI Platform Driver during POST)
+      0x0000,                 // Max         (FIX9 - Patched by ACPI Platform Driver during POST)
+      0x0000,                 // Translation
+      0x0001                 // Range Length = Max-Min+1 (FIX9 - Patched by ACPI Platform Driver during POST)
+    )
+
+    //AptioV Server Override Start : Off board video card not detected in device manager when it is connected to CPU 1.
+    //Descriptor for IO space of the video card.
+    WORDIO(                   // Consumed-and-produced resource (all I/O below CF8)
+      ResourceProducer,       // bit 0 of general flags is 0
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is fixed
+      PosDecode,
+      EntireRange,
+      0x5450,                 // Granularity  (PTH5 - Patched by ACPI Platform Driver during POST)
+      0x3548,                 // Min          (PTH5 - Patched by ACPI Platform Driver during POST)
+      0x0000,                 // Max          (PTH5 - Patched by ACPI Platform Driver during POST) 
+      0x0000,                 // Translation
+      0x0000                  // Range Length (PTH5 - Patched by ACPI Platform Driver during POST)
+    ) 
+   //RESOURCE_CHUNK5_OFF. Changed to patch video resource based on lgacyvgasoc
+    DWORDMEMORY(              // descriptor for video RAM on video card
+      ResourceProducer,       // bit 0 of general flags is 0
+      PosDecode,
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is Fixed
+      Cacheable,
+      ReadWrite,
+      0x31485450,             // Granularity  (PTH1 - Patched by ACPI Platform Driver during POST)
+      0x00000000,             // Min          (PTH1 - Patched by ACPI Platform Driver during POST)
+      0x00000000,             // Max          (PTH1 - Patched by ACPI Platform Driver during POST)
+      0x00000000,             // Translation
+      0x00000000              // Range Length (PTH1 - Patched by ACPI Platform Driver during POST)
+    )
+    //AptioV Server Override End : Off board video card not detected in device manager when it is connected to CPU 1.
+
+    //RESOURCE_CHUNK2_OFF
+    WORDIO(                   //Consumed-and-produced resource (all I/O above CFF)
+      ResourceProducer,       // bit 0 of general flags is 0
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is fixed
+      PosDecode,
+      EntireRange,
+      0x4946,                 // Granularity (FIXA - Patched by ACPI Platform Driver during POST)
+      0x4158,                 // Min         (FIXA - Patched by ACPI Platform Driver during POST)
+      0x0000,                 // Max         (FIXA - Patched by ACPI Platform Driver during POST)
+      0x0000,                 // Translation
+      0x0001                 // Range Length = Max-Min+1 (FIXA - Patched by ACPI Platform Driver during POST)
+    )
+
+    //
+    // PCI RESOURCE_32bit
+    //
+    DWORDMemory(              // Consumed-and-produced resource(all of memory space)
+      ResourceProducer,       // bit 0 of general flags is 0
+      PosDecode,              // positive Decode
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is fixed
+      NonCacheable,
+      ReadWrite,
+      0x42584946,             // Granularity (FIXB - Patched by ACPI Platform Driver during POST)
+      0x00000000,             // Min (calculated dynamically) (FIXB - Patched by ACPI Platform Driver during POST)
+      0x00000000,             // Max = 4GB - 1MB  (fwh + fwh alias) (FIXB - Patched by ACPI Platform Driver during POST)
+      0x00000000,             // Translation
+      0x00000000             // Range Length (calculated dynamically) (FIXB - Patched by ACPI Platform Driver during POST)
+    )
+
+    //
+    // PCI RESOURCE_64bit
+    //
+    QWORDMemory(              // Consumed-and-produced resource(all of memory space)
+      ResourceProducer,       // bit 0 of general flags is 0
+      PosDecode,              // positive Decode
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is fixed
+      NonCacheable,
+      ReadWrite,
+      0x43584946,          // Granularity (FIXC - Patched by ACPI Platform Driver during POST)
+      0x00000000000,          // Min (calculated dynamically) (FIXC - Patched by ACPI Platform Driver during POST)
+      0x00000000000,          // Max = 4GB - 1MB  (fwh + fwh alias) (FIXC - Patched by ACPI Platform Driver during POST)
+      0x00000000000,          // Translation
+      0x00000000000          // Range Length (calculated dynamically) (FIXC - Patched by ACPI Platform Driver during POST)
+    )
+  }) // end of P1RS Buffer
+
+
+  // Current resource template return
+  Method(_CRS, 0x0, NotSerialized) {
+    Return(P1RS)
+  }
+
+  //
+  // Memory Riser UID will be in Interger form to support CPU Migration on WIN8 
+  // and later OS. First two digits will indicate Memory Device(01) and last two
+  // digits will represent the Memory Riser number.
+  //
+  Device (MHP0) {
+    // Within the IIO, read D5:F1 for Memory HP status
+    Name(_ADR, 0x00050001)          // D5:F1
+    Name(_UID, "01-00")
+
+    // MHP0 - Config register for Slot status
+    OperationRegion(MHP0, PCI_Config, 0xE, 2)
+    Field(MHP0,ByteAcc,NoLock,Preserve) {
+      STM2,7,
+    }
+  }
+
+  Device (MHP1) {
+    // Within the IIO, read D5:F1 for Memory HP status
+    Name(_ADR, 0x00050001)          // D5:F1
+    Name(_UID, "01-01")
+
+    // MHP1 - Config register for Slot status
+    OperationRegion(MHP1, PCI_Config, 0x1E, 2)
+    Field(MHP1,ByteAcc,NoLock,Preserve) {
+      STM3,7,
+    }
+  }
+
+// AptioV Server Override Start: Proximity domains _PXM method requires for each active IIO bridge.
+Method(_PXM, 0)
+{
+  Return(1)
+}
+// AptioV Server Override End: Proximity domains _PXM method requires for each active IIO bridge.

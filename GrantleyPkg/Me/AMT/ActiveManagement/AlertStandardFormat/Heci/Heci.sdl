@@ -1,0 +1,38 @@
+TOKEN
+	Name  = "Heci_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Heci support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AlertStandardFormatDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AlertStandardFormatDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AlertStandardFormatPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AlertStandardFormatPeim support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AlertStandardFormatDxe"
+	File  = "Dxe\AlertStandardFormatDxe.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AlertStandardFormatDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AlertStandardFormatPeim"
+	File  = "Pei\AlertStandardFormatPei.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AlertStandardFormatPeim_SUPPORT" "=" "1"
+End
+

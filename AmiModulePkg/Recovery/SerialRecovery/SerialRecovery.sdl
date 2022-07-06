@@ -1,0 +1,84 @@
+TOKEN
+    Name  = "SerialRecovery_SUPPORT"
+    Value  = "0"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "SERIAL,"
+    Parent  = "RecoveryDeviceOrder"
+    Token = "SerialRecovery_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+TOKEN
+    Name  = "ENABLE_SERIAL_RECOVERY_TRACES"
+    Value  = "0"
+    Help  = "Main token to enable Serial Recovery driver Trace support "
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SERIAL_PACKET_DELAY"
+    Value  = "1000"
+    Help  = "Value in millisec. Delay that is given for data receive in packets as some console application send each data with some delay due to many reasons like throughput of system"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel "
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000040"
+    Override  = "AmiModulePkg.SerialRecovery"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "ENABLE_SERIAL_RECOVERY_TRACES" "=" "1"
+    Token = "SerialRecovery_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel "
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x00000040"
+    Override  = "AmiModulePkg.SerialRecovery"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "ENABLE_SERIAL_RECOVERY_TRACES" "=" "0"
+    Token = "SerialRecovery_SUPPORT" "=" "1"
+End
+
+PcdMapping
+    Name  = "PcdSerialRegisterBase"
+    GuidSpace  = "gEfiMdeModulePkgTokenSpaceGuid"
+    PcdType  = "PcdsPatchableInModule"
+    Value  = "0x02E0"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "SerialRecovery_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "SerialRecovery"
+    File  = "SerialRecovery.inf"
+    Package  = "AmiModulePkg"
+    Token = "SerialRecovery_SUPPORT" "=" "1"
+    ModuleTypes = "PEIM"
+End
+
+FFS_FILE
+    Name  = "SerialRecovery"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "AmiModulePkg.SerialRecovery"
+    Rule_Override  = "Compressed"
+    Token = "SerialRecovery_SUPPORT" "=" "1"
+End

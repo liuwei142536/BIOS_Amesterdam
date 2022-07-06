@@ -1,0 +1,10 @@
+<component>
+	name = "DbgPerformanceLib"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\DbgPerformanceLib\"
+	RefName = "Debugger.DbgPerformanceLib"
+[INF]
+"DbgPerformanceLib.inf"
+[files]
+"DbgPerformanceLib.sdl"	
+<endComponent>

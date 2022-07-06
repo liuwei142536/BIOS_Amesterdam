@@ -1,0 +1,14 @@
+<component>
+	name = "SampleCode"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\SampleCode\"
+	RefName = "GrantleyPkg.SampleCode"
+[INF]
+"AtAmUi\AtAmUi.inf"
+[files]
+"SampleCode.sdl"	
+[parts]
+"GrantleyPkg.AmtPolicyInit"
+"GrantleyPkg.AtPolicyInit"
+"GrantleyPkg.MdesStatusCode"
+<endComponent>

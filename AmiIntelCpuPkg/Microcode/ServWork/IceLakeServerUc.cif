@@ -1,0 +1,13 @@
+<component>
+	name = "Server/Workstation IceLake uCode Patches (606AX)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\ServWork\"
+	RefName = "IceLakeServerUc"
+[files]
+"IceLakeServerUc.sdl"
+"M97606A0_00000028.pdb"	= "SERVER WORKSTATION MICROCODE UPDATES"
+"M87606A4_0B000280.pdb"	= "SERVER WORKSTATION MICROCODE UPDATES"
+"M87606A5_0C0002F0.pdb"	= "SERVER WORKSTATION MICROCODE UPDATES"
+"M87606A6_0D000311.pdb" = "SERVER WORKSTATION MICROCODE UPDATES"
+"M10606C1_01000132.pdb" = "SERVER WORKSTATION MICROCODE UPDATES"
+<endComponent>

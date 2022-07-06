@@ -1,0 +1,86 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file  PciOutOfResourceSetupPage.inf
+#
+# INF description file for PciOutOfResourceSetupPage Driver
+##
+#
+##
+#[BuildOptions]
+#*_*_*_CC_FLAGS = /FI $(WORKSPACE)/Build/SIOElink.h
+
+
+[Defines]
+INF_VERSION = 0x00010005
+VERSION_STRING = 1.0
+BASE_NAME = PciOutOfResourceSetupPage
+MODULE_TYPE = DXE_DRIVER
+FILE_GUID = cdc1c80d-e6d3-4a42-9229-75f3befcf109
+
+ENTRY_POINT = PciOutOfResourceSetupPageEntry
+
+#
+#  This flag specifies whether HII resource section is generated into PE image.
+#
+    UEFI_HII_RESOURCE_SECTION       = TRUE
+    
+[Sources]
+PciOutOfResourceSetupPage.c
+PciOutOfResourceSetupPage.h
+PciOutOfResourceSetupPage.vfr
+PciOutOfResourceSetupPage.uni
+
+[LibraryClasses]
+AmiDxeLib
+UefiDriverEntryPoint
+#AmiSdlLib
+#AmiPciBusLib
+#PciAccessCspLib
+
+
+[Protocols]
+#gEfiDevicePathProtocolGuid
+#gEfiSimpleTextOutProtocolGuid
+#gEfiGraphicsOutputProtocolGuid
+#gEfiUgaDrawProtocolGuid
+#gEfiHiiFontProtocolGuid
+gEfiHiiDatabaseProtocolGuid
+#gEfiDriverBindingProtocolGuid
+#gAmiBoardPciInitProtocolGuid
+
+[Packages]
+MdePkg/MdePkg.dec
+#MdeModulePkg/MdeModulePkg.dec
+#IntelFrameworkPkg/IntelFrameworkPkg.dec
+#IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+#AmiModulePkg/AmiModulePkg.dec
+
+[Depex]
+    gEfiHiiDatabaseProtocolGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

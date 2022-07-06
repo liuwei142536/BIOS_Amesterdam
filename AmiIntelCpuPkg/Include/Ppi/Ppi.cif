@@ -1,0 +1,8 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Include\Ppi\"
+	RefName = "AmiIntelCpuPkg.Ppi"
+[files]
+"AmiEarlyBistPpi.h"
+<endComponent>

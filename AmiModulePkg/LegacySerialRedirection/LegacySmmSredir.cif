@@ -1,0 +1,9 @@
+<component>
+	name = "LegacySmmSredir"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg/LegacySerialRedirection"
+	RefName = "LegacySmmSredir"
+[files]
+"LegacySmmSredir.c"
+"LegacySmmSredirInf.txt"	
+<endComponent>

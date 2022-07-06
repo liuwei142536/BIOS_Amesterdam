@@ -1,0 +1,19 @@
+<component>
+	name = "Lib"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\Include\Library\"
+	RefName = "Debugger.IncludeLib"
+[files]
+"dbgcmd.h"	
+"dbgr.h"	
+"PortingLib.h"	
+"PeiDbgCmdx64.h"	
+"DbgXhci.h"	
+"XhciPei.h"	
+"UsbHostController.h"	
+"usb.h"	
+"UsbIo.h"	
+"UsbPeim.h"	
+"DbgUsb3Internal.h"	
+"AmiMapping.h"	
+<endComponent>

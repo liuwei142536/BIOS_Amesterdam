@@ -1,0 +1,373 @@
+## @file
+#  MemoryQpiInit PEIM
+#
+#  Copyright (c) 2009 - 2015, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MemoryQpiInit
+  FILE_GUID                      = 11777581-2B67-4075-8EB4-F691A47ECEC7
+  MODULE_TYPE                    = BASE
+  LIBRARY_CLASS                  = MemoryQpiInitLib | PEIM DXE_DRIVER DXE_SMM_DRIVER
+
+[Sources.Ia32]
+
+[Sources]
+  CpuInit.c
+  QpiInit.c
+  IioEarlyInit.c
+  IioEarlyInit.h
+  Chip\Common\Bios2yamChip.c
+  Chip\Common\CpuPciAccess.c
+  Chip\Common\CsrToPcieLib.c
+  Chip\Common\DebugCmd.c
+  Chip\Common\ErrorChip.c
+  Chip\Common\MemoryQpiInit.c
+  Chip\Common\PciAccess.c
+  Chip\Common\PcieAddressLib.c
+  Chip\Common\PrintfChip.c
+  Chip\Common\Smbus.c
+  Chip\Common\ScratchPadReg.c
+  Chip\Include\BiosSsaChipFunc.h
+  Chip\Include\ScratchPadReg.h
+  Chip\Include\CmdCtlDelay.h
+  Chip\Include\CpgcChip.h
+  Chip\Include\CpuPciAccess.h
+  Chip\Include\Ddr4OdtActivationTable.h
+  Chip\Include\Ddr4OdtValueTable.h
+  Chip\Include\DdrOdtActivationTable.h
+  Chip\Include\DdrOdtValueTable.h
+  Chip\Include\EvAutoRecipe.h
+  Chip\Include\MemHostChip.h
+  Chip\Include\MemPOR.h
+  Chip\Include\MemProjectSpecific.h
+  Chip\Include\MemThrot.h
+  Chip\Include\MemWeight.h
+  Chip\Include\pecoff.h
+  Chip\Include\ProcMemInit.h
+  Chip\Include\QpiAdapt.h
+  Chip\Include\QpiCoh.h
+  Chip\Include\QpiDisc.h
+  Chip\Include\QpiEvRecipeTable_BDX.h
+  Chip\Include\QpiEvRecipeTable_HSX.h
+  Chip\Include\QpiHost.h
+  Chip\Include\QpiJkt.h
+  Chip\Include\QpiLib.h
+  Chip\Include\QpiMisc.h
+  Chip\Include\QpiSi.h
+#  Chip\Include\RcRegs # AptioV Server override - doesn't exist
+  Chip\Include\RcRegs.h
+  Chip\Include\SysFuncChip.h
+  Chip\Include\SysHostChip.h
+  Chip\Include\uart16550.h
+  Chip\Include\uart16550Init.h
+  Chip\Include\RcRegs\CB33_FUN_0.h
+  Chip\Include\RcRegs\CBOBC_COH.h
+  Chip\Include\RcRegs\CBOBC_IOSAD.h
+  Chip\Include\RcRegs\CBOBC_MEMSAD.h
+  Chip\Include\RcRegs\CBO_CFG.h
+  Chip\Include\RcRegs\GbE_PF0.h
+  Chip\Include\RcRegs\GbE_VF0.h
+  Chip\Include\RcRegs\HA_CFG.h
+  Chip\Include\RcRegs\HA_DFX.h
+  Chip\Include\RcRegs\HA_GDXC.h
+  Chip\Include\RcRegs\HA_PMON.h
+  Chip\Include\RcRegs\IIOCB_FUNC0.h
+  Chip\Include\RcRegs\IIOCB_FUNC1.h
+  Chip\Include\RcRegs\IIOCB_FUNC2.h
+  Chip\Include\RcRegs\IIOCB_FUNC3.h
+  Chip\Include\RcRegs\IIOCB_FUNC4.h
+  Chip\Include\RcRegs\IIOCB_FUNC5.h
+  Chip\Include\RcRegs\IIOCB_FUNC6.h
+  Chip\Include\RcRegs\IIOCB_FUNC7.h
+  Chip\Include\RcRegs\IIO_DFX.h
+  Chip\Include\RcRegs\IIO_DFX_GLOBAL.h
+  Chip\Include\RcRegs\IIO_DFX_IOSF.h
+  Chip\Include\RcRegs\IIO_DFX_IOSF0.h
+  Chip\Include\RcRegs\IIO_DFX_IOSF2.h
+  Chip\Include\RcRegs\IIO_DFX_VTD.h
+  Chip\Include\RcRegs\IIO_IOAPIC.h
+  Chip\Include\RcRegs\IIO_LT.h
+  Chip\Include\RcRegs\IIO_MEMHP.h
+  Chip\Include\RcRegs\IIO_PCIE.h
+  Chip\Include\RcRegs\IIO_PCIEDMI.h
+  Chip\Include\RcRegs\IIO_PCIEIOSF.h
+  Chip\Include\RcRegs\IIO_PCIEIOSF0.h
+  Chip\Include\RcRegs\IIO_PCIEIOSF2.h
+  Chip\Include\RcRegs\IIO_PCIENTB.h
+  Chip\Include\RcRegs\IIO_PERFMON.h
+  Chip\Include\RcRegs\IIO_RAS.h
+  Chip\Include\RcRegs\IIO_VTD.h
+  Chip\Include\RcRegs\MCDDC_CTL.h
+  Chip\Include\RcRegs\MCDDC_DESC.h
+  Chip\Include\RcRegs\MCDDC_DP.h
+  Chip\Include\RcRegs\MCIO_DDRIO.h
+  Chip\Include\RcRegs\MCIO_DDRIOEXT.h
+  Chip\Include\RcRegs\MCIO_DDRIOEXTGBC.h
+  Chip\Include\RcRegs\MCIO_DDRIOEXTMCC.h
+  Chip\Include\RcRegs\MCIO_DDRIOGBC.h
+  Chip\Include\RcRegs\MCIO_DDRIOMCC.h
+  Chip\Include\RcRegs\MC_MAIN.h
+  Chip\Include\RcRegs\MC_MAINEXT.h
+  Chip\Include\RcRegs\PCU_FUN0.h
+  Chip\Include\RcRegs\PCU_FUN1.h
+  Chip\Include\RcRegs\PCU_FUN2.h
+  Chip\Include\RcRegs\PCU_FUN3.h
+  Chip\Include\RcRegs\PCU_FUN4.h
+  Chip\Include\RcRegs\PCU_FUN5.h
+  Chip\Include\RcRegs\PCU_FUN6.h
+  Chip\Include\RcRegs\PCU_FUN7.h
+  Chip\Include\RcRegs\PCU_PMC.h
+  Chip\Include\RcRegs\PSEUDO_OFFSET.h
+  Chip\Include\RcRegs\QPIAGENT_DFX_CIO.h
+  Chip\Include\RcRegs\QPIAGENT_DFX_COMMON.h
+  Chip\Include\RcRegs\QPIAGENT_DFX_LINK.h
+  Chip\Include\RcRegs\QPIAGENT_DFX_PHY.h
+  Chip\Include\RcRegs\QPIAGENT_DFX_PHY_IOVB.h
+  Chip\Include\RcRegs\QPIAGENT_DFX_PHY_IOVC.h
+  Chip\Include\RcRegs\QPIAGENT_DFX_PHY_PQD.h
+  Chip\Include\RcRegs\QPIAGENT_LL.h
+  Chip\Include\RcRegs\QPIAGENT_PMON.h
+  Chip\Include\RcRegs\QPIAGENT_REUT.h
+  Chip\Include\RcRegs\R2PCIE_CFG.h
+  Chip\Include\RcRegs\R2PCIE_PMON.h
+  Chip\Include\RcRegs\R3QPI_CFG.h
+  Chip\Include\RcRegs\R3QPI_LNK0PMON.h
+  Chip\Include\RcRegs\R3QPI_LNK1PMON.h
+  Chip\Include\RcRegs\SBO_CFG.h
+  Chip\Include\RcRegs\UBOX_CFG.h
+  Chip\Include\RcRegs\UBOX_DFX.h
+  Chip\Include\RcRegs\UBOX_MISC.h
+  Chip\Include\RcRegs\VCU_FUN_0.h
+  Chip\Include\RcRegs\VCU_FUN_2.h
+  Chip\Mem\BiosSsaMemoryConfigChip.c
+  Chip\Mem\BiosSsaMemoryDdrtConfigChip.c
+  Chip\Mem\BiosSsaMemoryServerConfigChip.c
+  Chip\Mem\DmtMain.c
+  Chip\Mem\InitMemChip.c
+  Chip\Mem\MemAddrMap.c
+  Chip\Mem\MemCmdControl.c
+  Chip\Mem\MemCpgc.c
+  Chip\Mem\MemDisplayChip.c
+  Chip\Mem\MemIOControl.c
+  Chip\Mem\MemPciAccess.c
+  Chip\Mem\MemProjectSpecific.c
+  Chip\Mem\MemRAS.c
+  Chip\Mem\MemSPDChip.c
+  Chip\Mem\MemStartChip.c
+  Chip\Mem\MemThrot.c
+  Chip\Mem\MemTimingChip.c
+  Chip\Mem\MemTrainingChip.c
+  Chip\Mem\MemWDBChip.c
+  Chip\Mem\MemXoverCalib.c
+  Chip\Mem\MrcSsaServicesChip.c
+  Chip\Qpi\QpiAdapt.c
+  Chip\Qpi\QpiCoh.c
+  Chip\Qpi\QpiDisc.c
+  Chip\Qpi\QpiEvAutoRecipe.c
+  Chip\Qpi\QpiLib.c
+  Chip\Qpi\QpiLinks.c
+  Chip\Qpi\QpiMain.c
+  Core\Common\Bios2yam.c # AptioV server override - add missing files
+  Core\Common\ExecuteTargetOnly.c
+  Core\Common\EvItpDownloadAgent.c
+  Core\Common\BiosSsaResultsConfig.c
+  Core\Common\BiosSsaCommonConfig.c
+  Core\Common\Checkpoint.c
+#  Core\Common\CommonAccessLib.c # AptioV server override - add missing files
+  Core\Common\CpuAccess.c
+  Core\Common\CpuTimer.c
+  Core\Common\Decompress.c
+  Core\Common\Error.c
+  Core\Common\Gpio.c
+  Core\Common\IoAccess.c
+  Core\Common\Malloc.c
+  Core\Common\Math.c
+  Core\Common\MemUtil.c
+  Core\Common\PeLoader.c
+  Core\Common\PerfTracker.c
+  Core\Common\Pipe.c
+  Core\Common\PipeDataSync.c
+  Core\Common\PipeInit.c
+  Core\Common\PmTimer.c
+  Core\Common\Printf.c
+#  Core\Common\RcSim.c # AptioV server override - add missing files
+#  Core\Common\RcSimThread.c # AptioV server override - add missing files
+  Core\Common\ScratchPadReg.c # AptioV server override - add missing files
+  Core\Common\SerialPort.c
+  Core\Common\String.c
+  Core\Common\UsbDebugPort.c
+  Core\Include\Bios2yam.h # AptioV server override - add missing files
+  Core\Include\SsaMemoryClientConfig.h
+  Core\Include\SsaMemoryConfig.h
+  Core\Include\SsaMemoryDdrtConfig.h
+  Core\Include\SsaMemoryServerConfig.h
+  Core\Include\SysFuncChipCommon.h
+  Core\Include\SysRegs.h
+  Core\Include\SsaCommonConfig.h
+  Core\Include\MemFuncChipCommon.h
+  Core\Include\BiosSsaMemoryServerConfig.h
+  Core\Include\DmtMain.h
+  Core\Include\BiosSsaCommonConfig.h
+  Core\Include\BiosSsaMemoryConfig.h
+  Core\Include\BiosSsaResultsConfig.h # AptioV server override - add missing files
+  Core\Include\SsaResultsConfig.h
+  Core\Include\BssaDebug.h
+  Core\Include\ChipApi.h # AptioV server override - add missing files
+  Core\Include\CommonAccessApi.h # AptioV server override - add missing files
+#  Core\Include\CommonAccessLib.h # AptioV server override - add missing files
+  Core\Include\CommonAccessType.h # AptioV server override - add missing files
+  Core\Include\CoreApi.h # AptioV server override - add missing files
+  Core\Include\EvItpDownloadAgent.h
+  Core\Include\EvLoaderPeim.h
+  Core\Include\Pipe.h
+  Core\Include\CpuHost.h
+  Core\Include\CsrToPcieAddress.h # AptioV server override - add missing files
+  Core\Include\BiosSsaMemoryDdrtConfig.h
+  Core\Include\UsbDebugPort.h
+  Core\Include\MemPlatformCommon.h
+  Core\Include\MemRegs.h
+  Core\Include\ExecuteTargetOnly.h
+  Core\Include\MrcSsaServices.h
+  Core\Include\NGNDimmPlatformCfgData.h # AptioV server override - add missing files
+  Core\Include\PcieAddress.h # AptioV server override - add missing files
+  Core\Include\PlatformApi.h # AptioV server override - add missing files
+  Core\Include\MrcCommonTypes.h
+  Core\Include\PlatformFuncCommon.h
+  Core\Include\Printf.h
+  Core\Include\ScratchPadReg.h # AptioV server override - add missing files
+  Core\Include\SsaCallbackPeim.h
+  Core\Include\bdat.h
+  Core\Include\Cpgc.h
+  Core\Include\DataTypes.h
+  Core\Include\MemFunc.h
+  Core\Include\MemHost.h
+  Core\Include\MemSpdSimInit.h
+  Core\Include\SysFunc.h
+  Core\Include\SysHost.h
+  Core\Mem\BiosSsaMemoryConfig.c
+  Core\Mem\BiosSsaMemoryDdrtConfig.c
+  Core\Mem\BiosSsaMemoryServerConfig.c
+  Core\Mem\MemTraining.c
+  Core\Mem\MemPowerTraining.c
+  Core\Mem\MemPPR.c
+  Core\Mem\MrcSsaServices.c
+  Core\Mem\InitMem.c
+  Core\Mem\MemBdat.c
+  Core\Mem\MemCmdClk.c
+  Core\Mem\MemDdr4Lrdimm.c
+  Core\Mem\MemDisplay.c
+  Core\Mem\MemEarlyRid.c # AptioV server override - add missing files
+  Core\Mem\MemoryInit.c
+  Core\Mem\MemJedec.c
+  Core\Mem\MemMain.c
+  Core\Mem\MemMargins.c
+  Core\Mem\MemODT.c
+  Core\Mem\MemRdDqDqs.c
+  Core\Mem\MemRecEnable.c
+  Core\Mem\MemSPD.c
+#  Core\Mem\MemSPDAep.c # AptioV server override - add missing files
+  Core\Mem\MemSPDDDR3.c
+  Core\Mem\MemSPDDDR4.c
+  Core\Mem\MemSpdSimInit.c
+  Core\Mem\MemStart.c
+  Core\Mem\MemTiming.c
+  Core\Mem\MemWDB.c
+  Core\Mem\MemWrDqDqs.c
+  Core\Mem\MemWrLeveling.c
+  Core\Mem\MemXMP.c
+  Core\Mem\NVDIMM.c
+  # AptioV server override - don't include folders in INF
+#  Platform\Hooks
+#  Platform\Include
+#  Platform\Setup
+  Platform\Hooks\CommonHooks.c
+  Platform\Hooks\FastVideo.c
+  Platform\Hooks\MemHooks.c
+  Platform\Hooks\QpiHooks.c
+  Platform\Hooks\QpiPlatformEparam.c
+  Platform\Include\FastVideo.h
+  Platform\Include\FastVideoPlatform.h
+  Platform\Include\MemDefaults.H
+  Platform\Include\MemdownSpdTable.h
+  Platform\Include\MemPlatform.H
+  Platform\Include\PlatformFunc.h # AptioV server override - add missing files
+  Platform\Include\PlatformHost.h
+  Platform\Include\QpiPlatform.H
+  Platform\Include\UsbDebugPortConfig.h
+  Platform\Setup\CommonSetup.c
+  Platform\Setup\CpuSetup.c
+  Platform\Setup\MemSetup.c
+  Platform\Setup\QpiSetup.c
+
+[Packages]
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  MdePkg/MdePkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+#  SecurityPkg/SecurityPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec     # AptioV server override: Report MRC progress/error codes to status code listener
+  
+
+[LibraryClasses.Ia32]
+  PeimEntryPoint
+
+[LibraryClasses]
+  DebugLib
+  AmiPeiLib  # AptioV override Grangeville: For Resolving Build Error occur while updating AmiCryptoPkg
+  HobLib
+  IoLib
+  PciLib
+  OemMemoryQpiInitLib
+  IioInitHooksLib
+  IioEarlyInitLib
+  ReportStatusCodeLib
+
+#*** AMI PORTING BEGIN ***#
+
+#AptioV override Grangeville: Adding COM1(0x2f8) support
+[FixedPcd.common]
+  gEfiSerialPortTokenSpaceGuid.PcdSerialRegisterBase
+
+#*** AMI PORTING END *****#
+
+[Guids]
+  gEfiPlatformInfoGuid
+  gEfiMemoryMapGuid
+  gEfiSmmPeiSmramMemoryReserveGuid
+  gEfiMpstNodeDataGuid
+  # gEfiAcpiVariableCompatiblityGuid  Could be deleted, nobody Use it. -Bryan
+  gEfiMemoryTypeInformationGuid
+  gEfiPlatformTxtDeviceMemoryGuid
+
+[Ppis]
+  gEfiPeiCpuIoPpiInstalledGuid
+  gEfiPciCfg2PpiGuid
+  gPeiBaseMemoryTestPpiGuid
+  gPeiPlatformMemorySizePpiGuid
+  gPeiTxtScleanPpiGuid
+  gSsaBiosServicesPpiGuid
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+[BuildOptions.Ia32]
+  MSFT:*_*_*_CC_FLAGS     = /W4 /Gs999999 /GF /GL- /wd4214 /wd4334 /wd4142 /wd4819 /DBUILDING_FOR_IA32  /DIA32 /DSSA_OEM_HOOK $(DSC_GLOBAL_BUILD_OPTIONS)
+
+[BuildOptions.X64]
+  MSFT:*_*_X64_CC_FLAGS   = /W2 /Gs32768 /DCONFIG_DP /DQPI_HW_PLATFORM /DBUILDING_FOR_X64 /UIA32 /DEXTERNAL_PACKAGE /DRAS_FEATURES /wd4142 /wd4819 $(DSC_GLOBAL_BUILD_OPTIONS)
+
+

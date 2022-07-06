@@ -1,0 +1,54 @@
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DbgRxAuthenticationLib
+  FILE_GUID                      = DBE715D7-AFB0-4c80-A5FF-CF724E54AA93
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 0.1
+  LIBRARY_CLASS                  = RxAuthenticationLib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+[Binaries.Ia32]
+  BIN | DbgRxAuthenticationLib.lib|*|*|MYTOOLS
+  BIN | DbgRxAuthenticationLib.lib|*|*|MSFT
+  BIN | DbgRxAuthenticationVS2015Lib.lib|*|*|VS2015
+
+[Binaries.X64]
+  BIN | DbgRxAuthenticationLibx64.lib|*|*|MYTOOLS
+  BIN | DbgRxAuthenticationLibx64.lib|*|*|MSFT
+  BIN | DbgRxAuthenticationVS2015Libx64.lib|*|*|VS2015
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AMIDebuggerPkg/AMIDebuggerPkg.dec
+
+[LibraryClasses]
+
+
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

@@ -1,0 +1,10 @@
+<component>
+	name = "SmmTcgStorageSec"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg/TcgStorageSecurity/"
+	RefName = "SmmTcgStorageSec"
+[INF]
+"SmmTcgStorageSec.inf"
+[files]
+"SmmTcgStorageSec.sdl"	
+<endComponent>

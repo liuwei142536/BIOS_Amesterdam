@@ -1,0 +1,35 @@
+TOKEN
+	Name  = "DbgPortLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling DbgPortLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+    Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+	Token = "USB_DEBUG_TRANSPORT" "=" "0"
+    Token = "USB_3_DEBUG_SUPPORT" "=" "0"
+End
+
+PATH
+	Name  = "DbgPortLib_DIR"
+End
+
+MODULE
+	Help  = "Includes DbgPortLib.mak to Project"
+	File  = "DbgPortLib.mak"
+End
+
+ELINK
+	Name  = "PeiDebugInitialize"
+	InvokeOrder = ReplaceParent
+End
+
+INFComponent
+	Name  = "DbgPortLib"
+	File  = "DbgPortLib.inf"
+	Package  = "Debugger"
+End
+
+LibraryMapping
+	Class  = "DebugPortLib"
+	Instance  = "Debugger.DbgPortLib"
+End

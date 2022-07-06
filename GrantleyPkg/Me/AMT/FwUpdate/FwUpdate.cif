@@ -1,0 +1,8 @@
+<component>
+	name = "FwUpdate"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\FwUpdate\"
+	RefName = "GrantleyPkg.FwUpdate"
+[parts]
+"GrantleyPkg.MeFwDowngrade"
+<endComponent>

@@ -1,0 +1,10 @@
+<component>
+	name = "Cpu"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Cpu\Dxe"
+	RefName = "GrantleyPkg.Cpu"
+[INF]
+"PlatformCpuPolicy\PlatformCpuPolicy.inf"
+[files]
+"CpuDxe.sdl"
+<endComponent>

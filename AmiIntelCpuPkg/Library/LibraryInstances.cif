@@ -1,0 +1,8 @@
+<component>
+	name = "LibraryInstances"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Library\"
+	RefName = "AmiIntelCpuPkg.LibraryInstances"
+[parts]
+"AmiIntelCpuPkg.ProcessorStartup"
+<endComponent>

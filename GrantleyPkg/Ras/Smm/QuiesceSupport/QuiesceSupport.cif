@@ -1,0 +1,12 @@
+<component>
+	name = "QuiesceSupport"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\Smm\QuiesceSupport\"
+	RefName = "GrantleyPkg.QuiesceSupport"
+[INF]
+"QuiesceSupport.inf"
+[files]
+"QuiesceMain.h"	
+"QuiesceSupport.h"	
+"QuiesceSupport.sdl"	
+<endComponent>

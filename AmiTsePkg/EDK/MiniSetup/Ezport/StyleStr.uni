@@ -1,0 +1,58 @@
+//*****************************************************************//
+//*****************************************************************//
+//*****************************************************************//
+//**                                                             **//
+//**         (C)Copyright 2010, American Megatrends, Inc.        **//
+//**                                                             **//
+//**                     All Rights Reserved.                    **//
+//**                                                             **//
+//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
+//**                                                             **//
+//**                     Phone (770)-246-8600                    **//
+//**                                                             **//
+//*****************************************************************//
+//*****************************************************************//
+//*****************************************************************//
+// $Archive: $
+//
+// $Author: $
+//
+// $Revision: $
+//
+// $Date: $
+//
+//*****************************************************************//
+//*****************************************************************//
+//*****************************************************************//
+
+/=#
+
+//CAUTION: Do not add new string tokens, when TSE source module is
+//not present. When TSE source module is not present, usage of this
+//file is restricted to only modification of strings; otherwise
+//outcome is unpredictable. When you TSE sources and want to add a
+//new string add the token in FakeTokens.c
+#include "VFR.uni"
+
+
+#string STR_NAV_STRINGS_0        #language    en-US    "Esc : Quit                              ↑ ↓ → ← : Select Item\nF4 : Save & Exit Setup"
+                                 #language    fr-FR    "Esc : Quit                              ↑ ↓ → ← : Select Item\nF4 : Save & Exit Setup"
+                                 #language    zh-cht    "Esc : 離開                              ↑ ↓ → ← : 選擇項目\nF4 : 儲存並離開"
+#string STR_NAV_STRINGS_1        #language    en-US    " ↑↓→←:Move  Enter:Select  F1:General Help\n     F2:Previous Values    F3:Optimized Defaults  F4:Save  ESC:Exit"
+                                 #language    fr-FR    " ↑↓→←:Move  Enter:Select  F1:General Help\n     F2:Previous Values    F3:Optimized Defaults  F4:Save  ESC:Exit"
+                                 #language    zh-cht    " ↑↓→←:移動  Enter:選擇  F1:一般性提示\n     F2:之前設定值    F3:最佳化預設值  F4:儲存  ESC:離開"
+#string STR_NAV_STRINGS_2        #language    en-US    "→←: Select Screen\n↑↓: Select Item\nEnter: Select\n+/-: Change Opt.\nF1: General Help\nF2: Previous Values\nF3: Optimized Defaults\nF4: Save & Exit\nESC: Exit"
+                                 #language    fr-FR    "→←: Select Screen\n↑↓: Select Item\nEnter: Select\n+/-: Change Opt.\nF1: General Help\nF2: Previous Values\nF3: Optimized Defaults\nF4: Save & Exit\nESC: Exit"
+                                 #language    zh-cht    "→←: 選擇畫面\n↑↓: 選擇項目\nEnter: 選擇\n+/-: 變更\nF1: 一般性提示\nF2: 之前設定值\nF3: 最佳化預設值\nF4: 儲存  ESC: 離開"
+#string STR_NAV_STRINGS_3        #language    en-US    "→←: Select Screen\n↑↓/Click: Select Item\nEnter/Dbl Click: Select\n+/-: Change Opt.\nF1: General Help\nF2: Previous Values\nF3: Optimized Defaults\nF4: Save & Exit\nESC/Right Click: Exit"
+                                 #language    fr-FR    "→←: Select Screen\n↑↓/Click: Select Item\nEnter/Dbl Click: Select\n+/-: Change Opt.\nF1: General Help\nF2: Previous Values\nF3: Optimized Defaults\nF4: Save & Exit\nESC/Right Click: Exit"
+                                 #language    zh-cht    "→←: Select Screen\n↑↓/Click: Select Item\nEnter/Dbl Click: Select\n+/-: Change Opt.\nF1: General Help\nF2: Previous Values\nF3: Optimized Defaults\nF4: Save & Exit\nESC/Right Click: Exit"
+
+
+#string STR_EXIT_HELP            #language    en-US    "Abandon all Data"
+                                 #language    fr-FR    "Abandon all Data"
+                                 #language    zh-cht    "放棄所有資料"
+
+#string STR_RESET_HELP           #language    en-US    "Abandon all Data"
+                                 #language    fr-FR    "Abandon all Data"
+                                 #language    zh-cht    "放棄所有資料"

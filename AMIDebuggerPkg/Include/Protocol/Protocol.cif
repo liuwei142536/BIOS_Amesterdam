@@ -1,0 +1,10 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Include\Protocol\"
+	RefName = "AMIDebuggerPkg.Bin.Protocol"
+[files]
+"AMIDebugger.h"	
+"AMITransport.h"	
+"DebugPort.h"	
+<endComponent>

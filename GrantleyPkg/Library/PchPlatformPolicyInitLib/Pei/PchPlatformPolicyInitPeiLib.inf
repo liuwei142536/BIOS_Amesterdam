@@ -1,0 +1,60 @@
+#
+# This file contains a 'Sample Driver' and is licensed as such
+# under the terms of your license agreement with Intel or your
+# vendor.  This file may be modified by the user, subject to  
+# the additional terms of the license agreement               
+#
+#/*++
+#
+#  Copyright (c) 2011 - 2014 Intel Corporation. All rights reserved
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#  Module Name:
+#
+#  PlatformPolicyUpdatePeiLib.inf
+#
+#  Abstract:
+#
+#    Component description file for PEI DxePlatformPolicyUpdateLib Library
+#
+#--*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PlatformPolicyInitPeiLib
+  FILE_GUID                      = 20596BCC-EF0D-4772-AB71-C5102620A013
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PchPlatformInitPeiLib | PEIM
+
+[Sources]
+  PchPlatformPolicyInitPei.c
+  ../Common/PchPlatformPolicyInitCommon.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec  
+  GrantleyPkg/Me/MePkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  
+ [LibraryClasses]
+  HobLib
+  PcdLib
+  DebugLib
+  PciExpressLib  
+  PchPlatformLib 
+  PchChipsetInitHobLib
+  PlatformHooksLib
+
+  
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress  

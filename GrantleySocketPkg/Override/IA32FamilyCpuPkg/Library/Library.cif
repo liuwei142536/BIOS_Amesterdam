@@ -1,0 +1,10 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Override\IA32FamilyCpuPkg\Library\"
+	RefName = "GrantleySocketPkg.Override.IA32FamilyCpuPkg.Library"
+[files]
+"Library.sdl"	
+[INF]
+"CpuConfigLib\CpuConfigLib.inf"
+<endComponent>

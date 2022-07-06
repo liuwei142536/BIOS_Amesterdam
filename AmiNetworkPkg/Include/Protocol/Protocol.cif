@@ -1,0 +1,11 @@
+<component>
+    name = "Protocol"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\Include\Protocol\"
+    RefName = "AmiNetworkPkg.Protocol"
+[files]
+"AmiIpAvail.h"	
+"RedFishIScsiConfig.h"	
+"AmiNwsShutdownNotify.h"	
+"Dpc.h"	
+<endComponent>

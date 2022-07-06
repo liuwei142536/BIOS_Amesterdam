@@ -1,0 +1,10 @@
+<component>
+	name = "DbgSerInitLib"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\DbgSerInitLib\"
+	RefName = "Debugger.DbgSerInitLib"
+[INF]
+"DbgSerInitLib.inf"
+[files]
+"DbgSerInitLib.sdl"	
+<endComponent>

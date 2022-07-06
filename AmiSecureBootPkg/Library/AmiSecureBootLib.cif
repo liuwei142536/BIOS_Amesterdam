@@ -1,0 +1,11 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmiSecureBootPkg\Library\"
+	RefName = "AmiSecureBootLib"
+[INF]
+"AmiSecureBootLib.inf"
+[files]
+"AmiSecureBootLib.sdl"	
+"AmiSecureBootLibTemplate.h"	
+<endComponent>

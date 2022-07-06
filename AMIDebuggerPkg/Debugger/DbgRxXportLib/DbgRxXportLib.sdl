@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "DbgRxXportLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable DbgRxXportLib support in Project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+PATH
+	Name  = "DbgDbgrRxXportLib_DIR"
+End
+
+INFComponent
+	Name  = "CommonXportLib"
+	File  = "CommonXportLib.inf"
+	Package  = "Debugger"
+End
+
+INFComponent
+	Name  = "DbgRxXportLib"
+	File  = "DbgRxXportLib.inf"
+	Package  = "Debugger"
+End
+
+LibraryMapping
+	Class  = "CommonXportLib"
+	Instance  = "Debugger.CommonXportLib"
+End
+
+LibraryMapping
+	Class  = "DebugXportLib"
+	Instance  = "Debugger.DbgRxXportLib"
+End

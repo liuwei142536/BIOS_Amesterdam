@@ -1,0 +1,22 @@
+TOKEN
+	Name  = "Overclocking_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Dxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "OcInit_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable OcInit support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "OcInit"
+	File  = "OcInit.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+	Token = "OcInit_SUPPORT" "=" "1"
+End

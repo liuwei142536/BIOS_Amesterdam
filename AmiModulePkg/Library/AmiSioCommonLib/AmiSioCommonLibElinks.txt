@@ -1,0 +1,55 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+/** @file AmiSioCommonlibElinks.h
+    This contains the functions to config the Super IO.
+**/
+#ifndef  _AMISIOCOMMONLIBELINKS_H_
+#define  _AMISIOCOMMONLIBELINKS_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+    Function Definitions
+**/
+@Elink("ENTER_CONFIG_MODE_FUNCTIONS", "VOID @Child(VOID);
+", "", "")
+@Elink("EXIT_CONFIG_MODE_FUNCTIONS", "VOID @Child(VOID);
+", "", "")
+@Elink("SELECT_LDN_FUNCTIONS", "VOID @Child(UINT8 Ldn);
+", "", "")
+
+#define ENTER_CONFIG_MODE_FUNCTIONS @Elink(ENTER_CONFIG_MODE_FUNCTIONS, "@Child,", "", "")
+#define EXIT_CONFIG_MODE_FUNCTIONS @Elink(EXIT_CONFIG_MODE_FUNCTIONS, "@Child,", "", "")
+#define SELECT_LDN_FUNCTIONS @Elink(SELECT_LDN_FUNCTIONS, "@Child,", "", "")
+
+/****** DO NOT WRITE BELOW THIS LINE *******/
+#ifdef __cplusplus
+}
+#endif
+#endif
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

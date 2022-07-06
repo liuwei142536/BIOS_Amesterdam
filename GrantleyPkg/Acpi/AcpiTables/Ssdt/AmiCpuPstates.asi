@@ -1,0 +1,98 @@
+#if PER_THREAD_ACPI == 0
+
+External (\PSLM, PkgObj)
+
+NAME (HWAL, 0x80)
+
+//  Package() {  <CoreFreq[WORD]>,
+//               |       <Power[DWORD]>,
+//               |       |           <TransitionLatency[WORD]>,
+//               |       |           |      <BusMasterlatency[WORD]>,
+//               |       |           |       |       <Control Register value to write to achive described performance state [WORD]> 
+//               |       |           |       |       |       <Status Register value to read back to verify successful transition accomplished[WORD]>
+//               |       |           |       |       |       |
+
+#define PSS_SOCKET(Socket) \
+    Name(PSS##Socket,Package() { \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P0 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P1 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P2 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P3 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P4 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P5 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P6 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P7 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P8 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P9 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P10 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P11 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P12 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P13 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}, /* P14 */ \
+      Package(){0x8000, 0x80000000, 0x8000, 0x8000, 0x8000, 0x8000}  /* P15 */ \
+    })
+
+PSS_SOCKET(0)
+PSS_SOCKET(1)
+PSS_SOCKET(2)
+PSS_SOCKET(3)
+
+#else
+
+/////////////////////////
+/////// Warning! ////////
+/////// Warning! ////////
+/////// Warning! ////////
+/////////////////////////
+//AmiAcpiPlatform.c functionality depends on the order of names below.
+//If you change the order, you need to change AmiAcpiPlatform.c.
+//Such as functions UpdatePStateAsl and NoEistRenamePstateMethods.
+//Also changes _PPC, _PSD, _PSS, _PCT such as type of method or name may require changes in NoEistRenamePstateMethods. 
+
+
+//Number of Entries, Revision, Domain, HW_ALL, Number of CPUS.
+Name (PSDC, Package(){Package(){5, 0, 1, 0xFC, 1}}) //SW_ALL (0xFC)
+Name (PSDD, Package(){Package(){5, 0, 1, 0xFD, 1}}) //SW_ANY (0xFD)
+Name (PSDE, Package(){Package(){5, 0, 1, 0xFE, 1}}) //HW_ALL (0xFE)
+
+Method(_PPC, 0) //If EIST disabled, this will be renamed to XPPC.
+{
+#if ASL_SPS_ASL_SUPPORT
+    Or(PETE, 0x80, PETE) // Confirm P-States support on this system
+    Return(DeRefOf(Index(\PSLM, SCKN))) // P-State limit for this socket
+#else
+    Return(0)
+#endif
+}
+
+Method(_PSD,0) {    //If EIST disabled, this will be renamed to XPSD.
+
+  // IF _PCD[5,11]=11, or 01, _PSD reports HW_ALL (0xFE)
+  If (LAnd(LEqual(And(TYPE, 0x820), 0x820), LEqual(HWAL, 0))) {
+      Return(PSDE)
+  }
+
+  // IF _PCD[5,11]=10, SETUP selects "SW_ANY", _PSD reports SW_ANY (0xFD)
+  If (LAnd(LEqual(And(TYPE, 0x820), 0x20), LEqual(HWAL, 2))) {
+      Return(PSDD)
+  }
+
+  // By default let _PSD report SW_ALL (0xFC) - conservative.
+  Return(PSDC)
+} // End of _PSD
+
+
+Method(_PSS,0)      //If EIST disabled, this will be renamed to XPSS.
+{
+    Return (ToSocket(PSS))
+}
+
+
+Name(_PCT, Package()    //If EIST disabled, this will be renamed to XPCT.
+{
+      ResourceTemplate(){Register(FFixedHW, 0, 0, 0)}, // control
+      ResourceTemplate(){Register(FFixedHW, 0, 0, 0)}  // status
+})
+
+
+#endif

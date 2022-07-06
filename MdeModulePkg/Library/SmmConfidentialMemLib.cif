@@ -1,0 +1,9 @@
+<component>
+    name = "SmmConfMemLibNull LibraryInstances"
+    category = ModulePart
+    LocalRoot = "MdeModulePkg\Library\"
+    RefName = "MdeModulePkg.SmmConfMemLibNullLibraryInstances"
+
+[INF]
+"SmmConfidentialMemLib\SmmConfidentialMemLibNull.inf"
+<endComponent>

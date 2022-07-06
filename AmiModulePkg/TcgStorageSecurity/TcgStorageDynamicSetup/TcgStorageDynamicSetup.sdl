@@ -1,0 +1,968 @@
+TOKEN
+    Name  = "TcgStorageDynamicSetup_SUPPORT"
+    Value  = 1	
+    Help  = "Main switch to enable TcgStorageDynamicSetup support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+    Token = "AMI_TSE_TCG_SECURITY_SUPPORT" "=" "1"
+    Token = "TCG_STORAGE_SEC_SETUP_SAME_SYS_PW" "=" "0"
+End
+
+PATH
+    Name  = "TCGSTORAGEDYNAMICSETUP_DIR"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_00,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_00,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_00,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_00,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_01,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_01,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_01,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_01,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_02,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_02,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_02,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_02,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_03,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_03,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_03,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_03,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_04,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_04,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_04,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_04,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_05,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_05,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_05,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_05,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_06,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_06,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_06,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_06,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_07,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_07,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_07,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_07,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_08,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_08,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_08,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_08,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_09,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_09,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_09,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_09,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_10,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_10,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_10,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_10,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_11,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_11,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_11,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_11,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_12,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_12,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_12,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_12,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_13,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_13,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_13,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_13,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_14,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_14,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_14,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_14,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_15,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_15,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_15,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_15,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_16,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_16,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_16,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_16,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_17,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_17,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_17,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_17,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_18,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_18,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_18,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_18,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_19,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_19,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_19,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_19,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_20,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_20,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_20,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_20,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_21,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_21,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_21,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_21,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_22,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_22,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_22,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_22,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_23,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_23,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_23,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_23,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_24,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_24,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_24,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_24,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_25,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_25,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_25,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_25,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_26,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_26,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_26,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_26,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_27,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_27,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_27,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_27,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_28,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_28,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_28,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_28,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_29,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_29,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_29,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_29,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_30,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_30,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_30,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_30,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_GOTO_31,TcgSecurityDynamicSetupUpdateFormCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"    
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_UP_31,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_MP_31,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,TCG_SECURITY_DYNAMIC_SETUP_PSID_31,TcgSecurityDynamicSetupPasswordCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "1"    
+End
+
+ELINK
+    Name  = "$(TCGSTORAGEDYNAMICSETUP_DIR)/TcgStorageDynamicSetup.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "InitTcgSecurityDynamicIfrContents,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "HiiLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "RngLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "AmiHiiUpdateLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiIfrTianoGuid"
+    Parent  = "AdditionalSetupGuids"
+    InvokeOrder = AfterParent
+End
+#  Uncomment below GUID once checked into AmiModulePkg.dec
+#ELINK
+#    Name  = "gAmiTcgStorageSecurityProtocolGuid"
+#    Parent  = "AdditionalSetupProtocols"
+#    InvokeOrder = AfterParent
+#End
+
+ELINK
+    Name  = "gAmiPostManagerProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(TCGSTORAGEDYNAMICSETUP_DIR)/TcgStorageDynamicSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(TCGSTORAGEDYNAMICSETUP_DIR)/TcgStorageDynamicSetup.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End

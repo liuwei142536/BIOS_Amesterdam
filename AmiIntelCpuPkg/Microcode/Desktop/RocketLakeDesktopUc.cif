@@ -1,0 +1,11 @@
+<component>
+	name = "Desktop RocketLake uCode Patches (A067X)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Desktop\"
+	RefName = "RocketLakeDesktopUc"
+[files]
+"RocketLakeDesktopUc.sdl"
+"M02A0670_00000024.pdb" = "DESKTOP MICROCODE UPDATES"
+"M02A0670_0000002A.pdb" = "DESKTOP MICROCODE UPDATES"
+"M02A0671_00000050.pdb" = "DESKTOP MICROCODE UPDATES"
+<endComponent>

@@ -1,0 +1,33 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#  This library implements FVCheckOverrideHook NULL Hook function.
+##
+
+
+[Defines]
+  INF_VERSION = 0x00010005
+  VERSION_STRING = 1.0
+  BASE_NAME = AmiSecurePatchFvLibNull
+  MODULE_TYPE = DXE_CORE
+  LIBRARY_CLASS = AmiSecurePatchFvLib | DXE_CORE
+  FILE_GUID = 4f67445b-976e-4e19-bbea-dedcdbdcf830
+
+[Sources]
+  AmiSecurePatchFvLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+

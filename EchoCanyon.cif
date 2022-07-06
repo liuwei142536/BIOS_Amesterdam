@@ -1,0 +1,8 @@
+<component>
+	name = "EchoCanyon"
+	category = Flavor
+	RefName = "EchoCanyon"
+	Rank = 62
+[files]
+"EchoCanyon.sdl"	
+<endComponent>

@@ -1,0 +1,321 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 1999 - 2015 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   CsiSetup.hfr
+// 
+// Abstract:
+// 
+//   CSI Setup formset.
+// 
+// Revision History: 
+// 
+// --*/
+
+  //
+  // Tylersburg Submenu
+  //
+#include <Token.h> // AptioV Server Override: Added to get the value of sdl tokens
+
+form formid = VFR_FORMID_CSI,
+    title   = STRING_TOKEN(STR_CSI_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    
+    //
+    // Jump to CSI Status Form
+    //
+    goto VFR_FORMID_CSI_GENERAL,
+        prompt  = STRING_TOKEN(STR_CSI_GENERAL_FORM_TITLE),
+        help    = STRING_TOKEN(STR_CSI_GENERAL_FORM_HELP);
+
+
+    //
+    // Jump to CSI Per Socket Configuration Form
+    //
+    goto VFR_FORMID_CSIPERSOCKET, 
+        prompt = STRING_TOKEN(STR_CSI_PERSOCKET_FORM_TITLE),
+        help   = STRING_TOKEN(STR_CSI_PERSOCKET_FORM_HELP);
+
+endform;
+
+
+form formid = VFR_FORMID_CSI_GENERAL,
+    title   = STRING_TOKEN(STR_CSI_GENERAL_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_GENERAL_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    
+    //
+    // Jump to CSI Status Form
+    //
+    goto VFR_FID_CSI_STATUS,
+        prompt  = STRING_TOKEN(STR_CSI_STATUS_TITLE),
+        help    = STRING_TOKEN(STR_CSI_STATUS_HELP);
+   
+     oneof varid = SYSTEM_CONFIGURATION.DegradePrecedence,
+        prompt  = STRING_TOKEN(STR_QPI_DEGRADE_PRECEDENCE),
+        help    = STRING_TOKEN(STR_QPI_DEGRADE_PRECEDENCE_HELP),
+        option text = STRING_TOKEN(STR_QPI_TOPOLOGY_PRECEDENCE_STRING),         value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_QPI_FEATURE_PRECEDENCE_STRING),          value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.QpiLinkSpeedMode,
+        prompt  = STRING_TOKEN(STR_CSI_LINK_SPEED_MODE),
+        help    = STRING_TOKEN(STR_CSI_LINK_SPEED_MODE_HELP),
+        option text = STRING_TOKEN(STR_CSI_MODE_SLOW),          value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_MODE_FAST),          value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.QpiLinkSpeed,
+        prompt  = STRING_TOKEN(STR_CSI_FREQ_SELECT),
+        help    = STRING_TOKEN(STR_CSI_FREQ_SELECT_HELP),
+        option text = STRING_TOKEN(STR_LINKSPEED_64G_STRING),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKSPEED_80G_STRING),   value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKSPEED_96G_STRING),   value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKSPEED_AUTO_STRING),  value = 6, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_LINKSPEED_AUTOLIMITED_STRING), value = 7, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid    = SYSTEM_CONFIGURATION.QpiLinkL0pEn,
+        prompt   = STRING_TOKEN(STR_LINKL0P_PROMPT),
+        help     = STRING_TOKEN(STR_LINKL0P_HELP),
+        option text = STRING_TOKEN(STR_LINKL0P_DISABLE_STRING), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKL0P_ENABLE_STRING),  value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid    = SYSTEM_CONFIGURATION.QpiLinkL1En,
+        prompt   = STRING_TOKEN(STR_LINKL1_PROMPT),
+        help     = STRING_TOKEN(STR_LINKL1_HELP),
+        option text = STRING_TOKEN(STR_LINKL1_DISABLE_STRING),  value = 0, flags = RESET_REQUIRED ;
+        option text = STRING_TOKEN(STR_LINKL1_ENABLE_STRING),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    oneof varid    = SYSTEM_CONFIGURATION.QpiLinkL0rEn,
+        prompt   = STRING_TOKEN(STR_CSI_PERIOD_RET_INTERVAL_PROMPT),
+        help     = STRING_TOKEN(STR_CSI_PERIOD_RET_INTERVAL_HELP),
+        option text = STRING_TOKEN(STR_CSI_DISABLE),  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_ENABLE),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.QpiLinkCreditReduce,
+        prompt  = STRING_TOKEN(STR_QPI_LINK_CREDIT_REDUCE),
+        help    = STRING_TOKEN(STR_QPI_LINK_CREDIT_REDUCE_HELP),
+        option text = STRING_TOKEN(STR_NO),                       value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_YES),                      value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_PERLINK_SETTING),      value = 2, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.QpiConfigTxWci,
+        prompt  = STRING_TOKEN(STR_CSI_LINKWIDTH),
+        help    = STRING_TOKEN(STR_CSI_LINKWIDTH_HELP),
+        option text = STRING_TOKEN(STR_QUAR0),                  value = 0,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR1),                  value = 1,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR2),                  value = 2,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR3),                  value = 3,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR4),                  value = 4,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR5),                  value = 5,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR6),                  value = 6,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR7),                  value = 7,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR8),                  value = 8,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR9),                  value = 9,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR10),                 value = 10, flags = RESET_REQUIRED;
+	option text = STRING_TOKEN(STR_CSI_AUTO),               value = 11, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_CSI_PERLINK_SETTING),    value = 12, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.QpiAdVNACreditArbThreshold,
+        prompt    = STRING_TOKEN(STR_CSI_AD_RING_VNA_CREDIT_ARB_THRESHOLD),
+        help      = STRING_TOKEN(STR_CSI_AD_RING_VNA_CREDIT_ARB_THRESHOLD_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0, 
+        maximum   = 16,
+        step      = 1,    // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 1,
+        default   = 1, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+    oneof varid = SYSTEM_CONFIGURATION.QpiCrcMode,
+        prompt  = STRING_TOKEN(STR_CSI_CRC_MODE),
+        help    = STRING_TOKEN(STR_CSI_CRC_MODE_HELP),
+        option text = STRING_TOKEN(STR_CSI_8BIT_CRC),           value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_CSI_16BIT_ROLLING),      value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.QpiLbEn,
+        prompt  = STRING_TOKEN(STR_QPI_LB_EN),
+        help    = STRING_TOKEN(STR_QPI_LB_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),                value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),                 value = 1, flags = RESET_REQUIRED;
+    endoneof;
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+
+    numeric varid = SYSTEM_CONFIGURATION.LegacyVgaSoc,
+       prompt  = STRING_TOKEN (STR_QPI_LEGACY_VGA_SOC),
+       help    = STRING_TOKEN (STR_QPI_LEGACY_VGA_SOC_HELP),
+       flags   = 0 | RESET_REQUIRED,
+       minimum = 0,
+       maximum = 7,
+       step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                     // otherwise it will auto-increment with a left/right arrow
+       default = 0,
+    endnumeric;
+
+    oneof varid = SYSTEM_CONFIGURATION.MmioP2pDis,
+        prompt  = STRING_TOKEN(STR_QPI_MMIO_P2P_DIS),
+        help    = STRING_TOKEN(STR_QPI_MMIO_P2P_DIS_HELP),
+        option text = STRING_TOKEN(STR_NO),                     value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_YES),                    value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.E2EParityEn,
+        prompt  = STRING_TOKEN(STR_QPI_E2E_PARITY_EN),
+        help    = STRING_TOKEN(STR_QPI_E2E_PARITY_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),                value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),                 value = 1, flags = RESET_REQUIRED;
+    endoneof;
+    
+    oneof varid = SYSTEM_CONFIGURATION.ClusterOnDieEn,
+        prompt  = STRING_TOKEN(STR_QPI_COD_EN),
+        help    = STRING_TOKEN(STR_QPI_COD_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),                value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),                 value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_AUTO),               value = 2, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.EarlySnoopEn,
+        prompt  = STRING_TOKEN(STR_EARLY_SNOOP),
+        help    = STRING_TOKEN(STR_QPI_EARLYSNOOP_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),                value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),                 value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_AUTO),               value = 2, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.HomeDirWOSBEn,
+        prompt  = STRING_TOKEN(STR_HOMEDIR_WOSBEN),
+        help    = STRING_TOKEN(STR_HOMEDIR_WOSBEN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),                value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),                 value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_AUTO),               value = 2, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    oneof varid = SYSTEM_CONFIGURATION.QpiSkuMismatchCheck,
+        prompt  = STRING_TOKEN(STR_QPI_SKU_MISMATCH_CHECK),
+        help    = STRING_TOKEN(STR_QPI_SKU_MISMATCH_CHECK_HELP),
+        option text = STRING_TOKEN(STR_NO),     value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_YES),    value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+endif;    
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+
+    oneof varid = SYSTEM_CONFIGURATION.DebugPrintLevel,
+        prompt  = STRING_TOKEN(STR_DEBUG_PRTLVL_PROMPT),
+        help    = STRING_TOKEN(STR_DEBUG_PRTLVL_HELP),
+        option text = STRING_TOKEN(STR_DEBUG_PRTLVL_FATAL_STRING),     value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DEBUG_PRTLVL_WARNING_STRING),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DEBUG_PRTLVL_SUMMARY_STRING),   value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DEBUG_PRTLVL_DETAIL_STRING),    value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DEBUG_PRTLVL_ALL_STRING),       value = 0xF, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+    
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;    
+    oneof varid     = SYSTEM_CONFIGURATION.CsiSocketResourceAutoAdjust,
+        prompt      = STRING_TOKEN(STR_CSI_SOCKET_RES_AUTO_PROMPT),
+        help        = STRING_TOKEN(STR_CSI_SOCKET_RES_AUTO_HELP),
+        option text = STRING_TOKEN(STR_CSI_SOCKET_RES_AUTO_ENABLE),  value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_CSI_SOCKET_RES_AUTO_DISABLE), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+    
+    oneof varid = SYSTEM_CONFIGURATION.IBPECIEn,
+        prompt  = STRING_TOKEN(STR_QPI_IBPECI_EN),
+        help    = STRING_TOKEN(STR_QPI_IBPECI_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),      value = 0,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),       value = 1,  flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+#ifdef SDP_FLAG
+//
+// File contains the options exposed to SDP- users
+//
+#include "CsiSetupSDP.hfr"
+#endif
+    
+endif;    
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+
+endform;
+
+form formid = VFR_FID_CSI_STATUS,
+    title   = STRING_TOKEN(STR_CSI_STATUS_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_STATUS_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_CSI_NUMBER_OF_CPU),
+        text   = STRING_TOKEN(STR_CSI_NUMBER_OF_CPU_VAL),
+        flags  = 0, key = 0;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_CSI_NUMBER_OF_IIO),
+        text   = STRING_TOKEN(STR_CSI_NUMBER_OF_IIO_VAL),
+        flags  = 0, key = 0;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_CSI_LINK_SPEED),
+        text   = STRING_TOKEN(STR_CSI_LINK_SPEED_STATUS),
+        flags  = 0, key = 0;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_CSI_LINK_FREQ),
+        text   = STRING_TOKEN(STR_CSI_LINK_FREQ_STATUS),
+        flags  = 0, key = 0;
+    
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_CSI_GMMIOL_BASE_LIMIT),
+        text   = STRING_TOKEN(STR_CSI_GMMIOL_BASE_LIMIT_VAL),
+        flags  = 0, key = 0;
+    
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_CSI_GMMIOH_BASE_LIMIT),
+        text   = STRING_TOKEN(STR_CSI_GMMIOH_BASE_LIMIT_VAL),
+        flags  = 0, key = 0;
+    
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_CSI_PCI_E_CFG_BASE),
+        text   = STRING_TOKEN(STR_CSI_PCI_E_CFG_BASE_VAL),
+        flags  = 0, key = 0;
+    
+endform;
+
+

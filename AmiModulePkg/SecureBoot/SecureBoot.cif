@@ -1,0 +1,25 @@
+<component>
+	name = "SecureBoot,UEFI"
+	category = eModule
+	Rank = 30
+	LocalRoot = "AmiModulePkg\SecureBoot\"
+	RefName = "SecureBoot"
+[INF]
+"SecureBootDXE.inf"
+[files]
+"SecureBoot.chm"
+"SecureBoot.sdl"
+"SecureBoot.uni"
+"SecureBoot.sd"
+"SecureBoot.c"
+[parts]
+"AuthVariable"
+"ImageVerificationLib"
+"SecureBoot.AmiRedFishApi"
+"SecureBoot.AmiDeviceGuardApi"
+"SecVariables"
+[dependency]
+AmiModulePkg.NVRAM >= "SS: AptioV;$/AptioV/Source/Modules/NVRAM;NVRAM_08"
+AmiCryptoPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCryptoPkg;AmiCryptoPkg_31"
+AmiSecureBootPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiSecureBootPkg;AmiSecureBootPkg_07"
+<endComponent>

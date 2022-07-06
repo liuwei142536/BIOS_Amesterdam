@@ -1,0 +1,69 @@
+TOKEN
+    Name  = "DESKTOP_9067X_ALDERLAKE"
+    Value = "0"
+    Help  = "Intel(R) Alder Lake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "DESKTOP_M0290670"
+    Value  = "1"
+    Help  = "Intel(R) Desktop Alder Lake-S A-0 Stepping(90670)"
+    TokenType = Boolean
+End
+
+
+TOKEN
+    Name  = "DESKTOP_M8290671"
+    Value  = "1"
+    Help  = "Intel(R) Desktop Alder Lake-S B-0 Stepping(90671)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "DESKTOP_M0190674"
+    Value  = "1"
+    Help  = "Intel(R) Desktop Alder Lake-S G-0 Stepping(90674)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "DESKTOP_M0390672"
+    Value  = "1"
+    Help  = "Intel(R) Desktop Alder Lake-S C-0/K-0 Stepping(90672)"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M0290670_00000019.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Alder Lake-S A-0/A-2 Stepping(90670)"
+    Token = "DESKTOP_M0290670" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M8290671_0000001A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Alder Lake-S B-0 Stepping(90671)"
+    Token = "DESKTOP_M8290671" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M0190674_00000219.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Alder Lake-S G-0 Stepping(90674)"
+    Token = "DESKTOP_M0190674" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M0390672_00000016.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Alder Lake-S C-0/K-0 Stepping(90672)"
+    Token = "DESKTOP_M0390672" "=" "1"
+    InvokeOrder = AfterParent
+End
+

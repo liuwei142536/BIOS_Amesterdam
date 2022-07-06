@@ -1,0 +1,391 @@
+﻿//*****************************************************************//
+//*****************************************************************//
+//*****************************************************************//
+//**                                                             **//
+//**        (C)Copyright 1985-2012, American Megatrends, Inc.    **//
+//**                                                             **//
+//**                     All Rights Reserved.                    **//
+//**                                                             **//
+//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
+//**                                                             **//
+//**                     Phone (770)-246-8600                    **//
+//**                                                             **//
+//*****************************************************************//
+//*****************************************************************//
+//*****************************************************************//
+// $Archive: $
+//
+// $Author: $
+//
+// $Revision: $
+//
+// $Date: $
+//
+//*****************************************************************//
+//*****************************************************************//
+//*****************************************************************//
+
+/=#
+
+//CAUTION: Do not add new string tokens, when TSE source module is
+//not present. When TSE source module is not present, usage of this
+//file is restricted to only modification of strings; otherwise
+//outcome is unpredictable. When you TSE sources and want to add a
+//new string add the token in FakeTokens.c
+
+// None Aptio 4.x versions of TSE need to carry VFR.uni with the TSE sources.
+#include "VFR.uni"
+
+
+#string STR_MAIN_TITLE           #language    en-US    "Aptio Setup Utility - Copyright (C) %04x American Megatrends, Inc."
+                                 #language    fr-FR    "Utilité De Configuration D'Aptio - Copyright (C) %04x American Megatrends, Inc."
+                                 #language    zh-cht    "Aptio 設定工具 - 版權所有 (C) %04x American Megatrends, Inc."
+#string STR_MAIN_COPYRIGHT       #language    en-US    "Version %x.%02x.%04x. Copyright (C) %04x American Megatrends, Inc."
+                                 #language    fr-FR    "Version %x.%02x.%04x. Copyright (C) %04x American Megatrends, Inc."
+                                 #language    zh-cht    "版本 %x.%02x.%04x. 版權所有 (C) %04x American Megatrends, Inc."
+
+#string STR_CTRL_CHKBOX_ENABLE   #language    en-US    "Enabled"
+                                 #language    fr-FR    "Activé"
+                                 #language    zh-cht    "設定"
+#string STR_CTRL_CHKBOX_DISABLE  #language    en-US    "Disabled"
+                                 #language    fr-FR    "Désactivé"
+                                 #language    zh-cht    "取消"
+#string STR_HELP_TITLE           #language    en-US    "Item Help"
+                                 #language    fr-FR    "Aide De Choix"
+                                 #language    zh-cht    "項目提示"
+
+#string STR_FDD                     #language en-US "FDD"
+#string STR_HDD                     #language en-US "HDD"
+#string STR_CDROM                   #language en-US "CD/DVD ROM"
+#string STR_NETWORK                 #language en-US "Embedded Network"
+#string STR_BEV                     #language en-US "BEV"
+
+#string STR_PRI_MAS                 #language en-US "Primary Master"
+#string STR_PRI_SLA                 #language en-US "Primary Slave"
+#string STR_SEC_MAS                 #language en-US "Secondary Master"
+#string STR_SEC_SLA                 #language en-US "Secondary Slave"
+#string STR_SATA_X                  #language en-US "SATA %d"
+#string STR_NO_BOOT_OPTIONS         #language en-US "No option to boot to.\n\r\n\r"
+
+#string STR_PASSWORD_PROMPT         #language    en-US    "Enter Password"
+                                    #language    fr-FR    "Enter Password"
+                                    #language    zh-cht    "輸入密碼"
+
+#string STR_ERROR_PSWD              #language    en-US    "Invalid Password"
+                                    #language    fr-FR    "Invalid Password"
+                                    #language    zh-cht    "密碼錯誤"
+
+#string STR_DRV_HLTH_REBOOT_POST    #language en-US "Driver Health requested Rebooting....."
+
+#string STR_EVAL_MSG             #language    en-US    "EVALUATION COPY."
+                                 #language    fr-FR    "EVALUATION COPY."
+                                 #language    zh-cht    "EVALUATION COPY."
+#string STR_ACK_BBS_POPUP        #language    en-US    "Entering Boot Menu..."
+                                 #language    fr-FR    "Entering Boot Menu..."
+                                 #language    zh-cht    "Entering Boot Menu..."
+#string STR_DEL_ENTER_SETUP      #language    en-US    "Press <DEL> or <ESC> to enter setup."
+                                 #language    fr-FR    "Press <DEL> or <ESC> to enter setup."
+                                 #language    zh-cht    "按 <DEL> 或 <ESC> 進入."
+#string STR_ACK_ENTER_SETUP      #language    en-US    "Entering Setup..."
+                                 #language    fr-FR    "Entering Setup..."
+                                 #language    zh-cht    "Entering Setup..."
+#string STR_GENERAL_HELP         #language    en-US    "General Help"
+                                 #language    fr-FR    "Aide générale"
+                                 #language    zh-cht    "一般性提示"
+#string STR_GENERAL_HELP_MSG     #language    en-US    "↑↓→←      : Move\nEnter     : Select\n+/-       : Value\nESC       : Exit\nF1        : General Help\nF2        : Previous Values\nF3        : Optimized Defaults\nF4        : Save & Exit Setup\n<K>       : Scroll help area upwards\n<M>       : Scroll help area downwards"
+                                 #language    fr-FR    "↑↓→←      : Move\nEnter     : Select\n+/-       : Value\nESC       : Exit\nF1        : General Help\nF2        : Previous Values\nF3        : Optimized Defaults\nF4        : Save & Exit Setup"
+                                 #language    zh-cht    "↑↓→←      : 移動\nEnter     : 選擇\n+/-       : 數值\nESC       : 離開\nF1        : 一般性提示\nF2        : 之前設定值\nF3        : 最佳化預設值\nF4        : 儲存並離開"
+#string STR_BOOT_MANAGER         #language    en-US    "Boot Manager"
+                                 #language    fr-FR    "Boot Manager"
+                                 #language    zh-cht    "啟動管理員"
+#string STR_BOOT_MANAGER_HELP    #language    en-US    "Configure boot options"
+                                 #language    fr-FR    "Configure boot options"
+                                 #language    zh-cht    "啟動配置選項"
+#string STR_LANGUAGE             #language    en-US    "Language"
+                                 #language    fr-FR    "Langue"
+                                 #language    zh-cht    "語言"
+#string STR_LANGUAGE_HELP        #language    en-US    "Select the default system language"
+                                 #language    fr-FR    "Choisissez la langue de système"
+                                 #language    zh-cht    "選擇系統預設語言"
+
+#string STR_LOAD_PREVIOUS        #language    en-US    "Load Previous Values"
+                                 #language    fr-FR    "Load Previous Values"
+                                 #language    zh-cht    "載入之前設定值"
+#string STR_LOAD_PREVIOUS_MSG    #language    en-US    "Load Previous Values?"
+                                 #language    fr-FR    "Load Previous Values?"
+                                 #language    zh-cht    "載入之前設定值嗎?"
+
+#string STR_LOAD_FAILSAFE        #language    en-US    "Load Fail-Safe Defaults"
+                                 #language    fr-FR    "Load Fail-Safe Defaults"
+                                 #language    zh-cht    "載入安全預設值"
+#string STR_LOAD_FAILSAFE_HELP   #language    en-US    "Load Fail-Safe Defaults"
+                                 #language    fr-FR    "Load Fail-Safe Defaults"
+                                 #language    zh-cht    "載入安全預設值"
+#string STR_LOAD_FAILSAFE_MSG    #language    en-US    "Load Fail-Safe Defaults?"
+                                 #language    fr-FR    "Load Fail-Safe Defaults?"
+                                 #language    zh-cht    "載入安全預設值嗎?"
+
+#string STR_LOAD_OPTIMAL         #language    en-US    "Load Optimized Defaults"
+                                 #language    fr-FR    "Load Optimized Defaults"
+                                 #language    zh-cht    "載入最佳化預設值"
+#string STR_LOAD_OPTIMAL_HELP    #language    en-US    "Load Optimized Defaults"
+                                 #language    fr-FR    "Load Optimized Defaults"
+                                 #language    zh-cht    "載入最佳化預設值"
+#string STR_LOAD_OPTIMAL_MSG     #language    en-US    "Load Optimized Defaults?"
+                                 #language    fr-FR    "Load Optimized Defaults?"
+                                 #language    zh-cht    "載入最佳化預設值嗎?"
+
+#string STR_SAVE_EXIT            #language    en-US    "Save & Exit Setup"
+                                 #language    fr-FR    "Save & Exit Setup"
+                                 #language    zh-cht    "儲存並離開"
+#string STR_SAVE_EXIT_HELP       #language    en-US    "Save Data to NVRAM"
+                                 #language    fr-FR    "Save Data to NVRAM"
+                                 #language    zh-cht    "儲存資料到 NVRAM 中"
+#string STR_SAVE_EXIT_MSG        #language    en-US    "Save configuration and exit?"
+                                 #language    fr-FR    "Save configuration and exit?"
+                                 #language    zh-cht    "儲存配置並離開嗎?"
+
+#string STR_SAVE_RESET           #language    en-US    "Save & reset"
+                                 #language    fr-FR    "Save & reset"
+                                 #language    zh-cht    "儲存並重新啟動"
+#string STR_SAVE_RESET_HELP      #language    en-US    "Save Data to NVRAM"
+                                 #language    fr-FR    "Save Data to NVRAM"
+                                 #language    zh-cht    "儲存資料到 NVRAM 中"
+#string STR_SAVE_RESET_MSG       #language    en-US    "Save configuration and reset?"
+                                 #language    fr-FR    "Save configuration and reset?"
+                                 #language    zh-cht    "儲存配置並重新啟動嗎?"
+
+#string STR_SAVE_VALUES          #language    en-US    "Save Setup Values"
+                                 #language    fr-FR    "Save Setup Values"
+                                 #language    zh-cht    "儲存設定資料"
+#string STR_SAVE_VALUES_MSG      #language    en-US    "Save configuration?"
+                                 #language    fr-FR    "Save configuration?"
+                                 #language    zh-cht    "儲存配置嗎?"
+
+#string STR_EXIT                 #language    en-US    "Exit Without Saving"
+                                 #language    fr-FR    "Exit Without Saving"
+                                 #language    zh-cht    "不儲存並離開"
+#string STR_EXIT_MSG             #language    en-US    "Quit without saving?"
+                                 #language    fr-FR    "Quit without saving?"
+                                 #language    zh-cht    "不儲存並離開嗎?"
+
+#string STR_RESET                #language    en-US    "Reset Without Saving"
+                                 #language    fr-FR    "Reset Without Saving"
+                                 #language    zh-cht    "不儲存並重新啟動"
+#string STR_RESET_MSG            #language    en-US    "Reset without saving?"
+                                 #language    fr-FR    "Reset without saving?"
+                                 #language    zh-cht    "不儲存並重新啟動嗎?"
+
+
+#string STR_SAVE_USER_DEFAULTS   #language    en-US    "Save Values as User Defaults"
+                                 #language    fr-FR    "Save Values as User Defaults"
+                                 #language    zh-cht    "資料儲存為使用者預設值"
+
+#string STR_LOAD_USER_DEFAULTS   #language    en-US    "Restore User Defaults"
+                                 #language    fr-FR    "Restore User Defaults"
+                                 #language    zh-cht    "恢復使用者預設值"
+#string STR_LOAD_USER_MSG        #language    en-US    "Restore User Defaults?"
+                                 #language    fr-FR    "Restore User Defaults?"
+                                 #language    zh-cht    "恢復使用者預設值嗎?"
+				 
+#string STR_SUBMENU_OPTION       #language    en-US    "Press Enter"
+                                 #language    fr-FR    "Allez"
+                                 #language    zh-cht    "按 Enter"
+#string STR_CTRL_OK              #language    en-US    "Ok"
+                                 #language    fr-FR    "Ok"
+                                 #language    zh-cht    "接受"
+#string STR_CTRL_CANCEL          #language    en-US    "Cancel"
+                                 #language    fr-FR    "Cancel"
+                                 #language    zh-cht    "取消"
+#string STR_CTRL_YES             #language    en-US    "Yes"
+                                 #language    fr-FR    "oui"
+                                 #language    zh-cht    "是"
+#string STR_CTRL_NO              #language    en-US    "No"
+                                 #language    fr-FR    "no"
+                                 #language    zh-cht    "否"
+#string STR_DAY_SUNDAY           #language    en-US    "Sun"
+                                 #language    fr-FR    "dim"
+                                 #language    zh-cht    "星期天"
+#string STR_DAY_MONDAY           #language    en-US    "Mon"
+                                 #language    fr-FR    "lun"
+                                 #language    zh-cht    "星期一"
+#string STR_DAY_TUESDAY          #language    en-US    "Tue"
+                                 #language    fr-FR    "mar"
+                                 #language    zh-cht    "星期二"
+#string STR_DAY_WEDNESDAY        #language    en-US    "Wed"
+                                 #language    fr-FR    "mer"
+                                 #language    zh-cht    "星期三"
+#string STR_DAY_THURSDAY         #language    en-US    "Thu"
+                                 #language    fr-FR    "jeu"
+                                 #language    zh-cht    "星期四"
+#string STR_DAY_FRIDAY           #language    en-US    "Fri"
+                                 #language    fr-FR    "ven"
+                                 #language    zh-cht    "星期五"
+#string STR_DAY_SATURDAY         #language    en-US    "Sat"
+                                 #language    fr-FR    "sam"
+                                 #language    zh-cht    "星期六"
+
+#string STR_OLD_PSWD             #language    en-US    "Enter Current Password"
+                                 #language    fr-FR    "Enter Current Password"
+                                 #language    zh-cht    "輸入目前密碼"
+#string STR_NEW_PSWD             #language    en-US    "Create New Password"
+                                 #language    fr-FR    "Create New Password"
+                                 #language    zh-cht    "建立新的密碼"
+#string STR_CONFIRM_NEW_PSWD     #language    en-US    "Confirm New Password"
+                                 #language    fr-FR    "Confirm New Password"
+                                 #language    zh-cht    "確定新的密碼"
+				 
+#string STR_PSWD_CLR             #language    en-US    "Clear Old Password. Continue?"
+#string STR_ERROR                #language    en-US    "ERROR"
+                                 #language    fr-FR    "ERROR"
+                                 #language    zh-cht    "錯誤"
+#string STR_WARNING              #language    en-US    "WARNING"
+                                 #language    fr-FR    "WARNING"
+                                 #language    zh-cht    "警告"
+
+#string STR_WARNING_NOT_FOUND    #language    en-US    "Not Found"
+                                 #language    fr-FR    "Not Found"
+                                 #language    zh-cht    "找不到"
+#string STR_ERROR_INPUT          #language    en-US    "Invalid Input Range"
+                                 #language    fr-FR    "Invalid Input Range"
+#string STR_EMPTY_STRING         #language    en-US    ""
+                                 #language    fr-FR    ""
+                                 #language    zh-cht    ""
+
+#string STR_INCONSISTENT_MSG_TITLE		#language en-US  "Inconsistency error"
+										#language fr-FR  "Inconsistency error"
+										#language zh-cht  "資料前後不一致錯誤"
+
+#string STR_NOSUBMITIF_MSG_TITLE		#language en-US  "Submit error"
+#string STR_BBS_POPUP_TITLE_STRING	#language    en-US    "Please select boot device:"
+                                 	#language    fr-FR    "Please select boot device:"
+                                 	#language    zh-cht    "Please select boot device:"
+
+#string STR_BBS_POPUP_HELP1_STRING	#language    en-US    "↑ and ↓ to move selection"
+                                 	#language    fr-FR    "↑ and ↓ to move selection"
+                                 	#language    zh-cht    "↑ and ↓ to move selection"
+
+#string STR_BBS_POPUP_HELP2_STRING	#language    en-US    "ENTER to select boot device"
+                                 	#language    fr-FR    "ENTER to select boot device"
+                                 	#language    zh-cht    "ENTER to select boot device"
+
+#string STR_BBS_POPUP_HELP3_STRING	#language    en-US    "ESC to boot using defaults"
+                                 	#language    fr-FR    "ESC to boot using defaults"
+                                 	#language    zh-cht    "ESC to boot using defaults"
+
+#string STR_BBS_POPUP_HELP_STRING	#language    en-US    "↑ and ↓ to move selection\nENTER to select boot device\nESC to boot using defaults"
+                                 	#language    fr-FR    "↑ and ↓ to move selection\nENTER to select boot device\nESC to boot using defaults"
+                                 	#language    zh-cht    "↑ and ↓ to move selection\nENTER to select boot device\nESC to boot using defaults"
+
+#string STR_POPUPMENU_ENTER_SETUP   #language    en-US    "Enter Setup"
+				    #language    fr-FR    "Enter Setup"
+				    #language    zh-cht    "Enter Setup"
+				    
+#string STR_USB                     #language en-US "USB"
+#string STR_VENDOR                  #language en-US "Vendor Specific"
+#string STR_FILEPATH                #language en-US "File Path"
+#string STR_PROTOCOL                #language en-US "Protocol"
+#string STR_FV_FILEPATH             #language en-US "Firmware File Path"
+
+#string STR_USB_DP                  #language en-US "USB %d"
+#string STR_SCSI_DP                 #language en-US "SCSI %d LUN %d"
+#string STR_FIBRE_CHANNEL_DP        #language en-US "Fibre Channel %ld LUN %ld"
+#string STR_1394_DP                 #language en-US "1394 Device"
+#string STR_I20_DP                  #language en-US "I20 (Tid: %x)"
+#string STR_INFINIBAND_DP           #language en-US "InfiniBand Device %ld"
+#string STR_VENDOR_DP               #language en-US "Vendor Specific Device"
+#string STR_MAC_DP                  #language en-US "Mac: %a"
+#string STR_NETWORK_IPV4_DP         #language en-US "Network IPv4 Device %d"
+#string STR_NETWORK_IPV6_DP         #language en-US "Network IPv6 Device %d"
+#string STR_UART_DP                 #language en-US "UART Device (Baud Rate: %ld)"
+#string STR_USB_CLASS_DP            #language en-US "USB %xh - Class Device"
+#string STR_USB_CLASS_PHY_DP        #language en-US "USB %xh - Physical Device"
+#string STR_USB_CLASS_MASS_DP       #language en-US "USB %xh - Mass Storage Device"
+#string STR_USB_LOGICAL_DP          #language en-US "USB Logical Device %d"
+#string STR_USB_SATA_DP             #language en-US "USB SATA Device %d"
+#string STR_USB_ISCSI_DP            #language en-US "USB iSCSI Device %ld"
+
+#string STR_HARD_DISK_ORDER         #language en-US "Hard Drive BBS Priorities"
+#string STR_CDROM_ORDER             #language en-US "CD/DVD ROM Drive BBS Priorities"
+#string STR_FLOPPY_DISK_ORDER       #language en-US "Floppy Drive BBS Priorities"
+#string STR_NETWORK_ORDER           #language en-US "Network Device BBS Priorities"
+#string STR_BEV_ORDER               #language en-US "BEV Device BBS Priorities"
+#string STR_USB_ORDER               #language en-US "USB Device BBS Priorities"
+#string STR_PCMCIA_ORDER            #language en-US "PCMCIA Device BBS Priorities"
+#string STR_UNKNOWN_ORDER           #language en-US "Unknown Device BBS Priorities"
+
+#string STR_ADD_BOOT_OPTION_RESERVED	#language en-US "Boot Option Name is Reserved"
+#string STR_ADD_BOOT_OPTION_EMPTY		#language en-US "Please set Boot Option Name and File Path"
+#string STR_ADD_DRIVER_OPTION_EMPTY		#language en-US "Please set Driver Option Name and File Path"
+#string STR_DEL_BOOT_OPTION_RESERVED	#language en-US "Reserved Boot Option, can not be Deleted"
+
+#string STR_MSGBOX_PROGRESS_TITLE          #language    en-US    "AMI Progress Box"
+                                 	   #language    fr-FR    "AMI Progress Box"
+                                 	   #language    zh-cht    "AMI Progress Box"
+
+#string STR_MSGBOX_PROGRESS_TEXT          #language    en-US    "Message Box for Progress Update"
+                                 	  #language    fr-FR    "Message Box for Progress Update"
+                                 	  #language    zh-cht    "Message Box for Progress Update"
+
+// EIP-41615: strings related to file browser support in Add Boot Option
+#string STR_FILE_SYSTEM                 #language en-US "Select a File System"
+#string STR_FILE_PATH                   #language en-US "Select a File to Boot"
+#string STR_DRIVER_PATH                 #language en-US "Select a Driver"
+#string STR_DRV_HLTH_TITLE         	    #language en-US "Driver Health"
+#string STR_DRV_HLTH_RECON         	    #language en-US "Proceed with Reconnecting the Controller"
+#string STR_DRV_HLTH_REBOOT       	    #language en-US "Proceed with Sytem Reboot"
+#string STR_SECBOOT_VIOLATION       	#language en-US "Secure Boot Violation"
+#string STR_SECBOOT_INV_SIGN	       	#language en-US "Invalid signature detected. Check Secure Boot Policy in Setup"
+
+//#include "StyleStr.uni"
+
+#string STR_DBG_PRINT_CHECKED           #language en-US "x"
+#string STR_DBG_PRINT_HIIPARSING        #language en-US "Print HiiParsing"
+#string STR_DBG_PRINT_HIIFUNCTION       #language en-US "Print HiiFunctions"
+#string STR_DBG_PRINT_HIICALLBACK       #language en-US "Print HiiCallbacks"
+#string STR_DBG_PRINT_HIINOTIFICATION   #language en-US "Print HiiNotifications"
+#string STR_DBG_PRINT_IFRFORM           #language en-US "Print Current IfrForm"
+#string STR_DBG_PRINT_VARIABLE_CACHE    #language en-US "Print Variable Cache"
+
+//EIP-96246 Starts
+#string STR_OVERRIDE_BOOTNEXT_OPTION_1	#language en-US "Override now and clear the BootNext data"
+#string STR_OVERRIDE_BOOTNEXT_OPTION_2	#language en-US "Override now but keep the BootNext data"
+#string STR_OVERRIDE_BOOTNEXT_OPTION_3	#language en-US "Boot to BootNext and clear BootNext data"
+#string STR_OVERRIDE_OPTION_MENU_TITLE	#language en-US "BootNext Override options:"
+#string STR_OVERRIDE_OPTION_MENU_LEGEND	#language en-US "ENTER to perform the selected action.\n Press ESC to close this menu"
+//EIP-96246 Ends
+
+#string STR_OLD_PSWD_LABEL		#language    en-US    "Enter Current "
+#string STR_NEW_PSWD_LABEL		#language    en-US    "Create New "
+#string STR_CONFIRM_NEW_PSWD_LABEL	#language    en-US    "Confirm New "
+#string STR_PSWD_CLR_LABEL		#language    en-US    "Clear Old "
+#string STR_FILE_SYSTEM_TO_SAVE_IMG    	#language    en-US    "Select a File System to print current screen"
+#string STR_TSE_CACHE_CHANGE_WARNING    #language    en-US    "Changes Happened. Save/Discard the changes and exit"
+#string STR_CANT_CHANGE_PASSWORD   	#language    en-US    "Change of password not expected by driver"
+#string STR_PARSING_ERROR   	#language    en-US    "Invalid configuration data detected and excluded."
+
+#string STR_NON_DEVICE_GROUP        #language en-US "Non Devices Group"
+#string STR_DISK_DEVICE_GROUP       #language en-US "Disk Devices Group"
+#string STR_VIDEO_DEVICE_GROUP      #language en-US "Video Devices Group"
+#string STR_NETWORK_DEVICE_GROUP    #language en-US "Network Devices Group"
+#string STR_INPUT_DEVICE_GROUP      #language en-US "Input Devices Group"
+#string STR_ONBOARD_DEVICE_GROUP    #language en-US "Onboard Devices Group"
+#string STR_OTHER_DEVICE_GROUP      #language en-US "Other Devices Group"
+#string STR_DEVICE_GROUP_HELP       #language en-US "Provides Device Group Access"
+
+#string STR_ENCODING_ERROR          #language en-US "Password cannot be encoded due to insufficient variable space."
+//**********************************************************************//
+//**********************************************************************//
+//**********************************************************************//
+//**                                                                  **//
+//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **//
+//**                                                                  **//
+//**                       All Rights Reserved.                       **//
+//**                                                                  **//
+//**     5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093     **//
+//**                                                                  **//
+//**                       Phone: (770)-246-8600                      **//
+//**                                                                  **//
+//**********************************************************************//
+//**********************************************************************//
+//**********************************************************************//

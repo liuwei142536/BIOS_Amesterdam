@@ -1,0 +1,10 @@
+<component>
+	name = "DxeSmm"
+	category = ModulePart
+	LocalRoot = "GrangevillePkg\Platform\DxeSmm\"
+	RefName = "GrangevillePkg.Platform.DxeSmm"
+[INF]
+"SoftADR\SoftAdr.inf"
+[files]
+"DxeSmm.sdl"	
+<endComponent>

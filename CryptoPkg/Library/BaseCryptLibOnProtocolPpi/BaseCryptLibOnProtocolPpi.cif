@@ -1,0 +1,12 @@
+<component>
+    name = "BaseCryptLibOnProtocolPpi"
+    category = ModulePart
+    LocalRoot = "CryptoPkg\Library\BaseCryptLibOnProtocolPpi\"
+    RefName = "CryptoPkg.BaseCryptLibOnProtocolPpi"
+[INF]
+"DxeCryptLib.inf"
+"PeiCryptLib.inf"
+"SmmCryptLib.inf"
+[files]
+"BaseCryptLibOnProtocolPpi.sdl"	
+<endComponent>

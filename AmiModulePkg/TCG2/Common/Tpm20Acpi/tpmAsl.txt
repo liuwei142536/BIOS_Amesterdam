@@ -1,0 +1,374 @@
+//tpm.asl
+External(CRBI)
+    Device(\_SB.TPM)
+    {
+    
+        Name(@Token(TPMIRQNAME), 0xFFFFFFFF)
+        
+        Method(_HID, 0){        //PnP Device ID
+           If(@Token(TCMFNAME))     
+           {
+              Return(EISAID("@Token(TCMESIADVALUE)"))
+           }
+           Else
+           {
+               If(LEqual(@Token(TTDPNAME), 0)){
+                    Return(EISAID("@Token(TPMPNPESAIDVALUE)"))
+                }else{
+                    Return("MSFT0101")
+                }
+           }
+        }
+        
+#if defined (ASL_CID_SUPPORT) && (ASL_CID_SUPPORT == 1)
+        Method(_CID, 0){       //Redline RS2 changes; Added CID
+           If(LEqual(@Token(TCMFNAME), 0))     
+           {
+               If(LEqual(TTDP, 0)){
+                    Return(EISAID("@Token(TPMPNPESAIDVALUE)"))
+               }else{
+                    Return("MSFT0101")
+               }
+           }
+        }
+#endif
+
+      OperationRegion(TMMB, SystemMemory, 0x0FED40000, 0x5000)
+      Field(TMMB, ByteAcc, Lock, Preserve)
+      {
+        ACC0, 8,            //Access0 Register
+        Offset(0x08),
+        INTE, 32,           // TPM Interrupt Enable - Locality 0
+        INTV, 8,            // TPM Interrupt Vector - Locality 0
+        Offset(0x10),
+        INTS, 32,           // TPM Interrupt Status - Locality 0
+        INTF, 32,           // TPM Interrupt Capability - Locality 0
+        TSTS, 32,           // TPM Status  - Locality 0
+        Offset(0x24),
+        FIFO, 32,           // TPM FIFO register - Locality 0
+        Offset(0x30),
+        IDTF, 32,           // TPM Interface ID register - Locality 0
+        Offset(0x4C),
+        SCMD, 32,           //  TPM CTRL STRT  - Locality 0 CRB interface only
+      }
+       
+      Method(_STR,0)
+      {
+         If(LEqual(@Token(TTDPNAME), 0)){
+              Return (Unicode ("TPM 1.2 Device"))
+         }else {
+              Return (Unicode ("TPM 2.0 Device"))
+         }
+      }
+        
+      Name(_UID,0x01)
+      
+      //TPM 2.0 CRB interface (FTPM Base)
+      Name(CRST,ResourceTemplate()
+      {
+            Memory32Fixed (ReadOnly, 0x00000000, 0x1000,PCRB) // For BDW and AMD
+            Memory32Fixed (ReadOnly, 0xFED70000, 0x1000,PCRC)   
+      })
+      
+      //TPM 2.0 CRB interface (PTP)
+      Name(CRSD,ResourceTemplate()
+      {
+            Memory32Fixed (ReadWrite, 0xFED40000, 0x5000, PCRE)
+      })
+
+      //TPM 1.2/2.0 TIS interface -Interrupt disabled
+      Name(CRID,ResourceTemplate()
+      {
+            Memory32Fixed (ReadWrite, 0xFED40000, 0x5000,PCRS)            
+      })
+      
+      //TPM 1.2/2.0 TIS interface -Interrupt Enabled
+      Name(CREI,ResourceTemplate()
+      {
+            Memory32Fixed (ReadWrite, 0xFED40000, 0x5000,PCRI)
+            Interrupt(ResourceConsumer, Level, ActiveLow, Shared, , , INTR) {0}  //porting, update possible interrupt comma separated list buffer
+      })
+      
+      
+      //
+      // Return the resource consumed by TPM device
+      //
+      Method(_CRS,0,Serialized)
+      {
+         If(LEqual(@Token(AMDTNAME), 1)) //AMD FTPM
+         {
+            // Resource for Control Area
+             CreateDWordField(CRST, ^PCRB._BAS, MTFB) // Min
+             CreateDWordField(CRST, ^PCRB._LEN, LTFB) // Length
+                   
+             Store(@Token(TPMBNAME), MTFB)
+             Store(@Token(TPMBSIZE), LTFB)
+             
+            // Resrouce for Control Command Buffer
+             CreateDWordField(CRST, ^PCRC._BAS, MTFC) // Min
+             CreateDWordField(CRST, ^PCRC._LEN, LTFC) // Length
+               
+             Store(@Token(TPMCNAME), MTFC)
+             Store(@Token(TPMCSIZE), LTFC)
+             
+             Return (CRST)
+         }Else{
+            If(LEqual(@Token(DTPTNAME),1)) //TPM 2.0 CRB interface (PTP)
+            {
+               CreateDWordField(CRSD, ^PCRE._BAS, MTFE) // Min
+               CreateDWordField(CRSD, ^PCRE._LEN, LTFE) // Length
+               
+               Store(0x0FED40000, MTFE)
+               Store(0x00005000, LTFE)
+                              
+               Return(CRSD)
+            }            
+            ElseIf(LEqual(@Token(TTPFNAME), 1)) //TPM 1.2/2.0 TIS interface
+            {
+               If (LAnd(LEqual(@Token(TPMIRQNAME), 0), 
+                        LNotEqual(@Token(TPMIRQNAME), 0xFFFFFFFF))) {
+                   CreateDWordField(CRID, ^PCRS._BAS, MTFD) // Min
+                   CreateDWordField(CRID, ^PCRS._LEN, LTFD) // Length
+               
+                   Store(0x0FED40000, MTFD)
+                   Store(0x00005000, LTFD)
+                   Return (CRID)
+                }Else{
+                    CreateDWordField(CREI, ^INTR._INT, LIRQ)
+                    Store(@Token(TPMIRQNAME), LIRQ)
+                    Return (CREI)
+                }
+            }ElseIf(LEqual(@Token(TTPFNAME), 0)) //TPM 2.0 CRB interface (FTPM Base)
+            {
+               CreateDWordField(CRST, ^PCRC._BAS, MTFF) // correct for BDW.
+               Store(@Token(FTPMNAME), MTFF)
+               Return (CRST)
+            }
+
+            Store(0x00000000, MTFE)
+            Store(0x00000000, LTFE)
+            Return (CRID)  
+         }
+            Return (CRID)
+      }
+      
+      
+      //
+      // Set resources consumed by the TPM device. 
+      Method(_SRS,1,Serialized)
+      {
+        //
+        // Do not configure Interrupt if IRQ Num is configured 0 by default
+        //
+        If (LAnd(LNotEqual(@Token(TPMIRQNAME), 0),
+            LNotEqual(@Token(TPMIRQNAME), 0xFFFFFFFF))) {
+          //
+          // Update resource descriptor
+          // Use the field name to identify the offsets in the argument
+          // buffer and RES0 buffer.
+          //
+          CreateDWordField(Arg0, ^INTR._INT, IRQ0)
+          CreateDWordField(CREI, ^INTR._INT, LIRQ)
+          Store(IRQ0, LIRQ)
+          Store(IRQ0, @Token(TPMIRQNAME))
+
+          CreateBitField(Arg0, ^INTR._HE, ITRG)
+          CreateBitField(CREI, ^INTR._HE, LTRG)
+          Store(ITRG, LTRG)
+
+          CreateBitField(Arg0, ^INTR._LL, ILVL)
+          CreateBitField(CREI, ^INTR._LL, LLVL)
+          Store(ILVL, LLVL)
+
+          //
+          // Update TPM FIFO PTP/TIS interface only, identified by TPM_INTERFACE_ID_x lowest
+          // nibble.
+          // 0000 - FIFO interface as defined in PTP for TPM 2.0 is active
+          // 1111 - FIFO interface as defined in TIS1.3 is active
+          //
+          If (LOr(LEqual (And (IDTF, 0x0F), 0x00), LEqual (And (IDTF, 0x0F), 0x0F))) {
+            //
+            // If FIFO interface, interrupt vector register is
+            // available. TCG PTP specification allows only
+            // values 1..15 in this field. For other interrupts
+            // the field should stay 0.
+            //
+            If (LLess (IRQ0, 16)) {
+              Store (And(IRQ0, 0xF), INTV)
+            }
+            //
+            // Interrupt enable register (TPM_INT_ENABLE_x) bits 3:4
+            // contains settings for interrupt polarity.
+            // The other bits of the byte enable individual interrupts.
+            // They should be all be zero, but to avoid changing the
+            // configuration, the other bits are be preserved.
+            // 00 - high level
+            // 01 - low level
+            // 10 - rising edge
+            // 11 - falling edge
+            //
+            // ACPI spec definitions:
+            // _HE: '1' is Edge, '0' is Level
+            // _LL: '1' is ActiveHigh, '0' is ActiveLow (inverted from TCG spec)
+            //
+            If (LEqual (ITRG, 1)) {
+              Or(INTE, 0x00000010, INTE)
+            } Else {
+              And(INTE, 0xFFFFFFEF, INTE)
+            }
+            if (LEqual (ILVL, 0)) {
+              Or(INTE, 0x00000008, INTE)
+            } Else {
+              And(INTE, 0xFFFFFFF7, INTE)
+            }
+          }
+        }
+      }
+      
+      
+      OperationRegion (CRBD, SystemMemory, @Token(TPMMNAME), 0x48)
+      Field (CRBD, AnyAcc, NoLock, Preserve)
+      {
+        Offset(0x04),
+        HERR, 32,
+        Offset (0x40),
+        HCMD, 32,
+        Offset(0x44), 
+        HSTS, 32,
+      }
+      
+
+      Method(_STA, 0){
+        If(LEqual(@Token(TTDPNAME), 0)){
+            If(@Token(TPMFNAME)){
+                 Return(0x0F)  // TPM Support 
+             }
+             Return(0x00)  // No TPM Support
+         }ElseIF(LEqual(@Token(TTDPNAME), 1)){
+            If(@Token(TPMFNAME)){
+             Return(0x0F)  // TPM Support 
+            }
+            Return (0x00)
+         } 
+         Return (0x00)
+       }
+   
+       Method (STRT, 3, Serialized, 0, IntObj, {UnknownObj, UnknownObj, UnknownObj}) // IntObj, IntObj, PkgObj
+       {
+          OperationRegion (TPMR, SystemMemory, @Token(FTPMNAME), 0x1000)
+          Field (TPMR, AnyAcc, NoLock, Preserve)
+          {
+            Offset(0x04),
+            FERR, 32,
+            Offset(0x0c),
+            BEGN, 32,
+          }
+          
+          Name (TIMR, 0)  
+          If( LNotEqual( ToInteger (Arg0), 0 ))
+          {
+            // For Tools check Arg0, do nothing...
+            // Return (1)   // 1: General Failure
+          }
+          
+          //
+          // Switch by function index
+          //
+          Switch (ToInteger (Arg1))
+          {
+              Case (0)
+              {
+                //
+                // Standard query, supports function 1-1
+                //
+                Return (Buffer () {0x03})
+              }
+              Case (1)
+              {   
+                Store(0, TIMR)
+                
+                If(LEqual(@Token(AMDTNAME), 1))
+                {
+                  While(LAND(LEqual(BEGN, One), LLESS(TIMR, 0x200)))
+                  {
+                     If(LEqual(BEGN, One))
+                     {
+                       Sleep(0x1)
+                       Increment(TIMR)
+                     }
+                  }
+
+                }Else{
+#if defined( ASL_TPM20_CRB_WITH_START_METHOD ) && (ASL_TPM20_CRB_WITH_START_METHOD == 1)
+
+                Store(0, TIMR);
+                //
+                // Wait STR bit clear, 90 sec for time out
+                //
+                While(LAND(LLessEqual(TIMR, 90000),LNotEqual(And(SCMD,0x00000001),0)))
+                {
+                    Sleep(1)
+                    Increment(TIMR)
+                }
+#else
+                  If(LEqual(Or(And(HSTS,0x00000002),And(HSTS,0x00000001)),0x00000003))
+                  {
+                    //
+                    // Trigger the FTPM_CMD interrupt
+                    //
+                    Store (0x00000001, HCMD)
+                  }              
+                  Else
+                  {
+                    //Set Error Bit
+                    Store(0x00000001,FERR)
+                    //Clear Start Bit
+                    Store(0x00000000,BEGN)
+                  }
+#endif
+
+              }
+              Return(Zero)
+           }    
+        }
+      
+        Return (1)    
+      }
+
+      Method (CRYF, 3, Serialized, 0, {BuffObj, PkgObj}, {UnknownObj, UnknownObj, UnknownObj}) // IntObj, IntObj, PkgObj
+      {
+        If( LNotEqual( ToInteger (Arg0), 1 ))
+        {
+          // For Tools check Arg0, do nothing...
+          // Return (Buffer () {0x00})  // 0: Failure
+        }
+          
+        //
+        // Switch by function index
+        //
+        Switch (ToInteger(Arg1))
+        {
+          Case (0)
+          {
+            //
+            // Standard query
+            //
+            Return (Buffer () {0x03})
+          }
+          Case (1)
+          {
+            //
+            // Return failure if no TPM present
+            //
+            Name(TPMV, Package () {0x01, Package () {0x1, 0x20}})
+            if (LEqual (_STA (), 0x00))
+            {
+              Return (Package () {0x00})
+            }
+            Return (TPMV)
+          }
+        }
+        Return (Buffer () {0})
+      }
+
+  }

@@ -1,0 +1,11 @@
+<component>
+	name = "DbgXhciXportLib"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\DbgXhciXportLib\"
+	RefName = "Debugger.DbgXhciXportLib"
+[INF]
+"CommonXhciXportLib.inf"
+"DbgXhciXportLib.inf"
+[files]
+"DbgXhciXportLib.sdl"	
+<endComponent>

@@ -1,0 +1,68 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file AmiTseTcgStorageSecurity.inf
+#   AMITSE module part of the TcgStorageSecurity 
+##
+
+[Defines]  
+  INF_VERSION                    = 0x00010015
+  BASE_NAME                      = AmiTseTcgStorageSecurity
+  FILE_GUID                      = B85C7FEA-AEBF-492b-96C6-42EA133BCF29
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiTseTcgStorageSecurity
+
+[Sources]
+  AmiTseTcgStorageSecurity.c
+  AmiTseTcgStorageSecurity.h
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  
+[Protocols]
+  gEfiDiskInfoProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gAmiHddSecurityEndProtocolGuid
+#  Uncomment below GUID once checked into AmiModulePkg.dec
+#  gAmiTcgStorageSecurityProtocolGuid
+  gAmiHddPasswordVerifiedGuid
+  gTSEScreenMgmtProtocolGuid
+  gEfiTrEEProtocolGuid
+  gEfiSmmControl2ProtocolGuid
+  gEfiPciIoProtocolGuid
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiTsePkg/AmiTsePrivatePkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+
+[Depex]
+  gEfiVariableArchProtocolGuid
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

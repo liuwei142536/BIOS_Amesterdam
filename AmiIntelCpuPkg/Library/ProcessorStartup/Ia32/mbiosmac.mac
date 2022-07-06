@@ -1,0 +1,518 @@
+;*************************************************************************
+;*************************************************************************
+;**                                                                     **
+;**        (C)Copyright 1985-2008, American Megatrends, Inc.            **
+;**                                                                     **
+;**                       All Rights Reserved.                          **
+;**                                                                     **
+;**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+;**                                                                     **
+;**                       Phone: (770)-246-8600                         **
+;**                                                                     **
+;*************************************************************************
+;*************************************************************************
+
+;*****************************************************************;
+; $Header: /Alaska/SOURCE/CPU/Intel/Nehalem/MBIOSMAC.MAC 2     3/03/09 11:09p Markw $
+;
+; $Revision: 2 $
+;
+; $Date: 3/03/09 11:09p $
+;*****************************************************************;
+;*****************************************************************;
+; Revision History
+; ----------------
+; $Log: /Alaska/SOURCE/CPU/Intel/Nehalem/MBIOSMAC.MAC $
+; 
+; 2     3/03/09 11:09p Markw
+; Update copyright headers.
+; 
+; 1     11/02/07 1:59p Markw
+; 
+;*****************************************************************;
+
+;<AMI_FHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		MBIOSMAC.MAC
+;
+; Description:	Assembly Macros
+;
+;----------------------------------------------------------------------------
+;<AMI_FHDR_END>
+
+
+ifndef _mbiosmac_mac_
+_mbiosmac_mac_	equ	1
+.xlist
+
+.586p
+.model small, c
+.XMM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mEXTERN_NEAR
+;
+; Description: External Near macro
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEXTERN_NEAR MACRO LabelName
+
+	EXTERN	LabelName:NEAR		; Define the label as a NEAR EXTERN.
+
+ENDM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mEXTERN_NEAR32
+;
+; Description: External Near 32 Macro
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEXTERN_NEAR32 MACRO LabelName
+
+	EXTERN	LabelName:NEAR32		; Define the label as a NEAR EXTERN.
+
+ENDM
+
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mEXTERN_FAR
+;
+; Description: External Far macro
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEXTERN_FAR MACRO LabelName
+
+	EXTERN	LabelName:FAR		; Define the label as a FAR EXTERN.
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mSTART_PROC_NEAR
+;
+; Description: Start Near procedure macro.
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mSTART_PROC_NEAR MACRO LabelName
+
+LabelName PROC NEAR PUBLIC
+
+ENDM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mSTART_PROC_NEAR32
+;
+; Description: Start Near 32-bit procedure macro.
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mSTART_PROC_NEAR32 MACRO LabelName
+
+LabelName PROC NEAR32 PUBLIC
+
+ENDM
+
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mBODY_CALL_PROC_NEAR
+;
+; Description: Call near macro.
+;
+; Input: 
+;   LabelID
+;   LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_CALL_PROC_NEAR MACRO LabelID, LabelName
+
+	call	LabelName
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mBODY_JMP_PROC_NEAR
+;
+; Description: Jump Near Macro. Provide a return label to jump to.
+;
+; Input: 
+;   LabelID
+;   LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_JMP_PROC_NEAR MACRO LabelID, LabelName
+
+	jmp	LabelName
+	PUBLIC	LabelName&End
+LabelName&End::
+
+ENDM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mBODY_JMP_PROC_NEAR32
+;
+; Description: Jump near 32-bit macro. Provide a return label to jump to.
+;
+; Input: 
+;   LabelID
+;   LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_JMP_PROC_NEAR32 MACRO LabelID, LabelName
+
+	jmp	LabelName
+	PUBLIC	LabelName&End
+LabelName&End::
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mEND_PROC_NEAR
+;
+; Description: End near procedure macro. Last in a group.
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_NEAR MACRO LabelName
+
+	ret
+LabelName ENDP
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mEND_PROC_WITH_JMP_NEAR
+;
+; Description: End of procedure and jump near macro. Last procedure in a group.
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_WITH_JMP_NEAR MACRO LabelName
+
+	EXTERN	LabelName&End:NEAR
+	jmp	LabelName&End
+LabelName ENDP
+
+ENDM
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mEND_PROC_WITH_JMP_NEAR32
+;
+; Description: Jump Near 32-bit macro. Last macro in a group.
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_WITH_JMP_NEAR32 MACRO LabelName
+
+	EXTERN	LabelName&End:NEAR32
+	jmp	LabelName&End
+LabelName ENDP
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mSTART_PROC_FAR
+;
+; Description: Far procedure macro.
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mSTART_PROC_FAR MACRO LabelName
+
+LabelName PROC FAR PUBLIC
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mBODY_CALL_PROC_FAR
+;
+; Description: Call far macro.
+;
+; Input: 
+;   LabelID
+;   LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_CALL_PROC_FAR MACRO LabelID, LabelName
+
+	call	LabelName
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mBODY_JMP_PROC_FAR
+;
+; Description: jmp far macro with return label to jump back to.
+;
+; Input: 
+;   LabelID
+;   LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_JMP_PROC_FAR MACRO LabelID, LabelName
+
+	jmp	LabelName
+	PUBLIC	LabelName&End
+LabelName&End::
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mEND_PROC_FAR
+;
+; Description: Ret procedure macro. Last in a group.
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_FAR MACRO LabelName
+
+	ret
+LabelName ENDP
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mEND_PROC_WITH_JMP_FAR
+;
+; Description: End procedure macro. Last in agroup.
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_PROC_WITH_JMP_FAR MACRO LabelName
+
+	EXTERN	LabelName&End:FAR
+	jmp	LabelName&End
+LabelName ENDP
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mSTART_TBL
+;
+; Description: Start table macro.
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mSTART_TBL MACRO LabelName
+
+	PUBLIC	LabelName
+LabelName LABEL BYTE
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mBODY_TBL_ENTRY_NEAR
+;
+; Description: Start table enty macro.
+;
+; Input: 
+;   LabelID
+;   LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_TBL_ENTRY_NEAR MACRO LabelID, LabelName
+
+	stTblEntryNEAR <LabelName>
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mBODY_ID_AND_TBL_ENTRY_NEAR
+;
+; Description: Start ID Table Entry macro.
+;
+; Input: 
+;   LabelID
+;   LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_ID_AND_TBL_ENTRY_NEAR MACRO LabelID, LabelName
+
+	stIDAndTblEntryNEAR <LabelID, LabelName>
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mBODY_TBL_ENTRY_FAR
+;
+; Description:
+;
+; Input: 
+;   LabelID
+;   LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_TBL_ENTRY_FAR MACRO LabelID, LabelName
+
+	stTblEntryFAR <LabelName>
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mBODY_ID_AND_TBL_ENTRY_FAR
+;
+; Description:
+;
+; Input: 
+;   LabelID
+;   LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mBODY_ID_AND_TBL_ENTRY_FAR MACRO LabelID, LabelName
+
+	stIDAndTblEntryFAR <LabelID, LabelName>
+
+ENDM
+
+
+;<AMI_PHDR_START>
+;----------------------------------------------------------------------------
+;
+; Name:		mEND_TBL
+;
+; Description:
+;
+; Input: LabelName
+;
+;----------------------------------------------------------------------------
+;<AMI_PHDR_END>
+
+mEND_TBL MACRO LabelName
+
+	PUBLIC	LabelName&End
+LabelName&End LABEL BYTE
+
+ENDM
+
+.list
+
+endif	;_mbiosmac_mac_
+
+;*************************************************************************
+;*************************************************************************
+;**                                                                     **
+;**        (C)Copyright 1985-2008, American Megatrends, Inc.            **
+;**                                                                     **
+;**                       All Rights Reserved.                          **
+;**                                                                     **
+;**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+;**                                                                     **
+;**                       Phone: (770)-246-8600                         **
+;**                                                                     **
+;*************************************************************************
+;*************************************************************************

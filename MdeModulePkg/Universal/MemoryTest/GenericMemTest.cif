@@ -1,0 +1,10 @@
+<component>
+	name = "MdeModulePkg.GenericMemTest"
+	category = eModule
+	LocalRoot = "MdeModulePkg\Universal\MemoryTest"
+	RefName = "MdeModulePkg.GenericMemTest"
+[files]
+"GenericMemTest.sdl"	
+[INF]
+"GenericMemoryTestDxe\GenericMemoryTestDxe.inf"
+<endComponent>

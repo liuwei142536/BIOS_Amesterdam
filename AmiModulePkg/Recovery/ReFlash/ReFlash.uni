@@ -1,0 +1,116 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file
+  Definition of module setup strings
+
+**/
+
+/=#
+#include "VFR.uni"
+
+#string STR_RECOVERY #language eng "Recovery"
+#string STR_UPDATE_NVRAM #language eng "Reset NVRAM"
+#string STR_UPDATE_NVRAM_HELP #language eng "Set this option to reset NVRAM to default values"
+#string STR_UPDATE_BB #language eng "Boot Block Update"
+#string STR_UPDATE_BB_HELP #language eng "Set this option to update boot block area of the firmware"
+#string STR_UPDATE_MAIN #language eng "Main Block Update"
+#string STR_UPDATE_MAIN_HELP #language eng "Set this option to update Main block area of the firmware"
+#string STR_UPDATE_EC #language eng "EC FIRMWARE Update" // EC_FIRMWARE_UPDATE_INTERFACE_SUPPORT+
+#string STR_UPDATE_EC_HELP #language eng "Set this option to update EC area of the firmware" // EC_FIRMWARE_UPDATE_INTERFACE_SUPPORT+
+#string STR_FLASH #language eng "Proceed with flash update"
+#string STR_FLASH_HELP #language eng "Select this to start flash update"
+#string STR_RECOVERY_FLASH #language eng "Flashing..."
+#string STR_FLASH_ENABLE #language eng "Yes, I'm sure"
+
+#string STR_SUBTITLE2_ERROR   #language eng "ROM Image update denied"
+#string STR_SUBTITLE2_WARNING #language eng "Are you sure you want to update the image?"
+
+#string STR_SUBTITLE1 #language eng ""
+#string STR_SUBTITLE2 #language eng ""
+
+#string STR_SUBTITLE1_TEMPLATE #language eng "ROM Image %s"
+
+#string STR_INFO #language eng "WARNING! BIOS Recovery mode has been detected"
+#string STR_INFO1 #language eng "WARNING! BIOS Update mode in progress..."
+
+#string STR_FLASH_PROGRESS_HELP #language eng "Flash update status"
+#string STR_FLASH_PROGRESS_CAPTION #language eng "Flash update progress"
+#string STR_FLASH_PROGRESS_CAPTION_BACKUP #language eng "Backup boot block..."
+#string STR_FLASH_PROGRESS_CAPTION_FLASH #language eng "Write new image..."
+#string STR_FLASH_PROGRESS_CAPTION_CUSTOM #language eng "Update %s firmware..."
+#string STR_FLASH_PROGRESS #language eng "not started"
+#string STR_FLASH_UPDATE_FAILED #language eng "Failed"
+#string STR_FLASH_UPDATE_DONE #language eng "Completed."
+
+#string STR_ERR   #language eng "Header is invalid"
+#string STR_ERR1  #language eng "Signature is invalid"
+#string STR_ERR2  #language eng "Platform Key is invalid"
+#string STR_ERR3  #language eng "Version is invalid"
+#string STR_ERR4  #language eng "is not loaded"
+#string STR_OPTIONS #language eng "Please select blocks you want to update"
+#string STR_UPDATE_WARNING1 #language eng "WARNING! System firmware is being updated."
+#string STR_UPDATE_WARNING2 #language eng "Keyboard is locked."
+#string STR_UPDATE_WARNING3 #language eng "DO NOT TURN THE POWER OFF !!!"
+#string STR_UPDATE_WARNING_RESET #language eng "Once firmware update is completed"
+#string STR_UPDATE_WARNING_RESET_USER #language eng "press any key to reboot the system"
+#string STR_UPDATE_WARNING_RESET_AUTO #language eng "system will be automatically rebooted"
+#string STR_FLASH_START_FAILED #language eng "can not be started"
+#string STR_ACCESS_DENIED #language eng "Flash update is"
+#string STR_ACCESS_DENIED2 #language eng "disabled"
+#string STR_ACCESS_DENIED3 #language eng "Reason"
+#string STR_ACCESS_DENIED4 #language eng "USER access level"
+
+#string STR_FLASH_SELECTION_ERROR_POPUP #language eng "Cannot disable FV_MAIN update"
+
+#string STR_FLASH_PROGRESS_MESSAGE_BACKUP_BB #language eng "Backup boot block..."
+#string STR_FLASH_PROGRESS_MESSAGE_BACKUP_RECOVERY #language eng "Backup recovery block..."
+#string STR_FLASH_PROGRESS_MESSAGE_FLASH_BB #language eng "Write new boot block..."
+#string STR_FLASH_PROGRESS_MESSAGE_FLASH_RECOVERY #language eng "Write new recovery block..."
+#string STR_FLASH_PROGRESS_MESSAGE_FLASH_MAIN #language eng "Write new main block..."
+#string STR_FLASH_PROGRESS_MESSAGE_FLASH_NVRAM #language eng "Write new nvram block..."
+
+#string STR_FLASH_PROGRESS_TITLE_BACKUP #language eng "Backup critical blocks"
+#string STR_FLASH_PROGRESS_TITLE_FLASH #language eng "Program new data"
+
+#string STR_UPDATE_ERROR1 #language eng "Flash update failed"
+#string STR_UPDATE_ERROR2 #language eng "Flash image invalid or not found"
+#string STR_UPDATE_ERROR3 #language eng "System will reset in 5 seconds"
+
+#string STR_PARTIAL_UPDATE  #language eng ""
+#string STR_PARTIAL_UPDATE1 #language eng "System booted from new image"
+#string STR_PARTIAL_UPDATE2 #language eng "ROM Layout mismatch detected"
+#string STR_PARTIAL_UPDATE3 #language eng "Partial update is not allowed"
+#string STR_PARTIAL_UPDATE4 #language eng "Only full image can be updated"
+
+#string STR_FLASH_SELECT_FILE  #language eng "Select Image file"
+#string STR_FLASH_VERIFY_IMAGE  #language eng "Verify Image"
+#string STR_FLASH_UPDATE_IMAGE  #language eng "Update Image"
+
+#string STR_SETUP_FLASH_SUBTITLE1  #language eng ""
+#string STR_SETUP_FLASH_SUBTITLE2  #language eng ""
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

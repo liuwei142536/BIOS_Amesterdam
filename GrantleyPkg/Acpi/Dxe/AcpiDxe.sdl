@@ -1,0 +1,68 @@
+TOKEN
+	Name  = "AcpiDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Dxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AcpiPlatform_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AcpiPlatform support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AcpiVTD_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AcpiVTD support in Project"
+	TokenType = Boolean
+End
+
+#ELINK
+#	Name  = "*_*_X64_CC_FLAGS"
+#	Type  = "BuildOptions"
+#	InvokeOrder = ReplaceParent
+#	OutDSC = Yes
+#	Override  = "AcpiPlatform"
+#End
+
+#ELINK
+#	Name  = "/D"
+#	Parent  = "*_*_X64_CC_FLAGS"
+#	Type  = "BuildOptions"
+#	InvokeOrder = ReplaceParent
+#	Override  = "AcpiPlatform"
+#End
+
+#ELINK
+#	Name  = "ACS_WA"
+#	Parent  = "*_*_X64_CC_FLAGS"
+#	Type  = "BuildOptions"
+#	InvokeOrder = ReplaceParent
+#	Override  = "AcpiPlatform"
+#End
+
+INFComponent
+	Name  = "AcpiPlatform"
+	File  = "AcpiPlatform\AcpiPlatform.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AcpiPlatform_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AcpiVTD"
+	File  = "AcpiVtd\AcpiVTD.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AcpiVTD_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "GrantleyPkg.AcpiPlatform"
+End
+

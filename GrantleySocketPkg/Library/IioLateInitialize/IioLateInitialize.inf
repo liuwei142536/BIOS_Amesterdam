@@ -1,0 +1,72 @@
+## @file
+#  Status Code Handler Driver which produces general handlers and hook them
+#  onto the status code router.
+#
+#  Copyright (c) 2006 - 2013, Intel Corporation.
+#
+#  All rights reserved. This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION             = 0x00010005
+  BASE_NAME               = IioLateInitLib
+  FILE_GUID               = 74B9CA54-0D70-4510-ABAD-8F7137CA62F5
+  MODULE_TYPE             = BASE
+  VERSION_STRING          = 1.0
+  LIBRARY_CLASS           = IioLateInitLib | DXE_DRIVER DXE_SMM_DRIVER
+
+[Sources]
+  IioLateInitialize.h   #AptioV server override: Adding missing source files
+  IioDmiInit.c
+  IioLateInitialize.c
+  IioIoApicInit.c
+  IioPortInit.c
+  IioVtdInit.c
+  IioCpuWorkAround.c
+  Ntb.c
+  IioIoat.c
+   
+[Packages]  
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  UefiLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  PciExpressLib
+  IioInitHooksLib
+  S3BootScriptLib
+  DxeServicesTableLib
+  IoLib
+  PcdLib
+
+[Protocols]
+  gEfiPciCallbackProtocolGuid
+  gEfiIioSystemProtocolGuid
+  gExitPmAuthProtocolGuid
+  gEfiIioUdsProtocolGuid
+  gEfiMpServiceProtocolGuid
+  gEfiPciEnumerationCompleteProtocolGuid #AptioV Server override: Use AMI PCI bus driver protocol that indicate resources assigned.
+
+[Guids]
+  gReadyForLockProtocolGuid
+  gEfiEventExitBootServicesGuid
+
+[Pcd]
+  gPlatformTokenSpaceGuid.PcdLockCsrSsidSvidRegister
+
+[Depex]
+  gEfiMpServiceProtocolGuid

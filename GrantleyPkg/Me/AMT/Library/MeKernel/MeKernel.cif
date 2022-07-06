@@ -1,0 +1,11 @@
+<component>
+	name = "MeKernel"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Library\MeKernel\"
+	RefName = "GrantleyPkg.MeKernel"
+[INF]
+"Dxe\MeLib.inf"
+"Pei\MeLibPei.inf"
+[files]
+"MeKernel.sdl"	
+<endComponent>

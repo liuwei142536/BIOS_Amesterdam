@@ -1,0 +1,42 @@
+<component>
+    name = "Debugger"
+    category = eModule
+    Rank = 48
+    LocalRoot = "AMIDebuggerPkg\Debugger\"
+    RefName = "AMIDebuggerPkg.Debugger"
+[files]
+"AMI Debug for UEFI.chm"	
+"Debugger.sdl"	
+"AMIDebugRx.sd"	
+"AMIDebugRx.uni"	
+"AMIDebugRx.mak"	
+"Debugger.mak"	
+"DebuggerHost.zip"	
+"RxFirmware.zip"	
+"USB3DriverPkg.zip"	
+"Driver.zip"	
+"DebugPortDetector.zip"	
+"XHCIDbgCapDetector.zip"	
+"SerialDebugger.mak"	
+"CommonDbg.mak"	
+[parts]
+"Debugger.Include"
+"Debugger.DbgDbgrLib"
+"Debugger.ConsoleRedirectionLib"
+"Debugger.DbgPerformanceLib"
+"Debugger.DbgAgentLib"
+"Debugger.GenericUSBDebugger"
+"Debugger.DbgModuleLocator"
+"Debugger.PeCoffExtraActionLibDebug"
+"Debugger.DbgRxPortLib"
+"Debugger.DbgRxXportLib"
+"Debugger.DbgXhciXportLib"
+"Debugger.XhciDebugger"
+"Debugger.DbgXportLib"
+"Debugger.DbgPortLib"
+"Debugger.DbgSerInitLib"
+"Debugger.UefiTimerLib"
+"Debugger.AptioVDebugger"
+[dependency]
+AMIDebuggerPkg.Bin = "SS: AptioV;$/AptioV/Binary/Interfaces/AmiDebuggerPkg;AMIDebuggerPkg_44"
+<endComponent>

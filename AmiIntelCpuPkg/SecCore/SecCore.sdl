@@ -1,0 +1,17 @@
+TOKEN
+	Name  = "SecCore_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SecCore support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+
+INFComponent
+	Name  = "SecCore"
+	File  = "SecCore.inf"
+	Package  = "AmiIntelCpuPkg"
+	ModuleTypes  = "SEC"
+	Token = "SecCore_SUPPORT" "=" "1"
+End
+

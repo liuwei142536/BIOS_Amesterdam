@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="SetupPackage">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Platform"         type="_PLATFORM_GROUP"      minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element name="VariableList"     type="_VARIABLE_LIST"       minOccurs="1" maxOccurs="1"/>
+                <xs:element name="GuidList"         type="_GUID_LIST"           minOccurs="1" maxOccurs="1"/>
+                <xs:element name="PageIdGuidList"   type="_PAGEID_GUID_LIST"    minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- E L E M E N T. . . D E F I N I T I O N S . . . What follows are Element Type Definitions -->
+    
+    <!-- PLATFORM -->
+    <xs:complexType  name="_PLATFORM_GROUP">
+        <xs:sequence>
+            <xs:element name="Pages" type="_PAGE_LIST" minOccurs="1"  maxOccurs="1"/>
+            <xs:element name="StringPack" type="_PLATFORM_STRINGS" minOccurs="1" maxOccurs="1"/>    
+        </xs:sequence>
+        <!-- PLATFORM TAG ATTRIBUTES -->        
+        <xs:attribute name="Guid" type="GUID" use="required" />
+        <xs:attribute name="Name" type="xs:string" use="required" />
+    </xs:complexType>
+    
+    
+    <!-- _PAGE_LIST -->
+    <xs:complexType name="_PAGE_LIST">
+        <xs:sequence>
+            <xs:element name="PageInfo" type="_PAGE_INFO" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+     <!-- _PAGE_INFO -->    
+    <xs:complexType name="_PAGE_INFO">
+        <xs:sequence>
+            <xs:element name="ControlInfo" type="_CONTROL_INFO" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <!-- _PAGE_INFO ATTRIBUTES -->
+        <xs:attribute name="PageIdIndex"    type="UINT16" use="required" />
+        <xs:attribute name="PageID"         type="UINT16" use="required" />
+        <xs:attribute name="PageFormID"     type="UINT16" use="required" />
+        <xs:attribute name="PageParentID"   type="UINT16" use="required" />
+        <xs:attribute name="PageTitle"      type="UINT16" use="required" />
+        <xs:attribute name="PageSubTitle"   type="UINT16" use="required" />
+        <xs:attribute name="PageFlags"      type="UINT32" use="required" />
+        <xs:attribute name="PageVariable"   type="UINT32" use="required" />
+    </xs:complexType>
+    
+
+    <!-- _CONTROL_INFO -->    
+    <xs:complexType name="_CONTROL_INFO">
+        <xs:sequence>
+            <!-- OPTIONS TAG -->
+            <xs:element name="Options" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <!-- OPTION TAG -->
+                        <xs:element name="Option" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:attribute name="Value"  type="UINT64" use="required"/>
+                                <xs:attribute name="Option" type="UINT16" use="required"/>
+                                <xs:attribute name="Type"   type="UINT8" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>    
+            </xs:element>
+        </xs:sequence>
+        <!-- CONTROL_INFO ATTRIBUTES ........Varies based on control type -->
+        <xs:attribute name="PageIdIndex"            type="UINT32" use="required" />
+        <xs:attribute name="ControlID"              type="xs:string" use="required"/>
+        <xs:attribute name="ControlType"            type="CONTROL_TYPE" use="required"/>
+        <xs:attribute name="ControlPageID"          type="UINT16" use="required" />
+        <!-- DISPLAY -->
+        <xs:attribute name="QuestionId"             type="UINT16" use="required" />
+        <xs:attribute name="Text"                   type="UINT16"/>
+        <xs:attribute name="ControlHelp"            type="UINT16"/>
+        <!-- CONSTRAINTS (i.e. NUMERIC) -->
+        <xs:attribute name="MinValue"               type="UINT64" default="0x00" />
+        <xs:attribute name="MaxValue"               type="UINT64" default="0x00" />
+        <xs:attribute name="Step"                   type="UINT64" default="0x01" />
+        <!-- CONSTRAINTS (i.e. PASSWORD, STRING) -->
+        <xs:attribute name="MinSize"                type="UINT16" />
+        <xs:attribute name="MaxSize"                type="UINT16" />
+        <!-- STYLE (i.e. CHECKBOX) -->
+        <xs:attribute name="Style"                  type="CheckBoxStyle" default="checkbox"/>
+        <!-- NAVIGATIONAL (i.e. SUBMENU) -->
+        <xs:attribute name="DestQuestionID"         type="UINT16" />
+        <xs:attribute name="ControlDestPageID"      type="UINT16" />
+        <!-- MISC. -->
+        <xs:attribute name="DefaultStoreCount"      type="UINT8" use="required" />
+        <xs:attribute name="ControlDataLength"      type="UINT16" use="required" />
+        <xs:attribute name="ControlDataWidth"       type="UINT16" use="required" />
+        <xs:attribute name="ControlFailsafeValue"   type="UINT64" use="required" />
+        <xs:attribute name="ControlOptimalValue"    type="UINT64" use="required" />
+        <xs:attribute name="ControlFlags"           type="UINT32" use="required" />
+        <xs:attribute name="ControlOffset"          type="UINT32" use="required" />
+        <xs:attribute name="ControlLength"          type="UINT16" use="required" />
+        <xs:attribute name="MD5Hash"                type="xs:string" use="required" />
+	    <xs:attribute name="ControlGroupCount"      type="UINT32" />
+	    <xs:attribute name="ConditionalGroupCount"      type="UINT32" />
+    </xs:complexType>
+    
+   
+   <!-- STRINGPACK -->    
+    <xs:complexType name="_PLATFORM_STRINGS">
+        <xs:sequence>
+            <xs:element name="Strings" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="String" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <!-- STRING TAG ATTRIBUTES --> 
+                                <xs:attribute name="id" type="UINT32" use="required"/>
+                                <xs:attribute name="value" type="xs:string" use="required" />
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <!-- STRINGS TAG ATTRIBUTES -->  
+                    <xs:attribute name="Language" type="LanguageDefinition" use="required" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <!-- STRINGPACK TAG ATTRIBUTES -->        
+        <xs:attribute name="Guid" type="GUID" />
+    </xs:complexType> 
+    
+    
+    <!-- _VARIABLE_LIST -->
+    <xs:complexType name="_VARIABLE_LIST">
+        <xs:sequence>
+            <xs:element name="VariableInfo" type="_VARIABLE_INFO" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <!-- _VARIABLE_LIST ATTRIBUTES -->        
+        <xs:attribute name="VariableCount" type="UINT32" />
+    </xs:complexType>
+    
+    
+    <!-- _VARIABLE_INFO -->    
+    <xs:complexType name="_VARIABLE_INFO">
+        <!-- _VARIABLE_INFO ATTRIBUTES -->
+        <xs:attribute name="VariableGuid"       type="GUID"   use="required" />
+        <xs:attribute name="VariableName"       type="CHAR16" use="required" />
+        <xs:attribute name="VariableAttributes" type="UINT32" use="required" />
+        <xs:attribute name="ExtendedAttributes" type="UINT32" use="required" />
+        <xs:attribute name="VariableSize"       type="UINT32" use="required" />
+    </xs:complexType>
+    
+    
+    <!-- _GUID_LIST -->
+    <xs:complexType name="_GUID_LIST">
+        <xs:sequence>
+            <xs:element name="GuidInfo" type="_GUID_INFO" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <!-- _GUID_LIST ATTRIBUTES -->        
+        <xs:attribute name="GuidCount" type="UINT32" />
+    </xs:complexType>
+    
+    
+    <!-- _GUID_INFO -->    
+    <xs:complexType name="_GUID_INFO">
+        <!-- _GUID_INFO ATTRIBUTES -->
+        <!-- xs:attribute name="GuidValue"  type="GUID"   use="required" /-->
+        <xs:attribute name="Guid"       type="GUID"   use="required" />
+        <xs:attribute name="GuidName"   type="CHAR16" use="required" />
+        <xs:attribute name="GuidFlags"  type="UINT32" use="required" />
+        <xs:attribute name="GuidKey"    type="UINT32" use="required" />
+    </xs:complexType>
+    
+    
+    <!-- _PAGEID_GUID_LIST -->
+    <xs:complexType name="_PAGEID_GUID_LIST">
+        <xs:sequence>
+            <xs:element name="PageIdGuidInfo" type="_PAGEID_GUID_INFO" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <!-- _PAGEID_LIST ATTRIBUTES -->        
+        <xs:attribute name="GuidCount" type="UINT32" />
+    </xs:complexType>
+    
+    
+    <!-- _PAGEID_GUID_INFO -->    
+    <xs:complexType name="_PAGEID_GUID_INFO">
+        <!-- _PAGEID_GUID_INFO ATTRIBUTES -->
+        <xs:attribute name="Guid"           type="GUID"     use="required" />
+        <xs:attribute name="PageIdIndex"    type="UINT32"   use="required" />
+        <xs:attribute name="PageClass"      type="UINT16" />
+        <xs:attribute name="PageSubClass"   type="UINT16" />
+    </xs:complexType>
+    
+            
+    <!-- A T T R I B U T E . . . T Y P E S . . . What follows are Derived Attribute Data Types -->
+    
+    <!-- CHAR16 -->
+    <xs:simpleType name="CHAR16">
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="preserve"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- UINT8 -->
+    <xs:simpleType name="UINT8">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="0x([0-9a-fA-F])*"/>
+            <xs:maxLength value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- UINT16 -->
+    <xs:simpleType name="UINT16">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="0x([0-9a-fA-F])*"/>
+            <xs:maxLength value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- UINT32 -->
+    <xs:simpleType name="UINT32">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="0x([0-9a-fA-F])*"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- UINT64 -->
+    <xs:simpleType name="UINT64">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="0x([0-9a-fA-F])*"/>
+            <xs:maxLength value="18"/>
+        </xs:restriction>
+    </xs:simpleType>
+                 
+    <!-- GUID -->
+    <xs:simpleType name="GUID">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9a-fA-F]{1,8}-[0-9a-fA-F]{1,4}-[0-9a-fA-F]{1,4}-[0-9a-fA-F]{1,4}-[0-9a-fA-F]{1,12}"/>
+            <xs:pattern value="[0-9a-fA-F]{1,8}-[0-9a-fA-F]{1,4}-[0-9a-fA-F]{1,4}-[0-9a-fA-F]{1,2}-[0-9a-fA-F]{1,2}-[0-9a-fA-F]{1,2}-[0-9a-fA-F]{1,2}-[0-9a-fA-F]{1,2}-[0-9a-fA-F]{1,2}-[0-9a-fA-F]{1,2}-[0-9a-fA-F]{1,2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- CHECKBOX STYLES -->
+    <xs:simpleType name="CheckBoxStyle">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="checkbox"/>
+            <xs:enumeration value="combobox"/>
+            <xs:enumeration value="slider"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- LANGUAGE DEFINITIONS -->
+    <xs:simpleType name="LanguageDefinition">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="en-US"/>
+            <xs:enumeration value="fr-FR"/>
+            <xs:enumeration value="es-ES"/>
+            <xs:enumeration value="de-DE"/>
+            <xs:enumeration value="ru-RU"/>
+            <xs:enumeration value="ko-KR"/>
+            <xs:enumeration value="it-IT"/>
+            <xs:enumeration value="da-DK"/>
+            <xs:enumeration value="fi-FI"/>
+            <xs:enumeration value="nl-NL"/>
+            <xs:enumeration value="no-NO"/>
+            <xs:enumeration value="nb-NO"/>
+            <xs:enumeration value="nn-NO"/>
+            <xs:enumeration value="pt-PT"/>
+            <xs:enumeration value="pt-BR"/>
+            <xs:enumeration value="sv-SE"/>
+            <xs:enumeration value="ja-JP"/>
+            <xs:enumeration value="zh-chs"/>
+            <xs:enumeration value="zh-cht"/>
+            <xs:enumeration value="x-AMI"/>
+	    <xs:enumeration value="x-UEFI-AMI"/>
+            <xs:enumeration value="x-OEM"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- CONTROL TYPES -->
+    <xs:simpleType name="CONTROL_TYPE">
+        <!-- Acceptable ControlType values -->
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Null"/>
+            <xs:enumeration value="Ref"/>
+            <xs:enumeration value="Label"/>
+            <xs:enumeration value="Text"/>
+            <xs:enumeration value="Date"/>
+            <xs:enumeration value="Time"/>
+            <xs:enumeration value="OneOf"/>
+            <xs:enumeration value="SubTitle"/>
+            <xs:enumeration value="MsgBox"/>
+            <xs:enumeration value="CheckBox"/>
+            <xs:enumeration value="Numeric"/>
+            <xs:enumeration value="Password"/>
+            <xs:enumeration value="Menu"/>
+            <xs:enumeration value="OrderedList"/>
+            <xs:enumeration value="String"/>
+            <xs:enumeration value="Action"/>
+            <xs:enumeration value="ResetButton"/>
+            <xs:enumeration value="Ref2"/>
+	    <xs:enumeration value="NoSubmitIf"/>
+	    <xs:enumeration value="Rule"/>
+	    <xs:enumeration value="InconsistentIf"/>
+	    <xs:enumeration value="WarningIf"/>
+        </xs:restriction>
+    </xs:simpleType>
+         
+</xs:schema>
+<!--
+                 C H I P S
+    [[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]
+    [::::::::::::::::::::::::::::::::::]
+    [::::::::::::::::::::::::::::::::::]
+    [::::::::::::::::::::::::::::::::::]
+    [:::::[ . . . . . . . . . .  ]:::::]
+    [:::::[. . . . . . . . . . . ]:::::]
+    [:::::[ . . . . . . . . . .  ]:::::]
+    [:::::[. . . . . . . . . . . ]:::::]
+    [:::::[ . . . . . . . . . .  ]:::::]
+    [:::::[. . . . . . . . . . . ]:::::]
+    [:::::[ . . . . . . . . . .  ]:::::]
+    [:::::[. . . . . . . . . . . ]:::::]
+    [:::::[ . . . . . . . . . .  ]:::::]
+    [:::::[. . . . . . . . . . . ]:::::]
+    [::::::::::::::::::::::::::::::::::]
+    [::::::::::::::::::::::::::::::::::]
+    [::::::::::::::::::::::::::::::::::]
+    [[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]
+
+-->

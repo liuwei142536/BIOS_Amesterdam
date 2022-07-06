@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "MemRas_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MemRas support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MemRas"
+	File  = "MemRas.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "CompressDxeLib"
+    Instance  = "GrantleyPkg.CompressDxeLib"
+    Override  = "GrantleyPkg.MemRas"
+End
+

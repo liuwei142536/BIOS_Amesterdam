@@ -1,0 +1,11 @@
+<component>
+	name = "McBankErrorInjection"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\Smm\McBankErrorInjection\"
+	RefName = "GrantleyPkg.McBankErrorInjection"
+[INF]
+"McBankErrorInjection.inf"
+[files]
+"McBankErrorInjection.h"	
+"McBankErrorInjection.sdl"	
+<endComponent>

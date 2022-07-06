@@ -1,0 +1,12 @@
+<component>
+	name = "TcgStorageDynamicSetup"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\TcgStorageSecurity\TcgStorageDynamicSetup\"
+	RefName = "TcgStorageDynamicSetup"
+[files]
+"TcgStorageDynamicSetup.sdl"	
+"TcgStorageDynamicSetup.c"   
+"TcgStorageDynamicSetup.h"
+"TcgStorageDynamicSetup.sd"
+"TcgStorageDynamicSetup.uni"
+<endComponent>

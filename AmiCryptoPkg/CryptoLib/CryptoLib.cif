@@ -1,0 +1,19 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmiCryptoPkg\CryptoLib\"
+	RefName = "AmiCryptoLib"
+[INF]
+"PeiCryptLib.inf"
+"AmiCryptLib.inf"
+"AmiCryptLibRun.inf"
+"AmiCryptLibSmm.inf"
+"AmiPeiCryptLibTiny.inf"
+"IntrinsicLib.inf"
+[files]
+"CryptoLib.sdl"	
+"Install.cmd"
+"License.txt"
+[parts]
+"AmiCryptoLibInc"
+<endComponent>

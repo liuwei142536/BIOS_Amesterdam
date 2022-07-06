@@ -1,0 +1,42 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+## @file CmosManagerPeiLib.inf
+#   INF file for the module
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CmosManagerPeiLib
+  FILE_GUID                      = B64E9DE2-C665-40ed-B30B-8FA53B72344E  
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CmosManagerLib | PEIM
+
+[Sources]
+  CmosManagerPeiLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  
+[Ppis]
+  gAmiCmosAccessPpiGuid
+
+[Guids]
+
+[LibraryClasses]
+  PeiServicesTablePointerLib
+  BaseLib
+  DebugLib
+
+[Depex]
+  gAmiCmosAccessPpiGuid
+  

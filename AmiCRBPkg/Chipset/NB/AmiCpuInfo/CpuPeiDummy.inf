@@ -1,0 +1,51 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuPeiDummy
+  FILE_GUID                      = e60a79d5-dc9b-47f1-87d3-51bf697b6121
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CpuPeiDummyEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+  CpuPeiDummy.c
+  CpuPeiDummy.h
+
+[Packages]
+  MdePkg/MdePkg.dec  
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec #include AmiCompatibilityPkg header first
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+
+[LibraryClasses]
+  PeimEntryPoint
+  AmiCspLib
+  AmiPeiLib
+
+[Ppis]
+  gEfiPeiMasterBootModePpiGuid	# PPI_NOTIFY SOMETIMES_CONSUMED
+  gEfiPeiStallPpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+
+[Depex]
+  gEfiPeiMemoryDiscoveredPpiGuid AND
+  gEfiPeiMasterBootModePpiGuid AND
+  gEfiPeiCpuIoPpiInstalledGuid AND		#MdePkg.dec
+  gEfiPciCfg2PpiGuid AND			#MdePkg.dec
+  gEfiPeiReadOnlyVariable2PpiGuid		#MdePkg.dec
+
+
+[BuildOptions.IA32]
+*_*_IA32_CC_FLAGS = -DPEI_COMPILE 
+

@@ -1,0 +1,49 @@
+## @file
+#  Instance of PCI Express Library using the 256 MB PCI Express MMIO window.
+#
+#  PCI Express Library that uses the 256 MB PCI Express MMIO window to perform
+#  PCI Configuration cycles. Layers on top of an I/O Library instance.
+#
+#  Copyright (c) 2007 - 2014, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php.
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PeiDbgPciExpressLib
+  FILE_GUID                      = 7b2baa3b-c571-49aa-b556-73245e394263
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DbgPciExpressLib | SEC PEIM PEI_CORE 
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  PciExpressLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AMIDebuggerPkg/AMIDebuggerPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  DebugLib
+  IoLib
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress  ## CONSUMES
+  
+[Protocols]
+gPcdProtocolGuid 
+  

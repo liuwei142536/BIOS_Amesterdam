@@ -1,0 +1,23 @@
+TOKEN
+    Name = "SmbiosPeim_SUPPORT"
+    Value = "1"
+    Help = "Main switch to enable SmbiosPeim support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+    Token = "SB_WAKEUP_TYPE_FN" "=" "1"
+End
+
+PATH
+    Name = "SMBIOS_PEIM_DIR"
+End
+
+INFComponent
+    Name  = "SmbiosPeim"
+    File  = "SmbiosPeim.inf"
+    Package  = "AmiCompatibilityPkg"
+    ModuleTypes  = "PEIM"
+    Token = "SMBIOS_SUPPORT" "=" "1"
+    Token = "SB_WAKEUP_TYPE_FN" "=" "1"
+End

@@ -1,0 +1,28 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Include\"
+	RefName = "GrantleyPkg.Include"
+[files]
+"BackCompatible.h"	
+"CommonIncludes.h"	
+"EfiFlashMap.h"	
+"EfiServerManagement.h"	
+"FlashLayout.h"	
+"FlashMap.h"	
+"IchRegs.h"	
+"IchRegsAliases.h"	
+"IoApic.h"
+"PchCommonDefinitions.h"	
+"Platform.h"	
+"PpmAslDefines.h"	
+"SioRegs.h"	
+"SmmELogHost.h"	
+[parts]
+"GrantleyPkg.Include.Acpi"
+"GrantleyPkg.Guid"
+"GrantleyPkg.Ipmi"
+"GrantleyPkg.Include.Library"
+"GrantleyPkg.Ppi"
+"GrantleyPkg.Protocol"
+<endComponent>

@@ -1,0 +1,66 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file
+#   This driver installs SMI Flash Protocol
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmiFlash
+  FILE_GUID                      = BC327DBD-B982-4f55-9F79-056AD7E987C5
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = SMIFlashDriverEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  SmiFlash.c
+  SmiFlashLinks.c
+
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  AmiCspLib    # AptioV Server override
+  AmiDxeLib
+  UefiDriverEntryPoint
+  FlashLib
+  AmiBufferValidationLib
+  MemoryAllocationLib
+  DebugLib
+  HobLib
+
+[Guids]
+  gEfiFirmwareFileSystem2Guid
+  
+[Protocols]
+  gEfiSmmBase2ProtocolGuid
+  gEfiSmmSwDispatch2ProtocolGuid
+  gFlashSmmProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+  gEfiSmmAccess2ProtocolGuid
+  gAmiUsbSmmProtocolGuid
+  gEmul6064TrapProtocolGuid
+  gAmiSmiFlashProtocolGuid
+  gEfiSmmCpuProtocolGuid
+
+[Depex.common.DXE_SMM_DRIVER]
+ gEfiSmmBase2ProtocolGuid       AND
+ gEfiSmmSwDispatch2ProtocolGuid AND
+ gFlashSmmProtocolGuid          AND
+ gEfiFirmwareVolume2ProtocolGuid AND
+ gEfiSmmAccess2ProtocolGuid

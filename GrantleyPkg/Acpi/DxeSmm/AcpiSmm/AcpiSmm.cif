@@ -1,0 +1,11 @@
+<component>
+	name = "AcpiSmm"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Acpi\DxeSmm\AcpiSmm\"
+	RefName = "GrantleyPkg.AcpiSmm"
+[INF]
+"AcpiSmmPlatform.inf"
+[files]
+"SmmVariable.h"	
+"AcpiSmm.sdl"	
+<endComponent>

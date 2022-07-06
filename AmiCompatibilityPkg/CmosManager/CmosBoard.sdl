@@ -1,0 +1,345 @@
+TOKEN
+    Name  = "FULL_CMOS_MANAGER_DEBUG"
+    Value  = "0"
+    Help  = "1-Turns on all available CMOS Manager module-level debug messages, resulting in larger build\0-Only basic debugging messages are supported, dependent upon project-level debug settings."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "FIRST_MANAGED_CMOS_ADDRESS"
+    Value  = "0x40"
+    Help  = "This is the lower limit of the CMOS register range to be managed by CMOS Manager. \\Note: the region starting at FIRST_MANAGED_CMOS_ADDRESS and ending at MAX_MANAGED_CMOS_ADDRESS - 1 represents the managed region."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MAX_MANAGED_CMOS_ADDRESS"
+    Value  = "128"
+    Help  = "Last CMOS address + 1 used to specify the maximum address that is managed by CMOS Manager. \\Note: the region starting at FIRST_MANAGED_CMOS_ADDRESS and ending at MAX_MANAGED_CMOS_ADDRESS - 1 represents the managed region."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_MGR_RECOVER_ONLY_CHECKUMMED"
+    Value  = "0"
+    Help  = "Upon incoherency detection in the Managed Region, only use the Optimal Defaults buffer for checksummed locations."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_MGR_RECOVER_IN_PEI"
+    Value  = "1"
+    Help  = "Upon incoherency detection due to bad checksum in the Managed Region, invoke the recovery policy in the PEI phase."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_SEC_SUPPORT"
+    Value  = "0"
+    Help  = "Specifies whether or not to the CMOS Access interface is available in SMM."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "CMOS_SMM_SUPPORT"
+    Value  = "0"
+    Help  = "Specifies whether or not to the CMOS Access interface is available in SMM."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "CMOS_MANAGER_ASL_SUPPORT"
+    Value  = "0"
+    Help  = "Enable ASL support for CMOS Manager as a CMOS device. (Requires CMOS_SMM_SUPPORT.)"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Token = "CMOS_SMM_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CMOS_USES_STANDARD_RANGE_ACCESS"
+    Value  = "1"
+    Help  = "Specifies whether or not to use CMOS Manager's default access function for the 0-0x7f range.  If a platform provides a different access function for this region this token should be disabled."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_BANK0_INDEX"
+    Value  = "0x70"
+    Help  = "Index I/O port to access CMOS registers in range: 0x0-0x7f."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_BANK0_DATA"
+    Value  = "0x71"
+    Help  = "Data I/O port to access CMOS registers in range: 0x0-0x7f."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_BANK1_INDEX"
+    Value  = "0x72"
+    Help  = "Index I/O port to access CMOS registers in range: 0x80-0xff."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_BANK1_DATA"
+    Value  = "0x73"
+    Help  = "Data I/O port to access CMOS registers in range: 0x80-0xff."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_BANK1_OFFSET"
+    Value  = "0"
+    Help  = "Value to be subtracted from CMOS address location when CMOS accesses BANK1.\(In some chipsets, bit 7 must not be touched for bank 1.)"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_MGR_SET_NMI_BIT"
+    Value  = "1"
+    Help  = "1-Set NMI bit for access to NMI region\0-Do not set NMI bit for access to NMI region"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_NMI_BIT_VALUE"
+    Value  = "0x80"
+    Help  = "Value to be ORed with the index port value for BANK0 access, when NMI access is enabled."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CMOS_MGR_SET_NMI_BIT" "=" "1"
+End
+
+TOKEN
+    Name  = "CMOS_NMI_BIT_VALUE"
+    Value  = "0x0"
+    Help  = "Value to be ORed with the index port value for BANK0 access, when NMI access is disabled."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CMOS_MGR_SET_NMI_BIT" "=" "0"
+End
+
+TOKEN
+    Name  = "CMOS_BASED_API_SUPPORT"
+    Value  = "1"
+    Help  = "Specifies whether or not the 32-bit mode CMOS Access interface pointer is saved to CMOS."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "CMOS_BASED_API_INDEX"
+    Value  = "$(CMOS_BANK0_INDEX)"
+    Help  = "Index I/O port to access CMOS registers for the CMOS Access API pointer."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CMOS_BASED_API_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CMOS_BASED_API_DATA"
+    Value  = "$(CMOS_BANK0_DATA)"
+    Help  = "Data I/O port to access CMOS registers for the CMOS Access API pointer."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CMOS_BASED_API_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CMOS_ACCESS_API_BYTE3"
+    Value  = "0x42"
+    Help  = "The high byte of the CMOS Access API pointer registers.\If you change this token, you must overide the CMOS Tokens in CmosManager.ssp."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+    Token = "CMOS_BASED_API_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "CMOS_SETUP_SUPPORT"
+    Value  = "0"
+    Help  = "This SDL Token specifies whether or not the CMOS module setup page is supported.\(This feature is only supported for TSE versions 4.6.2_TSE_2_01_1204 and later)"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "CMOS_MESSAGES_SUPPORT"
+    Value  = "0"
+    Help  = "This SDL Token specifies whether or not CMOS messages are supported.\(This feature is only supported for TSE versions 4.6.2_TSE_2_01_1204 and later)"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+
+TOKEN
+    Name  = "CMOS_USES_STANDARD_BATTERY_TEST"
+    Value  = "1"
+    Help  = "Specifies whether or not to use CMOS Manager's default battery test function.  If a platform provides a different battery test function this token should be disabled."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_USES_STANDARD_IS_FIRST_BOOT"
+    Value  = "1"
+    Help  = "Specifies whether or not to use CMOS Manager's default first boot test function.  If a platform provides a different first boot test function this token should be disabled."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_USES_STANDARD_IS_BSP"
+    Value  = "1"
+    Help  = "This SDL Token specifies whether or not to use the default function to determine whether or not the boot strap processor is executing.   If a platform provides a different function for determining the BSP, this token should be disabled."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_USES_STANDARD_IS_CMOS_USABLE"
+    Value  = "1"
+    Help  = "This SDL Token specifies whether or not to use the default function to determine whether or not the CMOS is usable.   If a platform provides a different function for determining the usability of CMOS, this token should be disabled."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CMOS_USES_STANDARD_IS_COLD_BOOT"
+    Value  = "1"
+    Help  = "This SDL Token specifies whether or not to use the default function to determine whether or not the platform is executing a cold boot."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "{0, 0, 0, 127, ReadWriteStandardRange},"
+    Parent  = "CMOS_PORT_MAPPING"
+    Help  = "Standard NMI-capable access range"
+    Token = "CMOS_USES_STANDARD_RANGE_ACCESS" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CmosMgrBatteryIsGood,"
+    Parent  = "CMOS_BATTERY_TEST_MAPPING"
+    Help  = "Link the standard function to determine whether or not the CMOS battery is good."
+    Token = "CMOS_USES_STANDARD_BATTERY_TEST" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CmosMgrIsFirstBoot,"
+    Parent  = "CMOS_IS_FIRST_BOOT_MAPPING"
+    Help  = "Link the standard function to determine whether or not the platform is executing a first boot."
+    Token = "CMOS_USES_STANDARD_IS_FIRST_BOOT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CmosIsUsable,"
+    Parent  = "CMOS_IS_USABLE_MAPPING"
+    Help  = "Link the standard function to determine whether or not the is usable.  (The CMOS may be usable if the battery is bad.)"
+    Token = "CMOS_USES_STANDARD_IS_CMOS_USABLE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CmosMgrIsBsp,"
+    Parent  = "CMOS_IS_BSP_MAPPING"
+    Help  = "Link the standard function to determine whether or not the BSP is currently executing."
+    Token = "CMOS_USES_STANDARD_IS_BSP" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CmosMgrIsColdBoot,"
+    Parent  = "CMOS_IS_COLD_BOOT_MAPPING"
+    Help  = "Link the standard function to determine whether or not the platform is executing a cold boot."
+    Token = "CMOS_USES_STANDARD_IS_COLD_BOOT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ClearBatteryInvalidBit,"
+    Parent  = "CLEAR_CMOS_BAD_BATTERY_MAPPING"
+    Help  = "Link the function to clear Cmos Bad Battery bit (set the chipset Valid RAM and Time - VRT)."
+    InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(CMOS_MANAGER_DIR)\CmosSetup.sd"
+	Parent  = "SETUP_DEFINITIONS"
+	InvokeOrder = AfterParent
+    Token = "CMOS_SETUP_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "$(CMOS_MANAGER_DIR)/CmosSetup.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+    Token = "CMOS_SETUP_SUPPORT" "=" "1"
+End
+
+PCIDEVICE
+    Title  = "CMOS Access ASL"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'AmiCompatibilityPkg\CmosManager\CmosAccess.asl;After Pci Tree'"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+    Token = "CMOS_MANAGER_ASL_SUPPORT" "=" "1"
+End

@@ -1,0 +1,12 @@
+<component>
+	name = "Server CoffeeLakeS uCode Patches (906EX)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\ServWork\"
+	RefName = "CoffeeLakeSServerUc"
+[files]
+"CoffeeLakeSServerUc.sdl"
+"M22906EA_000000EC.pdb"	= "DESKTOP MICROCODE UPDATES"
+"M02906EB_000000DE.pdb"	= "DESKTOP MICROCODE UPDATES"
+"M22906EC_000000D6.pdb"	= "DESKTOP MICROCODE UPDATES"
+"M22906ED_000000EC.pdb"	= "DESKTOP MICROCODE UPDATES"
+<endComponent>

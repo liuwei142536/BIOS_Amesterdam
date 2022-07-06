@@ -1,0 +1,14 @@
+<component>
+	name = "CRBLibrary"
+	category = ModulePart
+	LocalRoot = "AmiCRBPkg\Library\"
+	RefName = "CRBLibrary"
+[INF]
+"TscTimerLib\BaseTscTimerLib.inf"
+"TscTimerLib\DxeTscTimerLib.inf"
+"TscTimerLib\PeiTscTimerLib.inf"
+"AmiPlatformAcpiLib\AmiPlatformAcpiLib.inf"
+"AmiPlatformAcpiLibNull\AmiPlatformAcpiLibNull.inf"
+[files]
+"Library.sdl"	
+<endComponent>

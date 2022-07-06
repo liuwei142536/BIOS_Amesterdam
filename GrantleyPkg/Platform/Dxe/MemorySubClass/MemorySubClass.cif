@@ -1,0 +1,11 @@
+<component>
+	name = "MemorySubClass"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\Dxe\MemorySubClass\"
+	RefName = "GrantleyPkg.MemorySubClass"
+[INF]
+"MemorySubClass.inf"
+[files]
+"MemorySubClass.h"	
+"MemorySubClass.sdl"	
+<endComponent>

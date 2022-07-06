@@ -1,0 +1,86 @@
+TOKEN
+    Name  = "SERVWORK_5066X"
+    Value = "0"
+    Help  = "Intel(R) Broadwell-DE Server"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SERVWORK_MFF50661"
+    Value  = "1"
+    Help  = "Intel(R) Broadwell-DE Processor U-0 Stepping"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVWORK_M1050662"
+    Value  = "1"
+    Help  = "Intel(R) Broadwell-DE V-1 Stepping(50662)"
+    TokenType = Boolean
+	Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVWORK_M1050663"
+    Value  = "1"
+    Help  = "Intel(R) Broadwell-DE V-2, V-3 Stepping(50663)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SERVWORK_M1050664"
+    Value  = "1"
+    Help  = "Intel(R) Broadwell-DE Y-0 Stepping(50664)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SERVWORK_M1050665"
+    Value  = "1"
+    Help  = "Intel(R) Broadwell-NS A-0 Stepping(50665)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/MFF50661_F1000008.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Broadwell-DE Processor U-0 Stepping"
+    Token = "SERVWORK_MFF50661" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M1050662_0000001C.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Broadwell-DE V-1 Stepping(50662)"
+    Token = "SERVWORK_M1050662" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M1050663_0700001C.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Broadwell-DE V-2, V-3 Stepping(50663)"
+    Token = "SERVWORK_M1050663" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M1050664_0F00001A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Broadwell-DE Y-0 Stepping(50664)"
+    Token = "SERVWORK_M1050664" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M1050665_0E000014.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Broadwell-NS A-0 Stepping(50665)"
+    Token = "SERVWORK_M1050665" "=" "1"
+    InvokeOrder = AfterParent
+End
+

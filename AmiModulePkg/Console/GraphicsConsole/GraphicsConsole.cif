@@ -1,0 +1,12 @@
+<component>
+	name = "GraphicsConsole"
+	category = eCore
+	LocalRoot = "AmiModulePkg\Console\GraphicsConsole\"
+	RefName = "AmiModulePkg.GraphicsConsole"
+[INF]
+"GraphicsConsole.inf"
+"GraphicsSplitter.inf"
+[files]
+"GraphicsConsole.sdl"	
+"GraphicsConsole.chm"	
+<endComponent>

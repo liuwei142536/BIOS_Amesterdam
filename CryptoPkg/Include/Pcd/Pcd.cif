@@ -1,0 +1,8 @@
+<component>
+	name = "Pcd"
+	category = ModulePart
+	LocalRoot = "CryptoPkg\Include\Pcd\"
+	RefName = "CryptoPkg.Pcd"
+[files]
+"PcdCryptoServiceFamilyEnable.h"
+<endComponent>

@@ -1,0 +1,8 @@
+TOKEN
+	Name  = "DbgAgentLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling DbgAgentLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Disable = Yes
+End

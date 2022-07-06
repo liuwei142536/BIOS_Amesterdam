@@ -1,0 +1,17 @@
+<component>
+	name = "OemActivation"
+	category = eModule
+	LocalRoot = "AmiModulePkg\OemActivation\"
+	RefName = "AmiModulePkg.OemActivation"
+[files]
+"OemActivation.chm"	
+[parts]
+"OA1"
+"OA2"
+"OA3"
+[dependency]
+AmiModulePkg.ACPI >= "SS: AptioV;$/AptioV/Source/Modules/ACPI;5.004_ACPI_02"
+SMIFlash >= "SS: AptioV;$/AptioV/Source/Modules/SmiFlash;5.001_SmiFlash_03"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_25"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;5.004_AmiCompatibilityPkg_13"
+<endComponent>

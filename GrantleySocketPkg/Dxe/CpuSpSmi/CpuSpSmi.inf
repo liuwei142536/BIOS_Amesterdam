@@ -1,0 +1,32 @@
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuSpSMI
+  FILE_GUID                      = 116e1acf-2533-4cc2-820a-bbc10a2aB07c
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = CpuSpSmiInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = X64
+#
+#
+
+[Sources]
+  CpuSpSmi.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  
+[LibraryClasses] 
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  BaseLib
+  
+[Depex]
+ TRUE

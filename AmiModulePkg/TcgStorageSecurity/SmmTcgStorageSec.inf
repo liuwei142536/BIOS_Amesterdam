@@ -1,0 +1,76 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file SmmTcgStorageSec.inf
+#  Smm Module Part of the TcgStorageSecurity  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010015
+  BASE_NAME                      = SmmTcgStorageSec
+  FILE_GUID                      = 6B85F263-F584-44f8-BB5D-F02C40795D8E
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = TcgStorageSecSMMInit
+
+[Sources]
+  SmmTcgStorageSec.h
+  SmmTcgStorageSec.c
+  TcgStorageSecurityHelper.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  IoLib
+  AmiBufferValidationLib
+  S3BootScriptLib
+  TimerLib
+  AmiMsftIntrinsicsLib
+  SmmConfidentialMemLib
+  
+[Protocols]
+  gEfiSmmSwDispatch2ProtocolGuid
+  gEfiSmmBase2ProtocolGuid
+#  Uncomment below GUIDs once checked into AmiModulePkg.dec  
+#  gAmiTcgStorageSecurityProtocolGuid
+  gAmiAhciSmmProtocolGuid
+  gAmiSmmNvmePassThruProtocolGuid
+  gAmiSmmNvmeControllerProtocolGuid
+  gEdkiiIoMmuProtocolGuid
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  
+[Depex]
+  gEfiSmmSwDispatch2ProtocolGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

@@ -1,0 +1,160 @@
+TOKEN
+	Name  = "IScsi_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable IScsi support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	Master = Yes
+	Token = "UefiNetworkStack_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "TSE_SHOW_PROMPT_STRING_AS_TITLE"
+	Value  = "1"
+	Help  = "1 => To display control label string as Password Title. 0 => To display title string from AMITSEStr.uni file."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ENABLE_CHAP_SECRET_ENCRYPTION"
+	Value  = "0"
+	Help  = "Enabling this token will encrypt the CHAP/REVERSE CHAP secrets and Disabling this token will work with out encryption"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NET_PKG_AMI_PORTING_ENABLE" "=" "1"
+End
+
+TOKEN
+    Name  = "RSD_ISCSI_SUPPORT"
+	Value  = "0"
+    Help  = "Token to enable/disable RSD iSCSI support. 0 - Disable RSD iSCSI support. 1 - Enables RSD iSCSI support."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "NET_PKG_AMI_PORTING_ENABLE" "=" "1"
+    Token = "DxeIpmiInitialize_SUPPORT" "=" "1"
+End
+
+ELINK
+	Name  = "DefaultIscsiManageEncryptionHook,"
+	Parent  = "ChapSecretsEncryptionManagementHook"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "RsdIScsiSupportLib"
+    Parent  = "ADDITIONAL_iSCSI_LIB"
+    Token = "RSD_ISCSI_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ChapSecretsEncryptionManagementHook"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "ADDITIONAL_iSCSI_SOURCE_FILES"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "ADDITIONAL_iSCSI_LIB"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "ADDITIONAL_iSCSI_PACKAGES"
+	InvokeOrder = ReplaceParent
+End
+
+################################################################################################
+# Enable the below ELINKs for RSD 2.2 support and make sure AmiIpmiPkg and AmiRsdPkg are added.#
+################################################################################################
+
+#ELINK
+#    Name  = "AmiIpmiPkg/AmiIpmiPkg.dec"
+#    Parent  = "ADDITIONAL_iSCSI_PACKAGES"
+#    InvokeOrder = ReplaceParent
+#    Token = "RSD_ISCSI_SUPPORT" "=" "1"
+#    Help = "ELINK to add AmiIpmiPkg to iSCSI for RSD 2.2 support."
+#End
+
+#ELINK
+#    Name  = "AmiRsdPkg/AmiRsdPkg.dec"
+#    Parent  = "ADDITIONAL_iSCSI_PACKAGES"
+#    InvokeOrder = ReplaceParent
+#    Token = "RSD_ISCSI_SUPPORT" "=" "1"
+#    Help = "ELINK to add AmiRsdPkg to iSCSI for RSD 2.2 support."
+#End
+
+ELINK
+    Name  = "ADDITIONAL_iSCSI_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "ADDITIONAL_iSCSI_PROTOCOLS"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "ADDITIONAL_iSCSI_GUIDS"
+	InvokeOrder = ReplaceParent
+End
+
+OUTPUTREGISTER
+	Name  = "AUTOGEN_CHAP_PASSWORD_HOOK_ELINKS"
+	Path  = "Build"
+	File  = "CHAPSecretEncryptionHookElinks.h"
+	Template  = "CHAPSecretEncryptionHookElinks.txt"
+End
+
+INFComponent
+	Name  = "IScsiDxe"
+	File  = "IScsiDxe.inf"
+	Package  = "AmiNetworkPkg"
+	PreProcess = Yes
+	ModuleTypes  = "UEFI_DRIVER"
+End
+
+INFComponent
+	Name  = "RsdIScsiSupport"
+	File  = "RsdIScsiSupport.inf"
+	Package  = "AmiNetworkPkg"
+   	ModuleTypes  = "BASE"
+	Token = "RSD_ISCSI_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "RsdIScsiSupportLib"
+    Instance  = "AmiNetworkPkg.RsdIScsiSupport"
+    Token = "RSD_ISCSI_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "ISCSI_FORCEFULLY_SET_INITIATOR_NAME"
+	Value  = "0"
+	Help  = "Main switch to enable IScsi support in Project"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "IScsi_SUPPORT" "=" "1"
+End
+
+ELINK
+	Name  = "DefaultIscsiInitiatorNameHook,"
+	Parent  = "DefaultIscsiInitiatorNameManagementHook"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "DefaultIscsiInitiatorNameManagementHook"
+	InvokeOrder = ReplaceParent
+End
+
+OUTPUTREGISTER
+	Name  = "AUTOGEN_DEFAULT_INIT_NAME_HOOK_ELINKS"
+	Path  = "Build"
+	File  = "DefaultIscsiInitiatorNameHookElinks.h"
+	Template  = "DefaultIscsiInitiatorNameHookElinks.txt"
+End

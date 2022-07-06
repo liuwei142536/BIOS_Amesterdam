@@ -1,0 +1,56 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file TcgStorageSecurity.inf
+#  TCG Storage Security Protocol Implementation  
+##
+
+[Defines]
+  INF_VERSION                   = 0x00010015
+  BASE_NAME                     = TcgStorageSecurity
+  FILE_GUID                     = 7D6DF4FD-3650-4e77-BF3A-84DC988A025C
+  MODULE_TYPE                   = DXE_DRIVER
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = TcgStorageSecEntryPoint
+
+[Sources]
+  TcgStorageSec.c
+  TcgStorageSecurityHelper.c
+
+[LibraryClasses]
+  BaseMemoryLib
+  DebugLib
+  UefiDriverEntryPoint
+  DevicePathLib
+  TimerLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+
+[Protocols]
+  gEfiBlockIoProtocolGuid
+  gEfiSmmControl2ProtocolGuid
+  gEfiS3SaveStateProtocolGuid
+  gAmiNvmeControllerProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiStorageSecurityCommandProtocolGuid
+  gEfiSmmCommunicationProtocolGuid
+  gAmiTcgStorageSecurityInitProtocolGuid
+  gAmiTcgStorageSecurityProtocolGuid
+
+[Guids]
+  gEfiEndOfDxeEventGroupGuid
+  gEfiEventReadyToBootGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[Depex]
+  gEfiVariableArchProtocolGuid AND
+  gEfiVariableWriteArchProtocolGuid

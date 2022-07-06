@@ -1,0 +1,95 @@
+TOKEN
+    Name         = "AmiUsbLib_SUPPORT"
+    Value        = "1"
+    Help         = "Main switch to enable AmiUsbLib support in Project"
+    TokenType    = Boolean
+    TargetEQU    = Yes
+    TargetMAK    = Yes
+    TargetH      = Yes
+    Master       = Yes
+End
+
+INFComponent
+    Name         = "AmiUsbSmmGlobalDataValidationLib"
+    File         = "AmiUsbSmmGlobalDataValidationLib.inf"
+    Package      = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class        = "AmiUsbSmmGlobalDataValidationLib"
+    Instance     = "AmiModulePkg.AmiUsbSmmGlobalDataValidationLib"
+    ModuleTypes  = "SMM_CORE DXE_SMM_DRIVER"
+End
+
+INFComponent
+    Name         = "SmmAmiUsbHcdLib"
+    File         = "SmmAmiUsbHcdLib\SmmAmiUsbHcdLib.inf"
+    Package      = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class        = "AmiSmmUsbHcdLib"
+    Instance     = "AmiModulePkg.SmmAmiUsbHcdLib"
+    ModuleTypes  = "SMM_CORE DXE_SMM_DRIVER"
+End
+
+INFComponent
+    Name         = "DxeAmiUsbHcdLib"
+    File         = "DxeAmiUsbHcdLib\DxeAmiUsbHcdLib.inf"
+    Package      = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class        = "AmiDxeUsbHcdLib"
+    Instance     = "AmiModulePkg.DxeAmiUsbHcdLib"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+ELINK
+    Name         = "StartUsbControllers,"
+    Parent       = "ConnectRootBridgeHandlesBeforeEndOfDxe,"
+    Token        = "USB_DRIVER_MAJOR_VER" ">=" "18"
+    InvokeOrder  = AfterParent
+    Disable      = Yes
+End
+
+ELINK
+    Name         = "StartUsbControllersEx,"
+    Parent       = "ConnectRootBridgeHandlesBeforeEndOfDxe,"
+    Token        = "AmiPciBus_SUPPORT" "=" "1"
+    InvokeOrder  = AfterParent
+End
+
+ELINK
+    Name         = "StartUsbControllersEx,"
+    Parent       = "ConnectRootBridgeHandles,"
+    Token        = "AmiPciBus_SUPPORT" "=" "0"
+    InvokeOrder  = AfterParent
+End
+
+ELINK
+    Name         = "ConnectUsbConIn,"
+    Parent       = "/* Connect ConIn Devices */"
+    Token        = "AMIUSB_SUPPORT" "=" "1"
+    InvokeOrder  = AfterParent
+    Disable      = Yes
+End
+
+ELINK
+    Name         = "ConnectUsbConInEx,"
+    Parent       = "ConnectConInVariable,"
+    Token        = "AMIUSB_SUPPORT" "=" "1"
+    InvokeOrder  = BeforeParent
+End
+
+INFComponent
+    Name         = "DxeAmiUsbBdsLib"
+    File         = "DxeAmiUsbBdsLib\DxeAmiUsbBdsLib.inf"
+    Package      = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class        = "NULL"
+    Instance     = "AmiModulePkg.DxeAmiUsbBdsLib"
+    Override     = "AmiModulePkg.Bds"
+End

@@ -1,0 +1,125 @@
+## @file
+#  Component description file for the PCH Init PEIM.
+#
+#@copyright
+#  Copyright (c)  2004 - 2013 Intel Corporation. All rights reserved
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#  This file contains a 'Sample Driver' and is licensed as such
+#  under the terms of your license agreement with Intel or your
+#  vendor.  This file may be modified by the user, subject to
+#  the additional terms of the license agreement
+#
+
+################################################################################
+#
+# Defines Section - statements that will be processed to create a Makefile.
+#
+################################################################################
+[Defines]
+INF_VERSION          = 0x00010005
+BASE_NAME            = PchInitPeim
+FILE_GUID            = FD236AE7-0791-48c4-B29E-29BDEEE1A838
+MODULE_TYPE       = PEIM
+VERSION_STRING       = 1.0
+ENTRY_POINT          = InstallPchInitPpi
+
+################################################################################
+#
+# Sources Section - list of files that are required for the build to succeed.
+#
+################################################################################
+[Sources]
+  PchInitPeim.h
+  PchInitPeim.c
+  PchUsbInit.c
+  ..\Common\PchUsbCommon.c
+  ..\Common\PchHsio.c
+  ..\Common\PchHsioLptHB0.c
+  ..\Common\PchHsioLptHC0.c
+  ..\Common\PchHsioLptHC0_BeverlyCove.c
+  ..\Common\PchHsioLptLpBx.c
+  ..\Common\PchHsioWbgA0.c  
+  ..\Common\PchHsioWbgB0.c
+  PchDmiPeim.c
+  PchInitEva.c
+  PchUsbPreconditionPeim.c
+#AptioV server override start: Adding files included in .c to INF for component download.  
+  ..\Common\PchUsbCommon.h
+  PchInitCommon.h
+  ..\Common\PchHsio.h
+  ..\Common\PchHsioWbgA0.h
+  ..\Common\PchHsioWbgB0.h
+  ..\Common\PchHSIOLptHB0.h
+  ..\Common\PchHsioLptHCx.h
+  ..\Common\PchHsioLptLpBx.h  
+  ..\Common\PchInitVar.h  
+  ..\Common\PchHsioLptHC0.h
+  ..\Common\PchHsioLptHC0_BeverlyCove.h
+#AptioV server override end: Adding files included in .c to INF for component download.  
+
+################################################################################
+#
+# Package Dependency Section - list of Package files that are required for
+#                              this module.
+#
+################################################################################
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  GrantleySocketPkg/SocketPkg.dec #AptioV server overrride : Dynamic mmcfg base address change
+
+################################################################################
+#
+# Library Class Section - list of Library Classes that are required for
+#                         this module.
+#
+################################################################################
+[LibraryClasses]
+  BaseLib
+  PeimEntryPoint
+  PchPlatformLib
+  DebugLib
+  PcdLib
+  IoLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  PlatformHooksLib
+  HobLib
+  PeiServicesLib
+  PchChipsetInitHobLib
+  TimerLib
+
+################################################################################
+#
+# Protocol C Name Section - list of Protocol and Protocol Notify C Names
+#                           that this module uses or produces.
+#
+################################################################################
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gEfiPchTokenSpaceGuid.PcdPchSataInitReg78Data
+  gEfiPchTokenSpaceGuid.PcdPchSataInitReg88Data
+
+[Ppis]
+  gPchInitPpiGuid                     # PPI ALWAYS_PRODUCED
+  gPchPlatformPolicyPpiGuid           # PPI ALWAYS_CONSUMED
+  gPchUsbPolicyPpiGuid                # PPI ALWAYS_CONSUMED
+  gPchPeiInitDonePpiGuid              # PPI ALWAYS_CONSUMED
+  gEfiPeiMemoryDiscoveredPpiGuid      # PPI ALWAYS_CONSUMED
+  gWdtPpiGuid                         # PPI ALWAYS_CONSUMED
+  gPchDmiTcVcMapPpiGuid               # PPI ALWAYS_CONSUMED
+  gPchUsbPolicyPpiGuid                # PPI ALWAYS_CONSUMED
+  gPchResetPpiGuid                    # PPI ALWAYS_CONSUMED
+  
+
+[Depex]
+ gPchPlatformPolicyPpiGuid AND
+ gPchResetPpiGuid

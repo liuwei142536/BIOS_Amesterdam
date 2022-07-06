@@ -1,0 +1,273 @@
+TOKEN
+	Name  = "ProcessorStartup_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SecCore support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+PATH
+	Name  = "PROCESSOR_STARTUP_PATH"
+End
+
+MODULE
+	Help  = "Includes ProcessorStartup.mak to Project"
+	File  = "ProcessorStartup.mak"
+End
+
+LibraryMapping
+	Class  = "PlatformSecLib"
+	Instance  = "AmiIntelCpuPkg.ProcessorStartup"
+End
+
+INFComponent
+	Name  = "ProcessorStartup"
+	File  = "..\..\..\Build\ProcessorStartup.inf"
+	Package  = "AmiIntelCpuPkg"
+	ModuleTypes  = "SEC"
+End
+
+
+ELINK
+	Name  = "SEC_STARTUP_SRC"
+	InvokeOrder = ReplaceParent
+End
+
+#Sample e-link entry
+#ELINK
+#    Name  = "$(FILE_PATH)/File.c"
+#    Parent  = "SEC_STARTUP_SRC"
+#    InvokeOrder = AfterParent
+#End
+
+ELINK
+    Name  = "SEC_STARTUP_PKG"
+    InvokeOrder = ReplaceParent
+End
+
+#Sample e-link entry
+#ELINK
+#    Name  = "MdePkg/MdePkg.dec"
+#    Parent  = "SEC_STARTUP_PKG"
+#    InvokeOrder = AfterParent
+#End
+
+ELINK
+    Name  = "SEC_STARTUP_LIB_CLASSES"
+    InvokeOrder = ReplaceParent
+End
+
+#Sample e-link entry
+#ELINK
+#    Name  = "PcdLib"
+#    Parent  = "SEC_STARTUP_LIB_CLASSES"
+#    InvokeOrder = AfterParent
+#End
+
+ELINK
+    Name  = "SEC_STARTUP_PCDS"
+    InvokeOrder = ReplaceParent
+End
+
+#Sample e-link entry
+#ELINK
+#    Name  = "gEfiCpuTokenSpaceGuid.PcdPeiTemporaryRamStackSize"
+#    Parent  = "SEC_STARTUP_PCDS"
+#    InvokeOrder = AfterParent
+#End
+
+
+OUTPUTREGISTER
+    Name  = "EKERNEL_BOOT"
+    Path  = "Build"
+    File  = "SecCore.asm"
+End
+
+ELINK
+    Name  = "GetBistFunc"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "PS_GetBist,"
+    Parent  = "GetBistFunc"
+    Help  = "Only one BIST function. A replacement must override this function."
+    InvokeOrder = AfterParent
+End
+
+#Sample elink
+#ELINK
+#    Name  = "OverrideBistFunction,"
+#    Parent  = "PS_GetBist,"
+#    InvokeOrder = ReplaceParent
+#End
+
+ELINK
+    Name  = "SecElinkFuncs"
+    InvokeOrder = ReplaceParent
+End
+
+#Always InvokeOrder = AfterParent
+#ELINK
+#    Name  = "TestFunc,"
+#    Parent  = "SecElinkFuncs"
+#    InvokeOrder = AfterParent
+#End
+
+ELINK
+    Name  = "SecAdditionalPpis"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "$(PROCESSOR_STARTUP_PATH)/Ia32/mbiosmac.mac"
+	Parent  = "SEC_STARTUP_SRC"
+	InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "$(PROCESSOR_STARTUP_PATH)/Ia32/mbiosequ.equ"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(PROCESSOR_STARTUP_PATH)/Ia32/equates.equ"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartup.asm"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(PROCESSOR_STARTUP_PATH)/ProcessorStartup.c"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+
+TOKEN
+	Name  = "CAR_BASE_ADDRESS"
+	Value  = "(0xffffffff - $(FLASH_SIZE) + 1 - 0x100000) & 0xfff00000"
+	Help  = "DO NOT CHANGE THIS VALUE.\Cache-as-RAM physical base location"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CAR_TOTAL_SIZE"
+	Value  = "0x20000"
+	Help  = "Total Cache-as-RAM size available (in bytes)"
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PEI_CACHE_FLASH_ENABLED"
+	Value  = "1"
+	Help  = "Enable caching the flash during PEI."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "FV_BB_BASE"
+	Value  = "0xffffffff - $(FV_BB_SIZE) + 1"
+	Help  = "Code Cache Base Address."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CODE_CACHE_BASE_ADDRESS"
+	Value  = "$(FV_BB_BASE)"
+	Help  = "Code Cache Base Address."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "CODE_CACHE_SIZE"
+	Value  = "20000h"
+	Help  = "Code Cache Size.\Max 40000h. Size must match alignment of base."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+
+SEGMENT
+	Name  = "Text"
+	Format  = "SEGMENT PARA PUBLIC USE32 'CODE'"
+End
+
+ELINK
+	Name  = "SecPlatformLibEntry"
+	Segment  = "text"
+	Help  = "SEC Core Init"
+	mSTART  = "mSTART_PROC_NEAR32"
+	mBODY  = "mBODY_JMP_PROC_NEAR32"
+	mEND  = "mEND_PROC_WITH_JMP_NEAR32"
+	mEXTERN  = "mEXTERN_NEAR32"
+	SrcFile  = "Build\SecCore.asm"
+	InvokeOrder = TableFunction
+	OutBOOT = Yes
+End
+
+#Sample E-link
+#ELINK
+#    Name  = "SecRcEntry"
+#    Parent  = "SecPlatformLibEntry"
+#    Help  = "Reference code"
+#    InvokeOrder = AfterParent
+#End
+
+
+
+ELINK
+	Name  = "GetBistFunc"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "PS_GetBist,"
+	Parent  = "GetBistFunc"
+	Help  = "Only one BIST function. A replacement must override this function."
+	InvokeOrder = AfterParent
+End
+
+
+#Sample elink
+#ELINK
+#    Name  = "OverrideBistFunction,"
+#    Parent  = "PS_GetBist,"
+#    InvokeOrder = ReplaceParent
+#End
+
+ELINK
+	Name  = "SecElinkFuncs"
+	InvokeOrder = ReplaceParent
+End
+
+#Always InvokeOrder = AfterParent
+#ELINK
+#    Name  = "TestFunc,"
+#    Parent  = "SecElinkFuncs"
+#    InvokeOrder = AfterParent
+#End
+
+ELINK
+	Name  = "SecAdditionalPpis"
+	InvokeOrder = ReplaceParent
+End
+
+

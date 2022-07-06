@@ -1,0 +1,15 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "AmiCryptoPkg\CryptoProtocols\"
+	RefName = "AmiCryptoProtocols"
+[INF]
+"FwKeyHobPei.inf"
+"CryptoPPI.inf"
+"CryptoDXE.inf"
+"CryptoSMM.inf"
+[files]
+"CryptoProtocols.sdl"
+[parts]
+"AmiCryptoApiInc"
+<endComponent>

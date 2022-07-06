@@ -1,0 +1,11 @@
+<component>
+	name = "TSE Binary - UEFI2.1"
+	category = ModulePart
+	LocalRoot = "AmiTsePkg\EDK\MiniSetup\uefi2.1\"
+	RefName = "AMITSE.Uefi21Bin"
+[INF]
+"Uefi21Bin.inf" 	
+"Uefi21BinBT32.inf" 	
+[files]
+"uefi21Bin.sdl"	
+<endComponent>

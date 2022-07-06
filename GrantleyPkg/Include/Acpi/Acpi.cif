@@ -1,0 +1,27 @@
+<component>
+	name = "Acpi"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Include\Acpi\"
+	RefName = "GrantleyPkg.Include.Acpi"
+[files]
+"AcpiVTD.h"	
+"Bdat.h"	
+"dbgp.h"	
+"DMARemappingReportingTable.h"	
+"Facs.h"	
+"Fadt.h"	
+"Hpet.h"	
+"Madt.h"	
+"Mcfg.h"	
+"Mpst.h"	
+"Msct.h"	
+"Pcct.h"	
+"Pmct.h"	
+"Pmtt.h"	
+"Slit.h"	
+"Spcr.h"	
+"Srat.h"	
+"StaticResourceAffinityTable.h"	
+"WatchdogDescriptionTable.h"	
+"Wddt.h"	
+<endComponent>

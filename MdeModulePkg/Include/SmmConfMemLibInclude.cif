@@ -1,0 +1,8 @@
+<component>
+    name = "SmmConfMemLib Include"
+    category = ModulePart
+    LocalRoot = "MdeModulePkg\Include\"
+    RefName = "MdeModulePkg.SmmConfMemLibInclude"
+[parts]
+"MdeModulePkg.SmmConfMemLibLibrary"
+<endComponent>

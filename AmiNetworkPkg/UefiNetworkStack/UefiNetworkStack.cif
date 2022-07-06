@@ -1,0 +1,15 @@
+<component>
+    name = "UefiNetworkStack"
+    category = eModule
+    LocalRoot = "AmiNetworkPkg\UefiNetworkStack\"
+    RefName = "AmiNetworkPkg.UefiNetworkStack"
+[files]
+"UefiNetworkStack.sdl"	
+"UefiNetworkStack.chm"	
+"UefiNetworkStackElink.txt"	
+[parts]
+"AmiNetworkPkg.UefiNetworkStack.Common"
+"AmiNetworkPkg.UefiNetworkStack.Ipv4"
+"AmiNetworkPkg.UefiNetworkStack.Ipv6"
+"AmiNetworkPkg.UefiNetworkStack.Application"
+<endComponent>

@@ -1,0 +1,45 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CsmPolicy
+  FILE_GUID                      = 07525079-2616-4599-93FA-5EE9E3F0295C
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CsmPolicy
+  CONSTRUCTOR                    = CsmPolicyEntry
+  DESTRUCTOR                     = CsmPolicyDestructor
+
+[Sources]
+  CsmPolicy.c
+
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+
+[Protocols]
+  gOpromStartEndProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gAmiOpromPolicyProtocolGuid
+  gAmiCsmOpromPolicyProtocolGuid
+  gEfiPlatformDriverOverrideProtocolGuid
+  gEfiBusSpecificDriverOverrideProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gBdsAllDriversConnectedProtocolGuid
+  gEfiLegacyBiosProtocolGuid
+  gEfiPxeBaseCodeProtocolGuid
+  
+[Guids]
+  gAmiCsmThunkDriverGuid
+  
+[LibraryClasses]
+
+[Depex]

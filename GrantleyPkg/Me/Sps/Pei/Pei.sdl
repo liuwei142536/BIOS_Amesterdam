@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "Pei_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Pei support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SpsPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SpsPei support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SpsPei"
+	File  = "SpsPei.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+	Token = "SpsPei_SUPPORT" "=" "1"
+End
+

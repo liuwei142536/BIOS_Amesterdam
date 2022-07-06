@@ -1,0 +1,17 @@
+TOKEN
+	Name  = "S3Resume2Pei_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling S3Resume2Pei support in the project"
+	TokenType = Boolean
+	Master = Yes
+    TOKEN  = "A_S3" "=" "1"    	
+End
+
+INFComponent
+	Name  = "S3Resume2Pei"
+	File  = "S3Resume2Pei.inf"
+	Package  = "UefiCpuPkg"
+	ModuleTypes  = "PEIM"
+	Token = "S3Resume2Pei_SUPPORT" "=" "1"
+End 
+

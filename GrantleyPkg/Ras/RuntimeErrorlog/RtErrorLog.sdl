@@ -1,0 +1,177 @@
+TOKEN
+	Name  = RtErrorLog_SUPPORT
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+    TargetH = Yes
+	Master = Yes
+	Help  = "Main switch to enable RtErrorLog support in Project"
+End
+
+TOKEN
+	Name  = HandleLastbootError_Support
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+    TargetH = Yes	
+	Help  = "Main switch to enable HandleLastbootError Support  in Project"
+End
+
+MODULE
+	Help  = "Includes RtErrorLog.mak to Project"
+	File  = "RtErrorLog.mak"
+End
+
+TOKEN
+	Name  = "ENABLE_ERROR_INJECTOR_SUPPORT"
+	Value  = "1"
+	Help  = "To support software methods(Like ITP C-scripts) to inject Memory Errors"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = "PCI_LOGGING_NMI2SMI_DELIVERY"
+#	Value  = "1"
+#	Help  = "Use NMI-to-SMI to generate SMIs for PCI Logging."
+#	TokenType = Boolean
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "GENERATE_NMI_ON_FE"
+	Value  = "1"
+	Help  = "Generate NMI On Fatal error."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+#TOKEN
+#	Name  = RESET_SYSTEM_ON_FE
+#	Value  = "2"
+#	Help  = "Reset the System On Fatal error."
+#	TokenType = Integer
+#	TargetH = Yes
+#End
+
+TOKEN
+	Name  = "FATAL_ERROR_ACTION"
+	Value  = "$(GENERATE_NMI_ON_FE)"
+	Help  = "Select the action to do On Fatal error. On 1: Generate NMI; 2 : Reset the System 3: Continue the System, In this case OS may need to process the error. "
+	TokenType = Integer
+	TargetH = Yes
+End
+
+ELINK
+	Name  = "MemErrorHandlers"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "MemErrorInitFunctions"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "PciErrorHandlers"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "PciErrorInitFunctions"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "CoreErrorHandlers"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "CboErrorHandlers"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "QpiErrorHandlers"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "IohQpiErrorHandlers"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "IohCoreErrorHandlers"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "IohVtdErrorHandlers"
+	InvokeOrder = ReplaceParent
+End
+
+INFComponent
+	Name  = "RtErrorLogBoardLib"
+	File  = "RtErrorLogBoard.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "RtErrorLogBoardLib"
+	Instance  = "GrantleyPkg.RtErrorLogBoardLib"
+	ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+	Arch  = "common"
+End
+
+INFComponent
+    Name  = "RtErrorLogBmcNullLib"
+    File  = "Board\Bmc\RtErrorLogBmcNullLib.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "RuntimeErrorLogBmc_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+    Class  = "RtErrorLogBmcLib"
+    Instance  = "GrantleyPkg.RtErrorLogBmcNullLib"
+    Arch  = "common"
+    ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+    Token = "RuntimeErrorLogBmc_SUPPORT" "=" "0"
+End
+
+INFComponent
+    Name  = "RtErrorLogWheaNullLib"
+    File  = "Board\Whea\RtErrorLogWheaNullLib.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "RtErrorLogWhea_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+    Class  = "RtErrorLogWheaLib"
+    Instance  = "GrantleyPkg.RtErrorLogWheaNullLib"
+    Arch  = "common"
+    ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+    Token = "RtErrorLogWhea_SUPPORT" "=" "0"
+End
+
+INFComponent
+    Name  = "RtErrorLogGpnvNullLib"
+    File  = "Board\Gpnv\RtErrorLogGpnvNullLib.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "RtErrorLogGpnv_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+    Class  = "RtErrorLogGpnvLib"
+    Instance  = "GrantleyPkg.RtErrorLogGpnvNullLib"
+    Arch  = "common"
+    ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+    Token = "RtErrorLogGpnv_SUPPORT" "=" "0"
+End

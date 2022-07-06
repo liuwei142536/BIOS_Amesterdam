@@ -1,0 +1,99 @@
+/*++
+  This file contains an 'Intel Peripheral Driver' and is        
+  licensed for Intel CPUs and chipsets under the terms of your  
+  license agreement with Intel or your vendor.  This file may   
+  be modified by the user, subject to additional terms of the   
+  license agreement                                             
+--*/
+//
+//  Copyright (c)  2001 - 2013 Intel Corporation.  All rights reserved.
+//
+//  This software and associated documentation (if any) is furnished under
+//  a license and may only be used or copied in accordance with the terms
+//  of the license.  Except as permitted by such license, no part of this
+//  software or documentation may be reproduced, stored in a retrieval system,
+//  or transmitted in any form or by any means without the express written
+//  consent of Intel Corporation.
+//
+//*************************************************************
+//  Filename:  SIO.asi
+//
+//  ACPI ASL source file for Super IO device
+//
+//
+//  This section defines the
+//  OperationRegion necessary for this i/o.
+//
+
+
+//------------------------------------------------------------------------
+// !!! BELOW ARE GENERIC SIO CONTROL METHODS. DO NOT REQUIRE MODIFICATIONS
+//----------------------------------------------------------------------
+//  Set of Field names to be used to access SIO configuration space.
+	OperationRegion(SMCF,	//Name of Operation Region for SuperIO device
+		SystemIO,	//Type of address space
+		0x2E,		//Offset to start of region
+		2)		//Size of region in bytes
+				//End of Operation Region
+	Field(SMCF, ByteAcc, NoLock,Preserve){
+		INXF, 8,	//Field named INDX is 8 bit wide
+		DATF, 8 	//Field DATA is 8 bit wide
+	}
+
+//----------------------------------------------------------------------
+//  Set of Field names to be used to access SIO configuration space.
+//----------------------------------------------------------------------
+	IndexField(INXF, DATF, ByteAcc, NoLock, Preserve){
+		// Global Configuration Registers:
+		//
+		Offset(7),
+		LDNF, 8,  // Logical Device Number
+
+		Offset(0x20),
+		DIDF, 8, // Super IO Device ID register
+
+		//
+		// Per-Device Configuration Registers:
+		//
+		Offset(0x30),
+		ACTF, 8, // Active register
+
+		Offset(0x60),
+		AHFF, 8, // Primary i/o base address, high byte
+		ALFF, 8, //  low byte
+
+		Offset(0x70),
+		INTF, 8, // Primary IRQ register
+
+		Offset(0x71),
+		INSF, 8, // IRQ type select (some devices)
+
+		Offset(0x74),
+		DMCF, 8, // Primary DMA channel (some devices)
+	}			//End of indexed field
+
+
+//------------------------------------------------------------------------
+// Enter Config Mode, Select LDN
+// Arg0 : Logical Device number
+//------------------------------------------------------------------------
+
+	Method(ENFF, 1){
+		Store(0xa5, INXF)
+        Store(0xa5, INXF)
+		Store(Arg0, LDNF)	//Select LDN
+	}
+
+
+//------------------------------------------------------------------------
+// Exit Config Mode
+//------------------------------------------------------------------------
+	Method(EXFF, 0){
+		Store(0xaa, INXF)
+	}
+
+
+#include "SC.ASI"
+
+
+

@@ -1,0 +1,52 @@
+
+
+[Defines]
+INF_VERSION = 0x00010015
+VERSION_STRING = 1.0
+BASE_NAME = MinisetupBinBT32
+MODULE_TYPE = BASE
+LIBRARY_CLASS = MinisetupBin
+
+[Sources]
+
+[binaries.IA32]
+LIB | MiniSetupLocal.lib|*|*|MYTOOLS
+LIB | MiniSetupLocal.lib|*|*|MSFT
+LIB | MiniSetupLocalVS2015.lib|*|*|VS2015
+[binaries.X64]
+LIB | MiniSetupLocalx64.lib|*|*|MYTOOLS
+LIB | MiniSetupLocalx64.lib|*|*|MSFT
+LIB | MiniSetupLocalVS2015x64.lib|*|*|VS2015
+LIB | MiniSetupLocalGCCx64.lib|*|*|GCC
+[binaries.AARCH64]
+LIB | MiniSetupLocalAarch64.lib
+
+
+[Packages]
+  AmiTsePkg/AmiTsePkg.dec
+  AmiTsePkg/AmiTsePrivatePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  
+  
+  [Protocols]
+  gEfiUsbIoProtocolGuid                         
+  gEfiDiskIoProtocolGuid
+  gEfiLoadFileProtocolGuid
+
+[Guids]
+  gEfiConsoleOutDeviceGuid
+  
+  
+[BuildOptions]
+MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50
+GCC:*_*_*_CC_FLAGS = -DTSE_FOR_APTIO_4_50  
+  
+[Pcd]
+   gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdShellFile
+   gEfiMdeModulePkgTokenSpaceGuid.PcdProgressCodeOsLoaderLoad
+   gEfiMdeModulePkgTokenSpaceGuid.PcdProgressCodeOsLoaderStart

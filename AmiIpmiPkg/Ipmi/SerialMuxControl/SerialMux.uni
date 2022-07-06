@@ -1,0 +1,45 @@
+﻿﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @file  SerialMux.uni
+//
+//  String definitions for SerialMux
+//
+
+
+//#include "VFR.uni"
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"    // AMI Mapping Language
+
+#string STR_ENABLED                                      #language en-US  "Enable"
+#string STR_DISABLED                                     #language en-US  "Disable"
+
+#string STR_SRVRMGMT_SERIALMUX_ENABLE                    #language en-US  "Serial Mux"
+                                                         #language x-AMI  "IPMI400"
+#string STR_SRVRMGMT_SERIALMUX_ENABLE_HELP               #language en-US  "Press <Enter> to enable or disable Serial Mux configuration."
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

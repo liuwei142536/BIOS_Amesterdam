@@ -1,0 +1,79 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+/=#
+#include "VFR.uni"
+
+#langdef    x-AMI "x-AMI"   // AMI Configuration Language
+
+#string STR_CSM_FORM                    #language eng "CSM Configuration"
+#string STR_CSM_FORM_HELP               #language eng "CSM configuration: Enable/Disable, Option ROM execution settings, etc."
+#string STR_CSM_TITLE                   #language eng "Compatibility Support Module Configuration"
+#string STR_CSM_OPROM_DISPLAY_MODE      #language eng "Option ROM Messages"
+                                        #language x-AMI "CSM000"
+#string STR_CSM_OPROM_DISPLAY_MODE_HELP     #language eng "Set display mode for Option ROM"
+#string STR_CSM_OPROM_DISPLAY_FORCE_BIOS    #language eng "Force BIOS"
+#string STR_CSM_OPROM_DISPLAY_KEEP_CURRENT  #language eng "Keep Current"
+#string STR_CSM_I19_TRAP                #language eng "INT19 Trap Response"
+                                        #language x-AMI "CSM001"
+#string STR_CSM_I19_TRAP_IMMEDIATE      #language eng "Immediate"
+#string STR_CSM_I19_TRAP_POSTPONED      #language eng "Postponed"
+#string STR_CSM_I19_TRAP_HELP           #language eng "BIOS reaction on INT19 trapping by Option ROM: IMMEDIATE - execute the trap right away; POSTPONED - execute the trap during legacy boot."
+#string STR_CSM_GA20_ACTIVE             #language eng "GateA20 Active"
+                                        #language x-AMI "CSM002"
+#string STR_CSM_GA20_ACTIVE_UPONREQUEST #language eng "Upon Request"
+#string STR_CSM_GA20_ACTIVE_ALWAYS      #language eng "Always"
+#string STR_CSM_GA20_ACTIVE_HELP        #language eng "UPON REQUEST - GA20 can be disabled using BIOS services. ALWAYS - do not allow disabling GA20; this option is useful when any RT code is executed above 1MB."
+#string STR_CSM_ZIP_EMULATION_PROMPT    #language eng "ZIP Emulation Type"
+                                        #language x-AMI "CSM003"
+#string STR_CSM_ZIP_EMULATION_HELP      #language eng "Sets the Emulation type for ZIP drives"
+#string STR_CSM_ZIP_EMULATION_FDD       #language eng "Floppy"
+#string STR_CSM_ZIP_EMULATION_HDD       #language eng "Hard Drive"
+#string STR_CSM_MODULE_VERSION          #language eng "CSM16 Module Version"
+                                        #language x-AMI "CSM004"
+#string STR_CSM_MODULE_VERSION_VALUE    #language eng "N/A, reset required"
+#string STR_CSM_SUPPORT_PROMPT          #language eng "CSM Support"
+                                        #language x-AMI "CSM005"
+#string STR_CSM_SUPPORT_HELP            #language eng "Enable/Disable CSM Support."
+#string STR_BOOT_OPTION_FILTERING_POLICY                    #language eng "Boot option filter"
+                                                            #language x-AMI "CSM006"
+#string STR_BOOT_OPTION_FILTERING_POLICY_HELP               #language eng "This option controls Legacy/UEFI ROMs priority"
+#string STR_BOOT_OPTION_FILTERING_POLICY_ALL                #language eng "UEFI and Legacy"
+#string STR_BOOT_OPTION_FILTERING_POLICY_LEGACY_ONLY        #language eng "Legacy only"
+#string STR_BOOT_OPTION_FILTERING_POLICY_UEFI_ONLY          #language eng "UEFI only"
+
+#string STR_CSM_OPROM_POLICY            #language eng "Option ROM execution"
+
+#string STR_PXE_OPROM_POLICY                                #language eng "Network"
+                                                            #language x-AMI "CSM007"
+#string STR_PXE_OPROM_POLICY_HELP                           #language eng "Controls the execution of UEFI and Legacy Network OpROM"
+
+#string STR_MASS_STORAGE_OPROM_POLICY                       #language eng "Storage"
+                                                            #language x-AMI "CSM008"
+#string STR_MASS_STORAGE_OPROM_POLICY_HELP                  #language eng "Controls the execution of UEFI and Legacy Storage OpROM"
+
+#string STR_VIDEO_OPROM_POLICY                              #language eng "Video"
+                                                            #language x-AMI "CSM009"
+#string STR_VIDEO_OPROM_POLICY_HELP                         #language eng "Controls the execution of UEFI and Legacy Video OpROM"
+#string STR_OPROM_POLICY_DISABLE                            #language eng "Do not launch"
+#string STR_OPROM_POLICY_UEFI_ONLY                          #language eng "UEFI"
+#string STR_OPROM_POLICY_LEGACY_ONLY                        #language eng "Legacy"
+
+#string STR_OLD_OPROM_LAUNCH_POLICY                         #language eng "Other PCI devices"
+                                                            #language x-AMI "CSM010"
+#string STR_OLD_OPROM_LAUNCH_POLICY_HELP                    #language eng "Determines OpROM execution policy for devices other than Network, Storage, or Video"
+#string STR_CSM_SUBTITLE_DISABLE1                           #language eng "CSM configuration is disabled."
+#string STR_CSM_SUBTITLE_DISABLE2                           #language eng "Compatibility Support Module is not loaded"
+#string STR_CSM_SUBTITLE_DISABLE3                           #language eng "due to active UEFI Secure Boot mode."
+
+#string STR_CSM_HDD_ORDER_ADJUSTMENT                        #language eng "HDD Connection Order"
+                                                            #language x-AMI "CSM011"
+#string STR_CSM_HDD_ORDER_ADJUSTMENT_HELP                   #language eng "Some OS require HDD handles to be adjusted, i.e. OS is installed on drive 80h."
+#string STR_CSM_ADJUST_HDD_ORDER                            #language eng "Adjust"
+#string STR_CSM_KEEP_HDD_ORDER                              #language eng "Keep"
+

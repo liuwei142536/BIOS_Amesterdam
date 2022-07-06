@@ -1,0 +1,12 @@
+<component>
+	name = "HeciDxe"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Heci\Dxe\"
+	RefName = "GrantleyPkg.HeciDxe"
+[INF]
+"HeciInitDxe.inf"
+[files]
+"Hecidrv.h"	
+"HeciInit.h"	
+"HeciDxe.sdl"	
+<endComponent>

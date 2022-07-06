@@ -1,0 +1,11 @@
+<component>
+	name = "DbgPortLib"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\DbgPortLib\"
+	RefName = "Debugger.DbgPortLib"
+[INF]
+"DbgPortLib.inf"
+[files]
+"DbgPortLib.sdl"	
+"DbgPortLib.mak"	
+<endComponent>

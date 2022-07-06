@@ -1,0 +1,11 @@
+<component>
+	name = "Pei"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Pei\"
+	RefName = "GrantleySocketPkg.Pei"
+[INF]
+"IioInit\IioDmiInitPeim.inf"
+"UncoreInit\UncoreInit.inf"
+[files]
+"SocketPkgPei.sdl"	
+<endComponent>

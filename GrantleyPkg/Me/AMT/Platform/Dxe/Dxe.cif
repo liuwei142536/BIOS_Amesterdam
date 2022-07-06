@@ -1,0 +1,21 @@
+<component>
+	name = "Dxe"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Platform\Dxe\"
+	RefName = "GrantleyPkg.Me.AMT.MePlatform.Dxe.Dxe"
+[INF]
+"AmtBoot\AmtBoot.inf"
+"AmtPetAlert\AmtPetAlert.inf"
+"AmtSetup\AmtSetup.inf"
+"AmtWrapperDxe\AmtWrapperDxe.inf"
+"AsfTable\AsfTable.inf"
+"MeSmbios\MeSmbios.inf"
+[files]
+"Dxe.sdl"	
+[parts]
+"GrantleyPkg.AmtInt16"
+"GrantleyPkg.Amt.MebxPrompt"
+"GrantleyPkg.Amt.AmtTseFunc"
+"GrantleyPkg.Amt.AmtBdsLib"
+"GrantleyPkg.Amt.AmtLockKBD"
+<endComponent>

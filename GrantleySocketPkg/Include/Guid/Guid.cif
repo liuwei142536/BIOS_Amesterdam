@@ -1,0 +1,12 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Include\Guid\"
+	RefName = "GrantleySocketPkg.Guid"
+[files]
+"MemoryConfigData.h"	
+"MemoryMapData.h"	
+"MpstNodeData.h"	
+"PlatformInfo.h"	
+"LastBootErrorLogHob.h"
+<endComponent>

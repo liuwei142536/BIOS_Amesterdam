@@ -1,0 +1,8 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\Include\"
+	RefName = "Debugger.Include"
+[parts]
+"Debugger.IncludeLib"
+<endComponent>

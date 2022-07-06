@@ -1,0 +1,13 @@
+<component>
+	name = "Heci"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\ActiveManagement\AlertStandardFormat\Heci\"
+	RefName = "GrantleyPkg.Heci"
+[INF]
+"Dxe\AlertStandardFormatDxe.inf"
+"Pei\AlertStandardFormatPei.inf"
+[files]
+"Heci.sdl"	
+[parts]
+"GrantleyPkg.Common"
+<endComponent>

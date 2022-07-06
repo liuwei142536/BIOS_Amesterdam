@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "AmiSecureBootPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SecureBootPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "AMI_SECUREBOOTPKG_MODULE_REVISION"
+    Value  = "08"
+    Help  = "Version of AmiSecureBoot Pkg interfaces. 05 - updated AmiRedFish API"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
