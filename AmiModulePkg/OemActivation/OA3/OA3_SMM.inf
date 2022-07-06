@@ -1,0 +1,33 @@
+
+
+[Defines]
+    INF_VERSION = 0x00010005
+    VERSION_STRING = 1.0
+    BASE_NAME = OA3_SMM
+    MODULE_TYPE = DXE_SMM_DRIVER
+    FILE_GUID = 8434DA1F-5CEB-402e-A93C-038CBE0F3F0E
+    PI_SPECIFICATION_VERSION = 0x00010014
+    ENTRY_POINT = OA3_SMM_EntryPoint
+
+[Sources]
+    OA3_SMM.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    MdeModulePkg/MdeModulePkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+    BaseMemoryLib
+    UefiDriverEntryPoint
+    SmmServicesTableLib
+    AmiBufferValidationLib
+    DebugLib
+
+[Protocols]
+    gEfiSmmVariableProtocolGuid
+
+[Depex]
+    gEfiSmmBase2ProtocolGuid AND
+    gEfiSmmSwDispatch2ProtocolGuid
+

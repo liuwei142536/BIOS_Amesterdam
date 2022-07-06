@@ -1,0 +1,58 @@
+TOKEN
+	Name  = "AcpiTables_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AcpiTables support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PlatformAcpiTable_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformAcpiTable support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "SPS_ASL_SUPPORT"
+	Value  = "0"
+	Help  = "Switch to enable SPS ASL support for P/T states change in DSDT and CPU PM SSDT's. Do not turn off this token if Node Manager ASL support tokens are enabled"
+	TokenType = Boolean
+	TargetH = Yes	
+	Token = "SPS_ENABLE" "=" "0"
+End
+
+TOKEN
+	Name  = "SPS_ASL_SUPPORT"
+	Value  = "1"
+	Help  = "Switch to enable SPS ASL support for P/T states change in DSDT and CPU PM SSDT's. Do not turn off this token if Node Manager ASL support tokens are enabled"
+	TokenType = Boolean
+	TargetH = Yes	
+	Token = "SPS_ENABLE" "=" "1"
+End
+
+TOKEN
+	Name  = "RAS_ASL_SUPPORT"
+	Value  = "0"
+	Help  = "Switch to enable RAS ASL support for CPU and memory"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+INFComponent
+	Name  = "PlatformAcpiTable"
+	File  = "AcpiTables.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "USER_DEFINED"
+	Token = "PlatformAcpiTable_SUPPORT" "=" "1"
+    Token = "GRANGEVILLE_PLATFORM" "=" "0"
+End
+
+FFS_FILE
+    Name  = "PlatformAcpiTable"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "GrantleyPkg.PlatformAcpiTable"
+    Rule_Override  = "ACPITABLE"
+    Token = "PlatformAcpiTable_SUPPORT" "=" "1"
+    Token = "GRANGEVILLE_PLATFORM" "=" "0"
+End

@@ -1,0 +1,84 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+#
+# 
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = StatusCodeDxe
+  FILE_GUID                      = 61422D26-81EC-47FF-B6CF-939EAEE73FBA
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  VERSION_STRING                 = 1.0
+#  LIBRARY_CLASS                  = StatusCodeDxeLib|DXE_DRIVER DXE_CORE DXE_RUNTIME_DRIVER
+  ENTRY_POINT                    = DxeRuntimeInitStatusCode
+
+
+[Sources]  
+  StatusCodeInt.h	
+  StatusCodeMap.c
+  StatusCodeCommon.c
+  StatusCodeDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec   
+  MdeModulePkg/MdeModulePkg.dec 
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  SerialPortLib
+  PrintLib
+  TimerLib
+  AmiBeepLib
+  PcdLib
+  PostCodeLib
+  
+[Protocols]  
+  gEfiStatusCodeRuntimeProtocolGuid
+  gEfiRscHandlerProtocolGuid
+  gEfiConsoleControlProtocolGuid
+  #gAmiPostManagerProtocolGuid  ### only Decl in comp pakage
+  gEfiDataHubProtocolGuid
+  gAmiDebugServiceProtocolGuid         ## PRODUCES
+  
+[Guids]
+  gEfiStatusCodeSpecificDataGuid
+  gEfiStatusCodeDataTypeStringGuid
+  gEfiStatusCodeDataTypeDebugGuid
+  
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask      ## CONSUMES
+    
+[Depex]
+  TRUE
+  
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

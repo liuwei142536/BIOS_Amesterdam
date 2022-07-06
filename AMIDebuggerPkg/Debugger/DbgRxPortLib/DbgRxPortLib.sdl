@@ -1,0 +1,35 @@
+TOKEN
+	Name  = "DbgRxPortLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling DbgRxPortLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "0"
+	Token = "SHELL_DEBUGGER_SUPPORT"  "=" "0"
+End
+
+PATH
+	Name  = "DbgDbgrRxPortLib_DIR"
+End
+
+INFComponent
+	Name  = "DbgRxPortLib"
+	File  = "DbgRxPortLib.inf"
+	Package  = "Debugger"
+End
+
+
+LibraryMapping
+	Class  = "DebugPortLib"
+	Instance  = "Debugger.DbgRxPortLib"
+End
+
+MODULE
+    Help  = "Includes DbgRxPortLib.mak to Project"
+    File  = "DbgRxPortLib.mak"
+End
+
+ELINK
+    Name  = "PeiDebugInitialize"
+    InvokeOrder = ReplaceParent
+End

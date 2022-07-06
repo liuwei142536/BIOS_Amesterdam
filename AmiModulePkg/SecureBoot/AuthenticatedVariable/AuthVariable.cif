@@ -1,0 +1,12 @@
+<component>
+	name = "Authenticated Variables Library"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\SecureBoot\AuthenticatedVariable\"
+	RefName = "AuthVariable"
+[INF]
+"AuthVariable.inf"
+"AuthVariableLink.inf"
+[files]
+"AuthVariable.sdl"
+"AuthVariableHooksTemplate.h"
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "Pei"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Library\PchPlatformPolicyInitLib\Pei\"
+	RefName = "GrantleyPkg.PchPlatformPolicyInitLib.Pei"
+[INF]
+"PchPlatformPolicyInitPeiLib.inf"
+[files]
+"PchPlatformPolicyInitPei.h"	
+"Pei.sdl"	
+<endComponent>

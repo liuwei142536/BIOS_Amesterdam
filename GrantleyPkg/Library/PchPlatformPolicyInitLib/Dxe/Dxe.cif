@@ -1,0 +1,11 @@
+<component>
+	name = "Dxe"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Library\PchPlatformPolicyInitLib\Dxe\"
+	RefName = "GrantleyPkg.PchPlatformPolicyInitLib.Dxe"
+[INF]
+"PchPlatformPolicyInitDxeLib.inf"
+[files]
+"PchPlatformPolicyInitDxe.h"	
+"Dxe.sdl"	
+<endComponent>

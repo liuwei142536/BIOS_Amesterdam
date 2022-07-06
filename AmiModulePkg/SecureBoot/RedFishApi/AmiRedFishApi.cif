@@ -1,0 +1,10 @@
+<component>
+	name = "RedfishTM Protocol"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\SecureBoot\RedFishApi\"
+	RefName = "SecureBoot.AmiRedFishApi"
+[INF]
+"AmiRedFishApi.inf"
+[files]
+"AmiRedFishApi.sdl"
+<endComponent>

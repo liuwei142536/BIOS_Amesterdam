@@ -1,0 +1,10 @@
+<component>
+	name = "Server/Workstation Cooper Lake uCode Patches (5065X)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\ServWork\"
+	RefName = "CooperLakeServerUc"
+[files]
+"CooperLakeServerUc.sdl"
+"MBF5065A_8600001D.pdb" = "SERVER WORKSTATION MICROCODE UPDATES"
+"MBF5065B_07002402.pdb" = "SERVER WORKSTATION MICROCODE UPDATES"
+<endComponent>

@@ -1,0 +1,21 @@
+<component>
+    name = "BaseCryptLib"
+    category = ModulePart
+    LocalRoot = "CryptoPkg\Library\BaseCryptLib\"
+    RefName = "CryptoPkg.BaseCryptLib"
+[INF]
+"CrtWrapperLib.inf"
+"PeiCrtWrapperLib.inf"
+"BaseCryptLib.inf"
+"BaseCryptLibSocket.inf"
+"PeiCryptLib.inf"
+"RuntimeCryptLib.inf"
+"SmmCryptLib.inf"
+[files]
+"BaseCryptLib.sdl"	
+"BaseCryptLib.uni"	
+"PeiCryptLib.uni"	
+"RuntimeCryptLib.uni"	
+"SmmCryptLib.uni"	
+"Pk\CryptPkcs7VerifyNull.c" 
+<endComponent>

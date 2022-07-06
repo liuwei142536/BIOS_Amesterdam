@@ -1,0 +1,554 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// /*++
+// Copyright (c) 2011-2021 Intel Corporation. All rights reserved.
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// --*/
+/=#
+
+#include "Strings.uni"
+
+#string STR_ME_FORM                             #language en-US "ME Configuration"
+#string STR_ME_FORM_HELP                        #language en-US "Configure Management Engine Technology Parameters"
+
+#string STR_ME_SUBTITLE                         #language en-US "Management Engine Technology Configuration"
+//---------------------------------------------------------------------------
+// ME Configuration
+//---------------------------------------------------------------------------
+// in Strings.uni #string STR_ENABLED                             #language en-US "Enabled"
+// in Strings.uni #string STR_DISABLED                            #language en-US "Disabled"
+// in Strings.uni #string STR_AUTO                                #language en-US "Auto"
+// in Strings.uni #string STR_NONE                                #language en-US "None"
+#string STR_NO                                  #language en-US "No"
+#string STR_YES                                 #language en-US "Yes"
+
+#string STR_ME_FW_INFO_HELP                     #language en-US  "Multiple SKU selection \nMiniSku:\n ME + MeClock \nFull SKU:\n ME + AMT(whole AMT)+ MeClock + DT\nAuto Selection:\n Which kind of Me Firmware is it at present"
+#string STR_ME_FW_INFO_PROMPT                   #language en-US  "ME Firmware Mode"
+#string STR_ME_FW_INFO_VALUE                    #language en-US  "N/A" //dynamically updated
+#string STR_ME_NORMAL_MODE                      #language en-US  "Normal Mode"
+#string STR_ME_FAILED                           #language en-US  "Me Failed"
+#string STR_ME_TEMP_DISABLED                    #language en-US  "Me Temporarily Disabled"   
+#string STR_ME_SECOVER                          #language en-US  "Secovr Jmpr/Heci MSG"   
+#string STR_ME_ALT_DISABLED                     #language en-US  "ME ALT Disabled"
+//#string STR_MIN_ME                              #language en-US  "Ignition sku firmware"
+//#string STR_FULL_ME                             #language en-US  "Full sku firmware"
+//#string STR_MIN_ME_FACTORY                      #language en-US  "Ignition - Factory Mode"
+//#string STR_ME_SV_FW                            #language en-US  "SV Firmware"
+//#string STR_ME_FW_VERSION_HELP                  #language en-US  "ME Firmware Version"
+//#string STR_ME_FW_VERSION_PROMPT                #language en-US  "ME FW Version"
+//#string STR_ME_FW_VERSION_VALUE                 #language en-US  "N/A" //dynamically updated
+
+//#string STR_VE_FW_VERSION_HELP                  #language en-US  "VE Firmware Version"
+//#string STR_VE_FW_VERSION_PROMPT                #language en-US  "VE FW Version"
+//#string STR_VE_FW_VERSION_VALUE                 #language en-US  "N/A" //dynamically updated
+
+//---------------------------------------------------------------------------
+// Server ME Configuration
+//---------------------------------------------------------------------------
+#string STR_SERVER_ME_FORM                      #language en-US "Server ME Configuration"
+                                                #language x-AMI "ME060"
+#string STR_SERVER_ME_FORM_HELP                 #language en-US "Configure Server ME Technology Parameters"
+#string STR_SERVER_ME_FORM_TITLE                #language en-US "Server ME Configuration"
+
+#string STR_SERVER_ME_SUBTITLE                  #language en-US "General ME Configuration"
+
+#string STR_ME_FWVER_OPERATIONAL_PROMPT         #language en-US "Operational Firmware Version"
+#string STR_ME_FWVER_OPERATIONAL_HELP           #language en-US "Version of operational firmware selected to run."
+#string STR_ME_FWVER_OPERATIONAL_VALUE          #language en-US "N/A"
+#string STR_ME_FWVER_BACKUP_PROMPT              #language en-US "Backup Firmware Version"
+#string STR_ME_FWVER_BACKUP_HELP                #language en-US "Version of backup operational firmware if present (optional)."
+#string STR_ME_FWVER_BACKUP_VALUE               #language en-US "N/A"
+#string STR_ME_FWVER_RECOVERY_PROMPT            #language en-US "Recovery Firmware Version"
+#string STR_ME_FWVER_RECOVERY_HELP              #language en-US "Version of recovery firmware - runs when ME is in recovery mode."
+#string STR_ME_FWVER_RECOVERY_VALUE             #language en-US "N/A"
+
+// Display the SKU information
+#string STR_ME_FWSKU_HELP                       #language en-US "Server ME firmware features list"
+#string STR_ME_FWSKU_PROMPT                     #language en-US "ME Firmware Features"
+#string STR_ME_FWSKU_VALUE                      #language en-US "N/A"
+
+#string STR_ME_FWSTS1_HELP                      #language en-US "ME Firmware Status #1 register in HECI-1 configuration space."
+#string STR_ME_FWSTS1_PROMPT                    #language en-US "ME Firmware Status #1"
+#string STR_ME_FWSTS1_VALUE                     #language en-US "N/A"
+#string STR_ME_FWSTS2_HELP                      #language en-US "ME Firmware Status #2 register in HECI-1 configuration space."
+#string STR_ME_FWSTS2_PROMPT                    #language en-US "ME Firmware Status #2"
+#string STR_ME_FWSTS2_VALUE                     #language en-US "N/A"
+#string STR_ME_FWCURSTE_HELP                    #language en-US "ME firmware Current State, bits [3:0] in MEFS1."
+#string STR_ME_FWCURSTE_PROMPT                  #language en-US "  Current State"
+#string STR_ME_FWCURSTE_VALUE                   #language en-US "N/A"
+#string STR_ME_FWERRCODE_HELP                   #language en-US "Server ME firmware Error Code, bits [15:12] in MEFS1."
+#string STR_ME_FWERRCODE_PROMPT                 #language en-US "  Error Code"
+#string STR_ME_FWERRCODE_VALUE                  #language en-US "N/A"
+//
+// TODO: Merge with memory settings
+//
+#string STR_SPSALTITUDE_PROMPT                  #language en-US "Altitude"
+                                                #language x-AMI "ME000"
+#string STR_SPSALTITUDE_HELP                    #language en-US "The altitude of the platform location above the see level, expressed in meters. The hex number is decoded as 2's complement signed integer.\nProvide the 80000000 value if the altitude is unknown."
+
+#string STR_MCTP_BUS_OWNER_PROMPT               #language en-US "MCTP Bus Owner"
+												#language x-AMI "ME001"
+#string STR_MCTP_BUS_OWNER_HELP                 #language en-US "MCTP bus owner location on PCIe: [15:8] bus, [7:3] device, [2:0] function. If all zeros sending bus owner is disabled."
+
+//
+// IPMI configuration section
+// TODO: Create separate screen for IPMI
+#string STR_IPMI_SUBTITLE                       #language en-US "IPMI Configuration"
+
+#string STR_IPMI_HELP                           #language en-US ""
+#string STR_IPMI_DEVID_PROMPT                   #language en-US "Device ID"
+#string STR_IPMI_DEVID_VALUE                    #language en-US "N/A"
+#string STR_IPMI_DEVSTE_PROMPT                  #language en-US "Device State"
+#string STR_IPMI_DEVSTE_VALUE                   #language en-US "N/A"
+#string STR_IPMI_DEVFWREV_PROMPT                #language en-US "Firmware Revision"
+#string STR_IPMI_DEVFWREV_VALUE                 #language en-US "N/A"
+#string STR_IPMI_DEVMFGID_PROMPT                #language en-US "Manufacturer ID"
+#string STR_IPMI_DEVMFGID_VALUE                 #language en-US "N/A"
+#string STR_IPMI_PRODID_PROMPT                  #language en-US "Product ID"
+#string STR_IPMI_PRODID_VALUE                   #language en-US "N/A"
+
+#string STR_IPMI_SELFTEST_PROMPT                #language en-US "Self Test Result"
+#string STR_IPMI_SELFTEST_VALUE                 #language en-US "N/A"
+
+#string STR_IPMI_DEVGUID_PROMPT                 #language en-US "System GUID"
+#string STR_IPMI_DEVGUID_VALUE                  #language en-US "N/A"
+
+#string STR_IPMI_PWRPOLICY_PROMPT               #language en-US "Power Restore Policy"
+#string STR_IPMI_PWRPOLICY_HELP                 #language en-US "System behaviour after AC power failure"
+
+#string STR_IPMI_FRUENTITY_PROMPT               #language en-US "FRU Entity"
+#string STR_IPMI_FRUENTITY_VALUE                #language en-US "N/A"
+#string STR_IPMI_FRUINSTID_PROMPT               #language en-US "FRU Instance ID"
+#string STR_IPMI_FRUINSTID_VALUE                #language en-US "N/A"
+#string STR_IPMI_FRUDEVNAME_PROMPT              #language en-US "FRU Device Name"
+#string STR_IPMI_FRUDEVNAME_VALUE               #language en-US "N/A"
+#string STR_IPMI_FRUVERSION_PROMPT              #language en-US "FRU Version"
+#string STR_IPMI_FRUVERSION_VALUE               #language en-US "N/A"
+
+#string STR_IPMI_SOL_PROMPT                     #language en-US "Serial Over LAN"
+#string STR_IPMI_SOL_HELP                       #language en-US "Enable/Disable Serial Over LAN redirection"
+
+#string STR_SME_CLEARSEL_HELP                   #language en-US "Server ME Clear SEL Log"
+#string STR_SME_CLEARSEL_PROMPT                 #language en-US "Clear SEL Log"
+
+#string STR_SME_BOOT_DEVICE_FORCE_PROMPT        #language en-US "Boot Device Override"
+                                                #language x-AMI "ME03A"
+#string STR_SME_BOOT_DEVICE_FORCE_HELP	        #language en-US "Override the Boot Device Option readed from ME"
+#string STR_HDD				                    #language en-US "Hard Drive"
+#string STR_CD_DVD			                    #language en-US "CD/DVD"
+#string STR_BIOS_SETUP			                #language en-US "BIOS Setup"
+#string STR_USB				                    #language en-US "USB"
+
+//---------------------------------------------------------------------------
+// AMT configuration section
+//---------------------------------------------------------------------------
+#string STR_AMT_FORM                                    #language en-US "Manageability Application Configuration"
+                                                        #language x-AMI "ME004"
+#string STR_AMT_FORM_HELP                               #language en-US "Configure Active Management Technology Parameters"
+#string STR_AMT_SUBTITLE                                #language en-US "AMT Configuration"
+#string STR_AMT_HELP                                    #language en-US ""
+
+#string STR_AMT_PROMPT                                  #language en-US "Manageability App Enable"
+                                                        #language x-AMI "ME003"
+#string STR_AMT_HELP                                    #language en-US "Enable/Disable Manageability Application and other manageability features. \nThis option will send a en/dis state message to firmware to toggle the manageability feature states."
+
+#string STR_ME_FW_TYPE_PROMPT                           #language en-US "ME Firmware Type"   
+#string STR_ME_FW_TYPE_VALUE                            #language en-US "N/A" //dynamically updated
+#string STR_ME_FW_TYPE_HELP                             #language en-US "ME Firmware Type (Workstation/HEDT or  SPS)"   
+#string STR_ME_FW_TYPE_SPS                              #language en-US "SPS"
+#string STR_ME_FW_TYPE_AMT                              #language en-US "Workstation/HEDT"
+#string STR_ME_FW_TYPE_UNKNOWN                          #language en-US "Unknown"
+#string STR_ME_FW_SKU_HELP                              #language en-US "ME Firmware SKU"
+#string STR_ME_FW_SKU_PROMPT                            #language en-US "ME Firmware SKU"
+#string STR_ME_FW_SKU_VALUE                             #language en-US "N/A" //dynamically updated
+#string STR_ME_FILE_SYSTEM_CORRUPTION_HELP              #language en-US "Me File System Integrity Value"
+#string STR_ME_FILE_SYSTEM_CORRUPTION_PROMPT            #language en-US "Me File System Integrity Value"
+#string STR_ME_FILE_SYSTEM_CORRUPTION_VALUE             #language en-US "N/A" //dynamically updated 
+
+#string STR_FW_UPGRADE_SUBTITLE                         #language en-US "Firmware Update Configuration"
+#string STR_FW_UPGRADE_SUBTITLE_HELP                    #language en-US "Configure Management Engine Technology Parameters"
+#string STR_AMT_ME_FW_DOWNGRADE_PROMPT                  #language en-US "Me FW Image Re-Flash"
+                                                        #language x-AMI "ME005"
+#string STR_AMT_ME_FW_DOWNGRADE_HELP                    #language en-US "Enable/Disable Me FW Image Re-Flash function."
+#string STR_AMT_LOCAL_FW_UPDATE_PROMPT                  #language en-US "Local FW Update"
+                                                        #language x-AMI "ME006"
+#string STR_AMT_LOCAL_FW_UPDATE_HELP                    #language en-US "Options for Local FW Update function."
+
+#string STR_MNG_STATE_PROMPT                            #language en-US "Manageability State"
+                                                        #language x-AMI "ME007"
+#string STR_MNG_STATE_HELP                              #language en-US "Enable/Disable Intel Manageability features including AMT, CIRA, CILA."
+#string STR_AMT_IFR_UPDATE_PROMPT                       #language en-US "IFR Update"
+                                                        #language x-AMI "ME008"
+#string STR_AMT_IFR_UPDATE_HELP		                    #language en-US "Independent FW Recovery. Note **OEM** This is only for OEM to opt-out from IFR Update but not the option for end user."
+#string STR_MDES_PROMPT                                 #language en-US "MDES Capability"
+                                                        #language x-AMI "ME009"
+#string STR_MDES_HELP                                   #language en-US "MDES Capability state control"
+
+#string STR_AMTBX_HOTKEY_PRESSED_PROMPT                 #language en-US "BIOS Hotkey Pressed"
+                                                        #language x-AMI "ME00A"
+#string STR_AMTBX_HOTKEY_PRESSED_HELP	                #language en-US "OEMFLag Bit 1:\nEnable/Disable BIOS hotkey press."
+#string STR_AMTBX_SELECTION_SCREEN_PROMPT               #language en-US "MEBx Selection Screen"
+                                                        #language x-AMI "ME00B"
+#string STR_AMTBX_SELECTION_SCREEN_HELP	                #language en-US "OEMFLag Bit 2:\nEnable/Disable MEBx selection screen."
+#string STR_AMT_HIDE_CONFIRMATION_UNCONFIGURE_ME_PROMPT #language en-US "Hide Un-Configure ME Confirmation Prompt"
+                                                        #language x-AMI "ME00C"
+#string STR_AMT_HIDE_CONFIRMATION_UNCONFIGURE_ME_HELP   #language en-US "OEMFlag Bit 6:\nHide Un-Configure ME without password Confirmation Prompt "
+#string STR_AMT_MEBX_DEBUG_MSG_PROMPT                   #language en-US "MEBx Debug Message Output"
+                                                        #language x-AMI "ME05D"
+#string STR_AMT_MEBX_DEBUG_MSG_HELP                     #language en-US "OEMFlag Bit 14:\nEnable MEBx debug message output."
+#string STR_AMT_UNCONFIGURE_ME_PROMPT                   #language en-US "Un-Configure ME"
+                                                        #language x-AMI "ME00D"
+#string STR_AMT_UNCONFIGURE_ME_HELP                     #language en-US "OEMFlag Bit 15:\nUn-Configure ME without password."
+
+#string STR_AMT_CIRA_REQUEST_PROMPT                     #language en-US "Activate Remote Assistance Process"
+                                                        #language x-AMI "ME010"
+#string STR_AMT_CIRA_REQUEST_HELP                       #language en-US "Trigger CIRA boot."
+#string STR_AMT_USB_CONFIGURE_PROMPT                    #language en-US "USB Configure"
+                                                        #language x-AMI "ME00E"
+#string STR_AMT_USB_CONFIGURE_HELP                      #language en-US "Enable/Disable USB Configure function."
+#string STR_AMT_PET_PROGRESS_PROMPT                     #language en-US "PET Progress"
+                                                        #language x-AMI "ME00F"
+#string STR_AMT_PET_PROGRESS_HELP                       #language en-US "User can Enable/Disable PET Events progress to recieve PET events or not."
+#string STR_AMT_CIRA_TIMEOUT_PROMPT                     #language en-US "AMT CIRA Timeout"
+                                                        #language x-AMI "ME011"
+#string STR_AMT_CIRA_TIMEOUT_HELP                       #language en-US "OEM defined timeout for MPS connection to be established.\n  0 - use the default timeout value of 60 seconds. \n  255 - MEBX waits until the connection succeeds"
+#string STR_ME_STATE_CONTROL_PROMPT                     #language en-US "ME State"
+                                                        #language x-AMI "ME002"
+#string STR_ME_STATE_CONTROL_HELP                       #language en-US "ME State Control help. Note **OEM** This is only a debug hook."
+
+//---------------------------------------------------------------------------
+// ASF Configuration
+//---------------------------------------------------------------------------
+#string STR_ASF_PROMPT                                  #language en-US "ASF"
+                                                        #language x-AMI "ME012"
+#string STR_ASF_HELP                                    #language en-US "Enable/Disable Alert Specification Format."
+#string STR_WATCHDOG_PROMPT                             #language en-US "WatchDog"
+                                                        #language x-AMI "ME013"
+#string STR_WATCHDOG_HELP                               #language en-US "Enable/Disable WatchDog Timer."
+#string STR_WATCHDOG_OS_PROMPT                          #language en-US "OS WatchDog"
+#string STR_WATCHDOG_OS_HELP                            #language en-US "Enable/Disable watchdog at OS launch."
+
+#string STR_WATCHDOG_TIMER_OS_PROMPT                    #language en-US " OS Timer"
+                                                        #language x-AMI "ME014"
+#string STR_WATCHDOG_TIMER_OS_HELP                      #language en-US "Set OS watchdog timer."
+#string STR_WATCHDOG_TIMER_BIOS_PROMPT                  #language en-US " BIOS Timer"
+                                                        #language x-AMI "ME015"
+#string STR_WATCHDOG_TIMER_BIOS_HELP                    #language en-US "Set BIOS watchdog timer."
+
+
+//---------------------------------------------------------------------------
+// MEBx Resolution Configuration
+//---------------------------------------------------------------------------
+
+#string STR_MEBX_FORM                                   #language en-US "MEBx Resolution Settings"
+                                                        #language x-AMI "ME016"
+#string STR_MEBX_FORM_HELP                              #language en-US "Resolution settings for MEBx graphics mode and UI/non-UI text mode"
+
+#string STR_MEBX_SUBTITLE                               #language en-US "Set MEBx resolutions"
+
+#string STR_MEBX_NONUI_MODE_PROMPT                      #language en-US "Non-UI Mode Resolution"
+                                                        #language x-AMI "ME017"
+#string STR_MEBX_NONUI_MODE_HELP                        #language en-US "Resolution for non-UI text mode"
+
+#string STR_MEBX_UI_MODE_PROMPT                         #language en-US "UI Mode Resolution"
+                                                        #language x-AMI "ME018"
+#string STR_MEBX_UI_MODE_HELP                           #language en-US "Resolution for UI text mode"
+
+#string STR_MEBX_GRAPHICS_MODE_PROMPT                   #language en-US "Graphics Mode Resolution"
+                                                        #language x-AMI "ME019"
+#string STR_MEBX_GRAPHICS_MODE_HELP                     #language en-US "Resolution for graphics mode"
+
+#string STR_MEBX_MODE_AUTO                              #language en-US "Auto"
+#string STR_MEBX_TEXT_80_25                             #language en-US "80x25"
+#string STR_MEBX_TEXT_100_31                            #language en-US "100x31"
+
+#string STR_MEBX_GRAPHICS_640_480                       #language en-US "640x480"
+#string STR_MEBX_GRAPHICS_800_600                       #language en-US "800x600"
+#string STR_MEBX_GRAPHICS_1024_768                      #language en-US "1024x768"
+
+//---------------------------------------------------------------------------
+// Intel Silicon View Technology(SVT) fo PCH definitions
+//---------------------------------------------------------------------------
+#string STR_SVT_FOR_PCH_PROMPT                  #language en-US "Intel SVT for PCH Capability"
+                                                #language x-AMI "ME061"
+#string STR_SVT_FOR_PCH_HELP                    #language en-US "Intel Silicon View Technology(SVT) for PCH Capability."
+
+//---------------------------------------------------------------------------
+// FW Debug Configuration definitions
+//---------------------------------------------------------------------------
+#string STR_FWDEBUG_FORM                        #language en-US "Server ME Debug Configuration"
+                                                #language x-AMI "ME062"
+#string STR_FWDEBUG_FORM_HELP                   #language en-US "Server ME firmware debug parameters configuration"
+#string STR_FWDEBUG_FORM_TITLE                  #language en-US "Server ME Debug Configuration"
+
+#string STR_SIEN_FORM                           #language en-US "Server ME General Configuration"
+                                                #language x-AMI "ME01A"
+#string STR_SIEN_FORM_HELP                      #language en-US "Server ME basic features configuration"
+#string STR_SIEN_FORM_TITLE                     #language en-US "Server ME General Configuration"
+
+#string STR_NM_FORM                             #language en-US "NM Configuration"
+                                                #language x-AMI "ME01B"
+#string STR_NM_FORM_HELP                        #language en-US "Options to configure NM features"
+#string STR_NM_FORM_TITLE                       #language en-US "NM Configuration"
+
+#string STR_DCMI_FORM                           #language en-US "DCMI Configuration"
+                                                #language x-AMI "ME01C"
+#string STR_DCMI_FORM_HELP                      #language en-US "Options to configure DCMI features"
+#string STR_DCMI_FORM_TITLE                     #language en-US "DCMI Configuration"
+
+#string STR_ME_HMRFPOLOCK_PROMPT                #language en-US "HMRFPO_LOCK Message"
+                                                #language x-AMI "ME023"
+#string STR_ME_HMRFPOLOCK_HELP                  #language en-US "Enable/Disable sending HMRFPO_LOCK message to ME"
+
+#string STR_ME_HMRFPOENABLE_PROMPT              #language en-US "HMRFPO_ENABLE Message"
+                                                #language x-AMI "ME025"
+#string STR_ME_HMRFPOENABLE_HELP                #language en-US "Enable/Disable sending HMRFPO_ENABLE message to ME"
+
+#string STR_ME_ENDOFPOST_PROMPT                 #language en-US  "END_OF_POST Message"
+                                                #language x-AMI "ME024"
+#string STR_ME_ENDOFPOST_HELP                   #language en-US  "Enable/Disable sending END_OF_POST message to ME"
+
+#string STR_ME_GRLOCK_PROMPT                    #language en-US "Global Reset Lock"
+                                                #language x-AMI "ME026"
+#string STR_ME_GRLOCK_HELP                      #language en-US "Enable/Disable locking the joint ME and host reset capability"
+
+#string STR_NM_BOOT_MODE_OVERRIDE_PROMPT        #language en-US  "Boot Mode Override"
+                                                #language x-AMI "ME02E"
+#string STR_NM_BOOT_MODE_OVERRIDE_HELP          #language en-US  "Enables overriding the boot mode requested in NMFS register."
+#string STR_NM_BOOT_MODE_PROMPT                 #language en-US  "  Boot Mode"
+                                                #language x-AMI "ME02F"
+#string STR_NM_BOOT_MODE_HELP                   #language en-US  "The boot mode to use instead of the mode requested in NMFS register."
+#string STR_POWER_OPTIMIZED                     #language en-US  "Power Optimized"
+#string STR_PERF_OPTIMIZED                      #language en-US  "Performance Optimized"
+
+#string STR_NM_CORES_DISABLE_OVERRIDE_PROMPT    #language en-US  "Cores Disable Override"
+                                                #language x-AMI "ME030"
+#string STR_NM_CORES_DISABLE_OVERRIDE_HELP      #language en-US  "Enables overriding the value of the number of cores to disable requested in NMFS register."
+#string STR_NM_CORES_DISABLE_PROMPT             #language en-US  "  Cores To Disable"
+                                                #language x-AMI "ME031"
+#string STR_NM_CORES_DISABLE_HELP               #language en-US  "The number of cores to disable instead of the number requested in NMFS register."
+
+#string STR_NM_POWERMSMT_OVERRIDE_PROMPT        #language en-US  "Power Measurement Override"
+                                                #language x-AMI "ME032"
+#string STR_NM_POWERMSMT_OVERRIDE_HELP          #language en-US  "Override power measurement support status reported to ME"
+#string STR_NM_POWERMSMT_SUPPORT_PROMPT         #language en-US  "  Power Measurement"
+                                                #language x-AMI "ME033"
+#string STR_NM_POWERMSMT_SUPPORT_HELP           #language en-US  "Override power measurement support status reported to ME"
+
+#string STR_NM_HWCHANGE_OVERRIDE_PROMPT         #language en-US  "Hardware Change Override"
+                                                #language x-AMI "ME034"
+#string STR_NM_HWCHANGE_OVERRIDE_HELP           #language en-US  "Override hardware change detection status reported to ME"
+#string STR_NM_HWCHANGE_STATUS_PROMPT           #language en-US  "  Hardware Changed"
+                                                #language x-AMI "ME035"
+#string STR_NM_HWCHANGE_STATUS_HELP             #language en-US  "Override hardware change detection status reported to ME"
+
+#string STR_ME_DID_ENABLE_PROMPT                #language en-US  "DRAM Init Done Enable"
+                                                #language x-AMI "ME01F"
+#string STR_ME_DID_ENABLE_HELP                  #language en-US  "Enable/Disable notifying ME about DRAM initialization. (It Enables/Disables UMA functionality.)"
+
+#string STR_ME_DID_TIMEOUT_PROMPT               #language en-US  "  DRAM Init Done Timeout"
+                                                #language x-AMI "ME020"
+#string STR_ME_DID_TIMEOUT_HELP                 #language en-US  "Enable/Disable waiting for DRAM initialization notify acknowledge from ME with 5 s timeout."
+
+#string STR_ME_DID_INIT_STAT_PROMPT             #language en-US  "  DRAM Initialization Status"
+                                                #language x-AMI  "ME063"
+#string STR_ME_DID_INIT_STAT_HELP               #language en-US  "Override the DRAM initialization status value."
+#string STR_ME_DID_INIT_STAT_AUTO               #language en-US  "Auto - true status"
+#string STR_ME_DID_INIT_STAT_0                  #language en-US  "0 - Success"
+#string STR_ME_DID_INIT_STAT_1                  #language en-US  "1 - No Memory in Channels"
+#string STR_ME_DID_INIT_STAT_2                  #language en-US  "2 - Memory Init Error"
+
+#string STR_ME_ICC_FORM                         #language en-US "Integrated Clock Control"
+
+#string STR_ME_ICC_ENABLES_OVERRIDE_FORM        #language en-US "Override ICC Clock Enables"
+                                                #language x-AMI "ME021"
+#string STR_ME_ICC_ENABLES_OVERRIDE_FORM_HELP   #language en-US "Set OEM typical values."
+#string STR_ME_ICC_ENABLES_OVERRIDE_FORM_TITLE  #language en-US "Override ICC Clock Enables"
+
+#string STR_ME_ICC_ENABLES_OVERRIDE_PROMPT      #language en-US "Override ICC Clock Enables"
+                                                #language x-AMI "ME05E"
+#string STR_ME_ICC_ENABLES_OVERRIDE_HELP        #language en-US "This option allows customization of clock enables."
+#string STR_ME_ICC_ENABLES_BITS_HELP            #language en-US ""
+#string STR_ME_ICC_ENABLES_FLEX0_PROMPT         #language en-US "FLEX0 Output (bit 0)"
+                                                #language x-AMI "ME03D"
+#string STR_ME_ICC_ENABLES_FLEX1_PROMPT         #language en-US "FLEX1 Output (bit 1)"
+                                                #language x-AMI "ME03E"
+#string STR_ME_ICC_ENABLES_FLEX2_PROMPT         #language en-US "FLEX2 Output (bit 2)"
+                                                #language x-AMI "ME03F"
+#string STR_ME_ICC_ENABLES_FLEX3_PROMPT         #language en-US "FLEX3 Output (bit 3)"
+                                                #language x-AMI "ME040"
+#string STR_ME_ICC_ENABLES_PCICLK0_PROMPT       #language en-US "PCICLK0 Output (bit 7)"
+                                                #language x-AMI "ME041"
+#string STR_ME_ICC_ENABLES_PCICLK1_PROMPT       #language en-US "PCICLK1 Output (bit 8)"
+                                                #language x-AMI "ME042"
+#string STR_ME_ICC_ENABLES_PCICLK2_PROMPT       #language en-US "PCICLK2 Output (bit 9)"
+                                                #language x-AMI "ME043"
+#string STR_ME_ICC_ENABLES_PCICLK3_PROMPT       #language en-US "PCICLK3 Output (bit 10)"
+                                                #language x-AMI "ME044"
+#string STR_ME_ICC_ENABLES_PCICLK4_PROMPT       #language en-US "PCICLK4 Output (bit 11)"
+                                                #language x-AMI "ME045"
+#string STR_ME_ICC_ENABLES_SRC0_PROMPT          #language en-US "SRC0 Output (bit 16)"
+                                                #language x-AMI "ME046"
+#string STR_ME_ICC_ENABLES_SRC1_PROMPT          #language en-US "SRC1 Output (bit 17)"
+                                                #language x-AMI "ME047"
+#string STR_ME_ICC_ENABLES_SRC2_PROMPT          #language en-US "SRC2 Output (bit 18)"
+                                                #language x-AMI "ME048"
+#string STR_ME_ICC_ENABLES_SRC3_PROMPT          #language en-US "SRC3 Output (bit 19)"
+                                                #language x-AMI "ME049"
+#string STR_ME_ICC_ENABLES_SRC4_PROMPT          #language en-US "SRC4 Output (bit 20)"
+                                                #language x-AMI "ME04A"
+#string STR_ME_ICC_ENABLES_SRC5_PROMPT          #language en-US "SRC5 Output (bit 21)"
+                                                #language x-AMI "ME04B"
+#string STR_ME_ICC_ENABLES_SRC6_PROMPT          #language en-US "SRC6 Output (bit 22)"
+                                                #language x-AMI "ME04C"
+#string STR_ME_ICC_ENABLES_SRC7_PROMPT          #language en-US "SRC7 Output (bit 23)"
+                                                #language x-AMI "ME04D"
+#string STR_ME_ICC_ENABLES_ITPXDP_PROMPT        #language en-US "ITPXDP Output (bit 24)"
+                                                #language x-AMI "ME04E"
+#string STR_ME_ICC_ENABLES_PEG_A_PROMPT         #language en-US "PEG_A Output (bit 26)"
+                                                #language x-AMI "ME04F"
+#string STR_ME_ICC_ENABLES_PEG_B_PROMPT         #language en-US "PEG_B Output (bit 27)"
+                                                #language x-AMI "ME050"
+#string STR_ME_ICC_ENABLES_DMI_PROMPT           #language en-US "DMI Output (bit 28)"
+                                                #language x-AMI "ME051"
+#string STR_ME_ICC_ENABLES_DP_PROMPT            #language en-US "DP Output (bit 29)"
+                                                #language x-AMI "ME052"
+#string STR_ME_ICC_ENABLES_DPNS_PROMPT          #language en-US "DPNS Output (bit 30)"
+                                                #language x-AMI "ME053"
+#string STR_ME_ICC_ENABLES_MODULATOR4ENABLE_PROMPT    #language en-US "Modulator4Enable Output (bit 31)"
+                                                      #language x-AMI "ME054"
+
+#string STR_ME_ICC_SSC_OVERRIDE_FORM            #language en-US "Override ICC Spread Spectrum Configuration"
+                                                #language x-AMI "ME022"
+#string STR_ME_ICC_SSC_OVERRIDE_FORM_HELP       #language en-US "Override the default ICC Spread Spectrum Configuration."
+#string STR_ME_ICC_SSC_OVERRIDE_FORM_TITLE      #language en-US "Override ICC Spread Spectrum Configuration"
+
+#string STR_ME_ICC_SSC_OVERRIDE_PROMPT          #language en-US "Override ICC Spread Spectrum Configuration"
+                                                #language x-AMI "ME05F"
+#string STR_ME_ICC_SSC_OVERRIDE_HELP            #language en-US "Set non-default ICC spread spectrum configuration."
+#string STR_ME_ICC_SSC_OVERRIDE_AUTO            #language en-US "Auto"
+#string STR_ME_ICC_SSC_OVERRIDE_ENABLE          #language en-US "Override"
+
+#string STR_ME_ICC_SSC_HELP                     #language en-US "Select spread spectrum mode."
+#string STR_ME_ICC_SSC0_PROMPT                  #language en-US "  SSC0 mode"
+                                                #language x-AMI "ME055"
+#string STR_ME_ICC_SSC1_PROMPT                  #language en-US "  SSC1 mode"
+                                                #language x-AMI "ME056"
+#string STR_ME_ICC_SSC2_PROMPT                  #language en-US "  SSC2 mode"
+                                                #language x-AMI "ME057"
+#string STR_ME_ICC_SSC3_PROMPT                  #language en-US "  SSC3 mode"
+                                                #language x-AMI "ME058"
+#string STR_ME_ICC_SSC4_PROMPT                  #language en-US "  SSC4 mode"
+                                                #language x-AMI "ME059"
+#string STR_ME_ICC_SSC5_PROMPT                  #language en-US "  SSC5 mode"
+                                                #language x-AMI "ME05A"
+#string STR_ME_ICC_SSC6_PROMPT                  #language en-US "  SSC6 mode"
+                                                #language x-AMI "ME05B"
+#string STR_ME_ICC_SSC7_PROMPT                  #language en-US "  SSC7 mode"
+                                                #language x-AMI "ME05C"
+
+#string STR_ME_ICC_SSM_DOWN	                    #language en-US "Down"
+#string STR_ME_ICC_SSM_CENTER                   #language en-US "Center"
+#string STR_ME_ICC_SSM_DISABLE                  #language en-US "Disable"
+#string STR_ME_ICC_SSM_DONOTCHANGE              #language en-US "DoNotChange"
+#string STR_ME_ICC_SSM_AUTO                     #language en-US "Auto"
+
+#string STR_ME_HECI1ENABLE_PROMPT               #language en-US "HECI-1 Enable"
+                                                #language x-AMI "ME027"
+#string STR_ME_HECI1ENABLE_HELP                 #language en-US "Override HECI-1 status on PCI, or let SPS firmware decide (auto)"
+#string STR_ME_HECI2ENABLE_PROMPT               #language en-US "HECI-2 Enable"
+                                                #language x-AMI "ME028"
+#string STR_ME_HECI2ENABLE_HELP                 #language en-US "Override HECI-2 status on PCI, or let SPS firmware decide (auto)"
+#string STR_ME_IDERENABLE_PROMPT                #language en-US "IDEr Enable"
+                                                #language x-AMI "ME029"
+#string STR_ME_IDERENABLE_HELP                  #language en-US "Override IDEr status on PCI, or let SPS firmware decide (auto)"
+#string STR_ME_KTENABLE_PROMPT                  #language en-US "KT Enable"
+                                                #language x-AMI "ME02A"
+#string STR_ME_KTENABLE_HELP                    #language en-US "Override KT status on PCI, or let SPS firmware decide (auto)"
+#string STR_ME_SVT_ENABLED_PROMPT               #language en-US "Silicon View Technology"
+                                                #language x-AMI "ME02B"
+#string STR_ME_SVT_ENABLED_HELP                 #language en-US "Indicates whether Silicon View Technology is enabled on the platform or not."
+
+#string STR_ME_MPHY_EN_SURV_TABLE_PROMPT        #language en-US "MPHY Send Table"
+                                                #language x-AMI "ME02C"
+#string STR_ME_MPHY_EN_SURV_TABLE_HELP          #language en-US "Enable/Disable sending Mphy Survivability table (PchInitTable)"
+#string STR_ME_MPHY_CORRUPT_ENDPOINTS_PROMPT    #language en-US "MPHY Corrupt Endpoints"
+                                                #language x-AMI "ME02D"
+#string STR_ME_MPHY_CORRUPT_ENDPOINTS_HELP      #language en-US "Enable/Disable corrupting endpoints in Mphy Survivability table (PchInitTable)"
+	
+#string STR_ME_CORE_BIOS_DONE_PROMPT            #language en-US  "Core Bios Done Message"
+#string STR_ME_CORE_BIOS_DONE_HELP              #language en-US  "Enable/Disable Core Bios Done message sent to ME"
+
+#string STR_TT_CUSTOM_LOW			            #language en-US "Thermal Throttling Low"
+#string STR_TT_CUSTOM_LOW_HELP			        #language en-US "Custom option value for Thermal Throttling, low word"
+
+#string STR_TT_CUSTOM_HIGH			            #language en-US "Thermal Throttling High"
+#string STR_TT_CUSTOM_HIGH_HELP			        #language en-US "Custom option value for Thermal Throttling high word"
+
+#string FW_IFACE_VER_DL				            #language en-US "Firmware Interface Version DeadLoop()"
+#string ICC_MSG_DL				                #language en-US "ICC Command DeadLoop()"
+#string DYN_FUSE_MSG_DL				            #language en-US "Dynamic Fusing Command"
+#string DXE_OVR_DM_MODE				            #language en-US "OverrideMode for DM on DXE"
+#string DXE_OVR_DNM_MODE			            #language en-US "OverrideMode for DNM on DXE"
+#string DXE_OVR_PEI_MODE			            #language en-US "Grab from PEI"
+
+#string STR_ME_TIMEOUT_PROMPT                   #language en-US "ME Initialization Complete Timeout"
+                                                #language x-AMI "ME01D"
+#string STR_ME_TIMEOUT_HELP                     #language en-US "This option defines how long BIOS waits for ME to initialize."
+
+#string STR_HOB_DBG				                #language en-US "HOB DBG"
+#string STR_HOB_DBG_HLP				            #language en-US "HOB DBG HLP"
+
+#string STR_IPMI_FRB_2ENABLE                    #language en-US "FRB-2 Enable"
+                                                #language x-AMI "ME037"
+#string STR_IPMI_FRB_2ENABLE_HELP               #language en-US "Fault Resilient Boot (FRB).\n\nBIOS programs the BMC watchdog timer for approximately 6 minutes. If BIOS does not complete POST before the timer expires, the BMC will reset the system."
+
+#string STR_IPMI_FRB_TIMER                      #language en-US  "FRB-2 Watchdog Timer"
+#string STR_IPMI_FRB_TIMER_HELP                 #language en-US  "BIOS programs the watchdog timer with the timeout value selected.  If BIOS does not complete booting before the timer expires, the ME will reset the system and an error will be logged."
+#string STR_IPMI_FRB_TIMER_TIMEOUT              #language en-US  "FRB-2 Watchdog Timer Timeout"
+                                                #language x-AMI "ME039"
+#string STR_IPMI_FRB_TIMER_TIMEOUT_HELP         #language en-US  "If the FRB-2 Watchdog timer is enabled, this is the timeout value BIOS will use to configure the watchdog timer."
+#string STR_IPMI_FRB_TIMER_POLICY               #language en-US  "FRB-2 Watchdog Timer Policy"
+                                                #language x-AMI "ME038"
+#string STR_IPMI_FRB_TIMER_POLICY_HELP          #language en-US  "If the FRB-2 Watchdog timer is enabled, this is the system action taken if the watchdog timer expires.\n\n[Reset] - System performs a reset.\n\n[Power Off] - System powers off."
+#string STR_IPMI_FRB_TIMER_POWER_OFF            #language en-US  "Power Off"
+#string STR_IPMI_FRB_TIMER_RESET                #language en-US  "Reset"
+#string STR_IPMI_FRB_TIMER_POWER_CYCLE          #language en-US  "Power Cycle"
+#string STR_TIME_20SEC                          #language en-US  "20 seconds"
+#string STR_TIME_90SEC                          #language en-US  "90 seconds"
+#string STR_TIME_5MIN                           #language en-US  "5 minutes"
+#string STR_TIME_10MIN                          #language en-US  "10 minutes"
+#string STR_TIME_15MIN                          #language en-US  "15 minutes"
+#string STR_TIME_20MIN                          #language en-US  "20 minutes"
+
+#string STR_DCMI_ME_CONNECTION		            #language en-US  "DCMI Connection"
+                                                #language x-AMI "ME036"
+#string STR_DCMI_ME_CONNECTION_HELP	            #language en-US  "Choose the DCMI Client connection support between Dynamic and Static"
+#string STR_STATIC                              #language en-US  "Static"
+#string STR_DYNAMIC                             #language en-US  "Dynamic"
+
+#string STR_PWR_RESTORATION_POLICY              #language en-US  "Power Restoration Policy"
+                                                #language x-AMI "ME03B"
+#string STR_PWR_RESTORATION_POLICY_HELP         #language en-US  "This command can be used to configure the power restore policy"
+#string STR_S0                                  #language en-US  "S0"
+#string STR_PREVIOUS                            #language en-US  "Previous State"
+#string STR_S5                                  #language en-US  "S5"
+#string STR_NOCHANGE                            #language en-US  "No Change"
+
+#string STR_CLEAR_SEL_LOG                       #language en-US "Clear SEL"
+                                                #language x-AMI "ME03C"
+#string STR_CLEAR_SEL_LOG_HELP                  #language en-US "Enable ClearSEL Ipmi Command"
+
+#string STR_SPS_TIMER_CUSTOM                    #language en-US "Custom HPET timer for SPS HECI Waiting"
+                                                #language x-AMI "ME01E"

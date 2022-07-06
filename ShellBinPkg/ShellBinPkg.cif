@@ -1,0 +1,15 @@
+<component>
+    name = "ShellBinPkg"
+    category = eModule
+    LocalRoot = "ShellBinPkg\"
+    RefName = "ShellBinPkg"
+[INF]
+"FullShell\FullShell.inf"
+"MinimumShell\MinimumShell.inf"
+[files]
+"ShellBinPkg.sdl"	
+"ShellBinPkg.dec"	
+[dependency]
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;5.004_MdeModulePkg_09"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_13"
+<endComponent>

@@ -1,0 +1,576 @@
+TOKEN
+    Name  = "UefiNetworkCommon_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable common Network driver support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "DpcDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable DpcDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "DnsDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable HttpDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "ArpDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable MnpDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SnpDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SnpDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "MnpDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable MnpDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "UefiPxeBcDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable UefiPxeBcDxe support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TcpDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable TcpDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "VLanConfigDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable VLanConfigDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "HttpBootDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable HttpBootDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "HttpDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable HttpDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "HttpUtilitiesDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable HttpUtilitiesDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "TlsAuthConfigDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable TlsAuthConfigDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "TlsDxe_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable TlsDxe support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SUPPORT_CACERT_IN_BUILDTIME"
+    Value  = "0"
+    Help  = "Token to support reading CA certificate from Bios and Save to Nvram "
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "NET_PKG_AMI_PORTING_ENABLE" "=" "1"
+End
+
+TOKEN
+    Name  = "CACERT_FILE_GUID"
+    Value  = "{ 0x6F5D7177, 0x3917, 0x4F56, 0x8E, 0x68, 0x40, 0x0F, 0x57, 0x1E, 0x8A, 0xD1 }"
+    Help  = "GUID of the certificate file Cacert."
+    TokenType = Expression
+    Token = "SUPPORT_CACERT_IN_BUILDTIME" "=" "1"
+End
+
+TOKEN
+    Name  = "AMIRedFishVlan_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AMIRedFishVlanLib support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "NET_PKG_AMI_PORTING_ENABLE" "=" "1"
+End
+
+TOKEN
+    Name  = "WifiConnectionManagerDxe_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable WifiConnectionManagerDxe support in Project"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "ADDITIONAL_ARP_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    Parent  = "ADDITIONAL_ARP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiCompatibilityPkg/AmiCompatibilityPkg.dec"
+    Parent  = "ADDITIONAL_ARP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_ARP_LIBRARY"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkCommonLib"
+    Parent  = "ADDITIONAL_ARP_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_HTTPBOOT_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    Parent  = "ADDITIONAL_HTTPBOOT_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiCompatibilityPkg/AmiCompatibilityPkg.dec"
+    Parent  = "ADDITIONAL_HTTPBOOT_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_HTTPBOOT_LIBRARY"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPostManagerLib"
+    Parent  = "ADDITIONAL_HTTPBOOT_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiNetworkCommonLib"
+    Parent  = "ADDITIONAL_HTTPBOOT_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_HTTP_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    Parent  = "ADDITIONAL_HTTP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_HTTP_GUIDS"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "gEdkiiHttpTlsCipherListGuid"
+    Parent  = "ADDITIONAL_HTTP_GUIDS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiCertX509Guid"
+    Parent  = "ADDITIONAL_HTTP_GUIDS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_IPSEC_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    Parent  = "ADDITIONAL_IPSEC_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiCompatibilityPkg/AmiCompatibilityPkg.dec"
+    Parent  = "ADDITIONAL_IPSEC_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_IPSEC_GUIDS"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "gEfiNetworkStackSetupGuid"
+    Parent  = "ADDITIONAL_IPSEC_GUIDS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_MNP_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    Parent  = "ADDITIONAL_MNP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_MNP_LIBRARY"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkCommonLib"
+    Parent  = "ADDITIONAL_MNP_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_SNP_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiCompatibilityPkg/AmiCompatibilityPkg.dec"
+    Parent  = "ADDITIONAL_SNP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiModulePkg/AmiModulePkg.dec"
+    Parent  = "ADDITIONAL_SNP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    Parent  = "ADDITIONAL_SNP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_SNP_PROTOCOLS"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "gEfiIp4Config2ProtocolGuid"
+    Parent  = "ADDITIONAL_SNP_PROTOCOLS"
+    Token = "SNP_SPEEDUP" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiSimpleNetworkProtocolGuid"
+    Parent  = "ADDITIONAL_SNP_PROTOCOLS"
+    Token = "SNP_SPEEDUP" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiNwsShutdownNotifyProtocolGuid"
+    Parent  = "ADDITIONAL_SNP_PROTOCOLS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_SNP_LIBRARY"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkCommonLib"
+    Parent  = "ADDITIONAL_SNP_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_SNP_GUIDS"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "gAmiResetSystemEventGuid"
+    Parent  = "ADDITIONAL_SNP_GUIDS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_TCP_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    Parent  = "ADDITIONAL_TCP_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_TCP_LIBRARY"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkCommonLib"
+    Parent  = "ADDITIONAL_TCP_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_TLS_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    Parent  = "ADDITIONAL_TLS_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_UEFIPXEBC_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPkg/AmiNetworkPkg.dec"
+    Parent  = "ADDITIONAL_UEFIPXEBC_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiCompatibilityPkg/AmiCompatibilityPkg.dec"
+    Parent  = "ADDITIONAL_UEFIPXEBC_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_UEFIPXEBC_LIBRARY"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AmiNetworkPostManagerLib"
+    Parent  = "ADDITIONAL_UEFIPXEBC_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiNetworkCommonLib"
+    Parent  = "ADDITIONAL_UEFIPXEBC_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ADDITIONAL_UEFIPXEBC_GUIDS"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "gReadyToPxeBootGuid"
+    Parent  = "ADDITIONAL_UEFIPXEBC_GUIDS"
+    InvokeOrder = AfterParent
+End
+
+OUTPUTREGISTER
+    Name  = "AUTOGEN_HTTPSCERTS_ELINKS"
+    Path  = "Build"
+    File  = "HttpsCertsElink.h"
+    Template  = "PreserveCACert/HttpsCertsElink.txt"
+    Token = "SUPPORT_CACERT_IN_BUILDTIME" "=" "1"
+End
+
+INFComponent
+    Name  = "ArpDxe"
+    File  = "ArpDxe/ArpDxe.inf"
+    Package  = "AmiNetworkPkg"
+    PreProcess = Yes
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "ArpDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "DpcDxe"
+    File  = "DpcDxe/DpcDxe.inf"
+    Package  = "AmiNetworkPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "DpcDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "MnpDxe"
+    File  = "MnpDxe/MnpDxe.inf"
+    Package  = "AmiNetworkPkg"
+    PreProcess = Yes
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "MnpDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "TlsDxe"
+    File  = "TlsDxe/TlsDxe.inf"
+    Package  = "AmiNetworkPkg"
+    PreProcess = Yes
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "TlsDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "TcpDxe"
+    File  = "TcpDxe/TcpDxe.inf"
+    Package  = "AmiNetworkPkg"
+    PreProcess = Yes
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "TcpDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "UefiPxeBcDxe"
+    File  = "UefiPxeBcDxe/UefiPxeBcDxe.inf"
+    Package  = "AmiNetworkPkg"
+    PreProcess = Yes
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "UefiPxeBcDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "HttpBootDxe"
+    File  = "HttpBootDxe/HttpBootDxe.inf"
+    Package  = "AmiNetworkPkg"
+    PreProcess = Yes
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "HttpBootDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "SnpDxe"
+    File  = "SnpDxe/SnpDxe.inf"
+    Package  = "AmiNetworkPkg"
+    PreProcess = Yes
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "SnpDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "IpSecDxe"
+    File  = "IpSecDxe/IpSecDxe.inf"
+    Package  = "AmiNetworkPkg"
+    PreProcess = Yes
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "IpSecDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "HttpDxe"
+    File  = "HttpDxe/HttpDxe.inf"
+    Package  = "AmiNetworkPkg"
+    PreProcess = Yes
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "HttpDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "VlanConfigDxe"
+    File  = "VlanConfigDxe/VlanConfigDxe.inf"
+    Package  = "AmiNetworkPkg"
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "VLanConfigDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "DnsDxe"
+    File  = "DnsDxe/DnsDxe.inf"
+    Package  = "AmiNetworkPkg"
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "DnsDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "HttpUtilitiesDxe"
+    File  = "HttpUtilitiesDxe/HttpUtilitiesDxe.inf"
+    Package  = "AmiNetworkPkg"
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "HttpUtilitiesDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "TlsAuthConfigDxe"
+    File  = "TlsAuthConfigDxe/TlsAuthConfigDxe.inf"
+    Package  = "AmiNetworkPkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "TlsAuthConfigDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "CACert"
+    File  = "CACert/CACert.inf"
+    Package  = "AmiNetworkPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "SUPPORT_CACERT_IN_BUILDTIME" "=" "1"
+End
+
+INFComponent
+    Name  = "PreserveCACert"
+    File  = "PreserveCACert/PreserveCACert.inf"
+    Package  = "AmiNetworkPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "SUPPORT_CACERT_IN_BUILDTIME" "=" "1"
+End
+
+INFComponent
+    Name  = "WifiConnectionManagerDxe"
+    File  = "WifiConnectionManagerDxe/WifiConnectionManagerDxe.inf"
+    Package  = "AmiNetworkPkg"
+    ModuleTypes  = "USER_DEFINED"
+    Token = "WifiConnectionManagerDxe_SUPPORT" "=" "1"
+End
+

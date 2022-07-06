@@ -1,0 +1,12 @@
+<component>
+	name = "FirmwarePerformanceDataTable"
+	category = ModulePart
+	LocalRoot = "MdeModulePkg\Universal\Acpi\"
+	RefName = "MdeModulePkg.FirmwarePerformanceDataTable"
+[INF]
+FirmwarePerformanceDataTablePei\FirmwarePerformancePei.inf
+FirmwarePerformanceDataTableDxe\FirmwarePerformanceDxe.inf
+FirmwarePerformanceDataTableSmm\FirmwarePerformanceSmm.inf
+[files]
+"FirmwarePerformanceDataTable.sdl"	
+<endComponent>

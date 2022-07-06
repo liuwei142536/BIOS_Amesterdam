@@ -1,0 +1,21 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "WellsburgPkg\Library\"
+	RefName = "WellsburgPkg.Library"
+[INF]
+"AslUpdate\Dxe\PchAslUpdateLib.inf"
+"PchPciExpressHelpersLib\PchPciExpressHelpersLib.inf"
+"PchSmmPciExpressHelpersLib\PchSmmPciExpressHelpersLib.inf"
+"PchChipsetInitHobLib\PchChipsetInitHobLib.inf"
+"RcFviDxeLib\RcFviDxeLib.inf"
+"DxeRuntimePciLibPciExpress\DxeRuntimePciLibPciExpress.inf"
+"PchPlatformLib\PchPlatformLib.inf"
+"PchSmmPlatformLib\PchSmmPlatformLib.inf"
+"PchResetSystemLib\ResetSystemLib.inf"
+"PchSmmLib\PchSmmLib.inf"
+"PchOemSmmLib\PchOemSmmLib.inf"
+"PchSmmResetLib\PchSmmResetLib.inf"
+[files]
+"WellsburgPkgLibrary.sdl"	
+<endComponent>

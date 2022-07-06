@@ -1,0 +1,10 @@
+<component>
+	name = "At"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\At\"
+	RefName = "GrantleyPkg.At"
+[files]
+"At.sdl"	
+[parts]
+"GrantleyPkg.AtAm"
+<endComponent>

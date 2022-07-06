@@ -1,0 +1,11 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Include\Ppi\"
+	RefName = "GrantleyPkg.Ppi"
+[files]
+"AtaPolicy.h"	
+"FlashMap.h"	
+"LegacyRegion1.h"	
+"SmbusPolicy.h"	
+<endComponent>

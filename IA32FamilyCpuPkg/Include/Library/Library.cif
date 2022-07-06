@@ -1,0 +1,13 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "IA32FamilyCpuPkg\Include\Library\"
+	RefName = "IA32FamilyCpuPkg.Library"
+	Generic Module = "SS: AptioV;$\AptioV\Source\Hardware\Cpu\Intel\IA32FamilyCpuPkg\Include\Library;5.004_IA32FamilyCpuPkg_04"
+[files]
+"CpuConfigLib.h"	
+"CpuOnlyResetLib.h"	
+"PlatformSecLib.h"	
+"SocketLga1156Lib.h"	
+"SocketLga775Lib.h"	
+<endComponent>

@@ -1,0 +1,72 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+    INF_VERSION                     = 0x00010005
+    BASE_NAME                       = AmiFileExplorerLib
+    VERSION_STRING                  = 1.0
+    FILE_GUID                       = 70e1a818-0be1-4449-bfd4-9ef68c7f02a9
+    MODULE_TYPE                     = DXE_DRIVER
+    LIBRARY_CLASS                   = FileExplorerLib|DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER
+    LIBRARY_CLASS                   = AmiFileBrowserLib|DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER
+#
+#  This flag specifies whether HII resource section is generated into PE image.
+#
+#    UEFI_HII_RESOURCE_SECTION       = TRUE
+
+[Sources]
+    Vector.c
+    Vector.h
+    Device.c
+    FileList.c
+    FileBrowser.c
+    FileBrowser.h
+    FileBrowser.uni
+    
+[Packages]
+    MdePkg/MdePkg.dec
+    MdeModulePkg/MdeModulePkg.dec
+    AmiTsePkg/AmiTsePkg.dec
+    
+[LibraryClasses]
+    BaseLib
+    BaseMemoryLib
+    MemoryAllocationLib
+    UefiBootServicesTableLib
+    DebugLib
+    PrintLib
+    DevicePathLib
+    SortLib
+    DxeServicesLib
+    HiiLib
+        
+[Protocols]
+    gEfiSimpleFileSystemProtocolGuid
+    gEfiDevicePathProtocolGuid
+    gEfiHiiDatabaseProtocolGuid
+    gEfiHiiStringProtocolGuid
+    gAmiPostManagerProtocolGuid
+    gEsaFileBrowserProtocolGuid
+    
+[Guids]
+    gEfiFileSystemInfoGuid
+    
+[Pcd]
+
+[BuildOptions]
+MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50  
+GCC:*_*_*_CC_FLAGS = -DTSE_FOR_APTIO_4_50  
+
+[Depex]
+    

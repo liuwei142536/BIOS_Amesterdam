@@ -1,0 +1,80 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NvramDxe
+  FILE_GUID                      = 1807040D-5934-41A2-A088-8E0F777F71AB
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  ENTRY_POINT                    = NvRamInit
+
+[Sources]
+  NVRAM.h
+  NvramRead.c
+  NvramDxeCommon.h
+  NvramDxeCommon.c
+  NvramDxe.c
+  NvramSmi.h
+  NvramSmmWrapper.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  AmiCriticalSectionLib
+  PcdLib
+  DebugLib
+  AmiPerformanceProfilingLib
+  DxeServicesTableLib
+
+[Protocols]
+  gEfiVariableArchProtocolGuid
+  gEfiVariableWriteArchProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+  gAmiFlashProtocolGuid
+  gEfiSmmVariableProtocolGuid
+  gEfiSmmCommunicationProtocolGuid
+  gEdkiiVariableLockProtocolGuid
+  gEfiDxeSmmReadyToLockProtocolGuid
+  gAmiLegacyBootProtocolGuid
+  gEfiMonotonicCounterArchProtocolGuid
+  gAmiNvramUpdateProtocolGuid
+
+[Guids]
+  gEfiGlobalVariableGuid
+  gAmiGlobalVariableGuid
+  gEfiHobListGuid
+  gAmiNvramSmmCommunicationGuid
+  gEfiImageSecurityDatabaseGuid
+  gEfiHardwareErrorVariableGuid
+
+[Depex]
+  gAmiFlashProtocolGuid
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVariableStoreSize
+  gAmiModulePkgTokenSpaceGuid.AmiPcdNvramResetPropertyMask
+
+[FeaturePcd]
+  gAmiModulePkgTokenSpaceGuid.AmiPcdNvramSmmSupport
+
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+

@@ -1,0 +1,11 @@
+<component>
+	name = "AmiCpuInfo"
+	category = ModulePart
+	Rank = 30
+	LocalRoot = "GrantleySocketPkg\Override\AmiCpuInfoProtocols\"
+	RefName = "AmiCpuInfo"
+[INF]
+"AmiCpuInfoProtocols.inf"
+[files]
+"AmiCpuInfoProtocols.sdl"	
+<endComponent>

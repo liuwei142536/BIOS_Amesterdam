@@ -1,0 +1,210 @@
+TOKEN
+	Name  = "GrantleyPkgLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "BaseSmbusLibNull"
+	File  = "BaseSmbusLibNull\BaseSmbusLibNull.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CpuOnlyResetLib"
+	File  = "CpuOnlyResetLib\CpuOnlyResetLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "IioInitHooksLib"
+	File  = "IioInitHooksLib\OemIioInitHooks.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "GRANGEVILLE_PLATFORM" "=" "0"
+End
+
+INFComponent
+	Name  = "IntelIchAcpiTimerLib"
+	File  = "IntelIchAcpiTimerLib\IntelIchAcpiTimerLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "OemMemoryQpiInitLib"
+	File  = "OemMemoryQpiInitLib\OemMemoryQpiInitLib.inf"
+	Package  = "GrantleyPkg"
+	Arch  = "IA32"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PcieSlotOpromLib"
+	File  = "PcieSlotOpromLib\PcieSlotOpromLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "PfatInitLib"
+	File  = "PfatInitLib\PfatInit.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PlatformCapsuleLib"
+	File  = "PlatformCapsuleLib\PlatformCapsuleLib.inf"
+	Package  = "GrantleyPkg"
+	Arch  = "X64"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "PlatformClocksLib"
+	File  = "PlatformClocksLib\Pei\PlatformClocksLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "PlatformHooksLib"
+	File  = "PlatformHooksLib\PlatformHooksLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "SecOemHookLib"
+	File  = "SecOemHookLib\SecOemHookLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "SEC"
+End
+
+INFComponent
+	Name  = "AmiGrantleyAcpiCpuLib"
+	File  = "AmiGrantleyAcpiCpuLib/AmiGrantleyAcpiCpuLib.inf"
+	Package  = "GrantleyPkg"
+End
+
+INFComponent
+	Name  = "SerialPortLib"
+	File  = "SerialPortLib\SerialPortLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "CmosAccessLib"
+	File  = "CmosAccessLib\CmosAccessLib.inf"
+	Package  = "GrantleyPkg"
+End
+
+INFComponent
+	Name  = "CompressDxeLib"
+	File  = "Compress\CompressLib.inf"
+	Package  = "GrantleyPkg"
+End
+
+INFComponent
+    Name  = "CpuInitHooksLib"
+    File  = "CpuInitHooksLib\OemCpuInitHooks.inf"
+    Package  = "GrantleyPkg"
+    Token = "GRANGEVILLE_PLATFORM" "=" "0"
+End
+
+LibraryMapping
+    Class  = "CpuInitHooksLib"
+    Instance  = "GrantleyPkg.CpuInitHooksLib"
+    Token = "GRANGEVILLE_PLATFORM" "=" "0"
+End
+
+LibraryMapping
+	Class  = "SecOemHookLib"
+	Instance  = "GrantleyPkg.SecOemHookLib"
+End
+
+LibraryMapping
+	Class  = "CpuOnlyResetLib"
+	Instance  = "GrantleyPkg.CpuOnlyResetLib"
+End
+
+LibraryMapping
+	Class  = "IioInitHooksLib"
+	Instance  = "GrantleyPkg.IioInitHooksLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "GRANGEVILLE_PLATFORM" "=" "0"
+End
+LibraryMapping
+	Class  = "TimerLib"
+	Instance  = "GrantleyPkg.IntelIchAcpiTimerLib"
+End
+
+LibraryMapping
+	Class  = "OemMemoryQpiInitLib"
+	Instance  = "GrantleyPkg.OemMemoryQpiInitLib"
+	Arch  = "IA32"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+	Class  = "PcieSlotOpromLib"
+	Instance  = "GrantleyPkg.PcieSlotOpromLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "PfatInitLib"
+	Instance  = "GrantleyPkg.PfatInitLib"
+End
+
+
+#Arch  = "X64"   AptioV server override: As per Platform.DSC CapsuleLib from PlatformPkg has to be used for all DXE drivers
+LibraryMapping
+	Class  = "CapsuleLib"
+	Instance  = "GrantleyPkg.PlatformCapsuleLib"
+	ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_APPLICATION"
+End
+
+LibraryMapping
+	Class  = "PlatformHooksLib"
+	Instance  = "GrantleyPkg.PlatformHooksLib"
+End
+
+LibraryMapping
+	Class  = "PlatformClocksLib"
+	Instance  = "GrantleyPkg.PlatformClocksLib"
+End
+
+LibraryMapping
+	Class  = "SmbusLib"
+	Instance  = "GrantleyPkg.BaseSmbusLibNull"
+End
+
+LibraryMapping
+	Class  = "SerialPortLib"
+	Instance  = "GrantleyPkg.SerialPortLib"
+End
+
+LibraryMapping
+	Class  = "AmiAcpiCpuLib"
+	Instance  = "GrantleyPkg.AmiGrantleyAcpiCpuLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "CmosAccessLib"
+	Instance  = "GrantleyPkg.CmosAccessLib"
+End
+
+LibraryMapping
+	Class  = "CompressDxeLib"
+	Instance  = "GrantleyPkg.CompressDxeLib"
+End
+
+

@@ -1,0 +1,12 @@
+<component>
+	name = "AmiIntelCpuPkg"
+	category = CPU
+	LocalRoot = "AmiIntelCpuPkg\"
+	RefName = "AmiIntelCpuPkg"
+[files]
+"AmiIntelCpuPkg.dec"	
+[parts]
+"AmiIntelCpuPkg.SecCore"
+"AmiIntelCpuPkg.Include"
+"AmiIntelCpuPkg.LibraryInstances"
+<endComponent>

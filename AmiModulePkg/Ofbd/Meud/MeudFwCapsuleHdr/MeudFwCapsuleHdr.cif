@@ -1,0 +1,10 @@
+<component>
+	name = "MeudFwCapsuleHdr"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Ofbd\Meud\MeudFwCapsuleHdr\"
+	RefName = "MeudFwCapsuleHdr"
+[INF]
+"MeudFwCapsuleHdr.inf"
+[files]
+"MeudFwCapsuleHdr.sdl"	
+<endComponent>

@@ -1,0 +1,12 @@
+<component>
+	name = "DxeSmm"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\DxeSmm\"
+	RefName = "GrantleyPkg.Platform.DxeSmm"
+[files]
+"DxeSmm.sdl"	
+[parts]
+"GrantleyPkg.Pfat"
+[INF]
+"PlatformReset\PlatformResetSmm.inf"
+<endComponent>

@@ -1,0 +1,13 @@
+<component>
+    name = "NetworkStackSetupScreen"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\UefiNetworkStack\Common\NetworkStackSetupScreen\"
+    RefName = "NetworkStackSetupScreen"
+[INF]
+"NetworkStackSetupScreen.inf"
+[files]
+"NetworkStackSetupScreen.sdl"	
+"NetworkStackSetupScreen.mak"	
+"NetworkStackSetupScreen.sd"	
+"NetworkStackSetupScreen.uni"	
+<endComponent>

@@ -1,0 +1,39 @@
+///
+/// This file contains 'Framework Code' and is licensed as such
+/// under the terms of your license agreement with Intel or your
+/// vendor.  This file may not be modified, except as allowed by
+/// additional terms of your license agreement.
+///
+
+/**
+
+Copyright (c)  1999 - 2011 Intel Corporation. All rights reserved
+This software and associated documentation (if any) is furnished
+under a license and may only be used or copied in accordance
+with the terms of the license. Except as permitted by such
+license, no part of this software or documentation may be
+reproduced, stored in a retrieval system, or transmitted in any
+form or by any means without the express written consent of
+Intel Corporation.
+
+
+  @file 
+  SmbusPolicy.h
+    
+  @brief 
+  Smbus Policy PPI as defined in EFI 2.0
+
+**/
+#ifndef _PEI_SMBUS_POLICY_PPI_H
+#define _PEI_SMBUS_POLICY_PPI_H
+
+typedef struct _PEI_SMBUS_POLICY_PPI {
+  UINTN   BaseAddress;
+  UINT32  PciAddress;
+  UINT8   NumRsvdAddress;
+  UINT8   *RsvdAddress;
+} PEI_SMBUS_POLICY_PPI;
+
+extern EFI_GUID gPeiSmbusPolicyPpiGuid;
+
+#endif

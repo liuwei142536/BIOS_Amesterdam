@@ -1,0 +1,44 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file OemStatusCodeTable.h
+    Oem status codes definitions.
+
+**/
+
+#ifndef __OEM_STATUS_CODE_TABLE_H__
+#define __OEM_STATUS_CODE_TABLE_H__
+
+#define END_OF_OEM_STATUS_CODE_ELINKS_LIST {0xFFFF, 0xFFFF, 0xFF, 0xFF, 0xFF, 0xFF}
+#define OEM_STATUS_CODE_ELINKS_LIST @elink(OEM_STATUS_CODE_LIST, "@Child", "", "")
+EFI_STATUS_CODE_TO_SEL_ENTRY OemStatusCodeToSelTable [] = {
+OEM_STATUS_CODE_ELINKS_LIST
+END_OF_OEM_STATUS_CODE_ELINKS_LIST
+};
+
+#endif  // #ifndef __OEM_STATUS_CODE_TABLE_H__
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

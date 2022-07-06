@@ -1,0 +1,62 @@
+## @file
+#  CpuCsrAccess Protocol
+#
+#  Copyright (c) 2009 - 2012, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuCsrAccessSMM
+  FILE_GUID                      = 870E0F5A-1981-45f6-AE26-0391425CC46F
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = CpuCsrAccessStart
+
+[Sources]
+  CpuCsrAccess.c
+
+[Packages]
+  GrantleySocketPkg/SocketPkg.dec
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  HobLib
+  IoLib
+  PciLib
+  BaseLib
+
+[Protocols]
+  gEfiIioUdsProtocolGuid                        
+  gEfiCpuCsrAccessGuid
+  gEfiSmmBase2ProtocolGuid
+
+[Guids]
+#
+#4987134 start
+#
+
+gEfiEventVirtualAddressChangeGuid
+
+#
+#4987134 end
+#
+
+[Depex]
+  gEfiSmmBase2ProtocolGuid AND
+  gEfiIioUdsProtocolGuid

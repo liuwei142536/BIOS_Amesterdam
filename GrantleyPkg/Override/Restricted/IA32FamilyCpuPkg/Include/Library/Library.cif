@@ -1,0 +1,8 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Override\Restricted\IA32FamilyCpuPkg\Include\Library\"
+	RefName = "GrantleyPkg.Override.Restricted.IA32FamilyCpuPkg.Include.Library.Library"
+[files]
+"SmmCpuPlatformHookLib.h"	
+<endComponent>

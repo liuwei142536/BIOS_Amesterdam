@@ -1,0 +1,60 @@
+#  Component description file for ReserveMem driver.
+#
+#  Copyright (c) 2009 - 2013, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = C2FDxe
+  FILE_GUID                      = 678BD19C-B4C9-4FF2-FFFF-FFFFECFFA924
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = C2FInit
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  c2f.h
+  c2f.c
+
+[Sources.X64]  
+  c2fdxe.asm
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  UefiRuntimeServicesTableLib
+  UefiBootServicesTableLib
+  HobLib
+  BaseMemoryLib
+  IoLib
+
+[Protocols]
+  gEfiCpuArchProtocolGuid                       # PROTOCOL ALWAYS_CONSUMED
+  gEfiTimerArchProtocolGuid		       # PROTOCOL ALWAYS_CONSUMED
+
+[Guids]
+    gEfiSetupVariableGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  
+[Depex]
+	gEfiVariableArchProtocolGuid AND
+	gEfiCpuArchProtocolGuid  

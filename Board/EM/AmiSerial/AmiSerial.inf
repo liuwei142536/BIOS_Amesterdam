@@ -1,0 +1,61 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file AmiSerial.inf
+#  AmiSerial driver information
+##
+
+[Defines]
+  INF_VERSION = 0x00010015
+  VERSION_STRING = 1.0
+  BASE_NAME = AmiSerial
+  MODULE_TYPE = DXE_DRIVER
+  FILE_GUID = 50A34B71-34DB-402A-169A-48A504DCAF3E
+  ENTRY_POINT = AmiSerialEntryPoint
+
+[Sources]
+  AmiSerial.c
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[Depex]
+  TRUE
+ 
+[Protocols]
+  gAmiSerialProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiComponentName2ProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gEfiDevicePathProtocolGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

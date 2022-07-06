@@ -1,0 +1,43 @@
+TOKEN
+	Name  = "SerialAMIDebugAgent_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SerialAMIDebugAgent support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Disable = Yes
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+    	Token = "USB_DEBUG_TRANSPORT" "=" "0"
+	Token = "USB_3_DEBUG_SUPPORT" "!=" "1"
+End
+
+TOKEN
+	Name  = "SerialDxeDebugAgent_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SerialPeiDebugAgent support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "SerialPeiDebugAgent_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SerialPeiDebugAgent support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SerialDebugAgent"
+	File  = "SerialDebugAgent.inf"
+	Package  = "AMIDebuggerPkg"
+End
+
+LibraryMapping
+	Class  = "DbgAgentLib"
+	Instance  = "AMIDebuggerPkg.SerialDebugAgent"
+End
+
+LibraryMapping
+    Class  = "DbgAgentLib"
+    Instance  = "AMIDebuggerPkg.SmmAMIDebugAgentLib"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "SMM_DEBUG_SUPPORT" "=" "1"
+End

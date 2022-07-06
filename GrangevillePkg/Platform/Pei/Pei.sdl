@@ -1,0 +1,39 @@
+TOKEN
+	Name  = "Pei_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Pei support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PlatformInfo_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformInfo support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PlatformEarlyPolicy_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformEarlyPolicy support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PlatformInfo"
+	File  = "PlatformInfo\PlatformInfo.inf"
+	Package  = "GrangevillePkg"
+	ModuleTypes  = "PEIM"
+	Token = "PlatformInfo_SUPPORT" "=" "1"
+	Token = "GRANGEVILLE_PLATFORM" "=" "1"
+End
+
+INFComponent
+	Name  = "PlatformEarlyPolicy"
+	File  = "PlatformPolicy\PlatformEarlyPolicy.inf"
+	Package  = "GrangevillePkg"
+	ModuleTypes  = "PEIM"
+	Token = "PlatformEarlyPolicy_SUPPORT" "=" "1"
+End
+

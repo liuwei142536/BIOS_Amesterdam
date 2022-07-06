@@ -1,0 +1,15 @@
+<component>
+	name = "GrangevillePkg"
+	category = eModule
+	LocalRoot = "GrangevillePkg\"
+	RefName = "GrangevillePkg.GrangevillePkg"
+[files]
+"PlatformPkg.dec"	
+"PlatformPkgConfig.dsc"	
+"GrangevillePkg.sdl"	
+[parts]
+"GrangevillePkg.Acpi"
+"GrangevillePkg.Library"
+"GrangevillePkg.Platform"
+"GrangevillePkg.Tool"
+<endComponent>

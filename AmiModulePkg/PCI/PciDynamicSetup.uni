@@ -1,0 +1,310 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/**
+   @file PciDynamicSetup.uni
+
+   Pci Dynamic Setup String Definitions.
+**/
+
+/=#
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"      // AMI Mapping Language
+
+#string STR_EMPTY                               #language en-US ""
+#string STR_ENABLED                             #language en-US "Enabled"
+#string STR_DISABLED                            #language en-US "Disabled"
+#string STR_NONE                                #language en-US "None"
+#string STR_AUTO                                #language en-US "Auto"
+
+#string STR_PCI_DRIVER_VER_PROMPT               #language en-US "AMI PCI Driver Version :   "
+#string STR_PCI_FORM                            #language en-US "PCI Subsystem Settings"
+#string STR_PCI_GLOBAL_SUBTITLE                 #language en-US "PCI Settings Common for all Devices:"
+#string STR_PCI_GOTO_SUBTITLE                   #language en-US "Change Settings of the Following PCI Devices:"
+#string STR_PCI_WARNING1                        #language en-US "WARNING: Changing PCI Device(s) settings may"
+#string STR_PCI_WARNING2                        #language en-US "have unwanted side effects! System may HANG!" 
+#string STR_PCI_WARNING3                        #language en-US "PROCEED WITH CAUTION."
+
+
+//Common PCI Settings strings:
+#string STR_PCI_4G_PROMPT                       #language en-US "Above 4G Decoding"
+#string STR_PCI_4G_HELP                         #language en-US "Globally Enables or Disables 64bit capable Devices to be Decoded in Above 4G Address Space (Only if System Supports 64 bit PCI Decoding)."
+                                                              
+#string STR_PCI_4G_LOCAL_PROMPT                 #language en-US "Disable Above 4G Decoding"
+#string STR_PCI_4G_LOCAL_HELP                   #language en-US "Disables 64bit capable Device Resources to be Allocated in Above 4G Address Space."
+
+#string STR_PCI_SRIOV_PROMPT                    #language en-US "SR-IOV Support"
+#string STR_PCI_SRIOV_HELP                      #language en-US "If system has SR-IOV capable PCIe Devices, this option Enables or Disables Single Root IO Virtualization Support."
+
+#string STR_PCI_BME_DMA_MITIGATION_PROMPT       #language en-US "BME DMA Mitigation"
+#string STR_PCI_BME_DMA_MITIGATION_HELP         #language en-US "Re-enable Bus Master Attribute disabled during Pci enumeration for PCI Bridges after SMM Locked "
+
+#string STR_GLOBAL_HOTPLUG_PROMPT               #language en-US "Hot-Plug Support" 
+#string STR_GLOBAL_HOTPLUG_HELP                 #language en-US "Globally Enables or Disables Hot-Plug support for the entire System. If System has Hot-Plug capable Slots and this option set to Enabled, it provides a Setup screen for selecting PCI resource padding for Hot-Plug." 
+#string STR_GLOBAL_VC_PROMPT                    #language en-US "Don't Reset VC-TC Mapping"
+#string STR_GLOBAL_VC_HELP                      #language en-US "If system has Virtual Channels, Software can reset Traffic Class mapping through the Virtual Channels to it's default state. Setting this option to Enabled will not modify VC Resources."
+
+//----------------------------------------------------------------------
+#string STR_PCI_DEV_FORM                        #language en-US "PCI Device Settings"
+#string STR_PCI_PCIE1_FORM                      #language en-US "PCI Express GEN 1 Settings"
+#string STR_PCI_PCIE2_FORM                      #language en-US "PCI Express GEN 2 Settings"
+#string STR_PCI_HOTPLUG_FORM                    #language en-US "PCI Hot-Plug Settings"
+#string STR_PCI_HOTPLUG_FORM_HELP               #language en-US "Allow Changing Build time Defined Hot-Plug Settings."
+#string STR_PCI_HP_SUB                          #language en-US "Select Resource Padding for Hot-Plug"
+#string STR_PCI_GOTO_HELP                       #language en-US "Change On Board PCI Device or PCI Slot Settings."
+#string STR_PCI_DEV_SUBTITLE                    #language en-US "n/a" 
+#string STR_PCI_DEV_SUBTITLE1                   #language en-US "n/a" 
+#string STR_PCI_DEV_SUBTITLE2                   #language en-US "n/a" 
+//----------------------------------------------------------------------
+#string STR_DEV_INFO_EMPTY_STR1                 #language en-US "Location: Device Producing Slot Not Found..." 
+#string STR_DEV_INFO_EMPTY_STR2                 #language en-US "Supports: Slot is Not Populated..."
+#string STR_DEV_INFO_STR1                       #language en-US "Location: B:%02Xh|D:%02Xh|F:%02Xh; VID:%04X|DID:%04X" 
+#string STR_DEV_INFO_STR2                       #language en-US "Supports: PCIe GEN1[%s]; GEN2[%s]; ARI[%s]; HP[%s]"
+//----------------------------------------------------------------------
+//Strings We are going to Assmble goto control and 
+//PCI Device Subtitle messages. Needed to suport localization.
+#string STR_DEVICE_STR                          #language en-US "Device  "
+#string STR_SLOT_STR                            #language en-US "Slot"
+#string STR_ONBOARD_STR                         #language en-US "OnBoard"
+#string STR_POPULATED_STR                       #language en-US "Occupied"
+#string STR_EMPTY_STR                           #language en-US "Empty   "
+#string STR_NOT_PRESENT_STR                     #language en-US "NOT FOUND"
+//----------------------------------------------------------------------
+#string STR_PCI_CLAS_00_STR                     #language en-US "Old Pci Device"
+#string STR_PCI_CLAS_01_STR                     #language en-US "Mass Storage Controller"
+#string STR_PCI_CLAS_02_STR                     #language en-US "Network Controller"
+#string STR_PCI_CLAS_03_STR                     #language en-US "Display Controller"
+#string STR_PCI_CLAS_04_STR                     #language en-US "Multimedia Device"
+#string STR_PCI_CLAS_05_STR                     #language en-US "Memory Controller"
+#string STR_PCI_CLAS_06_STR                     #language en-US "Bridge Device"
+#string STR_PCI_CLAS_07_STR                     #language en-US "Simple Comm. Controller"
+#string STR_PCI_CLAS_08_STR                     #language en-US "Base System Peripherals"
+#string STR_PCI_CLAS_09_STR                     #language en-US "Input Device"
+#string STR_PCI_CLAS_0A_STR                     #language en-US "Docking Station"
+#string STR_PCI_CLAS_0B_STR                     #language en-US "Processor"
+#string STR_PCI_CLAS_0C_STR                     #language en-US "Serial Bus Controller"
+#string STR_PCI_CLAS_0D_STR                     #language en-US "Wireless Controller"
+#string STR_PCI_CLAS_0E_STR                     #language en-US "Intelligent I/O Controller"
+#string STR_PCI_CLAS_0F_STR                     #language en-US "Satellite Comm. Controller"
+#string STR_PCI_CLAS_10_STR                     #language en-US "En/Decryption Controller"
+#string STR_PCI_CLAS_11_STR                     #language en-US "Data Acquisition Controller"
+//----------------------------------------------------------------------
+#string STR_PCI_DRIVER_VER                      #language en-US "00.00"
+#string STR_PCI_HP_FORM_HELP                    #language en-US "Change PCI Express Hot-Plug and Standard HP Controller Settings of This Device."
+#string STR_PCI_PCIE1_FORM_HELP                 #language en-US "Change PCI Express GEN 1 Settings of This Device."
+#string STR_PCI_PCIE2_FORM_HELP                 #language en-US "Change PCI Express GEN 2 Settings of This Device."
+#string STR_PCI_LATENCY_PROMPT                  #language en-US "PCI Latency Timer"
+#string STR_PCIX_LATENCY_PROMPT                 #language en-US "PCI-X Latency Timer"
+#string STR_PCI_LATENCY_HELP                    #language en-US "Value to be programmed into PCI Latency Timer Register."
+#string STR_PCIE_DEVICE                         #language en-US "PCI Express Device Register Settings"
+#string STR_PCIE2_DEVICE                        #language en-US "PCI Express GEN2 Device Register Settings"
+#string STR_PCIE_LINK                           #language en-US "PCI Express Link Register Settings"
+#string STR_PCIE2_LINK                          #language en-US "PCI Express GEN2 Link Register Settings"
+#string STR_PCI_VGASNOOP_PROMPT                 #language en-US "VGA Palette Snoop"
+#string STR_PCI_VGASNOOP_HELP                   #language en-US "Enables or Disables VGA Palette Registers Snooping."
+#string STR_PCI_PERR_PROMPT                     #language en-US "PERR# Generation"
+#string STR_PCI_PERR_HELP                       #language en-US "Enables or Disables PCI Device to Generate PERR#."
+#string STR_PCI_SERR_PROMPT                     #language en-US "SERR# Generation"
+#string STR_PCI_SERR_HELP                       #language en-US "Enables or Disables PCI Device to Generate SERR#."
+//----------------------------------------------------------------------
+
+
+#string STR_PCI_32                              #language en-US "32 PCI Bus Clocks"
+#string STR_PCI_64                              #language en-US "64 PCI Bus Clocks"
+#string STR_PCI_96                              #language en-US "96 PCI Bus Clocks"
+#string STR_PCI_128                             #language en-US "128 PCI Bus Clocks"
+#string STR_PCI_160                             #language en-US "160 PCI Bus Clocks"
+#string STR_PCI_192                             #language en-US "192 PCI Bus Clocks"
+#string STR_PCI_224                             #language en-US "224 PCI Bus Clocks"
+#string STR_PCI_248                             #language en-US "248 PCI Bus Clocks"
+
+#string STR_PCIE_RELAXEDORDERING_PROMPT         #language en-US "Relaxed Ordering"
+#string STR_PCIE_RELAXEDORDERING_HELP           #language en-US "Enables or Disables PCI Express Device Relaxed Ordering."
+#string STR_PCIE_NOSNOOP_PROMPT                 #language en-US "No Snoop"
+#string STR_PCIE_NOSNOOP_HELP                   #language en-US "Enables or Disables PCI Express Device No Snoop option."
+#string STR_PCIE_MAXPAYLOAD_PROMPT              #language en-US "Maximum Payload"
+#string STR_PCIE_MAXPAYLOAD_HELP                #language en-US "Set Maximum Payload of PCI Express Device or allow System BIOS to select the value."
+
+#string STR_PCIE_MAXREADREQUEST_PROMPT          #language en-US "Maximum Read Request"
+#string STR_PCIE_MAXREADREQUEST_HELP            #language en-US "Set Maximum Read Request Size of PCI Express Device or allow System BIOS to select the value."
+
+#string STR_MP128                               #language en-US "128 Bytes"
+#string STR_MP256                               #language en-US "256 Bytes"
+#string STR_MP512                               #language en-US "512 Bytes"
+#string STR_MP1024                              #language en-US "1024 Bytes"
+#string STR_MP2048                              #language en-US "2048 Bytes"
+#string STR_MP4096                              #language en-US "4096 Bytes"
+
+#string STR_PCIE_ASPM_PROMPT                    #language en-US "ASPM Support"
+#string STR_PCIE_ASPM_HELP                      #language en-US "Set the ASPM Level:\nForce L0s - Force all links to L0s State\nAUTO - BIOS auto configure\nDISABLE - Disables ASPM"
+
+#string STR_PCIE_LINK_WARN                      #language en-US "WARNING: Enabling ASPM may cause some\n         PCI-E devices to fail!"
+
+#string STR_FORCE_L0                            #language en-US "Force L0s"
+
+#string STR_PCIE_EXTD_SYNCH_PROMPT              #language en-US "Extended Synch"
+#string STR_PCIE_EXTD_SYNCH_HELP                #language en-US "If ENABLED, allows generation of Extended Synchronization patterns."
+
+#string STR_PCIE_EXTTAGFLD_PROMPT               #language en-US "Extended Tag"
+#string STR_PCIE_EXTTAGFLD_HELP                 #language en-US "If ENABLED, allows Device to use 8-bit Tag field as a requester."
+
+#string STR_HOTPLUG_ENABLE_PROMPT               #language en-US "Disable Hot-Plug" 
+#string STR_HOTPLUG_ENABLE_HELP                 #language en-US "Disables BIOS built-in Hot-Plug support for currently selected On Board Device or Slot." 
+
+#string STR_PCIE1_ENABLE_PROMPT                 #language en-US "Disable PCIe Init" 
+#string STR_PCIE1_ENABLE_HELP                   #language en-US "Disables BIOS built-in PCI Express Initialization for currently selected and down stream PCI Device(s)." 
+
+#string STR_PCIE2_ENABLE_PROMPT                 #language en-US "Disable PCIe GEN 2" 
+#string STR_PCIE2_ENABLE_HELP                   #language en-US "Disables BIOS built-in PCI Express GEN2 Initialization for currently selected and down stream PCI Device(s)." 
+
+#string STR_BUS_PADD_PROMPT                     #language en-US "PCI Buses Padding" 
+#string STR_BUS_PADD_HELP                       #language en-US "Pad PCI Buses behind the bridge for Hot-Plug." 
+#string STR_1                                   #language en-US "1" 
+#string STR_2                                   #language en-US "2" 
+#string STR_3                                   #language en-US "3" 
+#string STR_4                                   #language en-US "4" 
+#string STR_5                                   #language en-US "5" 
+#string STR_6                                   #language en-US "6" 
+#string STR_7                                   #language en-US "7" 
+#string STR_8                                   #language en-US "8" 
+#string STR_9                                   #language en-US "9" 
+#string STR_10                                  #language en-US "10" 
+
+#string STR_IO_PADD_PROMPT                      #language en-US "I/O Resources Padding" 
+#string STR_IO_PADD_HELP                        #language en-US "Pad PCI I/O Resources behind the bridge for Hot-Plug." 
+#string STR_4K                                  #language en-US "4 K" 
+#string STR_8K                                  #language en-US "8 K" 
+#string STR_16K                                 #language en-US "16 K" 
+#string STR_32K                                 #language en-US "32 K" 
+
+#string STR_MMIO32_PADD_PROMPT                  #language en-US "MMIO 32 bit Resources Padding" 
+#string STR_MMIO32_PADD_HELP                    #language en-US "Pad PCI MMIO 32-bit Resources behind the bridge for Hot-Plug." 
+
+#string STR_MMIO32PF_PADD_PROMPT                #language en-US "PFMMIO 32 bit Resources Padding" 
+#string STR_MMIO32PF_PADD_HELP                  #language en-US "Pad PCI MMIO 32-bit Prefetchable Resources behind the bridge for Hot-Plug." 
+
+#string STR_MMIO64_PADD_PROMPT                  #language en-US "MMIO 64 bit Resources Padding" 
+#string STR_MMIO64_PADD_HELP                    #language en-US "Pad PCI MMIO 64-bit Resources behind the bridge for Hot-Plug." 
+
+#string STR_MMIO64PF_PADD_PROMPT                #language en-US "PFMMIO 64 bit Resources Padding" 
+#string STR_MMIO64PF_PADD_HELP                  #language en-US "Pad PCI MMIO 64-bit Prefetchable Resources behind the bridge for Hot-Plug." 
+
+#string STR_1M                                  #language en-US "1 M" 
+#string STR_2M                                  #language en-US "2 M" 
+#string STR_4M                                  #language en-US "4 M" 
+#string STR_8M                                  #language en-US "8 M" 
+#string STR_16M                                 #language en-US "16 M" 
+#string STR_32M                                 #language en-US "32 M" 
+#string STR_64M                                 #language en-US "64 M" 
+#string STR_128M                                #language en-US "128 M" 
+#string STR_256M                                #language en-US "256 M" 
+#string STR_512M                                #language en-US "512 M" 
+#string STR_1G                                  #language en-US "1 G" 
+#string STR_2G                                  #language en-US "2 G" 
+#string STR_4G                                  #language en-US "4 G" 
+#string STR_8G                                  #language en-US "8 G"
+#string STR_16G                                 #language en-US "16 G"
+#string STR_32G                                 #language en-US "32 G"
+#string STR_64G                                 #language en-US "64 G"
+#string STR_128G                                #language en-US "128 G"
+#string STR_256G                                #language en-US "256 G"
+#string STR_512G                                #language en-US "512 G"
+
+ 
+
+#string STR_LNK_TR_RETRY_PROMPT                 #language en-US "Link Training Retry" 
+#string STR_LNK_TR_RETRY_HELP                   #language en-US "Defines number of Retry Attempts software will take to retrain the link if previous training attempt was unsuccessful." 
+
+#string STR_LNK_TR_TIMEOUT_PROMPT               #language en-US "Link Training Timeout (uS)" 
+#string STR_LNK_TR_TIMEOUT_HELP                 #language en-US "Defines number of Microseconds software will wait before polling 'Link Training' bit in Link Status register. Value range from 10 to 10000 uS." 
+
+#string STR_DEV_S3_PCIE_SCRIPTS_PROMPT          #language en-US "Restore PCIE Registers" 
+#string STR_DEV_S3_PCIE_SCRIPTS_HELP            #language en-US "On non-PCI Express aware OS's (Pre Windows Vista) some devices may not be correctly reinitialized after S3. Enabling this restors PCI Express device configurations on S3 resume. Warning: Enabling this may cause issues with other hardware after S3 resume."
+
+//PCIe Gen2 Options
+#string STR_DEV_COMPL_TIMEOUT_PROMPT            #language en-US "Completion Timeout" 
+#string STR_DEV_COMPL_TIMEOUT_HELP              #language en-US "In device Functions that support Completion Timeout programmability, allows system software to modify the Completion Timeout value. 'Default' 50us to 50ms. If 'Shorter' is selected, software will use shorter timeout ranges supported by hardware. If 'Longer' is selected, software will use longer timeout ranges."
+#string STR_DEFAULT                             #language en-US "Default"
+
+#string STR_DEV_ARI_PROMPT                      #language en-US "ARI Forwarding" 
+#string STR_DEV_ARI_HELP                        #language en-US "If supported by hardware and set to 'Enabled', the Downstream Port disables its traditional Device Number field being 0 enforcement when turning a Type1 Configuration Request into a Type0 Configuration Request, permitting access to Extended Functions in an ARI Device immediately below the Port. Default value: Disabled" 
+
+#string STR_DEV_AOP_REQ_PROMPT                  #language en-US "AtomicOp Requester Enable" 
+#string STR_DEV_AOP_REQ_HELP                    #language en-US "If supported by hardware and set to 'Enabled', this function initiates AtomicOp Requests only if Bus Master Enable bit is in the Command Register Set." 
+
+#string STR_DEV_AOP_EGRESS_BLK_PROMPT           #language en-US "AtomicOp Egress Blocking" 
+#string STR_DEV_AOP_EGRESS_BLK_HELP             #language en-US "If supported by hardware and set to 'Enabled', outbound AtomicOp Requests via Egress Ports will be blocked." 
+
+#string STR_DEV_IDO_REQ_PROMPT                  #language en-US "IDO Request Enable" 
+#string STR_DEV_IDO_REQ_HELP                    #language en-US "If supported by hardware and set to 'Enabled', this permits setting the number of ID-Based Ordering (IDO) bit (Attribute[2]) requests to be initiated."
+
+#string STR_DEV_IDO_COMPL_PROMPT                #language en-US "IDO Completion Enable" 
+#string STR_DEV_IDO_COMPL_HELP                  #language en-US "If supported by hardware and set to 'Enabled', this permits setting the number of ID-Based Ordering (IDO) bit (Attribute[2]) requests to be initiated."
+
+#string STR_DEV_LTR_REPORT_PROMPT               #language en-US "LTR Mechanism Enable" 
+#string STR_DEV_LTR_REPORT_HELP                 #language en-US "If supported by hardware and set to 'Enabled', this enables the Latency Tolerance Reporting (LTR) Mechanism."
+
+#string STR_DEV_E2E_TLP_BLK_PROMPT              #language en-US "End-End TLP Prefix Blocking" 
+#string STR_DEV_E2E_TLP_BLK_HELP                #language en-US "If supported by hardware and set to 'Enabled', this function will block forwarding of TLPs containing End-End TLP Prefixes."
+
+#string STR_LNK_SPEED_PROMPT                    #language en-US "Target Link Speed" 
+#string STR_LNK_SPEED_HELP                      #language en-US "If supported by hardware and set to 'Force to X.X GT/s' for Downstream Ports, this sets an upper limit on Link operational speed by restricting the values advertised by the Upstream component in its training sequences. When 'Auto' is selected HW initialized data will be used." 
+
+#string STR_LNK_COMPL_SOS_PROMPT                #language en-US "Compliance SOS" 
+#string STR_LNK_COMPL_SOS_HELP                  #language en-US "If supported by hardware and set to 'Enabled', this will force LTSSM to send SKP Ordered Sets between sequences when sending Compliance Pattern or Modified Compliance Pattern."
+
+#string STR_LNK_HW_AUTO_WIDTH_PROMPT            #language en-US "Hardware Autonomous Width" 
+#string STR_LNK_HW_AUTO_WIDTH_HELP              #language en-US "If supported by hardware and set to 'Disabled', this will disable the hardware's ability to change link width except width size reduction for the purpose of correcting unstable link operation." 
+
+#string STR_LNK_HW_AUTO_SPEED_PROMPT            #language en-US "Hardware Autonomous Speed" 
+#string STR_LNK_HW_AUTO_SPEED_HELP              #language en-US "If supported by hardware and set to 'Disabled', this will disable the hardware's ability to change link speed except speed rate reduction for the purpose of correcting unstable link operation." \
+#string STR_2_5G                                #language en-US "Force to 2.5 GT/s" 
+#string STR_5_0G                                #language en-US "Force to 5.0 GT/s" 
+#string STR_8_0G                                #language en-US "Force to 8.0 GT/s"
+#string STR_16_0G                               #language en-US "Force to 16.0 GT/s"
+
+#string STR_LNK_CLOCK_PM_PROMPT                 #language en-US "Clock Power Management" 
+#string STR_LNK_CLOCK_PM_HELP                   #language en-US "If supported by hardware and set to 'Enabled', the device is permitted to use CLKREQ# signal for power management of Link clock in accordance to protocol defined in appropriate form factor specification."
+#string STR_SHORT                               #language en-US "Shorter" 
+#string STR_LONG                                #language en-US "Longer"
+
+#string STR_LNK_UNPOPULATED_PROMPT              #language en-US "Disable Empty Links" 
+#string STR_LNK_UNPOPULATED_HELP                #language en-US "In order to save power, software will disable unpopulated PCI Express links, if this option set to 'Disable Link'." 
+
+#string STR_USE_BRG_HP_CONFIG1                  #language en-US "Setup Option for the PCI Bridge\nProducing this Slot is Available.\nUse Slot's Parent Bridge Setup Screen\nto Configure Hot-Plug Resource Padding."
+//#string STR_USE_BRG_HP_CONFIG2                  #language en-US "Use Slot's Parent Bridge Setup\nScreen to Configure Resource Padding." 
+
+#string STR_PCI_HOTPLUG_WARNING                 #language en-US "WARNING:\nDue to the Bridge Architecture Specification\nSoftware can not apply selected padding for\n64 and 32 bit PFMMIO window at the same time.\nUser must pick which PFMMIO he wants to padd\nby setting another resource to Disable state.\nIf both PFMMIO set, 32 bit resource will be used." 
+
+#string STR_PCIE_INTEGR_EP_WARN                 #language en-US "This PCIe Device is Root Complex Integrated End Point\nor Event Collector type Device. It don't\nimplement Link Registers Block." 
+
+//#string STR_1G                                  #language en-US "1 G" 
+//#string STR_1G                                  #language en-US "1 G" 
+//#string STR_1G                                  #language en-US "1 G" 
+
+
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

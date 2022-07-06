@@ -1,0 +1,60 @@
+## @file
+#  PlatformEarlyInit PEIM
+#
+#  Copyright (c) 2009 - 2010, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UncoreInitPeim
+  FILE_GUID                      = D71C8BA4-4AF2-4d0d-B1BA-F2409F0C20D3
+  MODULE_TYPE                    = PEIM
+  ENTRY_POINT                    = UncoreInit
+
+[Sources]
+  UncoreInit.c
+  
+[Packages]
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  MdePkg/MdePkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  
+[LibraryClasses]
+  PeimEntryPoint
+  MemoryQpiInitLib
+  
+[Pcd]
+
+[Guids]
+  gEfiPlatformInfoGuid
+  
+[Ppis]
+  gEfiPeiCpuIoPpiInstalledGuid
+  gEfiPciCfg2PpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gPeiBaseMemoryTestPpiGuid
+  gPeiPlatformMemorySizePpiGuid
+  
+  
+[Depex]
+  gEfiPeiCpuIoPpiInstalledGuid AND
+  gEfiPciCfg2PpiGuid AND
+  gEfiPeiReadOnlyVariable2PpiGuid AND
+  gPeiBaseMemoryTestPpiGuid AND
+  gPeiPlatformMemorySizePpiGuid AND
+  gEfiPlatformInfoGuid
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS     = /Od /W4 /Gs999999 /GF /GL- /wd4214 /wd4334 /wd4142 /wd4819 /DBUILDING_FOR_IA32  /DIA32 $(DSC_GLOBAL_BUILD_OPTIONS)
+  
+

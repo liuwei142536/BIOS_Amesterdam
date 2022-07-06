@@ -1,0 +1,14 @@
+<component>
+    name = "FatBinPkg"
+    category = eModule
+    LocalRoot = "FatBinPkg\"
+    RefName = "FatBinPkg"
+[INF]
+"EnhancedFatDxe\Fat.inf"
+[files]
+"FatBinPkg.sdl"	
+"FatBinPkg.dec"	
+"License.txt"	
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;5.004_MdePkg_04"
+<endComponent>

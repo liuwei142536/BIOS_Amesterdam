@@ -1,0 +1,8 @@
+<component>
+	name = "Common"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Library\PchPlatformPolicyInitLib\Common\"
+	RefName = "GrantleyPkg.PchPlatformPolicyInitLib.Common"
+[files]
+"PchPlatformPolicyInitCommon.c"	
+<endComponent>

@@ -1,0 +1,16 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Include\Library\"
+	RefName = "GrantleySocketPkg.Include.Library"
+[files]
+"MemoryQpiInitLib.h"	
+"OemIioInit.h"	
+"OemMemoryQpiInit.h"	
+"SmmScriptLib.h"
+"CpuPpmLib.h"	
+"IioPlatformData.h"
+"IioEarlyInitializeLib.h"
+"IioLateInitializeLib.h"
+"OemCpuInit.h"
+<endComponent>

@@ -1,0 +1,8 @@
+<component>
+	name = "PlatformRuntime"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\RuntimeDxe\"
+	RefName = "GrantleyPkg.RuntimeDxe"
+[parts]
+"GrantleyPkg.PlatformReset"
+<endComponent>

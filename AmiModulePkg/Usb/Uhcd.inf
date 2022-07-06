@@ -1,0 +1,206 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   This is AMI Uhcd driver
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Uhcd
+  FILE_GUID                      = 580DD900-385D-11d7-883A-00500473D4EB
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmiUsbDriverEntryPoint
+
+[Sources]
+  Uhcd.c
+  AmiUsbHc.c
+  UsbBus.c
+  EfiUsbKb.c
+  Tree.c
+  EfiUsbKb.h
+  UsbBus.h
+  Tree.h
+  EfiUsbMass.c
+  EfiUsbMs.c
+  EfiUsbCcid.c
+  EfiUsbPoint.c
+  EfiUsbHid.c
+  ComponentName.c
+  UsbMisc.c
+  ComponentName.h
+  UsbMemMisc.c
+  $(USB_UHCD_SOURCES_LIST)
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  Build/AmiUsbPkg.dec
+  $(USB_UHCD_PACKAGES_LIST)
+
+[LibraryClasses]
+  BaseLib
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  UefiLib
+  DebugLib
+  BaseMemoryLib
+  TimerLib
+  ReportStatusCodeLib
+  PcdLib
+  AmiDxeUsbHcdLib
+  AmiDxeUsbBoardLib
+  IoLib
+  PrintLib
+  PerformanceLib
+  $(USB_UHCD_LIBRARYCLASSES_LIST)
+
+[Guids]
+  gEfiEndOfDxeEventGroupGuid
+  gEfiDiskInfoUsbInterfaceGuid
+  $(USB_UHCD_GUIDS_LIST)
+
+[Protocols]
+  gEfiSimpleTextInputExProtocolGuid
+  gEfiUsbHcProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gEfiUsbPolicyProtocolGuid
+  gEfiUsbProtocolGuid
+  gEfiUsb2HcProtocolGuid
+  gEfiPciIoProtocolGuid
+  gUsbTimingPolicyProtocolGuid
+  gEfiSmmControl2ProtocolGuid
+  gEfiComponentName2ProtocolGuid
+  gNonSmmEmul6064TrapProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiUsbIoProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiSimpleTextInProtocolGuid
+  gAmiEfiKeycodeProtocolGuid
+  gEfiSimplePointerProtocolGuid
+  gEfiSmmPeriodicTimerDispatch2ProtocolGuid
+  gAmiBlockIoWriteProtectionProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiLegacyBiosPlatformProtocolGuid
+  gEfiAbsolutePointerProtocolGuid
+  gAmiMultiLangSupportProtocolGuid
+  gAmiPciIrqProgramGuid
+  gEdkiiIoMmuProtocolGuid
+  gAmiUsbHidProtocolGuid
+  gAmiUsbIsrProtocolGuid
+  $(USB_UHCD_PROTOCOLS_LIST)
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  $(USB_UHCD_PCD_LIST)
+
+[PcdEx]
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUhciSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdOhciSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdEhciSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdXhciSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxSkipTableCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassNativeEmulation
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassSizeEmulation
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassEmulationForNoMedia
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassMediaCheck
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassSkipFddMediaCheck
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbEfiMsDirectAccess
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSkipCardReaderConnectBeep
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdXhciEventServiceMode
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdGpiDispatchByBitmap
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHotplugFddSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHotplugHddSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHotplugCdromSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdKeyRepeatDelay
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdKeyRepeatInitialDelay
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdKeyrepeatInterval
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdDifferentiateMassDeviceName
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMassStorageDeviceName
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdHideHispeedSetupQuestion
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbRuntimeDriverInSmm
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbInterruptPollingPeriod
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdExternalUsbControllerSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSpecificController
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdExtHwSmiPin
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSetupVariableRuntimeAccess
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdControllersInitialDelayList
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbRegisterPeriodicTimerInDxe
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdStorageDeviceRmbCheck
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbIrqSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbResetPortPolicy
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHostErrorsSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbBadDevices
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbKbdDevices
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMouseDevices
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHubDevices
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMassDevices
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbPointDevices
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMemPageCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbSendCommandToKbc
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbMouseUpdateEbdaData
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdEhci64bitDataStructure
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxHidDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxHubDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxMassDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxCcidDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdMaxUnsupportedDevCount
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbCcidDevice
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUseT0T1Protocol
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdCcidUseIntInsRemoval
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdStartUnitBeforeMsdEnumeration
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbSwSmi
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbBeepEnable
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSizeForFloppyEmulation
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdHighSpeedMaxBulkDataSize
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdFullSpeedMaxBulkDataSizePerFrame
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdExtraCheckDeviceReady
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdHidKeyRepeatUseSetIdle
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdBootProtocolSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdClearKbBufferAtReadyToBoot
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdSpecificEhciOwnershipChange
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdLegacyUsbDisableForUsbMass
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdXhciComplianceMoedWorkrouund
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdShowSkipPortInformation
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbHcInterruptOutSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbIadProtocolSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbIsoctransferSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbItdMemAllocForAllEhci
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbDcbaaMemAllocForAllXhci
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbDxeEdkiiIommuProtocolSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbGetBosDescSupport
+  gAmiUsbPkgTokenSpaceGuid.AmiPcdUsbDisconnectExitBootService
+  $(USB_UHCD_PCDEX_LIST)
+
+[Depex]
+  $(USB_RT_SMM_DEPEX_LIST)
+  gEfiVariableArchProtocolGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

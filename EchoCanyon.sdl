@@ -1,0 +1,809 @@
+TOKEN
+	Name  = EchoCanyon_SUPPORT
+	Value  = 0
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+	Help  = "Main switch to enable BeverlyCove support in Project"
+End
+
+
+######### BEVERLY COVE CRB SDL TOKENS #########
+
+TOKEN
+    Name  = "IPMI_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable IPMI support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AST2400_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable AST2300 support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "Grangeville_XML_config"
+    Value  = "LPTCB_NM_MONO_CRB.xml"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+
+
+PCIDEVICE
+    Title  = "Slot10 x1: (D1C:F0)PCIE Root Port #0"
+    Parent  = "PCIE Root Port #0"
+    Attribute  = "0x0"
+    Dev_type  = "PciDevice"
+    Dev  = 00h
+    Slot  = 0dh
+    SleepNum  = 00h
+    IntA =  LNKA; 16
+    IntB =  LNKB; 17
+    IntC =  LNKC; 18
+    IntD =  LNKD; 19
+    DeviceType = Slot
+    PCIBusSize = 32bit
+    ROMMain = No
+    PCIExpress = Yes
+End
+
+PCIDEVICE
+    Title  = "[LAN1]: Clarkville OnBoardLan x3" # Clarkville PHY I218-V (1GbE)
+    Parent  = "NB to PCI-E Root Port (D0, F0)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 019h
+    Fun  = 00h
+    SleepNum  = 01h
+    ROMFile  = "AmiCRBPkg\BA1561L2.LOM"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    OptionROM = Yes
+    ROMMain = No
+    PCIExpress = Yes
+    LegacyRom = Yes
+    FFSFileName  = "ROM Storage"
+    ROMSectionGuid  = "3C6AA19C-31B4-4d0b-9B2C-97D9160678B3"
+End
+
+PCIDEVICE
+    Title  = "[LAN1]: Clarkville OnBoardLanEfi x3" # Clarkville PHY I218-V (1GbE) 
+    Parent  = "NB to PCI-E Root Port (D0, F0)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 019h
+    Fun  = 00h
+    SleepNum  = 04h
+    ROMFile  = "AmiCRBPkg\E8710X3.EFI"   
+    DeviceID = 015A1h
+    VendorID = 08086h
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    OptionROM = Yes
+    ROMMain = No
+    #Virtual = Yes
+    UefiRom = Yes
+    LinkDevice = Yes
+    FFSFileName  = "ROM Storage"
+    ROMSectionGuid  = "5C001692-066D-45B0-BB85-9C8BDF6C0845"
+End
+
+PCIDEVICE
+    Title  = "[LAN1]: Cortina 10GbE OnBoardLanEfi x4" # Cortina PHY CS4227 (10GbE) SFP+
+    Parent  = "NB PCI-E Root Port #5"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    Fun  = 00h
+    SleepNum  = 01h
+    ROMFile  = "AmiCRBPkg\E7210X4.EFI"   
+    DeviceID = 015ACh
+    VendorID = 08086h
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    OptionROM = Yes
+    ROMMain = No
+    #Virtual = Yes
+    UefiRom = Yes
+    LinkDevice = Yes
+    FFSFileName  = "ROM Storage"
+    ROMSectionGuid  = "A1f436EA-A127-4EF8-957C-8048606FF670"
+End
+
+######### GPIO PROGRAMMING ############
+
+TOKEN
+    Name  = "GPIO0_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + $(GPIO_LVL) + 00"
+    Help  = "Native Signal is BMBUSY#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO1_CONFIG"
+    Value  = "$(GPI) + 01"
+    Help  = "Native Signal is TACH1.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO2_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 02"
+    Help  = "Native Signal config. for PIRQE#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO3_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 03"
+    Help  = "Native Signal config. for PIRQF#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO4_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + $(GPIO_LVL) + 04"
+    Help  = "Native Signal config. for PIRQG#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO5_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 05"
+    Help  = "Native Signal config. for PIRQH#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO6_CONFIG"
+    Value  = "$(GPO_LOW) + 06"
+    Help  = "Native Signal is TACH2.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO7_CONFIG"
+    Value  = "$(GPO_LOW) + 07"
+    Help  = "Native Signal is TACH3.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO8_CONFIG"
+    Value  = "$(GPO_LOW) + 08"
+    Help  = "Native Signal is GPIO8.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO9_CONFIG"
+    Value  = "$(GPO_LOW) + 09"
+    Help  = "Native Signal is USB_OC#5.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO10_CONFIG"
+    Value  = "$(GPO_LOW) + 10"
+    Help  = "Native Signal for USB_OC#6.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO11_CONFIG"
+    Value  = "$(GPIO_IO) + 11"
+    Help  = "Native Signal for SMBALERT#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO12_CONFIG"
+    Value  = "12"
+    Help  = "Native Signal is LANPHYPC.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO13_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 13"
+    Help  = "Native Signal is DOCK_AZ_RST#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO14_CONFIG"
+    Value  = "$(GPO_LOW) + $(GPIO_IO) + 14"
+    Help  = "Native Signal for TBT_hot_plug.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO15_CONFIG"
+    Value  = "$(GPO_LOW) + $(GPIO_IO) + 15"
+    Help  = "Native Signal is GPIO15.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO16_CONFIG"
+    Value  = "$(GPO_LOW) + 16"
+    Help  = "Native Signal is SATA4GP.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO17_CONFIG"
+    Value  = "$(GPO_LOW) + 17"
+    Help  = "Native Signal is TACH0.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO18_CONFIG"
+    Value  = "$(GPO_LOW) + 18"
+    Help  = "Native Signal is SRC1CLKRQ#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO19_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 19"
+    Help  = "Native Signal is SATA1GP.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO20_CONFIG"
+    Value  = "$(GPIO_LVL) + 20"
+    Help  = "Native Signal is SRC2CLKRQ#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config.."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO21_CONFIG"
+    Value  = "$(GPI) + 21"
+    Help  = "Native Signal is SATA0GP.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO22_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 22"
+    Help  = "Native Signal is SCLOCK.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO23_CONFIG"
+    Value  = "$(GPI) + 23"
+    Help  = "Native Signal is LDRQ1#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO24_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 24"
+    Help  = "Native Signal is GP24.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO25_CONFIG"
+    Value  = "$(GPO_LOW) + 25"
+    Help  = "Native Signal is SRC3CLKRQ#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO26_CONFIG"
+    Value  = "$(GPI) + 26"
+    Help  = "Native Signal is S4_STATE#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO27_CONFIG"
+    Value  = "$(GPO_LOW) + 27"
+    Help  = "Native Signal is GPIO27.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO28_CONFIG"
+    Value  = "$(GPO_HIGH) + 28"
+    Help  = "Native Signal is GPIO28.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO29_CONFIG"
+    Value  = "$(GPI) + 29"
+    Help  = "Native Signal is SLP_LAN#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO30_CONFIG"
+    Value  = "$(GPIO_IO) + 30"
+    Help  = "Native Signal is GPIO30#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO31_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 31"
+    Help  = "Native Signal is MGPIO2.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO32_CONFIG"
+    Value  = "$(GPO_LOW) + 32"
+    Help  = "Native Signal is CLKRUN#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO33_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + $(GPIO_LVL) + 33"
+    Help  = "Native Signal is CLKRUN#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO34_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 34"
+    Help  = "Native Signal is DOCKEN#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO35_CONFIG"
+    Value  = "35"
+    Help  = "Native Signal is NMI_N.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO36_CONFIG"
+    Value  = "$(GPO_HIGH) + $(GPIO_IO) + 36"
+    Help  = "Native Signal is SATA2GP.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO37_CONFIG"
+    Value  = "$(GPO_HIGH) + $(GPIO_IO) + 37"
+    Help  = "Native Signal is SATA3GP.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO38_CONFIG"
+    Value  = "$(GPO_LOW) + $(GPIO_IO) + 38"
+    Help  = "Native Signal is SLOAD.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO39_CONFIG"
+    Value  = "$(GPO_LOW) + $(GPIO_IO) + 39"
+    Help  = "Native Signal for SDATAOUT0.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO40_CONFIG"
+    Value  = "$(GPI) + 40"
+    Help  = "Native Signal is OC1#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO41_CONFIG"
+    Value  = "$(GPI) + 41"
+    Help  = "Native Signal is OC2#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO42_CONFIG"
+    Value  = "$(GPI) + 42"
+    Help  = "Native Signal is OC3#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO43_CONFIG"
+    Value  = "$(GPI) + 43"
+    Help  = "Native Signal is OC4#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO44_CONFIG"
+    Value  = "$(GPO_LOW) + 44"
+    Help  = "Native Signal is SRC5CLKRQ#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO45_CONFIG"
+    Value  = "$(GPO_LOW) + 45"
+    Help  = "Native Signal is SRC6CLKRQ#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO46_CONFIG"
+    Value  = "$(GPO_LOW) + 46"
+    Help  = "Native Signal is SRC7CLKRQ#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO47_CONFIG"
+    Value  = "$(GPIO_IO) + 47"
+    Help  = "Native Signal is PEGA_CLKRQ#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO48_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 48"
+    Help  = "Native Signal is SDATAOUT1.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO49_CONFIG"
+    Value  = "$(GPO_LOW) + 49"
+    Help  = "Native Signal is SATA5GP.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO50_CONFIG"
+    Value  = "$(GPI) + 50"
+    Help  = "Native Signal is REQ1#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO51_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 51"
+    Help  = "Native Signal is GNT1#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO52_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + $(GPIO_LVL) + 52"
+    Help  = "Native Signal is REQ2#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO53_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + $(GPIO_LVL) + 53"
+    Help  = "Native Signal is GNT2#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO54_CONFIG"
+    Value  = "$(GPO_LOW) + 54"
+    Help  = "Native Signal is REQ3#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO55_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + 55"
+    Help  = "Native Signal is GNT3#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO56_CONFIG"
+    Value  = "$(GPIO_IO) + 56"
+    Help  = "Native Signal is PEGB_CLKRQ#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO57_CONFIG"
+    Value  = "$(GPI) + $(GPIO_IO) + $(GPIO_LVL) + 57"
+    Help  = "Native Signal is MGPIO5.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO58_CONFIG"
+    Value  = "58"
+    Help  = "Native Signal is ML1CLK.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO59_CONFIG"
+    Value  = "$(GPO_LOW) + 59"
+    Help  = "Native Signal is OC0#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO60_CONFIG"
+    Value  = "$(GPIO_IO) + 60"
+    Help  = "Native Signal is SML0ALERT#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO61_CONFIG"
+    Value  = "61"
+    Help  = "Native Signal is SUS_STAT#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO62_CONFIG"
+    Value  = "62"
+    Help  = "Native Signal is SUSCLK.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO63_CONFIG"
+    Value  = "63"
+    Help  = "Native Signal is SLP_S5#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO64_CONFIG"
+    Value  = "64"
+    Help  = "Native Signal is CLKOUTFLEX0.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO65_CONFIG"
+    Value  = "$(GPO_LOW) + 65"
+    Help  = "Native Signal is CLKOUTFLEX1.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO66_CONFIG"
+    Value  = "66"
+    Help  = "Native Signal is CLKOUTFLEX2.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO67_CONFIG"
+    Value  = "$(GPO_LOW) + 67"
+    Help  = "Native Signal is CLKOUTFLEX3.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO68_CONFIG"
+    Value  = "$(GPI) + 68"
+    Help  = "Native Signal is TACH4.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO69_CONFIG"
+    Value  = "$(GPI) + 69"
+    Help  = "Native Signal is TACH5.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO70_CONFIG"
+    Value  = "$(GPI) + 70"
+    Help  = "Native Signal is TACH6.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO71_CONFIG"
+    Value  = "$(GPI) + 71"
+    Help  = "Native Signal is TACH7.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO72_CONFIG"
+    Value  = "$(GPIO_IO) + 72"
+    Help  = "Native Signal is BATLOW#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO73_CONFIG"
+    Value  = "$(GPIO_IO) + 73"
+    Help  = "Native Signal is SRC0CLKRQ#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO74_CONFIG"
+    Value  = "$(GPIO_LVL) + 74"
+    Help  = "Native Signal is PCHHOT/SML1ALERT#.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "GPIO75_CONFIG"
+    Value  = "75"
+    Help  = "Native Signal is SML1DATA.\Low byte = GPIO Number.\BIT8 = Use Config.\BIT9 = Input or Output Config.\BIT10 = GPO level Config.\BIT11 = GPI invert Config."
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+

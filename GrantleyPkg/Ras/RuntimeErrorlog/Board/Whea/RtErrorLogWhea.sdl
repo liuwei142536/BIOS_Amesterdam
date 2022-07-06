@@ -1,0 +1,52 @@
+TOKEN
+	Name  = "RtErrorLogWhea_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable RtErrorLogWhea support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+	Token = "WHEA_SUPPORT" "=" "1"
+End
+
+ELINK
+	Name  = "LogMemErrorToWhea,"
+	Parent  = "MemErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogPciErrorToWhea,"
+	Parent  = "PciErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name  = "RTERRORLOGWHEALIB"
+	Value  = "$(BUILD_DIR)\RtErrorLogWhea.lib"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+ELINK
+	Name  = "$(RTERRORLOGWHEALIB)"
+	Parent  = "RT_ERROR_LOG_ELINK_LIBS"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "RtErrorLogWheaLib"
+	File  = "RtErrorLogWhea.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "RtErrorLogWhea_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "RtErrorLogWheaLib"
+	Instance  = "GrantleyPkg.RtErrorLogWheaLib"
+	Arch  = "common"
+	ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+	Token = "RtErrorLogWhea_SUPPORT" "=" "1"
+End
+

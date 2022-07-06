@@ -1,0 +1,9 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Library\"
+	RefName = "GrantleyPkg.Me.AMT.Library.Library"
+[parts]
+"GrantleyPkg.AmtLibrary"
+"GrantleyPkg.AtLibrary"
+<endComponent>

@@ -1,0 +1,217 @@
+TOKEN
+    Name  = "IdeBusSrc_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable IdeBusSrc support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "MASTER_SLAVE_ENUMERATION"
+    Value  = "1"
+    Help  = "When off, Slave device is detected first and \then Master is detected."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IDEBUSMASTER_SUPPORT"
+    Value  = "1"
+    Help  = "Master Switch to enable ATA and ATAPI \BusMaster support.\For ATAPI devices, ATAPI_BUSMASTER_SUPPORT \also needs to be enabled.\MWDMA and UDMA programming in devices \and the controller will be done irrespective of \this switch."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ATAPI_BUSMASTER_SUPPORT"
+    Value  = "1"
+    Help  = "Enable/Disable ATAPI BusMaster Support.\If Enabled, BusMastering will be used for ATAPI \devices else PIO transfer. "
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "IDEBUSMASTER_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "ACOUSTIC_MANAGEMENT_SUPPORT"
+    Value  = "0"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IDE_POWER_MANAGEMENT_SUPPORT"
+    Value  = "0"
+    Help  = "Enables IDE Power Management support."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "STANDBY_TIMEOUT"
+    Value  = "5"
+    Help  = "Standby Timeout value in MINUTES.\A value of ZERO, disables Standby Timer"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0 - 480"
+    Token = "IDE_POWER_MANAGEMENT_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "ADVANCED_POWER_MANAGEMENT_SUPPORT"
+    Value  = "0"
+    Help  = "Enables Advanced Power Management Support."
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "IDE_POWER_MANAGEMENT_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "ADVANCED_POWER_MANAGEMENT_LEVEL"
+    Value  = "1"
+    Help  = "Disable : 0\Minimum Power Consumption : 1\Intermediate level with Standby : 2 - 7Fh\Minimum Power Consumption  with out Standby : 80h\Intermediate level without Standby : 81 - FDh\Maximum Performance : 0FEh"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0 - 0FEh"
+End
+
+TOKEN
+    Name  = "POWERUP_IN_STANDBY_SUPPORT"
+    Value  = "0"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "IDE_POWER_MANAGEMENT_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "POWERUP_IN_STANDBY_MODE"
+    Value  = "0"
+    Help  = "ON : Device Spins up when powered on.\0FF: Device will not spin-up when powered on"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IDE_POWER_MANAGEMENT_INTERFACE_SUPPORT"
+    Value  = "0"
+    Help  = "Installs IDE power Management Interface"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "IDE_POWER_MANAGEMENT_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "HOST_PROTECTED_AREA_SUPPORT"
+    Value  = "0"
+    Help  = "Enables HOST Protected Area Interface."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IDE_HP_SUPPORT"
+    Value  = "0"
+    Help  = "Enables IDE Hot Plug Support."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "EFI_IDE_PROTOCOL"
+    Value  = "1"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "INTEL_IDE_PROTOCOL"
+    Value  = "$(EFI_IDE_PROTOCOL)"
+    Help  = "For backward compatibility, will keep this token value same as EFI_IDE_PROTOCOL."
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "AHCI_COMPATIBLE_MODE"
+    Value  = "0"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ATAPI_BUSY_CLEAR_TIMEOUT"
+    Value  = "16000"
+    Help  = "Timeout value for ATAPI busy clear. Set to 16 second."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "S3_BUSY_CLEAR_TIMEOUT"
+    Value  = "30000"
+    Help  = "Timeout value for S3 busy clear. Set to 30 second."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DMA_ATA_COMMAND_COMPLETE_TIMEOUT"
+    Value  = "5000"
+    Help  = "Timeout value for completion of DMA ATA command. Set to 5 second."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DMA_ATAPI_COMMAND_COMPLETE_TIMEOUT"
+    Value  = "16000"
+    Help  = "Timeout value for completion of DMA ATAPI command. Set to 16 second."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ATAPI_RESET_COMMAND_TIMEOUT"
+    Value  = "5000"
+    Help  = "Timeout Value for ATAPI reset command. Set to 5 second."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "POWERON_BUSY_CLEAR_TIMEOUT"
+    Value  = "30000"
+    Help  = "The PowerOn busy clear timeout value. Set to 30 second."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IDEBUS_DEBUG_PRINT"
+    Value  = "0"
+    Help  = "The Debug Print Token used to print trace messages in IDEBUS"
+    TokenType = Boolean
+    TargetH = Yes
+    TargetMAK = Yes
+End
+
+INFComponent
+    Name  = "IdeBusSrc"
+    File  = "IdeBusSrc.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "UEFI_DRIVER"
+End
+
+INFComponent
+    Name  = "IdeBusBoard"
+    File  = "IdeBusBoard\IdeBusBoard.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Path  = "IdeBusBoard_DIR"
+End

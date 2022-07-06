@@ -1,0 +1,59 @@
+ ## @file
+ #**********************************************************************
+ #**********************************************************************
+ #**                                                                  **
+ #**        (C)Copyright 1985-2012, American Megatrends, Inc.         **
+ #**                                                                  **
+ #**                       All Rights Reserved.                       **
+ #**                                                                  **
+ #**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+ #**                                                                  **
+ #**                       Phone: (770)-246-8600                      **
+ #**                                                                  **
+ #**********************************************************************
+ #**********************************************************************
+ ##
+ 
+ [Defines]
+ DEC_SPECIFICATION              = 0x00010005
+ PACKAGE_NAME                   = AmiChipsetModulePkg
+ PACKAGE_GUID                   = D528069B-F350-469a-8EE7-1DB000FA8DE3
+ PACKAGE_VERSION                = 0.1
+ 
+ #
+ # The following information is for reference only and not required by the build tools.
+ #
+ #  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+ #
+ 
+[Includes]
+  Include
+  #Include/Protocol
+  #Include/Library
+  #Include/Guid
+  ../AmiCRBPkg/Board/SB
+  ../AmiCRBPkg/Chipset/SB
+  ../AmiCRBPkg/Board/NB
+  ../AmiCRBPkg/Chipset/NB
+  ../WellsburgPkg  
+  ../WellsburgPkg/Include
+  ../GrantleySocketPkg
+  ../GrantleySocketPkg/Include
+ 
+[LibraryClasses]
+ 
+ 
+[Guids]
+  ## Include/Guid/AmiTbtHrStatus.h
+  gAmiTbtHrStatusGuid = {0xba1d893b, 0x803e, 0x4b26, {0xa3, 0xde, 0x58, 0x57, 0x3, 0xff, 0x7b, 0xd6}}
+
+  ## Include/Guid/AmiTbtHob.h
+  gAmiTbtHobGuid = {0xf85db11d, 0x69bd, 0x4019, {0x9d, 0x57, 0x72, 0x1c, 0x9f, 0x43, 0xb2, 0xc8}}
+  
+[Protocols]
+  ## Include/Protocol/AmiTbtPlatformPolicy.h
+  gAmiTbtPlatformPolicyProtocolGuid = {0x380D7A5E, 0x1BCA, 0x11E1, 0xA1, 0x10, 0xE8, 0xEB, 0x47, 0x24, 0x01, 0x9B}
+  
+[Ppis]  
+  
+[PcdsDynamic]

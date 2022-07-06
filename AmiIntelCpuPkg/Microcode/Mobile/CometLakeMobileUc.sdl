@@ -1,0 +1,87 @@
+TOKEN
+	Name  = "MOBILE_806EX_COMETLAKE"
+	Value  = "0"
+    Help = "Intel(R) CometLake"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "MOBILE_M94806EC_COMETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) CometLake U42 V-0 Stepping(806EC)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_M22906ED_COMETLAKE_H"
+    Value  = "1"
+    Help  = "Intel(R) Comet Lake-H82 ES R-0 Stepping(906ED)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_M80A0660_COMETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) CometLake U62 v1 A-0 Stepping(A0660)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_M20A0652_COMETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) CometLake R-1 Stepping(A0652)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_M80A0661_COMETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) CometLake U62 v2 K-0 Stepping(A0661)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M94806EC_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) CometLake U42 V-0 Stepping(806EC)"
+    Token = "MOBILE_M94806EC_COMETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M22906ED_000000CC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Comet Lake-H82 ES R-0 Stepping(906ED)"
+    Token = "MOBILE_M22906ED_COMETLAKE_H" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M80A0660_000000EA.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) CometLake U62 v1 A-0 Stepping(A0660)"
+    Token = "MOBILE_M80A0660_COMETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M80A0661_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) CometLake U62 v2 K-0 Stepping(A0661)"
+    Token = "MOBILE_M80A0661_COMETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M20A0652_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) CometLake R-1 Stepping(A0652)"
+    Token = "MOBILE_M20A0652_COMETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End

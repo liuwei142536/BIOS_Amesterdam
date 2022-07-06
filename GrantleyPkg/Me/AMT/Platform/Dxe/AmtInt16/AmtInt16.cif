@@ -1,0 +1,11 @@
+<component>
+	name = "AmtInt16"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Platform\Dxe\AmtInt16\"
+	RefName = "GrantleyPkg.AmtInt16"
+[INF]
+"AmtInt16.inf"
+"AmtInt16_csm.inf"
+[files]
+"AmtInt16.sdl"	
+<endComponent>

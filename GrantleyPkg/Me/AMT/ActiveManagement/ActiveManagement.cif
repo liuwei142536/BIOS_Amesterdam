@@ -1,0 +1,12 @@
+<component>
+	name = "ActiveManagement"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\ActiveManagement\"
+	RefName = "GrantleyPkg.ActiveManagement"
+[parts]
+"GrantleyPkg.AlertStandardFormat"
+"GrantleyPkg.AmtBootOptions"
+"GrantleyPkg.IdeR"
+"GrantleyPkg.Sol"
+"GrantleyPkg.StartWatchDog"
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "PlatformReset"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\RuntimeDxe\PlatformReset\"
+	RefName = "GrantleyPkg.PlatformReset"
+[INF]
+"PlatformReset.inf"
+[files]
+"PlatformReset.h"	
+"PlatformReset.sdl"	
+<endComponent>

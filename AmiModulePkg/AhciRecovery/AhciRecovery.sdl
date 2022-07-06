@@ -1,0 +1,170 @@
+TOKEN
+    Name  = "AhciRecovery_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Ahci Recovery support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "AHCIREC_DRIVER_VERSION"
+    Value  = "10"
+    Help  = "Ahci Recovery Driver version"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "AHCI_BASE_ADDRESSES"
+    Value  = "0xF0F0F000"
+    Help  = "Base addresses to be Programmed in ABAR Register"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "AhciRecovery_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "ABAR_MEMORY_SIZE"
+    Value  = "0x10000"
+    Help  = "ABAR Memory Size considering 64KB length"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "RECOVERY_DATA_PORT_ACCESS"
+    Value  = "0"
+    Help  = "0-MMIO Access , 1- Index/Port access"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "IO_PORT_ADDRESS"
+    Value  = "0xFE00"
+    Help  = "Port addresses to be Programmed in LBAR Register"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ENABLE_AHCI_RECOVERY_TRACES"
+    Value  = "0"
+    Help  = "Main token to enable AHCI Recovery driver Trace support. Make sure PcdDebugPrintErrorLevel is set to 0x80001044 in project PCD override, to print all debug messages."
+    TokenType = Integer
+    TargetH = Yes
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MAX_AHCI_CONTROLLER_DEVICE"
+    Value  = "6"
+    Help  = "Maximum AHCI Controller's to be supported for recovery."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "OFFBOARD_AHCI_RECOVERY_SUPPORT"
+    Value  = "1"
+    Help  = "1-Enable or 0-Disable the Recovery support from OffBoard Controller"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MAX_AHCI_RECOVERY_DEVICE_SUPPORTED"
+    Value  = "12"
+    Help  = "Maximum AHCI Ata/Atapi devices to be supported for recovery."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "AHCI_ROOT_BRIDGE_LIST"
+    InvokeOrder = ReplaceParent
+    Help  = "List of Root Bridge's under which AHCI Device has to be searched \Format - {Bus, Dev, Func}"
+End
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000044"
+    Override  = "AmiModulePkg.AhciRecovery"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Display minimal debug messages when ENABLE_AHCI_RECOVERY_TRACES token value is disable"
+    TargetDSC = Yes
+    Token = "ENABLE_AHCI_RECOVERY_TRACES" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdFixedDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80001044"
+    Override  = "AmiModulePkg.AhciRecovery"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Display all debug messages when ENABLE_AHCI_RECOVERY_TRACES token value is enable"
+    TargetDSC = Yes
+    Token = "ENABLE_AHCI_RECOVERY_TRACES" "=" "1"
+End
+
+OUTPUTREGISTER
+    Name = "AhciRootBridgeList"
+    Path = "Build"
+    File = "AhciRecoveryElink.h"
+    Template = "AhciRecoveryElink.txt"
+End
+
+TOKEN
+    Name  = "AHCI_MAXIMUM_PCI_ROOT_BRIDGE"
+    Value  = "12"
+    Help  = "Port this - Maximum Bridge's in the Platform including number of root/root port Bridge's."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+FFS_FILE
+    Name = "AhciRecovery"
+    FD_AREA = "FV_BB"
+    INFComponent = "AmiModulePkg.AhciRecovery"
+    Rule_Override = "Compressed"
+End
+
+ELINK
+    Name = "PcieSataControllerInitFuncList"
+    InvokeOrder = ReplaceParent
+    Help =  "This ELink can be ported for PCIE SATA Controller Specific Initialization, Input should be in the Format Link(PciConfigAddress, VendorId),"
+End
+
+PATH
+    Name  = "AHCI_RECOVERY_DIR"
+End
+
+INFComponent
+    Name  = "AhciRecovery"
+    File  = "AhciRecovery.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+End
+
+# Platform specific porting.
+# This Pcd is cloned to support Intel VT-d feature.
+# Port this Pcd with sufficient DMA Buffer size required to support
+# IoMmu feature added in AHCIRecovery. 
+PcdMapping
+    Name  = "PcdVTdPeiDmaBufferSize"
+    GuidSpace  = "gIntelSiliconPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x02100000"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Declares VTd PEI DMA buffer size"
+    TargetDSC = Yes
+    TOKEN = "IntelSiliconPkg_VTd_SUPPORT" "=" "1" 
+End

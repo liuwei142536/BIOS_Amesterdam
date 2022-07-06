@@ -1,0 +1,73 @@
+#****************************************************************************
+#****************************************************************************
+#**                                                                        **
+#**           (C)Copyright 1985-2010, American Megatrends, Inc.            **
+#**                                                                        **
+#**                          All Rights Reserved.                          **
+#**                                                                        **
+#**           5555 Oakbrook Parkway, Suite 200, Norcross, GA 30071         **
+#**                                                                        **
+#**                          Phone (770)-246-8600                          **
+#**                                                                        **
+#****************************************************************************
+#****************************************************************************
+
+#****************************************************************************
+# $Header: $
+#
+# $Revision: $
+#
+# $Date: $
+#
+#****************************************************************************
+# Revision History
+# ----------------
+# $Log: $
+# 
+#
+#****************************************************************************
+TOKEN
+	Name  = "AmtBdsLib"
+	Value  = "1"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+	Help  = "Main switch to enable AmtStatusCode support in Project"
+End
+
+PATH
+	Name  = "AmtBdsLib_DIR"
+End
+
+ELINK
+	Name  = "AmtSolBeforeConInProtocolHook,"
+	Parent  = "InstallConInStartedProtocol,"
+	InvokeOrder = BeforeParent
+End
+
+ELINK
+	Name  = "AmtSolAfterDriverConnectedHook,"
+	Parent  = "ConnectEverything,"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "AmtBdsLib"
+    File  = "AmtBdsLib.inf"
+    Package  = "GrantleyPkg"
+End
+
+LibraryMapping
+	Class  = "AmtBdsLib"
+	Instance  = "GrantleyPkg.AmtBdsLib"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "GrantleyPkg.AmtBdsLib"
+	Override  = "AmiModulePkg.Bds"
+End
+
+
+

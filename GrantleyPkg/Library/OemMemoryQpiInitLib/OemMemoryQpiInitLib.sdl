@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "OemMemoryQpiInitLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling OemMemoryQpiInitLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "OemMemoryQpiInitLib"
+	File  = "OemMemoryQpiInitLib.inf"
+	Package  = "GrantleyPkg"
+	Arch  = "IA32"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "OemMemoryQpiInitLib"
+	Instance  = "GrantleyPkg.OemMemoryQpiInitLib"
+	Arch  = "IA32"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_SMM_DRIVER"
+End
+

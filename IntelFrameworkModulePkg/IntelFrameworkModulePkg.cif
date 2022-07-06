@@ -1,0 +1,19 @@
+<component>
+    name = "IntelFrameworkModulePkg"
+    category = eCore
+    LocalRoot = "IntelFrameworkModulePkg\"
+    RefName = "IntelFrameworkModulePkg"
+[files]
+"IntelFrameworkModulePkg.dec"	
+"IntelFrameworkModulePkg.sdl"	
+"IntelFrameworkModulePkg.uni"	
+"IntelFrameworkModulePkgExtra.uni"	
+"License.txt"	
+"IntelFrameworkModulePkg.chm"	
+[parts]
+"IntelFrameworkModulePkg.Include"
+"IntelFrameworkModulePkg.LibraryInstances"
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;5.004_MdePkg_04"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_14"
+<endComponent>

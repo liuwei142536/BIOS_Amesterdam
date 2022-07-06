@@ -1,0 +1,386 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2009, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+#*************************************************************************
+# $Header: /Alaska/Projects/Intel/Piketon/Havendale&Lynnfield_IbexPeak_1AEIQ/CRB/CSP.sdl 7     7/31/09 1:24a Tonywu $
+#
+# $Revision: 7 $
+#
+# $Date: 7/31/09 1:24a $
+#*************************************************************************
+
+#TOKEN
+#	Name  = "PI_SPECIFICATION_VERSION"
+#	Value  = "0x10014"
+#	Help  = "version of the PI specification supported:\0x5B - PI 0.91\0x10000 - PI 1.0\0x1000A - PI 1.1\0x00010014 - PI 1.2"
+#	TokenType = Integer
+#	TargetEQU = Yes
+#	TargetMAK = Yes
+#	TargetH = Yes
+#	Range  = "0x5B, 0x10000, 0x1000A, 0x10014"
+#End
+
+TOKEN
+	Name  = "NCPU"
+	Value  = "16"
+	Help  = "Maximum number of processor threads in the system."
+	TokenType = Integer
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "USB_XHCI"
+    Value  = "1"
+    Help  = "Maximum number of supported XHCI controllers."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "XHCI_PCI_DEVICES"
+    Value  = "{0xA0, 0x30}"
+    Help  = "List of supported onchip XHCI controllers in the following format: {dev1, 0}, {dev2, 0},...,{devN, 0}\dev represents the location of XHCI controller on PCI bus: dev = Bus << 8 + Dev << 3 + Func. Value followed by dev is the PCI device interface, for XHCI it must be 0x30.\Note: number of pairs {dev, 0} must not be less than a number of supported EHCI controllers specified in USB_XHCI token."
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "USB_UHCI"
+    Value = "0"
+    Help = "Maximum number of UHCI controllers present in the system"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-6"
+End
+
+TOKEN
+    Name = "USB_EHCI"
+    Value = "2"
+    Help = "Maximum number of EHCI controllers present in the system"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "USB_OHCI"
+    Value = "0"
+    Help = "Maximum number of OHCI controllers present in the system"
+    TokenType = Integer
+    TargetH = Yes     
+End
+
+TOKEN
+    Name = "UHCI_PCI_DEVICES"
+    Value = "{0xD0, 0}, {0xD1, 0}, {0xD2, 0}, {0xD3, 0}, {0xE8, 0}, {0xE9, 0}, {0xEA, 0}, {0xEB, 0}, {0xEC, 0}"
+    Help = "List of supported UHCI controllers in the following format: {dev1, 0}, {dev2, 0},...,{devN, 0}\dev represents the location of UHCI controller on PCI bus: dev = Bus << 8 + Dev << 3 + Func. Value followed by dev is the PCI device interface, for UHCI it must be 0.\Note: number of pairs {dev, 0} must not be less than a number of supported UHCI controllers specified in USB_UHCI token."
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "EHCI_PCI_DEVICES"
+    Value = "{0xD0, 0x20}, {0xE8, 0x20}"
+    Help = "List of supported EHCI controllers in the following format: {dev1, 0}, {dev2, 0},...,{devN, 0}\dev represents the location of EHCI controller on PCI bus: dev = Bus << 8 + Dev << 3 + Func. Value followed by dev is the PCI device interface, for EHCI it must be 0x20.\Note: number of pairs {dev, 0} must not be less than a number of supported UHCI controllers specified in USB_UHCI token."
+    TokenType = Expression
+    TargetH = Yes
+End
+ 
+TOKEN
+    Name = "EHCI_MEMORY_BASE_ADDRESS"
+    Value = "$(SB_TEMP_MMIO_BASE)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "USB_DEBUG_TRANSPORT" "=" "1"
+End
+
+TOKEN
+    Name = "PEI_UHCI_PCI_DEVICES"
+    Value = "{0x1A0000, 0x1A0100, 0x1A0200, 0x1D0000, 0x1D0100, 0x1D0200, 0x1D0300}"
+    Help = "List of supported UHCI controllers in the following format: {devfunc1, devfunc2,...,devfuncN}\devfunc represents the location of UHCI controller on PCI bus: dev = Bus << 24 + Dev << 16 + Func << 8. Value followed by dev is the PCI device interface, for UHCI it must be 0.\Note: number of entries {devfunc} must not be less than a number of supported UHCI controllers specified in PEI_NUM_UHCI token."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "UHCI_PEI_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "PEI_EHCI_PCI_BDFS"
+#KGB 5.0 Change    Value = "{0x02, 0x00, 0x1A, 0x00,  0x00, 0x1D, 0x00}"
+    Value = "{0x02, 0x00, 0x1A, 0x00,  0x00, 0x1D, 0x00}"
+    Help = "List of supported EHCI controllers in the following format: {devfunc1, devfunc2,...,devfuncN}\devfunc represents the location of EHCI controller on PCI bus: dev = Bus << 24 + Dev << 16 + Func << 8. Value followed by dev is the PCI device interface, for EHCI it must be 0.\Note: number of entries {devfunc} must not be less than a number of supported EHCI controllers specified in PEI_NUM_EHCI token."
+    TokenType = Expression
+    TargetH = Yes
+    Token = "EHCI_PEI_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PEI_EHCI_MEM_BASE_ADDRESSES"
+#KGB 5.0 Change        Value  = "{0x80000000+0x10000000, 0x80000000+0x10001000}"  
+    Value  = "{0x02, 0x00, 0x00, 0x00, 0x90,  0x00, 0x10, 0x00, 0x90}"
+	Help  = "List of base addresses for the respective EHCI controllers specified by PEI_EHCI_PCI_BDFS"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "DYNAMIC_MMCFG_BASE_SUPPORT" "=" "1" #//AptioV server overrride: Dynamic mmcfg base address change
+End
+
+TOKEN
+	Name  = "PEI_EHCI_MEM_BASE_ADDRESSES"
+	Value  = "{$(PCIEX_BASE_ADDRESS)+0x10000000, $(PCIEX_BASE_ADDRESS)+0x10001000}"
+	Help  = "List of base addresses for the respective EHCI controllers specified by PEI_EHCI_PCI_BDFS"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "DYNAMIC_MMCFG_BASE_SUPPORT" "=" "0" #//AptioV server overrride: Dynamic mmcfg base address change
+End
+
+TOKEN
+    Name = " "
+    TokenType = Integer
+End
+
+#TOKEN
+#    Name = "PCIE_BASE_ADDRESS"
+#    Value = "$(PCIEX_BASE_ADDRESS)"
+#    Help = "Specify the Base address where PCI Config space is mapped.\ Set to 0 if PCI Express access functions are not supported."
+#    TokenType = Integer
+#    TargetH = Yes
+#End
+
+TOKEN
+    Name = "CSM_OEM_SUPPORT"
+    Value = "1"
+    Help = "Enable/disable CSM OEM support."
+    TokenType = Boolean
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name = "SMM_CACHE_SUPPORT"
+    Value = "1"
+    Help = "Enable/disable SMM Cache Support"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name = " "
+    TokenType = Integer
+End
+
+
+TOKEN
+    Name  = "ACPI_PM_PROFILE"
+    Value  = "4"
+    Help  = "Power Management Profile ACPI 2.0\See acpi20.h"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-8 0 = Unspecified; 1 = Desktop; 2 = Modile; 3 = Workstation; 4 = Enterprise Server; 5 = SOHO Server; 6 = Application PC; 7 = Performance Server; 8 = Tablet"
+    Token = "ACPI_BUILD_TABLES_2_0" "=" "1"
+End
+
+TOKEN
+	Name  = "FACP_FLAG_USE_PLATFORM_CLOCK"
+	Value  = "1"
+	Help  = "Currently HPET is not disabled on the CRB. If the HPET is exposed to OSPM, OSPM should use the HPET. Otherwise, OSPM will use the ACPI power management timer. A value of one indicates that the platform is known to have a correctly implemented ACPI power management timer."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name = "MPS_TABLE_SUPPORT"
+    Value = "1"
+    Help = "Main switch to enable MPS V 1.4 Table support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name = " "
+    TokenType = Integer
+End
+
+TOKEN
+    Name  = "FWHFlash_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable FWH Flash support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+End
+
+TOKEN
+	Name = "LPCFlash_SUPPORT"
+	Value = "0"
+	Help = "Main switch to enable LPC Flash support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name = "STDFlash_SUPPORT"
+	Value = "0"
+	Help = "Main switch to enable STD Flash support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+    Name = " "
+    TokenType = Integer
+End
+
+#ME OFBD token overrides
+TOKEN
+    Name  = "FPT_START"
+    Value  = "0x1000"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FPT_LENGTH"
+    Value  = "0x1000"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MFSB_START"
+    Value  = "$(FPT_START) + $(FPT_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MFSB_LENGTH"
+    Value  = "0x10000"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SCA_START"
+    Value  = "$(MFSB_START) + $(MFSB_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "SCA_LENGTH"
+    Value  = "0x10000"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FTPR_START"
+    Value  = "$(SCA_START) + $(SCA_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "FTPR_LENGTH"
+    Value  = "0x20000"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MFS_START"
+    Value  = "$(FTPR_START) + $(FTPR_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MFS_LENGTH"
+    Value  = "0x40000"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "OPR1_START"
+    Value  = "$(MFS_START) + $(MFS_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "OPR1_LENGTH"
+    Value  = "0x200000"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "OPR2_START"
+    Value  = "$(OPR1_START) + $(OPR1_LENGTH)"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "OPR2_LENGTH"
+    Value  = "0x0"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "MEUD_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "GrantleyPkg/Me/MePkg.dec"
+    Parent  = "BricklandPkg/Me/MePkg.dec"
+    InvokeOrder = ReplaceParent
+   Token = "MEUD_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "TimerLib"
+    Parent  = "AMI_OFBD_LIBRARIES"
+    InvokeOrder = AfterParent
+End
+
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2009, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************

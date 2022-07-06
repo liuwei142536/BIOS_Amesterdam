@@ -1,0 +1,1012 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 1999 - 2014 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   CsiSystemConfig.hfr
+// 
+// Abstract:
+// 
+//   CSI Setup formset.
+// 
+// Revision History: 
+// 
+// --*/
+
+
+
+
+//--------------------------------------------------------------------------------------
+//PerSocket configuration
+//--------------------------------------------------------------------------------------
+
+form formid = VFR_FORMID_CSIPERSOCKET,
+
+    title   = STRING_TOKEN(STR_CSI_PERSOCKET_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_PERSOCKET_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+
+    goto VFR_FID_CSI_CPU0,
+        prompt  = STRING_TOKEN(STR_CSI_CPU0_TITLE),
+        help    = STRING_TOKEN(STR_CSI_CPU0_HELP);
+
+    goto VFR_FID_CSI_CPU1,
+        prompt  = STRING_TOKEN(STR_CSI_CPU1_TITLE),
+        help    = STRING_TOKEN(STR_CSI_CPU1_HELP);
+
+    goto VFR_FID_CSI_CPU2,
+        prompt  = STRING_TOKEN(STR_CSI_CPU2_TITLE),
+        help    = STRING_TOKEN(STR_CSI_CPU2_HELP);
+
+    goto VFR_FID_CSI_CPU3,
+        prompt  = STRING_TOKEN(STR_CSI_CPU3_TITLE),
+        help    = STRING_TOKEN(STR_CSI_CPU3_HELP);
+#if (MAX_CPU_SOCKET > 4)
+    goto VFR_FID_CSI_CPU4,
+        prompt  = STRING_TOKEN(STR_CSI_CPU4_TITLE),
+        help    = STRING_TOKEN(STR_CSI_CPU4_HELP);
+
+    goto VFR_FID_CSI_CPU5,
+        prompt  = STRING_TOKEN(STR_CSI_CPU5_TITLE),
+        help    = STRING_TOKEN(STR_CSI_CPU5_HELP);
+
+    goto VFR_FID_CSI_CPU6,
+        prompt  = STRING_TOKEN(STR_CSI_CPU6_TITLE),
+        help    = STRING_TOKEN(STR_CSI_CPU6_HELP);
+
+    goto VFR_FID_CSI_CPU7,
+        prompt  = STRING_TOKEN(STR_CSI_CPU7_TITLE),
+        help    = STRING_TOKEN(STR_CSI_CPU7_HELP);
+#endif
+endform;
+
+//--------------------------------------------------------------------------------------
+//PerCPU configuration
+//--------------------------------------------------------------------------------------
+// Form for CPU0
+//-------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU0,
+    title   = STRING_TOKEN(STR_CSI_CPU0_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU0_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    goto VFR_FID_CSI_CPU0_LINK0,
+        prompt  = STRING_TOKEN(STR_CSI_CPU0_LINK0),
+        help    = STRING_TOKEN(STR_CSI_CPU0_LINK0_HELP);
+
+    goto VFR_FID_CSI_CPU0_LINK1,
+        prompt  = STRING_TOKEN(STR_CSI_CPU0_LINK1),
+        help    = STRING_TOKEN(STR_CSI_CPU0_LINK1_HELP);
+#if (MAX_QPI_PORTS > 2)
+    goto VFR_FID_CSI_CPU0_LINK2,
+        prompt  = STRING_TOKEN(STR_CSI_CPU0_LINK2),
+        help    = STRING_TOKEN(STR_CSI_CPU0_LINK2_HELP);
+#endif
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+
+     numeric varid = SYSTEM_CONFIGURATION.BusRatio[0],
+        prompt  = STRING_TOKEN (STR_QPI_BUS_RATIO_0),
+        help    = STRING_TOKEN (STR_QPI_BUS_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.IoRatio[0],
+        prompt  = STRING_TOKEN (STR_QPI_IO_RATIO_0),
+        help    = STRING_TOKEN (STR_QPI_IO_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.MmiolRatio[0],
+        prompt  = STRING_TOKEN (STR_QPI_MMIOL_RATIO_0),
+        help    = STRING_TOKEN (STR_QPI_MMIOL_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;   
+
+    oneof varid = SYSTEM_CONFIGURATION.IioUniphyDisable[0],
+        prompt  = STRING_TOKEN(STR_QPI_IIO_DISABLE_0),
+        help    = STRING_TOKEN(STR_QPI_IIO_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                    value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DISABLE_AND_CLKGATE),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLE_NO_CLKGATE),    value = 2, flags = RESET_REQUIRED;
+
+    endoneof;
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    numeric varid = SYSTEM_CONFIGURATION.IoAlignment[0],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_PROMPT_0),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 16,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.IoLength[0],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_PROMPT_0),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x10000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_IO_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_IO_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolAlignment[0],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_PROMPT_0),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 32,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolLength[0],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_PROMPT_0),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x100000000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+endform;
+
+//--------------------------------------------------------------------------------------
+// Form for CPU1
+//-------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU1,
+    title   = STRING_TOKEN(STR_CSI_CPU1_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU1_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    goto VFR_FID_CSI_CPU1_LINK0,
+        prompt  = STRING_TOKEN(STR_CSI_CPU1_LINK0),
+        help    = STRING_TOKEN(STR_CSI_CPU1_LINK0_HELP);
+
+    goto VFR_FID_CSI_CPU1_LINK1,
+        prompt  = STRING_TOKEN(STR_CSI_CPU1_LINK1),
+        help    = STRING_TOKEN(STR_CSI_CPU1_LINK1_HELP);
+#if (MAX_QPI_PORTS > 2)
+    goto VFR_FID_CSI_CPU1_LINK2,
+        prompt  = STRING_TOKEN(STR_CSI_CPU1_LINK2),
+        help    = STRING_TOKEN(STR_CSI_CPU1_LINK2_HELP);
+#endif
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+
+     numeric varid = SYSTEM_CONFIGURATION.BusRatio[1],
+        prompt  = STRING_TOKEN (STR_QPI_BUS_RATIO_1),
+        help    = STRING_TOKEN (STR_QPI_BUS_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.IoRatio[1],
+        prompt  = STRING_TOKEN (STR_QPI_IO_RATIO_1),
+        help    = STRING_TOKEN (STR_QPI_IO_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.MmiolRatio[1],
+        prompt  = STRING_TOKEN (STR_QPI_MMIOL_RATIO_1),
+        help    = STRING_TOKEN (STR_QPI_MMIOL_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;   
+
+    oneof varid = SYSTEM_CONFIGURATION.IioUniphyDisable[1],
+        prompt  = STRING_TOKEN(STR_QPI_IIO_DISABLE_1),
+        help    = STRING_TOKEN(STR_QPI_IIO_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                    value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DISABLE_AND_CLKGATE),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLE_NO_CLKGATE),    value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    numeric varid = SYSTEM_CONFIGURATION.IoAlignment[1],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_PROMPT_1),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 16,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.IoLength[1],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_PROMPT_1),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x10000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_IO_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_IO_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolAlignment[1],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_PROMPT_1),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 32,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolLength[1],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_PROMPT_1),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x100000000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+endform;
+
+//--------------------------------------------------------------------------------------
+// Form for CPU2
+//-------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU2,
+    title   = STRING_TOKEN(STR_CSI_CPU2_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU2_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    goto VFR_FID_CSI_CPU2_LINK0,
+        prompt  = STRING_TOKEN(STR_CSI_CPU2_LINK0),
+        help    = STRING_TOKEN(STR_CSI_CPU2_LINK0_HELP);
+
+    goto VFR_FID_CSI_CPU2_LINK1,
+        prompt  = STRING_TOKEN(STR_CSI_CPU2_LINK1),
+        help    = STRING_TOKEN(STR_CSI_CPU2_LINK1_HELP);
+#if (MAX_QPI_PORTS > 2)
+    goto VFR_FID_CSI_CPU2_LINK2,
+        prompt  = STRING_TOKEN(STR_CSI_CPU2_LINK2),
+        help    = STRING_TOKEN(STR_CSI_CPU2_LINK2_HELP);
+#endif
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+
+     numeric varid = SYSTEM_CONFIGURATION.BusRatio[2],
+        prompt  = STRING_TOKEN (STR_QPI_BUS_RATIO_2),
+        help    = STRING_TOKEN (STR_QPI_BUS_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.IoRatio[2],
+        prompt  = STRING_TOKEN (STR_QPI_IO_RATIO_2),
+        help    = STRING_TOKEN (STR_QPI_IO_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.MmiolRatio[2],
+        prompt  = STRING_TOKEN (STR_QPI_MMIOL_RATIO_2),
+        help    = STRING_TOKEN (STR_QPI_MMIOL_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;   
+
+    oneof varid = SYSTEM_CONFIGURATION.IioUniphyDisable[2],
+        prompt  = STRING_TOKEN(STR_QPI_IIO_DISABLE_2),
+        help    = STRING_TOKEN(STR_QPI_IIO_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                    value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DISABLE_AND_CLKGATE),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLE_NO_CLKGATE),    value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    numeric varid = SYSTEM_CONFIGURATION.IoAlignment[2],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_PROMPT_2),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 16,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.IoLength[2],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_PROMPT_2),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x10000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_IO_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_IO_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolAlignment[2],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_PROMPT_2),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 32,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolLength[2],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_PROMPT_2),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x100000000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+endform;
+
+//--------------------------------------------------------------------------------------
+// Form for CPU3
+//-------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU3,
+    title   = STRING_TOKEN(STR_CSI_CPU3_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU3_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    goto VFR_FID_CSI_CPU3_LINK0,
+        prompt  = STRING_TOKEN(STR_CSI_CPU3_LINK0),
+        help    = STRING_TOKEN(STR_CSI_CPU3_LINK0_HELP);
+
+    goto VFR_FID_CSI_CPU3_LINK1,
+        prompt  = STRING_TOKEN(STR_CSI_CPU3_LINK1),
+        help    = STRING_TOKEN(STR_CSI_CPU3_LINK1_HELP);
+#if (MAX_QPI_PORTS > 2)
+    goto VFR_FID_CSI_CPU3_LINK2,
+        prompt  = STRING_TOKEN(STR_CSI_CPU3_LINK2),
+        help    = STRING_TOKEN(STR_CSI_CPU3_LINK2_HELP);
+#endif
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+     numeric varid = SYSTEM_CONFIGURATION.BusRatio[3],
+        prompt  = STRING_TOKEN (STR_QPI_BUS_RATIO_3),
+        help    = STRING_TOKEN (STR_QPI_BUS_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.IoRatio[3],
+        prompt  = STRING_TOKEN (STR_QPI_IO_RATIO_3),
+        help    = STRING_TOKEN (STR_QPI_IO_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.MmiolRatio[3],
+        prompt  = STRING_TOKEN (STR_QPI_MMIOL_RATIO_3),
+        help    = STRING_TOKEN (STR_QPI_MMIOL_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;   
+
+    oneof varid = SYSTEM_CONFIGURATION.IioUniphyDisable[3],
+        prompt  = STRING_TOKEN(STR_QPI_IIO_DISABLE_3),
+        help    = STRING_TOKEN(STR_QPI_IIO_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                    value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DISABLE_AND_CLKGATE),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLE_NO_CLKGATE),    value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    numeric varid = SYSTEM_CONFIGURATION.IoAlignment[3],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_PROMPT_3),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 16,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.IoLength[3],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_PROMPT_3),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x10000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_IO_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_IO_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolAlignment[3],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_PROMPT_3),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 32,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolLength[3],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_PROMPT_3),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x100000000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+endform;
+
+#if (MAX_CPU_SOCKET > 4)
+
+//--------------------------------------------------------------------------------------
+// Form for CPU4
+//-------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU4,
+    title   = STRING_TOKEN(STR_CSI_CPU4_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU4_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    goto VFR_FID_CSI_CPU4_LINK0,
+        prompt  = STRING_TOKEN(STR_CSI_CPU4_LINK0),
+        help    = STRING_TOKEN(STR_CSI_CPU4_LINK0_HELP);
+
+    goto VFR_FID_CSI_CPU4_LINK1,
+        prompt  = STRING_TOKEN(STR_CSI_CPU4_LINK1),
+        help    = STRING_TOKEN(STR_CSI_CPU4_LINK1_HELP);
+#if (MAX_QPI_PORTS > 2)
+    goto VFR_FID_CSI_CPU4_LINK2,
+        prompt  = STRING_TOKEN(STR_CSI_CPU4_LINK2),
+        help    = STRING_TOKEN(STR_CSI_CPU4_LINK2_HELP);
+#endif
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+     numeric varid = SYSTEM_CONFIGURATION.BusRatio[4],
+        prompt  = STRING_TOKEN (STR_QPI_BUS_RATIO_4),
+        help    = STRING_TOKEN (STR_QPI_BUS_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.IoRatio[4],
+        prompt  = STRING_TOKEN (STR_QPI_IO_RATIO_4),
+        help    = STRING_TOKEN (STR_QPI_IO_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.MmiolRatio[4],
+        prompt  = STRING_TOKEN (STR_QPI_MMIOL_RATIO_4),
+        help    = STRING_TOKEN (STR_QPI_MMIOL_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;   
+
+    oneof varid = SYSTEM_CONFIGURATION.IioUniphyDisable[4],
+        prompt  = STRING_TOKEN(STR_QPI_IIO_DISABLE_4),
+        help    = STRING_TOKEN(STR_QPI_IIO_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                    value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DISABLE_AND_CLKGATE),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLE_NO_CLKGATE),    value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    numeric varid = SYSTEM_CONFIGURATION.IoAlignment[4],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_PROMPT_4),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 16,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.IoLength[4],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_PROMPT_4),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x10000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_IO_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_IO_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolAlignment[4],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_PROMPT_4),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 32,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolLength[4],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_PROMPT_4),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x100000000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+endform;
+
+//--------------------------------------------------------------------------------------
+// Form for CPU5
+//-------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU5,
+    title   = STRING_TOKEN(STR_CSI_CPU5_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU5_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    goto VFR_FID_CSI_CPU5_LINK0,
+        prompt  = STRING_TOKEN(STR_CSI_CPU5_LINK0),
+        help    = STRING_TOKEN(STR_CSI_CPU5_LINK0_HELP);
+
+    goto VFR_FID_CSI_CPU5_LINK1,
+        prompt  = STRING_TOKEN(STR_CSI_CPU5_LINK1),
+        help    = STRING_TOKEN(STR_CSI_CPU5_LINK1_HELP);
+#if (MAX_QPI_PORTS > 2)
+    goto VFR_FID_CSI_CPU5_LINK2,
+        prompt  = STRING_TOKEN(STR_CSI_CPU5_LINK2),
+        help    = STRING_TOKEN(STR_CSI_CPU5_LINK2_HELP);
+#endif
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+     numeric varid = SYSTEM_CONFIGURATION.BusRatio[5],
+        prompt  = STRING_TOKEN (STR_QPI_BUS_RATIO_5),
+        help    = STRING_TOKEN (STR_QPI_BUS_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.IoRatio[5],
+        prompt  = STRING_TOKEN (STR_QPI_IO_RATIO_5),
+        help    = STRING_TOKEN (STR_QPI_IO_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.MmiolRatio[5],
+        prompt  = STRING_TOKEN (STR_QPI_MMIOL_RATIO_5),
+        help    = STRING_TOKEN (STR_QPI_MMIOL_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;   
+
+    oneof varid = SYSTEM_CONFIGURATION.IioUniphyDisable[5],
+        prompt  = STRING_TOKEN(STR_QPI_IIO_DISABLE_5),
+        help    = STRING_TOKEN(STR_QPI_IIO_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                    value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DISABLE_AND_CLKGATE),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLE_NO_CLKGATE),    value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    numeric varid = SYSTEM_CONFIGURATION.IoAlignment[5],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_PROMPT_5),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 16,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.IoLength[5],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_PROMPT_5),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x10000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_IO_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_IO_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolAlignment[5],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_PROMPT_5),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 32,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolLength[5],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_PROMPT_5),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x100000000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+endform;
+
+//--------------------------------------------------------------------------------------
+// Form for CPU6
+//-------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU6,
+    title   = STRING_TOKEN(STR_CSI_CPU6_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU6_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    goto VFR_FID_CSI_CPU6_LINK0,
+        prompt  = STRING_TOKEN(STR_CSI_CPU6_LINK0),
+        help    = STRING_TOKEN(STR_CSI_CPU6_LINK0_HELP);
+
+    goto VFR_FID_CSI_CPU6_LINK1,
+        prompt  = STRING_TOKEN(STR_CSI_CPU6_LINK1),
+        help    = STRING_TOKEN(STR_CSI_CPU6_LINK1_HELP);
+#if (MAX_QPI_PORTS > 2)
+    goto VFR_FID_CSI_CPU6_LINK2,
+        prompt  = STRING_TOKEN(STR_CSI_CPU6_LINK2),
+        help    = STRING_TOKEN(STR_CSI_CPU6_LINK2_HELP);
+#endif
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+
+     numeric varid = SYSTEM_CONFIGURATION.BusRatio[6],
+        prompt  = STRING_TOKEN (STR_QPI_BUS_RATIO_6),
+        help    = STRING_TOKEN (STR_QPI_BUS_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.IoRatio[6],
+        prompt  = STRING_TOKEN (STR_QPI_IO_RATIO_6),
+        help    = STRING_TOKEN (STR_QPI_IO_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.MmiolRatio[6],
+        prompt  = STRING_TOKEN (STR_QPI_MMIOL_RATIO_6),
+        help    = STRING_TOKEN (STR_QPI_MMIOL_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;   
+
+    oneof varid = SYSTEM_CONFIGURATION.IioUniphyDisable[6],
+        prompt  = STRING_TOKEN(STR_QPI_IIO_DISABLE_6),
+        help    = STRING_TOKEN(STR_QPI_IIO_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                    value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DISABLE_AND_CLKGATE),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLE_NO_CLKGATE),    value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    numeric varid = SYSTEM_CONFIGURATION.IoAlignment[6],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_PROMPT_6),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 16,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.IoLength[6],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_PROMPT_6),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x10000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_IO_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_IO_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolAlignment[6],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_PROMPT_6),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 32,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolLength[6],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_PROMPT_6),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x100000000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+endform;
+
+//--------------------------------------------------------------------------------------
+// Form for CPU7
+//-------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU7,
+    title   = STRING_TOKEN(STR_CSI_CPU7_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU7_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    goto VFR_FID_CSI_CPU7_LINK0,
+        prompt  = STRING_TOKEN(STR_CSI_CPU7_LINK0),
+        help    = STRING_TOKEN(STR_CSI_CPU7_LINK0_HELP);
+
+    goto VFR_FID_CSI_CPU7_LINK1,
+        prompt  = STRING_TOKEN(STR_CSI_CPU7_LINK1),
+        help    = STRING_TOKEN(STR_CSI_CPU7_LINK1_HELP);
+#if (MAX_QPI_PORTS > 2)
+    goto VFR_FID_CSI_CPU7_LINK2,
+        prompt  = STRING_TOKEN(STR_CSI_CPU7_LINK2),
+        help    = STRING_TOKEN(STR_CSI_CPU7_LINK2_HELP);
+#endif
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+     numeric varid = SYSTEM_CONFIGURATION.BusRatio[7],
+        prompt  = STRING_TOKEN (STR_QPI_BUS_RATIO_7),
+        help    = STRING_TOKEN (STR_QPI_BUS_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.IoRatio[7],
+        prompt  = STRING_TOKEN (STR_QPI_IO_RATIO_7),
+        help    = STRING_TOKEN (STR_QPI_IO_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;
+    
+     numeric varid = SYSTEM_CONFIGURATION.MmiolRatio[7],
+        prompt  = STRING_TOKEN (STR_QPI_MMIOL_RATIO_7),
+        help    = STRING_TOKEN (STR_QPI_MMIOL_RATIO_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 8,
+        step    = 1,  // Stepping of 0 equates to a manual entering of a value,
+                      // otherwise it will auto-increment with a left/right arrow
+        default = 1,
+        default = 1, defaultstore = AmiMfgDefault,
+     endnumeric;   
+
+    oneof varid = SYSTEM_CONFIGURATION.IioUniphyDisable[7],
+        prompt  = STRING_TOKEN(STR_QPI_IIO_DISABLE_7),
+        help    = STRING_TOKEN(STR_QPI_IIO_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                    value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DISABLE_AND_CLKGATE),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLE_NO_CLKGATE),    value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+suppressif TRUE;
+    numeric varid = SYSTEM_CONFIGURATION.IoAlignment[7],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_PROMPT_7),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 16,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.IoLength[7],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_PROMPT_7),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_IO_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x10000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_IO_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_IO_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolAlignment[7],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_PROMPT_7),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_ALIGNMENT_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 32,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.MmiolLength[7],
+        prompt    = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_PROMPT_7),
+        help      = STRING_TOKEN(STR_CSI_SOCKET_MMIOL_LENGTH_HELP),
+        flags     = RESET_REQUIRED | DISPLAY_UINT_HEX,
+        minimum   = 0, maximum = 0x100000000,
+        step      = 0, // 0 = manual entering of a value, else it will auto-increment with a left/right arrow
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+        default   = QPI_SOCKET_MMIOL_RATIO_UNIT, defaultstore = AmiMfgDefault, // Requests minimum resources by default. QPI RC will distribute the remaining available resources.
+    endnumeric;
+endif;
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+
+endform;
+
+#endif  // (MAX_CPU_SOCKET > 4)
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------------
+// Form for OSB Protocol Layer options
+//----------------------------------------------------------------------------------------------------------------------------------
+// Aptio V server override : Blank Setup page not required
+/*
+form formid = VFR_FORMID_CSISYSTEM_OSB,
+    title   = STRING_TOKEN(STR_CSI_SYSTEM_OSB_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_CSI_SYSTEM_OSB_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+
+
+endform;
+*/
+

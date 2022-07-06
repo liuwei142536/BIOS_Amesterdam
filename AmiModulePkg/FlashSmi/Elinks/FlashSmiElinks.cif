@@ -1,0 +1,10 @@
+<component>
+    name = "FlashSmiElinks"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\FlashSmi\Elinks\"
+    RefName = "FlashSmiElinks"
+[files]
+"FlashSmiElinks.sdl"
+[INF]
+"FlashSmiElinks.inf"
+<endComponent>

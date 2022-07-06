@@ -1,0 +1,41 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DbgRxXportLib
+  FILE_GUID                      = 12F04150-B7F9-4482-ADDE-A55D36F5055A
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 0.1
+  LIBRARY_CLASS                  = DebugXportLib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Binaries.Ia32]
+  BIN | DbgRxXportLib.lib|*|*|MYTOOLS
+  BIN | DbgRxXportLib.lib|*|*|MSFT
+  BIN | DbgRxXportVS2015Lib.lib|*|*|VS2015
+[Binaries.X64]
+  BIN | DbgRxXportX64Lib.lib|*|*|MYTOOLS
+  BIN | DbgRxXportX64Lib.lib|*|*|MSFT
+  BIN | DbgRxXportVS2015X64Lib.lib|*|*|VS2015 
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AMIDebuggerPkg/AMIDebuggerPkg.dec
+
+[LibraryClasses]
+  CommonXportLib

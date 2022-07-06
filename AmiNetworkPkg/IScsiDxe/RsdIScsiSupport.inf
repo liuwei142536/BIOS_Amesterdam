@@ -1,0 +1,53 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+    INF_VERSION       = 0x00010005
+    VERSION_STRING    = 1.0
+    BASE_NAME         = RsdIScsiSupport
+    FILE_GUID         = 6824737e-8a82-4483-8785-b1743661f8fd                     
+    MODULE_TYPE       = BASE
+    LIBRARY_CLASS     = RsdIScsiSupportLib
+
+[Sources]
+  RsdIScsiSupport.c
+  RsdIScsiSupport.h
+  RsdIScsiBmcParser.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  CryptoPkg/CryptoPkg.dec
+  AmiNetworkPkg/AmiNetworkPkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiIpmiPkg/AmiIpmiPkg.dec
+  AmiRsdPkg/AmiRsdPkg.dec
+
+[LibraryClasses]
+ UefiRuntimeServicesTableLib
+ AmiDxeLib
+ UefiLib
+ RsdIpmiExtCommandLib
+
+[Guids] 
+  gEfiRsdIScsiAttemptConfigGuid                 ## New GUID for RSD2.2 support
+
+[FixedPcd]
+  gEfiNetworkPkgTokenSpaceGuid.PcdMaxIScsiAttemptNumber     ## CONSUMES  
+ 
+[Protocols]
+  gEfiDxeIpmiTransportProtocolGuid
+
+ 

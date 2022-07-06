@@ -1,0 +1,52 @@
+TOKEN
+	Name  = "RtErrorLogGpnv_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable RtErrorLogGpnv support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+	Token = "GpnvErrorLogging_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "RTERRORLOGGPNVLIB"
+	Value  = "$(BUILD_DIR)\RtErrorLogGpnv.lib"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+ELINK
+	Name  = "$(RTERRORLOGGPNVLIB)"
+	Parent  = "RT_ERROR_LOG_ELINK_LIBS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogPciErrorToGpnv,"
+	Parent  = "PciErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogMemErrorToGpnv,"
+	Parent  = "MemErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "RtErrorLogGpnvLib"
+	File  = "RtErrorLogGpnv.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "RtErrorLogGpnv_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "RtErrorLogGpnvLib"
+	Instance  = "GrantleyPkg.RtErrorLogGpnvLib"
+	Arch  = "common"
+	ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+	Token = "RtErrorLogGpnv_SUPPORT" "=" "1"
+End
+

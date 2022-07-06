@@ -1,0 +1,82 @@
+#
+# This file contains an 'Intel Peripheral Driver' and is
+# licensed for Intel CPUs and chipsets under the terms of your
+# license agreement with Intel or your vendor.  This file may
+# be modified by the user, subject to additional terms of the
+# license agreement
+#
+#/*++
+#
+#  Copyright (c) 2019 Intel Corporation. All rights reserved
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#  Module Name:
+#
+#    ConfigSmi.inf
+#
+#  Abstract:
+#
+#    PCH RC SMI Handling initialization tasks
+#
+#--*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PchSmiRegister
+  FILE_GUID                      = BBC98A25-89B0-474B-AC85-8E524EB33E25
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = PchSmiRegisterEntry
+
+[Sources]
+  PchSmiRegister.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+
+[LibraryClasses]
+  DebugLib
+  DxeServicesTableLib
+  IoLib
+  HobLib
+  MemoryAllocationLib
+  PchAslUpdateLib
+  PcdLib
+  PchPciExpressHelpersLib
+  PchPlatformLib
+  RcFviLib
+  S3BootScriptLib
+  SmmServicesTableLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib 
+  UefiLib
+
+
+[Protocols]
+  gDxePchPlatformPolicyProtocolGuid        ## CONSUMES
+  gEfiSmmBase2ProtocolGuid                 ## CONSUMES
+  gEfiSmmIchnDispatch2ProtocolGuid         ## CONSUMES
+  gEfiSmmIchnDispatch2ExProtocolGuid       ## CONSUMES
+
+[Guids]
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+[Depex]
+  gDxePchPlatformPolicyProtocolGuid     AND
+  gEfiSmmBase2ProtocolGuid              AND
+  gEfiSmmIchnDispatch2ProtocolGuid      AND
+  gEfiSmmIchnDispatch2ExProtocolGuid
+

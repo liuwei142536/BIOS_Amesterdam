@@ -1,0 +1,26 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Include\Protocol\"
+	RefName = "GrantleyPkg.Protocol"
+[files]
+"DmaRemap.h"	
+"EfiLegacyBootMarker.h"	
+"frb.h"	
+"FvbExtension.h"	
+"GenericFru.h"	
+"GlobalNvsArea.h"	
+"MemRasProtocol.h"	
+"MpstSupport.h"	
+"PciCallback.h"	
+"PciIovPlatform.h"	
+"PlatformPolicy.h"	
+"PlatformResetPolicy.h"	
+"PlatformType.h"	
+"QpiRasProtocol.h"	
+"RedirFru.h"	
+"SmmCpuService.h"	
+"PlatformSlotInfoGuid.h"	
+"SmmErrorLogProtocol.h"	
+"SPIOpcode.h"
+<endComponent>

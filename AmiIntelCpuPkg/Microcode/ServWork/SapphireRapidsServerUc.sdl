@@ -1,0 +1,22 @@
+TOKEN
+	Name  = "SERVER_806FX_SAPPHIRERAPIDS"
+	Value  = "0"
+    Help = "Intel(R) Server Sapphire Rapids"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "SERVER_M87806F3_SAPPHIRERAPIDS"
+    Value  = "1"
+    Help  = "Intel(R) Server Sapphire Rapids-SP D-0 Stepping(806F3) "
+    TokenType = Boolean    
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M87806F3_0D000361.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Sapphire Rapids-SP D-0 Stepping(806F3) "
+    Token = "SERVER_M87806F3_SAPPHIRERAPIDS" "=" "1"
+    InvokeOrder = AfterParent
+End

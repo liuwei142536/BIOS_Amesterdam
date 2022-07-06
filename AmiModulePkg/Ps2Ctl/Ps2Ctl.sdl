@@ -1,0 +1,209 @@
+TOKEN
+    Name  = "PS2Ctl_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable PS2 Controller support in the project."
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "PS2KBDPEI_SUPPORT"
+    Value  = "0"
+    Help  = "Main switch to enable Ps2Kbd Pei support"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PS2MOUSE_SUPPORT"
+    Value  = "1"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "PS2Ctl_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PS2KBD_SUPPORT"
+    Value  = "1"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "PS2Ctl_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "KBC_AUTODETECT_PORTS"
+    Value  = "0"
+    Help  = "Auto detection of KB/MS using AMI KB-5.  This switch will enable/disable the connector swap of Keyboard and PS2 Mouse i.e. keyboard\can be connected to PS2 Mouse connector and vice-versa."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "KBC_AUTODETECT_PORTS_FUNCTION"
+    Value  = "AutodetectKbdMousePorts"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "KBC_AUTODETECT_PORTS" "=" "1"
+End
+
+TOKEN
+    Name  = "BLOCK_KBC_PIN_22_23_BIT"
+    Value  = "1"
+    Help  = "Turn this switch On or Off to block or unblock KBC lines P22 and P23.\If unblocked - KBC will be able to change lines P22 and P23 from high to low and back using D1 command.\If blocked - KBC will not be able to change the state of P22 and P23 lines."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "LEDS_AT_STARTUP"
+    Value  = "2"
+    Help  = "Keyboard LEDs after startup:\Bit0: ScrlLock is on/off;\Bit1: NumLock is on/off;\Bit2: CapsLock is on/off."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "KBC_BASIC_ASSURANCE_TEST"
+    Value  = "1"
+    Help  = "1 - Perform KBC Basic Assurance Test. 0 - Do not perform KBC Basic Assurance Test."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DETECT_PS2_KEYBOARD"
+    Value  = "0"
+    Help  = "1 - Perform PS2 Keyboard Detection. 0 - Do not perform PS2 Keyboard Detection."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DETECT_PS2_MOUSE"
+    Value  = "0"
+    Help  = "1 - Perform PS2 Mouse Detection. 0 - Do not perform PS2 Mouse Detection."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "INSTALL_KEYBOARD_MOUSE_ALWAYS"
+    Value  = "1"
+    Help  = "1 - Install the Keyboard- SimpleTextIn, Mouse - AbsPointer Always, 0 - Install the Keyboard- SimpleTextIn, Mouse - AbsPointer only if the device is present at the time of detection."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "KBD_MS_IRQ_SUPPORT"
+    Value  = "0"
+    Help  = "When this token is ON Keyboard and Mouse will operate using interrupt, when OFF polling will be used"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "KBD_READ_BEFORE_INSTALL"
+    Value  = "0"
+    Help  = "This token will be used to save the key codes if keys are pressed before installing keyboard driver"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "KBD_MS_IRQ_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "IBFREE_TIMEOUT"
+    Value  = "300"
+    Help  = "Timeout (in milliseconds) used for the function IbFreeTimeout()"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "MAXIMUM_TIMEOUT_FOR_IBFREE"
+    Value  = "5000"
+    Help  = "Maximum Timeout (in milliseconds) used for the function IbFreeTimeout()"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+
+TOKEN
+    Name  = "CLEAR_PS2KB_BUFFER_AT_READYTOBOOT"
+    Value  = "0"
+    Help  = "ON   -> PS2 KB Buffer will be cleared at ReadyToBoot.\OFF  -> PS2 KB Buffer will not be cleared at ReadyToBoot."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CHECK_BDA_KEYBOARD_BUFFER"
+    Value  = "1"
+    Help  = "ON   -> BDA KBD Buffer will be checked for any key whenever there is no key is found in ReadKeyStroke().\OFF  -> BDA KBD Buffer will not be checked."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CLEAR_PENDING_KEYS_IN_PS2"
+    Value  = "0"
+    Help  = "ON -> Resets the keyboard before PS2 Driver is started and Clears OBF on every Kbd Reset as some Notebook KBC has some pending keys even after disabling and enabling Scanning."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TIMEOUT_FOR_1BYTE_MOUSEPACKET_READ"
+    Value  = "50"
+    Help  = "Timeout (in millisecond) used in function GetMouseData to read First Byte mouse data packet"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TIMEOUT_FOR_REM_MOUSEPACKET_READ"
+    Value  = "100"
+    Help  = "Timeout(in millisecond) used in function GetMouseData to read remaining(second Byte etc) mouse data packet"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+PATH
+    Name  = "PS2Ctl_DIR"
+    Help  = "PS/2 Controller source directory"
+End
+
+OUTPUTREGISTER
+    Name = "Ps2CtlOemInfoFile"
+    File = "Ps2CtlOem.h"
+    Path = "Build"
+    Template = "Ps2CtlOem.txt"
+End
+
+ELINK
+    Name = "Ps2CtlOemHandleData"
+    InvokeOrder = ReplaceParent
+    Help =  "Oem Hook to be called before HandleKbdData to be called. If the OemHook function return EFI_SUCCESS, Core HandleKbdData function not called"
+End
+
+INFComponent
+    Name  = "Ps2KbdPei"
+    File  = "Ps2KbdPei.inf"
+    Package  = "PeiConsoleIn"
+    ModuleTypes  = "PEIM"
+    Token = "PS2KBDPEI_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "Ps2Main"
+    File  = "Ps2Ctl.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "UEFI_DRIVER"
+    Token = "PS2Ctl_SUPPORT" "=" "1"
+End
+

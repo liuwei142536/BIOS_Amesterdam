@@ -1,0 +1,2618 @@
+/*++
+  This file contains an 'Intel Peripheral Driver' and is        
+  licensed for Intel CPUs and chipsets under the terms of your  
+  license agreement with Intel or your vendor.  This file may   
+  be modified by the user, subject to additional terms of the   
+  license agreement                                             
+--*/
+/*++
+
+Copyright (c)  1999 - 20012 Intel Corporation. All rights reserved
+This software and associated documentation (if any) is furnished
+under a license and may only be used or copied in accordance
+with the terms of the license. Except as permitted by such
+license, no part of this software or documentation may be
+reproduced, stored in a retrieval system, or transmitted in any
+form or by any means without the express written consent of
+Intel Corporation.
+
+
+Module Name:
+
+  Srat2.0.c
+
+Abstract:
+
+  This file contains a structure definition for the ACPI Static Resource 
+  Affinity Table (SRAT) Rev 2.0. Any changes to the SRAT table require updating the
+  respective structure count in Srat.h and then adding the structure to the 
+  SRAT defined in this file.  The table layout is defined in Srat.h and the 
+  table contents are defined in StaticResourceAffinityTable.h and Srat.h.
+
+--*/
+
+//
+// Statements that include other files
+//
+
+#include <Acpi\Srat.h>
+
+#define PROC_LOCAL_X2APIC_AFFINITY_ENTRY(thread)         \
+  EFI_ACPI_4_0_PROCESSOR_LOCAL_X2APIC_AFFINITY,          \
+  sizeof (EFI_ACPI_4_0_PROCESSOR_LOCAL_X2APIC_AFFINITY_STRUCTURE), \
+  EFI_ACPI_RESERVED_BYTE,                                \
+  EFI_ACPI_RESERVED_BYTE,                                \
+  0x00000000,                                            \
+  0xFFFFFFFF,                                            \
+  0x00000000,                                            \
+  0x00000000,                                            \
+  EFI_ACPI_RESERVED_BYTE,                                \
+  EFI_ACPI_RESERVED_BYTE,                                \
+  EFI_ACPI_RESERVED_BYTE,                                \
+  EFI_ACPI_RESERVED_BYTE,
+
+
+//
+// Static Resource Affinity Table definition
+//
+EFI_ACPI_4_0_STATIC_RESOURCE_AFFINITY_TABLE Srat40 = {
+  EFI_ACPI_4_0_SYSTEM_RESOURCE_AFFINITY_TABLE_SIGNATURE,
+  sizeof (EFI_ACPI_4_0_STATIC_RESOURCE_AFFINITY_TABLE),
+  EFI_ACPI_4_0_SYSTEM_RESOURCE_AFFINITY_TABLE_REVISION,
+  //
+  // Checksum will be updated at runtime
+  //
+  0x00,
+  //
+  // It is expected that these values will be programmed at runtime
+  //
+  ' ',
+  ' ',
+  ' ',
+  ' ',
+  ' ',
+  ' ',
+
+  0,
+  EFI_ACPI_OEM_SRAT_4_0_REVISION,
+  0,
+  0,
+  //
+  // Beginning of SRAT specific fields
+  //
+  EFI_ACPI_SRAT_RESERVED_FOR_BACKWARD_COMPATIBILITY,
+  EFI_ACPI_RESERVED_QWORD,
+  //
+  // Local Apic entry 00
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 01
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 02
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 03
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 04
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 05
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 06
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 07
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 08
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 09
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved 
+  //
+  // Local Apic entry 0A
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 0B
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 0C
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 0D
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 0E
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 0F
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 10
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 11
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 12
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 13
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 14
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 15
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 16
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 17
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 18
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 19
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved 
+  //
+  // Local Apic entry 1A
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 1B
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 1C
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 1D
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 1E
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 1F
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 20
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 21
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 22
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 23
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 24
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 25
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 26
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 27
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 28
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 29
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved 
+  //
+  // Local Apic entry 2A
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 2B
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 2C
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 2D
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 2E
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 2F
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 30
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 31
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 32
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 33
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 34
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 35
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 36
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 37
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 38
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 39
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved 
+  //
+  // Local Apic entry 3A
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 3B
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 3C
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 3D
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 3E
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 3F
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 40
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 41
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 42
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 43
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 44
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 45
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 46
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 47
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 48
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 49
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved 
+  //
+  // Local Apic entry 4A
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 4B
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 4C
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 4D
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 4E
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 4F
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 50
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 51
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 52
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 53
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 54
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 55
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 56
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 57
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 58
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 59
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved 
+  //
+  // Local Apic entry 5A
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 5B
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 5C
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 5D
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 5E
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 5F
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 60
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 61
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 62
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 63
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 64
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 65
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 66
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 67
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 68
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 69
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved 
+  //
+  // Local Apic entry 6A
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 6B
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 6C
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 6D
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 6E
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 6F
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 70
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 71
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 72
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 73
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 74
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 75
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 76
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  //
+  // Local Apic entry 77
+  //
+  EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY,   // Type
+  sizeof (EFI_ACPI_PROCESSOR_LOCAL_APIC_SAPIC_AFFINITY_STRUCTURE),  // Length
+  0x00,                                           // Proximity Domain [7:0]
+  0xFF,                                           // APIC ID
+  0x00000000,                                     // Flags - Disabled (until initialized by platform driver)
+  0x00,                                           // Local SAPIC EID
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [15:8]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [23:16]
+  EFI_ACPI_RESERVED_BYTE,                         // Proximity Domain [31:24]
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+
+  //
+  // If Hotplug needs to be implemented we must mark the memory ranges below 4GB
+  // as pinned memory, since it contains BIOS structures. Not supported in Thurley
+  //
+  //
+  // Memory Affinity Structure 1
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 2
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 3
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 4
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 5
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 6
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 7
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 8
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 9
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 10
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 11
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 12
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 13
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 14
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 15
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 16
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 17
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 18
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 19
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 20
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 21
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 22
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 23
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 24
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 25
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 26
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 27
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 28
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 29
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 30
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 31
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+  //
+  // Memory Affinity Structure 32
+  //
+  EFI_ACPI_MEMORY_AFFINITY,                       // Type
+  sizeof (EFI_ACPI_MEMORY_AFFINITY_STRUCTURE),    // Length
+  0x00,                                           // Proximity Domain
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  EFI_ACPI_RESERVED_BYTE,                         // Reserved
+  0x00000000,                                     // Address Base Low
+  0x00000000,                                     // Address Base High
+  0x00000000,                                     // Length Low
+  0x00000000,                                     // Length High
+  EFI_ACPI_RESERVED_DWORD,                        // Reserved
+  0x00000000,                                     // Flags disabled, until enabled by Platform driver
+  EFI_ACPI_RESERVED_QWORD,                        // Reserved
+
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(0)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(1)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(2)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(3)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(4)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(5)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(6)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(7)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(8)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(9)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(10)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(11)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(12)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(13)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(14)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(15)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(16)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(17)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(18)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(19)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(20)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(21)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(22)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(23)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(24)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(25)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(26)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(27)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(28)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(29)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(30)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(31)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(32)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(33)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(34)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(35)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(36)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(37)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(38)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(39)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(40)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(42)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(42)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(43)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(44)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(45)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(46)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(47)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(48)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(48)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(50)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(51)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(52)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(53)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(54)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(55)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(56)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(57)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(58)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(59)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(60)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(61)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(62)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(63)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(64)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(65)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(66)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(67)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(68)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(69)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(70)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(71)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(72)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(73)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(74)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(75)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(76)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(77)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(78)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(79)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(80)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(81)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(82)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(83)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(84)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(85)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(86)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(87)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(88)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(89)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(90)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(91)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(92)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(93)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(94)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(95)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(96)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(97)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(98)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(99)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(100)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(101)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(102)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(103)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(104)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(105)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(106)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(107)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(108)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(109)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(110)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(111)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(112)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(113)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(114)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(115)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(116)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(117)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(118)
+    PROC_LOCAL_X2APIC_AFFINITY_ENTRY(119)
+};
+
+VOID
+main (
+  VOID
+  )
+{
+}

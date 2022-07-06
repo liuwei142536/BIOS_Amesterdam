@@ -1,0 +1,42 @@
+
+#if PER_THREAD_ACPI == 0
+
+    External (MWOS, FieldUnitObj)
+    
+    //Dynamically updated
+    //Monitor C-states
+    Name (CMST, Package() {
+        4,  
+        Package(){ResourceTemplate(){Register(FFixedHW, 1, 2, 0, 1)}, 0x80, 0x80, 0x8000},
+        Package(){ResourceTemplate(){Register(FFixedHW, 1, 2, 0x80, 3)}, 0x80, 0x80, 0x8000},
+        Package(){ResourceTemplate(){Register(FFixedHW, 1, 2, 0x80, 3)}, 0x80, 0x80, 0x8000},
+        Package(){ResourceTemplate(){Register(FFixedHW, 1, 2, 0x80, 3)}, 0x80, 0x80, 0x8000}
+    })
+    
+    //IO C-states
+    Name (CIST, Package() {
+        4,  
+        Package(){ResourceTemplate(){Register(FFixedHW, 0, 0, 0)}, 0x80, 0x80, 0x8000},
+        Package(){ResourceTemplate(){Register(SystemIO, 8, 0, 0x8000)}, 0x80, 0x80, 0x8000},
+        Package(){ResourceTemplate(){Register(SystemIO, 8, 0, 0x8000)}, 0x80, 0x80, 0x8000},
+        Package(){ResourceTemplate(){Register(SystemIO, 8, 0, 0x8000)}, 0x80, 0x80, 0x8000}
+    })
+    
+
+    //_CST packages 
+    Method(CST, 0) {
+        If(LAnd(MWOS, And(TYPE, 0x200)))  {
+            Return(CMST)    //Mwait C-states
+        }
+        return (CIST)       //IO C-states
+    }
+    
+#else
+
+Method(_CST, 0) 
+{
+    return (CST())
+}
+
+#endif    
+    

@@ -1,0 +1,89 @@
+#
+# This file contains an 'Intel Peripheral Driver' and is      
+# licensed for Intel CPUs and chipsets under the terms of your
+# license agreement with Intel or your vendor.  This file may 
+# be modified by the user, subject to additional terms of the 
+# license agreement                                           
+#
+## @file
+# Component description file for Platform CPU Policy DXE Driver.
+#
+# Copyright (c) 2012, Intel Corporation. All rights reserved.<BR>
+#
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                   = 0x00010005
+  BASE_NAME                     = PlatformCpuPolicy
+  FILE_GUID                     = 76A7B4FC-C8D5-462d-A4D2-6E88338A772A
+  MODULE_TYPE                   = DXE_DRIVER
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = PlatformCpuPolicyEntryPoint
+  
+[Sources]
+  PlatformCpuPolicy.c
+  
+[Packages]  
+# following will be removed when IA32FamilyCpuPkg overrides are merged back to trunk
+  ServerCommonPkg/ServerCommonPkg.dec
+  MdePkg/MdePkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec #AptioV server override
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  PcdLib
+  UefiBootServicesTableLib  
+  UefiRuntimeServicesTableLib
+  BaseLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  HobLib
+  IoLib
+
+[Protocols]
+  gIntelCpuPcdsSetDoneProtocolGuid
+  gEfiPlatformTypeProtocolGuid
+  gEfiCpuCsrAccessGuid                          # PROTOCOL ALWAYS_CONSUMED
+  gExitPmAuthProtocolGuid
+
+[Guids]
+  gEfiSetupVariableGuid
+
+[Pcd]
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorFeatureUserConfiguration
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorFeatureUserConfigurationEx1
+  gEfiCpuTokenSpaceGuid.PcdCpuEnergyPolicy
+  gEfiCpuTokenSpaceGuid.PcdCpuAcpiLvl2Addr
+  gEfiCpuTokenSpaceGuid.PcdCpuPackageCStateLimit
+  gEfiCpuTokenSpaceGuid.PcdCpuClockModulationDutyCycle
+  gEfiCpuTokenSpaceGuid.PcdCpuHwCoordination
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuSocketCount
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuSocketNames
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuAssetTags
+  gEfiCpuTokenSpaceGuid.PcdIsPowerOnReset
+  gEfiCpuTokenSpaceGuid.PcdCpuDcuMode
+  gEfiCpuTokenSpaceGuid.PcdCpuDebugInterface
+  gEfiCpuTokenSpaceGuid.PcdCpuTurboOverride
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorMsrLockCtrl
+  gEfiCpuTokenSpaceGuid.PcdCpuIioLlcWaysBitMask
+  gEfiCpuTokenSpaceGuid.PcdCpuQlruCfgBitMask
+  gEfiCpuTokenSpaceGuid.PcdSbspSelection
+  gEfiCpuTokenSpaceGuid.PcdCpuPmStructAddr
+
+
+[Depex]
+  gEfiVariableArchProtocolGuid AND gEfiPlatformTypeProtocolGuid AND gEfiCpuCsrAccessGuid
+

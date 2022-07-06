@@ -1,0 +1,17 @@
+<component>
+	name = "Server Snowridge uCode Patches (8066X)"
+	category = ModulePart
+	Rank = 40
+	LocalRoot = "AmiIntelCpuPkg\Microcode\ServWork\"
+	RefName = "SnowridgeServerUc"
+[files]
+"SnowridgeServerUc.sdl"
+"HASH_Ax.txt"
+"HASH_Bx.txt"
+"HASH_Bx_Production.txt"
+"HASH_Cx.txt"
+"M01_80660_80661_80662_80663_90070007.mcb"	= "SERVER WORKSTATION MICROCODE UPDATES"
+"M01_80664_80665_0b00000f.mcb"
+"M01_80664_80665_9b01000e.mcb"
+"M01_80664_80665_80667_9c01000b.mcb"
+<endComponent>

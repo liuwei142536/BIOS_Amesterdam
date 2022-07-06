@@ -1,0 +1,86 @@
+#/*++
+# This file contains a 'Sample Driver' and is licensed as such
+# under the terms of your license agreement with Intel or your
+# vendor.  This file may be modified by the user, subject to
+# the additional terms of the license agreement
+#--*/
+#/*++
+#
+#  Copyright (c)  2007 - 2013 Intel Corporation. All rights reserved
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#  Module Name:
+#
+#    HeciDxe.inf
+#
+#  Abstract:
+#
+#    Component description file for Heci DXE driver
+#
+#--*/
+
+[defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = HeciInitDxe
+  FILE_GUID      = 55E76644-78A5-4a82-A900-7126A5798892
+  MODULE_TYPE    = DXE_DRIVER
+  VERSION_STRING = 1.0
+  ENTRY_POINT    = HeciDxeEntryPoint
+
+[Sources]
+  HeciInit.c
+  Hecidrv.c
+
+[Packages] 
+  MdePkg/MdePkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  GrantleyPkg/Me/MePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+#Aptio V Grantley Override
+  #ShellPkg/ShellPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  DxeServicesTableLib
+  PciLib
+  IoLib
+  MeLib
+  PerformanceLib
+  RcFviLib
+  S3IoLib
+  MeTypeLib
+  MeTypeSetLib
+  HeciCoreLib
+
+[Protocols]
+  gEfiHeciProtocolGuid
+  gMeBiosPayloadDataProtocolGuid
+  gEfiMebxProtocolGuid
+  gExitPmAuthProtocolGuid
+  gEfiMeRcInfoProtocolGuid
+  gAmtReadyToBootProtocolGuid
+  #gEfiShellEnvironment2Guid    #Aptio Server override
+
+[Guids]
+  gMePlatformReadyToBootGuid
+  gEfiMeBiosExtensionSetupGuid
+  gEfiSetupEnterGuid
+
+[Pcd.common]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+[Depex]
+  TRUE
+

@@ -1,0 +1,21 @@
+TOKEN
+    Name  = "AhciSmm_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AhciSmm  support in Project"
+    TokenType = Boolean
+    Master = Yes
+    Token = "SMM_SUPPORT" "=" "1"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+End
+
+PATH
+    Name  = "AHCI_SMM_DIR"
+End
+
+INFComponent
+    Name  = "AhciSmm"
+    File  = "AhciSmm.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End
+

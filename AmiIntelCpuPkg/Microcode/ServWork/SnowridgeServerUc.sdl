@@ -1,0 +1,88 @@
+TOKEN
+    Name  = "SERVWORK_8066X"
+    Value = "0"
+    Help  = "Intel(R) Snowridge"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SERVWORK_M0180660_80661_80662_80663"
+    Value  = "1"
+    Help  = "Intel(R) Snowridge Processor A-0/A-1/A-2/A-3 Stepping"
+    TokenType = Boolean
+    Token = "SELECT_SILICON_STEPPING" "=" "0"
+End
+
+TOKEN
+    Name  = "SERVWORK_M0180664"
+    Value  = "1"
+    Help  = "Intel(R) Snowridge Processor B-0 Stepping"
+    TokenType = Boolean
+    Token = "SELECT_SILICON_STEPPING" "=" "1"
+End
+
+TOKEN
+    Name  = "SERVWORK_M0180664_80665_80667"
+    Value  = "1"
+    Help  = "Intel(R) Snowridge Processor C-0 Stepping"
+    TokenType = Boolean
+    Token = "SELECT_SILICON_STEPPING" "=" "2"
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M01_80660_80661_80662_80663_90070007.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Snowridge Processor A0 stepping (0x80660), A1 stepping (0x80661), A2 stepping (0x80662) and A3 stepping (0x80663)"
+    Token = "SERVWORK_M0180660_80661_80662_80663" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M01_80664_80665_9b01000e.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Snowridge Processor B0 stepping (0x80664)"
+    Token = "SERVWORK_M0180664" "=" "1"
+	Token = "CHIPSET_VERSION" "=" "0"
+    Token = "CRB_PLATFORM_SELECT" "=" "1"    
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M01_80664_80665_0b00000f.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Snowridge Processor Production B0 stepping (0x80664)"
+    Token = "SERVWORK_M0180664" "=" "1"
+	Token = "CHIPSET_VERSION" "=" "1"
+    Token = "CRB_PLATFORM_SELECT" "=" "1"    
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M01_80664_80665_9b01000e.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Snowridge Processor B0 stepping (0x80664)"
+    Token = "SERVWORK_M0180664" "=" "1"
+    Token = "CRB_PLATFORM_SELECT" "=" "2"    
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M01_80664_80665_9b01000e.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Snowridge Processor B0 stepping (0x80664)"
+    Token = "SERVWORK_M0180664" "=" "1"
+    Token = "CHIPSET_VERSION" "=" "0"
+    Token = "CRB_PLATFORM_SELECT" "=" "3"    
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M01_80664_80665_80667_9c01000b.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Snowridge Processor C0 stepping (0x80667)"
+    Token = "SERVWORK_M0180664_80665_80667" "=" "1"
+    Token = "CHIPSET_VERSION" "=" "0"
+    Token = "CRB_PLATFORM_SELECT" "=" "1"   
+    InvokeOrder = AfterParent
+End

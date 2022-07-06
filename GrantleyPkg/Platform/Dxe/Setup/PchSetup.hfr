@@ -1,0 +1,3473 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 1999 - 2019 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   PchSetup.vfr 
+// 
+// Abstract:
+// 
+//   Setup PCH formset.
+// 
+// Revision History: 
+// 
+// --*/
+#include <Token.h> //AptioV server override
+  //
+  // PCH Configuration Form
+  //
+
+  form formid = VFR_FORMID_PCH,
+
+    title    = STRING_TOKEN(STR_PCH_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_PCH_CONFIG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    //subtitle text = STRING_TOKEN(STR_NULL_STRING);//AptioV Server Override: Extra Horizontal Lines display removal.
+
+    suppressif TRUE;
+        oneof varid = SYSTEM_CONFIGURATION.GbeRegionInvalid,
+             questionid  = 0x2005,
+             prompt    = STRING_TOKEN(STR_PCH_GBEREG_PROMT),
+             help      = STRING_TOKEN(STR_PCH_GBEREG_PROMT),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT| INTERACTIVE;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = 0 | INTERACTIVE;             
+        endoneof;
+
+        oneof varid = SYSTEM_CONFIGURATION.PchLanSupported,
+             questionid  = 0x2006,
+             prompt    = STRING_TOKEN(STR_PCH_LAN_SUP_PROMT),
+             help      = STRING_TOKEN(STR_PCH_LAN_SUP_PROMT),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT| INTERACTIVE;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = 0 | INTERACTIVE;             
+        endoneof;
+    endif;
+
+    goto PCH_OPTIONS_FORM_ID,
+         prompt = STRING_TOKEN(STR_PCH_OPTIONS_FORM_TITLE),
+         help = STRING_TOKEN(STR_PCH_OPTIONS_FORM_HELP),
+         flags = 0,
+         key = 0;
+
+    goto PCH_PCIE_OPTIONS_FORM_ID,
+         prompt = STRING_TOKEN(STR_PCIE_OPTIONS_FORM_TITLE),
+         help = STRING_TOKEN(STR_PCIE_OPTIONS_FORM_HELP),
+         flags = 0,
+         key = 0;
+
+#ifdef PCH_SERVER_BIOS_FLAG
+
+  suppressif TRUE;
+    goto PCH_EVA_OPTIONS_FORM_ID,
+         prompt = STRING_TOKEN(STR_PCH_EVA_OPTIONS_FORM_TITLE),
+         help = STRING_TOKEN(STR_PCH_EVA_OPTIONS_FORM_HELP),
+         flags = 0,
+         key = 0;
+  endif;
+
+    goto PCH_SSATA_OPTIONS_FORM_ID,
+         prompt = STRING_TOKEN(STR_PCH_SSATA_OPTIONS_FORM_TITLE),
+         help   = STRING_TOKEN(STR_PCH_SSATA_OPTIONS_FORM_HELP), 
+         flags  = 0, 
+         key    = 0; 
+#endif
+
+    goto PCH_SATA_OPTIONS_FORM_ID,
+         prompt = STRING_TOKEN(STR_PCH_SATA_OPTIONS_FORM_TITLE),
+         help   = STRING_TOKEN(STR_PCH_SATA_OPTIONS_FORM_HELP),
+         flags = 0,
+         key = 0;
+
+    goto PCH_USB_OPTIONS_FORM_ID,
+         prompt = STRING_TOKEN(STR_PCH_USB_OPTIONS_FORM_TITLE),
+         help = STRING_TOKEN(STR_PCH_USB_OPTIONS_FORM_HELP),
+         flags = 0,
+         key = 0;
+
+    goto PCH_SECURITY_FORM_ID,
+        prompt = STRING_TOKEN(STR_SECURITY_OPTIONS_FORM_TITLE),
+        help   = STRING_TOKEN(STR_SECURITY_OPTIONS_FORM_HELP),
+        flags = 0,
+        key = 0;
+    #ifdef GRANGEVILLE_FLAG  
+        suppressif TRUE;
+            goto PCH_AZALIA_OPTIONS_FORM_ID,
+                prompt = STRING_TOKEN(STR_PCH_AZALIA_OPTIONS_FORM_TITLE),
+                help = STRING_TOKEN(STR_PCH_AZALIA_OPTIONS_FORM_HELP),
+                flags = 0,
+                key = 0;
+        endif;
+    #else
+            goto PCH_AZALIA_OPTIONS_FORM_ID,
+                prompt = STRING_TOKEN(STR_PCH_AZALIA_OPTIONS_FORM_TITLE),
+                help = STRING_TOKEN(STR_PCH_AZALIA_OPTIONS_FORM_HELP),
+                flags = 0,
+                key = 0;
+    #endif
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PchLanSupported == 0;
+    goto PCH_LAN_OPTIONS_FORM_ID,
+         prompt = STRING_TOKEN(STR_PCH_LAN_OPTIONS_FORM_TITLE),
+         help = STRING_TOKEN(STR_PCH_LAN_OPTIONS_FORM_HELP),
+         flags = 0,
+         key = 0;
+    endif;
+
+    goto PCH_THERMAL_FORM_ID,
+        prompt = STRING_TOKEN(STR_PLTTHM_CONFIG_FORM_TITLE),
+        help   = STRING_TOKEN(STR_PLTTHM_CONFIG_FORM_HELP),
+        flags = 0,
+        key = 0;         
+  endform;
+
+  form formid = PCH_OPTIONS_FORM_ID,
+
+     title     = STRING_TOKEN(STR_PCH_OPTIONS_FORM_TITLE);
+    
+     oneof varid    = SYSTEM_CONFIGURATION.BoardCapability,
+         prompt   = STRING_TOKEN(STR_BOARD_CAPABILITY),
+         help     = STRING_TOKEN(STR_BOARD_CAPABILITY_HELP),
+         option text = STRING_TOKEN(STR_SUS_PWR_DN_ACK_STRING), value = 0, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_DEEP_SX_STRING), value = 1, flags = RESET_REQUIRED| MANUFACTURING | DEFAULT;
+     endoneof;
+    
+     oneof varid    = SYSTEM_CONFIGURATION.DeepSxMode,
+         prompt   = STRING_TOKEN(STR_DEEP_SX_POWER_POLICIES_PROMPT),
+         help     = STRING_TOKEN(STR_DEEP_SX_POWER_POLICIES_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DEEPSX_S5_STRING), value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DEEPSX_S4_S5_STRING), value = 4, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DEEPSX_S3_S4_S5_STRING), value = 6, flags = RESET_REQUIRED;
+     endoneof;
+
+      oneof varid = SYSTEM_CONFIGURATION.Gp27WakeFromDeepSx,
+        prompt   = STRING_TOKEN(STR_PCH_GP27_WFDSX_PROMPT),
+        help     = STRING_TOKEN(STR_PCH_GP27_WFDSX_HELP),
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+
+     oneof varid    = SYSTEM_CONFIGURATION.PchSmbus,
+         prompt   = STRING_TOKEN(STR_PCH_SMBUS_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_SMBUS_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED| MANUFACTURING | DEFAULT;
+     endoneof;
+
+     
+
+     oneof varid  = SYSTEM_CONFIGURATION.PchSerm,
+      prompt   = STRING_TOKEN(STR_PCH_SERM_PROMPT),
+      help     = STRING_TOKEN(STR_PCH_SERM_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+     endoneof;
+    
+     oneof varid  = SYSTEM_CONFIGURATION.PchDisplay,
+         prompt   = STRING_TOKEN(STR_PCH_DISPLAY_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_DISPLAY_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT| MANUFACTURING |RESET_REQUIRED;
+     endoneof;
+
+//AptioV Server Override - Suppress test question that end user should not change 
+suppressif TRUE;
+     oneof varid  = SYSTEM_CONFIGURATION.PchPciClockRun,
+      prompt   = STRING_TOKEN(STR_PCH_PCICLOCKRUN_PROMPT),
+      help     = STRING_TOKEN(STR_PCH_PCICLOCKRUN_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+     endoneof;
+endif;
+    
+     oneof varid  = SYSTEM_CONFIGURATION.PchSirqMode,
+         prompt   = STRING_TOKEN(STR_PCH_SIRQ_MODE),
+         help     = STRING_TOKEN(STR_PCH_SIRQ_MODE_HELP),
+         option text = STRING_TOKEN(STR_SIRQ_MODE_QUIET), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_SIRQ_MODE_CONTINUOUS), value = 1, flags = RESET_REQUIRED;
+     endoneof;
+
+#ifdef HPET_SUPPORT    
+    oneof varid  = SYSTEM_CONFIGURATION.Hpet,
+         prompt   = STRING_TOKEN(STR_PCH_HPET_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_HPET_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.HpetBootTime,
+         prompt   = STRING_TOKEN(STR_PCH_HPET_BOOTTIME_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_HPET_BOOTTIME_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+#endif
+
+     oneof varid  =  SYSTEM_CONFIGURATION.EnableClockSpreadSpec,
+      prompt   = STRING_TOKEN(STR_CLOCK_SPREAD_SPEC_ENABLE),
+      help     = STRING_TOKEN(STR_CLOCK_SPREAD_SPEC_ENABLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+     endoneof;
+
+     oneof varid  =  SYSTEM_CONFIGURATION.PowerState,
+       prompt   = STRING_TOKEN(STR_STATE_AFTER_G3),
+       help     = STRING_TOKEN(STR_STATE_AFTER_G3_HELP),
+       option text = STRING_TOKEN(STR_S0_AFTER_G3_STRING), value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED; 
+       option text = STRING_TOKEN(STR_S5_AFTER_G3_STRING), value = 1, flags = RESET_REQUIRED;
+       option text = STRING_TOKEN(STR_LASTSTATE_AFTER_G3_STRING), value = 2, flags = RESET_REQUIRED; //AptioV server override: LastState support for PowerState setup option
+     endoneof;
+    
+//AptioV Server Override - Suppress test question that end user should not change 
+suppressif TRUE;    
+     oneof varid  = SYSTEM_CONFIGURATION.PchPort80Route,
+         prompt   = STRING_TOKEN(STR_PCH_PORT80_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_PORT80_HELP),
+         option text = STRING_TOKEN(STR_LPC_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_PCI_STRING), value = 1, flags = RESET_REQUIRED;
+     endoneof;
+    
+	 oneof varid  = SYSTEM_CONFIGURATION.PchCrossThrottling,
+      prompt   = STRING_TOKEN(STR_PCH_CROSS_THROTTLING_PROMPT),
+      help     = STRING_TOKEN(STR_PCH_CROSS_THROTTLING_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+endif;
+//AptioV Server Override - Suppress test question that end user should not change 
+
+     oneof varid  = SYSTEM_CONFIGURATION.PchCrid,
+         prompt   = STRING_TOKEN(STR_PCH_CRID_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_CRID_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+     endoneof;
+    
+  endform;
+
+  form formid = PCH_USB_OPTIONS_FORM_ID,
+    
+    title = STRING_TOKEN(STR_PCH_USB_OPTIONS_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_EMPTY_STRING);
+
+    oneof varid   = SYSTEM_CONFIGURATION.UsbPrecondition,
+      prompt      = STRING_TOKEN(STR_USB_PRECONDITION_SUPPORT),
+      help        = STRING_TOKEN(STR_USB_PRECONDITION_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid    = SYSTEM_CONFIGURATION.PchUsb30Mode,
+         prompt   = STRING_TOKEN(STR_PCH_USB30_MODE_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_USB30_MODE_HELP),
+         option text = STRING_TOKEN(STR_SMARTAUTO_STRING), value = 3, flags = RESET_REQUIRED;
+//
+// Controlled by PPV build flag
+//
+         option text = STRING_TOKEN(STR_AUTO_STRING), value = 2, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_MANUAL_STRING), value = 4, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x1;
+      oneof varid   = SYSTEM_CONFIGURATION.Btcg,
+        prompt      = STRING_TOKEN(STR_USB_BTCG_SUPPORT),
+        help        = STRING_TOKEN(STR_USB_BTCG_SUPPORT_HELP),
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+      endoneof;
+    endif; //suppressif ideqval SETUP_DATA.PchUsb30Mode == 0x1
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x4;
+    
+    oneof varid   = SYSTEM_CONFIGURATION.UsbXhciSupport,
+      prompt      = STRING_TOKEN(STR_USB_XHCI_SUPPORT),
+      help        = STRING_TOKEN(STR_USB_XHCI_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2PinsToWhichHc,
+      prompt      = STRING_TOKEN(STR_PCH_ROUTE_USB2_PIN_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_PER_PIN_PROMPT    ), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_ALL_TO_EHCI_PROMPT), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_ALL_TO_XHCI_PROMPT), value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+    endif; //suppressif NOT ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x4;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.RouteUsb2PinsToWhichHc == 0x1 OR
+               ideqval SYSTEM_CONFIGURATION.RouteUsb2PinsToWhichHc == 0x2 OR
+               ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x0 OR
+               ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x1 OR
+               ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x2 OR
+               ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x3;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin0,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN0_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin1,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN1_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin2,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN2_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin3,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN3_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin4,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN4_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin5,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN5_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin6,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN6_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin7,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN7_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin8,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN8_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin9,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN9_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin10,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN10_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin11,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN11_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin12,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN12_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.RouteUsb2Pin13,
+      prompt      = STRING_TOKEN(STR_PCH_USB2_PIN13_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_EHCI_PROMPT), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_PCH_ROUTE_TO_XHCI_PROMPT), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    endif; //suppressif ideqval SYSTEM_CONFIGURATION.RouteUsb2PinsToWhichHc
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x4;
+
+    oneof varid   = SYSTEM_CONFIGURATION.Usb3PinsTermination,
+      prompt      = STRING_TOKEN(STR_PCH_ENABLE_USB3_PIN_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_PCH_SELECT_PER_PIN_PROMPT), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLE_ALL_PIN_STRING   ), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLE_ALL_PIN_STRING    ), value = 2, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    endif; //suppressif NOT ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x4;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.Usb3PinsTermination == 0x1 OR
+               ideqval SYSTEM_CONFIGURATION.Usb3PinsTermination == 0x2 OR
+               ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x0 OR
+               ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x1 OR
+               ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x2 OR
+               ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x3;
+
+    oneof varid   = SYSTEM_CONFIGURATION.EnableUsb3Pin1,
+      prompt      = STRING_TOKEN(STR_PCH_USB3_PIN1_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.EnableUsb3Pin2,
+      prompt      = STRING_TOKEN(STR_PCH_USB3_PIN2_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.EnableUsb3Pin3,
+      prompt      = STRING_TOKEN(STR_PCH_USB3_PIN3_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.EnableUsb3Pin4,
+      prompt      = STRING_TOKEN(STR_PCH_USB3_PIN4_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.EnableUsb3Pin5,
+      prompt      = STRING_TOKEN(STR_PCH_USB3_PIN5_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.EnableUsb3Pin6,
+      prompt      = STRING_TOKEN(STR_PCH_USB3_PIN6_PROMPT),
+      help        = STRING_TOKEN(STR_EMPTY_STRING),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    endif; //suppressif ideqval SYSTEM_CONFIGURATION.Usb3PinsTermination......
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x1
+            OR ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x2
+            OR ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x3
+            OR ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x4;
+    oneof varid   = SYSTEM_CONFIGURATION.PchUsb20[0],
+      prompt      = STRING_TOKEN(STR_PCH_USB21_PROMPT),
+      help        = STRING_TOKEN(STR_PCH_USB2_HELP),
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x1
+            OR ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x2
+            OR ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x3
+            OR ideqval SYSTEM_CONFIGURATION.PchUsb30Mode == 0x4;
+      oneof varid   = SYSTEM_CONFIGURATION.PchUsb20[1],
+        prompt      = STRING_TOKEN(STR_PCH_USB22_PROMPT),
+        help        = STRING_TOKEN(STR_PCH_USB2_HELP),
+#ifdef GRANGEVILLE_FLAG
+
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+#else
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+
+#endif
+      endoneof;
+    endif;
+	//Comment out this empty string to make the setup page look neater
+   // subtitle text = STRING_TOKEN(STR_EMPTY_STRING);
+
+    //
+    // Usb ports per-port disable control enable
+    //
+    oneof varid    = SYSTEM_CONFIGURATION.PchUsbPerPortCtl,
+         prompt   = STRING_TOKEN(STR_PCH_USB_PER_PORT_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_USB_PER_PORT_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PchUsbPerPortCtl == 0x0;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[0],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT0_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[1],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT1_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[2],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT2_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[3],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT3_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[4],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT4_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[5],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT5_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[6],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT6_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+ 
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[7],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT7_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[8],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT8_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+ 
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[9],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT9_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;  
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[10],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT10_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;  
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[11],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT11_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;    
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[12],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT12_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;    
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsbPort[13],
+             prompt   = STRING_TOKEN(STR_PCH_USB_PORT13_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;    
+
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsb30Port[0],
+             prompt   = STRING_TOKEN(STR_PCH_USB30_PORT0_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;   
+ 
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsb30Port[1],
+             prompt   = STRING_TOKEN(STR_PCH_USB30_PORT1_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;   
+ 
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsb30Port[2],
+             prompt   = STRING_TOKEN(STR_PCH_USB30_PORT2_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;   
+ 
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsb30Port[3],
+             prompt   = STRING_TOKEN(STR_PCH_USB30_PORT3_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;   
+ 
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsb30Port[4],
+             prompt   = STRING_TOKEN(STR_PCH_USB30_PORT4_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;   
+ 
+         oneof varid    = SYSTEM_CONFIGURATION.PchUsb30Port[5],
+             prompt   = STRING_TOKEN(STR_PCH_USB30_PORT5_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_USB_PORT_DIS_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;   
+
+    endif;  //suppressif ideqval SYSTEM_CONFIGURATION.PchUsbPerPortCtl == 0x0
+
+    oneof varid   = SYSTEM_CONFIGURATION.XhciIdleL1,
+      prompt      = STRING_TOKEN(STR_USB_XHCI_IDLE_L1_SUPPORT),
+      help        = STRING_TOKEN(STR_USB_XHCI_IDLE_L1_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+#ifdef PCH_SERVER_BIOS_FLAG
+    oneof varid   = SYSTEM_CONFIGURATION.UsbS755WA,
+      prompt      = STRING_TOKEN(STR_USB_XHCI_S755WA),
+      help        = STRING_TOKEN(STR_USB_XHCI_S755WA_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+    endoneof;    
+#endif //PCH_SERVER_BIOS_FLAG
+  suppressif ideqval SYSTEM_CONFIGURATION.cpuType == CPU_BDX;
+      oneof varid   = SYSTEM_CONFIGURATION.XhciDisMSICapability,
+        prompt      = STRING_TOKEN(STR_USB_XHCI_S116WA), 
+        help        = STRING_TOKEN(STR_USB_XHCI_S116WA_HELP),
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags =  RESET_REQUIRED;
+      endoneof;
+  endif; 
+
+//Move the USB config page from Advanced setup screen to PCH setup screen
+//#include "UsbConfigData.hfr"
+
+  endform;    //end of USB_OPTIONS_FORM_ID
+    
+  form formid = PCH_AZALIA_OPTIONS_FORM_ID,
+    
+    title     = STRING_TOKEN(STR_PCH_AZALIA_OPTIONS_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_EMPTY_STRING);
+    
+    oneof varid  = SYSTEM_CONFIGURATION.PchAzalia,
+         prompt   = STRING_TOKEN(STR_PCH_AZALIA_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_AZALIA_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING;
+         option text = STRING_TOKEN(STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_AUTO_STRING),     value = 2, flags = RESET_REQUIRED | DEFAULT; 
+    endoneof;
+    
+    suppressif ideqval SYSTEM_CONFIGURATION.PchAzalia == 0x0;
+
+         oneof varid  = SYSTEM_CONFIGURATION.AzaliaDs,
+             prompt   = STRING_TOKEN(STR_AZALIA_DS_PROMPT),
+             help     = STRING_TOKEN(STR_AZALIA_DS_HELP),    
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+  
+         oneof varid    = SYSTEM_CONFIGURATION.AzaliaPme,
+             prompt     = STRING_TOKEN(STR_AZALIA_PME_PROMPT),
+             help       = STRING_TOKEN(STR_AZALIA_PME_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;   
+    endif;
+  endform;
+ 
+  form formid = PCH_SATA_OPTIONS_FORM_ID,
+
+    #define SATA_MODE_IDE         0
+    #define SATA_MODE_AHCI 1
+    #define SATA_MODE_RAID 2
+    #define SATA_MODE_LOOPBACK_TEST         3
+
+    title = STRING_TOKEN(STR_PCH_SATA_OPTIONS_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_PCH_SATA_OPTIONS_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    //subtitle text = STRING_TOKEN(STR_NULL_STRING);//AptioV Server Override: Extra Horizontal Lines display removal.
+
+    oneof varid     = SYSTEM_CONFIGURATION.PchSata,
+        prompt      = STRING_TOKEN(STR_SATA_DEVICE_PROMPT),
+        help        = STRING_TOKEN(STR_SATA_DEVICE_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING),  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.PchSata == 0;
+        oneof varid     = SYSTEM_CONFIGURATION.SataInterfaceMode,
+             prompt      = STRING_TOKEN(STR_SATA_TYPE_PROMPT),
+             help        = STRING_TOKEN(STR_SATA_TYPE_HELP),
+             option text = STRING_TOKEN(STR_SATA_IDE),   value = SATA_MODE_IDE, flags = RESET_REQUIRED;
+#ifndef GRANGEVILLE_FLAG
+#ifndef RSTE_TEST
+             option text = STRING_TOKEN(STR_SATA_AHCI),  value = SATA_MODE_AHCI, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+             option text = STRING_TOKEN(STR_SATA_RAID),  value = SATA_MODE_RAID, flags = RESET_REQUIRED;
+#else 
+             option text = STRING_TOKEN(STR_SATA_AHCI),  value = SATA_MODE_AHCI, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_SATA_RAID),  value = SATA_MODE_RAID, flags = RESET_REQUIRED | DEFAULT| MANUFACTURING;
+#endif  // RSTE_TEST
+#else
+             option text = STRING_TOKEN(STR_SATA_AHCI),  value = SATA_MODE_AHCI, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+#if RSTE_SUPPORT // Aptio V Grangeville override - add RAID support
+             option text = STRING_TOKEN(STR_SATA_RAID),  value = SATA_MODE_RAID, flags = RESET_REQUIRED;
+#endif
+#endif  // GRANGEVILLE_FLAG
+         endoneof;
+
+         oneof varid       = SYSTEM_CONFIGURATION.SataTestMode,
+             prompt   = STRING_TOKEN(STR_SATA_TEST_MODE_PROMPT),
+             help     = STRING_TOKEN(STR_SATA_TEST_MODE_HELP),
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_LOOPBACK_TEST;
+         goto PCH_SATA_SFMS_OPTIONS_FORM_ID,
+             prompt = STRING_TOKEN(STR_SATA_MODE_OPTIONS_FORM_TITLE),
+             help = STRING_TOKEN(STR_SATA_MODE_OPTIONS_FORM_HELP);
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_LOOPBACK_TEST;
+        oneof varid = SYSTEM_CONFIGURATION.SataLpm,
+            prompt   = STRING_TOKEN(STR_SATA_AHCI_LPM_PROMPT),
+            help     = STRING_TOKEN(STR_SATA_AHCI_LPM_HELP),
+            option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        endoneof;               
+        suppressif ideqval SYSTEM_CONFIGURATION.SataLpm == 0x0;
+            oneof varid   = SYSTEM_CONFIGURATION.SataSalp,
+                prompt   = STRING_TOKEN(STR_SATA_AHCI_SALP_PROMPT),
+                help     = STRING_TOKEN(STR_SATA_AHCI_SALP_HELP),
+                option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+            endoneof;
+        endif;
+    endif;
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_RAID;
+      oneof varid = SYSTEM_CONFIGURATION.SataAlternateId,
+          prompt   = STRING_TOKEN(STR_SATA_ALTERNATE_ID_PROMPT),
+          help     = STRING_TOKEN(STR_SATA_ALTERNATE_ID_HELP),
+          option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+      endoneof;
+  
+      oneof varid = SYSTEM_CONFIGURATION.SataRaidLoadEfiDriver,
+          prompt   = STRING_TOKEN(STR_SATA_RAID_EFI_DRIVER_PROMPT),
+          help     = STRING_TOKEN(STR_SATA_RAID_EFI_DRIVER_HELP),
+          option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SATA0_STRING),
+        text   = STRING_TOKEN(STR_SATA0_NAME);
+
+    text
+      help   = STRING_TOKEN(STR_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_SOFT_PRESERVE),
+      text   = STRING_TOKEN(STR_SATA0_SOFT_PRESERVE_STATUS),
+      flags  = 0,
+      key    = 0;
+  
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataPort[0],
+             prompt      = STRING_TOKEN(STR_SATA_PORT_0),
+             help        = STRING_TOKEN(STR_SATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataExternal[0] == 1;  
+         oneof varid   = SYSTEM_CONFIGURATION.SataHotPlug[0],
+             prompt      = STRING_TOKEN(STR_SATA_HOTPLUG0),
+             help        = STRING_TOKEN(STR_SATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.SataExternal[0],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA0),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataExternal[0] == 1;  
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SATA_ESATA),
+        text   = STRING_TOKEN(STR_SATA_HOTPLUG_SUPPORT),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+   suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+                OR ideqval SYSTEM_CONFIGURATION.SataHotPlug[0] == 0;
+         oneof varid   = SYSTEM_CONFIGURATION.SataMechanicalSw[0],
+             prompt      = STRING_TOKEN(STR_SATA_MECHANICAL_SW0),
+             help        = STRING_TOKEN(STR_SATA_MECHANICAL_SW_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataSpinUp[0],
+             prompt      = STRING_TOKEN(STR_SATA_SPIN_UP0),
+             help        = STRING_TOKEN(STR_SATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.SataType[0],
+         prompt      = STRING_TOKEN(STR_SATA_TYPE0),
+         help        = STRING_TOKEN(STR_SATA_TYPE_HELP),
+         option text = STRING_TOKEN(STR_SATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_SATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SATA1_STRING),
+        text   = STRING_TOKEN(STR_SATA1_NAME);
+
+    text
+      help   = STRING_TOKEN(STR_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_SOFT_PRESERVE),
+      text   = STRING_TOKEN(STR_SATA1_SOFT_PRESERVE_STATUS),
+      flags  = 0,
+      key    = 0;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataPort[1],
+             prompt      = STRING_TOKEN(STR_SATA_PORT_1),
+             help        = STRING_TOKEN(STR_SATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+     endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+                OR ideqval SYSTEM_CONFIGURATION.SataExternal[1] == 1;
+         oneof varid   = SYSTEM_CONFIGURATION.SataHotPlug[1],
+             prompt      = STRING_TOKEN(STR_SATA_HOTPLUG1),
+             help        = STRING_TOKEN(STR_SATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.SataExternal[1],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA1),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+   suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+                OR ideqval SYSTEM_CONFIGURATION.SataExternal[1] == 1;
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SATA_ESATA),
+        text   = STRING_TOKEN(STR_SATA_HOTPLUG_SUPPORT),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+   suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+                OR ideqval SYSTEM_CONFIGURATION.SataHotPlug[1] == 0;
+         oneof varid   = SYSTEM_CONFIGURATION.SataMechanicalSw[1],
+             prompt      = STRING_TOKEN(STR_SATA_MECHANICAL_SW1),
+             help        = STRING_TOKEN(STR_SATA_MECHANICAL_SW_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataSpinUp[1],
+             prompt      = STRING_TOKEN(STR_SATA_SPIN_UP1),
+             help        = STRING_TOKEN(STR_SATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.SataType[1],
+         prompt      = STRING_TOKEN(STR_SATA_TYPE1),
+         help        = STRING_TOKEN(STR_SATA_TYPE_HELP),
+         option text = STRING_TOKEN(STR_SATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_SATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SATA2_STRING),
+        text   = STRING_TOKEN(STR_SATA2_NAME);
+
+    text
+      help   = STRING_TOKEN(STR_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_SOFT_PRESERVE),
+      text   = STRING_TOKEN(STR_SATA2_SOFT_PRESERVE_STATUS),
+      flags  = 0,
+      key    = 0;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataPort[2],
+             prompt      = STRING_TOKEN(STR_SATA_PORT_2),
+             help        = STRING_TOKEN(STR_SATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+   oneof varid   = SYSTEM_CONFIGURATION.PxDevSlp[2],
+          prompt      = STRING_TOKEN(STR_PCH_P2DEVSLP_PROMPT),
+          help        = STRING_TOKEN(STR_PCH_P2DEVSLP_HELP),
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataExternal[2] == 1;    
+         oneof varid   = SYSTEM_CONFIGURATION.SataHotPlug[2],
+             prompt      = STRING_TOKEN(STR_SATA_HOTPLUG2),
+             help        = STRING_TOKEN(STR_SATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.SataExternal[2],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA2),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataExternal[2] == 1;    
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SATA_ESATA),
+        text   = STRING_TOKEN(STR_SATA_HOTPLUG_SUPPORT),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataHotPlug[2] == 0;    
+         oneof varid   = SYSTEM_CONFIGURATION.SataMechanicalSw[2],
+             prompt      = STRING_TOKEN(STR_SATA_MECHANICAL_SW2),
+             help        = STRING_TOKEN(STR_SATA_MECHANICAL_SW_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataSpinUp[2],
+             prompt      = STRING_TOKEN(STR_SATA_SPIN_UP2),
+             help        = STRING_TOKEN(STR_SATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.SataType[2],
+      prompt      = STRING_TOKEN(STR_SATA_TYPE2),
+      help        = STRING_TOKEN(STR_SATA_TYPE_HELP),
+      option text = STRING_TOKEN(STR_SATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_SATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SATA3_STRING),
+        text   = STRING_TOKEN(STR_SATA3_NAME);
+
+    text
+      help   = STRING_TOKEN(STR_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_SOFT_PRESERVE),
+      text   = STRING_TOKEN(STR_SATA3_SOFT_PRESERVE_STATUS),
+      flags  = 0,
+      key    = 0;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataPort[3],
+             prompt      = STRING_TOKEN(STR_SATA_PORT_3),
+             help        = STRING_TOKEN(STR_SATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+     endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataExternal[3] == 1;    
+         oneof varid   = SYSTEM_CONFIGURATION.SataHotPlug[3],
+             prompt      = STRING_TOKEN(STR_SATA_HOTPLUG3),
+             help        = STRING_TOKEN(STR_SATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.SataExternal[3],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA3),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataExternal[3] == 1;
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SATA_ESATA),
+        text   = STRING_TOKEN(STR_SATA_HOTPLUG_SUPPORT),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+                OR ideqval SYSTEM_CONFIGURATION.SataHotPlug[3] == 0;
+      oneof varid   = SYSTEM_CONFIGURATION.SataMechanicalSw[3],
+         prompt      = STRING_TOKEN(STR_SATA_MECHANICAL_SW3),
+         help        = STRING_TOKEN(STR_SATA_MECHANICAL_SW_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataSpinUp[3],
+             prompt      = STRING_TOKEN(STR_SATA_SPIN_UP3),
+             help        = STRING_TOKEN(STR_SATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.SataType[3],
+      prompt      = STRING_TOKEN(STR_SATA_TYPE3),
+      help        = STRING_TOKEN(STR_SATA_TYPE_HELP),
+      option text = STRING_TOKEN(STR_SATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_SATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SATA4_STRING),
+        text   = STRING_TOKEN(STR_SATA4_NAME);
+
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SOFT_PRESERVE),
+        text   = STRING_TOKEN(STR_SATA4_SOFT_PRESERVE_STATUS),
+        flags  = 0,
+        key    = 0;
+
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataPort[4],
+             prompt      = STRING_TOKEN(STR_SATA_PORT_4),
+             help        = STRING_TOKEN(STR_SATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataExternal[4] == 1;    
+         oneof varid   = SYSTEM_CONFIGURATION.SataHotPlug[4],
+             prompt      = STRING_TOKEN(STR_SATA_HOTPLUG4),
+             help        = STRING_TOKEN(STR_SATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.SataExternal[4],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA4),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+               OR ideqval SYSTEM_CONFIGURATION.SataExternal[4] == 1;
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SATA_ESATA),
+        text   = STRING_TOKEN(STR_SATA_HOTPLUG_SUPPORT),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+                OR ideqval SYSTEM_CONFIGURATION.SataHotPlug[4] == 0;
+      oneof varid   = SYSTEM_CONFIGURATION.SataMechanicalSw[4],
+         prompt      = STRING_TOKEN(STR_SATA_MECHANICAL_SW4),
+         help        = STRING_TOKEN(STR_SATA_MECHANICAL_SW_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataSpinUp[4],
+             prompt      = STRING_TOKEN(STR_SATA_SPIN_UP4),
+             help        = STRING_TOKEN(STR_SATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.SataType[4],
+      prompt      = STRING_TOKEN(STR_SATA_TYPE4),
+      help        = STRING_TOKEN(STR_SATA_TYPE_HELP),
+      option text = STRING_TOKEN(STR_SATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_SATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SATA5_STRING),
+        text   = STRING_TOKEN(STR_SATA5_NAME);
+        
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SOFT_PRESERVE),
+        text   = STRING_TOKEN(STR_SATA5_SOFT_PRESERVE_STATUS),
+        flags  = 0,
+        key    = 0;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataPort[5],
+             prompt      = STRING_TOKEN(STR_SATA_PORT_5),
+             help        = STRING_TOKEN(STR_SATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING),  value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+                OR  ideqval SYSTEM_CONFIGURATION.SataExternal[5] == 1;    
+         oneof varid   = SYSTEM_CONFIGURATION.SataHotPlug[5],
+             prompt      = STRING_TOKEN(STR_SATA_HOTPLUG5),
+             help        = STRING_TOKEN(STR_SATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.SataExternal[5],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA5),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+                OR ideqval SYSTEM_CONFIGURATION.SataHotPlug[5] == 0;
+      oneof varid   = SYSTEM_CONFIGURATION.SataMechanicalSw[5],
+         prompt      = STRING_TOKEN(STR_SATA_MECHANICAL_SW5),
+         help        = STRING_TOKEN(STR_SATA_MECHANICAL_SW_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE
+                OR ideqval SYSTEM_CONFIGURATION.SataExternal[5] == 1;
+        text
+             help   = STRING_TOKEN(STR_EMPTY_STRING),
+             text   = STRING_TOKEN(STR_SATA_ESATA),
+             text   = STRING_TOKEN(STR_SATA_HOTPLUG_SUPPORT),
+             flags  = 0,
+             key    = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.SataSpinUp[5],
+             prompt      = STRING_TOKEN(STR_SATA_SPIN_UP5),
+             help        = STRING_TOKEN(STR_SATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+            option text = STRING_TOKEN(STR_ENABLED_STRING),   value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.SataType[5],
+      prompt      = STRING_TOKEN(STR_SATA_TYPE5),
+      help        = STRING_TOKEN(STR_SATA_TYPE_HELP),
+      option text = STRING_TOKEN(STR_SATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_SATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+        
+endform;
+
+  form formid = PCH_SATA_SFMS_OPTIONS_FORM_ID,
+
+     title = STRING_TOKEN(STR_SATA_MODE_OPTIONS_FORM_TITLE);
+
+     oneof varid   = SYSTEM_CONFIGURATION.SataHddlk,
+         prompt      = STRING_TOKEN(STR_SATA_HDDLK_PROMPT),
+         help        = STRING_TOKEN(STR_SATA_HDDLK_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.SataLedl,
+         prompt      = STRING_TOKEN(STR_SATA_LEDL_PROMPT),
+         help        = STRING_TOKEN(STR_SATA_LEDL_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_RAID;
+         oneof varid   = SYSTEM_CONFIGURATION.SataRaidR0,
+             prompt    = STRING_TOKEN(STR_SATA_RAID0_PROMPT),
+             help      = STRING_TOKEN(STR_SATA_RAID0_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.SataRaidR1,
+             prompt      = STRING_TOKEN(STR_SATA_RAID1_PROMPT),
+             help        = STRING_TOKEN(STR_SATA_RAID1_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.SataRaidR10,
+             prompt      = STRING_TOKEN(STR_SATA_RAID10_PROMPT),
+             help        = STRING_TOKEN(STR_SATA_RAID10_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.SataRaidR5,
+             prompt      = STRING_TOKEN(STR_SATA_RAID5_PROMPT),
+             help        = STRING_TOKEN(STR_SATA_RAID5_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.SataRaidIrrt,
+             prompt      = STRING_TOKEN(STR_SATA_IRRT_PROMPT),
+             help        = STRING_TOKEN(STR_SATA_IRRT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.SataRaidOub,
+             prompt      = STRING_TOKEN(STR_SATA_OUB_PROMPT),
+             help        = STRING_TOKEN(STR_SATA_OUB_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid   = SYSTEM_CONFIGURATION.SataRaidIooe,
+             prompt      = STRING_TOKEN(STR_SATA_IOOE_PROMPT),
+             help        = STRING_TOKEN(STR_SATA_IOOE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.SataRaidSrt,
+            prompt      = STRING_TOKEN(STR_PCH_SRT_PROMPT),
+            help        = STRING_TOKEN(STR_PCH_SRT_HELP),
+            option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+            option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.SataRaidOromDelay,
+             prompt      = STRING_TOKEN(STR_SATA_ODLY_PROMPT),
+             help        = STRING_TOKEN(STR_SATA_ODLY_HELP),
+             option text = STRING_TOKEN(STR_2SEC_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_4SEC_STRING), value = 1, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_6SEC_STRING), value = 2, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_8SEC_STRING), value = 3, flags = RESET_REQUIRED; 
+         endoneof;
+
+    endif;
+  endform;
+#ifdef PCH_SERVER_BIOS_FLAG
+  form formid = PCH_SSATA_OPTIONS_FORM_ID,
+
+    title = STRING_TOKEN(STR_PCH_SSATA_OPTIONS_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_PCH_SSATA_OPTIONS_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+	
+    oneof varid     = SYSTEM_CONFIGURATION.PchsSata,
+        prompt      = STRING_TOKEN(STR_SSATA_DEVICE_PROMPT),
+        help        = STRING_TOKEN(STR_SSATA_DEVICE_HELP),
+        option text = STRING_TOKEN(STR_ENABLED_STRING),   value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED ;
+        option text = STRING_TOKEN(STR_DISABLED_STRING),  value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.PchsSata == 0;
+        oneof varid     = SYSTEM_CONFIGURATION.sSataInterfaceMode,
+             prompt      = STRING_TOKEN(STR_SSATA_TYPE_PROMPT),
+             help        = STRING_TOKEN(STR_SSATA_TYPE_HELP),
+             option text = STRING_TOKEN(STR_SSATA_IDE),   value = SATA_MODE_IDE, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_SSATA_AHCI),  value = SATA_MODE_AHCI, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_SSATA_RAID),  value = SATA_MODE_RAID, flags = RESET_REQUIRED;
+         endoneof;
+
+         oneof varid       = SYSTEM_CONFIGURATION.sSataTestMode,
+             prompt   = STRING_TOKEN(STR_SSATA_TEST_MODE_PROMPT),
+             help     = STRING_TOKEN(STR_SSATA_TEST_MODE_HELP),
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    rule SSATA_MODE_OPTIONS_DISABLED,
+        ideqval SYSTEM_CONFIGURATION.PchSata == 1
+        AND
+        ideqval SYSTEM_CONFIGURATION.PchsSata == 1
+        AND
+        ideqval SYSTEM_CONFIGURATION.SataInterfaceMode == SATA_MODE_RAID
+        AND
+        ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_RAID
+        AND
+        ideqval SYSTEM_CONFIGURATION.SataAlternateId == 1
+        AND
+        ideqval SYSTEM_CONFIGURATION.sSataAlternateId == 1
+        AND
+        ideqid SYSTEM_CONFIGURATION.SataRaidLoadEfiDriver == SYSTEM_CONFIGURATION.sSataRaidLoadEfiDriver
+    endrule;
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+        suppressif ruleref ( SSATA_MODE_OPTIONS_DISABLED );
+            goto PCH_SSATA_SFMS_OPTIONS_FORM_ID,
+                prompt = STRING_TOKEN(STR_SSATA_MODE_OPTIONS_FORM_TITLE),
+                help = STRING_TOKEN(STR_SSATA_MODE_OPTIONS_FORM_HELP);
+        endif;
+        suppressif NOT ruleref ( SSATA_MODE_OPTIONS_DISABLED );
+            text
+                help = STRING_TOKEN(STR_SSATA_MODE_OPTIONS_DISABLED_HELP),
+                text = STRING_TOKEN(STR_SSATA_MODE_OPTIONS_FORM_TITLE),
+                text = STRING_TOKEN(STR_NULL_STRING);
+        endif;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+        oneof varid = SYSTEM_CONFIGURATION.sSataLpm,
+            prompt   = STRING_TOKEN(STR_SSATA_AHCI_LPM_PROMPT),
+            help     = STRING_TOKEN(STR_SSATA_AHCI_LPM_HELP),
+            option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        endoneof;               
+        suppressif ideqval SYSTEM_CONFIGURATION.sSataLpm == 0x0;
+            oneof varid   = SYSTEM_CONFIGURATION.sSataSalp,
+                prompt   = STRING_TOKEN(STR_SSATA_AHCI_SALP_PROMPT),
+                help     = STRING_TOKEN(STR_SSATA_AHCI_SALP_HELP),
+                option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+                option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+            endoneof;
+        endif;
+    endif;
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_RAID;
+      oneof varid = SYSTEM_CONFIGURATION.sSataAlternateId,
+          prompt   = STRING_TOKEN(STR_SSATA_ALTERNATE_ID_PROMPT),
+          help     = STRING_TOKEN(STR_SSATA_ALTERNATE_ID_HELP),
+          option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+      endoneof;
+  
+      oneof varid = SYSTEM_CONFIGURATION.sSataRaidLoadEfiDriver,
+          prompt   = STRING_TOKEN(STR_SSATA_RAID_EFI_DRIVER_PROMPT),
+          help     = STRING_TOKEN(STR_SSATA_RAID_EFI_DRIVER_HELP),
+          option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+      endoneof;	  
+    endif;
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SSATA0_STRING),
+        text   = STRING_TOKEN(STR_SSATA0_NAME);
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataPort[0],
+             prompt      = STRING_TOKEN(STR_SSATA_PORT_0),
+             help        = STRING_TOKEN(STR_SSATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               ideqval SYSTEM_CONFIGURATION.sSataExternal[0] == 1;  
+         oneof varid   = SYSTEM_CONFIGURATION.sSataHotPlug[0],
+             prompt      = STRING_TOKEN(STR_SSATA_HOTPLUG0),
+             help        = STRING_TOKEN(STR_SSATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.sSataExternal[0],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA6),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               NOT ideqval SYSTEM_CONFIGURATION.sSataExternal[0] == 1;
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SSATA_ESATA),
+        text   = STRING_TOKEN(STR_SSATA_HOTPLUG_SUPPORT),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               ideqval SYSTEM_CONFIGURATION.sSataHotPlug[0] == 0;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataMechanicalSw[0],
+             prompt      = STRING_TOKEN(STR_SSATA_MECHANICAL_SW0),
+             help        = STRING_TOKEN(STR_SSATA_MECHANICAL_SW_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataSpinUp[0],
+             prompt      = STRING_TOKEN(STR_SSATA_SPIN_UP0),
+             help        = STRING_TOKEN(STR_SSATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.sSataType[0],
+         prompt      = STRING_TOKEN(STR_SSATA_TYPE0),
+         help        = STRING_TOKEN(STR_SSATA_TYPE_HELP),
+         option text = STRING_TOKEN(STR_SSATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_SSATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SSATA1_STRING),
+        text   = STRING_TOKEN(STR_SSATA1_NAME);
+
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataPort[1],
+             prompt      = STRING_TOKEN(STR_SSATA_PORT_1),
+             help        = STRING_TOKEN(STR_SSATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+     endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               ideqval SYSTEM_CONFIGURATION.sSataExternal[1] == 1;    
+         oneof varid   = SYSTEM_CONFIGURATION.sSataHotPlug[1],
+             prompt      = STRING_TOKEN(STR_SSATA_HOTPLUG1),
+             help        = STRING_TOKEN(STR_SSATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.sSataExternal[1],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA7),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               NOT ideqval SYSTEM_CONFIGURATION.sSataExternal[1] == 1;
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SSATA_ESATA),
+        text   = STRING_TOKEN(STR_SSATA_HOTPLUG_SUPPORT),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               ideqval SYSTEM_CONFIGURATION.sSataHotPlug[1] == 0;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataMechanicalSw[1],
+             prompt      = STRING_TOKEN(STR_SSATA_MECHANICAL_SW1),
+             help        = STRING_TOKEN(STR_SSATA_MECHANICAL_SW_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataSpinUp[1],
+             prompt      = STRING_TOKEN(STR_SSATA_SPIN_UP1),
+             help        = STRING_TOKEN(STR_SSATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.sSataType[1],
+         prompt      = STRING_TOKEN(STR_SSATA_TYPE1),
+         help        = STRING_TOKEN(STR_SSATA_TYPE_HELP),
+         option text = STRING_TOKEN(STR_SSATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_SSATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SSATA2_STRING),
+        text   = STRING_TOKEN(STR_SSATA2_NAME);
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataPort[2],
+             prompt      = STRING_TOKEN(STR_SSATA_PORT_2),
+             help        = STRING_TOKEN(STR_SSATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               ideqval SYSTEM_CONFIGURATION.sSataExternal[2] == 1;  
+         oneof varid   = SYSTEM_CONFIGURATION.sSataHotPlug[2],
+             prompt      = STRING_TOKEN(STR_SSATA_HOTPLUG2),
+             help        = STRING_TOKEN(STR_SSATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.sSataExternal[2],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA8),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE  
+               OR ideqval SYSTEM_CONFIGURATION.sSataExternal[2] == 1;
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SSATA_ESATA),
+        text   = STRING_TOKEN(STR_SSATA_HOTPLUG_SUPPORT),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               ideqval SYSTEM_CONFIGURATION.sSataHotPlug[2] == 0;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataMechanicalSw[2],
+             prompt      = STRING_TOKEN(STR_SSATA_MECHANICAL_SW2),
+             help        = STRING_TOKEN(STR_SSATA_MECHANICAL_SW_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataSpinUp[2],
+             prompt      = STRING_TOKEN(STR_SSATA_SPIN_UP2),
+             help        = STRING_TOKEN(STR_SSATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    oneof varid   = SYSTEM_CONFIGURATION.sSataType[2],
+         prompt      = STRING_TOKEN(STR_SSATA_TYPE2),
+         help        = STRING_TOKEN(STR_SSATA_TYPE_HELP),
+         option text = STRING_TOKEN(STR_SSATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_SSATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    text
+        help   = STRING_TOKEN(STR_NULL_STRING),
+        text   = STRING_TOKEN(STR_SSATA3_STRING),
+        text   = STRING_TOKEN(STR_SSATA3_NAME);
+
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataPort[3],
+             prompt      = STRING_TOKEN(STR_SSATA_PORT_3),
+             help        = STRING_TOKEN(STR_SSATA_PORT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+     endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               ideqval SYSTEM_CONFIGURATION.sSataExternal[3] == 1;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataHotPlug[3],
+             prompt      = STRING_TOKEN(STR_SSATA_HOTPLUG3),
+             help        = STRING_TOKEN(STR_SSATA_PORT_HOTPLUG_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+        oneof varid   = SYSTEM_CONFIGURATION.sSataExternal[3],
+             prompt      = STRING_TOKEN(STR_SATA_CONF_ESATA9),
+             help        = STRING_TOKEN(STR_SATA_CONF_ESATA_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE OR 
+               ideqval SYSTEM_CONFIGURATION.sSataExternal[3] == 1;
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_SSATA_ESATA),
+        text   = STRING_TOKEN(STR_SSATA_HOTPLUG_SUPPORT),
+        flags  = 0,
+        key    = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_IDE;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataSpinUp[3],
+             prompt      = STRING_TOKEN(STR_SSATA_SPIN_UP3),
+             help        = STRING_TOKEN(STR_SSATA_SPIN_UP_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+        
+    oneof varid   = SYSTEM_CONFIGURATION.sSataType[3],
+         prompt      = STRING_TOKEN(STR_SSATA_TYPE3),
+         help        = STRING_TOKEN(STR_SSATA_TYPE_HELP),
+         option text = STRING_TOKEN(STR_SSATA_HDD_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_SSATA_SSD_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+endform;
+
+  form formid = PCH_SSATA_SFMS_OPTIONS_FORM_ID,
+
+     title = STRING_TOKEN(STR_SSATA_MODE_OPTIONS_FORM_TITLE);
+
+     oneof varid   = SYSTEM_CONFIGURATION.sSataHddlk,
+         prompt      = STRING_TOKEN(STR_SSATA_HDDLK_PROMPT),
+         help        = STRING_TOKEN(STR_SSATA_HDDLK_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid   = SYSTEM_CONFIGURATION.sSataLedl,
+         prompt      = STRING_TOKEN(STR_SSATA_LEDL_PROMPT),
+         help        = STRING_TOKEN(STR_SSATA_LEDL_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.sSataInterfaceMode == SATA_MODE_RAID;
+         oneof varid   = SYSTEM_CONFIGURATION.sSataRaidR0,
+             prompt    = STRING_TOKEN(STR_SSATA_RAID0_PROMPT),
+             help      = STRING_TOKEN(STR_SSATA_RAID0_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.sSataRaidR1,
+             prompt      = STRING_TOKEN(STR_SSATA_RAID1_PROMPT),
+             help        = STRING_TOKEN(STR_SSATA_RAID1_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.sSataRaidR10,
+             prompt      = STRING_TOKEN(STR_SSATA_RAID10_PROMPT),
+             help        = STRING_TOKEN(STR_SSATA_RAID10_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.sSataRaidR5,
+             prompt      = STRING_TOKEN(STR_SSATA_RAID5_PROMPT),
+             help        = STRING_TOKEN(STR_SSATA_RAID5_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.sSataRaidIrrt,
+             prompt      = STRING_TOKEN(STR_SSATA_IRRT_PROMPT),
+             help        = STRING_TOKEN(STR_SSATA_IRRT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.sSataRaidOub,
+             prompt      = STRING_TOKEN(STR_SSATA_OUB_PROMPT),
+             help        = STRING_TOKEN(STR_SSATA_OUB_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.sSataRaidIooe,
+             prompt      = STRING_TOKEN(STR_SSATA_IOOE_PROMPT),
+             help        = STRING_TOKEN(STR_SSATA_IOOE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid   = SYSTEM_CONFIGURATION.sSataRaidSrt,
+            prompt      = STRING_TOKEN(STR_SSATA_SRT_PROMPT),
+            help        = STRING_TOKEN(STR_SSATA_SRT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.sSataRaidOromDelay,
+             prompt      = STRING_TOKEN(STR_SSATA_ODLY_PROMPT),
+             help        = STRING_TOKEN(STR_SSATA_ODLY_HELP),
+             option text = STRING_TOKEN(STR_2SEC_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_4SEC_STRING), value = 1, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_6SEC_STRING), value = 2, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_8SEC_STRING), value = 3, flags = RESET_REQUIRED; 
+         endoneof;
+
+    endif;
+  endform;
+#endif 
+
+  form formid = PCH_LAN_OPTIONS_FORM_ID,
+
+    title     = STRING_TOKEN(STR_PCH_LAN_OPTIONS_FORM_TITLE);
+
+    oneof varid    = SYSTEM_CONFIGURATION.PchLan,
+         prompt   = STRING_TOKEN(STR_PCH_LAN_TITLE),
+         help     = STRING_TOKEN(STR_PCH_LAN_HELP),
+      option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PchLan == 0;
+         oneof varid = SYSTEM_CONFIGURATION.PchWakeOnLan,
+             prompt   = STRING_TOKEN(STR_PCH_LAN_WOL_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_LAN_WOL_HELP),
+             //
+             // The default setup option has been changed from Disabled to Enabled to sync with Greens Glacier and to fix the 
+             // SelfTest error LPC Controller (Bus 0 Dev 31 Fun 0) 0A4[8]
+             //
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid = SYSTEM_CONFIGURATION.PchSlpLanLowDc,
+             prompt   = STRING_TOKEN(STR_PCH_SLP_LAN_LOW_DC_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_SLP_LAN_LOW_DC_HELP),
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+         endoneof;
+
+         oneof varid = SYSTEM_CONFIGURATION.PchPxeRom,
+             prompt   = STRING_TOKEN(STR_PCH_PXEROM_CONTROL),
+             help     = STRING_TOKEN(STR_PCH_PXEROM_CONTROL_HELP),
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+         endoneof;
+
+         oneof varid = SYSTEM_CONFIGURATION.PchEfiNetworkSupport,
+             prompt   = STRING_TOKEN(STR_PCH_EFI_NETWORK_CONTROL),
+             help     = STRING_TOKEN(STR_PCH_EFI_NETWORK_CONTROL_HELP),
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+         endoneof;
+      endif;    
+    
+
+    suppressif ideqval SYSTEM_CONFIGURATION.GbeRegionInvalid == 0;
+    text 
+      help   = STRING_TOKEN(STR_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_PCH_GBE_REGION),
+      text   = STRING_TOKEN(STR_PCH_INVALID),
+      flags = 0, key = 0;
+    endif;    
+
+  endform;
+  
+  form formid = PCH_PCIE_OPTIONS_FORM_ID,
+  
+    title     = STRING_TOKEN(STR_PCIE_OPTIONS_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    //
+    // HSD 4165822: PCI-E Global ASPM Support
+    //
+    oneof varid = SYSTEM_CONFIGURATION.PchPcieGlobalAspm,
+          prompt  = STRING_TOKEN(STR_PCH_PCIE_PORT_ASPM_PROMPT),
+          help    = STRING_TOKEN(STR_PCH_PCIE_GLOBAL_ASPM_HELP),
+          option text = STRING_TOKEN(STR_DISABLE),      value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_L1_ONLY),      value = 2, flags = RESET_REQUIRED| MANUFACTURING | DEFAULT;
+    endoneof;
+
+    suppressif TRUE;
+
+        oneof varid       = SYSTEM_CONFIGURATION.PciePortConfig1,
+             questionid  = 0x2001,
+             prompt      = STRING_TOKEN(STR_PCH_PCIE_CONFIG1_PROMPT),
+             help        = STRING_TOKEN(STR_PCH_PCIE_CONFIG_HELP),        
+             option text = STRING_TOKEN(STR_NULL_STRING), value=0, flags = DEFAULT | INTERACTIVE;
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value=1, flags= 0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_ENABLED_STRING ), value=2, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_AUTO_STRING), value=3, flags=0 | INTERACTIVE;
+        endoneof;
+
+        oneof varid       = SYSTEM_CONFIGURATION.PciePortConfig2,
+             questionid  = 0x2002,
+             prompt      = STRING_TOKEN(STR_PCH_PCIE_CONFIG2_PROMPT),
+             help        = STRING_TOKEN(STR_PCH_PCIE_CONFIG_HELP),        
+             option text = STRING_TOKEN(STR_NULL_STRING), value = 0, flags = DEFAULT | INTERACTIVE;
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 1, flags= 0 |INTERACTIVE;
+             option text = STRING_TOKEN(STR_ENABLED_STRING ), value = 2, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_AUTO_STRING), value = 3, flags=0 | INTERACTIVE;
+        endoneof;
+
+        oneof varid       = SYSTEM_CONFIGURATION.PcieSBDE,
+             questionid  = 0x2003,
+             prompt      = STRING_TOKEN(STR_PCH_PCIE_SBDE_PROMPT),
+             help        = STRING_TOKEN(STR_PCH_PCIE_SBDE_HELP),        
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 0, flags=DEFAULT | INTERACTIVE;
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 1, flags=0 | INTERACTIVE;
+       endoneof;
+
+    endif;
+       oneof varid       = SYSTEM_CONFIGURATION.GbePciePortNum,
+             questionid  = 0x2004,
+             prompt      = STRING_TOKEN(STR_PCH_GBE_PROMPT),
+             help        = STRING_TOKEN(STR_PCH_GBE_HELP),        
+             option text = STRING_TOKEN(STR_PCH_PCIERP1_PROMPT), value = 0, flags=DEFAULT | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_PCIERP2_PROMPT), value = 1, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_PCIERP3_PROMPT), value = 2, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_PCIERP4_PROMPT), value = 3, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_PCIERP5_PROMPT), value = 4, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_PCIERP6_PROMPT), value = 5, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_PCIERP7_PROMPT), value = 6, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_PCIERP8_PROMPT), value = 7, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_PCIERP9_PROMPT), value = 8, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_PCIERP10_PROMPT), value = 9, flags=0 | INTERACTIVE;
+             option text = STRING_TOKEN(STR_PCH_NPCIE_PROMPT), value = 255, flags=0 | INTERACTIVE;
+       endoneof;
+
+     oneof varid  = SYSTEM_CONFIGURATION.PcieClockGating,
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CKG_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CKG_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags =  DEFAULT| MANUFACTURING |RESET_REQUIRED;
+     endoneof;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.PchPcieGlobalAspm == 2;
+     oneof varid   = SYSTEM_CONFIGURATION.PcieDmiAspm,
+        prompt      = STRING_TOKEN(STR_PCH_DMI_ASPM_PROMPT),
+        help        = STRING_TOKEN(STR_PCH_DMI_ASPM_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags =  RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+     endoneof;
+      endif;
+
+
+    oneof varid   = SYSTEM_CONFIGURATION.PcieDmiExtSync,
+        prompt      = STRING_TOKEN(STR_PCH_DMI_ES_PROMPT),
+        help        = STRING_TOKEN(STR_PCH_DMI_ES_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.PcieDmiStopAndScreamEnable,
+        prompt      = STRING_TOKEN(STR_STOP_AND_SCREAM_CTRL),
+        help        = STRING_TOKEN(STR_STOP_AND_SCREAM_HELP),
+        option text = STRING_TOKEN(STR_DISABLED),     value = 0, flags = DEFAULT | RESET_REQUIRED |  MANUFACTURING;
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+#ifdef PCH_SERVER_BIOS_FLAG
+    oneof varid   = SYSTEM_CONFIGURATION.XTpmLen,
+        prompt      = STRING_TOKEN(STR_XTPMLEN_ENABLE),
+        help        = STRING_TOKEN(STR_XTPMLEN_ENABLE_HELP),
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+    endoneof;
+#endif
+
+    text 
+      help   = STRING_TOKEN(STR_EMPTY_STRING),
+      text   = STRING_TOKEN(STR_PCIE_LAN_PROMPT),
+      text   = STRING_TOKEN(STR_PCIE_LAN_VALUE);
+    
+    grayoutif  ideqval SYSTEM_CONFIGURATION.PcieSBDE == 0;
+         oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortSBDE,
+             prompt      = STRING_TOKEN(STR_PCH_PCIERP_SBDE_PROMPT),
+             help        = STRING_TOKEN(STR_PCH_PCIERP_SBDE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    endif;
+
+    suppressif ideqval  SYSTEM_CONFIGURATION.PcieRootPortSBDE == 0 OR 
+               ideqval  SYSTEM_CONFIGURATION.PcieSBDE == 0;
+      numeric varid =  SYSTEM_CONFIGURATION.PcieSBDEPort,
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_SBDE_PORT_PROMPT),
+        help        = STRING_TOKEN (STR_PCH_PCIE_SBDE_PORT_HELP),
+        flags   = RESET_REQUIRED,
+        minimum     = 0,
+        maximum     = 7,
+        step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 0,    // PCIe Port0 as default
+      endnumeric;
+    endif;
+
+     oneof varid   =  SYSTEM_CONFIGURATION.PcieUsbGlitchWa,
+         prompt      = STRING_TOKEN(STR_PCIE_USB_WA),
+         help        = STRING_TOKEN(STR_PCIE_USB_WA_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+     endoneof;
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortFunctionSwapping,
+      prompt      = STRING_TOKEN(STR_PCIE_RPFN_SWAPPING),
+      help        = STRING_TOKEN(STR_PCIE_RPFN_SWAPPING_HELP),
+      option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.GbePciePortNum == 0;
+         goto PCH_PCIERP1_OPTIONS_FORM_ID,
+             prompt = STRING_TOKEN(STR_PCIERP1_OPTIONS_FORM_TITLE),
+             help = STRING_TOKEN(STR_PCIERP1_OPTIONS_FORM_HELP),
+             flags = 0,
+             key = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[0] == 0 OR 
+               ideqval SYSTEM_CONFIGURATION.GbePciePortNum == 1 OR
+               NOT ideqval SYSTEM_CONFIGURATION.PciePortConfig1 == 0;
+         goto PCH_PCIERP2_OPTIONS_FORM_ID,
+             prompt = STRING_TOKEN(STR_PCIERP2_OPTIONS_FORM_TITLE),
+             help = STRING_TOKEN(STR_PCIERP2_OPTIONS_FORM_HELP),
+             flags = 0,
+             key = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[0] == 0 OR 
+               ideqval SYSTEM_CONFIGURATION.GbePciePortNum == 2 OR
+               ideqval SYSTEM_CONFIGURATION.PciePortConfig1 == 3;
+         goto PCH_PCIERP3_OPTIONS_FORM_ID,
+             prompt = STRING_TOKEN(STR_PCIERP3_OPTIONS_FORM_TITLE),
+             help = STRING_TOKEN(STR_PCIERP3_OPTIONS_FORM_HELP),
+             flags = 0,
+             key = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[0] == 0 OR 
+               ideqval SYSTEM_CONFIGURATION.GbePciePortNum == 3 OR
+              ideqval SYSTEM_CONFIGURATION.PciePortConfig1 == 3 OR 
+              ideqval SYSTEM_CONFIGURATION.PciePortConfig1 == 2;
+         goto PCH_PCIERP4_OPTIONS_FORM_ID,
+             prompt = STRING_TOKEN(STR_PCIERP4_OPTIONS_FORM_TITLE),
+             help = STRING_TOKEN(STR_PCIERP4_OPTIONS_FORM_HELP),
+             flags = 0,
+             key = 0;
+    endif; 
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[0] == 0 OR
+               ideqval SYSTEM_CONFIGURATION.GbePciePortNum == 4;
+         goto PCH_PCIERP5_OPTIONS_FORM_ID,
+             prompt = STRING_TOKEN(STR_PCIERP5_OPTIONS_FORM_TITLE),
+             help = STRING_TOKEN(STR_PCIERP5_OPTIONS_FORM_HELP),
+             flags = 0,
+             key = 0;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[0] == 0 OR 
+               ideqval SYSTEM_CONFIGURATION.GbePciePortNum == 5 OR
+               NOT ideqval SYSTEM_CONFIGURATION.PciePortConfig2 == 0;
+         goto PCH_PCIERP6_OPTIONS_FORM_ID,
+             prompt = STRING_TOKEN(STR_PCIERP6_OPTIONS_FORM_TITLE),
+             help = STRING_TOKEN(STR_PCIERP6_OPTIONS_FORM_HELP),
+             flags = 0,
+             key = 0;
+    endif;
+
+#ifndef ULT_FLAG    
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[0] == 0 OR 
+               ideqval SYSTEM_CONFIGURATION.GbePciePortNum == 6 OR
+           ideqval SYSTEM_CONFIGURATION.PciePortConfig2 == 3;
+         goto PCH_PCIERP7_OPTIONS_FORM_ID,
+             prompt = STRING_TOKEN(STR_PCIERP7_OPTIONS_FORM_TITLE),
+             help = STRING_TOKEN(STR_PCIERP7_OPTIONS_FORM_HELP),
+             flags = 0,
+             key = 0;
+    endif;
+         
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[0] == 0 OR 
+               ideqval SYSTEM_CONFIGURATION.GbePciePortNum == 7 OR
+              ideqval SYSTEM_CONFIGURATION.PciePortConfig2 == 3 OR 
+              ideqval SYSTEM_CONFIGURATION.PciePortConfig2 == 2;
+     goto PCH_PCIERP8_OPTIONS_FORM_ID,
+         prompt = STRING_TOKEN(STR_PCIERP8_OPTIONS_FORM_TITLE),
+         help = STRING_TOKEN(STR_PCIERP8_OPTIONS_FORM_HELP),
+         flags = 0,
+         key = 0;
+    endif;
+#endif
+  endform;
+
+
+  form formid = PCH_PCIERP1_OPTIONS_FORM_ID,
+
+    title     = STRING_TOKEN(STR_PCIERP1_OPTIONS_FORM_TITLE);
+
+    checkbox varid    = SYSTEM_CONFIGURATION.PcieRootPortEn[0],
+             prompt   = STRING_TOKEN(STR_PCH_PCIERP1_PROMPT),
+             help     = STRING_TOKEN(STR_PCH_PCIERP_HELP),
+             // Flags behavior for checkbox is overloaded so that it equals
+             // a DEFAULT value.  1 = ON, 0 = off
+             flags    = CHECKBOX_DEFAULT,
+    endcheckbox;
+    
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[0] == 0x0;
+      suppressif ideqval SYSTEM_CONFIGURATION.PchPcieGlobalAspm == 2;
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortAspm[0],
+               prompt   = STRING_TOKEN(STR_PCIE_ASPM_PROMPT0),
+               help     = STRING_TOKEN(STR_PCIE_ASPM_HELP),
+               option text = STRING_TOKEN(STR_PCIE_ASPM_DISABLED_STRING),  value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED; 
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0S_STRING),       value = 1, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L1_STRING),        value = 2, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0SL1_STRING),     value = 3, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_AUTO_STRING),      value = 4, flags = RESET_REQUIRED;
+      endoneof;      
+      endif;
+    
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortL1SubStates[0],
+          prompt      = STRING_TOKEN(STR_PCIE_L1SUB_PROMPT),
+          help        = STRING_TOKEN(STR_PCIE_L1SUB_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_2_STRING), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_2_STRING), value = 3, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortURE[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_URE_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_URE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortFEE[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_FEE_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_FEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortNFE[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_NFE_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_NFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCEE[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CEE_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCTD[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CTD_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CTD_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSFE[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SFE_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSNE[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SNE_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SNE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSCE[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SCE_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+       
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortPMCE[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_PMCE_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_PMCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortHPE[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_HPCE_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_HPCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSpeed[0],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SPEED_PROMPT0),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SPEED_HELP),
+         option text = STRING_TOKEN (STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN (STR_GEN1), value = 1, flags = RESET_REQUIRED; 
+         option text = STRING_TOKEN (STR_GEN2), value = 2, flags = RESET_REQUIRED; 
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortPME[0],
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_PME_PROMPT0),
+        help        = STRING_TOKEN(STR_PCH_PCIE_PME_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      numeric varid = SYSTEM_CONFIGURATION.PcieExtraBusRsvd[0],
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_RBUS_PROMPT0),
+          help        = STRING_TOKEN (STR_PCH_PCIE_RBUS_HELP),
+          minimum     = 0,
+          maximum     = 7,
+          step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+          default     = 0,    // default no extra bus reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvd[0], 
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_PROMPT0),
+          help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_HELP),
+          minimum     = 1,
+          maximum     = 20,
+          step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+          default     = 10,   // Default 10MB Memory Reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieIoRsvd[0], 
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_RVIO_PROMPT0),
+          help        = STRING_TOKEN (STR_PCH_PCIE_RVIO_HELP),
+          minimum     = 4,
+          maximum     = 20,
+          step        = 4,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+          default     = 4,    // Default 4K IO Reserved
+      endnumeric;
+
+     endif;  
+  endform;
+
+  form formid = PCH_PCIERP2_OPTIONS_FORM_ID,
+
+    title     = STRING_TOKEN(STR_PCIERP2_OPTIONS_FORM_TITLE);
+   
+   
+    checkbox varid    = SYSTEM_CONFIGURATION.PcieRootPortEn[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIERP2_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_PCIERP_HELP),
+         // Flags behavior for checkbox is overloaded so that it equals
+         // a DEFAULT value.  1 = ON, 0 = off
+         flags    = CHECKBOX_DEFAULT,
+    endcheckbox;
+
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[1] == 0x0;
+      suppressif ideqval SYSTEM_CONFIGURATION.PchPcieGlobalAspm == 2;
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortAspm[1],
+               prompt   = STRING_TOKEN(STR_PCIE_ASPM_PROMPT1),
+               help     = STRING_TOKEN(STR_PCIE_ASPM_HELP),
+               option text = STRING_TOKEN(STR_PCIE_ASPM_DISABLED_STRING),  value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED; 
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0S_STRING),       value = 1, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L1_STRING),        value = 2, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0SL1_STRING),     value = 3, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_AUTO_STRING),      value = 4, flags = RESET_REQUIRED;
+      endoneof;      
+      endif;
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortL1SubStates[1],
+          prompt      = STRING_TOKEN(STR_PCIE1_L1SUB_PROMPT),
+          help        = STRING_TOKEN(STR_PCIE_L1SUB_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_2_STRING), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_2_STRING), value = 3, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;    
+       
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortURE[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_URE_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_URE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortFEE[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_FEE_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_FEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortNFE[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_NFE_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_NFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCEE[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CEE_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCTD[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CTD_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CTD_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSFE[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SFE_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSNE[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SNE_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SNE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSCE[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SCE_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortPMCE[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_PMCE_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_PMCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortHPE[1],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_HPCE_PROMPT1),
+         help     = STRING_TOKEN(STR_PCH_PCIE_HPCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortSpeed[1],
+        prompt   = STRING_TOKEN (STR_PCH_PCIE_SPEED_PROMPT1),
+        help     = STRING_TOKEN (STR_PCH_PCIE_SPEED_HELP),
+        option text = STRING_TOKEN (STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN1), value = 1, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN2), value = 2, flags = RESET_REQUIRED; 
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortPME[1],
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_PME_PROMPT1),
+        help        = STRING_TOKEN(STR_PCH_PCIE_PME_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortMSIE[1], 
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_MSIE_PROMPT1), 
+        help        = STRING_TOKEN(STR_PCH_PCIE_MSIE_HELP), 
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+      endoneof;
+
+
+      numeric varid = SYSTEM_CONFIGURATION.PcieExtraBusRsvd[1],
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RBUS_PROMPT1),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RBUS_HELP),
+        minimum     = 0,
+        maximum     = 7,
+        step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 0,    // default no extra bus reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvd[1], 
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_PROMPT1),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_HELP),
+        minimum     = 1,
+        maximum     = 20,
+        step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 10,   // Default 10MB Memory Reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieIoRsvd[1], 
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RVIO_PROMPT1),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RVIO_HELP),
+        minimum     = 4,
+        maximum     = 20,
+        step        = 4,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 4,    // Default 4K IO Reserved
+      endnumeric;    
+    endif;
+   
+  endform;
+
+  form formid = PCH_PCIERP3_OPTIONS_FORM_ID,
+
+    title     = STRING_TOKEN(STR_PCIERP3_OPTIONS_FORM_TITLE);
+
+ 
+    checkbox varid    = SYSTEM_CONFIGURATION.PcieRootPortEn[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIERP3_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_PCIERP_HELP),
+         // Flags behavior for checkbox is overloaded so that it equals
+         // a DEFAULT value.  1 = ON, 0 = off
+         flags    = CHECKBOX_DEFAULT,
+    endcheckbox;
+    
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[2] == 0x0;
+      suppressif ideqval SYSTEM_CONFIGURATION.PchPcieGlobalAspm == 2;
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortAspm[2],
+               prompt   = STRING_TOKEN(STR_PCIE_ASPM_PROMPT2),
+               help     = STRING_TOKEN(STR_PCIE_ASPM_HELP),
+               option text = STRING_TOKEN(STR_PCIE_ASPM_DISABLED_STRING),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0S_STRING),       value = 1, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L1_STRING),        value = 2, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0SL1_STRING),     value = 3, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_AUTO_STRING),      value = 4, flags = RESET_REQUIRED;
+      endoneof;      
+      endif;
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortL1SubStates[2],
+          prompt      = STRING_TOKEN(STR_PCIE2_L1SUB_PROMPT),
+          help        = STRING_TOKEN(STR_PCIE_L1SUB_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_2_STRING), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_2_STRING), value = 3, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortURE[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_URE_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_URE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+     
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortFEE[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_FEE_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_FEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortNFE[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_NFE_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_NFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCEE[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CEE_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCTD[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CTD_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CTD_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSFE[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SFE_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSNE[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SNE_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SNE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSCE[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SCE_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortPMCE[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_PMCE_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_PMCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortHPE[2],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_HPCE_PROMPT2),
+         help     = STRING_TOKEN(STR_PCH_PCIE_HPCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortSpeed[2],
+        prompt   = STRING_TOKEN (STR_PCH_PCIE_SPEED_PROMPT2),
+        help     = STRING_TOKEN (STR_PCH_PCIE_SPEED_HELP),
+        option text = STRING_TOKEN (STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN1), value = 1, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN2), value = 2, flags = RESET_REQUIRED; 
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortPME[2],
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_PME_PROMPT2),
+        help        = STRING_TOKEN(STR_PCH_PCIE_PME_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+  
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortMSIE[2], 
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_MSIE_PROMPT2), 
+        help        = STRING_TOKEN(STR_PCH_PCIE_MSIE_HELP), 
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+      endoneof;
+  
+
+      numeric varid = SYSTEM_CONFIGURATION.PcieExtraBusRsvd[2],
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RBUS_PROMPT2),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RBUS_HELP),
+        minimum     = 0,
+        maximum     = 7,
+        step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 0,    // default no extra bus reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvd[2], 
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_PROMPT2),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_HELP),
+        minimum     = 1,
+        maximum     = 20,
+        step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 10,   // Default 10MB Memory Reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieIoRsvd[2], 
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RVIO_PROMPT2),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RVIO_HELP),
+        minimum     = 4,
+        maximum     = 20,
+        step        = 4,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 4,    // Default 4K IO Reserved
+      endnumeric;
+  
+    endif;
+   
+  endform;
+
+  form formid = PCH_PCIERP4_OPTIONS_FORM_ID,
+
+    title     = STRING_TOKEN(STR_PCIERP4_OPTIONS_FORM_TITLE);
+ 
+     checkbox varid    = SYSTEM_CONFIGURATION.PcieRootPortEn[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIERP4_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_PCIERP_HELP),
+         // Flags behavior for checkbox is overloaded so that it equals
+         // a DEFAULT value.  1 = ON, 0 = off
+         flags    = CHECKBOX_DEFAULT,
+     endcheckbox;
+    
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[3] == 0x0;
+      suppressif ideqval SYSTEM_CONFIGURATION.PchPcieGlobalAspm == 2;
+         oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortAspm[3],
+             prompt   = STRING_TOKEN(STR_PCIE_ASPM_PROMPT3),
+             help     = STRING_TOKEN(STR_PCIE_ASPM_HELP),
+               option text = STRING_TOKEN(STR_PCIE_ASPM_DISABLED_STRING),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0S_STRING),       value = 1, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L1_STRING),        value = 2, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0SL1_STRING),     value = 3, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_PCIE_ASPM_AUTO_STRING),      value = 4, flags = RESET_REQUIRED;
+         endoneof;      
+     endif;
+        
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortL1SubStates[3],
+          prompt      = STRING_TOKEN(STR_PCIE3_L1SUB_PROMPT),
+          help        = STRING_TOKEN(STR_PCIE_L1SUB_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_2_STRING), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_2_STRING), value = 3, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortURE[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_URE_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_URE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortFEE[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_FEE_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_FEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortNFE[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_NFE_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_NFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCEE[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CEE_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCTD[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CTD_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CTD_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSFE[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SFE_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSNE[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SNE_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SNE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSCE[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SCE_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+        
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortPMCE[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_PMCE_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_PMCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortHPE[3],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_HPCE_PROMPT3),
+         help     = STRING_TOKEN(STR_PCH_PCIE_HPCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortSpeed[3],
+         prompt   = STRING_TOKEN (STR_PCH_PCIE_SPEED_PROMPT3),
+         help     = STRING_TOKEN (STR_PCH_PCIE_SPEED_HELP),
+         option text = STRING_TOKEN (STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN (STR_GEN1), value = 1, flags = RESET_REQUIRED; 
+         option text = STRING_TOKEN (STR_GEN2), value = 2, flags = RESET_REQUIRED; 
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortPME[3],
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_PME_PROMPT3),
+        help        = STRING_TOKEN(STR_PCH_PCIE_PME_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+  
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortMSIE[3], 
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_MSIE_PROMPT3), 
+        help        = STRING_TOKEN(STR_PCH_PCIE_MSIE_HELP), 
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+      endoneof;
+
+      numeric varid = SYSTEM_CONFIGURATION.PcieExtraBusRsvd[3],
+         prompt      = STRING_TOKEN (STR_PCH_PCIE_RBUS_PROMPT3),
+         help        = STRING_TOKEN (STR_PCH_PCIE_RBUS_HELP),
+         minimum     = 0,
+         maximum     = 7,
+         step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+         default     = 0,    // default no extra bus reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvd[3], 
+         prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_PROMPT3),
+         help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_HELP),
+         minimum     = 1,
+         maximum     = 20,
+         step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+         default     = 10,   // Default 10MB Memory Reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieIoRsvd[3], 
+         prompt      = STRING_TOKEN (STR_PCH_PCIE_RVIO_PROMPT3),
+         help        = STRING_TOKEN (STR_PCH_PCIE_RVIO_HELP),
+         minimum     = 4,
+         maximum     = 20,
+         step        = 4,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+         default     = 4,    // Default 4K IO Reserved
+      endnumeric;
+    
+    endif;
+   
+  endform;
+
+  form formid = PCH_PCIERP5_OPTIONS_FORM_ID,
+
+    title     = STRING_TOKEN(STR_PCIERP5_OPTIONS_FORM_TITLE);
+   
+    checkbox varid    = SYSTEM_CONFIGURATION.PcieRootPortEn[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIERP5_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_PCIERP_HELP),
+         // Flags behavior for checkbox is overloaded so that it equals
+         // a DEFAULT value.  1 = ON, 0 = off
+          flags    = CHECKBOX_DEFAULT,
+    endcheckbox;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[4] == 0x0;
+      suppressif ideqval SYSTEM_CONFIGURATION.PchPcieGlobalAspm == 2;
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortAspm[4],
+               prompt   = STRING_TOKEN(STR_PCIE_ASPM_PROMPT4),
+               help     = STRING_TOKEN(STR_PCIE_ASPM_HELP),
+               option text = STRING_TOKEN(STR_PCIE_ASPM_DISABLED_STRING),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0S_STRING),       value = 1, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L1_STRING),        value = 2, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0SL1_STRING),     value = 3, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_AUTO_STRING),      value = 4, flags = RESET_REQUIRED;
+      endoneof;      
+      endif;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortL1SubStates[4],
+          prompt      = STRING_TOKEN(STR_PCIE4_L1SUB_PROMPT),
+          help        = STRING_TOKEN(STR_PCIE_L1SUB_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_2_STRING), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_2_STRING), value = 3, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortURE[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_URE_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_URE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortFEE[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_FEE_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_FEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortNFE[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_NFE_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_NFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCEE[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CEE_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCTD[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CTD_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CTD_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSFE[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SFE_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSNE[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SNE_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SNE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSCE[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SCE_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortPMCE[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_PMCE_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_PMCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortHPE[4],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_HPCE_PROMPT4),
+         help     = STRING_TOKEN(STR_PCH_PCIE_HPCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortSpeed[4],
+        prompt   = STRING_TOKEN (STR_PCH_PCIE_SPEED_PROMPT4),
+        help     = STRING_TOKEN (STR_PCH_PCIE_SPEED_HELP),
+        option text = STRING_TOKEN (STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN1), value = 1, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN2), value = 2, flags = RESET_REQUIRED; 
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortPME[4],
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_PME_PROMPT4),
+        help        = STRING_TOKEN(STR_PCH_PCIE_PME_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+  
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortMSIE[4], 
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_MSIE_PROMPT4), 
+        help        = STRING_TOKEN(STR_PCH_PCIE_MSIE_HELP), 
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+      endoneof;
+
+      numeric varid = SYSTEM_CONFIGURATION.PcieExtraBusRsvd[4],
+         prompt      = STRING_TOKEN (STR_PCH_PCIE_RBUS_PROMPT4),
+         help        = STRING_TOKEN (STR_PCH_PCIE_RBUS_HELP),
+         minimum     = 0,
+         maximum     = 7,
+         step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+         default     = 0,    // default no extra bus reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvd[4], 
+         prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_PROMPT4),
+         help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_HELP),
+         minimum     = 1,
+         maximum     = 20,
+         step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+         default     = 10,   // Default 10MB Memory Reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieIoRsvd[4], 
+         prompt      = STRING_TOKEN (STR_PCH_PCIE_RVIO_PROMPT4),
+         help        = STRING_TOKEN (STR_PCH_PCIE_RVIO_HELP),
+         minimum     = 4,
+         maximum     = 20,
+         step        = 4,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+         default     = 4,    // Default 4K IO Reserved
+      endnumeric;
+    
+    endif;
+   
+  endform;
+   
+  form formid = PCH_PCIERP6_OPTIONS_FORM_ID,
+
+    title     = STRING_TOKEN(STR_PCIERP6_OPTIONS_FORM_TITLE);
+    
+    checkbox varid    = SYSTEM_CONFIGURATION.PcieRootPortEn[5],
+        prompt   = STRING_TOKEN(STR_PCH_PCIERP6_PROMPT),
+        help     = STRING_TOKEN(STR_PCH_PCIERP_HELP),
+        // Flags behavior for checkbox is overloaded so that it equals
+        // a DEFAULT value.  1 = ON, 0 = off
+        flags    = CHECKBOX_DEFAULT,
+    endcheckbox;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[5] == 0x0;
+      suppressif ideqval SYSTEM_CONFIGURATION.PchPcieGlobalAspm == 2;
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortAspm[5],
+               prompt   = STRING_TOKEN(STR_PCIE_ASPM_PROMPT5),
+               help     = STRING_TOKEN(STR_PCIE_ASPM_HELP),
+               option text = STRING_TOKEN(STR_PCIE_ASPM_DISABLED_STRING),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0S_STRING),       value = 1, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L1_STRING),        value = 2, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0SL1_STRING),     value = 3, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_AUTO_STRING),      value = 4, flags = RESET_REQUIRED;
+         endoneof;      
+      endif;
+         oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortL1SubStates[5],
+             prompt      = STRING_TOKEN(STR_PCIE5_L1SUB_PROMPT),
+             help        = STRING_TOKEN(STR_PCIE_L1SUB_HELP),
+             option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_PCIE_L1SUB_1_STRING), value = 1, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_PCIE_L1SUB_2_STRING), value = 2, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_PCIE_L1SUB_1_2_STRING), value = 3, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortURE[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_URE_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_URE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortFEE[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_FEE_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_FEE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortNFE[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_NFE_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_NFE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCEE[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_CEE_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_CEE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCTD[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_CTD_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_CTD_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSFE[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_SFE_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_SFE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSNE[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_SNE_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_SNE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSCE[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_SCE_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_SCE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+        
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortPMCE[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_PMCE_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_PMCE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortHPE[5],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_HPCE_PROMPT5),
+             help     = STRING_TOKEN(STR_PCH_PCIE_HPCE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortSpeed[5],
+        prompt   = STRING_TOKEN (STR_PCH_PCIE_SPEED_PROMPT5),
+        help     = STRING_TOKEN (STR_PCH_PCIE_SPEED_HELP),
+        option text = STRING_TOKEN (STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN1), value = 1, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN2), value = 2, flags = RESET_REQUIRED; 
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortPME[5],
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_PME_PROMPT5),
+        help        = STRING_TOKEN(STR_PCH_PCIE_PME_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+  
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortMSIE[5], 
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_MSIE_PROMPT5), 
+        help        = STRING_TOKEN(STR_PCH_PCIE_MSIE_HELP), 
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+      endoneof;
+
+      numeric varid = SYSTEM_CONFIGURATION.PcieExtraBusRsvd[5],
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RBUS_PROMPT5),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RBUS_HELP),
+        minimum     = 0,
+        maximum     = 7,
+        step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 0,    // default no extra bus reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvd[5], 
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_PROMPT5),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_HELP),
+        minimum     = 1,
+        maximum     = 20,
+        step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 10,   // Default 10MB Memory Reserved
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieIoRsvd[5], 
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RVIO_PROMPT5),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RVIO_HELP),
+        minimum     = 4,
+        maximum     = 20,
+        step        = 4,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 4,    // Default 4K IO Reserved
+      endnumeric;
+ 
+    endif;
+   
+  endform;
+
+  form formid = PCH_PCIERP7_OPTIONS_FORM_ID,
+
+    title     = STRING_TOKEN(STR_PCIERP7_OPTIONS_FORM_TITLE);
+
+    checkbox varid    = SYSTEM_CONFIGURATION.PcieRootPortEn[6],
+         prompt   = STRING_TOKEN(STR_PCH_PCIERP7_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_PCIERP_HELP),
+         // Flags behavior for checkbox is overloaded so that it equals
+         // a DEFAULT value.  1 = ON, 0 = off
+         flags    = CHECKBOX_DEFAULT,
+    endcheckbox;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[6] == 0x0;
+      suppressif ideqval SYSTEM_CONFIGURATION.PchPcieGlobalAspm == 2;
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortAspm[6],
+             prompt   = STRING_TOKEN(STR_PCIE_ASPM_PROMPT6),
+             help     = STRING_TOKEN(STR_PCIE_ASPM_HELP),
+               option text = STRING_TOKEN(STR_PCIE_ASPM_DISABLED_STRING),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0S_STRING),       value = 1, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L1_STRING),        value = 2, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0SL1_STRING),     value = 3, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_PCIE_ASPM_AUTO_STRING),      value = 4, flags = RESET_REQUIRED;
+         endoneof;      
+      endif;
+         oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortL1SubStates[6],
+             prompt      = STRING_TOKEN(STR_PCIE6_L1SUB_PROMPT),
+             help        = STRING_TOKEN(STR_PCIE_L1SUB_HELP),
+             option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_PCIE_L1SUB_1_STRING), value = 1, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_PCIE_L1SUB_2_STRING), value = 2, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_PCIE_L1SUB_1_2_STRING), value = 3, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         endoneof;
+
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortURE[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_URE_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_URE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortFEE[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_FEE_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_FEE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortNFE[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_NFE_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_NFE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCEE[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_CEE_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_CEE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCTD[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_CTD_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_CTD_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSFE[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_SFE_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_SFE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSNE[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_SNE_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_SNE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSCE[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_SCE_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_SCE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortPMCE[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_PMCE_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_PMCE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+    
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortHPE[6],
+             prompt   = STRING_TOKEN(STR_PCH_PCIE_HPCE_PROMPT6),
+             help     = STRING_TOKEN(STR_PCH_PCIE_HPCE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortSpeed[6],
+             prompt   = STRING_TOKEN (STR_PCH_PCIE_SPEED_PROMPT6),
+             help     = STRING_TOKEN (STR_PCH_PCIE_SPEED_HELP),
+             option text = STRING_TOKEN (STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN (STR_GEN1), value = 1, flags = RESET_REQUIRED; 
+             option text = STRING_TOKEN (STR_GEN2), value = 2, flags = RESET_REQUIRED; 
+         endoneof;
+
+         oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortPME[6],
+             prompt      = STRING_TOKEN(STR_PCH_PCIE_PME_PROMPT6),
+             help        = STRING_TOKEN(STR_PCH_PCIE_PME_HELP),
+             option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+             option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+         endoneof;
+ 
+         oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortMSIE[6], 
+            prompt      = STRING_TOKEN(STR_PCH_PCIE_MSIE_PROMPT6), 
+            help        = STRING_TOKEN(STR_PCH_PCIE_MSIE_HELP), 
+            option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+            option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         endoneof;
+
+         numeric varid = SYSTEM_CONFIGURATION.PcieExtraBusRsvd[6],
+             prompt      = STRING_TOKEN (STR_PCH_PCIE_RBUS_PROMPT6),
+             help        = STRING_TOKEN (STR_PCH_PCIE_RBUS_HELP),
+             minimum     = 0,
+             maximum     = 7,
+             step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+             default     = 7,    // Default bus reserved for docking (Saddlestring)
+         endnumeric;
+      
+         numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvd[6], 
+             prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_PROMPT6),
+             help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_HELP),
+             minimum     = 1,
+             maximum     = 20,
+             step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+             default     = 17,   // Default 17MB Memory Reserved for docking (Saddlestring)
+         endnumeric;
+      
+         numeric varid = SYSTEM_CONFIGURATION.PcieIoRsvd[6], 
+             prompt      = STRING_TOKEN (STR_PCH_PCIE_RVIO_PROMPT6),
+             help        = STRING_TOKEN (STR_PCH_PCIE_RVIO_HELP),
+             minimum     = 4,
+             maximum     = 20,
+             step        = 4,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+             default     = 16,   // Default 16K IO Reserved for docking (Saddlestring)
+         endnumeric;
+    endif;
+   
+  endform;
+  
+    form formid = PCH_PCIERP8_OPTIONS_FORM_ID,
+
+    title     = STRING_TOKEN(STR_PCIERP8_OPTIONS_FORM_TITLE);
+    
+    checkbox varid    = SYSTEM_CONFIGURATION.PcieRootPortEn[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIERP8_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_PCIERP_HELP),
+         // Flags behavior for checkbox is overloaded so that it equals
+         // a DEFAULT value.  1 = ON, 0 = off
+         flags    = CHECKBOX_DEFAULT,
+    endcheckbox;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PcieRootPortEn[7] == 0x0;
+      suppressif ideqval SYSTEM_CONFIGURATION.PchPcieGlobalAspm == 2;
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortAspm[7],
+               prompt   = STRING_TOKEN(STR_PCIE_ASPM_PROMPT7),
+               help     = STRING_TOKEN(STR_PCIE_ASPM_HELP),
+               option text = STRING_TOKEN(STR_PCIE_ASPM_DISABLED_STRING),  value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0S_STRING),       value = 1, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L1_STRING),        value = 2, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_L0SL1_STRING),     value = 3, flags = RESET_REQUIRED;
+               option text = STRING_TOKEN(STR_PCIE_ASPM_AUTO_STRING),      value = 4, flags = RESET_REQUIRED;
+      endoneof;      
+      endif;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortL1SubStates[7],
+          prompt      = STRING_TOKEN(STR_PCIE7_L1SUB_PROMPT),
+          help        = STRING_TOKEN(STR_PCIE_L1SUB_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_STRING), value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_2_STRING), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PCIE_L1SUB_1_2_STRING), value = 3, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortURE[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_URE_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_URE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortFEE[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_FEE_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_FEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortNFE[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_NFE_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_NFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCEE[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CEE_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CEE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortCTD[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_CTD_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_CTD_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSFE[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SFE_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SFE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSNE[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SNE_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SNE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortSCE[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_SCE_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_SCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+        
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortPMCE[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_PMCE_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_PMCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    
+      oneof varid    = SYSTEM_CONFIGURATION.PcieRootPortHPE[7],
+         prompt   = STRING_TOKEN(STR_PCH_PCIE_HPCE_PROMPT7),
+         help     = STRING_TOKEN(STR_PCH_PCIE_HPCE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortSpeed[7],
+        prompt   = STRING_TOKEN (STR_PCH_PCIE_SPEED_PROMPT7),
+        help     = STRING_TOKEN (STR_PCH_PCIE_SPEED_HELP),
+        option text = STRING_TOKEN (STR_AUTO), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN1), value = 1, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN (STR_GEN2), value = 2, flags = RESET_REQUIRED; 
+      endoneof;
+
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortPME[7],
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_PME_PROMPT7),
+        help        = STRING_TOKEN(STR_PCH_PCIE_PME_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+  
+      oneof varid   = SYSTEM_CONFIGURATION.PcieRootPortMSIE[7], 
+        prompt      = STRING_TOKEN(STR_PCH_PCIE_MSIE_PROMPT7), 
+        help        = STRING_TOKEN(STR_PCH_PCIE_MSIE_HELP), 
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED; 
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+      endoneof;
+  
+
+      numeric varid = SYSTEM_CONFIGURATION.PcieExtraBusRsvd[7],
+          prompt      = STRING_TOKEN (STR_PCH_PCIE_RBUS_PROMPT7),
+          help        = STRING_TOKEN (STR_PCH_PCIE_RBUS_HELP),
+          minimum     = 0,
+          maximum     = 7,
+          step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+          default     = 7,    // Default bus reserved for docking (Saddlestring)
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieMemRsvd[7], 
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RMEM_PROMPT7),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RMEM_HELP),
+        minimum     = 1,
+        maximum     = 20,
+        step        = 1,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 17,   // Default 17MB Memory Reserved for docking (Saddlestring)
+      endnumeric;
+      
+      numeric varid = SYSTEM_CONFIGURATION.PcieIoRsvd[7], 
+        prompt      = STRING_TOKEN (STR_PCH_PCIE_RVIO_PROMPT7),
+        help        = STRING_TOKEN (STR_PCH_PCIE_RVIO_HELP),
+        minimum     = 4,
+        maximum     = 20,
+        step        = 4,    // Stepping of 0 equates to a manual entering of a value, otherwise it will auto-increment with a left/right arrow
+        default     = 8,    // Default 8K IO Reserved for docking (Saddlestring)
+      endnumeric;
+
+    endif;
+  endform;
+
+
+  form formid = PCH_SECURITY_FORM_ID,
+    title     = STRING_TOKEN(STR_SECURITY_OPTIONS_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_SECURITY_OPTIONS_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    oneof varid  = SYSTEM_CONFIGURATION.PchGpioLockDown,
+         prompt   = STRING_TOKEN(STR_PCH_GLE_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_GLE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.PchRtcLock,
+         prompt   = STRING_TOKEN(STR_PCH_RTC_LOCK_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_RTC_LOCK_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.PchBiosLock,
+         prompt   = STRING_TOKEN(STR_PCH_BLE_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_BLE_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+//AptioV server override start: Adding control for SPI Lock    
+    oneof varid       = SYSTEM_CONFIGURATION.PchFlashLockDown,
+         prompt      = STRING_TOKEN(STR_SV_FLASH_LOCKDOWN),
+         help        = STRING_TOKEN(STR_SV_FLASH_LOCKDOWN_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+	     option text = STRING_TOKEN(STR_ENABLED_STRING),  value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;    
+//AptioV server override end: Adding control for SPI Lock
+
+    oneof varid       = SYSTEM_CONFIGURATION.PchGbeFlashLockDown,
+         prompt      = STRING_TOKEN(STR_SV_GBE_FLASH_LOCKDOWN),
+         help        = STRING_TOKEN(STR_SV_GBE_FLASH_LOCKDOWN_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = DEFAULT | RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+
+  endform;
+
+#ifdef PCH_SERVER_BIOS_FLAG
+  form formid = PCH_EVA_OPTIONS_FORM_ID,
+  
+    title     = STRING_TOKEN(STR_PCH_EVA_OPTIONS_FORM_TITLE); 
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+  endform;
+
+#endif
+
+  form formid = PCH_THERMAL_FORM_ID,
+  
+  title = STRING_TOKEN(STR_PLTTHM_CONFIG_FORM_TITLE);
+
+    oneof varid  = SYSTEM_CONFIGURATION.ThermalDeviceEnable,
+             prompt   = STRING_TOKEN (STR_THERMAL_DEVICE_ENABLE),
+             help     = STRING_TOKEN (STR_THERMAL_DEVICE_ENABLE_HELP),
+             option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_AUTO), value = 2, flags =  RESET_REQUIRED;
+    endoneof;
+
+    oneof varid     = SYSTEM_CONFIGURATION.AlertEnableLock,
+             prompt      = STRING_TOKEN(STR_ALERT_ENABLE_LOCK),
+             help        = STRING_TOKEN(STR_ALERT_ENABLE_LOCK_HELP),
+             option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.AlertEnableLock == 0x0;
+      oneof varid     = SYSTEM_CONFIGURATION.PchAlert,
+             prompt      = STRING_TOKEN(STR_PCH_ALERT),
+             help        = STRING_TOKEN(STR_PCH_ALERT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid     = SYSTEM_CONFIGURATION.DimmAlert,
+             prompt      = STRING_TOKEN(STR_DIMM_ALERT),
+             help        = STRING_TOKEN(STR_DIMM_ALERT_HELP),
+             option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+             option text = STRING_TOKEN(STR_ENABLED), value = 1, flags =  RESET_REQUIRED;
+      endoneof;
+    endif;
+
+#ifdef DE_SKU
+    //
+    // Power Management WA
+    //
+    oneof varid  = SYSTEM_CONFIGURATION.PchEnableThermalLockDown,
+         prompt   = STRING_TOKEN(STR_PCH_ENABLE_THERMAL_LOCKDOWN_PROMPT),
+         help     = STRING_TOKEN(STR_PCH_ENABLE_THERMAL_LOCKDOWN_HELP),
+         option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+         option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+#endif //DE_SKU
+
+  endform;
+  

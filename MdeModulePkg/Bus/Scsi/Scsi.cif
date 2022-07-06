@@ -1,0 +1,15 @@
+<component>
+	name = "Scsi"
+	category = eModule
+	LocalRoot = "MdeModulePkg\Bus\Scsi\"
+	RefName = "MdeModulePkg.Scsi"
+[INF]
+"ScsiBusDxe\ScsiBusDxe.inf"
+"ScsiDiskDxe\ScsiDiskDxe.inf"
+[files]
+"Scsi.sdl"	
+"Scsi.chm"	
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_13"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_17"
+<endComponent>

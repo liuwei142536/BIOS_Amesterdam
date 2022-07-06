@@ -1,0 +1,552 @@
+TOKEN
+    Name  = "SecureBoot_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SecureBoot Module support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SECURE_BOOT_MODULE_REVISION"
+    Value  = "32"
+    Help  = "Version of Secure Boot module interfaces. 32 corresponds to label 28"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SecureBootDXE_SUPPORT"
+    Value  = "1"
+    Help  = "Load a DXE driver to provision SecureBoot defaults"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DEFAULT_SECURE_BOOT_ENABLE"
+    Value  = "0"
+    Help  = "Default value of Secure Boot Enable Control.\0-Secure Boot control option will be locked Disabled unless platform in User mode with CSM disabled"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DEFAULT_SECURE_BOOT_MODE"
+    Value  = "0"
+    Help  = "Default Secure Boot Mode selector.\0-Standard, 1-Custom Mode allows physically present users more flexibility changing Image Execution policy and Secure Boot Key management."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DEFAULT_SECURE_BOOT_MODE"
+    Value  = "1"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEFAULT_SECURE_BOOT_ENABLE" "=" "0"
+End
+
+TOKEN
+    Name  = "DEFAULT_PROVISION_SECURE_VARS"
+    Value  = "0"
+    Help  = "Install factory default Secure Boot variables: PK, KEK, db, dbx, dbt and dbr.\Note#1: Requires SecureBootDXE_SUPPORT = 1\Note#2: New BIOS built with this setting will not override existing Secure Boot variables in NVRAM on FW re-flash"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PRESERVE_SECURE_VARIABLES"
+    Value  = "1"
+    Help  = "1 - Preserve Secure Boot configuration across flash updates.\0 - Do not preserve Secure Boot configuration across flash updates."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CUSTOMIZED_SECURE_BOOT_DEPLOYMENT"
+    Value  = "0"
+    Help  = "Enable support for UEFI Customized Deployment of Secure Boot"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CUSTOMIZED_SECURE_BOOT_DEPLOYMENT"
+    Value  = "1"
+    Help  = "Enable Customized Deployment for Core5_15 and above(supports UEFIv2.7)"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AMI_PKG_VERSION" ">=" "26"
+End
+
+TOKEN
+    Name  = "DEFAULT_SECURE_BOOT_DEPLOYED_MODE"
+    Value  = "0"
+    Help  = "Boot the system in Deployed mode upon initial provisioning of default Secure Boot variables.\Requires CUSTOMIZED_SECURE_BOOT_DEPLOYMENT set to 1"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SECUREBOOT_MODE_CHANGE_RESET_REQUIRED"
+    Value  = "0"
+    Help  = "UEFIv2.7, ch 31.3: If reset is required on secure boot mode transition from User to Audit/Setup.\Requires CUSTOMIZED_SECURE_BOOT_DEPLOYMENT set to 1"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SECUREBOOT_AUDIT_MODE_CUSTOMIZATION"
+    Value  = "0"
+    Help  = "When AuditMode is activated, automatically enroll a list of\signer-chained certificates from signed Efi images to a DB variable.\Enhances AuditMode capabilities in configuring Secure Boot Key database to authenticate Efi images in Secure Boot mode"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SECURE_BOOT_SETUP"
+    Value  = "1"
+    Help  = "Install SecureBoot Setup page. If disabled, SecureBoot Setup controls are suppressed"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CUSTOMIZED_SECURE_BOOT_DEPLOYMENT_SETUP"
+    Value  = "0"
+    Help  = "Enable SecureBoot Setup controls to initiate manual Audit-, Deployed mode transitions"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CUSTOMIZED_SECURE_BOOT_DEPLOYMENT_SETUP"
+    Value  = "1"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "CUSTOMIZED_SECURE_BOOT_DEPLOYMENT" "=" "1"
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SECUREBOOT_DEVICE_GUARD_READY_SETUP"
+    Value  = "1"
+    Help  = "Enable SecureBoot Setup controls for filtering out of 'MS UEFI CA' certificate from DB variable"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ENABLE_IMAGE_EXEC_POLICY_OVERRIDE"
+    Value  = "0"
+    Help  = "Enable user override of Image Execution policy"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ENABLE_IMAGE_EXEC_POLICY_OVERRIDE"
+    Value  = "1"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+
+TOKEN
+    Name  = "LOAD_FROM_FV"
+    Value  = "0"
+    Help  = "Load image from Internal FV. Possible options:\0-ALWAYS_EXECUTE; 1-NEVER_EXECUTE; 2-ALLOW_EXECUTE_ON_SECURITY_VIOLATION;\3-DEFER_EXECUTE_ON_SECURITY_VIOLATION; 4-DENY_EXECUTE_ON_SECURITY_VIOLATION; 5-QUERY_USER_ON_SECURITY_VIOLATION"
+    TokenType = Integer
+    TargetH = Yes
+    Lock = Yes
+    Range    = "Supported options: 0"
+End
+
+TOKEN
+    Name  = "LOAD_FROM_OROM"
+    Value  = "4"
+    Help  = "Load image from Option ROM"
+    TokenType = Integer
+    TargetH = Yes
+    Range    = "Supported options: 3,4,5"
+End
+
+TOKEN
+    Name  = "LOAD_FROM_REMOVABLE_MEDIA"
+    Value  = "4"
+    Help  = "Load image from Removable Media"
+    TokenType = Integer
+    TargetH = Yes
+    Range    = "Supported options: 3,4,5"
+End
+
+TOKEN
+    Name  = "LOAD_FROM_FIXED_MEDIA"
+    Value  = "4"
+    Help  = "Load image from Fixed Media"
+    TokenType = Integer
+    TargetH = Yes
+    Range    = "Supported options: 3,4,5"
+End
+
+TOKEN
+    Name  = "SecureBoot_DEBUG_MESSAGES"
+    Value  = "0"
+    TokenType = Boolean
+    Help  = "Control level of debug messages in SecureBoot source code"
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+TOKEN
+    Name  = "SecureBoot_DEBUG_LEVEL"
+    Value  = "EFI_D_INFO"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SecureBoot_DEBUG_LEVEL"
+    Value  = "EFI_D_ERROR"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "SecureBoot_DEBUG_MESSAGES" "=" "1"
+End
+
+PATH
+    Name  = "SecureBoot_DIR"
+    Help  = "Path to SecureBoot Module Module in Project"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,SECURE_BOOT_MENU_REFRESH,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,KEY_MANAGEMENT_MENU_REFRESH,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,SECURE_BOOT_SUPPORT_CHANGE_KEY,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,SECURE_BOOT_MODE_CHANGE_KEY,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,FORCE_AUDIT_KEY,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "CUSTOMIZED_SECURE_BOOT_DEPLOYMENT" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,FORCE_DEPLOYED_KEY,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "CUSTOMIZED_SECURE_BOOT_DEPLOYMENT" "=" "1"
+End
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,CLEAR_DEPLOYED_KEY,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "CUSTOMIZED_SECURE_BOOT_DEPLOYMENT" "=" "1"
+End
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0, REMOVE_UEFI_CA, ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "SECUREBOOT_DEVICE_GUARD_READY_SETUP" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0, RESTORE_DB_DEFAULTS, ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+    Token = "SECUREBOOT_DEVICE_GUARD_READY_SETUP" "=" "1"
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,FORCE_DEFAULT_KEY,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,FORCE_SETUP_KEY,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,FORCE_DEFAULT_KEY_2,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,FORCE_SETUP_KEY_2,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,KEY_PROVISION_CHANGE_KEY,ForceSetupModeCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,GET_PK_KEY,GetSecureBootDBCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+   Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,ENROLL_EFI_IMAGE,EnrollCertificateToDbFromEfiImageCallback),"
+   Parent  = "SetupItemCallbacks"
+   InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,MANAGE_PK_KEY,ManageSecureBootKeysCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,MANAGE_KEK_KEY,ManageSecureBootKeysCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,MANAGE_DB_KEY,ManageSecureBootKeysCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,MANAGE_DBT_KEY,ManageSecureBootKeysCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,MANAGE_DBX_KEY,ManageSecureBootKeysCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SECURITY_FORM_SET_CLASS,0,MANAGE_DBR_KEY,ManageSecureBootKeysCallback),"
+    Parent  = "SetupItemCallbacks"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "UpdateSecureVariableBrowserInfo,"
+    Parent  = "LoadedPreviousValuesHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "UpdateSecureVariableBrowserInfo,"
+    Parent  = "LoadedConfigDefaults,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SecureBoot_DIR)$(PATH_SLASH)SecureBoot.c"
+    Parent  = "TSE_SOURCE_FILES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SecureBoot_DIR)$(PATH_SLASH)SecureBoot.sd"
+    Parent  = "SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SecureBoot_DIR)$(PATH_SLASH)SecureBoot.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(SecureBoot_DIR)$(PATH_SLASH)SecureBoot.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiPostManagerProtocolGuid gEfiSimpleFileSystemProtocolGuid gAmiDigitalSignatureProtocolGuid gAmiDeviceGuardSecBootApiGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiLegacyBiosProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    Token = "CSM_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiCryptoPkg$(PATH_SLASH)AmiCryptoPkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiSecureBootPkg$(PATH_SLASH)AmiSecureBootPkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "IntelFrameworkPkg$(PATH_SLASH)IntelFrameworkPkg.dec"
+    Parent  = "AdditionalSetupPackages"
+    Token = "CSM_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "DxeServicesLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiSecureBootLib"
+    Parent  = "AdditionalSetupLibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiSecureBootPkg$(PATH_SLASH)AmiSecureBootPkg.dec"
+    Parent  = "ADDITIONAL_AMITSE_Packages"
+    InvokeOrder = AfterParent
+End
+ELINK
+    Name  = "AmiCryptoPkg$(PATH_SLASH)AmiCryptoPkg.dec"
+    Parent  = "ADDITIONAL_AMITSE_Packages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiSecureBootLib"
+    Parent  = "ADDITIONAL_AMITSE_LibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiDigitalSignatureProtocolGuid gAmiDeviceGuardSecBootApiGuid"
+    Parent  = "ADDITIONAL_AMITSE_Protocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiImageSecurityDatabaseGuid gEfiGlobalVariableGuid gEfiCertX509Guid gEfiCertRsa2048Guid gEfiHashAlgorithmSha256Guid"
+    Parent  = "ADDITIONAL_AMITSE_Guids"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiDeploymentModeNvGuid gAmiVendorKeysNvGuid"
+    Parent  = "ADDITIONAL_AMITSE_Guids"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiImageSecurityDatabaseGuid gEfiGlobalVariableGuid gEfiCertX509Sha256Guid gEfiCertX509Sha384Guid gEfiCertX509Sha512Guid gEfiCertSha256Guid gEfiCertX509Guid gEfiCertRsa2048Guid  gEfiHashAlgorithmSha256Guid"
+    Parent  = "AdditionalSetupGuids"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiDeploymentModeNvGuid gAmiVendorKeysNvGuid"
+    Parent  = "AdditionalSetupGuids"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiSigOwherGuid"
+    Parent  = "ADDITIONAL_AMITSE_Guids"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiSigOwherGuid"
+    Parent  = "AdditionalSetupGuids"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = '{L"DeploymentModeNv",{ 0x97e8965f, 0xc761, 0x4f48, {0xb6, 0xe4, 0x9f, 0xfa, 0x9c, 0xb2, 0xa2, 0xd6} } },'
+    Parent  = "NvramPersistentVariables"
+    InvokeOrder = AfterParent
+    Token = "PRESERVE_SECURE_VARIABLES" "=" "1"
+End
+
+ELINK
+    Name  = '{L"VendorKeysNv",{0x550e42e1, 0xb6fa, 0x4e99, {0xbb, 0xd9, 0x1a, 0x90, 0x1f, 0x0, 0x1d, 0x7a} } },'
+    Parent  = "NvramPersistentVariables"
+    InvokeOrder = AfterParent
+    Token = "PRESERVE_SECURE_VARIABLES" "=" "1"
+End
+
+ELINK
+    Name  = " "
+    Parent  = '{L"KEK",EFI_GLOBAL_VARIABLE},'
+    InvokeOrder = ReplaceParent
+    Token = "PRESERVE_SECURE_VARIABLES" "=" "0"
+End
+
+ELINK
+    Name  = " "
+    Parent  = '{L"PK",EFI_GLOBAL_VARIABLE},'
+    InvokeOrder = ReplaceParent
+    Token = "PRESERVE_SECURE_VARIABLES" "=" "0"
+End
+
+ELINK
+    Name  = " "
+    Parent  = '{L"*",EFI_IMAGE_SECURITY_DATABASE_GUID},'
+    InvokeOrder = ReplaceParent
+    Token = "PRESERVE_SECURE_VARIABLES" "=" "0"
+End
+
+ELINK
+    Name  = " "
+    Parent  = '{L"SecureBootSetup",{0x7B59104A, 0xC00D, 0x4158, {0x87, 0xFF, 0xF0, 0x4D, 0x63, 0x96, 0xA9, 0x15} } },'
+    InvokeOrder = ReplaceParent
+    Token = "PRESERVE_SECURE_VARIABLES" "=" "0"
+End
+
+INFComponent
+    Name  = "SecureBootDXE"
+    File  = "SecureBootDXE.inf"
+    Package  = "AmiSecureBootPkg"
+    ModuleTypes = "DXE_DRIVER"
+    Token = "SecureBootDXE_Support" "=" "1"
+End
+
+FFS_FILE
+    Name  = "SecureBootDXE"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "AmiSecureBootPkg.SecureBootDXE"
+    Token = "SecureBootDXE_Support" "=" "1"
+End
+

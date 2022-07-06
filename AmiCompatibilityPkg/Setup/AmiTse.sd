@@ -1,0 +1,244 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file
+ *   Setup data file that contains control that are dependent on the AMITSE emodule.
+ */
+#ifdef CONTROL_DEFINITION
+    #ifndef SEPERATOR
+    #define SEPERATOR\
+        subtitle\
+            text = STRING_TOKEN(STR_EMPTY);
+    #endif
+
+    #define LANGUAGE_SELECT\
+        suppressif ideqval LANGUAGE_CODES.Value == 0xFFFF;\
+            oneof varid   = LANGUAGE.Value,\
+                prompt    = STRING_TOKEN(STR_LANGUAGE_PROMPT),\
+                help      = STRING_TOKEN(STR_LANGUAGE_HELP),\
+                flags = 0,\
+                option text  = STRING_TOKEN(STR_EMPTY), value = 0, flags = 0;\
+                option text  = STRING_TOKEN(STR_EMPTY), value = 1, flags = 0;\
+                default = 0,\
+                default = 0, defaultstore = AmiMfgDefault,\
+            endoneof;\
+        endif;
+
+    #define AMI_ADMINISTRATOR_PASSWORD\
+        grayoutif ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_USER;\
+            password varid = AMITSESETUP.AdminPassword,\
+                prompt = STRING_TOKEN(STR_ADMIN_PASSWORD),\
+                help = STRING_TOKEN(STR_ADMIN_PASSWORD_HELP),\
+                flags = 0,\
+                minsize = PASSWORD_MIN_SIZE,\
+                maxsize = PASSWORD_MAX_SIZE,\
+                encoding = 1,\
+            endpassword;\
+        endif;
+
+    #define AMI_USER_PASSWORD\
+        password varid = AMITSESETUP.UserPassword,\
+            prompt = STRING_TOKEN(STR_USER_PASSWORD),\
+            help = STRING_TOKEN(STR_USER_PASSWORD_HELP),\
+            flags = 0,\
+            minsize = PASSWORD_MIN_SIZE,\
+            maxsize = PASSWORD_MAX_SIZE,\
+            encoding = 1,\
+        endpassword;
+
+    #define QUIET_BOOT\
+        checkbox varid = AMITSESETUP.AMISilentBoot,\
+            prompt = STRING_TOKEN(STR_QUIET_BOOT),\
+            help = STRING_TOKEN(STR_QUIET_BOOT_HELP),\
+            flags = 0,\
+            key = 0,\
+            default = DEFAULT_QUIET_BOOT,\
+            default = DEFAULT_QUIET_BOOT, defaultstore = AmiMfgDefault,\
+        endcheckbox;
+
+    #define AMI_TSE_SAVE_AND_EXIT\
+        suppressif ideqval AMI_CALLBACK.Value == SAVE_AND_EXIT_VALUE;\
+            goto EXIT_MAIN,\
+                prompt = STRING_TOKEN(STR_SAVE_EXIT),\
+                help = STRING_TOKEN(STR_SAVE_EXIT_HELP);\
+        endif;
+
+    #define AMI_TSE_DISCARD_AND_EXIT\
+        suppressif ideqval AMI_CALLBACK.Value == DISCARD_AND_EXIT_VALUE;\
+            goto EXIT_MAIN,\
+                prompt = STRING_TOKEN(STR_DISCARD_EXIT),\
+                help = STRING_TOKEN(STR_DISCARD_EXIT_HELP);\
+        endif;
+
+    #define AMI_TSE_SAVE_AND_RESET\
+        suppressif ideqval AMI_CALLBACK.Value == SAVE_AND_RESET_VALUE;\
+            goto EXIT_MAIN,\
+                prompt = STRING_TOKEN(STR_SAVE_RESET),\
+                help = STRING_TOKEN(STR_SAVE_RESET_HELP);\
+        endif;
+
+    #define AMI_TSE_DISCARD_AND_RESET\
+        suppressif ideqval AMI_CALLBACK.Value == DISCARD_AND_RESET_VALUE;\
+            goto EXIT_MAIN,\
+                prompt = STRING_TOKEN(STR_DISCARD_RESET),\
+                help = STRING_TOKEN(STR_DISCARD_RESET_HELP);\
+        endif;
+
+    #define AMI_TSE_SAVE_IMMEDIATE\
+        suppressif ideqval AMI_CALLBACK.Value == SAVE_VALUE;\
+            goto EXIT_MAIN,\
+                prompt = STRING_TOKEN(STR_SAVE),\
+                help = STRING_TOKEN(STR_SAVE_HELP);\
+        endif;
+
+    #define AMI_TSE_DISCARD_IMMEDIATE\
+        suppressif ideqval AMI_CALLBACK.Value == DISCARD_VALUE;\
+            goto EXIT_MAIN,\
+                prompt = STRING_TOKEN(STR_DISCARD),\
+                help = STRING_TOKEN(STR_DISCARD_HELP);\
+        endif;
+
+    #define AMI_TSE_RESTORE_DEFAULTS\
+        suppressif ideqval AMI_CALLBACK.Value == RESTORE_DEFAULTS_VALUE;\
+            goto EXIT_MAIN,\
+                prompt = STRING_TOKEN(STR_RESTORE_DEFAULTS),\
+                help = STRING_TOKEN(STR_RESTORE_DEFAULTS_HELP);\
+        endif;
+
+    #define AMI_TSE_SAVE_USER_DEFAULTS\
+        suppressif ideqval AMI_CALLBACK.Value == SAVE_USER_DEFAULTS_VALUE;\
+            goto EXIT_MAIN,\
+                prompt = STRING_TOKEN(STR_SAVE_USER_DEFAULTS),\
+                help = STRING_TOKEN(STR_SAVE_USER_DEFAULTS_HELP);\
+        endif;
+
+    #define AMI_TSE_RESTORE_USER_DEFAULTS\
+        suppressif ideqval AMI_CALLBACK.Value == RESTORE_USER_DEFAULTS_VALUE;\
+            goto EXIT_MAIN,\
+                prompt = STRING_TOKEN(STR_RESTORE_USER_DEFAULTS),\
+                help = STRING_TOKEN(STR_RESTORE_USER_DEFAULTS_HELP);\
+        endif;
+
+#endif //CONTROL_DEFINITION
+
+#ifdef MAIN_FORM_SET
+    #ifdef FORM_SET_ITEM
+        suppressif ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_ADMIN;
+            text
+                help   = STRING_TOKEN(STR_EMPTY),
+                text   = STRING_TOKEN(STR_ACCESS_LEVEL),
+                text   = STRING_TOKEN(STR_ACCESS_USER);
+        endif;
+        
+        suppressif ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_USER;
+            text
+                help   = STRING_TOKEN(STR_EMPTY),
+                text   = STRING_TOKEN(STR_ACCESS_LEVEL),
+                text   = STRING_TOKEN(STR_ACCESS_ADMIN);
+        endif;
+    #endif //FORM_SET_ITEM
+    #ifdef FORM_SET_GOTO
+        SEPARATOR
+        LANGUAGE_SELECT
+    #endif // FORM_SET_GOTO
+#endif //MAIN_FORM_SET
+
+
+
+#ifdef SECURITY_FORM_SET
+    #ifdef FORM_SET_ITEM
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_ONE);
+        SEPARATOR
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_TWO);
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_THREE);
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_FOUR);
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_FIVE);
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_SIX);
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_SEVEN);
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_EIGHT);
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_NINE);
+        subtitle
+            text = STRING_TOKEN(STR_SECURITY_BANNER_TEN);
+        text
+            help   = STRING_TOKEN(STR_EMPTY),
+            text   = STRING_TOKEN(STR_MIN_PASSWORD_LENGTH_NAME),
+            text   = STRING_TOKEN(STR_MIN_PASSWORD_LENGTH__VALUE);
+        text
+            help   = STRING_TOKEN(STR_EMPTY),
+            text   = STRING_TOKEN(STR_MAX_PASSWORD_LENGTH_NAME),
+            text   = STRING_TOKEN(STR_MAX_PASSWORD_LENGTH__VALUE);
+
+        SEPARATOR
+
+        AMI_ADMINISTRATOR_PASSWORD
+        AMI_USER_PASSWORD
+    #endif //FORM_SET_ITEM
+#endif //SECURITY_FORM_SET
+
+#ifdef BOOT_FORM_SET
+    #ifdef FORM_SET_ITEM
+        QUIET_BOOT
+    #endif
+#endif
+
+
+#ifdef EXIT_FORM_SET
+    #ifdef FORM_SET_ITEM
+        subtitle
+            text = STRING_TOKEN(STR_SAVE_TITLE);
+        
+        AMI_TSE_SAVE_AND_EXIT
+        AMI_TSE_DISCARD_AND_EXIT
+
+        SEPARATOR
+        
+        AMI_TSE_SAVE_AND_RESET
+        AMI_TSE_DISCARD_AND_RESET
+        
+        SEPARATOR
+
+        AMI_TSE_SAVE_IMMEDIATE
+        AMI_TSE_DISCARD_IMMEDIATE
+
+        SEPARATOR
+
+        subtitle
+            text = STRING_TOKEN(STR_DEFAULTS_TITLE);
+        AMI_TSE_RESTORE_DEFAULTS
+        AMI_TSE_SAVE_USER_DEFAULTS
+        AMI_TSE_RESTORE_USER_DEFAULTS
+    #endif // FORM_SET_ITEM
+#endif //EXIT_FORM_SET
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

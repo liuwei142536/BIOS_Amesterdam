@@ -1,0 +1,89 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file
+#  Cryptographic Library Instance for DXE_DRIVER.
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiCryptLibRun
+  FILE_GUID                      = 72D5A6BC-0A3D-41C8-9B88-25A204F60296
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiCryptLib|DXE_RUNTIME_DRIVER
+  CONSTRUCTOR                    = AmiCryptLibRunConstructor
+  DESTRUCTOR                     = AmiCryptLibRunDestructor
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF ARM
+#
+
+[Sources]
+ CryptLibInitRun.c
+ BaseCryptLib.c
+ RSAKeyImport.c
+ Pkcs1_sigDecode.c
+ Memalloc.c
+ Scrtlib.c
+ TimeWrapper.c
+ wpa_debug.c
+ wpa_debug.h
+ Pkcs7.c
+ Pkcs7.h
+ includes.h
+ build_config.h
+ common.h
+ os.h
+ crypto.h
+ libtommath.h
+ bignum.c
+ bignum.h
+ asn1.c
+ asn1.h
+ rsa.c
+ rsa.h
+ md5.h
+ md5.c
+ sha1.h
+ sha1.c
+ sha256.c
+ sha256.h
+ sha384.c
+ sha512.c
+ x509v3.c
+ x509v3.h
+
+[Packages]
+ MdePkg/MdePkg.dec
+ AmiModulePkg/AmiModulePkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+ 
+[LibraryClasses]
+ BaseLib
+ MemoryAllocationLib
+ UefiBootServicesTableLib
+ UefiRuntimeServicesTableLib
+ DebugLib
+ PrintLib
+ 
+[LibraryClasses.IA32]
+  AmiCryptIntrinsicLib
+ 
+[Pcd]
+ gAmiCryptoPkgTokenSpaceGuid.AmiPcdCpMaxHeapSize
+
+[BuildOptions.X64]
+#Don't define LTM_FAST if intend to support RSA operations with 8192bit key or larger
+MSFT:*_*_X64_CC_FLAGS     = -DLTM_FAST -wd4267 -wd4334
+GCC:*_*_X64_CC_FLAGS      = -DLTM_FAST
+
+[BuildOptions.AARCH64]
+*_GCC_AARCH64_CC_FLAGS   = -D_MSC_VER  -DLTM_FAST

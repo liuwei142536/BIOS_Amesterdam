@@ -1,0 +1,103 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   This is AMI UsbRtSmm driver
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UsbRtSmm
+  FILE_GUID                      = 04EAAAA1-29A1-11d7-8838-00500473D4EB
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x00010014
+  ENTRY_POINT                    = USBDriverEntryPoint
+
+[Sources]
+  Rt/AmiUsb.c
+  Rt/UsbKbd.c
+  Rt/Elib.c
+  Rt/Uhci.c
+  Rt/Usb.c
+  Rt/UsbHub.c
+  Rt/UsbMass.c
+  Rt/UsbMass.h
+  Rt/UsbCcid.c
+  Rt/UsbMs.c
+  Rt/UsbHid.c
+  Rt/UsbPoint.c
+  Rt/Uhci.h
+  Rt/UsbKbd.h
+  Rt/Ehci.c
+  Rt/Ehci.h
+  Rt/Ohci.c
+  Rt/Ohci.h
+  Rt/SysKbc.c
+  Rt/SysNoKbc.c
+  Rt/Xhci.h
+  Rt/Xhci.c
+  $(USB_RT_SMM_SOURCES_LIST)
+ 
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  $(USB_RT_SMM_PACKAGES_LIST)
+
+[LibraryClasses]
+  BaseLib
+  AmiSmmUsbHcdLib
+  BaseMemoryLib
+  UefiDriverEntryPoint
+  DebugLib
+  IoLib
+  TimerLib
+  AmiBufferValidationLib
+  SmmServicesTableLib
+  AmiUsbSmmGlobalDataValidationLib
+  DxeSmmUsbSbLib
+  AmiBaseUsbBoardLib
+  $(USB_RT_SMM_LIBRARYCLASSES_LIST)
+ 
+[Protocols]
+  gEfiUsbProtocolGuid
+  gAmiUsbSmmProtocolGuid
+  gEfiSmmUsbDispatch2ProtocolGuid
+  gEfiSmmSwDispatch2ProtocolGuid
+  gEmul6064MsInputProtocolGuid
+  gEmul6064TrapProtocolGuid
+  gEmul6064KbdInputProtocolGuid
+  $(USB_RT_SMM_PROTOCOLS_LIST)
+ 
+[Depex]
+  $(USB_RT_SMM_DEPEX_LIST)
+  gEfiUsbProtocolGuid AND
+  gEfiSmmBase2ProtocolGuid AND
+  gEfiSmmSwDispatch2ProtocolGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

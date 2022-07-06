@@ -1,0 +1,128 @@
+/*++
+  This file contains an 'Intel Peripheral Driver' and is        
+  licensed for Intel CPUs and chipsets under the terms of your  
+  license agreement with Intel or your vendor.  This file may   
+  be modified by the user, subject to additional terms of the   
+  license agreement                                             
+--*/
+/*++
+
+  Copyright (c)  2008 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval system, 
+  or transmitted in any form or by any means without the express written 
+  consent of Intel Corporation.
+
+Module Name:
+
+  2Ioh.asi
+
+Abstract:
+
+  Contains IOH device and register information
+
+--*/
+
+  // IOH1 presence detect routine
+  Device (IOHP) {
+    // Within the IOH, read D0:F0 for IOH presence detect
+    Name(_ADR, 0x00000000)          // Device 00
+    Name(_UID, "IOH1PRES")          // IOH1 Present
+
+    // IOHR - Config register for Vendor ID check
+    OperationRegion(IOHR, PCI_Config, 0x00, 0x02)
+    Field(IOHR, ByteAcc, NoLock, Preserve){
+      offset(0x00),
+      VID0,16,  // Vendor ID
+    }
+  }
+  
+  Method(_STA){
+    if(LEqual(\_SB.IOH1.IOHP.VID0, 0x8086)) {
+      // Have to account for logical offline condition which IOH1 is still in QPI fabric, but not OS visible
+      ShiftRight(IIOH, 0, Local1)
+      And(Local1, 0x1, Local1)
+      if(LEqual(Local1, 0x0)) {
+        // IOH1 logically offline
+        Return(0x00)
+      }else{
+        // IOH1 present and logically online
+        Return(0x0F) 
+      }
+    } else { 
+        Return(0x00)    
+    }    
+  } // End Method STA
+
+
+Name(P1RS, ResourceTemplate() {
+    //RESOURCE_CHUNK1_OFF
+    WORDBusNumber(            //Bus number resource (0); the bridge produces bus numbers for its subsequent buses
+      ResourceProducer,       // bit 0 of general flags is 1
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is fixed
+      PosDecode,              // PosDecode
+      0x4946,                 // Granularity    (FIX5 - Patch through Acpi Plaform Driver during POST)
+      0x3558,                 // Min
+      0x00FB,                 // Max
+      0x0000,                 // Translation
+      0x00FB                  // Range Length = Max-Min+1
+    )
+
+    //RESOURCE_CHUNK2_OFF
+    WORDIO(                   //Consumed-and-produced resource (all I/O above CFF)
+      ResourceProducer,       // bit 0 of general flags is 0
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is fixed
+      PosDecode,
+      EntireRange,
+      0x4946,                 // Granularity (FIX6 - Patch through Acpi Plaform Driver during POST)
+      0x3658,                 // Min
+      0xffff,                 // Max
+      0x0000,                 // Translation
+      0xf300                  // Range Length
+    )
+
+    //
+    // PCI RESOURCE_32bit
+    //
+    DWORDMemory(              // Consumed-and-produced resource(all of memory space)
+      ResourceProducer,       // bit 0 of general flags is 0
+      PosDecode,              // positive Decode
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is fixed
+      NonCacheable,
+      ReadWrite,
+      0x37584946,             // Granularity (FIX7 - Patch through Acpi Plaform Driver during POST)
+      0x00000000,             // Min (calculated dynamically)
+      0x00000000,             // Max = 4GB - 1MB  (fwh + fwh alias...)
+      0x00000000,             // Translation
+      0x00000000              // Range Length (calculated dynamically)
+   )  
+
+    //
+    // PCI RESOURCE_64bit
+    //
+    QWORDMemory(              // Consumed-and-produced resource(all of memory space)
+      ResourceProducer,       // bit 0 of general flags is 0
+      PosDecode,              // positive Decode
+      MinFixed,               // Range is fixed
+      MaxFixed,               // Range is fixed
+      NonCacheable,
+      ReadWrite,
+      0x38584946,             // Granularity  (FIX8 - Patch through Acpi Plaform Driver during POST)
+      0x00000000000,          // Min (calculated dynamically)
+      0x00000000000,          // Max = 4GB - 1MB  (fwh + fwh alias...)
+      0x00000000000,          // Translation
+      0x00000000000           // Range Length (calculated dynamically)
+    )
+})          // end of P1RS Buffer
+
+
+// Current resource template return
+Method(_CRS, 0x0, NotSerialized) {
+    Return(P1RS)
+}

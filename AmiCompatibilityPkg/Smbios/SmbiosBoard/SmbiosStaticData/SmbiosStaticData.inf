@@ -1,0 +1,28 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmbiosStaticData
+  FILE_GUID                      = DAF4BF89-CE71-4917-B522-C89D32FBC59F
+  VERSION_STRING                 = 1.0
+  MODULE_TYPE                    = USER_DEFINED
+  SECTION_GUID=AB56DC60-0057-11da-A8DB-000102EEE626
+
+[Sources]
+  SmbiosStaticData.asm16
+  Smb.equ
+  SmbData.mac
+  SmbDesc.def
+  SmbHdr.equ
+  SmbMacro.aid
+  SmbStruc.def
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec

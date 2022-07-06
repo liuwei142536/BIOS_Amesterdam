@@ -1,0 +1,8 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Library\Amt\Include\"
+	RefName = "GrantleyPkg.AmtLibrary.Include"
+[files]
+"Amt.h"	
+<endComponent>

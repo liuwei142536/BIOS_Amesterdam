@@ -1,0 +1,9 @@
+<component>
+	name = "Haswell - Grantley"
+	category = ModulePart
+	LocalRoot = "AmiCRBPkg\Board\NB\"
+	RefName = "Haswell - Grantley"
+[parts]
+"Haswell - NB Board"
+"Haswell - NB Chipset"
+<endComponent>

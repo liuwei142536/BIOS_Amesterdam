@@ -1,0 +1,21 @@
+TOKEN
+    Name  = "AmiDeviceGuardApi_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling DeviceGuard support in the project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+ELINK
+    Name  = '{"Microsoft Corporation UEFI CA 2011",{ 0x77FA9ABD, 0x0359, 0x4D32, {0xBD, 0x60, 0x28, 0xF4, 0xE7, 0x8F, 0x78, 0x4B} } },'
+    Parent  = "SecureBootLib_BadCertificates"
+    Help  = "Called from SecureBootLibBadCertificates"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "AmiDeviceGuardApi"
+    File  = "AmiDeviceGuardApi.inf"
+    Package  = "AmiSecureBootPkg"
+    ModuleTypes = "DXE_DRIVER"
+End

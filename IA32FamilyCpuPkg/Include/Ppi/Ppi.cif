@@ -1,0 +1,9 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "IA32FamilyCpuPkg\Include\Ppi\"
+	RefName = "IA32FamilyCpuPkg.Ppi"
+	Generic Module = "SS: AptioV;$\AptioV\Source\Hardware\Cpu\Intel\IA32FamilyCpuPkg\Include\Ppi;5.004_IA32FamilyCpuPkg_04"
+[files]
+"Cache.h"	
+<endComponent>

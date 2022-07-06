@@ -1,0 +1,29 @@
+TOKEN
+	Name  = "GrantleySocketPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling GrantleySocketPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "SW_SMI_SAVE_MSR"
+    Value  = "0x56"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SW_SMI_RESTORE_MSR"
+    Value  = "0x57"
+    TokenType = Integer
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+ELINK
+	Name  = "PROGRAM_IIO_OEM_SVID_SID"
+	InvokeOrder = ReplaceParent
+End
+

@@ -1,0 +1,59 @@
+## @file
+#  PcieSlotOpromLib Library
+#
+#  Copyright (c) 2009 - 2012, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PcieSlotOpromLib
+  FILE_GUID                      = 12194835-4441-450D-A0DA-187003FFD412                                   
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PcieSlotOpromLib|DXE_DRIVER
+  EDK_RELEASE_VERSION            = 0x00020000
+  UEFI_SPECIFICATION_VERSION     = 0x00020000
+
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF
+#
+
+[Sources.common]
+  PcieSlotOpromLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+
+[LibraryClasses]
+  HobLib
+  BaseLib
+  DebugLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+
+[Protocols]
+  gEfiPciRootBridgeIoProtocolGuid 
+  
+[Guids]
+  gEfiPlatformInfoGuid
+  gEfiSetupVariableGuid
+
+[FixedPcd.common]
+
+

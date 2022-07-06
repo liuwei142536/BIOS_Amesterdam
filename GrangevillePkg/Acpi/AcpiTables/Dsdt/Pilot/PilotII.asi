@@ -1,0 +1,141 @@
+/*++
+  This file contains an 'Intel Peripheral Driver' and is        
+  licensed for Intel CPUs and chipsets under the terms of your  
+  license agreement with Intel or your vendor.  This file may   
+  be modified by the user, subject to additional terms of the   
+  license agreement                                             
+--*/
+/*++
+
+  Copyright (c)  2001 - 2013 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval system, 
+  or transmitted in any form or by any means without the express written 
+  consent of Intel Corporation.
+
+  Module Name:
+
+    PilotII.asi
+
+  Abstract:
+
+    ACPI ASL source file for PilotII Super IO device
+
+    In order to get/set the Configuration Mode of the Logical Devices
+    inside of the Pilot, it is necessary to access the i/o ports for
+    the Configuration registers.  This section defines the
+    OperationRegion necessary for this i/o.
+
+--*/
+
+
+//------------------------------------------------------------------------
+// !!! BELOW ARE GENERIC SIO CONTROL METHODS. DO NOT REQUIRE MODIFICATIONS
+//----------------------------------------------------------------------
+//  Set of Field names to be used to access SIO configuration space.
+    OperationRegion(SMCF,    //Name of Operation Region for SuperIO device
+      SystemIO,    //Type of address space
+      0x4E,        //Offset to start of region
+      2)           //Size of region in bytes
+                   //End of Operation Region
+    Field(SMCF, ByteAcc, NoLock,Preserve){
+      INXF, 8,     //Field named INDX is 8 bit wide
+      DATF, 8      //Field DATA is 8 bit wide
+    }
+
+//----------------------------------------------------------------------
+//  Set of Field names to be used to access SIO configuration space.
+//----------------------------------------------------------------------
+    IndexField(INXF, DATF, ByteAcc, NoLock, Preserve){
+      //
+      // Global Configuration Registers:
+      //
+      Offset(7),
+      LDNF, 8,  // Logical Device Number
+
+      Offset(0x20),
+      DIDF, 8, // Super IO Device ID register
+
+      //
+      // Per-Device Configuration Registers:
+      //
+      Offset(0x30),
+      ACTF, 8, // Active register
+
+      Offset(0x60),
+      AHFF, 8, // Primary i/o base address, high byte
+      ALFF, 8, //  low byte
+
+      Offset(0x70),
+      INTF, 8, // Primary IRQ register
+
+      Offset(0x71),
+      INSF, 8, // IRQ type select (some devices)
+
+      Offset(0x74),
+      DMCF, 8, // Primary DMA channel (some devices)
+    } //End of indexed field
+
+
+//------------------------------------------------------------------------
+// Enter Config Mode, Select LDN
+// Arg0 : Logical Device number
+//------------------------------------------------------------------------
+
+    Method(ENFF, 1){
+      Store(0x5a, INXF)
+      Store(Arg0, LDNF)    //Select LDN
+    }
+
+
+//------------------------------------------------------------------------
+// Exit Config Mode
+//------------------------------------------------------------------------
+    Method(EXFF, 0){
+      Store(0xa5, INXF)
+    }
+
+//Implement the serial port _PRW method (GPE 0x1D - GPIO 13 wake from S5).
+//------------------------------------------------------------------------
+// SuperI/O SWC ACPI block IO registers
+//------------------------------------------------------------------------
+    OperationRegion(SWCR,    //Name of Operation Region for SuperIO device
+      SystemIO,    //Type of address space
+      0x680,       //Offset to start of region
+      2)           //Size of region in bytes
+                   //End of Operation Region
+    Field(SWCR, ByteAcc, NoLock,Preserve){
+      SWCI, 8,     //Field named INDX is 8 bit wide
+      SWCD, 8      //Field DATA is 8 bit wide
+    }
+
+    IndexField(SWCI, SWCD, ByteAcc, NoLock, Preserve){
+      Offset(0x00), RIS1, 1,    // +0.0 = RI1 Event Status
+                    RIS2, 1,    // +0.1 = RI2 Event Status
+                        , 6,
+      Offset(0x02), RIE1, 1,    // +2.0 = RI1 Event Enable
+                    RIE2, 1,    // +2.1 = RI2 Event enable
+                        , 6,
+    } //end of indexed field
+
+    Method(PTS2, 1){
+// Clear RI2 status
+      Store(1, RIS2)        // Clear RI2 Event Status
+      Store(1, RIE2)        // Enable RI2 Event
+    }
+
+    Method(WAK2, 1){
+// Disable RI2 Event
+      Store(0, RIE2)        // Disable RI2 Event
+      Store(1, RIS2)        // Clear RI2 Event Status
+    }
+
+#include "UAR1.ASI"
+#include "UAR2.ASI"
+#include "Ps2.ASI"
+#include "IpmiOprRegions.asi"
+
+

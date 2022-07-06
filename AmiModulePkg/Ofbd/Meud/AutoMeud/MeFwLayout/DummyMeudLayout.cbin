@@ -1,0 +1,32 @@
+#include <Uefi.h>
+
+#include <Guid/ZeroGuid.h>
+
+#include <AmiRomLayout.h>
+
+#pragma pack(1)
+typedef struct
+{
+    UINT32          Signature;
+    UINT32          Version;
+    UINT32          DesriptorSize;
+    UINT32          NumberOfDescriptors;
+	AMI_ROM_AREA    Descriptors[1];
+}DUMMY_MEUD_LAYOUT;
+
+DUMMY_MEUD_LAYOUT
+DummyLayout = 
+{
+    AMI_ROM_LAYOUT_SIGNATURE,
+    0x01,
+    sizeof(AMI_ROM_AREA),
+    0x01,
+    {
+        {
+            ZERO_GUID,
+            0x00, 0x00, 0x00, AmiRomAreaTypeRaw,
+            0x00
+        }
+    }
+};
+#pragma pack()

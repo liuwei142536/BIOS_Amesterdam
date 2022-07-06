@@ -1,0 +1,11 @@
+<component>
+	name = "AmiSioCommonLib"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Library\AmiSioCommonLib\"
+	RefName = "AmiSioCommonLib"
+[files]
+"AmiSioCommonLib.sdl"	
+"AmiSioCommonLib.c" 
+"AmiSioCommonLibElinks.txt" 
+"AmiSioCommonLibInf.txt"
+<endComponent>

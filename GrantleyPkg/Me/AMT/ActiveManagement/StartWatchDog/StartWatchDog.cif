@@ -1,0 +1,10 @@
+<component>
+	name = "StartWatchDog"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\ActiveManagement\StartWatchDog\"
+	RefName = "GrantleyPkg.StartWatchDog"
+[INF]
+"Pei\StartWatchDog.inf"
+[files]
+"StartWatchDog.sdl"	
+<endComponent>

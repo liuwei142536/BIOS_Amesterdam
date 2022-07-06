@@ -1,0 +1,116 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+##############################################################
+### Common Definitions Shared by All Tool Chains
+##############################################################
+
+#######################################################
+## Define priority of assembler file extensions
+#  If INF file includes multiple source files with the same name and different extensions,
+#  the build tools will only process the file that matches the first extension from the list
+#  defined by BUILDRULEORDER command
+#######################################################
+*_*_*_*_BUILDRULEORDER = nasm asm Asm ASM S s nasmb asm16
+
+#######################################################
+## Build Tool Flags
+#######################################################
+*_*_*_ASL_FLAGS          =
+#AptioV server override: Flag added to skip resource descriptor checks
+*_*_*_ASL_OUTFLAGS       = -cr -p
+*_*_*_VFR_FLAGS          = -n ENV(EXTERNAL_VFR_FLAGS)
+*_*_*_OPTROM_FLAGS       = -e
+*_*_*_GENFW_FLAGS        = ENV(EXTERNAL_GENFW_FLAGS)
+*_*_*_NASMB_FLAGS        = -f bin
+
+#######################################################
+## Build Tool Paths
+#######################################################
+#AptioV server override: Replace iasl with iasl5
+*_*_*_ASL_PATH           = ENV(TOOLS_DIR)/iasl5
+*_*_*_DT_PATH            = ENV(TOOLS_DIR)/iasl5
+*_*_*_VFR_PATH           = VfrCompile
+*_*_*_OPTROM_PATH        = EfiRom
+*_*_*_GENFW_PATH         = GenFw
+*_*_*_NASM_PATH          = ENV(NASM_PREFIX)nasm
+
+#######################################################
+## GUID Tools (Tools producing GUID-ed FFS sections)
+#######################################################
+
+##################
+# GenCrc32 tool definitions
+##################
+*_*_*_CRC32_PATH          = GenCrc32
+*_*_*_CRC32_GUID          = FC1BCDB0-7D31-49AA-936A-A4600D9DD083
+
+##################
+# BrotliCompress tool definitions
+##################
+*_*_*_BROTLI_PATH        = BrotliCompress
+*_*_*_BROTLI_GUID        = 3D532050-5CDA-4FD0-879E-0F7F630D5AFB
+
+##################
+# LzmaCompress tool definitions
+##################
+*_*_*_LZMA_PATH          = LzmaCompress
+*_*_*_LZMA_GUID          = EE4E5898-3914-4259-9D6E-DC7BD79403CF
+
+##################
+# LzmaF86Compress tool definitions with converter for x86 code.
+# It can improve the compression ratio if the input file is IA32 or X64 PE image.
+##################
+*_*_*_LZMAF86_PATH       = LzmaF86Compress
+*_*_*_LZMAF86_GUID       = D42AE6BD-1352-4bfb-909A-CA72A6EAE889
+
+##################
+# TianoCompress tool definitions
+##################
+*_*_*_TIANO_PATH         = TianoCompress
+*_*_*_TIANO_GUID         = A31280AD-481E-41B6-95E8-127F4C984779
+
+##################
+# BPDG tool definitions
+##################
+*_*_*_VPDTOOL_PATH       = BPDG
+*_*_*_VPDTOOL_GUID       = 8C3D856A-9BE6-468E-850A-24F7A8D38E08
+
+##################
+# Pkcs7Sign tool definitions
+##################
+*_*_*_PKCS7SIGN_PATH       = Pkcs7Sign
+*_*_*_PKCS7SIGN_GUID       = 4AAFD29D-68DF-49EE-8AA9-347D375665A7
+
+##################
+# Unused tool definitions 
+##################
+*_*_*_OBJCOPY_PATH       = echo
+*_*_*_OBJCOPY_FLAGS      = objcopy not needed for
+*_*_*_SYMRENAME_PATH     = echo
+*_*_*_SYMRENAME_FLAGS    = Symbol renaming not needed for
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

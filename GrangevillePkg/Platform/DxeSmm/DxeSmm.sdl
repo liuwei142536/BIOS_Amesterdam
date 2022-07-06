@@ -1,0 +1,24 @@
+TOKEN
+	Name  = "GrangevillePkg_Platform_DxeSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Pei support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SoftADR_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformInfo support in Project"
+	TokenType = Boolean
+	Token = "STORAGE_FEATURE_EN" "=" "1"
+	Token = "GRANGEVILLE_PLATFORM" "=" "1"
+End
+
+INFComponent
+	Name  = "SoftAdr"
+	File  = "SoftADR\SoftAdr.inf"
+	Package  = "GrangevillePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "SoftADR_SUPPORT" "=" "1"
+End

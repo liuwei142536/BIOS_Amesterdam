@@ -1,0 +1,10 @@
+<component>
+	name = "AtPolicyInit"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\SampleCode\AtPolicyInit\"
+	RefName = "GrantleyPkg.AtPolicyInit"
+[INF]
+"Dxe\AtDxePolicyInit.inf"
+[files]
+"AtPolicyInit.sdl"	
+<endComponent>

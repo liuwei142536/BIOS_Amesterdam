@@ -1,0 +1,10 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Include\Ppi\"
+	RefName = "GrantleyPkg.Me.AMT.Include.Ppi.Ppi"
+[files]
+"AmtPlatformPolicyPei.h"	
+"AmtStatusCode.h"	
+"PlatformMeHookPpi.h"	
+<endComponent>

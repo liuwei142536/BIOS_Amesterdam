@@ -1,0 +1,233 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 1999 - 2014 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+//
+//
+// Module Name:
+//
+//   MemorySetupRas.hfr
+//
+// Abstract:
+//
+//   Memory Setup formset.
+//
+// Revision History:
+//
+// --*/
+
+#include "MemDefaults.h"
+#include "token.h" // AptioV Server Override: Added to get the value of sdl tokens
+
+  //
+  // Ras Config
+  //
+  form formid = VFR_FORMID_MEMORY_RAS,
+
+    title  = STRING_TOKEN(STR_MEMORY_RAS_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_RAS_CONFIG_SETUP);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    //subtitle text = STRING_TOKEN(STR_NULL_STRING);//AptioV Server Override: Extra Horizontal Lines display removal.
+
+#ifndef GRANGEVILLE_FLAG
+    oneof varid = SYSTEM_CONFIGURATION.RASMode,
+        prompt  = STRING_TOKEN(STR_RASMODE_PROMPT),
+        help    = STRING_TOKEN(STR_RASMODE_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),            value = RAS_MODE_DISABLE, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_MIRROR),             value = MIRROR_ENABLED, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LOCKSTEP),           value = LOCKSTEP_ENABLED, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.RASMode == RAS_MODE_DISABLE;
+    endif;
+
+    oneof varid = SYSTEM_CONFIGURATION.lockstepEnableX4,
+        prompt      = STRING_TOKEN(STR_LOCKSTEPX4_PROMPT),
+        help        = STRING_TOKEN(STR_LOCKSTEPX4_HELP),
+        option text = STRING_TOKEN(STR_AUTO),  value = LOCKSTEPX4_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED_STRING),  value = LOCKSTEPX4_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),   value = LOCKSTEPX4_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.RASMode == MIRROR_ENABLED;
+        oneof varid = SYSTEM_CONFIGURATION.enableSparing,
+            prompt  = STRING_TOKEN(STR_MEM_SPARING_EN_PROMPT),
+            help    = STRING_TOKEN(STR_MEM_SPARING_EN_HELP),
+            option text = STRING_TOKEN(STR_DISABLED_STRING),         value = SPARING_DISABLED, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+            option text = STRING_TOKEN (STR_ENABLED_STRING),         value = SPARING_ENABLED, flags = RESET_REQUIRED;
+        endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.enableSparing == SPARING_DISABLED;
+
+        oneof varid = SYSTEM_CONFIGURATION.multiSparingRanks,
+            prompt  = STRING_TOKEN(STR_MEM_MULTISPARING_PROMPT),
+            help    = STRING_TOKEN(STR_MEM_MULTISPARING_HELP),
+            option text = STRING_TOKEN(STR_ONERANK_SPARE),        value = ONE_RANK_SPARE, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_TWORANK_SPARE),        value = TWO_RANK_SPARE, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_THREERANK_SPARE),      value = THREE_RANK_SPARE, flags = RESET_REQUIRED;
+            option text = STRING_TOKEN(STR_AUTO),                 value = AUTO_RANK_SPARE, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        endoneof;
+
+
+    endif;
+
+#endif    
+    numeric varid = SYSTEM_CONFIGURATION.spareErrTh,
+        prompt = STRING_TOKEN(STR_SPAREERRTH_PROMPT),
+        help = STRING_TOKEN(STR_SPAREERRTH_HELP),
+        flags = RESET_REQUIRED,
+        minimum = 0,
+        maximum = 0x7FFF,
+        step = 1, // Stepping of 0 equates to a manual entering of a value,
+        // otherwise it will auto-increment with a left/right arrow
+        default = 0x7FFF,
+        default = 0x7FFF, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.leakyBktLo,
+        prompt = STRING_TOKEN(STR_LEAKY_BKT_LO_PROMPT),
+        help = STRING_TOKEN(STR_LEAKY_BKT_LO_HELP),
+        flags = RESET_REQUIRED,
+        minimum = 0,
+        maximum = 0x3F,
+        step = 1, // Stepping of 0 equates to a manual entering of a value,
+        // otherwise it will auto-increment with a left/right arrow
+        default = LEAKY_BUCKET_LO,
+        default = LEAKY_BUCKET_LO, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.leakyBktHi,
+        prompt = STRING_TOKEN(STR_LEAKY_BKT_HI_PROMPT),
+        help = STRING_TOKEN(STR_LEAKY_BKT_HI_HELP),
+        flags = RESET_REQUIRED,
+        minimum = 0,
+        maximum = 0x29,
+        step = 1, // Stepping of 0 equates to a manual entering of a value,
+        // otherwise it will auto-increment with a left/right arrow
+        default = LEAKY_BUCKET_HI,
+        default = LEAKY_BUCKET_HI, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+    oneof varid = SYSTEM_CONFIGURATION.DramMaint,
+      prompt    = STRING_TOKEN(STR_DRAM_MAINT_PROMPT),
+      help      = STRING_TOKEN(STR_DRAM_MAINT_HELP),
+      option text = STRING_TOKEN (STR_AUTO_STRING), value = DRAM_MAINT_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_MANUAL),      value = DRAM_MAINT_MANUAL, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_DISABLE),     value = DRAM_MAINT_DIS, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.DramMaint == DRAM_MAINT_MANUAL;
+      oneof varid = SYSTEM_CONFIGURATION.DramMaintMode,
+        prompt    = STRING_TOKEN(STR_DRAM_MAINT_MODE_PROMPT),
+        help      = STRING_TOKEN(STR_DRAM_MAINT_MODE_HELP),
+        option text = STRING_TOKEN (STR_PTRR_MODE), value = DRAM_MAINT_PTRR, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_TRR_MODE),  value = DRAM_MAINT_TRR, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+
+      suppressif ideqval SYSTEM_CONFIGURATION.DramMaintMode == DRAM_MAINT_PTRR;
+        oneof varid = SYSTEM_CONFIGURATION.DramMaintTRRMode,
+          prompt    = STRING_TOKEN(STR_DRAM_MAINT_TRR_PROMPT),
+          help      = STRING_TOKEN(STR_DRAM_MAINT_TRR_HELP),
+          option text = STRING_TOKEN (STR_TRR_MODE_A), value = DRAM_MAINT_MODE_A, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_TRR_MODE_B), value = DRAM_MAINT_MODE_B, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        endoneof;
+      endif;
+    endif;
+
+    oneof varid = SYSTEM_CONFIGURATION.PatrolScrub,
+        prompt  = STRING_TOKEN(STR_PATROL_SCRUB_PROMPT),
+        help    = STRING_TOKEN(STR_PATROL_SCRUB_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),          value = PATROL_SCRUB_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),           value = PATROL_SCRUB_EN, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.PatrolScrub == 0;
+        numeric varid   = SYSTEM_CONFIGURATION.PatrolScrubDuration,
+        prompt  = STRING_TOKEN(STR_PATROL_SCRUB_DURATION_PROMPT),
+        help    = STRING_TOKEN(STR_PATROL_SCRUB_DURATION_HELP),
+        flags   = 0 | RESET_REQUIRED,
+        minimum = 0,
+        maximum = 24,
+        step    = 0,         // Stepping of 0 equates to a manual entering of a value,
+                                 // otherwise it will auto-increment with a left/right arrow
+        default = PATROL_SCRUB_DURATION_DEFAULT,
+        default = PATROL_SCRUB_DURATION_DEFAULT, defaultstore = AmiMfgDefault,
+        endnumeric;
+    endif;
+
+    oneof varid = SYSTEM_CONFIGURATION.DemandScrubMode,
+        prompt  = STRING_TOKEN(STR_DEMAND_SCRUB_PROMPT),
+        help    = STRING_TOKEN(STR_DEMAND_SCRUB_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),          value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),           value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.DeviceTaggingMode,
+        prompt  = STRING_TOKEN(STR_DEVICE_TAGGING_MODE_PROMPT),
+        help    = STRING_TOKEN(STR_DEVICE_TAGGING_MODE_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),        value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),         value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+#ifndef GRANGEVILLE_FLAG
+  // cputype hsx=0, bdx= 2
+    suppressif ideqval SYSTEM_CONFIGURATION.cpuType == 0;
+    oneof varid = SYSTEM_CONFIGURATION.HandleHardErrorDetection,
+        prompt  = STRING_TOKEN(STR_HANDLEHARDERRORDETECTION_EN_PROMPT),
+        help    = STRING_TOKEN(STR_HANDLEHARDERRORDETECTION_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),        value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),         value = 1, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+   
+    suppressif  ideqval SYSTEM_CONFIGURATION.HandleHardErrorDetection == 0x00 OR ideqval SYSTEM_CONFIGURATION.cpuType == 0;
+      numeric varid     = SYSTEM_CONFIGURATION.HardErrorDetection_threshold,
+        prompt      = STRING_TOKEN(STR_HANDLEHARDERRORDETECTION_THRESHOLD_EN_PROMPT),
+        help        = STRING_TOKEN(STR_HANDLEHARDERRORDETECTION_THRESHOLD_EN_HELP),
+        flags     = RESET_REQUIRED,        
+        minimum   = 0,
+        maximum   = 65535,
+        step      = 0,
+        default   = 0x1,
+      endnumeric;
+    endif;    
+    
+    suppressif  ideqval SYSTEM_CONFIGURATION.HandleHardErrorDetection == 0x00 OR ideqval SYSTEM_CONFIGURATION.cpuType == 0;
+      numeric varid     = SYSTEM_CONFIGURATION.HardErrorDetection_duration,
+        prompt      = STRING_TOKEN(STR_HANDLEHARDERRORDETECTION_DURATION_EN_PROMPT),
+        help        = STRING_TOKEN(STR_HANDLEHARDERRORDETECTION_DURATION_EN_HELP),
+        flags     = RESET_REQUIRED,        
+        minimum   = 0,
+        maximum   = 65535,
+        step      = 0,
+        default   = 0x100,
+      endnumeric;
+    endif;   
+#endif    
+
+    oneof varid = SYSTEM_CONFIGURATION.Mpst,
+        prompt  = STRING_TOKEN(STR_MPST_PROMPT),
+        help    = STRING_TOKEN(STR_MPST_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),       value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),        value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+
+endform;

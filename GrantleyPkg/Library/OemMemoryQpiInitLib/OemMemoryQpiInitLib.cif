@@ -1,0 +1,11 @@
+<component>
+	name = "OemMemoryQpiInitLib"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Library\OemMemoryQpiInitLib\"
+	RefName = "GrantleyPkg.OemMemoryQpiInitLib"
+[INF]
+"OemMemoryQpiInitLib.inf"
+[files]
+"EdkMemoryQpiInit.h"	
+"OemMemoryQpiInitLib.sdl"	
+<endComponent>

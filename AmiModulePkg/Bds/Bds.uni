@@ -1,0 +1,52 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+/** 
+ * @file Bds.uni
+ * file contains the string definitions used by the BDS module
+ */
+/=#
+#langdef   en-US "English"    // English
+
+#string STR_SHELL           #language en-US "Built-in EFI Shell"
+#string STR_FD              #language en-US "Removable Drive"
+#string STR_HD              #language en-US "Hard Drive"
+#string STR_CD              #language en-US "CD/DVD Drive"
+#string STR_PCMCIA          #language en-US "PCMCIA Device"
+#string STR_USB             #language en-US "USB"
+#string STR_NET             #language en-US "Network Card"
+#string STR_BEV             #language en-US "BEV Device"
+#string STR_UNKNOWN         #language en-US "Unknown Device"
+#string STR_ATAPI           #language en-US "ATAPI"
+#string STR_SCSI            #language en-US "SCSI"
+
+#string STR_UEFI_PREFIX     #language en-US "UEFI: "
+#string STR_IPV4_PREFIX     #language en-US "IPv4 "
+#string STR_IPV6_PREFIX     #language en-US "IPv6 "
+#string STR_PARTITION       #language en-US "Partition"
+#string STR_HTTP_PREFIX     #language en-US "HTTP "
+#string STR_PXE_PREFIX      #language en-US "PXE "
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

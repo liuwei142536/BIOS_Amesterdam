@@ -1,0 +1,96 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @file ServerMgmtSetupStrings.uni
+//
+//  String definitions for the Server Management screen
+//
+
+
+//#include "VFR.uni"
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"    // AMI Mapping Language
+
+#string STR_EMPTY                           #language en-US ""
+
+#string STR_ENABLED                         #language en-US "Enabled"
+#string STR_DISABLED                        #language en-US "Disabled"
+#string STR_NONE                            #language en-US "None"
+#string STR_AUTO                            #language en-US "Auto"
+
+#string STR_SERVER_MGMT_TITLE               #language en-US "Server Mgmt"
+#string STR_SERVER_MGMT_TITLE_HELP          #language en-US "Press <Enter> to view or change the Server management configuration."
+
+#string STR_ENABLING_DISABLING_OPTIONS      #language en-US "Enabling/Disabling Options"
+#string STR_BMC_SUPPORT                     #language en-US "BMC Support"
+                                            #language x-AMI "IPMI600"
+#string STR_BMC_SUPPORT_HELP                #language en-US "Enable/Disable interfaces to communicate with BMC"
+
+#string STR_WAIT_FOR_BMC_RESPONSE           #language en-US "Wait For BMC"
+                                            #language x-AMI  "IPMI601"
+#string STR_WAIT_FOR_BMC_RESPONSE_HELP      #language en-US "Wait For BMC response for specified time out. BMC starts at the same time when BIOS starts during AC power ON. It takes around 30 seconds to initialize Host to BMC interfaces."
+#string STR_IPMI_BMC_SELF_TEST_STATUS       #language en-US "BMC Self Test Status"
+#string STR_IPMI_BMC_SELF_TEST_STATUS_VAL   #language en-US ""
+
+#string STR_BMC_TIME_ZONE                   #language en-US "Time Zone(UTC Offset)"
+                                            #language x-AMI "IPMI602"
+#string STR_BMC_TIME_ZONE_HELP              #language en-US "Enter UTC Offset in hours i.e. from -24:00 to +24:00. These values will be converted into minutes and programmed to BMC. Enter 0x7FFF to consider BIOS time as local time"
+#string STR_BMC_CURR_TIME_ZONE_HELP         #language en-US "Display Current BMC Time Zone value. Unspecified displayed for 0x07FF value in BMC "
+#string STR_BMC_CURR_TIME_ZONE              #language en-US "Current Time Zone"
+#string STR_BMC_CURR_TIME_ZONE_VALUE        #language en-US "Unspecified"
+
+#string STR_BMC_TIME_ZONE_DEFAULT           #language en-US "0x7FFF"
+
+#string STR_IPMI_BMC_DEVICE_ID              #language en-US "BMC Device ID"
+#string STR_IPMI_BMC_DEVICE_ID_VAL          #language en-US "Unknown"
+
+#string STR_IPMI_BMC_DEVICE_REVISION        #language en-US "BMC Device Revision"
+#string STR_IPMI_BMC_DEVICE_REVISION_VAL    #language en-US "Unknown"
+
+#string STR_IPMI_BMC_FIRMWARE_REVISION      #language en-US "BMC Firmware Revision"
+#string STR_IPMI_BMC_FIRMWARE_REVISION_VAL  #language en-US "Unknown"
+
+#string STR_IPMI_VERSION                    #language en-US "IPMI Version"
+#string STR_IPMI_VERSION_VAL                #language en-US "Unknown"
+#string STR_BMC_INTERFACES_EXISTS           #language en-US "BMC Interface(s)"
+
+#string STR_BMC_INTERFACES_LIST             #language en-US "Unknown"
+
+#string STR_IPMI_BMC_WARM_RESET_HELP        #language en-US "Press <Enter> to do Warm Reset BMC."
+#string STR_IPMI_BMC_WARM_RESET             #language en-US "BMC Warm Reset"
+
+
+#string STR_BMC_WARM_RESET_INFO             #language en-US "BMC WARM RESET INFO"
+#string STR_WARM_RESET_BMC                  #language en-US " Warm Reset BMC? "
+#string STR_PROTOCOL_NOT_FOUND              #language en-US " Protocol Not Found!!! "
+#string STR_BMC_WARM_RESET_ERROR_INFO       #language en-US "BMC WARM RESET ERROR INFO"
+#string STR_BMC_WARM_RESET_FAIL             #language en-US " BMC Warm Reset Fails!!! "
+#string STR_BMC_WARM_RESET_DONE             #language en-US " BMC Warm Reset Done Successfully!!! "
+#string STR_TIME_ZONE_ERROR_INFO            #language en-US "TIME ZONE ERROR INFO"
+#string STR_INVALID_TIME_ZONE               #language en-US "Invalid Time zone Entered!!!"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

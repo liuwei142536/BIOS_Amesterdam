@@ -1,0 +1,234 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 1999 - 2012 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   CsiCpu7Config.hfr
+// 
+// Abstract:
+// 
+//   CSI Cpu7 formset.
+// 
+// Revision History: 
+// 
+// --*/
+
+
+// form for CPU 7 & link 0
+//------------------------------------------------------------------------------------------------
+// CPU 7 LINK 0 Configuration
+//------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU7_LINK0,
+     title   = STRING_TOKEN(STR_CSI_CPU7_LINK0);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU7_LINK0);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P0QpiPortDisable,
+        prompt  = STRING_TOKEN(STR_CSI_LINK_DISABLE_C7P0),
+        help    = STRING_TOKEN(STR_CSI_LINK_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                   value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_YES),                  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P0QpiLinkCreditReduce,
+        prompt  = STRING_TOKEN(STR_QPI_LINK_CREDIT_REDUCE_C7P0),
+        help    = STRING_TOKEN(STR_QPI_LINK_CREDIT_REDUCE_HELP),
+        option text = STRING_TOKEN(STR_NO),                       value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_YES),                      value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------
+// CPU7 LINK 0 Per Link (Phy Layer)
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P0QpiLinkSpeed,
+        prompt  = STRING_TOKEN(STR_CSI_LINK_SPEED_C7P0),
+        help    = STRING_TOKEN(STR_CSI_LINK_SPEED_HELP),
+        option text = STRING_TOKEN(STR_LINKSPEED_64G_STRING),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKSPEED_72G_STRING),   value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKSPEED_80G_STRING),   value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_AUTO),               value = 6, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P0QpiProbeType,
+        prompt  = STRING_TOKEN(STR_CSI_PROBE_TYPE_C7P0),
+        help    = STRING_TOKEN(STR_CSI_PROBE_TYPE_HELP),
+        option text = STRING_TOKEN(STR_CSI_NOT_PRESENT),        value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_CSI_MIDBUS),             value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_INTERPOSER),         value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P0QpiConfigTxWci,
+        prompt  = STRING_TOKEN(STR_CSI_LINKWIDTH_C7P0),
+        help    = STRING_TOKEN(STR_CSI_LINKWIDTH_HELP),
+        option text = STRING_TOKEN(STR_QUAR0),                  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR1),                  value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR2),                  value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR3),                  value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR4),                  value = 4, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR5),                  value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR6),                  value = 6, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR7),                  value = 7, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR8),                  value = 8, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR9),                  value = 9, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR10),                 value = 10, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_AUTO),               value = 11, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+endform;
+
+
+// form for CPU 7 & link 1
+//------------------------------------------------------------------------------------------------
+// CPU 7 LINK 1 Configuration
+//------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU7_LINK1,
+     title   = STRING_TOKEN(STR_CSI_CPU7_LINK1);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU7_LINK1);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P1QpiPortDisable,
+        prompt  = STRING_TOKEN(STR_CSI_LINK_DISABLE_C7P1),
+        help    = STRING_TOKEN(STR_CSI_LINK_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                   value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_YES),                  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P1QpiLinkCreditReduce,
+        prompt  = STRING_TOKEN(STR_QPI_LINK_CREDIT_REDUCE_C7P1),
+        help    = STRING_TOKEN(STR_QPI_LINK_CREDIT_REDUCE_HELP),
+        option text = STRING_TOKEN(STR_NO),                       value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_YES),                      value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------
+// CPU7 LINK 1 Per Link (Phy Layer)
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P1QpiLinkSpeed,
+        prompt  = STRING_TOKEN(STR_CSI_LINK_SPEED_C7P1),
+        help    = STRING_TOKEN(STR_CSI_LINK_SPEED_HELP),
+        option text = STRING_TOKEN(STR_LINKSPEED_64G_STRING),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKSPEED_72G_STRING),   value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKSPEED_80G_STRING),   value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_AUTO),               value = 6, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P1QpiProbeType,
+        prompt  = STRING_TOKEN(STR_CSI_PROBE_TYPE_C7P1),
+        help    = STRING_TOKEN(STR_CSI_PROBE_TYPE_HELP),
+        option text = STRING_TOKEN(STR_CSI_NOT_PRESENT),        value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_CSI_MIDBUS),             value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_INTERPOSER),         value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P1QpiConfigTxWci,
+        prompt  = STRING_TOKEN(STR_CSI_LINKWIDTH_C7P1),
+        help    = STRING_TOKEN(STR_CSI_LINKWIDTH_HELP),
+        option text = STRING_TOKEN(STR_QUAR0),                  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR1),                  value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR2),                  value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR3),                  value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR4),                  value = 4, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR5),                  value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR6),                  value = 6, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR7),                  value = 7, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR8),                  value = 8, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR9),                  value = 9, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR10),                 value = 10, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_AUTO),               value = 11, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+endform;
+
+// form for CPU 7 & link 2
+//------------------------------------------------------------------------------------------------
+// CPU 7 LINK 2 Configuration
+//------------------------------------------------------------------------------------------------
+
+form formid = VFR_FID_CSI_CPU7_LINK2,
+     title   = STRING_TOKEN(STR_CSI_CPU7_LINK2);
+
+    subtitle text = STRING_TOKEN(STR_CSI_CPU7_LINK2);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P2QpiPortDisable,
+        prompt  = STRING_TOKEN(STR_CSI_LINK_DISABLE_C7P2),
+        help    = STRING_TOKEN(STR_CSI_LINK_DISABLE_HELP),
+        option text = STRING_TOKEN(STR_NO),                   value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_YES),                  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P2QpiLinkCreditReduce,
+        prompt  = STRING_TOKEN(STR_QPI_LINK_CREDIT_REDUCE_C7P2),
+        help    = STRING_TOKEN(STR_QPI_LINK_CREDIT_REDUCE_HELP),
+        option text = STRING_TOKEN(STR_NO),                       value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_YES),                      value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------
+// CPU7 LINK 2 Per Link (Phy Layer)
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P2QpiLinkSpeed,
+        prompt  = STRING_TOKEN(STR_CSI_LINK_SPEED_C7P2),
+        help    = STRING_TOKEN(STR_CSI_LINK_SPEED_HELP),
+        option text = STRING_TOKEN(STR_LINKSPEED_64G_STRING),   value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKSPEED_72G_STRING),   value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_LINKSPEED_80G_STRING),   value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_AUTO),               value = 6, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P2QpiProbeType,
+        prompt  = STRING_TOKEN(STR_CSI_PROBE_TYPE_C7P2),
+        help    = STRING_TOKEN(STR_CSI_PROBE_TYPE_HELP),
+        option text = STRING_TOKEN(STR_CSI_NOT_PRESENT),        value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_CSI_MIDBUS),             value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_INTERPOSER),         value = 2, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.Cpu7P2QpiConfigTxWci,
+        prompt  = STRING_TOKEN(STR_CSI_LINKWIDTH_C7P2),
+        help    = STRING_TOKEN(STR_CSI_LINKWIDTH_HELP),
+        option text = STRING_TOKEN(STR_QUAR0),                  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR1),                  value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR2),                  value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR3),                  value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR4),                  value = 4, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR5),                  value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR6),                  value = 6, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR7),                  value = 7, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR8),                  value = 8, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR9),                  value = 9, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_QUAR10),                 value = 10, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CSI_AUTO),               value = 11, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+endform;
+

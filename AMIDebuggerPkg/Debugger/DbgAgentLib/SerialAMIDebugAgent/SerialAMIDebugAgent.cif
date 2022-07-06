@@ -1,0 +1,10 @@
+<component>
+	name = "SerialAMIDebugAgent"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\DbgAgentLib\SerialAMIDebugAgent\"
+	RefName = "Debugger.SerialAMIDebugAgent"
+[INF]
+"SerialDebugAgent.inf"
+[files]
+"SerialAMIDebugAgent.sdl"	
+<endComponent>

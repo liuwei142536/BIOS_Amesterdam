@@ -1,0 +1,14 @@
+<component>
+    name = "SmiFlash"
+    category = eModule
+    LocalRoot = "AmiModulePkg\SmiFlash\"
+    RefName = "SmiFlash"
+[INF]
+"SmiFlash.inf"
+"SmiFlashDxe.inf"
+"SmiFlashLibs.inf"
+[files]
+"SmiFlash.sdl"	
+"SmiFlash.chm"	
+"SmiFlash.mak"	
+<endComponent>

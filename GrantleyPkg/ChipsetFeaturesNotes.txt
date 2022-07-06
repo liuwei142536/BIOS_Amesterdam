@@ -1,0 +1,86 @@
+
+This document provides Setup user controls that Chipset features are dependent on.
+
+1. Feature Title: VT-d
+
+Setup controls to enable:
+IntelRcSetup->IIO Configuration->Intel VT for Dircted I/O->Interrupt Remapping [Enable]
+IntelRCSetup->IIO Configuration -> Intel VT for Directed I/O (VT-d) -> Intel VT for Directed I/O [Enable] 
+IntelRcSetup->IIO Configuration->Intel VT for Dircted I/O -> ATS [Enable]
+
+2. Feature Title: SATA RAID
+
+Setup controls to enable:
+IntelRcSetup->PCH Configuration->PCH SATA/sSATA Configuration->Configure SATA/sSATA as [RAID]                                                                                                                              
+Advanced->CSM Configuration->Storage [Legacy Only]   or [UEFI Only]                                                                         
+If Storage OROM policy is set to UEFI only, then dynamic IFR pages are produced under Advanced Page and RAID driver can be configured through the setup page.
+
+3. Feature Title: SRIOV  & Hyper V
+
+Setup controls to enable:
+Advanced->PCi Subsystem Settings->SR-IOV  Support [Enabled]                                                                                                                                   
+IntelRCSetup->ProcessorConfiguration->Enable VMX [Enabled] 
+IntelRCSetup->ProcessorConfiguration->Enable SMX [Enabled] 
+IntelRCSetup->IIO Configuration -> Intel VT for Directed I/O (VT-d) -> Intel VT for Directed I/O [Enable] 
+IntelRCSetup->IIO Configuration -> Intel VT for Directed I/O (VT-d) -> Interrupt Remapping [Enable]
+
+4. Feature Title: SecureBoot
+
+Setup controls to enable: 
+Advanced->CSM Configuration->Video [UEFI Only]                                                                                                                 
+Advanced->CSM Configuration->CSM Support [Disabled]                                                                                                        
+Select Security->Secure Boot Menu->Key Management->Enroll All Factory Default Keys                                      
+Security->Secure Boot Menu->Secure Boot [Enabled]
+
+
+5. Feature Title: ISCSI
+
+Setup controls to enable:
+1. Enable Network stack
+a. disable Legacy PXE Option ROM if the NIC card driver is present in the BIOS
+2. ISCSI Configure -> the NIC port as follows:  
+3. Choose Add An Attempt, choose MAC address of offboard/onboard card
+4. Enable DHCP
+5. Leave Target Disabled and set static values of ISCSI server
+6. Save changes and exit, reenter BIOS Setup, set the DVD drive to 1st boot device
+7. Boot to shell and see if drive is available
+8. Boot Windows 2012 Datacenter DVD and install to the iSCSI drive, OS should be installed without any error.
+a. Network Driver may be needed to see iSCSI drive
+
+6. Feature Title: TPM
+Onboard TPM chip is provisioned using AUX 3 method.
+
+Setup controls to enable: 
+Advanced->Trusted Computing->TPM State [Enabled]
+
+7. Feature Title: TXT
+Token "INTEL_TXT_SUPPORT" should be turned “ON”
+
+Setup controls to enable:
+IntelRCSetup->ProcessorConfiguration->Enable VMX [Enabled] 
+IntelRCSetup->ProcessorConfiguration->Enable SMX [Enabled] 
+IntelRCSetup->IIO Configuration -> Intel VT for Directed I/O (VT-d) -> Intel VT for Directed [Enable] 
+IntelRCSetup->IIO Configuration -> Intel VT for Directed I/O (VT-d) -> Interrupt Remapping [Enable] 
+Advanced->Trusted Computing->Security Device Support [Enable] 
+Advanced->Trusted Computing->TPM State [Enabled]
+
+8. Feature Title: P-states & Turbo
+
+Setup controls to enable:
+IntelRCSetup->Advanced Power Configuration->PowerTechnology[Custom]->P-states->EIST[Enable]
+IntelRCSetup->Advanced Power Configuration->PowerTechnology[Custom]->P-states->Turbo[Disable]
+
+9. Feature Title: C-states ( Core states (C3, C6), Package states C2, C3, C6) )
+
+Setup controls to enable:
+IntelRCSetup->Advanced Power Configuration->PowerTechnology[Custom]->C-states->C6 Report[Enable]
+IntelRCSetup->Advanced Power Configuration->PowerTechnology[Custom]->C-states->Package C-state Limit[C6 State]
+
+10. Feature Title: X2APIC
+
+Setup controls to enable:
+IntelRCSetup->ProcessorConfiguration->Enable VMX [Enabled] 
+IntelRCSetup->ProcessorConfiguration->Enable SMX [Enabled] 
+IntelRCSetup->ProcessorConfiguration->X2APIC[Enabled] 
+IntelRCSetup->IIO Configuration -> Intel VT for Directed I/O (VT-d) -> Intel VT for Directed I/O [Enable] 
+IntelRCSetup->IIO Configuration -> Intel VT for Directed I/O (VT-d) -> Interrupt Remapping [Enable] 

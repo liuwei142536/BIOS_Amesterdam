@@ -1,0 +1,52 @@
+TOKEN
+	Name  = "SocketPkgPei_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SocketPkgPei support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "UncoreInitPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable UncoreInitPeim support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "UncoreInitPeim"
+	File  = "UncoreInit\UncoreInit.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "PEIM"
+	Token = "UncoreInitPeim_SUPPORT" "=" "1"
+End
+
+# AptioV Server Override Start : Smbus base must be initialized before MRC
+FFS_FILE
+    Name  = "UncoreInitPeim"
+    FD_AREA  = "FV_BB"
+    INFComponent  = "GrantleySocketPkg.UncoreInitPeim"
+End
+# AptioV Server Override End : Smbus base must be initialized before MRC
+
+TOKEN
+	Name  = "IioDmiInitPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable IioDmiInitPeim support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "IioDmiInitPeim"
+	File  = "IioInit\IioDmiInitPeim.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "PEIM"
+	Token = "IioDmiInitPeim_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "IioDmiInitPeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "GrantleySocketPkg.IioDmiInitPeim"
+	Apriori_Index  = "0"
+End

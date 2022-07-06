@@ -1,0 +1,28 @@
+TOKEN
+	Name  = "UefiTimerLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling timerLib lib class for Shell debugger only. APIC timer "
+	TokenType = Boolean
+	Master = Yes
+	Token = "GenericUSBDebugger_SUPPORT" "=" "1"
+    Token = "SHELL_DEBUGGER_SUPPORT" "=" "1"
+End
+
+PATH
+	Name  = "UefiTimerLib_DIR"
+	Path  = "AMIDebuggerPkg\Debugger\UefiTimerLib"
+End
+
+INFComponent
+	Name  = "UefiTimerLib"
+	File  = "UefiTimerLib.inf"
+	Package  = "Debugger"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "TimerLib"
+	Instance  = "Debugger.UefiTimerLib"
+	Override  = "Debugger.GenericUSBDebugger"
+End
+

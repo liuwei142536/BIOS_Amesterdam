@@ -1,0 +1,23 @@
+<component>
+	name = "Legacy Serial Redirection"
+	category = eModule
+	LocalRoot = "AmiModulePkg\LegacySerialRedirection\"
+	RefName = "AmiModulePkg.LegacySerialRedirection"
+[INF]
+"LegacySredir.inf"
+[files]
+"LegacySredir.sdl"	
+"LegacySredir.chm"	
+"LegacySredir.mak"	
+[parts]
+"LSREDIR_CSM16"
+"LSREDIR_BIN"
+"LEGACY_SREDIR_PROTOCOL"
+"LegacySmmSredir"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_28"
+CSM >= "SS: AptioV;$/AptioV/Source/Modules/Csm;Csm_7.79_09"
+AmiModulePkg.Terminal >= "SS: AptioV;$/AptioV/Source/Modules/Terminal;Terminal_13"
+[dependency.optional]
+AmiSerial >= "SS: AptioV;$/AptioV/Source/Modules/AmiSerial;AmiSerial_02"
+<endComponent>

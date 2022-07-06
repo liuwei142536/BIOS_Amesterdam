@@ -1,0 +1,3 @@
+FILE DRIVER = 1a7828fc-da7d-4bc1-8b58-9a954fed7d70 {
+     SECTION PE32  = AmiCRBPkg/OnBoardLan.Efi
+  }

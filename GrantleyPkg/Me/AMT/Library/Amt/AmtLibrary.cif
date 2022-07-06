@@ -1,0 +1,13 @@
+<component>
+	name = "AmtLibrary"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Library\Amt\"
+	RefName = "GrantleyPkg.AmtLibrary"
+[INF]
+"Dxe\AmtLib.inf"
+"Pei\AmtLibPei.inf"
+[files]
+"AmtLibrary.sdl"	
+[parts]
+"GrantleyPkg.AmtLibrary.Include"
+<endComponent>

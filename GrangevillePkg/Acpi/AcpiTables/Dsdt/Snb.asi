@@ -1,0 +1,128 @@
+/*++
+  This file contains an 'Intel Peripheral Driver' and is        
+  licensed for Intel CPUs and chipsets under the terms of your  
+  license agreement with Intel or your vendor.  This file may   
+  be modified by the user, subject to additional terms of the   
+  license agreement                                             
+--*/
+/*++
+  Copyright (c)  2001 - 2006 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval system, 
+  or transmitted in any form or by any means without the express written 
+  consent of Intel Corporation.
+
+Module Name:
+
+  Snb.asi
+
+Abstract:
+
+  Contains BNB chipset device and register information
+
+--*/
+
+//
+// SNB Device 16 func 1
+//
+Device(PBIF) {
+  //
+  // Processor Bus, Boot and Interrupt function
+  //
+  Name (_ADR,0x00100000)           // Device (HI WORD)=16, Func (LO WORD)=0  
+       
+  OperationRegion (PBIC, PCI_Config, 0x00, 0xF0) // TNB D16, function 0
+  Field (PBIC, DWordAcc, NoLock, Preserve) {
+    offset(0xD0),
+    PAD0 , 32,       // SPAD0
+    PAD1 , 32,       // SPAD1
+    PAD2 , 32,       // SPAD2
+    PAD3 , 32,       // SPAD3
+    PDS0 , 32,        // SPADS0
+    PDS1 , 32,        // SPADS1
+    PDS2 , 32,        // SPADS2
+    PDS3 , 32,        // SPADS3
+  }
+}
+
+//
+// Device 16 func 1
+//
+Device(AMAP) {
+  //
+  // Processor Bus, Boot and Interrupt function
+  //
+  Name(_ADR,0x00100001)           // Device (HI WORD)=16, Func (LO WORD)=1    
+
+  OperationRegion (MAPC, PCI_Config, 0x00, 0xF8) // TNB D16, function 1
+  Field(MAPC, ByteAcc, NoLock, Preserve) {
+    offset(0x00),
+    VID, 16,        // Vendor Id
+    DID, 16,        // Device Id
+
+    offset(0x59),   // PAM
+    , 4,
+    BSEG, 4,        // 0xF0000 BIOS Segment
+    PAMS, 48,       // 0xC0000 to 0xEFFFF
+
+    offset(0x62),   // EXSMRC
+    , 5,
+    PICD, 1,        // APICDIS
+    , 2,
+
+    offset(0x68),   // HECBASE
+    ,12,
+    HBAS,12,        // HECBASE 23:12 maps to bits address bits 39:28
+    ,8,
+
+    offset(0x6C),   // TOLM
+    ,12,
+    TOLM,4,         // 15:12 - TOLM which maps to DRAM address bits 31:28
+
+    // IMIR Registers.
+    offset(0x80),
+    ,16, 
+    LIM0, 12, 
+    ,4,
+    
+    ,16, 
+    LIM1, 12, 
+    ,4,
+
+    ,16, 
+    LIM2, 12, 
+    ,4,
+
+    ,16, 
+    LIM3, 12, 
+    ,4,
+
+    ,16, 
+    LIM4, 12, 
+    ,4,
+
+    ,16, 
+    LIM5, 12, 
+    ,4,
+
+    // AIMIR Registers.
+    offset(0xA0),
+    MRPP, 6,        // Whether a certain IMIR was non-zero length at OS handoff or not. 1: Range was non-zero at POST, 0: Was zero at POST.   
+    NTDV, 6,        // Bitmap of devices to deliver Notify() against. 1: Deliver Notify(), 0: Do not deliver Notify().
+    NTCD, 6,        // Bitmap of notify codes to deliver the Notify() with. 1: Device Check, 0: Eject Request.
+    RDGP, 1,        // Raid-with-gap configuration. 1: RAID-with-Gap. 0: Other interleave/RAS modes.
+
+    offset(0xA4),
+    OXSZ, 12,       // Old XMB size, in Raid-with-gap configuration: Size of XMBs prior to size upgrade. 
+    NXSZ, 12,       // New XMB size, in Raid-with-gap configuration: Size of XMBs after size upgrade.
+
+    offset(0xA8),
+    AMR2, 32,
+    AMR3, 32,
+    AMR4, 32,
+    AMR5, 32     
+  }
+}

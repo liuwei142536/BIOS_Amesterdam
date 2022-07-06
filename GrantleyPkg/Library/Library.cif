@@ -1,0 +1,28 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Library\"
+	RefName = "GrantleyPkg.Library"
+[INF]
+"BaseSmbusLibNull\BaseSmbusLibNull.inf"
+"CpuOnlyResetLib\CpuOnlyResetLib.inf"
+"DebugPrintErrorLevelLibCmos\DebugPrintErrorLevelLibCmos.inf"
+"IioInitHooksLib\OemIioInitHooks.inf"
+"IntelIchAcpiTimerLib\IntelIchAcpiTimerLib.inf"
+"PcieSlotOpromLib\PcieSlotOpromLib.inf"
+"PfatInitLib\PfatInit.inf"
+"PlatformCapsuleLib\PlatformCapsuleLib.inf"
+"PlatformClocksLib\Pei\PlatformClocksLib.inf"
+"PlatformHooksLib\PlatformHooksLib.inf"
+"SerialPortLib\SerialPortLib.inf"
+"SecOemHookLib\SecOemHookLib.inf"
+"AmiGrantleyAcpiCpuLib\AmiGrantleyAcpiCpuLib.inf"
+"CmosAccessLib\CmosAccessLib.inf"
+"Compress\CompressLib.inf"
+"CpuInitHooksLib\OemCpuInitHooks.inf"
+[files]
+"GrantleyPkgLibrary.sdl"	
+[parts]
+"GrantleyPkg.PchPlatformPolicyInitLib"
+"GrantleyPkg.OemMemoryQpiInitLib"
+<endComponent>

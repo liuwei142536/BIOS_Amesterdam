@@ -1,0 +1,12 @@
+<component>
+	name = "LibraryInstances"
+	category = ModulePart
+	LocalRoot = "IA32FamilyCpuPkg\Library\"
+	RefName = "IA32FamilyCpuPkg.LibraryInstances"
+	Generic Module = "SS: AptioV;$\AptioV\Source\Hardware\Cpu\Intel\IA32FamilyCpuPkg\LibraryInstances;5.004_IA32FamilyCpuPkg_04"
+[INF]
+"CpuConfigLib\CpuConfigLib.inf"
+"CpuLocalApicTimerLib\CpuLocalApicTimerLib.inf"
+"CpuOnlyResetLibNull\CpuOnlyResetLibNull.inf"
+"PlatformSecLibNull\PlatformSecLibNull.inf"
+<endComponent>

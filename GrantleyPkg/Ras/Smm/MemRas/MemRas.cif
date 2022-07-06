@@ -1,0 +1,10 @@
+<component>
+	name = "MemRas"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\Smm\MemRas\"
+	RefName = "GrantleyPkg.MemRas"
+[INF]
+"MemRas.inf"
+[files]	
+"MemRas.sdl"	
+<endComponent>

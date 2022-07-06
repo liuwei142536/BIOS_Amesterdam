@@ -1,0 +1,8 @@
+<component>
+    name = "Library"
+    category = ModulePart
+    LocalRoot = "AmiCRBPkg\Include\Library\"
+    RefName = "AmiCRBPkg.Include.Library"
+[files]
+"AmiPlatformAcpiLib.h"	
+<endComponent>

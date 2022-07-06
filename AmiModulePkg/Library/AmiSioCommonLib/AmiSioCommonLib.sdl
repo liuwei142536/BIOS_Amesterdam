@@ -1,0 +1,71 @@
+TOKEN
+    Name  = "AmiSioCommonLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmiSioCommonLib support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "NUMBER_OF_SIO"
+    Value  = "1"
+    Help  = "Number of SuperIO module in the project"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+OUTPUTREGISTER
+    Name  = "AMISIOCOMMONLIB_INF"
+    Path  = "Build"
+    File  = "AmiSioCommonLib.inf"
+    Template  = "AmiSioCommonLibInf.txt"
+End
+
+INFComponent
+    Name  = "AmiSioCommonLib"
+    File  = "../../../Build/AmiSioCommonLib.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "AmiSioCommonLib"
+    Instance  = "AmiModulePkg.AmiSioCommonLib"
+End
+
+OUTPUTREGISTER
+    Name  = "AmiSioCommonLibElinks"
+    Path  = "Build"
+    File  = "AmiSioCommonLibElinks.h"
+    Template  = "AmiSioCommonLibElinks.txt"
+End
+
+ELINK
+    Name  = "AmiSioCommonLibList"
+    Help  = "Source file List of AmiSioCommonLibList Module"
+End
+
+ELINK
+    Name  = "../Build/AmiSioCommonLibElinks.h"
+    Parent  = "AmiSioCommonLibList"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ENTER_CONFIG_MODE_FUNCTIONS"
+    Help  = "eLink parent that will contain a list of functions for SIO to enter config mode"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "EXIT_CONFIG_MODE_FUNCTIONS"
+    Help  = "eLink parent that will contain a list of functions for SIO to exit config mode"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "SELECT_LDN_FUNCTIONS"
+    Help  = "eLink parent that will contain a list of functions for SIO to select LDN devices"
+    InvokeOrder = ReplaceParent
+End

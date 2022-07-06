@@ -1,0 +1,55 @@
+TOKEN
+	Name  = "MOBILE_8066X"
+	Value  = "0"
+    Help = "Intel(R) CannonLake"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "MOBILE_M8060662"
+    Value  = "1"
+    Help  = "0:Disable \ 1:Intel(R) Cannon Lake-U GT0 Processor C-0 Stepping \ 2:Intel(R) Cannon Lake-Y22 Processor C-0 Stepping"
+    TokenType = Integer
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_M8060663"
+    Value  = "1"
+    Help  = "0:Disable \ 1:Intel(R) Cannon Lake-U GT0 GT0 SR18 Processor D-0 Stepping \ 2:Intel(R) Cannon Lake-U GT0 GT0 HR18 Processor D-0 Stepping"
+    TokenType = Integer
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M8060662_0000001A.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Cannon Lake-U GT0 Processor C-0 Stepping"
+    Token = "MOBILE_M8060662" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M8060662_00000022.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Cannon Lake-Y22 Processor C-0 Stepping"
+    Token = "MOBILE_M8060662" "=" "2"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M8060663_0000002A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Cannon Lake-U GT0 GT0 SR18 Processor D-0 Stepping "
+    Token = "MOBILE_M8060663" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M8060663_0000002A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Cannon Lake-U GT0 GT0 HR18 Processor D-0 Stepping"
+    Token = "MOBILE_M8060663" "=" "2"
+    InvokeOrder = AfterParent
+End

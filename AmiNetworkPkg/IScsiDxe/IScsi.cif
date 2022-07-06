@@ -1,0 +1,22 @@
+<component>
+	name = "IScsi"
+	category = eModule
+	LocalRoot = "AmiNetworkPkg\IScsiDxe\"
+	RefName = "IScsi"
+[INF]
+"IScsiDxe.inf"
+"RsdIScsiSupport.inf"
+[files]
+"IScsi.sdl"	
+"IScsi.chm"	
+"CHAPSecretEncryptionHookElinks.txt"	
+"DefaultIscsiInitiatorNameHookElinks.txt"	
+[dependency]
+AmiNetworkPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiNetworkPkg;AmiNetworkPkg_25"
+AmiNetworkPkg.UefiNetworkStack >= "SS: AptioV;$/AptioV/Source/Modules/UefiNetworkStack;UefiNetworkStack_25"
+MdeModulePkg.Scsi >= "SS: AptioV;$/AptioV/Source/Modules/Scsi;Scsi_02"
+AmiTsePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiTsePkg;AmiTsePkg_2_20_1270"
+AmiCompatibilityPkg.Setup >= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_09"
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;AMITSE_2_20_1270"
+CryptoPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/CryptoPkg;CryptoPkg_28"
+<endComponent>

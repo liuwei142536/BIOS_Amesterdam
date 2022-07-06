@@ -1,0 +1,13 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Include\Library\"
+	RefName = "GrantleyPkg.Me.Include.Library"
+[files]
+"HeciMsgLib.h"
+"MePolicyLib.h"
+"HeciCoreLib.h"
+"MeChipsetLib.h"
+"MePlatformPolicyUpdatePeiLib.h"
+"MeTypeLib.h"
+<endComponent>

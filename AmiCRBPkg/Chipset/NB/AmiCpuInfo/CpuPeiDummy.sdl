@@ -1,0 +1,14 @@
+TOKEN
+	Name  = "CpuPeiDummy_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable CpuPeiDummy support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "CpuPeiDummy"
+	File  = "CpuPeiDummy.inf"
+	Package  = "AmiCRBPkg"
+	ModuleTypes  = "PEIM"
+	Token = "CpuPeiDummy_SUPPORT" "=" "1"
+End

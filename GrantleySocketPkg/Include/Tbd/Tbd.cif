@@ -1,0 +1,8 @@
+<component>
+	name = "Tbd"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Include\Tbd\"
+	RefName = "GrantleySocketPkg.Tbd"
+[files]
+"EfiBootScript.h"	
+<endComponent>

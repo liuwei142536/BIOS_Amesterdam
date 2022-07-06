@@ -1,0 +1,25 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+/** @file CmosSetup.uni
+    Cmos Boot messages strings
+
+**/
+
+//---------------------------------------------------------------------------
+/=#
+#include "VFR.uni"
+
+//---------------------------------------------------------------------------
+
+#string CMOS_MESSAGE_TITLE      #language eng "CMOS Message"
+#string DEFAULTS_LOADED_MESSAGE #language eng "The CMOS defaults were loaded.  (If you continue to see this message, consult the system user's guide for more information.)"
+#string BAD_BATTERY_MESSAGE     #language eng "The CMOS battery is bad or was recently replaced. (If you continue to see this message, consult the system user's guide for more information.)"
+#string NOT_USABLE_MESSAGE      #language eng "The CMOS non-volatile RAM is not usable. Your system hardware may not be optimally configured.  (If you continue to see this message, consult the system user's guide for more information.)"
+#string BAD_CHECKSUM_MESSAGE    #language eng "A bad CMOS checksum was detected. (If you continue to see this message, consult the system user's guide for more information.)"
+#string FIRST_BOOT_MESSAGE      #language eng "A first boot or NVRAM reset condition has been detected. (If you continue to see this message, consult the system user's guide for more information.)"

@@ -1,0 +1,12 @@
+<component>
+	name = "PlatformPei"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\Pei\"
+	RefName = "GrantleyPkg.Platform.Pei"
+[INF]
+"PlatformInfo\PlatformInfo.inf"
+[files]
+"PlatformPei.sdl"	
+[parts]
+"GrantleyPkg.PlatformInit"
+<endComponent>

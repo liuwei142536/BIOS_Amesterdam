@@ -1,0 +1,10 @@
+<component>
+	name = "Overclocking"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Overclocking"
+	RefName = "GrantleyPkg.Overclocking"
+[INF]
+"OcInit.inf"
+[files]
+"Overclocking.sdl"
+<endComponent>

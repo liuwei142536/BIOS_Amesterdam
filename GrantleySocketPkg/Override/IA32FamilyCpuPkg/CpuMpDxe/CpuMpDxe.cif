@@ -1,0 +1,10 @@
+<component>
+	name = "CpuMpDxe"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Override\IA32FamilyCpuPkg\CpuMpDxe\"
+	RefName = "IA32FamilyCpuPkg.CpuMpDxe"
+[INF]
+"CpuMpDxe.inf"
+[files]
+"CpuMpDxe.sdl"	
+<endComponent>

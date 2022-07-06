@@ -1,0 +1,143 @@
+TOKEN
+    Name  = "MEBX_PROMPT"
+    Value  = "1"
+    Help  = "Main switch to enable MEBX prompt support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name = "MEBX_SCANCODE"
+    Value = "0"
+    Help = "The scancode of MEBX in Project"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "MEBX_UNICODE"
+    Value = "0x50"
+    Help = "The unicode of MEBX in Project"
+    TokenType = integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "MEBX_KeyShiftState"
+    Value = "RIGHT_CONTROL_PRESSED | LEFT_CONTROL_PRESSED | SHIFT_STATE_VALID"
+    Help = "The KeyShiftState of MEBX in Project"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name = "MEBX_KeyToggleState"
+    Value = "0"
+    Help = "The KeyToggleState of MEBX in Project"
+    TokenType = integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CIRA_SUPPORT"
+    Value  = "1"
+    Help  = "Enable Disable CIRA"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AMT_ENABLE" "=" "1"
+End
+
+TOKEN
+    Name = "CIRA_SCANCODE"
+    Value = "EFI_SCAN_F1"
+    Help = "The scancode value of CIRA in Project"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "CIRA_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "CIRA_UNICODE"
+    Value = "0"
+    Help = "The unicode value of CIRA in Project"
+    TokenType = integer
+    TargetH = Yes
+    Token = "CIRA_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "CIRA_KeyShiftState"
+    Value = "RIGHT_CONTROL_PRESSED | LEFT_CONTROL_PRESSED | SHIFT_STATE_VALID | RIGHT_ALT_PRESSED | LEFT_ALT_PRESSED"
+    Help = "The KeyShiftState of CIRA in Project"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "CIRA_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name = "CIRA_KeyToggleState"
+    Value = "0"
+    Help = "The KeyToggleState of CIRA in Project"
+    TokenType = integer
+    TargetH = Yes
+    Token = "CIRA_SUPPORT" "=" "1"
+End
+
+PATH
+    Name  = "MEBX_PROMPT_DIR"
+End
+
+PATH
+    Name = "RC_ME_INCLUDE_DIR"
+    Path = "GrantleyPkg/Me/Include"
+End
+
+PATH
+    Name = "RC_AMT_INCLUDE_DIR"
+    Path = "GrantleyPkg/Me/AMT/Include"
+End
+
+ELINK
+	Name  = "$(RC_ME_INCLUDE_DIR)"
+	Parent  = "PLATFORM_DSC_INCLUDE_PATHS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "$(RC_AMT_INCLUDE_DIR)"
+	Parent  = "PLATFORM_DSC_INCLUDE_PATHS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(BUILD_DIR)/Platform.dec"
+	Parent  = "ADDITIONAL_AMITSE_Packages"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MEBX_PROMPT_DIR)\MebxPrompt.c"
+    Parent  = "TSE_SOURCE_FILES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "MebxPromptConInAvailabilityHook,"
+    Parent  = "ProcessConInAvailabilityHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "RemoteAssistConInAvailabilityHook,"
+    Parent  = "ProcessConInAvailabilityHook,"
+    InvokeOrder = AfterParent
+    Token = "CIRA_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "MEProcessEnterSetup,"
+    Parent  = "ProcessEnterSetup,"
+    InvokeOrder = AfterParent
+End

@@ -1,0 +1,16 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "WellsburgPkg\Include\Library\"
+	RefName = "WellsburgPkg.Include.Library"
+[files]
+"DxeRuntimePciLibPciExpress.h"	
+"PchAslUpdateLib.h"		
+"PchPciExpressHelpersLib.h"	
+"PchPlatformLib.h"	
+"PchSmbusLibrary.h"		
+"RcFviDxeLib.h"
+"PchChipsetInitHobLib.h"
+"PchOemSmmLib.h"
+"PchSmmResetLib.h"
+<endComponent>

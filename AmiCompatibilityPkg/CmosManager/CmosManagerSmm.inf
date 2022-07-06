@@ -1,0 +1,51 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file CmosManagerSmm.inf
+#   INF file for the module
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CmosSmm
+  FILE_GUID                      = F44875AB-B9FC-4578-A280-AA335B49967C   
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = CmosManagerSmmEntry
+
+[Sources]
+  CmosManagerSmm.c
+  CmosManagerSmm.h
+  CmosManager.c
+  CmosManager.h
+  CmosAccess.c
+  CmosTables.c
+  CmosTypes.h
+
+[Protocols]
+  gEfiSmmSwDispatch2ProtocolGuid
+  gAmiCmosAccessSmmProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  AmiDxeLib
+  AmiCspLib
+  #APTIOV_SERVER_OVERRIDE_START: SA50081 Security Advisory update
+  AmiBufferValidationLib
+  #APTIOV_SERVER_OVERRIDE_END: SA50081 Security Advisory update
+  
+[Depex]
+ gEfiSmmBase2ProtocolGuid       AND
+ gEfiSmmSwDispatch2ProtocolGuid

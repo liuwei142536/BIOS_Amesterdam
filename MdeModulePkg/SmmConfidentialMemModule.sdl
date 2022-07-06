@@ -1,0 +1,14 @@
+INFComponent
+    Name  = "SmmConfidentialMemLibNull"
+    File  = "Library/SmmConfidentialMemLib/SmmConfidentialMemLibNull.inf"
+    Package  = "MdeModulePkg"
+    Token = "SMM_SUPPORT" "=" "1"
+End
+
+
+LibraryMapping
+    Class  = "SmmConfidentialMemLib"
+    Instance  = "MdeModulePkg.SmmConfidentialMemLibNull"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "SMM_SUPPORT" "=" "1"
+End

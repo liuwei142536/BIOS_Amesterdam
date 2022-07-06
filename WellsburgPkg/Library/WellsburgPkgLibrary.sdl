@@ -1,0 +1,165 @@
+TOKEN
+	Name  = "WellsburgPkgLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling WellsburgPkg Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PchDxeRuntimePciLibPciExpress"
+	File  = "DxeRuntimePciLibPciExpress\DxeRuntimePciLibPciExpress.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PchPlatformLib"
+	File  = "PchPlatformLib\PchPlatformLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "BASE"
+End
+
+# AptioV server overrride start: Dynamic mmcfg base address change
+INFComponent
+	Name  = "PchSmmPlatformLib"
+	File  = "PchSmmPlatformLib\PchSmmPlatformLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER DXE_SMM_DRIVER"
+	Token = "DYNAMIC_MMCFG_BASE_SUPPORT" "=" "1"
+End
+# AptioV server overrride end: Dynamic mmcfg base address change
+
+INFComponent
+	Name  = "ResetSystemLib"
+	File  = "PchResetSystemLib\ResetSystemLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "PchSmmLib"
+	File  = "PchSmmLib\PchSmmLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "PchDxeRuntimePciLibPciExpressLib"
+	Instance  = "WellsburgPkg.PchDxeRuntimePciLibPciExpress"
+End
+
+LibraryMapping
+	Class  = "PchPlatformLib"
+	Instance  = "WellsburgPkg.PchPlatformLib"
+End
+
+# AptioV server overrride start: Dynamic mmcfg base address change
+LibraryMapping
+	Class  = "PchPlatformLib"
+	Instance  = "WellsburgPkg.PchSmmPlatformLib"
+	ModuleTypes = "DXE_RUNTIME_DRIVER DXE_SMM_DRIVER"
+	Token = "DYNAMIC_MMCFG_BASE_SUPPORT" "=" "1	
+End
+# AptioV server overrride end: Dynamic mmcfg base address change
+
+LibraryMapping
+	Class  = "ResetSystemLib"
+	Instance  = "WellsburgPkg.ResetSystemLib"
+End
+
+LibraryMapping
+	Class  = "SmmLib"
+	Instance  = "WellsburgPkg.PchSmmLib"
+End
+
+INFComponent
+	Name  = "PchAslUpdateLib"
+	File  = "AslUpdate\Dxe\PchAslUpdateLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "PchAslUpdateLib"
+	Instance  = "WellsburgPkg.PchAslUpdateLib"
+End
+
+INFComponent
+	Name  = "PchPciExpressHelpersLib"
+	File  = "PchPciExpressHelpersLib\PchPciExpressHelpersLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "BASE"
+End
+
+# AptioV server overrride start: Dynamic mmcfg base address change
+INFComponent
+	Name  = "PchSmmPciExpressHelpersLib"
+	File  = "PchSmmPciExpressHelpersLib\PchSmmPciExpressHelpersLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER DXE_SMM_DRIVER"
+	Token = "DYNAMIC_MMCFG_BASE_SUPPORT" "=" "1	
+End
+# AptioV server overrride end: Dynamic mmcfg base address change
+
+LibraryMapping
+	Class  = "PchPciExpressHelpersLib"
+	Instance  = "WellsburgPkg.PchPciExpressHelpersLib"
+End
+
+# AptioV server overrride start: Dynamic mmcfg base address change
+LibraryMapping
+	Class  = "PchPciExpressHelpersLib"
+	Instance  = "WellsburgPkg.PchSmmPciExpressHelpersLib"
+	ModuleTypes = "DXE_RUNTIME_DRIVER DXE_SMM_DRIVER"
+	Token = "DYNAMIC_MMCFG_BASE_SUPPORT" "=" "1	
+End
+# AptioV server overrride end: Dynamic mmcfg base address change
+
+INFComponent
+	Name  = "PchChipsetInitHobLib"
+	File  = "PchChipsetInitHobLib\PchChipsetInitHobLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "PchChipsetInitHobLib"
+	Instance  = "WellsburgPkg.PchChipsetInitHobLib"
+End
+
+INFComponent
+	Name  = "RcFviLib"
+	File  = "RcFviDxeLib\RcFviDxeLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "RcFviLib"
+	Instance  = "WellsburgPkg.RcFviLib"
+End
+
+INFComponent
+	Name  = "PchOemSmmLib"
+	File  = "PchOemSmmLib\PchOemSmmLib.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "PchOemSmmLib"
+	Instance  = "WellsburgPkg.PchOemSmmLib"
+End
+
+INFComponent
+	Name  = "PchSmmResetLib"
+	File  = "PchSmmResetLib\PchSmmResetLib.inf"
+	Package  = "WellsburgPkg"
+End
+
+LibraryMapping
+	Class  = "PchSmmResetLib"
+	Instance  = "WellsburgPkg.PchSmmResetLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End

@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "StartWatchDog_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling StartWatchDog support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "StartWatchDog"
+	File  = "Pei\StartWatchDog.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+	Token = "StartWatchDog_SUPPORT" "=" "1"
+End
+

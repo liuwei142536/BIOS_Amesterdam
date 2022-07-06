@@ -1,0 +1,60 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+    INF_VERSION     = 0x00010005
+    BASE_NAME       = FwUpdatePlatformLib
+    FILE_GUID       = FA1FA8D0-07E2-4AFC-93E7-722E4F352B03
+    MODULE_TYPE     = DXE_RUNTIME_DRIVER
+    VERSION_STRING  = 1.0
+    LIBRARY_CLASS   = FwUpdatePlatformLib | DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER
+
+[Sources]
+    FWUpdatePlatformLib.c
+    FWUpdateLib.h
+    me_status.h
+    $(FWUPDATELIB_INF_SOURCES)
+
+[Packages] 
+    MdePkg/MdePkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+    $(FWUPDATELIB_INF_PACKAGES)
+
+[LibraryClasses]
+    AmiDxeLib
+    HobLib
+    $(FWUPDATELIB_INF_LIBRARY)
+
+[Guids]
+    gEfiFirmwareFileSystem2Guid
+    $(FWUPDATELIB_INF_GUIDS)
+
+[Protocols]
+    gEfiDecompressProtocolGuid
+    $(FWUPDATELIB_INF_PROTOCOLS)
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

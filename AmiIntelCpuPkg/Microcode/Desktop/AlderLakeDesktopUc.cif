@@ -1,0 +1,12 @@
+<component>
+	name = "Desktop Alder Lake uCode Patches (9067x)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Desktop\"
+	RefName = "AlderLakeDesktopUc"
+[files]
+"AlderLakelDesktopUc.sdl"
+"M0290670_00000019.pdb"	= "DESKTOP MICROCODE UPDATES"
+"M8290671_0000001A.pdb"	= "DESKTOP MICROCODE UPDATES"
+"M0190674_00000219.pdb" = "DESKTOP MICROCODE UPDATES"
+"M0390672_00000016.pdb" = "DESKTOP MICROCODE UPDATES"
+<endComponent>

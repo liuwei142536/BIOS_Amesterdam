@@ -1,0 +1,81 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @file SelSetup.uni
+//
+// Description: Setup strings for SEL component.
+//
+
+//#include "VFR.uni"
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"    // AMI Mapping Language
+
+#string STR_ENABLING_DISABLING_OPTIONS     #language en-US "Enabling/Disabling Options"
+
+#string STR_SEL_EVENT_LOG_TITLE            #language en-US "System Event Log"
+
+#string STR_SEL_EVENT_LOG_HELP             #language en-US "Press <Enter> to change the SEL event log configuration."
+
+#string STR_SEL_ENABLE                     #language en-US "SEL Components"
+                                           #language x-AMI "IPMI000"
+#string STR_SEL_ENABLE_HELP                #language en-US "Change this to enable or disable event logging for error/progress codes during boot."
+
+#string STR_SEL_ERASE                      #language en-US "Erase SEL"
+                                           #language x-AMI "IPMI001"
+#string STR_SEL_ERASE_HELP                 #language en-US "Choose options for erasing SEL."
+
+
+#string STR_SEL_DO_NOT_ERASE               #language en-US "No"
+#string STR_SEL_ERASE_NEXT_BOOT            #language en-US "Yes, On next reset"
+#string STR_SEL_ERASE_EVERY_BOOT           #language en-US "Yes, On every reset"
+
+#string STR_SEL_FULL                       #language en-US "When SEL is Full"
+                                           #language x-AMI "IPMI002"
+#string STR_SEL_FULL_HELP                  #language en-US "Choose options for reactions to a full SEL."
+
+
+
+#string STR_SEL_DO_NOTHING                 #language en-US "Do Nothing"
+#string STR_SEL_ERASE_WHEN_FULL            #language en-US "Erase Immediately"
+
+#string STR_BOTH                           #language en-US "Both"
+#string STR_ERROR_CODE                     #language en-US "Error code"
+#string STR_PROGRESS_CODE                  #language en-US "Progress code"
+#string STR_SEL_EFI_SETTINGS               #language en-US "Custom EFI Logging Options"
+
+#string STR_SEL_BLANK                      #language en-US ""
+#string STR_SEL_ERASING_OPTIONS            #language en-US "Erasing Settings"
+
+
+#string STR_ERROR_LOGGING_NOTE_1           #language en-US "NOTE: All values changed here do not take"
+#string STR_ERROR_LOGGING_NOTE_2           #language en-US "      effect until computer is restarted."
+
+#string STR_LOG_EFI_ERRORS_PROMPT          #language en-US "Log EFI Status Codes"
+                                           #language x-AMI "IPMI003"
+#string STR_LOG_EFI_ERRORS_HELP            #language en-US "Disable the logging of EFI Status Codes or log only error code or only progress code or both."
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

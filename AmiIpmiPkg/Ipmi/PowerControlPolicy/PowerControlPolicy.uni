@@ -1,0 +1,47 @@
+﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @files  PowerControlPolicy.uni
+//
+// String definitions for PowerControlPolicy
+//
+
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"      // AMI Mapping Language
+
+#string STR_SRVRMGMT_PWR_CONTROL_POLICY             #language en-US  "Power Control Policy"
+                                                    #language x-AMI  "IPMI900"
+#string STR_SRVRMGMT_PWR_CONTROL_POLICY_HELP        #language en-US  "Configure how the system should respond if AC Power is lost."
+#string STR_PWR_CONTROL_POLICY_RESTORE              #language en-US  "Power Restore"
+#string STR_PWR_CONTROL_POLICY_LAST_STATE           #language en-US  "Last Power State"
+#string STR_PWR_CONTROL_POLICY_DONOT_POWER          #language en-US  "Do Not PowerUp"
+#string STR_PWR_CONTROL_POLICY_NO_CHANGE            #language en-US  "No Change(Unknown)"
+#string STR_PWR_CONTROL_POLICY_INFO                 #language en-US  "POWER CONTROL POLICY INFO"
+#string STR_IPMI_PROTOCOL_ERROR                     #language en-US  " IPMI Protocol Error !!! "
+#string STR_PWR_CONTROL_POLICY_ERROR                #language en-US  " Power Control Policy Failed !!! "
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

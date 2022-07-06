@@ -1,0 +1,76 @@
+//*****************************************************************//
+//*****************************************************************//
+//*****************************************************************//
+//**                                                             **//
+//**        (C)Copyright 2012, American Megatrends, Inc.    	  **//
+//**                                                             **//
+//**                     All Rights Reserved.                    **//
+//**                                                             **//
+//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
+//**                                                             **//
+//**                     Phone (770)-246-8600                    **//
+//**                                                             **//
+//*****************************************************************//
+//*****************************************************************//
+//*****************************************************************//
+// $Archive: $
+//
+// $Author: $
+//
+// $Revision: $
+//
+// $Date: $
+//
+//*****************************************************************//
+//*****************************************************************//
+//*****************************************************************//
+
+/=#
+
+#include "VFR.uni"
+
+#string STR_ADD_BOOT_OPTION             #language en-US "Add New Boot Option"
+#string STR_ADD_BOOT_OPTION_HELP        #language en-US "Add a new EFI boot option to the boot order"
+#string STR_DEL_BOOT_OPTION             #language en-US "Delete Boot Option"
+#string STR_DEL_BOOT_OPTION_HELP        #language en-US "Remove an EFI boot option from the boot order"
+#string STR_ADD_BOOT_LABEL              #language en-US "Add boot option"
+#string STR_BOOT_LABEL_HELP             #language en-US "Specify name for new boot option"
+#string STR_NEW_BOOT_FILE_PATH        	 #language en-US "Boot option File Path"
+#string STR_NEW_BOOT_FILE_PATH_HELP 	 #language en-US "File path for newly created boot option"
+#string STR_SAVE_BOOT_OPTION_HELP       #language en-US "Creates the newly formed boot option"
+#string STR_ADD_BOOT_PATH               #language en-US "Path for boot option"
+#string STR_BOOT_PATH_HELP              #language en-US "Enter the path to the boot option in the format fsx:\\path\\filename.efi"
+#string STR_SELECT_TO_DEL               #language en-US "Select one to Delete"
+#string STR_SAVE_BOOT_OPTION            #language en-US "Create"
+
+#string STR_DRIVER_ORDER_SUBTITLE		 #language en-US "Driver Option Priorities"
+#string STR_DRIVER_ORDER_X	             #language en-US "Driver Option #%d"
+#string STR_DRIVER_ORDER_HELP           #language en-US "Sets the system driver order"
+#string STR_ADD_DRIVER_OPTION           #language en-US "Add New Driver Option"
+#string STR_ADD_DRIVER_OPTION_HELP      #language en-US "Add a new EFI Driver option to the driver order"
+#string STR_DEL_DRIVER_OPTION           #language en-US "Delete Driver Option"
+#string STR_DEL_DRIVER_OPTION_HELP      #language en-US "Remove an EFI Driver option from the driver order"
+#string STR_ADD_DRIVER_LABEL            #language en-US "Add driver option"
+#string STR_DRIVER_LABEL_HELP           #language en-US "Specify name for new driver option"
+#string STR_ADD_DRIVER_PATH             #language en-US "Path for driver option"
+#string STR_DRIVER_PATH_HELP            #language en-US "Enter the path to the driver option in the format fsx:\\path\\filename.efi"
+#string STR_NEW_DRIVER_FILE_PATH        #language en-US "Driver option File Path"
+#string STR_NEW_DRIVER_FILE_PATH_HELP 	 #language en-US "File path for newly created driver"
+#string STR_SAVE_DRIVER_OPTION_HELP     #language en-US "Creates the newly formed driver option"
+
+
+//**********************************************************************//
+//**********************************************************************//
+//**********************************************************************//
+//**                                                                  **//
+//**        (C)Copyright 2012, American Megatrends, Inc.         		 **//
+//**                                                                  **//
+//**                       All Rights Reserved.                       **//
+//**                                                                  **//
+//**     5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093     **//
+//**                                                                  **//
+//**                       Phone: (770)-246-8600                      **//
+//**                                                                  **//
+//**********************************************************************//
+//**********************************************************************//
+//**********************************************************************//

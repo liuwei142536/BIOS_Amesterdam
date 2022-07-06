@@ -1,0 +1,5 @@
+FILE FREEFORM = 8bd816b2-655f-4c71-9032-c90d72c07c03 {
+    SECTION RAW = AmiCRBPkg\BDXDE_SINIT_v1_3_27_20211209_PW_signed.bin 
+ 
+  }
+  

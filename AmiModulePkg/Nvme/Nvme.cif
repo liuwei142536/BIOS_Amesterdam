@@ -1,0 +1,29 @@
+<component>
+	name = "Nvme"
+	category = eModule
+	LocalRoot = "AmiModulePkg\Nvme\"
+	RefName = "NVMe"
+[INF]
+"Nvme.inf"
+"NvmeControllerLib.inf"
+"NvmeSmm\NvmeSmm.inf"
+[files]
+"Nvme.sdl"	
+"Nvme.sd"	
+"Nvme.uni"	
+"NvmeSetup.c"	
+"NvmeStaticSetup.h"	
+"NVMe.chm"	
+[parts]
+"NVMEINT13"
+"NvmeProtocol"
+"NvmeDynamicSetup"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_32"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_10"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_19"
+[dependency.optional]
+HddSecurity >= "SS: AptioV;$/AptioV/Source/Modules/HddSecurity;HddSecurity_25"
+HddSMART >= "SS: AptioV;$/AptioV/Source/Modules/HddSMART;HddSmart_09"
+TcgStorageSecurity >= "SS: AptioV;$/AptioV/Source/Modules/TcgStorageSecurity;TcgStorageSecurity_06"
+<endComponent>

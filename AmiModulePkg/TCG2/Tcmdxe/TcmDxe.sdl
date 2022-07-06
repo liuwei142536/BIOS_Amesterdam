@@ -1,0 +1,18 @@
+TOKEN
+    Name  = "TcmDxeSupport"
+    Value  = "1"
+    Help  = "Enable or Disable TcgPeiSupport"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    TargetMAK = Yes
+    Master = Yes
+    Token = "TCG2Support" "=" "1"
+End
+
+INFComponent
+    Name  = "TCMDXE"
+    File  = "TCMDXE.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End

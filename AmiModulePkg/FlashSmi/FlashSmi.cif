@@ -1,0 +1,16 @@
+<component>
+    name = "FlashSmi"
+    category = eModule
+    LocalRoot = "AmiModulePkg\FlashSmi\"
+    RefName = "FlashSmi"
+[INF]
+"FlashSmiDxe.inf"
+"FlashSmiSmm.inf"
+[files]
+"FlashSmi.chm"
+"FlashSmi.sdl"
+[parts]
+"FlashSmiElinks"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_25"
+<endComponent>

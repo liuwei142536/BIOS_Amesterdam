@@ -1,0 +1,34 @@
+<component>
+    name = "CryptoPkg"
+    category = eModule
+    Rank = 48
+    LocalRoot = "CryptoPkg\"
+    RefName = "CryptoPkg"
+[INF]
+"Library\IntrinsicLib\IntrinsicLib.inf"
+"Library\BaseCryptLibNull\BaseCryptLibNull.inf"
+"Library\TlsLibNull\TlsLibNull.inf"
+"Library\BaseHashApiLib\BaseHashApiLib.inf"
+[files]
+"CryptoPkg.sdl"	
+"CryptoPkg.chm"	
+"CryptoPkg.dec"	
+"CryptoPkg.uni"	
+"CryptoPkgExtra.uni"	
+"Library\IntrinsicLib\BaseIntrinsicLib.uni"	
+"CryptoPkg.dsc"	
+[parts]
+"CryptoPkg.Include"
+"CryptoPkg.BaseCryptLib"
+"CryptoPkg.TlsLib"
+"CryptoPkg.LibInclude"
+"CryptoPkg.OpensslLib"
+"CryptoPkg.Ppi"
+"CryptoPkg.Protocol"
+"CryptoPkg.Driver"
+"CryptoPkg.BaseCryptLibOnProtocolPpi"
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_10"
+[dependency.optional]
+StdLib >= "SS: AptioV;$/AptioV/Source/Interfaces/StdLib;StdLib_10"
+<endComponent>

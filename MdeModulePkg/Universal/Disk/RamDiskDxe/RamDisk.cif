@@ -1,0 +1,18 @@
+<component>
+    name = "RamDisk"
+    category = eModule
+    LocalRoot = "MdeModulePkg\Universal\Disk\RamDiskDxe\"
+    RefName = "MdeModulePkg.RamDisk"
+[INF]
+"RamDiskDxe.inf"
+[files]
+"RamDisk.sdl"	
+"RamDisk.chm"	
+"RamDiskSsdtRule.txt"	
+[dependency]
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;AMITSE_2_19_1268"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_19"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_21"
+[dependency.optional]
+AMITSESources >= "SS: AptioV;$/AptioV/Source/Modules/AMITSE;TSESources_2_19_1268"
+<endComponent>

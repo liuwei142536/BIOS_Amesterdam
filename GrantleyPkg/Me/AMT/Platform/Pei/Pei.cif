@@ -1,0 +1,10 @@
+<component>
+	name = "Pei"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Platform\Pei\"
+	RefName = "GrantleyPkg.Me.AMT.MePlatform.Pei.Pei"
+[INF]
+"AmtStatusCode\AmtStatusCodePei.inf"
+[files]
+"Pei.sdl"	
+<endComponent>

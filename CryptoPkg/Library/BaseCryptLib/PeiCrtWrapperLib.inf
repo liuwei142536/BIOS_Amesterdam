@@ -1,0 +1,44 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file
+#  CrtWrapper Library Instance for BASE DRIVER.
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PeiCrtWrapperLib
+  FILE_GUID                      = 5FD39965-960E-4375-848A-3B9F035B82E9
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PeiCrtWrapperLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  PeiCrtWrapper.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  CryptoPkg/CryptoPkg.dec
+  
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  # suppress the following warnings so we do not break the build with warnings-as-errors:
+  #   C4305: truncation from type1 to type2 (Introduced by RFC3161 Timestamp ASN.1 declarations)
+  MSFT:*_*_*_CC_FLAGS = /wd4305
+  GCC:*_GCC44_IA32_CC_FLAGS = "-D__cdecl=__attribute__((cdecl))" "-D__declspec(t)=__attribute__((t))"

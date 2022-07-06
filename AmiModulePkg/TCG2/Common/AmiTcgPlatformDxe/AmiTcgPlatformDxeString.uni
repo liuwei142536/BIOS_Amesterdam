@@ -1,0 +1,77 @@
+﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**     5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093            **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//**********************************************************************
+// $Header: $
+//
+// $Revision: $
+//
+// $Date: $
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:	AmiTcgPlatfromDxeString.uni
+//
+// Description:	String definitions for PPI interface
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+/=#
+
+#langdef   en-US "English"    // English
+
+
+//
+// Begin en-USlish Language Strings
+//
+#string STR_TCG_CONFIGURATION           #language en-US  "A configuration change was requested to "
+#string STR_TPM 						#language en-US  " the TPM"
+#string STR_TCG_KEY1          			#language en-US  "Press F12 to "
+#string STR_TCG_KEY2          			#language en-US  "Press F10 to "
+#string STR_TCG_WARNING          		#language en-US  "WARNING: This request will remove any keys stored in the TPM"
+#string STR_TCG_WARNING1          		#language en-US  "WARNING: This request will remove any keys stored in the TPM. You will lose all created keys and access to data encrypted by these keys"
+#string STR_TCG_WARNING2          		#language en-US  "WARNING: Doing so might prevent security applications that rely on the TPM from functioning as expected"
+#string STR_TCG_CONFIRAMATION			#language en-US  "Press Esc to reject this change request and continue"
+#string STR_TCG_ENABLE					#language en-US  "enable"
+#string STR_TCG_DISABLE					#language en-US  "disable"
+#string STR_TCG_ACTIVATE				#language en-US  "activate"
+#string STR_TCG_DEACTIVATE				#language en-US  "deactivate"
+#string STR_TCG_ALLOW					#language en-US  "allow creation of an operator authentication value that permits temporary deactivation of"
+#string STR_TCG_DISALLOW				#language en-US  "disallow a user to take ownership of"
+#string STR_TCG_CLEAR					#language en-US  "clear"
+#string STR_TCG_NOTCLEAR				#language en-US  "???clear"
+#string STR_TCG_SETNOPPIPROVISION      		 #language en-US  "allow the Operation System to provision the computer's TPM (Trusted Platform Module) without asking for user confirmation in the future."
+#string STR_TCG_SETNOPPIPROVISIONACCPET       	 #language en-US  "approve future Operating System requests to provision the TPM"
+#string STR_TCG_SETNOPPICLEAR           #language en-US  "allow the Operation System to clear the computer's TPM (Trusted Platform Module) without asking for user confirmation in the future."
+#string STR_TCG_SETNOPPICLEARACCPET       	 #language en-US  "approve future Operating System requests to clear the TPM"
+#string STR_TCG_NOTE              		#language en-US  "This action will turn on the computer's TPM (Trusted Platform Module)"
+#string STR_TCG_NOTE1              		#language en-US  "This action will turn off the computer's TPM (Trusted Platform Module)"
+#string STR_TCG_NOTE2              		#language en-US  "This action will clear and turn on the computer's TPM (Trusted Platform Module)"
+#string STR_TCG_SETNOPPIMAINTENANCE     #language en-US  "allow the Operation System to Maintain the computer's TPM (Trusted Platform Module) without asking for user confirmation in the future."
+#string STR_TCG_SETNOPPIMAINTENANCEACCEPT       	 #language en-US  "approve future Operating System requests to Maintain the TPM"
+#string STR_TCG_BLANK                   #language en-US "                                                                                "
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**     5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093            **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "DbgXhciXportLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable DbgXhciXportLib support in Project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "USB_3_DEBUG_SUPPORT" "=" "1"
+End
+
+PATH
+	Name  = "DbgXhciXportLib_DIR"
+End
+
+INFComponent
+	Name  = "CommonXhciXportLib"
+	File  = "CommonXhciXportLib.inf"
+	Package  = "Debugger"
+End
+
+INFComponent
+	Name  = "DbgXhciXportLib"
+	File  = "DbgXhciXportLib.inf"
+	Package  = "Debugger"
+End
+
+LibraryMapping
+	Class  = "CommonXhciXportLib"
+	Instance  = "Debugger.CommonXhciXportLib"
+End
+
+LibraryMapping
+	Class  = "DebugXportLib"
+	Instance  = "Debugger.DbgXhciXportLib"
+End

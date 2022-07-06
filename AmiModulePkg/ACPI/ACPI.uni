@@ -1,0 +1,86 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**             5555 Oakbrook Pkwy, Norcross, GA 30093               **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//**********************************************************************
+// $Header: $
+//
+// $Revision: $
+//
+// $Date: $
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name: ACPI.UNI
+//
+// Description: ACPI Form String Definitions.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+/=#
+#include "VFR.uni"
+
+#string STR_ACPI_FORM                   #language eng "ACPI Settings"
+
+#string STR_ACPI_FORM_HELP              #language eng "System ACPI Parameters."
+
+#string STR_ACPI_SLEEP_PROMPT           #language eng "ACPI Sleep State"
+                                        #language x-AMI "ACPI001"
+
+#string STR_ACPI_SLEEP_HELP             #language eng "Select the highest ACPI sleep state the system will enter when the SUSPEND button is pressed."
+
+#string STR_ACPI_SLEEP_S1               #language eng "S1 (CPU Stop Clock)"
+
+#string STR_ACPI_SLEEP_S3               #language eng "S3 (Suspend to RAM)"
+
+#string STR_ACPI_SLEEP_NO               #language eng "Suspend Disabled"
+
+#string STR_ACPI_S4_PROMPT              #language eng "Enable Hibernation"
+                                        #language x-AMI "ACPI002"
+
+#string STR_ACPI_S4_HELP                #language eng "Enables or Disables System ability to Hibernate (OS/S4 Sleep State). This option may not be effective with some operating systems."
+
+#string STR_ACPI_LOCK_LEGACY_DEV_PROMPT #language eng "Lock Legacy Resources"
+                                        #language x-AMI "ACPI003"
+
+#string STR_ACPI_LOCK_LEGACY_DEV_HELP   #language eng "Enables or Disables Lock of Legacy Resources"
+
+#string STR_ACPI_AUTO_PROMPT            #language eng "Enable ACPI Auto Configuration"
+                                        #language x-AMI "ACPI004"
+
+#string STR_ACPI_AUTO_HELP              #language eng "Enables or Disables BIOS ACPI Auto Configuration."
+
+#string STR_S3_VIDEO_REPOST_PROMPT      #language eng "S3 Video Repost"
+                                        #language x-AMI "ACPI005"
+
+#string STR_S3_VIDEO_REPOST_HELP        #language eng "Enable or Disable S3 Video Repost"
+
+#string STR_ACPI_DISABLED               #language eng "Disabled"
+
+#string STR_ACPI_ENABLED                #language eng "Enabled"
+
+//#string <string name> #language eng ""
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**             5555 Oakbrook Pkwy, Norcross, GA 30093               **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

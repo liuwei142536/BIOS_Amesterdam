@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "PciPlatform_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PciPlatform support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "PciPlatform"
+	File  = "PciPlatform.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PciPlatform_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class = "PcdLib"
+    Instance = "MdePkg.DxePcdLib"
+    Override = "GrantleyPkg.PciPlatform"
+End

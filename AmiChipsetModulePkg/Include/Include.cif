@@ -1,0 +1,8 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmiChipsetModulePkg\Include\"
+	RefName = "AmiChipsetModulePkg.Include"
+[files]
+"Library\AmiChipsetIoLib.h"	
+<endComponent>

@@ -1,0 +1,12 @@
+<component>
+	name = "LastBootErrorLog"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\Whea\LastBootErrorLog\"
+	RefName = "GrantleyPkg.LastBootErrorLog"
+[INF]
+"LastBootErrorLog.inf"
+[files]
+"LastBootErrorLog.h"	
+"LastBootErrorLogHob.h"	
+"LastBootErrorLog.sdl"	
+<endComponent>

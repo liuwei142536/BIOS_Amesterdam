@@ -1,0 +1,14 @@
+<component>
+    name = "Ebc"
+    category = eCore
+    LocalRoot = "MdeModulePkg\Universal\EbcDxe\"
+    RefName = "MdeModulePkg.Ebc"
+[INF]
+"EbcDxe.inf"
+[files]
+"Ebc.sdl"	
+"Ebc.chm"	
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_15"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_19"
+<endComponent>

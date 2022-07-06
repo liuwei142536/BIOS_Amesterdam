@@ -1,0 +1,323 @@
+#
+# This file contains an 'Intel Peripheral Driver' and is      
+# licensed for Intel CPUs and chipsets under the terms of your
+# license agreement with Intel or your vendor.  This file may 
+# be modified by the user, subject to additional terms of the 
+# license agreement                                           
+#
+## @file
+# CPU MP DXE Driver.
+#
+# This DXE Driver does processor initialization, configures multi-processor environment,
+# logs data to SMBIOS table for processor subclass and cache subclass, and installs 
+# MP Services Protocol.
+#
+# Copyright (c) 2006 - 2019, Intel Corporation. All rights reserved.<BR>
+#
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuMpDxe
+#  MODULE_UNI_FILE                = CpuMpDxe.uni
+  FILE_GUID                      = 40BEAB40-CECE-4909-B133-20A413AE19E9
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MultiProcessorInitialize
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#  Create Event Guid C Name:  Event Type: EVENT_TYPE_PERIODIC_TIMER
+#
+#  HOB Guid C Name: gEfiHtBistHobGuid Hob Type: GUID_EXTENSION
+#
+
+[Sources]
+#Aptio V server override - Replace Intel SMBIOS with AMI SMBIOS.
+#  SMBIOS/ProcessorSubClass.c
+#  SMBIOS/ProcessorData.c
+#  SMBIOS/Processor.h
+#  SMBIOS/CpuSmbios.c
+#  SMBIOS/CacheSubClass.c
+#  SMBIOS/Cache.h
+  AmiCpuCacheSmbios.c
+  Vt.h
+  Vt.c
+  Xd.h
+  Xd.c
+  ThermalManagement.h
+  ThermalManagement.c
+  Setting.c
+  SelectLfp.c
+  ProgramBeforeReset.h
+  ProgramBeforeReset.c
+  ProcessorConfig.c
+  Prefetcher.h
+  Prefetcher.c
+  Peci.h
+  Peci.c
+  MpService.h
+  MpService.c
+  MpCommon.h
+  MpCommon.c
+  Microcode.h
+  Microcode.c
+  MchkInit.h
+  MchkInit.c
+  LimitCpuIdValue.h
+  LimitCpuIdValue.c
+  FerrSignalBreak.h
+  FerrSignalBreak.c
+  Feature.h
+  FastString.h
+  FastString.c
+  Eist.h
+  Eist.c
+  DataCollection.c
+  Cpu.h
+  C1e.h
+  C1e.c
+  GateA20m.c
+  GateA20m.h
+  Misc.c
+  Misc.h
+  TState.c
+  TState.h
+  Aes.c
+  Aes.h
+  Dca.c
+  Dca.h
+  CState.c
+  CState.h
+  X2Apic.c
+  X2Apic.h
+  Analysis.c
+  Strings.uni
+  SktScopeMsrInit.c
+  BdeSpecificHooks.c
+  BdeSpecificHooks.h
+  BootGuardLibrary.c	#AptioV Server Override
+  BootGuardLibrary.h	#AptioV Server Override
+
+[Sources.Ia32]
+  IA32/MpFuncs.asm
+  IA32/MpFuncs.S
+  IA32/CpuOnlyReset.h
+  IA32/CpuOnlyReset.c
+  IA32/CpuAsm.asm
+  IA32/CpuAsm.S
+  IA32/AsmInclude.inc
+  IA32/ArchSpecificDef.h
+  IA32/ArchSpecific.c
+
+[Sources.X64]
+  X64/MpFuncs.asm
+  X64/MpFuncs.S
+  X64/CpuOnlyReset.h
+  X64/CpuOnlyReset.c
+  X64/CpuAsm.asm
+  X64/CpuAsm.S
+  X64/AsmInclude.inc
+  X64/ArchSpecificDef.h
+  X64/ArchSpecific.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  #
+  # The dependency can be removed when we find better way to save CPU's S3 information.
+  #
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+# GrantleySocketPkg/Override/IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec #AptioV server override
+  GrantleySocketPkg/SocketPkg.dec
+# AptioV Server Override
+  AmiModulePkg/AmiModulePkg.dec	# AptioV Server Override
+  GrantleyPkg/Me/MePkg.dec #Aptio V Sever Override
+
+[LibraryClasses]
+  TimerLib
+  DxeServicesTableLib
+  CpuConfigLib
+  CpuLib
+  IoLib
+  PcdLib
+  UefiRuntimeServicesTableLib
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  UefiDriverEntryPoint
+  ReportStatusCodeLib
+  BaseMemoryLib
+  HiiLib
+  HobLib
+  UefiLib
+  DebugLib
+  BaseLib
+  SynchronizationLib
+  CpuOnlyResetLib
+  UefiCpuLib
+  MtrrLib
+  S3BootScriptLib
+  DebugAgentLib
+  LocalApicLib
+  PrintLib
+
+[Guids]
+  gEfiHtBistHobGuid                             ## CONSUMES  ## HOB
+  gEfiEventExitBootServicesGuid                 ## CONSUMES  ## Event
+  gIdleLoopEventGuid                            ## CONSUMES  ## Event
+  gEfiCpuTokenSpaceGuid                         ## CONSUMES  ## TokenSpaceGuid
+  gEfiMemoryMapGuid
+  gEfiPlatformInfoGuid
+  gPrevBootErrSrcHobGuid
+  gEfiSpsInfoHobGuid                            #Aptio V Server Override
+
+[Protocols]
+  gEfiSmbiosProtocolGuid                        ## CONSUMES
+  gEfiMpServiceProtocolGuid                     ## PRODUCES
+  gEfiCpuArchProtocolGuid                       ## CONSUMES
+  gEfiGenericMemTestProtocolGuid                ## SOMETIMES_CONSUMES
+  ## NOTIFY
+  ## SOMETIMES_CONSUMES
+  gEfiLegacyBiosProtocolGuid
+  gEfiSmmConfigurationProtocolGuid              ## NOTIFY
+  gEfiTimerArchProtocolGuid                     ## CONSUMES
+  gEfiTcgProtocolGuid                           ## SOMETIMES_CONSUMES
+  gEfiIioUdsProtocolGuid
+  gEfiCpuCsrAccessGuid                          # PROTOCOL ALWAYS_CONSUMED
+  gEfiTimerArchProtocolGuid                     # PROTOCOL ALWAYS_CONSUMED
+
+[FeaturePcd]
+  gEfiCpuTokenSpaceGuid.PcdCpuPeciFlag                       ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuFerrSignalBreakFlag            ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuIpPrefetcherFlag               ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuDcuPrefetcherFlag              ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuAdjacentCacheLinePrefetchFlag  ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuHardwarePrefetcherFlag         ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuFastStringFlag                 ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuSelectLfpAsBspFlag|TRUE        ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuMachineCheckFlag               ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuMicrocodeUpdateFlag            ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuExecuteDisableBitFlag          ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuMaxCpuIDValueLimitFlag         ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuVtLtFlag                       ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuEnhancedCStateFlag             ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuEistFlag                       ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuThermalManagementFlag          ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuConroeFamilyFlag               ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuCedarMillFamilyFlag            ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuPrescottFamilyFlag             ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuTunnelCreekFamilyFlag          ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuNehalemFamilyFlag              ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuGateA20MDisableFlag            ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuSandyBridgeFamilyFlag          ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuSilvermontFamilyFlag           ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuGoldmontFamilyFlag             ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuIvyBridgeFamilyFlag            ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuHaswellFamilyFlag              ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuBroadwellDEFamilyFlag
+  gEfiCpuTokenSpaceGuid.PcdCpuBroadwellFamilyFlag
+  gEfiCpuTokenSpaceGuid.PcdCpuMlcStreamerPrefetcherFlag      ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuMlcSpatialPrefetcherFlag       ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuMonitorMwaitFlag               ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuThreeStrikeCounterFlag         ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuEnergyPerformanceBiasFlag      ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuTStateFlag                     ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuAesFlag                        ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuDcaFlag                        ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuCStateFlag                     ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuX2ApicFlag                     ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuApicTprUpdateMessageFlag       ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuDcuModeSelectionFlag           ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuSocketIdReassignmentFlag       ## CONSUMES
+  
+  gEfiCpuTokenSpaceGuid.PcdCpuPCIeDownStreamPECIFlag
+
+[FixedPcd]
+  gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress
+
+[Pcd]
+  gEfiCpuTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber                ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuApLoopMode                               ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdPlatformType                                ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdPlatformDynamicVidSupport                   ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdPlatformHighPowerLoadLineSupport            ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuMicrocodePatchRegionSize                 ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuMicrocodePatchAddress                    ## CONSUMES
+  gCpuUncoreTokenSpaceGuid.PcdFlashNvStorageMicrocodeBase
+  gCpuUncoreTokenSpaceGuid.PcdFlashNvStorageMicrocodeSize
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuAssetTags                        ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuSocketNames                      ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuSocketCount                      ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuFrequencyLists                   ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuMaxFsbFrequency                  ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdPlatformCpuMaxCoreFrequency                 ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuApStackSize                              ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuApInitTimeOutInMicroSeconds              ## CONSUMES
+  ## CONSUMES
+  ## PRODUCES
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorFeatureSetting                  
+  ## CONSUMES
+  ## PRODUCES
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorFeatureCapability
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorFeatureUserConfiguration        ## CONSUMES
+  ## CONSUMES
+  ## PRODUCES
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorFeatureSettingEx1
+  ## CONSUMES
+  ## PRODUCES
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorFeatureCapabilityEx1
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorFeatureUserConfigurationEx1     ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuConfigContextBuffer                      ## PRODUCES
+  gEfiCpuTokenSpaceGuid.PcdCpuCallbackSignal                           ## PRODUCES
+  gEfiCpuTokenSpaceGuid.PcdIsPowerOnReset                              ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuPageTableAddress                         ## CONSUMES
+  ## CONSUMES
+  ## SOMETIMES_PRODUCES
+  gEfiCpuTokenSpaceGuid.PcdCpuMtrrTableAddress
+  gEfiCpuTokenSpaceGuid.PcdCpuS3DataAddress                            ## PRODUCES
+  gEfiCpuTokenSpaceGuid.PcdCpuHwCoordination                           ## SOMETIMES_CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuEnergyPolicy                             ## SOMETIMES_CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuClockModulationDutyCycle                 ## SOMETIMES_CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuAcpiLvl2Addr                             ## SOMETIMES_CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuPackageCStateLimit                       ## SOMETIMES_CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuDcuMode                                  ## SOMETIMES_CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuTccActivationOffset                      ## SOMETIMES_CONSUMES
+  gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdEbdaReservedMemorySize  ## CONSUMES
+  gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdOpromReservedMemoryBase ## CONSUMES
+  gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdOpromReservedMemorySize ## CONSUMES
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorMsrLockCtrl
+  gEfiCpuTokenSpaceGuid.PcdCpuDebugInterface
+#ESS Override Start
+# 4168379: Odin: PL1 cannot be changed greater than 200W and lock bit set.
+  gEfiCpuTokenSpaceGuid.PcdCpuTurboOverride
+#ESS Override End
+  gEfiCpuTokenSpaceGuid.PcdCpuIioLlcWaysBitMask
+  gEfiCpuTokenSpaceGuid.PcdCpuQlruCfgBitMask
+  gEfiCpuTokenSpaceGuid.PcdSbspSelection
+  gEfiMdePkgTokenSpaceGuid.PcdSpinLockTimeout|0
+
+[PcdEx]
+  ## CONSUMES
+  ## UNDEFINED # Token
+  gEfiCpuTokenSpaceGuid.PcdCpuSocketId
+  
+[Depex]
+  gEfiGenericMemTestProtocolGuid AND gEfiSmbiosProtocolGuid AND gIntelCpuPcdsSetDoneProtocolGuid AND gEfiTimerArchProtocolGuid AND gEfiCpuCsrAccessGuid
+
+[UserExtensions.TianoCore."ExtraFiles"]
+#  CpuMpDxeExtra.uni

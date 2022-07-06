@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "WheaErrorInj_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling WheaErrorInj support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "WheaErrorInj"
+	File  = "WheaErrorInj.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "WheaErrorInj_SUPPORT" "=" "1"
+End
+

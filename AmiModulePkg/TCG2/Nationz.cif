@@ -1,0 +1,10 @@
+<component>
+	name = "Nationz"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\TCG2\"
+	RefName = "Nationz"
+[files]
+[parts]
+"TcmDxe-ZTEIC"
+"TcmPei-ZTEIC"
+<endComponent>

@@ -1,0 +1,69 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DbgXhciXportLib
+  FILE_GUID                      = 6A90A1AD-2C18-47e2-AB05-8450A60C1096
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 0.1
+  LIBRARY_CLASS                  = DebugXhciXportX64Lib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+
+[Binaries.Ia32]
+  BIN | DbgXhciXportLib.lib|*|*|MYTOOLS
+  BIN | DbgXhciXportLib.lib|*|*|MSFT
+  BIN | DbgXhciXportVS2015Lib.lib|*|*|VS2015
+[Binaries.X64]
+  BIN | DbgXhciXportX64Lib.lib|*|*|MYTOOLS
+  BIN | DbgXhciXportX64Lib.lib|*|*|MSFT
+  BIN | DbgXhciXportVS2015X64Lib.lib|*|*|VS2015
+  
+[LibraryClasses]
+  IoLib
+  CommonXhciXportLib
+  
+[LibraryClasses.ia32]
+  AmiPeiLib
+
+[LibraryClasses.x64]
+  AmiDxeLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AMIDebuggerPkg/AMIDebuggerPkg.dec
+
+[Ppis]
+  gPeiUsbIoPpiGuid
+  gPeiUsbHostControllerPpiGuid
+
+[Pcd]
+  ## The memory BAR of xhci host controller, in which usb debug feature is enabled.
+  ## Note that the memory BAR address is only used before Pci bus resource allocation.
+  gEfiAMIDebugRxPkgTokenSpaceGuid.PcdUsbXhciMemorySpaceBase          ## SOMETIMES_CONSUMES
+
+  ## The pci address of xhci host controller, in which usb debug feature is enabled.
+  ## The format of pci address please refer to SourceLevelDebugPkg.dec
+  gEfiAMIDebugRxPkgTokenSpaceGuid.PcdUsbXhciPciAddress               ## CONSUMES
+
+  ## Per XHCI spec, software shall impose a timeout between the detection of the Debug Host 
+  ## connection and the DbC Run transition to 1. This PCD specifies the timeout value in microsecond.
+  gEfiAMIDebugRxPkgTokenSpaceGuid.PcdUsbXhciDebugDetectTimeout       ## SOMETIMES_CONSUMES
+  

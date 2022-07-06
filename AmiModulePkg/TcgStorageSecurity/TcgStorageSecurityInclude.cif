@@ -1,0 +1,12 @@
+<component>
+	name = "TcgStorageSecurity Includes"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\TcgStorageSecurity\"
+	RefName = "TcgStorageSecurityIncludes"
+[files]
+"AmiTcgStorageSecurity.h"	
+"TcgStorageSec.h"	
+"TcgStorageSecOPAL.h"	
+"TcgStorageSecurityCommon.h"	
+"AmiTcgStorageDeviceReset.h"	
+<endComponent>

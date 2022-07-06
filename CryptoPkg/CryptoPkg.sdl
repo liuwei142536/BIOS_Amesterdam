@@ -1,0 +1,180 @@
+TOKEN
+    Name  = "CryptoPkg_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling CryptoPkg support in the project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "CryptoPkg_MAJOR_VERSION"
+    Value  = "46"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "CryptoPkg_MINOR_VERSION"
+    Value  = "0"
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "DISABLE_STDLIB_WRAPPER_METHODS"
+    Value  = "0"
+    Help  = "Token for disabling build of wrapper methods related to StdLib in the project. 1 - Remove StdLib wrapper methods from build process, 0 - Add StdLib wrapper methods to build process"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "StdLib_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "DISABLE_STDLIB_WRAPPER_METHODS"
+    Value  = "1"
+    Help  = "Token for disabling build of wrapper methods related to StdLib in the project. 1 - Remove StdLib wrapper methods from build process, 0 - Add StdLib wrapper methods to build process"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "StdLib_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MINI_LIB_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling MinLib support in the project"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "StdLib_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "BUILD_OPENSSL_WITH_SOCKET"
+    Value  = "1"
+    TokenType = Boolean
+    TargetH = Yes    
+End
+
+ELINK
+    Name  = "ADDITIONAL_OpenSsl_Packages"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "ADDITIONAL_OpenSsl_LibraryClasses"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "ADDITIONAL_TlsLib_LibraryClasses"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "ADDITIONAL_LibraryClasses"
+    InvokeOrder = ReplaceParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "AmiDxeLib"
+    Parent  = "ADDITIONAL_OpenSsl_LibraryClasses"
+    Token = "DISABLE_STDLIB_WRAPPER_METHODS" "!=" "0"
+    InvokeOrder = AfterParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "LibC"
+    Parent  = "ADDITIONAL_OpenSsl_LibraryClasses"
+    Token = "DISABLE_STDLIB_WRAPPER_METHODS" "!=" "0"
+    InvokeOrder = AfterParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "LibStdLib"
+    Parent  = "ADDITIONAL_OpenSsl_LibraryClasses"
+    Token = "DISABLE_STDLIB_WRAPPER_METHODS" "!=" "0"
+    InvokeOrder = AfterParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "LibNetUtil"
+    Parent  = "ADDITIONAL_OpenSsl_LibraryClasses"
+    Token = "DISABLE_STDLIB_WRAPPER_METHODS" "!=" "0"        
+    InvokeOrder = AfterParent
+    OutDSC = Yes    
+End
+
+ELINK
+    Name  = "SafeIntLib"
+    Parent  = "ADDITIONAL_TlsLib_LibraryClasses"
+    Token = "MDE_PKG_VERSION" ">" "18"
+    InvokeOrder = AfterParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "RngLib"
+    Parent  = "ADDITIONAL_LibraryClasses"
+    InvokeOrder = AfterParent
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "AmiCompatibilityPkg/AmiCompatibilityPkg.dec"
+    Parent  = "ADDITIONAL_OpenSsl_Packages"
+    Token = "DISABLE_STDLIB_WRAPPER_METHODS" "!=" "0"
+    InvokeOrder = AfterParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "StdLib/StdLib.dec"
+    Parent  = "ADDITIONAL_OpenSsl_Packages"
+    Token = "DISABLE_STDLIB_WRAPPER_METHODS" "!=" "0"
+    InvokeOrder = AfterParent
+    OutDSC = Yes
+End
+
+ELINK
+    Name  = "-DOPENSSL_NO_STDIO -DOPENSSL_NO_FP_API -DOPENSSL_NO_TLS1_1 -DOPENSSL_NO_TLS1 -DOPENSSL_NO_TLS1_METHOD -DOPENSSL_NO_TLS1_1_METHOD -D__STDC_NO_ATOMICS__"
+    Parent  = "*_*_*_CC_FLAGS"
+    Type  = "BuildOptions"
+    Token = "DISABLE_STDLIB_WRAPPER_METHODS" "=" "0"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "-DOPENSSL_NO_TLS1_1 -DOPENSSL_NO_TLS1 -DOPENSSL_NO_TLS1_METHOD -DOPENSSL_NO_TLS1_1_METHOD -D__STDC_NO_ATOMICS__"
+    Parent  = "*_*_*_CC_FLAGS"
+    Type  = "BuildOptions"
+    Token = "DISABLE_STDLIB_WRAPPER_METHODS" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+  Name = "*_*_*_CC_FLAGS"
+  Type = "BuildOptions"
+  Arch = "COMMON"
+  InvokeOrder = ReplaceParent
+  OutDSC = Yes
+End
+
+#PcdMapping
+#    Name  = "PcdCryptoServiceFamilyEnable.HmacMd5.Family"
+#    GuidSpace  = "gEfiCryptoPkgTokenSpaceGuid"
+#    PcdType  = "PcdsFixedAtBuild"
+#    DataType  = "UINT32"
+#    Value  = "0xFFFFFFFF"
+#    Offset  = 00h
+#    Length  = 01h
+#    TargetDSC = Yes
+#End

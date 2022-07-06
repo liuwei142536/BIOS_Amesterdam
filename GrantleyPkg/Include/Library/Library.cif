@@ -1,0 +1,17 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Include\Library\"
+	RefName = "GrantleyPkg.Include.Library"
+[files]
+"CmosAccessLib.h"	
+"IpmiBaseLib.h"	
+"PcieSlotOpromLib.h"	
+"SioLib.h"
+"PchPlatformPolicyInitCommonLib.h"
+"PchPlatformPolicyInitDxeLib.h"
+"PchPlatformPolicyInitPeiLib.h"
+"PlatformClocksLib.h"
+"PLatformSmbiosIFWILib.h"
+"CompressLib.h"
+<endComponent>

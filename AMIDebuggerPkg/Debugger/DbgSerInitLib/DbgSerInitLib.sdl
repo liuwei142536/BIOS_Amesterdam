@@ -1,0 +1,31 @@
+TOKEN
+	Name  = "DbgSerInitLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling DbgSerInitLib support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token = "SERIAL_DEBUGGER_SUPPORT" "=" "1"
+	Token = "SERIAL_SEC_DBG_SUPPORT" "=" "0"
+	Token = "PeiDebugger_SUPPORT" "=" "1"
+    Token = "USB_3_DEBUG_SUPPORT" "=" "0"
+    Token = "USB_DEBUG_TRANSPORT" "=" "0"
+End
+
+PATH
+	Name  = "COMDbgSerInitLib_DIR"
+	Path  = "AMIDebuggerPkg\Debugger\DbgSerInitLib"
+End
+
+INFComponent
+	Name  = "DbgSerInitLib"
+	File  = "DbgSerInitLib.inf"
+	Package  = "Debugger"
+	Arch  = "common Ia32 X64"
+	Path  = "COMDbgSerInitLib_DIR"
+End
+
+LibraryMapping
+	Class  = "DbgSerInitLib"
+	Instance  = "Debugger.DbgSerInitLib"
+End
+

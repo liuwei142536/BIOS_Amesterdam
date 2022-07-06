@@ -1,0 +1,12 @@
+<component>
+    name = "Driver"
+    category = ModulePart
+    LocalRoot = "CryptoPkg\Driver\"
+    RefName = "CryptoPkg.Driver"
+[INF]
+"CryptoPei.inf"
+"CryptoDxe.inf"
+"CryptoSmm.inf"
+[files]
+"Crypto.sdl"	
+<endComponent>

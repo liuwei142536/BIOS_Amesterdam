@@ -1,0 +1,11 @@
+<component>
+	name = "MePolicyLib"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Library\MePolicyLib\"
+	RefName = "GrantleyPkg.MePolicyLib"
+[INF]
+"Dxe\MePolicyLib.inf"
+"Pei\AmtPeiPolicyLib.inf"
+[files]
+"MePolicyLib.sdl"	
+<endComponent>

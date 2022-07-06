@@ -1,0 +1,57 @@
+## @file
+#  CpuCsrAccess Protocol
+#
+#  Copyright (c) 2009 - 2012, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuCsrAccess
+  FILE_GUID                      = 06D20D84-A032-4e25-969A-346D255E46D1
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = CpuCsrAccessStart
+
+[Sources]
+  CpuCsrAccess.c
+  CpuCsrAccess.h	#AptioV server override: Adding files included in .c to INF for component download.  
+
+[Packages]
+  GrantleySocketPkg/SocketPkg.dec
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  HobLib
+  IoLib
+  PciLib
+  BaseLib
+
+[Protocols]
+  gEfiIioUdsProtocolGuid                        
+  gEfiCpuCsrAccessGuid
+  gEfiSmmBase2ProtocolGuid
+
+[Guids]
+  gEfiEventVirtualAddressChangeGuid             ## CONSUMES ## Event
+
+[Depex]
+#AptioV server override start: Remove dependency on gEfiSmmBase2ProtocolGuid for DXE driver as it has to run before IIO initialize.
+#  gEfiIioUdsProtocolGuid AND
+#  gEfiSmmBase2ProtocolGuid
+   gEfiIioUdsProtocolGuid
+#AptioV server override end: Remove dependency on gEfiSmmBase2ProtocolGuid for DXE driver as it has to run before IIO initialize.  

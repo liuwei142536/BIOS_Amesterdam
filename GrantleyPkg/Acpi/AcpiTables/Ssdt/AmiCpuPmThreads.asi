@@ -1,0 +1,871 @@
+
+
+External(\_SB.ToSocket(SCK).CP00, DeviceObj)
+External(\_SB.ToSocket(SCK).CP01, DeviceObj)
+External(\_SB.ToSocket(SCK).CP02, DeviceObj)
+External(\_SB.ToSocket(SCK).CP03, DeviceObj)
+External(\_SB.ToSocket(SCK).CP04, DeviceObj)
+External(\_SB.ToSocket(SCK).CP05, DeviceObj)
+External(\_SB.ToSocket(SCK).CP06, DeviceObj)
+External(\_SB.ToSocket(SCK).CP07, DeviceObj)
+External(\_SB.ToSocket(SCK).CP08, DeviceObj)
+External(\_SB.ToSocket(SCK).CP09, DeviceObj)
+External(\_SB.ToSocket(SCK).CP0A, DeviceObj)
+External(\_SB.ToSocket(SCK).CP0B, DeviceObj)
+External(\_SB.ToSocket(SCK).CP0C, DeviceObj)
+External(\_SB.ToSocket(SCK).CP0D, DeviceObj)
+External(\_SB.ToSocket(SCK).CP0E, DeviceObj)
+External(\_SB.ToSocket(SCK).CP0F, DeviceObj)
+External(\_SB.ToSocket(SCK).CP10, DeviceObj)
+External(\_SB.ToSocket(SCK).CP11, DeviceObj)
+External(\_SB.ToSocket(SCK).CP12, DeviceObj)
+External(\_SB.ToSocket(SCK).CP13, DeviceObj)
+External(\_SB.ToSocket(SCK).CP14, DeviceObj)
+External(\_SB.ToSocket(SCK).CP15, DeviceObj)
+External(\_SB.ToSocket(SCK).CP16, DeviceObj)
+External(\_SB.ToSocket(SCK).CP17, DeviceObj)
+External(\_SB.ToSocket(SCK).CP18, DeviceObj)
+External(\_SB.ToSocket(SCK).CP19, DeviceObj)
+External(\_SB.ToSocket(SCK).CP1A, DeviceObj)
+External(\_SB.ToSocket(SCK).CP1B, DeviceObj)
+External(\_SB.ToSocket(SCK).CP1C, DeviceObj)
+External(\_SB.ToSocket(SCK).CP1D, DeviceObj)
+External(\_SB.ToSocket(SCK).CP1E, DeviceObj)
+External(\_SB.ToSocket(SCK).CP1F, DeviceObj)
+External(\_SB.ToSocket(SCK).CP20, DeviceObj)
+External(\_SB.ToSocket(SCK).CP21, DeviceObj)
+External(\_SB.ToSocket(SCK).CP22, DeviceObj)
+External(\_SB.ToSocket(SCK).CP23, DeviceObj)
+
+Scope(ToSocket(SCK).CP00) {
+    Name(SCKN, SOCKET_NUM)
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP01) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP02) {
+
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP03) {
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP04) {
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+
+Scope(ToSocket(SCK).CP05) {
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP06) {
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP07) {
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP08) {
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP09) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP0A) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP0B) {
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP0C) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+
+Scope(ToSocket(SCK).CP0D) {
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP0E) {
+    Name(SCKN, SOCKET_NUM)
+
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP0F) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP10) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP11) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP12) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP13) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP14) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+
+Scope(ToSocket(SCK).CP15) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP16) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP17) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP18) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP19) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP1A) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP1B) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP1C) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+
+Scope(ToSocket(SCK).CP1D) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP1E) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP1F) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP20) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP21) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP22) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+
+Scope(ToSocket(SCK).CP23) {
+    Name(SCKN, SOCKET_NUM)
+    
+    Method(_PDC,1) {
+       PDC(Arg0)
+    }
+
+    Method(_OSC, 4)
+    {
+        return (OSC(Arg0, Arg1, Arg2, Arg3))
+    }
+
+#if PSTATE_SUPPORT
+    #include "AmiCpuPstates.asi"
+#endif
+#if CSTATE_SUPPORT
+    #include "AmiCpuCstates.asi"
+#endif
+#if TSTATE_SUPPORT
+    #include "AmiCpuTstates.asi"
+#endif
+}
+

@@ -1,0 +1,14 @@
+TOKEN
+	Name  = "McBankErrorInjection_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling McBankErrorInjection support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "McBankErrorInjection"
+	File  = "McBankErrorInjection.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End

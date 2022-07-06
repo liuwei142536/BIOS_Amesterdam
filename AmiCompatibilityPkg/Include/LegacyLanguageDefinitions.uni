@@ -1,0 +1,61 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2009, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//**********************************************************************
+// $Header: $
+//
+// $Revision: $
+//
+// $Date: $
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name: Languages.uni
+//
+// Description: Languages definitions.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+/=#
+#langdef   eng "English"    // English
+#langdef   fra "Français"   // French
+#langdef   spa "Español"    // Spanish
+#langdef   ger "Deutsch"    // German
+#langdef   rus "Русский"    // Russian
+#langdef   kor "Korean"     // Korean
+#langdef   ita "Italiano"   // Italian
+#langdef   dan "Dansk"      // Danish
+#langdef   fin "Suomi"      // Finnish
+#langdef   dut "Nederlands" // Dutch
+#langdef   nor "Norsk"      // Norweigan
+#langdef   por "Português"  // Portuguese
+#langdef   swe "Svenska"    // Swedish
+#langdef   jpn "日本語"      // Japansese
+#langdef   zho "中文 (简体)" // Chinese simplified
+#langdef   chi "中文 (繁體)" // Chinese traditional
+
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2011, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

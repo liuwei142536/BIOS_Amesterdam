@@ -1,0 +1,13 @@
+<component>
+	name = "MePolicy"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\SampleCode\MePolicyInit\"
+	RefName = "GrantleyPkg.MePolicy"
+[INF]
+"Dxe\MeDxePolicyInit.inf"
+[files]
+"MePolicy.sdl"	
+[parts]
+"GrantleyPkg.MePolicyLib"
+"GrantleyPkg.MeKernel"
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "HeciPei"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Heci\Pei\"
+	RefName = "GrantleyPkg.HeciPei"
+[INF]
+"HeciInit.inf"
+[files]
+"HeciServer.h"	
+"HeciPei.sdl"	
+<endComponent>

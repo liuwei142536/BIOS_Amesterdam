@@ -1,0 +1,10 @@
+<component>
+	name = "MeUma"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Heci\MeUma"
+	RefName = "GrantleyPkg.MeUma"
+[INF]
+"MeUma.inf"
+[files]
+"MeUma.sdl"
+<endComponent>

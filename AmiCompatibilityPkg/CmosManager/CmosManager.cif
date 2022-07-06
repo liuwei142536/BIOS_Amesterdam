@@ -1,0 +1,27 @@
+<component>
+    name = "CMOS Manager"
+    category = eModule
+    LocalRoot = "AmiCompatibilityPkg\CmosManager\"
+    RefName = "CmosManager"
+[INF]
+"CmosManagerPei.inf"
+"CmosManagerPeiLib.inf"
+"CmosManagerDxe.inf"
+"CmosManagerDxeLib.inf"
+"CmosManagerSmm.inf"
+"CmosManagerSmmLib.inf"
+[files]
+"CmosManager.sdl"	
+"CmosManager.chm"	
+[parts]
+"CmosBoard"
+"CmosCore"
+"CmosSec"
+[dependency]
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;5.004_AmiCompatibilityPkg_13"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;5.004_MdePkg_04"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;5.004_AmiModulePkg_15"
+IntelFrameworkPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/IntelFrameworkPkg;5.004_IntelFrameworkPkg_02"
+[dependency.optional]
+Smm >= "SS: AptioV;$/AptioV/Source/Hardware/Cpu/x86_64/Smm;SMM_08"
+<endComponent>

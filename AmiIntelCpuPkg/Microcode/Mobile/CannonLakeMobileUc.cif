@@ -1,0 +1,11 @@
+<component>
+	name = "Mobile CannonLake uCode Patches (8066X)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Mobile\"
+	RefName = "CannonLakeMobileUc"
+[files]
+"CannonLakeMobileUc.sdl"
+"M8060662_0000001A.mcb" = "MOBILE MICROCODE UPDATES" 
+"M8060662_00000022.mcb" = "MOBILE MICROCODE UPDATES" 
+"M8060663_0000002A.pdb" = "MOBILE MICROCODE UPDATES" 
+<endComponent>

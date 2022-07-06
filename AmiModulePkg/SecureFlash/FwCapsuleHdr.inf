@@ -1,0 +1,25 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file
+#   This module creates FwCapsule Hdr file
+##
+[Defines]
+INF_VERSION     = 0x00010015
+BASE_NAME       = FwCapsuleHdr
+MODULE_TYPE     = USER_DEFINED
+FILE_GUID       = 414D94AD-998D-47D2-BFCD-4E882241DE32
+SECTION_GUID    = 5A88641B-BBB9-4AA6-80F7-498AE407C31F
+
+[Sources]
+FwCapsuleHdr.cbin
+
+[Packages]
+ MdePkg/MdePkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+

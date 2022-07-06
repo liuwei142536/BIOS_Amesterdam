@@ -1,0 +1,83 @@
+TOKEN
+	Name  = "ServerCommonPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling ServerCommonPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SoftStrapsPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SoftStrapsPeim support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "SerialPortLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SerialPortLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "WheaErrorLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable WheaErrorLib support in Project"
+	TokenType = Boolean
+    Token = "WHEA_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "AcpiDebugSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AcpiDebugSmm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SoftStrapsPeim"
+	File  = "Universal/SoftStrapsPeim/SoftStrapsPeim.inf"
+	Package  = "ServerCommonPkg"
+	ModuleTypes = "PEIM"
+	Token = "SoftStrapsPeim_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "SoftStrapsPeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "ServerCommonPkg.SoftStrapsPeim"
+	Apriori_Index  = "11"
+	Token = "SoftStrapsPeim_SUPPORT" "=" "1"	
+End
+
+#Aptio V Grantley Override: SerialPortLib is provided by GrantleyPkg. So commenting it here.
+#INFComponent
+#	Name  = "SerialPortLib"
+#	File  = "Library/SerialPortLib/SerialPortLib.inf"
+#	Package  = "ServerCommonPkg"
+#	Token = "SerialPortLib_SUPPORT" "=" "1"
+#End
+
+INFComponent
+	Name  = "WheaErrorLib"
+	File  = "Library/WheaErrorLib/WheaErrorLib.inf"
+	Package  = "ServerCommonPkg"
+	Token = "WheaErrorLib_SUPPORT" "=" "1"
+End
+
+
+#Aptio V Grantley Override: SerialPortLib is provided by GrantleyPkg. So commenting it here.
+#LibraryMapping
+#	Class  = "SerialPortLib"
+#	Instance  = "ServerCommonPkg.SerialPortLib"
+#	Arch  = "common"
+#	Token = "SerialPortLib_SUPPORT" "=" "1"
+#End
+
+LibraryMapping
+	Class  = "WheaErrorLib"
+	Instance  = "ServerCommonPkg.WheaErrorLib"
+	Arch  = "common"
+	Token = "WheaErrorLib_SUPPORT" "=" "1"	
+End

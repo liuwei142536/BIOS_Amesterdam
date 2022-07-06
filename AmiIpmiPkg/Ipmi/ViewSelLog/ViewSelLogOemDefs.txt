@@ -1,0 +1,44 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file ViewSelLogOemDefs.h
+    Contains OEM status code events.
+
+**/
+
+#ifndef __VIEW_SEL_LOG_OEM_DEFS_H__
+#define __VIEW_SEL_LOG_OEM_DEFS_H__
+#define END_OF_OEM_STATUS_CODE_ELINKS_LIST {0xFFFF, 0xFFFF, 0xFF, 0xFF, 0xFF, 0xFF}
+
+@elink(VIEW_SEL_LOG_OEM_FILE, "#include <@Child>", "%n", "")
+
+#define VIEW_SEL_LOG_OEM_SENSOR_NUMBER_LIST @elink(OEM_IPMI_SEL_SENSOR_NUMBER_LIST, "@Child", "", "")
+#define VIEW_SEL_LOG_OEM_SENSOR_TYPE_LIST @elink(OEM_IPMI_SEL_SENSOR_TYPE_LIST, "@Child", "", "")
+#define VIEW_SEL_LOG_OEM_SENSOR_TYPE_OFFSET_LIST @elink(OEM_IPMI_SEL_SENSOR_TYPE_OFFSET_LIST, "@Child", "", "")
+
+#endif  // #ifndef __VIEW_SEL_LOG_OEM_DEFS_H__
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

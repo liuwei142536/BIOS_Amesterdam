@@ -1,0 +1,16 @@
+<component>
+	name = "AmiTsePkg"
+	category = ModulePart
+	Rank = 40
+	LocalRoot = "AmiTsePkg\"
+	RefName = "AmiTsePkg"
+[properties]
+	Orphan = AMITSE
+[files]
+"AmiTsePkg.dec"	
+"AmiTsePkg.sdl"	
+[parts]
+"AmiTsePkg.Include"
+"AmiTsePkg.Protocol"
+"AmiTsePkg.LibraryInstances"
+<endComponent>

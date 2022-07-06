@@ -1,0 +1,119 @@
+#
+# This file contains 'Framework Code' and is licensed as such 
+# under the terms of your license agreement with Intel or your
+# vendor.  This file may not be modified, except as allowed by
+# additional terms of your license agreement.                 
+#
+## @file
+# Platform Package
+#
+# Cross Platform Modules for Tiano
+# Copyright (c) 2008 - 2014, Intel Corporation. All rights reserved.<BR>
+#
+#    This software and associated documentation (if any) is furnished
+#    under a license and may only be used or copied in accordance
+#    with the terms of the license. Except as permitted by such
+#    license, no part of this software or documentation may be
+#    reproduced, stored in a retrieval system, or transmitted in any
+#    form or by any means without the express written consent of
+#    Intel Corporation.
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = GrantleySocketPkg
+  PACKAGE_GUID                   = DD44D851-9A3E-46E8-A2Ef-D794D014ECC1
+  PACKAGE_VERSION                = 0.91
+
+[Includes]              
+  Include
+  Include/Cpu
+  Include/Setup
+  Include/Iio
+  Include/Guid
+  Include/Library
+
+  Library/MemoryQpiInit/Chip/Include
+  Library/MemoryQpiInit/Chip/Include/RcRegs
+  Library/MemoryQpiInit/Core/Include
+  Library/MemoryQpiInit/Platform/Include
+  Library/MemoryQpiInit
+  Library/ProcessorPowerManagement
+  Library/ProcessorStartup
+  Override/IA32FamilyCpuPkg
+  Override/IA32FamilyCpuPkg/Include
+# AptioV server override  
+   ../Build
+   
+[Guids]
+  gCpuUncoreTokenSpaceGuid      = { 0x9044434c, 0x40e8, 0x47a1, { 0xa3, 0xba, 0x85, 0x07, 0xf3, 0xc0, 0xe2, 0x56 }}
+  gProcessorProducerGuid        = { 0x1bf06aea, 0x5bec, 0x4a8d, { 0x95, 0x76, 0x74, 0x9b, 0x09, 0x56, 0x2d, 0x30 }}
+  gEfiCpuHtCapableGuid          = { 0x0d1b9c8e, 0xf77b, 0x4632, { 0x83, 0x43, 0x91, 0xf4, 0x3d, 0x9a, 0x85, 0x60 }}
+  gEfiPlatformInfoGuid          = { 0x1e2acc41, 0xe26a, 0x483d, { 0xaf, 0xc7, 0xa0, 0x56, 0xc3, 0x4e, 0x08, 0x7b }}
+  gEfiMemoryConfigDataGuid      = { 0x80dbd530, 0xb74c, 0x4f11, { 0x8c, 0x03, 0x41, 0x86, 0x65, 0x53, 0x28, 0x31 }}
+  gEfiMemoryConfigDataHobGuid   = { 0x1de25879, 0x6e2a, 0x4d72, { 0xa7, 0x68, 0x28, 0x8c, 0xcb, 0x9f, 0xa7, 0x19 }}
+  gEfiMemoryMapDataHobBdatGuid  = { 0x3417b225, 0x916a, 0x49f5, { 0x9a, 0xf5, 0xc9, 0xc7, 0xbf, 0x93, 0x7e, 0xa2 }}
+  gEfiMemorySetupGuid           = { 0x3eeff35f, 0x147c, 0x4cd1, { 0xa2, 0x34, 0x92, 0xa0, 0x69, 0x70, 0x0d, 0xb6 }}
+  gEfiMemoryMapGuid             = { 0xf8870015, 0x6994, 0x4b98, { 0x95, 0xa2, 0xbd, 0x56, 0xda, 0x91, 0xc0, 0x7f }}
+  gEfiMpstNodeDataGuid          = { 0x418bc604, 0xf15e, 0x4843, { 0x85, 0xd0, 0x2d, 0x24, 0x80, 0xb7, 0xe4, 0x88 }}
+  gReadyForLockProtocolGuid     = { 0x8d6f1add, 0x45a5, 0x45a8, { 0x8b, 0xb8, 0x0c, 0x3a, 0x95, 0x31, 0x48, 0xfa }}
+  gPlatformTokenSpaceGuid       = { 0x07dfa0d2, 0x2ac5, 0x4cab, { 0xac, 0x14, 0x30, 0x5c, 0x62, 0x48, 0x87, 0xe4 }}
+  gPrevBootErrSrcHobGuid        = { 0x5138b5c5, 0x9369, 0x48ec, { 0x5b, 0x97, 0x38, 0xa2, 0xf7, 0x09, 0x66, 0x75 }}
+
+[Ppis]
+  gPeiBaseMemoryTestPpiGuid     = { 0xb6ec423c, 0x21d2, 0x490d, { 0x85, 0xc6, 0xdd, 0x58, 0x64, 0xea, 0xa6, 0x74 }}
+  gPeiPlatformMemorySizePpiGuid = {0x9a7ef41e, 0xc140, 0x4bd1, {0xb8, 0x84, 0x1e, 0x11, 0x24, 0x0b, 0x4c, 0xe6 }}
+  gPeiMpServicePpiGuid          = { 0xee16160a, 0xe8be, 0x47a6, { 0x82, 0x0a, 0xc6, 0x90, 0x0d, 0xb0, 0x25, 0x0a }}  
+  gSsaBiosServicesPpiGuid       = { 0xBAE29D7B, 0x89BB, 0x4223, { 0xAF, 0x76, 0x96, 0xD0, 0xB3, 0x24, 0x9B, 0x36 }}
+
+[Protocols]
+  gEfiPlatformCpuProtocolGuid   = { 0xbd26cdc9, 0xa092, 0x462a, { 0x87, 0x7a, 0x5a, 0xb6, 0xad, 0xce, 0x48, 0x12 }}
+  gEfiIioUdsProtocolGuid        = { 0xa7ced760, 0xc71c, 0x4e1a, { 0xac, 0xb1, 0x89, 0x60, 0x4d, 0x52, 0x16, 0xcb }}
+  gEfiIioSystemProtocolGuid      = { 0xddc3080a, 0x2740, 0x4ec2, {0x9a, 0xa5, 0xa0, 0xad, 0xef, 0xd6, 0xff, 0x9c }}
+  gEfiCpuCsrAccessGuid           = { 0x67835f, 0x9a50, 0x433a, {0x8c, 0xbb, 0x85, 0x20, 0x78, 0x19, 0x78, 0x14 }}
+
+  gDxeEnhancedSpeedstepProtocolGuid = { 0xe98021, 0xf4fe, 0x46cc, { 0xab, 0x2d, 0x89, 0x4c, 0x37, 0x3a, 0xfa, 0x1 }}
+
+
+[PcdsFeatureFlag]
+  gEfiCpuTokenSpaceGuid.PcdCpuIvyBridgeFamilyFlag|TRUE|BOOLEAN|0x10000031
+  gPlatformTokenSpaceGuid.PcdLockCsrSsidSvidRegister|TRUE|BOOLEAN|0x10000001
+  gEfiCpuTokenSpaceGuid.PcdCpuSocketIdReassignmentFlag|FALSE|BOOLEAN|0x10000029
+  gEfiCpuTokenSpaceGuid.PcdCpuBroadwellDEFamilyFlag|TRUE|BOOLEAN|0x10000039
+  gEfiCpuTokenSpaceGuid.PcdCpuBroadwellFamilyFlag|TRUE|BOOLEAN|0x10000041
+  gEfiCpuTokenSpaceGuid.PcdCpuPCIeDownStreamPECIFlag|TRUE|BOOLEAN|0x1000002E
+
+### [PcdsFixedAtBuild, PcdsPatchableInModule]
+[PcdsFixedAtBuild,PcdsPatchableInModule,PcdsDynamic]
+  ## PCD for ServerCommonPkg\Override\IA32FamilyCpuPkg\CpuMpDxe.inf
+  ## This PCD is the AP state on POST. The value is defined as below.
+  #  1: ApInHltLoop,   AP is in the Hlt-Loop state.
+  #  2: ApInMwaitLoop, AP is in the Mwait-Loop state.
+  #  3: ApInRunLoop,   AP is in the Run-Loop state.
+  gEfiCpuTokenSpaceGuid.PcdCpuApLoopMode|1|UINT8|0x10001004
+  gEfiCpuTokenSpaceGuid.PcdCpuDebugInterface|0x0|UINT8|0x60008017
+  gEfiCpuTokenSpaceGuid.PcdCpuProcessorMsrLockCtrl|0x0|UINT8|0x60008018
+  gEfiCpuTokenSpaceGuid.PcdCpuIioLlcWaysBitMask|0x0|UINT64|0x60008019
+  gEfiCpuTokenSpaceGuid.PcdCpuQlruCfgBitMask|0x0|UINT64|0x6000801A
+  gEfiCpuTokenSpaceGuid.PcdSbspSelection|0xFF|UINT8|0x6000801B
+  gEfiCpuTokenSpaceGuid.PcdCpuPmStructAddr|0x0|UINT64|0x60008020
+  gEfiCpuTokenSpaceGuid.PcdCpuTurboOverride|0x0|UINT32|0x60008022
+
+[PcdsFixedAtBuild]
+  gPlatformTokenSpaceGuid.PcdCboDev|0x0C|UINT32|0x3000000A
+  gPlatformTokenSpaceGuid.PcdCboFunc|0x06|UINT8|0x3000000B
+  gPlatformTokenSpaceGuid.PcdRUncoreCrSmram2|0x4C|UINT8|0x3000000C
+  gCpuUncoreTokenSpaceGuid.PcdFlashSecCacheRegionBase|0x00FFE00000|UINT32|0x2000000D
+  gCpuUncoreTokenSpaceGuid.PcdFlashSecCacheRegionSize|0x0000200000|UINT32|0x2000000E
+  gCpuUncoreTokenSpaceGuid.PcdFlashNvStorageMicrocodeBase|0xFFFB0000|UINT32|0x30000004
+  gCpuUncoreTokenSpaceGuid.PcdFlashNvStorageMicrocodeSize|0x00010000|UINT32|0x30000005
+
+
+[PcdsDynamic]
+  gEfiCpuTokenSpaceGuid.PcdMicrocodePatch23Address|0|UINT32|0x30000018
+  gEfiCpuTokenSpaceGuid.PcdPatch23SetupOptions|0|UINT32|0x30000019
+  
+[PcdsFeatureFlag]
+  ## This PCD specifies whether StatusCode is reported via USB Serial port.
+  gEfiCpuTokenSpaceGuid.PcdCpuSelectLfpAsBspFlag|TRUE|BOOLEAN|0x1000000F

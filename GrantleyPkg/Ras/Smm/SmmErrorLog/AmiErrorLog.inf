@@ -1,0 +1,35 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiErrorLog
+  FILE_GUID                      = 905CF1B3-32F8-489c-A641-46A714583262
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = InitializeAmiErrorLog 
+
+[Sources]
+  AmiErrorLog.c
+
+[Packages]
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  MdePkg/MdePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  BaseLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  #SmmServicesTableLib
+  UefiLib
+
+[Protocols]
+  gEfiSmmControl2ProtocolGuid
+
+[Guids]
+  gEfiSetupVariableGuid
+
+[Depex]
+ TRUE

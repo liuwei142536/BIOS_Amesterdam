@@ -1,0 +1,18 @@
+TOKEN
+	Name  = "AcpiTableDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Capsule support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AcpiTableDxe"
+	File  = "AcpiTableDxe/AcpiTableDxe.inf"
+	Package  = "MdeModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+

@@ -1,0 +1,15 @@
+TOKEN
+	Name  = "WheaPlatform_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling WheaPlatform support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "WheaPlatform"
+	File  = "WheaPlatform.inf"
+	Package  = "ServerCommonPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+

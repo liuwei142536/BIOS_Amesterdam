@@ -1,0 +1,65 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2013, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+## @file
+#   
+##
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiCpuInfoProtocols
+  FILE_GUID                      = 9529DD7B-9BA5-4FC3-B1E5-E085C9F98FCB
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = EntryPoint
+
+[Sources]  
+  AmiCpuInfo.h
+  AmiCpuInfo.c
+  AmiCpuInfoProtocols.c
+  AmiCpuInfoProtocols2.c
+  AmiCpuInfoFunctions.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  UefiCpuPkg/UefiCpuPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseLib
+  BaseMemoryLib
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  DebugLib
+  LocalApicLib
+  PciExpressLib
+ 
+[Protocols]
+    gEfiMpServiceProtocolGuid
+
+[Depex]
+    gEfiMpServiceProtocolGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

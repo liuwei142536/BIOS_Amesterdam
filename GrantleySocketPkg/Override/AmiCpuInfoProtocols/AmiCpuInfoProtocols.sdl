@@ -1,0 +1,16 @@
+TOKEN
+    Name  = "AMI_CPU_INFO_PROTOCOL_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable creation of Ami Cpu Info Protocol Support support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+INFComponent
+    Name  = "AmiCpuInfoProtocols"
+    File  = "AmiCpuInfoProtocols.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End

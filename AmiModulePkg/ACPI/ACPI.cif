@@ -1,0 +1,38 @@
+<component>
+    name = "ACPI"
+    category = eModule
+    LocalRoot = "AmiModulePkg\ACPI\"
+    RefName = "AmiModulePkg.ACPI"
+[INF]
+"ACPI.inf"
+"AcpiLib.inf"
+"TimeAndAlarmSmi.inf"
+"DsdtAsl.inf"
+"AcpiTables.inf"
+[files]
+"ACPI.chm"	
+"ACPI.sdl"	
+"ACPI.sd"	
+"ACPI.uni"	
+"AcpiElinkTempl.txt"	
+"DsdtAsl.asl"	
+[parts]
+"MdeModulePkg.AcpiTableDxe"
+"GenericAsl"
+"MdeModulePkg.BootScript"
+"IntelFrameworkModulePkg.S3SaveDxe"
+"UefiCpuPkg.S3Resume"
+"MdeModulePkg.FirmwarePerformanceDataTable"
+[dependency]
+AmiCompatibilityPkg.Setup >= "SS: AptioV;$/AptioV/Source/Modules/Setup;Setup_04"
+IntelFrameworkPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/IntelFrameworkPkg;5.004_IntelFrameworkPkg_02"
+AmiModulePkg.Bds >= "SS: AptioV;$/AptioV/Source/Modules/Bds;Bds_08"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_46"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_33"
+AmiModulePkg.AmiStatusCode >= "SS: AptioV;$/AptioV/Source/Modules/AmiStatusCode;StatusCodeAmi_09"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_21"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_19"
+[dependency.optional]
+AmiModulePkg.GenericSio >= "SS: AptioV;$/AptioV/Source/Modules/GenericSio;GenericSio_10"
+TCG2 >= "SS: AptioV;$/AptioV/Source/Modules/TCG2;TCG2_18"
+<endComponent>

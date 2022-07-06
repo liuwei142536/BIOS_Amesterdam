@@ -1,0 +1,12 @@
+<component>
+	name = "Smm"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Smm\"
+	RefName = "GrantleySocketPkg.Smm"
+[INF]
+"Access\SmmAccess.inf"
+"Iio\IioSmm.inf"
+"SmmAccessPei\SmmAccessPei.inf"
+[files]
+"SocketPkgSmm.sdl"	
+<endComponent>

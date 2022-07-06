@@ -1,0 +1,70 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file
+#  PEI AmiCryptoLib library implementation for RSA, PKCS#1, SHA256 functions
+#
+##
+
+[Defines]
+  INF_VERSION            = 0x00010005
+  BASE_NAME              = AmiPeiCryptLibTiny
+  FILE_GUID              = 5F97B85B-0BF7-4837-A70A-F37EB74742FD
+  MODULE_TYPE            = PEIM
+  VERSION_STRING         = 1.0
+  LIBRARY_CLASS          = AmiPeiCryptLibTiny|BASE PEIM PEI_CORE
+  CONSTRUCTOR            = AmiPeiCryptLibConstructor
+
+#0x5f97b85b, 0xbf7, 0x4837, 0xa7, 0xa, 0xf3, 0x7e, 0xb7, 0x47, 0x42, 0xfd);
+#
+#  VALID_ARCHITECTURES   = IA32 ARM
+#
+
+[Sources]
+ PeiCryptLibInit.c
+ RSAKeyImport.c
+ Pkcs1_sigDecode.c
+ Memalloc.c
+ includes.h
+ build_config.h
+ common.h
+ os.h
+ crypto.h
+ libtommath.h
+ bignum.c
+ bignum.h
+ rsa.c
+ rsa.h
+ sha256.c
+ sha256.h
+ asn1.h
+ wpa_debug.h
+
+[Packages]
+ MdePkg/MdePkg.dec
+ AmiModulePkg/AmiModulePkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+  
+[LibraryClasses]
+ PeiServicesLib
+# DebugLib
+
+[LibraryClasses.IA32]
+ AmiCryptIntrinsicLib
+  
+[Ppis]
+ gEfiPeiMemoryDiscoveredPpiGuid
+
+[Pcd]
+ gAmiCryptoPkgTokenSpaceGuid.AmiPcdCpMaxHeapSize
+ gAmiCryptoPkgTokenSpaceGuid.AmiPcdCpHeapAddr
+
+[BuildOptions.IA32]
+MSFT:*_*_IA32_CC_FLAGS = -DCONFIG_CRYPTLIB_TINY -DCONFIG_NO_STDOUT_DEBUG -DLTM_FAST
+
+[BuildOptions.AARCH64]
+*_GCC_AARCH64_CC_FLAGS = -D_MSC_VER -DCONFIG_CRYPTLIB_TINY -DCONFIG_NO_STDOUT_DEBUG -DLTM_FAST

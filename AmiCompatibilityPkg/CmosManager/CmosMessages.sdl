@@ -1,0 +1,31 @@
+ELINK
+    Name  = "$(CMOS_MANAGER_DIR)/CmosMessages.uni"
+    Parent  = "SetupStringFiles"
+    InvokeOrder = AfterParent
+    Token = "CMOS_SETUP_SUPPORT" "=" "1"
+    Token = "CMOS_MESSAGES_SUPPORT" "=" "1"
+End
+
+ELINK
+    Name  = "$(CMOS_MANAGER_DIR)/CmosMessages.c"
+    Parent  = "SetupCallbackFiles"
+    InvokeOrder = AfterParent
+    Token = "CMOS_SETUP_SUPPORT" "=" "1"
+    Token = "CMOS_MESSAGES_SUPPORT" "=" "1"
+End
+
+
+ELINK
+    Name  = "InitCmosStrings,"
+    Parent  = "SetupStringInit"
+    InvokeOrder = AfterParent
+    Token = "CMOS_SETUP_SUPPORT" "=" "1"
+    Token = "CMOS_MESSAGES_SUPPORT" "=" "1"
+End
+
+
+ELINK
+    Name  = "gAmiCmosAccessDxeProtocolGuid"
+    Parent  = "AdditionalSetupProtocols"
+    InvokeOrder = AfterParent
+End

@@ -1,0 +1,63 @@
+﻿﻿﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//**********************************************************************
+// $Header: $
+//
+// $Revision: $
+//
+// $Date: $
+//**********************************************************************
+
+//<AMI_FHDR_START>
+//-----------------------------------------------------------------------
+//
+// Name:		Nb.uni
+//
+// Description:	This contains the unicode strings pertaining to NB
+//
+//-----------------------------------------------------------------------
+//<AMI_FHDR_END>
+
+
+/=#
+#include "VFR.uni"
+#string STR_MEMORY_INFORMATION          #language eng "Memory Information"
+#string STR_MEMORY_SIZE_NAME            #language eng "Total Memory"
+#string STR_MEMORY_SIZE_VALUE           #language eng "N/A" // Dynamically updated
+#string STR_MEMORY_SIZE_HELP            #language eng "Total Memory in the System."
+
+
+// GrangevilleNS changes Starts EIP#432131 - Support for Optimize boot
+#string STR_OPTIMIZED_BOOT              #language eng "Optimized Boot"
+#string STR_OPTIMIZED_BOOT_HELP         #language eng "Enables or disables Optimized Boot. Enabling Optimized Boot will disable Csm support and disable connecting Network devices to decrease boot time. While disabling Optimized Boot, make sure to restore Csm Support option to previous value before enabling Optimized Boot."
+
+#string STR_ENABLE                      #language eng "Enabled"
+#string STR_DISABLE                     #language eng "Disabled"
+// GrangevilleNS changes End EIP#432131 - Support for Optimize boot
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+

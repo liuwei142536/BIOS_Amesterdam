@@ -1,0 +1,43 @@
+#ifdef ADVANCED_FORM_SET
+#ifdef FORM_SET_TYPEDEF
+#include "SioSetup.h"
+#endif 
+#ifdef FORM_SET_VARSTORE
+#if (ACPI_MODULE_VER > 170)
+    varstore SIO_SETUP_DATA,
+    key   = AUTO_ID(SIO_SETUP_DATA_ID),
+    name    = SioSetupData,
+    guid    = SIO_SETUP_GUID;
+#endif
+#endif
+    #ifdef FORM_SET_GOTO
+#if (ACPI_MODULE_VER > 170)
+        goto SIO_COMMON_FORM_ID,
+        prompt  = STRING_TOKEN(STR_SIO_COMMON_SETTING),
+        help    = STRING_TOKEN(STR_SIO_COMMON_SETTING_HELP);            
+#endif    
+#if (SIO_SETUP_USE_APTIO_4_STYLE == 0)
+        goto 
+            formsetguid = { 0x941BC855, 0xBF7E, 0x4fcb, { 0x88, 0x2F, 0x7A, 0xEA, 0xD1, 0x5C, 0x9D, 0x47 } },
+            formid = SIO_MAIN_FORM_ID,
+            question = 0,
+            prompt = STRING_TOKEN(STR_SIO_CONFIGURATION),
+            help = STRING_TOKEN(STR_SIO_CONFIGURATION);
+#endif
+    #endif
+#if (ACPI_MODULE_VER > 170)    
+    #ifdef FORM_SET_FORM
+        form formid = AUTO_ID(SIO_COMMON_FORM_ID),
+        title = STRING_TOKEN(STR_SIO_COMMON_SETTING);
+        SUBTITLE(STRING_TOKEN(STR_SIO_COMMON_SETTING))            
+        SEPARATOR    
+        checkbox varid = SIO_SETUP_DATA.LockLegacyRes,\
+            prompt = STRING_TOKEN(STR_LOCK_LEGACY_DEV_PROMPT),\
+            help = STRING_TOKEN(STR_LOCK_LEGACY_DEV_HELP),\
+            flags = RESET_REQUIRED,\
+            default = DEFAULT_LOCK_LEGACY_DEV, defaultstore = AmiMfgDefault,\
+        endcheckbox;
+        endform;
+    #endif
+#endif    
+#endif

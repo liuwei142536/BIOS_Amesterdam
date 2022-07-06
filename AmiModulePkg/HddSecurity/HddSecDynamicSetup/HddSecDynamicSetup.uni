@@ -1,0 +1,66 @@
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************
+/=#
+#include "VFR.uni"
+
+#string STR_HDDSEC_SECURITY_CONFIGURATION      #language eng "HDD Security Configuration:"
+#string STR_HDDSEC_SECURITY_ALL_HELP           #language eng "HDD Security Configuration"
+#string STR_HDDSEC_SECURITY_HELP               #language eng "HDD Security Configuration for selected drive"
+#string STR_HDDSEC_PASSWORD_DESCRIPTION        #language eng "HDD Password Description :"
+#string STR_HDDSEC_PASSWORD_CONFIGURATION      #language eng "HDD PASSWORD CONFIGURATION:"
+
+#string STR_HDDSEC_BANNER_ONE                  #language eng "Allows Access to Set, Modify and Clear"
+#string STR_HDDSEC_BANNER_TWO                  #language eng "HardDisk  User  Password"
+#string STR_HDDSEC_BANNER_THREE                #language eng "and  Master  Password."
+#string STR_HDDSEC_BANNER_FOUR                 #language eng "User Password is mandatory to Enable HDD Security."
+#string STR_HDDSEC_BANNER_FIVE                 #language eng "If Master password is installed (optional),"
+#string STR_HDDSEC_BANNER_SIX                  #language eng "it can also be used to unlock the HDD."
+#string STR_HDDSEC_BANNER_SEVEN                #language eng "If the 'Set User Password' option is hidden,"
+#string STR_HDDSEC_BANNER_EIGHT                #language eng "do power cycle to enable the option again."
+#string STR_HDDSEC_BANNER_NINE                 #language eng "NOTE: All disks have same password."
+#string STR_HDDSEC_BANNER_TEN                  #language eng "Use below option to configure all HDDs."
+
+#string STR_HDDSEC_SUPPORTED                   #language eng "Security Supported :"
+#string STR_HDDSEC_ENABLED                     #language eng "Security Enabled   :"
+#string STR_HDDSEC_LOCKED                      #language eng "Security Locked    :"
+#string STR_HDDSEC_FROZEN                      #language eng "Security Frozen    :"
+#string STR_HDDSEC_YES                         #language eng "Yes"
+#string STR_HDDSEC_NO                          #language eng "No"
+
+#string STR_HDDSEC_INSTALLED                   #language eng "INSTALLED"
+#string STR_HDDSEC_NOT_INSTALLED               #language eng "NOT INSTALLED"
+#string STR_HDDSEC_USER_PASSWORD_STS           #language eng "HDD User Pwd Status:"
+#string STR_HDDSEC_MASTER_PASSWORD_STS         #language eng "HDD Master Pwd Status     :"
+
+#string STR_HDDSEC_USER_PASSWORD               #language eng "Set User Password"
+#string STR_HDDSEC_USER_PASSWORD_HELP          #language eng "Set HDD User Password. \n*** Advisable to Power Cycle System after Setting Hard Disk Passwords ***.\nDiscard or Save changes option in setup does not have any impact on HDD when password is set or removed. If the 'Set HDD User Password' option is hidden, do power cycle to enable the option again"
+#string STR_HDDSEC_MASTER_PASSWORD             #language eng "Set Master Password"
+#string STR_HDDSEC_MASTER_PASSWORD_HELP        #language eng "Set HDD Master Password. \n*** Advisable to Power Cycle System after Setting Hard Disk Passwords ***\nDiscard or Save changes option in setup does not have any impact on HDD when password is set or removed. If the 'Set HDD Master option' is hidden, user might have entered setup with user HDD Security privilege(expected) or else do power cycle to enable the option again"
+
+
+//#string <string name>                   #language eng ""
+
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************

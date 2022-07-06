@@ -1,0 +1,33 @@
+TOKEN
+	Name  = "MeKernel_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MeKernel support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MeLib"
+	File  = "Dxe\MeLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "MeLibPei"
+	File  = "Pei\MeLibPei.inf"
+	Package  = "GrantleyPkg"
+End
+
+LibraryMapping
+	Class  = "MeLib"
+	Instance  = "GrantleyPkg.MeLib"
+	ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+	Class  = "MeLibPei"
+	Instance  = "GrantleyPkg.MeLibPei"
+	Arch  = "IA32"
+End
+

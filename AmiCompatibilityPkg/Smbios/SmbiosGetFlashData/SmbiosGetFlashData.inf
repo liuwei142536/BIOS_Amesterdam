@@ -1,0 +1,35 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmbiosGetFlashData
+  FILE_GUID                      = DED7956D-7E20-4f20-91A1-190439B04D5B
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SmbiosGetFlashDataInstall
+
+[Sources]  
+  SmbiosGetFlashData.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+
+[Guids]
+  
+[Protocols]
+  gEfiDriverBindingProtocolGuid
+  gAmiSmbiosFlashDataProtocolGuid
+
+[Depex]
+  gEfiFirmwareVolumeBlock2ProtocolGuid

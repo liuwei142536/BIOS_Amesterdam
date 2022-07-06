@@ -1,0 +1,90 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file
+#   This driver installs SimpleTextin, SimpleTextInEx and AmiKeycode Protocol
+#   for the Ps2 Keyboard devices. For Mouse Devices it installs the Absolute Pointer
+#   Protocol
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Ps2Main
+  FILE_GUID                      = 5FECEF6B-5FA4-4570-8163-0CF72A9C04C5
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PS2CtlEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  Ps2Main.c
+  Ps2Kbd.c
+  Ps2Ctl.h
+  Kbc.c
+  Kbc.h
+  KbcCommon.h
+  Mouse.c
+  Ps2Mouse.h
+  Names.c
+  EfiSmplpp.c
+  Ps2Tokens.c
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  AmiDxeLib
+
+[Protocols]
+  gBdsAllDriversConnectedProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gEfiAmiSioProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiSimpleTextInProtocolGuid
+  gEfiSimplePointerProtocolGuid
+  gEfiSimpleTextInputExProtocolGuid
+  gAmiEfiKeycodeProtocolGuid
+  gEfiCpuArchProtocolGuid
+  gEfiLegacyBiosProtocolGuid
+  gEfiLegacy8259ProtocolGuid
+  gAmiMultiLangSupportProtocolGuid
+  gEfiComponentNameProtocolGuid
+  gEfiComponentName2ProtocolGuid
+  gAmiLegacyBootProtocolGuid
+  
+[Packages]
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+
+[Depex]
+  TRUE
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

@@ -1,0 +1,18 @@
+<component>
+    name = "SmiVariable"
+    category = eModule
+    LocalRoot = "AmiModulePkg\SmiVariable\"
+    RefName = "AmiModulePkg.SmiVariable"
+[INF]
+"SmiVariable.inf"
+"ExportHiiDb.inf"
+[files]
+"SmiVariable.sdl"	
+"SmiVariable.chm"	
+"SmiVarElinkTempl.txt"	
+[dependency]
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;5.004_AmiCompatibilityPkg_13"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;5.004_MdeModulePkg_09"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;5.004_MdePkg_04"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_38"
+<endComponent>

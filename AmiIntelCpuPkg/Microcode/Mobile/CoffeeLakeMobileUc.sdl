@@ -1,0 +1,52 @@
+TOKEN
+	Name  = "MOBILE_806EZ"
+	Value  = "0"
+    Help = "Intel(R) CoffeeLake"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "MOBILE_MC0806EA"
+    Value  = "1"
+    Help  = "Intel(R) Mobile Coffee Lake-U43e D-0 Stepping(806EA)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "MOBILE_MC0806EB"
+    Value  = "1"
+    Help  = "Intel(R) Mobile Whiskey Lake-U42 W-0 Stepping(806EB)"
+    TokenType = Boolean    
+End
+
+TOKEN
+    Name  = "MOBILE_M90806EC"
+    Value  = "1"
+    Help  = "Intel(R) Mobile Whiskey Lake-U42 V-0 Stepping(806EC)"
+    TokenType = Boolean    
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/MC0806EA_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Mobile Coffee Lake-U43e D-0 Stepping(806EA)"
+    Token = "MOBILE_MC0806EA" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/MD0806EB_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Mobile Whiskey Lake-U42 W-0 Stepping(806EB)"
+    Token = "MOBILE_MC0806EB" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M94806EC_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Mobile Whiskey Lake-U42 V-0 Stepping(806EC)"
+    Token = "MOBILE_M90806EC" "=" "1"
+    InvokeOrder = AfterParent
+End

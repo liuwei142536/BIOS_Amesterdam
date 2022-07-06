@@ -1,0 +1,11 @@
+<component>
+	name = "Intel Wellsburg SB Board"
+	category = ModulePart
+	LocalRoot = "AmiCRBPkg\Board\SB\"
+	RefName = "Intel Wellsburg SB Board"
+[files]
+"SB.sdl"	
+"SB.mak"	
+"SB.h"	
+"SBSECInit.asm"	
+<endComponent>

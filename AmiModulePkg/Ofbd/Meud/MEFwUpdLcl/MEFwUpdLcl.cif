@@ -1,0 +1,17 @@
+<component>
+    name = "ME Firmware Update Local"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\Ofbd\Meud\MEFwUpdLcl\"
+    RefName = "MEFwUpdLcl"
+[files]
+"MEFwUpdLcl.c"
+"MEFwUpdLcl.sdl"
+"MEFwUpdLcl.mak"
+[parts]
+"MEFwUpdlProtocol"
+"FWUpdateLib_ME_9"
+"FWUpdateLib_ME_11"
+"FWUpdateLib_ME_12"
+"FWUpdateLib_ME_13"
+"FWUpdateLib_TXE_2"
+<endComponent>

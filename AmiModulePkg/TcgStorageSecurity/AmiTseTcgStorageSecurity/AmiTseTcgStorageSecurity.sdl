@@ -1,0 +1,114 @@
+TOKEN
+    Name  = "AMI_TSE_TCG_SECURITY_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable OPAL password Screen in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "TCG_STORAGE_SEC_SETUP_SAME_SYS_PW"
+    Value  = "0"
+    Help  = "DO NOT CHANGE - Enable to have User password as OPAL password"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "PASSWORD_RETRY_ATTEMPTS"
+    Value  = "3"
+    Help  = "Number of attempts allowed to unlock OPAL device using Admin Password during Post"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1 - MAXIMUM_TCG_OPAL_PWD_UNLOCK_ATTEMPTS"
+End
+
+TOKEN
+    Name  = "MAXIMUM_TCG_OPAL_PWD_UNLOCK_ATTEMPTS"
+    Value  = "6"
+    Help  = "Maximum number of attempts allowed to unlock OPAL Password during Post.[MAXIMUM_TCG_OPAL_PWD_UNLOCK_ATTEMPTS - PASSWORD_RETRY_ATTEMPTS] attempts to unlock OPAL device using User Password during Post"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1 - 10"
+End
+
+TOKEN
+    Name  = "TCG_STORAGE_SEC_ALL_HDD_SAME_PW"
+    Value  = "0"
+    Help  = " 1-Enable to have one password for all OPAL drives,0-Different OPAL drive could have different password"
+    TokenType = Boolean
+    TargetH = Yes
+    Token =  "TCG_STORAGE_SEC_SETUP_ON_SAME_PAGE" "=" "0"
+End
+
+PATH
+    Name  = "AMITSE_TCG_STORAGE_SECURITY_DIR"
+End
+
+ELINK
+    Name  = "RegisterSecurityEndNotification,"
+    Parent  = "ProcessConInAvailability,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "-i $(AMITSE_TCG_STORAGE_SECURITY_DIR)"
+    Parent  = "TSE_UNI_INCLUDE_PATH"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiTseTcgStorageSecurity"
+    Parent  = "ADDITIONAL_AMITSE_LibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AMITSE_TCG_STORAGE_SECURITY_DIR)/AmiTseTcgStorageSecurityFakeTokens.c"
+    Parent  = "TSE_STRING_CONSUMERS_LIST"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AMITSE_TCG_STORAGE_SECURITY_DIR)/AmiTseTcgStorageSecurity.uni"
+    Parent  = "TSE_STRING_FILES"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "AmiTseTcgStorageSecurity"
+    File  = "AmiTseTcgStorageSecurity.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+    Class  = "AmiTseTcgStorageSecurity"
+    Instance  = "AmiModulePkg.AmiTseTcgStorageSecurity"
+End
+
+ELINK
+	Name  = "TcgSecurityLoadSetupDefaults,"
+	Parent  = "LoadSetupDefaults,"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "TcgSecurityLoadSetupDefaults,"
+    Parent  = "LoadedPreviousValues,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "TcgSecurityLoadSetupDefaults,"
+    Parent  = "LoadedBuildDefaults,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "TcgSecurityLoadSetupDefaults,"
+    Parent  = "LoadedUserDefaults,"
+    InvokeOrder = AfterParent
+End
+
