@@ -1,0 +1,445 @@
+﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+/** @file SioStaticSetup.uni
+
+    SIO Form String Definitions
+    
+    Note: If you add more mapping language, please follow below rule.
+    GSIO000 - GSIO099 is for global usage.
+    GSIO100 - GSIO199 is for floppy usage.
+    GSIO200 - GSIO299 is for serial port usage.
+    GSIO300 - GSIO399 is for parallel port usage.
+    GSIO400 - GSIO499 is for CIR usage.
+    GSIO500 - GSIO599 is for IRDA usage.
+    GSIO600 - GSIO699 is for Generic Setting usage.
+    GSIO700 - GSIO999 is for reserved. If needed, you can use it.
+**/
+/=#
+#include "VFR.uni"
+#ifndef x-UEFI-AMI
+#langdef   x-UEFI-AMI "x-UEFI-AMI"    // AMI Configuration Language
+#endif
+
+////////////////////Mapping language following: GSIO0xx////////////////////
+////////////////////GSIO000 ------------------- GSIO099////////////////////
+#string STR_SIO_FORM                        #language eng "Super IO Configuration"
+#string STR_SIO_FORM_HELP                   #language eng "System Super IO Chip Parameters."
+#string STR_SIO_PROMPT                      #language eng "Super IO Chip"
+                                            #language x-UEFI-AMI "GSIO000"
+#string STR_SIO_ENABLED                     #language eng "Enabled"
+#string STR_SIO_DISABLED                    #language eng "Disabled"
+#string STR_AUTO                            #language eng "AUTO"
+
+////////////////////Mapping language following: GSIO1xx////////////////////
+////////////////////GSIO100 ------------------- GSIO199////////////////////
+//
+//Floppy Settings
+//
+#string STR_FLOPPY_FORM                     #language eng "Floppy Disk Controller Configuration"
+#string STR_FLOPPY_FORM_HELP                #language eng "Set Parameters of Floppy Disk Controller (FDC)"
+#string STR_FLOPPY_PROMPT                   #language eng "Floppy Disk Controller"
+                                            #language x-UEFI-AMI "GSIO100"
+#string STR_FLOPPY_PROMPT_HELP              #language eng "Enable or Disable Floppy Disk Controller"
+#string STR_FLOPPY_MODE_HELP                #language eng "Change Mode of Floppy Disk Controller. Select <Read Write> mode for Normal operation. Select <Write Protect> mode for Readonly operation."
+#string STR_FLOPPY_RW_MODE                  #language eng "Read Write"
+#string STR_FLOPPY_WP_MODE                  #language eng "Write Protect"
+#string STR_FLOPPY_CONFIG_VALUE             #language eng "Reset Required"
+
+#string STR_FLOPPY_IO3F0_IRQ6_DMA2          #language eng "IO=3F0h; IRQ=6; DMA=2;"
+#string STR_FLOPPY_IO3F0_IRQX_DMAX          #language eng "IO=3F0h; IRQ=3,4,5,6,7,9,10,11,12; DMA=2,3;"
+#string STR_FLOPPY_IO370_IRQX_DMAX          #language eng "IO=370h; IRQ=3,4,5,6,7,9,10,11,12; DMA=2,3;"
+
+////////////////////Mapping language following: GSIO2xx////////////////////
+////////////////////GSIO200 ------------------- GSIO299////////////////////
+//
+//Serial 1/2/3/4/5/6 Settings
+//
+#string STR_SERIAL1_FORM                    #language eng "Serial Port 1 Configuration"
+#string STR_SERIAL1_FORM_HELP               #language eng "Set Parameters of Serial Port 1 (COMA)"
+#string STR_SERIAL2_FORM                    #language eng "Serial Port 2 Configuration"
+#string STR_SERIAL2_FORM_HELP               #language eng "Set Parameters of Serial Port 2 (COMB)"
+#string STR_SERIAL3_FORM                    #language eng "Serial Port 3 Configuration"
+#string STR_SERIAL3_FORM_HELP               #language eng "Set Parameters of Serial Port 3 (COMC)"
+#string STR_SERIAL4_FORM                    #language eng "Serial Port 4 Configuration"
+#string STR_SERIAL4_FORM_HELP               #language eng "Set Parameters of Serial Port 4 (COMD)"
+#string STR_SERIAL5_FORM                    #language eng "Serial Port 5 Configuration"
+#string STR_SERIAL5_FORM_HELP               #language eng "Set Parameters of Serial Port 5 (COME)"
+#string STR_SERIAL6_FORM                    #language eng "Serial Port 6 Configuration"
+#string STR_SERIAL6_FORM_HELP               #language eng "Set Parameters of Serial Port 6 (COMF)"
+#string STR_SERIAL7_FORM                    #language eng "Serial Port 7 Configuration"
+#string STR_SERIAL7_FORM_HELP               #language eng "Set Parameters of Serial Port 7 (COMG)"
+#string STR_SERIAL8_FORM                    #language eng "Serial Port 8 Configuration"
+#string STR_SERIAL8_FORM_HELP               #language eng "Set Parameters of Serial Port 8 (COMH)"
+#string STR_SERIAL9_FORM                    #language eng "Serial Port 9 Configuration"
+#string STR_SERIAL9_FORM_HELP               #language eng "Set Parameters of Serial Port 9 (COMI)"
+#string STR_SERIAL10_FORM                   #language eng "Serial Port 10 Configuration"
+#string STR_SERIAL10_FORM_HELP              #language eng "Set Parameters of Serial Port 10 (COMJ)"
+
+#string STR_SERIAL_PROMPT                   #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO200"
+#string STR_SERIAL_PROMPT_COMA              #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO201"
+#string STR_SERIAL_PROMPT_COMB              #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO202"
+#string STR_SERIAL_PROMPT_COMC              #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO203"
+#string STR_SERIAL_PROMPT_COMD              #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO204"
+#string STR_SERIAL_PROMPT_COME              #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO205"
+#string STR_SERIAL_PROMPT_COMF              #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO206"
+#string STR_SERIAL_PROMPT_COMA2             #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO207"
+#string STR_SERIAL_PROMPT_COMB2             #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO208"
+#string STR_SERIAL_PROMPT_COMC2             #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO209"
+#string STR_SERIAL_PROMPT_COMD2             #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO20A"
+#string STR_SERIAL_PROMPT_COME2             #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO20B"
+#string STR_SERIAL_PROMPT_COMF2             #language eng "Serial Port"
+                                            #language x-UEFI-AMI "GSIO20C"
+                              
+#string STR_SERIAL_PROMPT_HELP              #language eng "Enable or Disable Serial Port (COM)"
+
+#string STR_SERIAL_MODE_STD                 #language eng "Standard Serial Port Mode"
+#string STR_SERIAL_MODE_HPSIR               #language eng "IrDA 1.0 (HP SIR) Mode"
+#string STR_SERIAL_MODE_ASKIR               #language eng "ASKIR Mode"
+
+#string STR_SERIAL_MODE_HELP                #language eng "Change the Serial Port mode."
+#string STR_SERIAL1_CONFIG_VALUE            #language eng "Reset Required"
+#string STR_SERIAL2_CONFIG_VALUE            #language eng "Reset Required"
+#string STR_SERIAL3_CONFIG_VALUE            #language eng "Reset Required"
+#string STR_SERIAL4_CONFIG_VALUE            #language eng "Reset Required"
+#string STR_SERIAL5_CONFIG_VALUE            #language eng "Reset Required"
+#string STR_SERIAL6_CONFIG_VALUE            #language eng "Reset Required"
+#string STR_SERIAL7_CONFIG_VALUE            #language eng "Reset Required"
+#string STR_SERIAL8_CONFIG_VALUE            #language eng "Reset Required"
+#string STR_SERIAL9_CONFIG_VALUE            #language eng "Reset Required"
+#string STR_SERIAL10_CONFIG_VALUE           #language eng "Reset Required"
+
+//Below are first priority resource setting for serial port 1,2,3,4,5,6
+#string STR_SERIAL_IO3F8_IRQ4               #language eng "IO=3F8h; IRQ=4;"
+#string STR_SERIAL_IO2F8_IRQ3               #language eng "IO=2F8h; IRQ=3;"
+#string STR_SERIAL_IO3E8_IRQ7               #language eng "IO=3E8h; IRQ=7;"
+#string STR_SERIAL_IO2E8_IRQ7               #language eng "IO=2E8h; IRQ=7;"
+#string STR_SERIAL_IO220_IRQ10              #language eng "IO=220h; IRQ=10;"
+#string STR_SERIAL_IO228_IRQ10              #language eng "IO=228h; IRQ=10;"
+
+//Below are possible resource setting for all serial port
+#string STR_SERIAL_IO3F8_IRQX               #language eng "IO=3F8h; IRQ=3,4,5,6,7,9,10,11,12;"
+#string STR_SERIAL_IO2F8_IRQX               #language eng "IO=2F8h; IRQ=3,4,5,6,7,9,10,11,12;"
+#string STR_SERIAL_IO3E8_IRQX               #language eng "IO=3E8h; IRQ=3,4,5,6,7,9,10,11,12;"
+#string STR_SERIAL_IO2E8_IRQX               #language eng "IO=2E8h; IRQ=3,4,5,6,7,9,10,11,12;"
+#string STR_SERIAL_IO220_IRQX               #language eng "IO=220h; IRQ=3,4,5,6,7,9,10,11,12;"
+#string STR_SERIAL_IO228_IRQX               #language eng "IO=228h; IRQ=3,4,5,6,7,9,10,11,12;"
+
+//For secondary serial IO
+#string STR_SERIAL0_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL1_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL2_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL3_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL4_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL5_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL6_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL7_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL8_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL9_2_CONFIG_VALUE          #language eng "Reset Required"
+#string STR_SERIAL10_2_CONFIG_VALUE         #language eng "Reset Required"
+
+////////////////////Mapping language following: GSIO3xx////////////////////
+////////////////////GSIO300 ------------------- GSIO399////////////////////
+//
+//Parallel Settings
+//
+#string STR_PARALLEL_FORM                   #language eng "Parallel Port Configuration"
+#string STR_PARALLEL_FORM_HELP              #language eng "Set Parameters of Parallel Port (LPT/LPTE)"
+
+#string STR_PARALLEL_PROMPT                 #language eng "Parallel Port"
+                                            #language x-UEFI-AMI "GSIO300"
+#string STR_PARALLEL_PROMPT_HELP            #language eng "Enable or Disable Parallel Port (LPT/LPTE)"
+
+#string STR_PARALLEL_MODE_STD               #language eng "Standard Parallel Port Mode"
+#string STR_PARALLEL_MODE_EPP               #language eng "EPP Mode"
+#string STR_PARALLEL_MODE_ECP               #language eng "ECP Mode"
+#string STR_PARALLEL_MODE_EEP               #language eng "EPP Mode & ECP Mode"
+#string STR_PARALLEL_MODE_E19_SP            #language eng "EPP1.9 and SPP Mode"
+#string STR_PARALLEL_MODE_E17_SP            #language eng "EPP1.7 and SPP Mode"
+#string STR_PARALLEL_MODE_ECP_E19           #language eng "ECP and EPP-1.9 Mode"
+#string STR_PARALLEL_MODE_ECP_E17           #language eng "ECP and EPP-1.7 Mode"
+
+#string STR_PARALLEL_MODE_HELP              #language eng "Change the Printer Port mode."
+
+#string STR_PARALLEL_CONFIG_VALUE           #language eng "Reset Required"
+#string STR_PARALLEL_IO378_IRQ5             #language eng "IO=378h; IRQ=5;"
+#string STR_PARALLEL_IO378_IRQX             #language eng "IO=378h; IRQ=5,6,7,9,10,11,12;"
+#string STR_PARALLEL_IO278_IRQX             #language eng "IO=278h; IRQ=5,6,7,9,10,11,12;"
+#string STR_PARALLEL_IO3BC_IRQX             #language eng "IO=3BCh; IRQ=5,6,7,9,10,11,12;"
+
+#string STR_PARALLEL_IO378_D                #language eng "IO=378h;(Default)"
+#string STR_PARALLEL_IO378                  #language eng "IO=378h;"
+#string STR_PARALLEL_IO278                  #language eng "IO=278h;"
+#string STR_PARALLEL_IO3BC                  #language eng "IO=3BCh;"
+
+#string STR_PARALLELE_IO378_778_IRQ5_DMA3   #language eng "IO=378h; IRQ=5; DMA=3;"
+#string STR_PARALLELE_IO378_778_IRQX_DMAX   #language eng "IO=378h; IRQ=5,6,7,9,10,11,12; DMA=1,3;"
+#string STR_PARALLELE_IO278_678_IRQX_DMAX   #language eng "IO=278h; IRQ=5,6,7,9,10,11,12; DMA=1,3;"
+#string STR_PARALLELE_IO3BC_7BC_IRQX_DMAX   #language eng "IO=3BCh; IRQ=5,6,7,9,10,11,12; DMA=1,3;"
+
+#string STR_PARALLELE_IO378_778_DMA3        #language eng "IO=378h; DMA=3;"
+#string STR_PARALLELE_IO378_778_DMAX        #language eng "IO=378h; DMA=1,3;"
+#string STR_PARALLELE_IO278_678_DMAX        #language eng "IO=278h; DMA=1,3;"
+#string STR_PARALLELE_IO3BC_7BC_DMAX        #language eng "IO=3BCh; DMA=1,3;"
+
+////////////////////Mapping language following: GSIO4xx////////////////////
+////////////////////GSIO400 ------------------- GSIO499////////////////////
+//
+//CIR Settings
+//
+#string STR_CIR_FORM                        #language eng "CIR Controller Configuration"
+#string STR_CIR_FORM_HELP                   #language eng "Set Parameters of CIR Controller (CIR)"
+#string STR_CIR_PROMPT                      #language eng "CIR Controller"
+                                            #language x-UEFI-AMI "GSIO400"
+#string STR_CIR_PROMPT_HELP                 #language eng "Enable or Disable CIR Controller"
+
+#string STR_CIR_CONFIG_VALUE                #language eng "Reset Required"
+#string STR_CIR_IO3E0_IRQ10                 #language eng "IO=3E0h; IRQ=10;"
+#string STR_CIR_IO3E0_IRQX                  #language eng "IO=3E0h; IRQ=3,4,5,6,7,9,10,11,12;"
+#string STR_CIR_IO2E0_IRQX                  #language eng "IO=2E0h; IRQ=3,4,5,6,7,9,10,11,12;"
+#string STR_CIR_IO298_IRQX                  #language eng "IO=298h; IRQ=3,4,5,6,7,9,10,11,12;"
+
+////////////////////Mapping language following: GSIO5xx////////////////////
+////////////////////GSIO500 ------------------- GSIO599////////////////////
+//
+//IRDA Settings
+//
+#string STR_IRDA_FORM                       #language eng "IRDA Controller Configuration"
+#string STR_IRDA_FORM_HELP                  #language eng "Set Parameters of IRDA Controller (IRDA)"
+#string STR_IRDA_PROMPT                     #language eng "IRDA Controller"
+                                            #language x-UEFI-AMI "GSIO500"
+#string STR_IRDA_PROMPT_HELP                #language eng "Enable or Disable IRDA Controller"
+
+#string STR_IRDA_CONFIG_VALUE               #language eng "Reset Required"
+#string STR_IRDA_IO3E0_IRQ10                #language eng "IO=3E0h; IRQ=10;"
+#string STR_IRDA_IO3E0_IRQX                 #language eng "IO=3E0h; IRQ=3,4,5,6,7,9,10,11,12;"
+#string STR_IRDA_IO2E0_IRQX                 #language eng "IO=2E0h; IRQ=3,4,5,6,7,9,10,11,12;"
+#string STR_IRDA_IO298_IRQX                 #language eng "IO=298h; IRQ=3,4,5,6,7,9,10,11,12;"
+
+
+//
+//PME Settings
+//
+#string STR_PME_WAKE_FROM_KEY               #language eng "Wake on Specific Key"
+
+#string STR_POWER_FAILURE_PROMPT            #language eng "Power Failure"
+#string STR_POWER_FAILURE_LAST              #language eng "Keep last state"
+#string STR_POWER_FAILURE_PASS              #language eng "Bypass mode"
+#string STR_POWER_FAILURE_ON                #language eng "Always on"
+#string STR_POWER_FAILURE_OFF               #language eng "Always off"
+
+//
+// Generic setting 
+//
+#string STR_SETTINGS_HELP                   #language eng "Select an optimal settings for Super IO Device"
+#string STR_AUTO                            #language eng "Auto"
+
+#string STR_CHANGE_CONFIG                   #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO600"
+#string STR_CHANGE_FDC_CONFIG               #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO601"
+#string STR_CHANGE_LPT_CONFIG1              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO602"
+#string STR_CHANGE_LPT_CONFIG2              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO603"
+#string STR_CHANGE_LPT_CONFIG3              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO604"
+#string STR_CHANGE_LPT_CONFIG4              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO605"
+#string STR_CHANGE_LPT_CONFIG5              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO606"
+#string STR_CHANGE_COMA_CONFIG              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO607"
+#string STR_CHANGE_COMB_CONFIG              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO608"
+#string STR_CHANGE_COMC_CONFIG              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO609"
+#string STR_CHANGE_COMD_CONFIG              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO60A"
+#string STR_CHANGE_COME_CONFIG              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO60B"
+#string STR_CHANGE_COMF_CONFIG              #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO60C"
+#string STR_CHANGE_COMA2_CONFIG             #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO60D"
+#string STR_CHANGE_COMB2_CONFIG             #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO60E"
+#string STR_CHANGE_COMC2_CONFIG             #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO60F"
+#string STR_CHANGE_COMD2_CONFIG             #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO610"
+#string STR_CHANGE_COME2_CONFIG             #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO611"
+#string STR_CHANGE_COMF2_CONFIG             #language eng "Change Settings"
+                                            #language x-UEFI-AMI "GSIO612"
+                                                                                        
+#string STR_CURRENT_CONFIG                  #language eng "Device Settings"
+#string STR_SELECT_MODE                     #language eng "Device Mode"
+                                            #language x-UEFI-AMI "GSIO613"
+#string STR_SELECT_FDC_MODE                 #language eng "Device Mode"
+                                            #language x-UEFI-AMI "GSIO614"
+#string STR_SELECT_IRDA_MODE                #language eng "Device Mode"
+                                            #language x-UEFI-AMI "GSIO615"
+//
+// HardWare Monitor 
+//
+#string STR_HWM1_TITLE                      #language eng "H/W Monitor"
+#string STR_HWM1_TITLE_HELP                 #language eng "Monitor hardware status"
+
+#string STR_HWM1_PC_HEALTH                  #language eng "Pc Health Status"
+#string STR_HWM1_SYSTEM_TEMP1               #language eng "System temperature1"
+#string STR_HWM1_SYSTEM_TEMP1_VALUE         #language eng "N/A"
+#string STR_HWM1_SYSTEM_TEMP2               #language eng "System temperature2"
+#string STR_HWM1_SYSTEM_TEMP2_VALUE         #language eng "N/A"
+#string STR_HWM1_SYSTEM_TEMP3               #language eng "System temperature3"
+#string STR_HWM1_SYSTEM_TEMP3_VALUE         #language eng "N/A"
+#string STR_HWM1_SYSTEM_TEMP4               #language eng "System temperature4"
+#string STR_HWM1_SYSTEM_TEMP4_VALUE         #language eng "N/A"
+#string STR_HWM1_SYSTEM_TEMP5               #language eng "System temperature5"
+#string STR_HWM1_SYSTEM_TEMP5_VALUE         #language eng "N/A"
+#string STR_HWM1_SYSTEM_TEMP6               #language eng "System temperature6"
+#string STR_HWM1_SYSTEM_TEMP6_VALUE         #language eng "N/A"
+#string STR_HWM1_SYSTEM_TEMP7               #language eng "System temperature7"
+#string STR_HWM1_SYSTEM_TEMP7_VALUE         #language eng "N/A"
+#string STR_HWM1_SYSTEM_TEMP8               #language eng "System temperature8"
+#string STR_HWM1_SYSTEM_TEMP8_VALUE         #language eng "N/A"
+#string STR_HWM1_SYSTEM_TEMP9               #language eng "System temperature9"
+#string STR_HWM1_SYSTEM_TEMP9_VALUE         #language eng "N/A"
+#string STR_HWM1_SYSTEM_TEMP10              #language eng "System temperature10"
+#string STR_HWM1_SYSTEM_TEMP10_VALUE        #language eng "N/A"
+
+#string STR_HWM1_FAN1_SPEED                 #language eng "Fan1 Speed"
+#string STR_HWM1_FAN1_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM1_FAN2_SPEED                 #language eng "Fan2 Speed"
+#string STR_HWM1_FAN2_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM1_FAN3_SPEED                 #language eng "Fan3 Speed"
+#string STR_HWM1_FAN3_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM1_FAN4_SPEED                 #language eng "Fan4 Speed"
+#string STR_HWM1_FAN4_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM1_FAN5_SPEED                 #language eng "Fan5 Speed"
+#string STR_HWM1_FAN5_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM1_FAN6_SPEED                 #language eng "Fan6 Speed"
+#string STR_HWM1_FAN6_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM1_FAN7_SPEED                 #language eng "Fan7 Speed"
+#string STR_HWM1_FAN7_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM1_FAN8_SPEED                 #language eng "Fan8 Speed"
+#string STR_HWM1_FAN8_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM1_FAN9_SPEED                 #language eng "Fan9 Speed"
+#string STR_HWM1_FAN9_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM1_FAN10_SPEED                #language eng "Fan10 Speed"
+#string STR_HWM1_FAN10_SPEED_VALUE          #language eng "N/A"
+
+#string STR_HWM1_VIN0                       #language eng "VIN0"
+#string STR_HWM1_VIN0_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN1                       #language eng "VIN1"
+#string STR_HWM1_VIN1_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN2                       #language eng "VIN2"
+#string STR_HWM1_VIN2_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN3                       #language eng "VIN3"
+#string STR_HWM1_VIN3_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN4                       #language eng "VIN4"
+#string STR_HWM1_VIN4_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN5                       #language eng "VIN5"
+#string STR_HWM1_VIN5_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN6                       #language eng "VIN6"
+#string STR_HWM1_VIN6_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN7                       #language eng "VIN7"
+#string STR_HWM1_VIN7_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN8                       #language eng "VIN8"
+#string STR_HWM1_VIN8_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN9                       #language eng "VIN9"
+#string STR_HWM1_VIN9_VALUE                 #language eng "N/A"
+#string STR_HWM1_VIN10                      #language eng "VIN10"
+#string STR_HWM1_VIN10_VALUE                #language eng "N/A"
+
+#string STR_HWM1_VCC3V                      #language eng "VCC3V"
+#string STR_HWM1_VCC3V_VALUE                #language eng "N/A"
+#string STR_HWM1_VCC5V                      #language eng "VCC5V"
+#string STR_HWM1_VCC5V_VALUE                #language eng "N/A"
+#string STR_HWM1_VSB3V                      #language eng "VSB3V"
+#string STR_HWM1_VSB3V_VALUE                #language eng "N/A"
+#string STR_HWM1_VSB5V                      #language eng "VSB5V"
+#string STR_HWM1_VSB5V_VALUE                #language eng "N/A"
+#string STR_HWM1_VCORE                      #language eng "VCORE"
+#string STR_HWM1_VCORE_VALUE                #language eng "N/A"
+#string STR_HWM1_VACC                       #language eng "VACC"
+#string STR_HWM1_VACC_VALUE                 #language eng "N/A"
+#string STR_HWM1_VBAT                       #language eng "VBAT"
+#string STR_HWM1_VBAT_VALUE                 #language eng "N/A"
+
+#string STR_HWM2_SYSTEM_TEMP1_VALUE         #language eng "N/A"
+#string STR_HWM2_SYSTEM_TEMP2_VALUE         #language eng "N/A"
+#string STR_HWM2_SYSTEM_TEMP3_VALUE         #language eng "N/A"
+#string STR_HWM2_SYSTEM_TEMP4_VALUE         #language eng "N/A"
+#string STR_HWM2_SYSTEM_TEMP5_VALUE         #language eng "N/A"
+#string STR_HWM2_SYSTEM_TEMP6_VALUE         #language eng "N/A"
+#string STR_HWM2_SYSTEM_TEMP7_VALUE         #language eng "N/A"
+#string STR_HWM2_SYSTEM_TEMP8_VALUE         #language eng "N/A"
+#string STR_HWM2_SYSTEM_TEMP9_VALUE         #language eng "N/A"
+#string STR_HWM2_SYSTEM_TEMP10_VALUE        #language eng "N/A"
+
+#string STR_HWM2_FAN1_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM2_FAN2_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM2_FAN3_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM2_FAN4_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM2_FAN5_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM2_FAN6_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM2_FAN7_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM2_FAN8_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM2_FAN9_SPEED_VALUE           #language eng "N/A"
+#string STR_HWM2_FAN10_SPEED_VALUE          #language eng "N/A"
+
+#string STR_HWM2_VIN1_VALUE                 #language eng "N/A"
+#string STR_HWM2_VIN2_VALUE                 #language eng "N/A"
+#string STR_HWM2_VIN3_VALUE                 #language eng "N/A"
+#string STR_HWM2_VIN4_VALUE                 #language eng "N/A"
+#string STR_HWM2_VIN5_VALUE                 #language eng "N/A"
+#string STR_HWM2_VIN6_VALUE                 #language eng "N/A"
+#string STR_HWM2_VIN7_VALUE                 #language eng "N/A"
+#string STR_HWM2_VIN8_VALUE                 #language eng "N/A"
+#string STR_HWM2_VIN9_VALUE                 #language eng "N/A"
+#string STR_HWM2_VIN10_VALUE                #language eng "N/A"
+
+#string STR_HWM2_VCC3V_VALUE                #language eng "N/A"
+#string STR_HWM2_VSB3V_VALUE                #language eng "N/A"
+#string STR_HWM2_VSB5V_VALUE                #language eng "N/A"
+#string STR_HWM2_VBAT_VALUE                 #language eng "N/A"
+
+//Smart Fan setting
+    
+//#string <string name>                   #language eng ""
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

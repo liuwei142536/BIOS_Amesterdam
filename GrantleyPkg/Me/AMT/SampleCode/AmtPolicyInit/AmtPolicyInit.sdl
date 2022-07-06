@@ -1,0 +1,38 @@
+TOKEN
+	Name  = "AmtPolicyInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AmtPolicyInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AmtDxePolicyInit_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmtDxePolicyInit support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmtPolicyInitPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmtPolicyInitPei support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmtDxePolicyInit"
+	File  = "Dxe\AmtDxePolicyInit.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmtDxePolicyInit_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmtPolicyInitPei"
+	File  = "Pei\AmtPolicyInitPei.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+	Token = "AmtPolicyInitPei_SUPPORT" "=" "1"
+End
+

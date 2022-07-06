@@ -1,0 +1,11 @@
+<component>
+	name = "Dxe"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Sps\Dxe\"
+	RefName = "GrantleyPkg.Me.Sps.Dxe.Dxe"
+[INF]
+"SpsDxe.inf"
+[files]	
+"DcmiInit.h"	
+"Dxe.sdl"	
+<endComponent>

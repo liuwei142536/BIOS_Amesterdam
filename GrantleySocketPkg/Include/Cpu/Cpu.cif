@@ -1,0 +1,11 @@
+<component>
+	name = "Cpu"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Include\Cpu\"
+	RefName = "GrantleySocketPkg.Cpu"
+[files]
+"CpuBaseLib.h"	
+"CpuCsr.h"	
+"CpuDataStruct.h"		
+"CpuRegs.h"	
+<endComponent>

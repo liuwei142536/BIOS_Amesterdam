@@ -1,0 +1,12 @@
+<component>
+	name = "BiosExtension"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\BiosExtension\"
+	RefName = "GrantleyPkg.BiosExtension"
+[INF]
+"Efi\BiosExtensionLoader\Dxe\BiosExtensionLoader.inf"
+"Efi\EfiMEBx\Mebx\Mebx.inf"
+"Efi\EfiMEBx\MebxSetupBrowser\MebxSetupBrowser.inf"
+[files]
+"BiosExtension.sdl"	
+<endComponent>

@@ -1,0 +1,64 @@
+
+#if PER_THREAD_ACPI == 0
+
+External (\TSLM, PkgObj)
+External (TSEN, FieldUnitObj)
+
+    Name(TSSA, Package() {
+      Package(){100, 0x80000000, 0, 0x00, 0}
+    })
+        
+    #define TSS_SOCKET(Socket) \
+        Name(TSS##Socket, Package() { \
+            Package(){100, 0x80000000, 0, 0x00, 0},    /* 100%   */ \
+            Package(){ 94, 0x80000000, 0, 0x1F, 0},    /* 93.75% */ \
+            Package(){ 88, 0x80000000, 0, 0x1E, 0},    /* 87.50% */ \
+            Package(){ 82, 0x80000000, 0, 0x1D, 0},    /* 81.25% */ \
+            Package(){ 75, 0x80000000, 0, 0x1C, 0},    /* 75.00% */ \
+            Package(){ 69, 0x80000000, 0, 0x1B, 0},    /* 68.75% */ \
+            Package(){ 63, 0x80000000, 0, 0x1A, 0},    /* 62.50% */ \
+            Package(){ 57, 0x80000000, 0, 0x19, 0},    /* 56.25% */ \
+            Package(){ 50, 0x80000000, 0, 0x18, 0},    /* 50.00% */ \
+            Package(){ 44, 0x80000000, 0, 0x17, 0},    /* 43.75% */ \
+            Package(){ 38, 0x80000000, 0, 0x16, 0},    /* 37.50% */ \
+            Package(){ 32, 0x80000000, 0, 0x15, 0},    /* 31.25% */ \
+            Package(){ 25, 0x80000000, 0, 0x14, 0},    /* 25.00% */ \
+            Package(){ 19, 0x80000000, 0, 0x13, 0},    /* 18.75% */ \
+            Package(){ 13, 0x80000000, 0, 0x12, 0}     /* 12.50% */ \
+          })
+    
+    //One per socket.
+    TSS_SOCKET(0)
+    TSS_SOCKET(1)
+    TSS_SOCKET(2)
+    TSS_SOCKET(3)
+#else
+    Method(_TPC, 0)
+    {
+#if ASL_SPS_ASL_SUPPORT
+        Or(PETE, 0x40, PETE) // Confirm T-States support on this system
+        Return(DeRefOf(Index(\TSLM, SCKN))) // T-State limit for this socket
+#else
+        Return(0)
+#endif
+    }
+
+    //
+    // T-State Control/Status interface
+    //
+    Method(_PTC, 0)
+    {
+        Return(Package() {
+            ResourceTemplate(){Register(FFixedHW, 0, 0, 0)},
+            ResourceTemplate(){Register(FFixedHW, 0, 0, 0)}
+        })
+    }
+
+    Method(_TSS, 0)
+    {
+        If (LOr(LEqual(TSEN, 0), LEqual(PSEN, 0))) {
+            return (TSSA)
+        }
+        return (ToSocket(TSS))
+    }
+#endif

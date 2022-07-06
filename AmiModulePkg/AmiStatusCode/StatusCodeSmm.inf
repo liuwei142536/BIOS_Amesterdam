@@ -1,0 +1,81 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+#
+# 
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = StatusCodeSmm
+  FILE_GUID                      = DB08F6CA-3048-4CD8-9B1F-20BED33ECFE7
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = SmmInitStatusCode
+
+
+[Sources]  
+  StatusCodeInt.h
+  StatusCodeMap.c
+  StatusCodeCommon.c
+  StatusCodeSmm.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  SmmServicesTableLib
+  SerialPortLib
+  PrintLib
+  TimerLib
+  AmiBeepLib
+  PcdLib
+  PostCodeLib
+ 
+[Protocols] 
+  gEfiSmmRscHandlerProtocolGuid               ## PRODUCES
+  gEfiSmmStatusCodeProtocolGuid               ## PRODUCES
+  gAmiSmmDebugServiceProtocolGuid             ## PRODUCES
+
+[Guids]
+  gEfiStatusCodeSpecificDataGuid
+  gEfiStatusCodeDataTypeStringGuid
+  gEfiStatusCodeDataTypeDebugGuid
+  
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPropertyMask      ## CONSUMES
+  
+[Depex]
+  TRUE
+  
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

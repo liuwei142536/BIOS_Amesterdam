@@ -1,0 +1,59 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file
+#   This driver installs AmiKeyCode PPI for the Ps2 driver 
+##
+
+[Defines]
+  INF_VERSION       = 0x00010015
+  VERSION_STRING    = 1.0
+  BASE_NAME         = Ps2KbdPei
+  MODULE_TYPE       = PEIM
+  FILE_GUID         = 5678DBEB-6702-44da-8C0C-60942AC1F980
+  ENTRY_POINT       = Ps2KbdPeiEntryPoint
+
+[Sources]
+  Ps2KbdPei.c
+  Ps2KbdPei.h
+  KbcCommon.h
+
+[LibraryClasses]
+  PeimEntryPoint
+  PeiServicesLib
+  AmiPeiLib
+
+[Ppis]
+  gEfiPeiStallPpiGuid
+
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+
+[Depex]
+  gEfiPeiStallPpiGuid AND
+  gEfiPeiMemoryDiscoveredPpiGuid
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

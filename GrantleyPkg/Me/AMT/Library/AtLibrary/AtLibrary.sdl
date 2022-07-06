@@ -1,0 +1,21 @@
+TOKEN
+	Name  = "AtLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AtLibrary support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AtDxeLib"
+	File  = "Dxe\AtDxeLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AtDxeLib"
+	Instance  = "GrantleyPkg.AtDxeLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+

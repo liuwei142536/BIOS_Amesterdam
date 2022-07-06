@@ -1,0 +1,13 @@
+<component>
+	name = "Mobile IceLake uCode Patches (706EX)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Mobile\"
+	RefName = "IceLakeMobileUc"
+[files]
+"IceLakeMobileUc.sdl"
+"MC0706E0_0000002C.pdb" = "MOBILE MICROCODE UPDATES" 
+"M80706E1_00000028.pdb" = "MOBILE MICROCODE UPDATES" 
+"M80706E1_00000042.pdb" = "MOBILE MICROCODE UPDATES" 
+"M80706E4_00000042.pdb" = "MOBILE MICROCODE UPDATES" 
+"M80706E5_000000A8.pdb" = "MOBILE MICROCODE UPDATES" 
+<endComponent>

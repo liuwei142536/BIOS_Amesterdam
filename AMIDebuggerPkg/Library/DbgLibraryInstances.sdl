@@ -1,0 +1,477 @@
+TOKEN
+	Name  = "DbgLibraryInstances_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable DbgLibraryInstances support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "DbgRxAuthenticationLib_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling DbgRxAuthenticationLib support in the project"
+	TokenType = Boolean
+	Token = "RX_AUTHENTICATION_SUPPORT" "!=" "1"
+End
+
+TOKEN
+	Name  = "DBG_CORE05_BUS_NUM"
+	Value  = "0x0"
+	Help  = "Bus Number used by Debugger to determine the PCIExBaseAddress when Dynamic MMCfg is ON"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DBG_CORE05_DEV_NUM"
+	Value  = "0x5"
+	Help  = "Device Number used by Debugger to determine the PCIExBaseAddress when Dynamic MMCfg is ON"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DBG_CORE05_FUNC_NUM"
+	Value  = "0x0"
+	Help  = "Function Number used by Debugger to determine the PCIExBaseAddress when Dynamic MMCfg is ON"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DBG_R_IIO_MMCFG_B0"
+	Value  = "0x90"
+	Help  = "The 0xB0 Number used by Debugger to determine the PCIExBaseAddress when Dynamic MMCfg is ON"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+PATH
+	Name  = "DxeAMIDebugAgentLib_DIR"
+	Path  = "AMIDebuggerPkg\Library\AMIDebugAgent"
+End
+
+PATH
+	Name  = "PeiAMIDebugAgentLib_DIR"
+	Path  = "AMIDebuggerPkg\Library\AMIDebugAgent"
+End
+
+PATH
+	Name  = "SmmAMIDebugAgentLib_DIR"
+	Path  = "AMIDebuggerPkg\Library\AMIDebugAgent"
+End
+
+PATH
+	Name  = "DebuggerLib_DIR"
+	Path  = "AMIDebuggerPkg\Library\DebuggerLib"
+End
+
+PATH
+	Name  = "CommonDebugPortLib_DIR"
+	Path  = "AMIDebuggerPkg\Library\CommonDebugPortLib"
+End
+
+PATH
+	Name  = "DebugStatusCodeLib_DIR"
+	Path  = "AMIDebuggerPkg\Library\DebugStatusCodeLib"
+End
+
+ELINK
+	Name  = "InitDxeDbgPciExpressLib,"
+	Parent  = "DxeStatusCodeInitialize"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "PeiDbgrSendDebugText,"
+	Parent  = "PeiReportStringStatus"
+	Token = "SEND_DEBUG_MESSAGE_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "PeiDbgrSendDebugText,"
+	Parent  = "DxeReportStringStatus"
+	Token = "SEND_DEBUG_MESSAGE_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "PeiDbgrSendDebugText,"
+	Parent  = "SmmReportStringStatus"
+	Token = "SEND_DEBUG_MESSAGE_SUPPORT" "=" "1"
+	Token = "SMM_DEBUG_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+
+#ELINK
+#	Name  = "PeiDbgrSendDebugText,"
+#	Parent  = "RtReportStringStatus"
+#	Token = "SEND_DEBUG_MESSAGE_SUPPORT" "=" "1"
+#	InvokeOrder = AfterParent
+#End
+ELINK
+	Name  = "PeiDbgrSendProgressCode,"
+	Parent  = "PeiReportCheckpoint"
+	Token = "SEND_CHECKPOINT_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "PeiDbgrSendProgressCode,"
+	Parent  = "DxeReportCheckpoint"
+	Token = "SEND_CHECKPOINT_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "PeiDbgrSendProgressCode,"
+	Parent  = "SmmReportCheckpoint"
+	Token = "SEND_CHECKPOINT_SUPPORT" "=" "1"
+	Token = "SMM_DEBUG_SUPPORT" "=" "1"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "Init_AMI_USBDebugPort_HOB,"
+	Parent  = "DxeStatusCodeInitialize"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "CallbackForDbgIDT,"
+	Parent  = "DxeStatusCodeInitialize"
+	Token = "DEBUG_IDT_PRESERVATION_WITH_CPU_ARCH_PROTOCOL" "=" "1"
+	Token = "REDIRECTION_ONLY_MODE" "=" "0"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "UpdateSMMData,"
+	Parent  = "DxeStatusCodeInitialize"
+	Token = "REDIRECTION_ONLY_MODE" "=" "0"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "ReadyToBootFunc,"
+	Parent  = "DxeStatusCodeInitialize"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "EnableDisableDbgSupport,"
+	Parent  = "CSM_16_CALL_COMPANION_FUNCTIONS"
+	Token = "REDIRECTION_ONLY_MODE" "=" "0"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "InitPeiDbgPciExpressLib,"
+	Parent  = "PeiStatusCodeInitialize"
+	Priority  = -10
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "CommonDebugAgentLib"
+	File  = "AMIDebugAgent/CommonDebugAgentLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+End
+
+INFComponent
+	Name  = "DxeAMIDebugAgentLib"
+	File  = "DxeAMIDebugAgentLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+	Path  = "DxeAMIDebugAgentLib_DIR"
+End
+
+INFComponent
+	Name  = "PeiAMIDebugAgentLib"
+	File  = "PeiAMIDebugAgentLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+	Path  = "PeiAMIDebugAgentLib_DIR"
+End
+
+INFComponent
+	Name  = "SmmAMIDebugAgentLib"
+	File  = "SmmAMIDebugAgentLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+	Path  = "SmmAMIDebugAgentLib_DIR"
+	Token = "SMM_DEBUG_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CommonDebugStatusCodeLib"
+	File  = "CommonDebugStatusCodeLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+	Path  = "DebugStatusCodeLib_DIR"
+End
+
+INFComponent
+	Name  = "DebugStatusCodeLib"
+	File  = "DebugStatusCodeLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Path  = "DebugStatusCodeLib_DIR"
+End
+
+INFComponent
+	Name  = "SmmDebugStatusCodeLib"
+	File  = "SmmDebugStatusCodeLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+	Path  = "DebugStatusCodeLib_DIR"
+	Token = "SMM_DEBUG_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "DbgHostStatusLib"
+	File  = "DbgHostStatusLib/DbgHostStatusLib.inf"
+	Package  = "AMIDebuggerPkg"
+End
+
+
+INFComponent
+	Name  = "SmmDbgHostStatusLib"
+	File  = "SmmDbgHostStatusLib/SmmDbgHostStatusLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+	Token = "SMM_DEBUG_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "CommonDebugLib"
+	File  = "CommonDebugLib/CommonDebugLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+End
+
+INFComponent
+	Name  = "DbgRxAuthenticationLib"
+	File  = "DbgRxAuthenticationLib/DbgRxAuthenticationLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Token = "DbgRxAuthenticationLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "DbgRxDebugSupportLib"
+	File  = "DbgRxDebugSupportLib/DbgRxDebugSupportLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common"
+End
+
+INFComponent
+	Name  = "CommonDebugSupportLib"
+	File  = "CommonDebugSupportLib/CommonDebugSupportLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common"
+End
+
+INFComponent
+	Name  = "DbgRxEndOfPeiLib"
+	File  = "DbgRxEndOfPeiLib/DbgRxEndOfPeiLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common"
+	Token = "DBG_ENDOFPEI_CALLBACK_SUPPORT" "=" "0"
+End
+
+INFComponent
+	Name  = "DebuggerLib"
+	File  = "DebuggerLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+	Path  = "DebuggerLib_DIR"
+End
+
+INFComponent
+	Name  = "CommonDebugPortLib"
+	File  = "CommonDebugPortLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+	Path  = "CommonDebugPortLib_DIR"
+End
+
+INFComponent
+	Name  = "InitializeLocalApicLib"
+	File  = "InitializeLocalApicLib/InitializeLocalApicLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+End
+
+INFComponent
+	Name  = "DxeDbgPciExpressLib"
+	File  = "DxeDbgPciExpressLib/DxeDbgPciExpressLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+End
+
+INFComponent
+	Name  = "PeiDbgPciExpressLib"
+	File  = "PeiDbgPciExpressLib/PeiDbgPciExpressLib.inf"
+	Package  = "AMIDebuggerPkg"
+	Arch  = "common Ia32 X64"
+End
+
+LibraryMapping
+	Class  = "DebugAgentLib"
+	Instance  = "AMIDebuggerPkg.DxeAMIDebugAgentLib"
+	ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_APPLICATION"
+End
+
+LibraryMapping
+	Class  = "DebugAgentLib"
+	Instance  = "AMIDebuggerPkg.PeiAMIDebugAgentLib"
+	ModuleTypes  = "SEC PEIM PEI_CORE"
+End
+
+LibraryMapping
+	Class  = "DebugAgentLib"
+	Instance  = "AMIDebuggerPkg.SmmAMIDebugAgentLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "SMM_DEBUG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CommonDebugAgentLib"
+	Instance  = "AMIDebuggerPkg.CommonDebugAgentLib"
+End
+
+LibraryMapping
+	Class  = "CommonDebugStatusCodeLib"
+	Instance  = "AMIDebuggerPkg.CommonDebugStatusCodeLib"
+End
+
+LibraryMapping
+	Class  = "DebugStatusCodeLib"
+	Instance  = "AMIDebuggerPkg.DebugStatusCodeLib"
+End
+
+LibraryMapping
+	Class  = "DebugStatusCodeLib"
+	Instance  = "AMIDebuggerPkg.SmmDebugStatusCodeLib"
+	ModuleTypes  = "SMM_CORE DXE_SMM_DRIVER"
+	Token = "SMM_DEBUG_SUPPORT" "=" "1"
+End
+
+
+#ELINK
+#	Name  = "PeiDbgrSendProgressCode,"
+#	Parent  = "RtReportCheckpoint"
+#	Token = "SEND_CHECKPOINT_SUPPORT" "=" "1"
+#	InvokeOrder = AfterParent
+#End
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AMIDebuggerPkg.DebugStatusCodeLib"
+	Override  = "AmiModulePkg.StatusCodePei"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AMIDebuggerPkg.DebugStatusCodeLib"
+	Override  = "AmiModulePkg.StatusCodeDxe"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AMIDebuggerPkg.SmmDebugStatusCodeLib"
+	Override  = "AmiModulePkg.StatusCodeSmm"
+	Token = "SMM_DEBUG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "DbgHostStatusLib"
+	Instance  = "AMIDebuggerPkg.DbgHostStatusLib"
+End
+
+LibraryMapping
+	Class  = "DbgHostStatusLib"
+	Instance  = "AMIDebuggerPkg.SmmDbgHostStatusLib"
+	ModuleTypes  = "SMM_CORE DXE_SMM_DRIVER"
+	Token = "SMM_DEBUG_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CommonDebugLib"
+	Instance  = "AMIDebuggerPkg.CommonDebugLib"
+End
+
+LibraryMapping
+	Class  = "RxAuthenticationLib"
+	Instance  = "AMIDebuggerPkg.DbgRxAuthenticationLib"
+	Token = "DbgRxAuthenticationLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "DebugSupportLib"
+	Instance  = "AMIDebuggerPkg.DbgRxDebugSupportLib"
+End
+
+LibraryMapping
+	Class  = "CommonDebugSupportLib"
+	Instance  = "AMIDebuggerPkg.CommonDebugSupportLib"
+End
+
+LibraryMapping
+	Class  = "DbgRxEndOfPeiLib"
+	Instance  = "AMIDebuggerPkg.DbgRxEndOfPeiLib"
+	Token = "DBG_ENDOFPEI_CALLBACK_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+	Class  = "DebuggerLib"
+	Instance  = "AMIDebuggerPkg.DebuggerLib"
+	ModuleTypes  = "DXE_DRIVER DXE_CORE DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+	Class  = "CommonDebugPortLib"
+	Instance  = "AMIDebuggerPkg.CommonDebugPortLib"
+	ModuleTypes  = "DXE_DRIVER DXE_CORE DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "MdeModulePkg.DebugAgentLibNull"
+	Override  = "AmiModulePkg.StatusCodeDxe"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AMIDebuggerPkg.DebuggerLib"
+	Override  = "AmiModulePkg.StatusCodeDxe"
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AMIDebuggerPkg.DebuggerLib"
+	Override  = "AmiModulePkg.CsmDxe"
+	Token = "REDIRECTION_ONLY_MODE" "=" "0"
+End
+
+
+#    ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+LibraryMapping
+	Class  = "DbgPciExpressLib"
+	Instance  = "AMIDebuggerPkg.DxeDbgPciExpressLib"
+End
+
+LibraryMapping
+	Class  = "DbgPciExpressLib"
+	Instance  = "AMIDebuggerPkg.PeiDbgPciExpressLib"
+	ModuleTypes  = "SEC PEIM PEI_CORE"
+End
+
+LibraryMapping
+	Class  = "InitializeLocalApicLib"
+	Instance  = "AMIDebuggerPkg.InitializeLocalApicLib"
+End
+

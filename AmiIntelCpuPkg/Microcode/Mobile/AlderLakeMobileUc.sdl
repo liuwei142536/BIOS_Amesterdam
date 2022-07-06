@@ -1,0 +1,67 @@
+TOKEN
+    Name  = "MOBILE_9067X_ALDERLAKE"
+    Value = "0"
+    Help  = "Intel(R) Alder Lake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "MOBILE_M8290671"
+    Value  = "1"
+    Help  = "Intel(R) Mobile Alder Lake-P J-0 Stepping(90671)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "MOBILE_M82906A1"
+    Value  = "1"
+    Help  = "Intel(R) Mobile Alder Lake-M/P28 Q-0 Stepping(906A1)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "MOBILE_M80906A2"
+    Value  = "1"
+    Help  = "Intel(R) Mobile Alder Lake-P K-0 Stepping(906A2)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "MOBILE_M80906A3"
+    Value  = "1"
+    Help  = "Intel(R) Mobile Alder Lake-P L-0/R-0 Stepping(906A3)"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M8290671_0000001C.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Mobile Alder Lake-P J-0 Stepping(90671)"
+    Token = "MOBILE_M8290671" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M82906A1_0000011C.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Mobile Alder Lake-M/P28 Q-0 Stepping(906A1)"
+    Token = "MOBILE_M82906A1" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M80906A2_0000030E.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Mobile Alder Lake-P K-0 Stepping(906A2)"
+    Token = "MOBILE_M80906A2" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M80906A3_00000413.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Mobile Alder Lake-P L-0/R-0 Stepping(906A3)"
+    Token = "MOBILE_M80906A3" "=" "1"
+    InvokeOrder = AfterParent
+End

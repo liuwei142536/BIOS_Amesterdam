@@ -1,0 +1,106 @@
+//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************
+
+/** @file HddSecurity.uni
+    HddSecurity Setup Strings
+
+**/
+
+/=#
+#include "VFR.uni"
+
+#string STR_HDD_SECURITY_CONFIG             #language eng "HDD Security Configuration:"
+
+#string STR_SECURITY_HDD_PWD_DESC           #language eng "HDD Password Description :"
+
+#string STR_SECURITY_HDD_BANNER_ONE         #language eng "Allows Access to Set, Modify and Clear"
+#string STR_SECURITY_HDD_BANNER_TWO         #language eng "Hard Disk    User    Password"
+#string STR_SECURITY_HDD_BANNER_THREE       #language eng "and   Master   Password."
+#string STR_SECURITY_HDD_BANNER_FOUR        #language eng "User Password is mandatory to Enable HDD Security."
+#string STR_SECURITY_HDD_BANNER_FIVE        #language eng "If Master password is installed (optional),"
+#string STR_SECURITY_HDD_BANNER_SIX         #language eng "it can also be used to unlock the HDD."
+#string STR_SECURITY_HDD_BANNER_SEVEN       #language eng "If the 'Set User Password' option is hidden,"
+#string STR_SECURITY_HDD_BANNER_EIGHT       #language eng "do power cycle to enable the option again."
+#string STR_SECURITY_HDD_BANNER_NINE        #language eng "NOTE: All disks have same password."
+#string STR_SECURITY_HDD_BANNER_TEN         #language eng "Use below option to configure all HDDs."
+
+#string STR_SECURITY_HDD_ONE                #language eng "1st HDD Security:"
+#string STR_SECURITY_HDD_TWO                #language eng "2nd HDD Security:"
+#string STR_SECURITY_HDD_THREE              #language eng "3rd HDD Security:"
+#string STR_SECURITY_HDD_FOUR               #language eng "4th HDD Security:"
+#string STR_SECURITY_HDD_FIVE               #language eng "5th HDD Security:"
+#string STR_SECURITY_HDD_SIX                #language eng "6th HDD Security:"
+#string STR_IDE_SECURITY_PROMPT             #language eng "HDD"
+
+#string STR_IDE_SECURITY_HD                 #language eng "HDD Password"
+#string STR_IDE_SECURITY_HELP               #language eng "HDD Security Configuration for selected drive"
+#string STR_IDE_SECURITY_ALL_HELP           #language eng "HDD Security Configuration"
+#string STR_HDD_PASSWORD_CONFIG             #language eng "HDD PASSWORD CONFIGURATION:"
+#string STR_SEC_SUPPORTED                   #language eng "Security Supported :"
+#string STR_SEC_ENABLED                     #language eng "Security Enabled   :"
+#string STR_SEC_LOCKED                      #language eng "Security Locked    :"
+#string STR_SEC_FROZEN                      #language eng "Security Frozen    :"
+#string STR_HDDS_YES                        #language eng "Yes"
+#string STR_HDDS_NO                         #language eng "No"
+#string STR_IDE_USER_PASSWORD_ONE           #language eng "Set User Password"
+                                            #language x-UEFI-AMI "HDD001"
+#string STR_IDE_USER_PASSWORD_TWO           #language eng "Set User Password"
+                                            #language x-UEFI-AMI "HDD002"
+#string STR_IDE_USER_PASSWORD_THREE         #language eng "Set User Password"
+                                            #language x-UEFI-AMI "HDD003"
+#string STR_IDE_USER_PASSWORD_FOUR          #language eng "Set User Password"
+                                            #language x-UEFI-AMI "HDD004"
+#string STR_IDE_USER_PASSWORD_FIVE          #language eng "Set User Password"
+                                            #language x-UEFI-AMI "HDD005"
+#string STR_IDE_USER_PASSWORD_SIX           #language eng "Set User Password"
+                                            #language x-UEFI-AMI "HDD006"
+
+#string STR_IDE_USER_PASSWORD_HELP          #language eng "Set HDD User Password. \n*** Advisable to Power Cycle System after Setting Hard Disk Passwords ***.\nDiscard or Save changes option in setup does not have any impact on HDD when password is set or removed. If the 'Set HDD User Password' option is hidden, do power cycle to enable the option again"
+#string STR_IDE_MASTER_PASSWORD_ONE         #language eng "Set Master Password"
+                                            #language x-UEFI-AMI "HDD007"
+#string STR_IDE_MASTER_PASSWORD_TWO         #language eng "Set Master Password"
+                                            #language x-UEFI-AMI "HDD008"
+#string STR_IDE_MASTER_PASSWORD_THREE       #language eng "Set Master Password"
+                                            #language x-UEFI-AMI "HDD009"
+#string STR_IDE_MASTER_PASSWORD_FOUR        #language eng "Set Master Password"
+                                            #language x-UEFI-AMI "HDD010"
+#string STR_IDE_MASTER_PASSWORD_FIVE        #language eng "Set Master Password"
+                                            #language x-UEFI-AMI "HDD011"
+#string STR_IDE_MASTER_PASSWORD_SIX         #language eng "Set Master Password"
+                                            #language x-UEFI-AMI "HDD012"
+                                            
+#string STR_IDE_USER_PASSWORD               #language eng "Set User Password"
+                                            #language x-UEFI-AMI "HDD013"
+#string STR_IDE_MASTER_PASSWORD             #language eng "Set Master Password"
+                                            #language x-UEFI-AMI "HDD014"
+#string STR_IDE_MASTER_PASSWORD_HELP        #language eng "Set HDD Master Password. \n*** Advisable to Power Cycle System after Setting Hard Disk Passwords ***\nDiscard or Save changes option in setup does not have any impact on HDD when password is set or removed. If the 'Set HDD Master option' is hidden, user might have entered setup with user HDD Security privilege(expected) or else do power cycle to enable the option again"
+        
+#string STR_HDDS_INSTALLED                  #language eng "INSTALLED"
+#string STR_NOT_HDDS_INSTALLED              #language eng "NOT INSTALLED"
+#string STR_IDE_USER_PASSWORD_STS           #language eng "HDD User Pwd Status:"
+#string STR_IDE_MASTER_PASSWORD_STS         #language eng "HDD Master Pwd Status :"
+
+//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************

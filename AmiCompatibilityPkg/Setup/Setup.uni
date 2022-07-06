@@ -1,0 +1,193 @@
+﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file
+    Unicode string file that defines the strings used by the setup emodule
+*/
+/=#
+#include "VFR.uni"
+
+#langdef   x-AMI "x-AMI"    // AMI Configuration Language
+
+#string STR_SETUP                       #language eng "Setup"
+#string STR_SETUP_HELP                  #language eng "Setup"
+
+//Main
+#string STR_MAIN                        #language eng "Main"
+#string STR_MAIN_HELP                   #language eng "System Overview"
+#string STR_LANGUAGE_HELP               #language eng "Choose the system default language"
+#string STR_LANGUAGE_PROMPT             #language eng "System Language"
+                                        #language x-AMI "SETUP000"
+#string STR_BIOS                        #language eng "BIOS Information"
+#string STR_BIOS_VENDOR_NAME            #language eng "BIOS Vendor"
+#string STR_BIOS_VENDOR_VALUE           #language eng "N/A" //dynamically updated
+#string STR_BIOS_CORE_VERSION_NAME      #language eng "Core Version"
+#string STR_BIOS_CORE_VERSION_VALUE     #language eng "N/A" //dynamically updated
+#string STR_BIOS_COMPLIANCY_NAME        #language eng "Compliancy"
+#string STR_BIOS_COMPLIANCY_VALUE       #language eng "N/A" //dynamically updated
+#string STR_BIOS_VERSION_NAME           #language eng "Project Version"
+#string STR_BIOS_VERSION_VALUE          #language eng "N/A" //dynamically updated
+#string STR_BIOS_DATE_NAME              #language eng "Build Date and Time"
+#string STR_BIOS_DATE_VALUE             #language eng "N/A" //dynamically updated
+#string STR_DATE                        #language eng "System Date"
+#string STR_DATE_HELP                   #language eng "Set the Date. Use Tab to switch between Date elements.\n\rDefault Ranges: \n\rYear: 1998-9999 \n\rMonths: 1-12 \n\rDays: Dependent on month\n\rRange of Years may vary."
+#string STR_TIME                        #language eng "System Time"
+#string STR_TIME_HELP                   #language eng "Set the Time. Use Tab to switch between Time elements."
+#string STR_ACCESS_LEVEL                #language eng "Access Level"
+#string STR_ACCESS_USER                 #language eng "User"
+#string STR_ACCESS_ADMIN                #language eng "Administrator"
+
+//Advanced
+#string STR_ADVANCED                    #language eng "Advanced"
+#string STR_ADVANCED_HELP               #language eng "Advanced Settings"
+#string STR_DYNAMIC_PAGE_SUBTITLE       #language eng "Dynamic Pages"
+
+//Chipset
+#string STR_CHIPSET                     #language eng "Chipset"
+#string STR_CHIPSET_HELP                #language eng "Chipset Settings"
+
+//Boot
+#string STR_BOOT                        #language eng "Boot"
+#string STR_BOOT_HELP                   #language eng "System Boot Settings"
+#string STR_QUIET_BOOT                  #language eng "Quiet Boot"
+                                        #language x-AMI "SETUP005"
+#string STR_QUIET_BOOT_HELP             #language eng "Enables or disables Quiet Boot option"
+#string STR_FAST_BOOT                   #language eng "Fast Boot"
+#string STR_FAST_BOOT_HELP              #language eng "Enables or disables boot with initialization of a minimal set of devices required to launch active boot option. Has no effect for BBS boot options."
+#string STR_BOOT_CFG                    #language eng "Boot Configuration"
+#string STR_BOOT_CFG_HELP               #language eng "System Boot Configuration Settings"
+#string STR_BOOT_TIMEOUT                #language eng "Setup Prompt Timeout"
+                                        #language x-AMI "SETUP003"
+//#string STR_BOOT_TIMEOUT_HELP           #language eng "Number of seconds that the firmware will wait before initiating the original default boot selection. A value of 0 indicates that the default boot selection is to be initiated immediately on boot. A value of 65535(0xFFFF) indicates that firmware will wait for user input before booting. This means the default boot selection is not automatically started by the firmware."
+#string STR_BOOT_TIMEOUT_HELP           #language eng "Number of seconds to wait for setup activation key. 65535(0xFFFF) means indefinite waiting."
+//#string STR_BOOT_TIMEOUT_HELP           #language eng "Number of seconds to wait for setup activation key. 0 means no wait(not recommended)."
+#string STR_CSM_BOOTUP_NUMLOCK          #language eng "Bootup NumLock State"
+                                        #language x-AMI "SETUP004"
+#string STR_CSM_BOOTUP_NUMLOCK_HELP     #language eng "Select the keyboard NumLock state"
+#string STR_CSM_BOOTUP_NUMLOCK_ON       #language eng "On"
+#string STR_CSM_BOOTUP_NUMLOCK_OFF      #language eng "Off"
+#string STR_BOOT_ORDER_SUBTITLE         #language eng "Boot Option Priorities"
+#string STR_BOOT_ORDER_X                #language eng "Boot Option #%d"
+                                        #language x-AMI "SETUP006"
+#string STR_LEGACY_BOOT_ORDER_X         #language eng "Boot Option #%d"
+                                        #language x-AMI "SETUP007"
+#string STR_BOOT_ORDER_HELP             #language eng "Sets the system boot order"
+#string STR_ADD_BOOT_OPTION             #language eng "Add New Boot Option"
+#string STR_ADD_BOOT_OPTION_HELP        #language eng "Add a new EFI boot option to the boot order"
+#string STR_DEL_BOOT_OPTION             #language eng "Delete Boot Option"
+#string STR_DEL_BOOT_OPTION_HELP        #language eng "Remove an EFI boot option from the boot order"
+#string STR_SELECT_TO_DEL               #language eng "Select one to Delete"
+#string STR_BBS_ORDER_HELP              #language eng "Set the order of the legacy devices in this group"
+#string STR_ADD_BOOT_LABEL              #language eng "Add boot option"
+#string STR_BOOT_LABEL_HELP             #language eng "Create new boot option"
+#string STR_ADD_BOOT_SEL_FS             #language eng "Select Filesystem"
+#string STR_BOOT_FS_HELP                #language eng "Select one filesystem from the list"
+#string STR_ADD_BOOT_PATH               #language eng "Path for boot option"
+#string STR_BOOT_PATH_HELP              #language eng "Enter the path to the boot option in the format fs0:\\path\\filename.efi"
+#string STR_SAVE_BOOT_OPTION            #language eng "Create"
+
+//Security
+#string STR_SECURITY                    #language eng "Security"
+#string STR_SECURITY_HELP               #language eng "Security Settings"
+
+
+#string STR_SECURITY_BANNER_ONE         #language eng "Password Description"
+                                        
+#string STR_SECURITY_BANNER_TWO         #language eng "If ONLY the Administrator's password is set," 
+                                        
+#string STR_SECURITY_BANNER_THREE       #language eng "then this only limits access to Setup and is" 
+                                        
+#string STR_SECURITY_BANNER_FOUR        #language eng "only asked for when entering Setup."
+                                        
+#string STR_SECURITY_BANNER_FIVE        #language eng "If ONLY the User's password is set, then this"
+                                        
+#string STR_SECURITY_BANNER_SIX         #language eng "is a power on password and must be entered to"
+                                        
+#string STR_SECURITY_BANNER_SEVEN       #language eng "boot or enter Setup. In Setup the User will"
+                                        
+#string STR_SECURITY_BANNER_EIGHT       #language eng "have Administrator rights."
+                                        
+#string STR_SECURITY_BANNER_NINE        #language eng "The password length must be"
+                                        
+                                        
+#string STR_SECURITY_BANNER_TEN         #language eng "in the following range:"
+                                        
+#string STR_MIN_PASSWORD_LENGTH_NAME    #language eng "Minimum length"
+#string STR_MIN_PASSWORD_LENGTH__VALUE  #language eng "N/A"
+#string STR_MAX_PASSWORD_LENGTH_NAME    #language eng "Maximum length"
+#string STR_MAX_PASSWORD_LENGTH__VALUE  #language eng "N/A"
+
+                                                       
+#string STR_ADMIN_PASSWORD              #language eng "Administrator Password"
+                                        #language x-AMI "SETUP001"
+#string STR_ADMIN_PASSWORD_HELP         #language eng "Set Administrator Password"
+#string STR_USER_PASSWORD               #language eng "User Password"
+                                        #language x-AMI "SETUP002"
+#string STR_USER_PASSWORD_HELP          #language eng "Set User Password"
+
+//Exit
+#string STR_EXIT                        #language eng "Save & Exit"
+#string STR_EXIT_HELP                   #language eng "Save & Exit Options"
+#string STR_SAVE_EXIT                   #language eng "Save Changes and Exit"
+
+#string STR_SAVE_EXIT_HELP              #language eng "Exit system setup after saving the changes."
+#string STR_DISCARD_EXIT                #language eng "Discard Changes and Exit"
+#string STR_DISCARD_EXIT_HELP           #language eng "Exit system setup without saving any changes."
+//
+#string STR_SAVE_RESET                  #language eng "Save Changes and Reset"
+#string STR_SAVE_RESET_HELP             #language eng "Reset the system after saving the changes."
+#string STR_DISCARD_RESET               #language eng "Discard Changes and Reset"
+#string STR_DISCARD_RESET_HELP          #language eng "Reset system setup without saving any changes."
+//
+#string STR_SAVE_TITLE                  #language eng "Save Options"
+
+#string STR_SAVE                        #language eng "Save Changes"
+#string STR_SAVE_HELP                   #language eng "Save Changes done so far to any of the setup options."
+
+#string STR_DISCARD                     #language eng "Discard Changes"
+#string STR_DISCARD_HELP                #language eng "Discard Changes done so far to any of the setup options."
+
+#string STR_DEFAULTS_TITLE              #language eng "Default Options"
+
+#string STR_RESTORE_DEFAULTS            #language eng "Restore Defaults"
+#string STR_RESTORE_DEFAULTS_HELP       #language eng "Restore/Load Default values for all the setup options."
+
+#string STR_SAVE_USER_DEFAULTS          #language eng "Save as User Defaults"
+#string STR_SAVE_USER_DEFAULTS_HELP     #language eng "Save the changes done so far as User Defaults."
+
+#string STR_RESTORE_USER_DEFAULTS       #language eng "Restore User Defaults"
+#string STR_RESTORE_USER_DEFAULTS_HELP  #language eng "Restore the User Defaults to all the setup options."
+
+#string STR_BOOT_OPTIONS                #language eng "Boot Override"
+#string STR_EFI_SHELL                   #language eng "Launch EFI Shell from filesystem device"
+#string STR_EFI_SHELL_HELP              #language eng "Attempts to Launch EFI Shell application (Shell.efi) from one of the available filesystem devices"
+#string STR_EFI_SHELL_HELP_X64          #language eng "Attempts to Launch EFI Shell application (Shellx64.efi) from one of the available filesystem devices"
+#string STR_EFI_SHELL_HELP_IPF          #language eng "Attempts to Launch EFI Shell application (ShellIA64.efi) from one of the available filesystem devices"
+
+#string STR_DRV_HEALTH                  #language eng "Driver Health"
+#string STR_DRV_HEALTH_HELP             #language eng "Provides Health Status for the Drivers/Controllers"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

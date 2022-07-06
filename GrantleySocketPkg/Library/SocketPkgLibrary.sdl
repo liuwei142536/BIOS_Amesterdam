@@ -1,0 +1,69 @@
+TOKEN
+	Name  = "SocketPkgLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SocketPkg Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "SmmScriptLib"
+	File  = "SmmScriptLib\SmmScriptLib.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "SmmScriptLib"
+	Instance  = "GrantleySocketPkg.SmmScriptLib"
+End
+
+INFComponent
+	Name  = "MemoryQpiInit"
+	File  = "MemoryQpiInit\MemoryQpiInit.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "MemoryQpiInitLib"
+	Instance  = "GrantleySocketPkg.MemoryQpiInit"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_SMM_DRIVER"
+End
+
+INFComponent
+	Name  = "CpuPpmLib"
+	File  = "ProcessorPowerManagement\CpuPpmLib.inf"
+	Package  = "GrantleySocketPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "CpuPpmLib"
+	Instance  = "GrantleySocketPkg.CpuPpmLib"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_SMM_DRIVER"
+End
+
+INFComponent
+	Name  = "IioEarlyInitLib"
+	File  = "IioEarlyInitialize/IioEarlyInitialize.inf"
+	Package  = "GrantleySocketPkg"
+End
+
+INFComponent
+	Name  = "IioLateInitLib"
+	File  = "IioLateInitialize/IioLateInitialize.inf"
+	Package  = "GrantleySocketPkg"
+End
+
+LibraryMapping
+	Class  = "IioEarlyInitLib"
+	Instance  = "GrantleySocketPkg.IioEarlyInitLib"
+	Arch  = "common"
+End
+
+LibraryMapping
+	Class  = "IioLateInitLib"
+	Instance  = "GrantleySocketPkg.IioLateInitLib"
+	Arch  = "common"
+End

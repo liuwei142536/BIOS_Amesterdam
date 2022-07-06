@@ -1,0 +1,1744 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// *++
+//
+// Copyright (c) 1999 - 2015 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+//
+//
+// Module Name:
+//
+//   MemorySetup.hfr
+//
+// Abstract:
+//
+//   Memory Setup formset.
+//
+// Revision History:
+//
+// --*/
+
+  #include "MemDefaults.h"
+  #include <Token.h> // AptioV Server Override: Added to get the value of sdl tokens
+
+  form formid = VFR_FORMID_MEMORY,
+
+    title = STRING_TOKEN(STR_MEMORY_CONFIG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle text = STRING_TOKEN(STR_IOH_MEM_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    //subtitle text = STRING_TOKEN(STR_NULL_STRING);//AptioV Server Override: Extra Horizontal Lines display removal.
+
+    oneof varid  = SYSTEM_CONFIGURATION.EnforcePOR,
+      prompt   = STRING_TOKEN (STR_ENFORCE_POR_PROMPT),
+      help     = STRING_TOKEN (STR_ENFORCE_POR_HELP),
+      option text = STRING_TOKEN (STR_AUTO),            value = ENFORCE_POR_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_POR),             value = ENFORCE_POR_EN, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_DISABLED_STRING), value = ENFORCE_POR_DIS, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_STRETCH),         value = ENFORCE_STRETCH_EN, flags = RESET_REQUIRED;
+    endoneof;
+    
+    oneof varid  = SYSTEM_CONFIGURATION.pprType,    
+      prompt   = STRING_TOKEN (STR_PPR_TYPE),
+      help     = STRING_TOKEN (STR_PPR_TYPE_HELP),
+      option text = STRING_TOKEN (STR_PPR_TYPE_HARD),   value = PPR_TYPE_HARD, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_PPR_TYPE_SOFT),   value = PPR_TYPE_SOFT, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN (STR_PPR_DISABLED),    value = PPR_DISABLED, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED; 
+    endoneof; 
+    
+    grayoutif NOT ideqval SYSTEM_CONFIGURATION.EMcaLogEn == 1 AND NOT ideqval SYSTEM_CONFIGURATION.EMcaCSmiEn == 1 AND
+      NOT ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 1;
+      oneof varid  = SYSTEM_CONFIGURATION.pprErrInjTest,    
+        prompt   = STRING_TOKEN (STR_PPR_ERR_INJ),
+        help     = STRING_TOKEN (STR_PPR_ERR_INJ_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = RESET_REQUIRED;
+      endoneof;    
+    endif;
+    
+    suppressif ideqval SYSTEM_CONFIGURATION.DDR3DimmsPresent == 1; //1 = DDR3 Dimms present, SUPPRESS below statements
+      oneof varid = SYSTEM_CONFIGURATION.DdrFreqLimit,
+          prompt  = STRING_TOKEN(STR_XMP_DDR_FREQ_LIMIT_PROMPT),
+          help    = STRING_TOKEN(STR_XMP_DDR_FREQ_LIMIT_HELP),
+          option text = STRING_TOKEN(STR_AUTO),           value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_1333_STRING), value = 5, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_1400_STRING), value = 6, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_1600_STRING), value = 7, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_1800_STRING), value = 8, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_1867_STRING), value = 9, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_2000_STRING), value = 10, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_2133_STRING), value = 11, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_2200_STRING), value = 12, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_2400_STRING), value = 13, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_2600_STRING), value = 14, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_2667_STRING), value = 15, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_2800_STRING), value = 16, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_2933_STRING), value = 17, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_3000_STRING), value = 18, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_3200_STRING), value = 19, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_800_RESVD_STRING), value = 1, flags = RESET_REQUIRED;  //Placing here to prevent HHI scanning error
+          option text = STRING_TOKEN(STR_DDR_FREQ_1000_RESVD_STRING), value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_1067_RESVD_STRING), value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FREQ_1200_RESVD_STRING), value = 4, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.DDR3DimmsPresent == 0; //0 = DDR4,SUPPRESS below statements
+    oneof varid = SYSTEM_CONFIGURATION.DdrFreqLimit,
+        prompt  = STRING_TOKEN(STR_XMP_DDR_FREQ_LIMIT_PROMPT),
+        help    = STRING_TOKEN(STR_XMP_DDR_FREQ_LIMIT_HELP),
+        option text = STRING_TOKEN(STR_AUTO),           value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_800_STRING), value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1000_STRING), value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1067_STRING), value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1200_STRING), value = 4, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1333_STRING), value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1400_STRING), value = 6, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1600_STRING), value = 7, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1800_STRING), value = 8, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1867_STRING), value = 9, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2000_STRING), value = 10, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2133_STRING), value = 11, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2200_STRING), value = 12, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2400_STRING), value = 13, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2600_STRING), value = 14, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2667_STRING), value = 15, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2800_RESVD_STRING), value = 16, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2933_RESVD_STRING), value = 17, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_3000_RESVD_STRING), value = 18, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_3200_RESVD_STRING), value = 19, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+
+
+    // TODO: Hide this for DDR4 platforms
+    suppressif ideqval SYSTEM_CONFIGURATION.DDR3DimmsPresent == 0; // 1 = DDR3 Dimms present
+      oneof varid = SYSTEM_CONFIGURATION.DdrVoltage,
+          prompt  = STRING_TOKEN(STR_DDR_VOLTAGE_PROMPT),
+          help    = STRING_TOKEN(STR_DDR_VOLTAGE_HELP),
+          option text = STRING_TOKEN(STR_AUTO),               value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_DDR_FORCE_150),      value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DDR_FORCE_135),      value = 2, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    oneof varid = SYSTEM_CONFIGURATION.promoteMrcWarnings,
+        prompt  = STRING_TOKEN(STR_PROMOTE_MRC_WARNING_PROMPT),
+        help    = STRING_TOKEN(STR_PROMOTE_MRC_WARNING_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.promoteWarnings,
+        prompt   = STRING_TOKEN (STR_PROMOTE_WARNINGS_PROMPT),
+        help     = STRING_TOKEN (STR_PROMOTE_WARNINGS_HELP),
+        option text = STRING_TOKEN (STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.haltOnMemErr,
+        prompt  = STRING_TOKEN(STR_HALT_ON_MEM_TRAINING_ERROR_PROMPT),
+        help    = STRING_TOKEN(STR_HALT_ON_MEM_TRAINING_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.MultiThreaded,
+        prompt   = STRING_TOKEN (STR_MULTI_THREADED_PROMPT),
+        help     = STRING_TOKEN (STR_MULTI_THREADED_HELP),
+        option text = STRING_TOKEN (STR_AUTO),            value = MULTI_THREADED_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = MULTI_THREADED_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED_STRING),  value = MULTI_THREADED_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.EccSupport,
+        prompt   = STRING_TOKEN (STR_ECC_SUPPORT_PROMPT),
+        help     = STRING_TOKEN (STR_ECC_SUPPORT_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = ECC_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = ECC_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = ECC_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.EnforceThreeMonthTimeout,
+        prompt   = STRING_TOKEN (STR_ENFORCE_TIMEOUT_PROMPT),
+        help     = STRING_TOKEN (STR_ENFORCE_TIMEOUT_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = ENFORCE_TIMEOUT_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = ENFORCE_TIMEOUT_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = ENFORCE_TIMEOUT_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.logParsing,
+        prompt   = STRING_TOKEN (STR_LOG_PARSING_PROMPT),
+        help     = STRING_TOKEN (STR_LOG_PARSING_HELP),
+        option text = STRING_TOKEN (STR_DISABLE),  value = LOG_PARSING_DIS, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),   value = LOG_PARSING_EN,  flags = RESET_REQUIRED;
+    endoneof;
+    
+#ifdef SSA_FLAG
+    oneof varid  = SYSTEM_CONFIGURATION.EnableBiosSsaLoader,
+        prompt   = STRING_TOKEN (STR_BIOS_SSA_LOADER_PROMPT),
+        help     = STRING_TOKEN (STR_BIOS_SSA_LOADER_HELP),
+        option text = STRING_TOKEN (STR_AUTO),      value = BIOS_SSA_DEFAULT, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),    value = BIOS_SSA_LOADER_ENABLE,   flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE),   value = BIOS_SSA_LOADER_DISABLE,  flags = RESET_REQUIRED;
+    endoneof;
+#endif
+
+    oneof varid  = SYSTEM_CONFIGURATION.EnableBacksideRMT,
+        prompt   = STRING_TOKEN (STR_BACKSIDE_RMT_PROMPT),
+        help     = STRING_TOKEN (STR_BACKSIDE_RMT_HELP),
+        option text = STRING_TOKEN (STR_AUTO),      value = BACKSIDE_RMT_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE),   value = BACKSIDE_RMT_DISABLE,  flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),    value = BACKSIDE_RMT_ENABLE,   flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.lrdimmRankMult,
+        prompt   = STRING_TOKEN (STR_RANK_MULT_PROMPT),
+        help     = STRING_TOKEN (STR_RANK_MULT_HELP),
+        option text = STRING_TOKEN (STR_AUTO),  value = RANK_MULT_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED_STRING), value = RANK_MULT_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.lrdimmModuleDelay,
+        prompt   = STRING_TOKEN (STR_MODULE_DELAY_PROMPT),
+        help     = STRING_TOKEN (STR_MODULE_DELAY_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = MODULE_DELAY_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AUTO),            value = MODULE_DELAY_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.HwMemTest,
+        prompt   = STRING_TOKEN (STR_MEM_TEST_PROMPT),
+        help     = STRING_TOKEN (STR_MEM_TEST_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = MEM_TEST_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = MEM_TEST_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = MEM_TEST_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.MemTestLoops,
+        prompt  = STRING_TOKEN(STR_MEM_TEST_LOOPS_PROMPT),
+        help    = STRING_TOKEN(STR_MEM_TEST_LOOPS_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 65535,
+        step      = 0,
+        default   = MEM_TEST_LOOPS_DEFAULT,
+        default   = MEM_TEST_LOOPS_DEFAULT, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+    oneof varid  = SYSTEM_CONFIGURATION.DramMaintenanceTest,
+        prompt   = STRING_TOKEN (STR_DM_MEM_TEST_PROMPT),
+        help     = STRING_TOKEN (STR_DM_MEM_TEST_HELP),
+        option text = STRING_TOKEN (STR_AUTO),     value = DMT_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = DMT_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED),  value = DMT_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.DramMaintenanceTest == 0;
+      oneof varid  = SYSTEM_CONFIGURATION.DMTDir,
+          prompt   = STRING_TOKEN (STR_DM_DIRECTION_TEST_PROMPT),
+          help     = STRING_TOKEN (STR_DM_DIRECTION_TEST_HELP),
+          option text = STRING_TOKEN (STR_UP),   value = DMT_DIRECTION_UP, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN (STR_DOWN), value = DMT_DIRECTION_DOWN, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid  = SYSTEM_CONFIGURATION.DMTInv,
+          prompt   = STRING_TOKEN (STR_DM_INV_TEST_PROMPT),
+          help     = STRING_TOKEN (STR_DM_INV_TEST_HELP),
+          option text = STRING_TOKEN (STR_DISABLED), value = DMT_INVERT_DIS, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+          option text = STRING_TOKEN (STR_ENABLED),  value = DMT_INVERT_EN, flags = RESET_REQUIRED;
+      endoneof;
+
+      numeric varid  = SYSTEM_CONFIGURATION.DMTRep,
+          prompt   = STRING_TOKEN (STR_DM_REPETITION_TEST_PROMPT),
+          help     = STRING_TOKEN (STR_DM_REPETITION_TEST_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 4294967295,
+          step      = 0,
+          default   = DMT_REPETITIONS,
+          default   = DMT_REPETITIONS, defaultstore = AmiMfgDefault,
+      endnumeric;
+
+      numeric varid  = SYSTEM_CONFIGURATION.DMTIter,
+          prompt   = STRING_TOKEN (STR_DM_ITER_TEST_PROMPT),
+          help     = STRING_TOKEN (STR_DM_ITER_TEST_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 4294967295,
+          step      = 0,
+          default   = DMT_ITERATIONS,
+          default   = DMT_ITERATIONS, defaultstore = AmiMfgDefault,
+      endnumeric;
+
+      oneof varid  = SYSTEM_CONFIGURATION.DMTSwizzleEn,
+          prompt   = STRING_TOKEN (STR_DM_SWIZZLE_PROMPT),
+          help     = STRING_TOKEN (STR_DM_SWIZZLE_HELP),
+          option text = STRING_TOKEN (STR_AUTO),            value = DMT_SWIZZLE_AUTO, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+          option text = STRING_TOKEN (STR_DISABLED_STRING), value = DMT_SWIZZLE_DIS, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_ENABLED_STRING),  value = DMT_SWIZZLE_EN, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid  = SYSTEM_CONFIGURATION.DMRefreshEn,
+          prompt   = STRING_TOKEN (STR_DM_REFRESH_PROMPT),
+          help     = STRING_TOKEN (STR_DM_REFRESH_HELP),
+          option text = STRING_TOKEN (STR_DISABLED_STRING), value = DMT_REFRESH_DIS, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_ENABLED_STRING),  value = DMT_REFRESH_EN, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;
+      endoneof;
+    endif;
+
+
+    oneof varid  = SYSTEM_CONFIGURATION.DdrMemoryType,
+        prompt   = STRING_TOKEN (STR_DDR_MEMORY_TYPE_PROMPT),
+        help     = STRING_TOKEN (STR_DDR_MEMORY_TYPE_HELP),
+        option text = STRING_TOKEN(STR_RDIMM_ONLY),       value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_UDIMM_ONLY),       value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_UDIMM_RDIMM),      value = 2, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.ceccWaChMask,
+        prompt    = STRING_TOKEN (STR_CECC_WA_CH_MASK_PROMPT),
+        help      = STRING_TOKEN (STR_CECC_WA_CH_MASK_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = CECC_WA_CHMASK_ALL,
+        step      = 0,
+        default   = CECC_WA_CHMASK_DEFAULT,
+    endnumeric;
+    
+    oneof varid  = SYSTEM_CONFIGURATION.RankMargin,
+        prompt   = STRING_TOKEN (STR_RMT_PROMPT),
+        help     = STRING_TOKEN (STR_RMT_HELP),
+        option text = STRING_TOKEN (STR_AUTO),     value = RMT_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = RMT_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED),  value = RMT_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.rmtPatternLength,
+        prompt    = STRING_TOKEN (STR_RMT_PATTERN_PROMPT),
+        help      = STRING_TOKEN (STR_RMT_PATTERN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 1,
+        maximum   = 9000000,
+        step      = 0,
+        default   = RMT_PATTERN_LENGTH,
+        default   = RMT_PATTERN_LENGTH, defaultstore = AmiMfgDefault,
+    endnumeric;
+    
+    numeric varid = SYSTEM_CONFIGURATION.rmtPatternLengthExt,
+        prompt    = STRING_TOKEN (STR_CMD_PATTERN_PROMPT),
+        help      = STRING_TOKEN (STR_CMD_PATTERN_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 1,
+        maximum   = 9000000,
+        step      = 0,
+        default   = CMD_PATTERN_LENGTH,
+    endnumeric;
+
+    oneof varid  = SYSTEM_CONFIGURATION.perbitmargin,
+        prompt   = STRING_TOKEN (STR_PER_BIT_MARGIN_PROMPT),
+        help     = STRING_TOKEN (STR_PER_BIT_MARGIN_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = PER_BIT_MARGIN_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = PER_BIT_MARGIN_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = PER_BIT_MARGIN_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.TrainingResultOffsetFunctionEnable,
+        prompt   = STRING_TOKEN (STR_TRNG_RESULT_OFFSET_PROMPT),
+        help     = STRING_TOKEN (STR_TRNG_RESULT_OFFSET_HELP),
+        option text = STRING_TOKEN (STR_AUTO),     value = TRNG_RESULT_OFFSET_DEFAULT, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = TRNG_RESULT_OFFSET_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED),  value = TRNG_RESULT_OFFSET_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+    
+  suppressif ideqval SYSTEM_CONFIGURATION.TrainingResultOffsetFunctionEnable == TRNG_RESULT_OFFSET_DISABLE;
+    numeric varid = SYSTEM_CONFIGURATION.OffsetTxDq,
+        prompt    = STRING_TOKEN(STR_OFFSET_TXDQ_PROMPT),
+        help      = STRING_TOKEN(STR_OFFSET_TXDQ_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 200,
+        step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                             // otherwise it will auto-increment with a left/right arrow
+        default   = 0,
+    endnumeric;
+    
+    numeric varid = SYSTEM_CONFIGURATION.OffsetTxVref,
+        prompt    = STRING_TOKEN(STR_OFFSET_TXVREF_PROMPT),
+        help      = STRING_TOKEN(STR_OFFSET_TXVREF_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 200,
+        step      = 0,
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.OffsetRxDq,
+        prompt    = STRING_TOKEN(STR_OFFSET_RXDQ_PROMPT),
+        help      = STRING_TOKEN(STR_OFFSET_RXDQ_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 200,
+        step      = 0,
+        default   = 0,
+    endnumeric;
+    
+    numeric varid = SYSTEM_CONFIGURATION.OffsetRxVref,
+        prompt    = STRING_TOKEN(STR_OFFSET_RXVREF_PROMPT),
+        help      = STRING_TOKEN(STR_OFFSET_RXVREF_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 200,
+        step      = 0,
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.OffsetCmdAll,
+        prompt    = STRING_TOKEN(STR_OFFSET_CMDALL_PROMPT),
+        help      = STRING_TOKEN(STR_OFFSET_CMDALL_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 200,
+        step      = 0,
+        default   = 0,
+    endnumeric;
+    
+    numeric varid = SYSTEM_CONFIGURATION.OffsetCmdVref,
+        prompt    = STRING_TOKEN(STR_OFFSET_CMDVREF_PROMPT),
+        help      = STRING_TOKEN(STR_OFFSET_CMDVREF_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 200,
+        step      = 0,
+        default   = 0,
+    endnumeric;
+    
+    numeric varid = SYSTEM_CONFIGURATION.OffsetCtlAll,
+        prompt    = STRING_TOKEN(STR_OFFSET_CTLALL_PROMPT),
+        help      = STRING_TOKEN(STR_OFFSET_CTLALL_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 200,
+        step      = 0, 
+        default   = 0,
+    endnumeric;
+  endif; //suppressif ideqval - TrainingResultOffsetFunctionEnable
+    
+    oneof varid  = SYSTEM_CONFIGURATION.AttemptFastBoot,
+        prompt   = STRING_TOKEN (STR_ATTEMPT_FAST_BOOT_PROMPT),
+        help     = STRING_TOKEN (STR_ATTEMPT_FAST_BOOT_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = FAST_BOOT_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = FAST_BOOT_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = FAST_BOOT_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.AttemptFastBootCold,
+        prompt   = STRING_TOKEN (STR_ATTEMPT_FAST_BOOT_COLD_PROMPT),
+        help     = STRING_TOKEN (STR_ATTEMPT_FAST_BOOT_COLD_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = FAST_BOOT_COLD_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = FAST_BOOT_COLD_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = FAST_BOOT_COLD_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.MemTestOnFastBoot,
+        prompt   = STRING_TOKEN (STR_MEM_TEST_FAST_BOOT_PROMPT),
+        help     = STRING_TOKEN (STR_MEM_TEST_FAST_BOOT_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = MEM_TEST_FAST_BOOT_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = MEM_TEST_FAST_BOOT_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = MEM_TEST_FAST_BOOT_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.RmtOnColdFastBoot,
+        prompt   = STRING_TOKEN (STR_RMT_COLD_FAST_BOOT_PROMPT),
+        help     = STRING_TOKEN (STR_RMT_COLD_FAST_BOOT_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = RMT_COLD_FAST_BOOT_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = RMT_COLD_FAST_BOOT_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = RMT_COLD_FAST_BOOT_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.bdatEn,
+        prompt   = STRING_TOKEN (STR_BDAT_EN_PROMPT),
+        help     = STRING_TOKEN (STR_BDAT_EN_HELP),
+        option text = STRING_TOKEN (STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED_STRING),  value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.ScrambleEn,
+        prompt   = STRING_TOKEN (STR_SCRAMBLE_EN_PROMPT),
+        help     = STRING_TOKEN (STR_SCRAMBLE_EN_HELP),
+        option text = STRING_TOKEN (STR_AUTO),     value = SCRAMBLE_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = SCRAMBLE_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED),  value = SCRAMBLE_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.allowCorrectableError,
+        prompt   = STRING_TOKEN (STR_ALLOW_CORRECTABLE_ERROR_EN_PROMPT),
+        help     = STRING_TOKEN (STR_ALLOW_CORRECTABLE_ERROR_EN_HELP),
+        option text = STRING_TOKEN (STR_AUTO),     value = ALLOW_CORRECTABLE_ERROR_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = ALLOW_CORRECTABLE_ERROR_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED),  value = ALLOW_CORRECTABLE_ERROR_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+    
+
+#if (!defined(DE_SKU)) || (!defined(VFR_CRB_FLAG))
+    suppressif ideqval SYSTEM_CONFIGURATION.cpuType == CPU_HSX;
+    grayoutif ideqval SYSTEM_CONFIGURATION.EccSupport == ECC_DIS OR ideqval SYSTEM_CONFIGURATION.caParity == CA_PARITY_DISABLE;
+    oneof varid  = SYSTEM_CONFIGURATION.WrCRC,
+        prompt   = STRING_TOKEN (STR_WR_CRC_PROMPT),
+        help     = STRING_TOKEN (STR_WR_CRC_HELP),
+        option text = STRING_TOKEN (STR_AUTO), value = WR_CRC_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = WR_CRC_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED),  value = WR_CRC_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+    endif;
+#endif
+
+    oneof varid  = SYSTEM_CONFIGURATION.DDR4Platform, 
+        prompt   = STRING_TOKEN (STR_DDR4_PLATFORM_PROMPT),
+        help     = STRING_TOKEN (STR_DDR4_PLATFORM_HELP),
+        option text = STRING_TOKEN (STR_AUTO), value = DDR4_PLATFORM_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = DDR4_PLATFORM_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED),  value = DDR4_PLATFORM_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.cpuType == CPU_HSX;
+    oneof varid  = SYSTEM_CONFIGURATION.EnCECCWA,
+        prompt   = STRING_TOKEN (STR_CECCWA_PROMPT),
+        help     = STRING_TOKEN (STR_CECCWA_HELP),
+        option text = STRING_TOKEN (STR_AUTO), value = CECCWA_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = CECCWA_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED),  value = CECCWA_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+
+    oneof varid  = SYSTEM_CONFIGURATION.CapErrFlow,
+        prompt   = STRING_TOKEN (STR_CAP_ERR_FLOW_PROMPT),
+#ifdef  DE_SKU        
+        help     = STRING_TOKEN (STR_CAP_ERR_FLOW_HELP_DE),
+#else
+        help     = STRING_TOKEN (STR_CAP_ERR_FLOW_HELP_EP),
+#endif        
+        option text = STRING_TOKEN (STR_AUTO), value = CAP_ERR_FLOW_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = CAP_ERR_FLOW_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED),  value = CAP_ERR_FLOW_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+
+    numeric varid = SYSTEM_CONFIGURATION.ScrambleSeedLow,
+        prompt    = STRING_TOKEN (STR_SCRAMBLE_SEED_LOW_PROMPT),
+        help      = STRING_TOKEN (STR_SCRAMBLE_SEED_LOW_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = MAX_SCRAMBLE_SEED_LOW,
+        step      = 0,
+        default   = SCRAMBLE_SEED_LOW,
+        default   = SCRAMBLE_SEED_LOW, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.ScrambleSeedHigh,
+        prompt    = STRING_TOKEN (STR_SCRAMBLE_SEED_HIGH_PROMPT),
+        help      = STRING_TOKEN (STR_SCRAMBLE_SEED_HIGH_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = MAX_SCRAMBLE_SEED_HIGH,
+        step      = 0,
+        default   = SCRAMBLE_SEED_HIGH,
+        default   = SCRAMBLE_SEED_HIGH, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+
+
+    oneof varid  = SYSTEM_CONFIGURATION.ADREn,
+        prompt   = STRING_TOKEN (STR_ADR_ENABLE),
+        help     = STRING_TOKEN (STR_ADR_ENABLE_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN (STR_HARDWARE_ADR),   value = 1, flags = RESET_REQUIRED;
+#ifdef  DE_SKU
+        option text = STRING_TOKEN (STR_SOFTWARE_ADR),   value = 2, flags = RESET_REQUIRED;
+#endif
+    endoneof;
+    
+    suppressif ideqval SYSTEM_CONFIGURATION.ADREn == 0;
+        oneof varid  = SYSTEM_CONFIGURATION.ADRDataSaveMode,
+        prompt   = STRING_TOKEN (STR_ADR_DATA_SAVE_MODE),
+        help     = STRING_TOKEN (STR_ADR_DATA_SAVE_MODE_HELP),
+        option text = STRING_TOKEN (STR_ADR_BBU), value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN (STR_ADR_C2F), value = 2, flags = RESET_REQUIRED;
+#ifdef MEM_NVDIMM_EN
+        option text = STRING_TOKEN (STR_ADR_NVDIMM), value = 3, flags = RESET_REQUIRED;
+#endif            
+        endoneof;
+     endif;
+
+#ifndef DE_SKU
+    suppressif ideqval SYSTEM_CONFIGURATION.ADREn == 0;
+    oneof varid  = SYSTEM_CONFIGURATION.check_pm_sts,
+        prompt   = STRING_TOKEN (STR_CHECK_PM_STS),
+        help     = STRING_TOKEN (STR_CHECK_PM_STS_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN (STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+#endif
+
+    suppressif ideqval SYSTEM_CONFIGURATION.ADREn == 0 OR ideqval SYSTEM_CONFIGURATION.ADRDataSaveMode == 3;
+    oneof varid  = SYSTEM_CONFIGURATION.check_platform_detect,
+        prompt   = STRING_TOKEN (STR_CHECK_PLATFORM),
+        help     = STRING_TOKEN (STR_CHECK_PLATFORM_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED ;
+        option text = STRING_TOKEN (STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+    endif;
+
+#ifdef DE_SKU
+    suppressif ideqval SYSTEM_CONFIGURATION.ADREn == 0;
+    oneof varid  = SYSTEM_CONFIGURATION.ADROnReset,
+        prompt   = STRING_TOKEN (STR_ADRONRESET),
+        help     = STRING_TOKEN (STR_ADRONRESET_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN (STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED ;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.BlockScTrafficOnAdr,
+        prompt   = STRING_TOKEN (STR_BLOCKSCTRAFFIC),
+        help     = STRING_TOKEN (STR_BLOCKSCTRAFFIC_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN (STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED ;
+    endoneof;
+    endif;
+#endif
+
+#ifdef MEM_NVDIMM_EN
+    suppressif ideqval SYSTEM_CONFIGURATION.ADREn == 0 OR NOT ideqval SYSTEM_CONFIGURATION.ADRDataSaveMode == 3;
+    oneof varid  = SYSTEM_CONFIGURATION.eraseArmNVDIMMS,
+        prompt   = STRING_TOKEN (STR_ERASEARM_NVDIMM),
+        help     = STRING_TOKEN (STR_ERASEARM_NVDIMM_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED ;
+        option text = STRING_TOKEN (STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.restoreNVDIMMS,
+        prompt   = STRING_TOKEN (STR_RESTORE_NVDIMM),
+        help     = STRING_TOKEN (STR_RESTORE_NVDIMM_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED ;
+        option text = STRING_TOKEN (STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    endoneof;
+    endif;
+#endif
+
+#ifdef NVMEM_FEATURE_EN
+    suppressif ideqval SYSTEM_CONFIGURATION.ADREn == 0;
+    oneof varid  = SYSTEM_CONFIGURATION.interNVDIMMS,
+        prompt   = STRING_TOKEN (STR_INTERLEAVE_NVDIMM),
+        help     = STRING_TOKEN (STR_INTERLEAVE_NVDIMM_HELP),
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT ;
+        option text = STRING_TOKEN (STR_ENABLED_STRING),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+#endif
+
+
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+// APTIOV_OVERRIDE_RC_START : Changes done for SA50084
+// EIP#557347
+#if defined (ROW_HAMMER_SUPPORT) && (ROW_HAMMER_SUPPORT ==1)
+    oneof varid = SYSTEM_CONFIGURATION.CustomRefreshRateEn,
+        prompt  = STRING_TOKEN(STR_CUSTOMREFRESHRATEEN_PROMPT),
+        help    = STRING_TOKEN(STR_CUSTOMREFRESHRATEEN_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING),    value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),    value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.CustomRefreshRateEn == 0;
+      numeric varid = SYSTEM_CONFIGURATION.CustomRefreshRate,
+        prompt    = STRING_TOKEN(STR_CUSTOMREFRESHRATE_PROMPT),
+        help      = STRING_TOKEN(STR_CUSTOMREFRESHRATE_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 20,
+        maximum   = 40,
+        step      = 1,
+        default   = Cust_Refresh_Rate_Default,
+        default   = Cust_Refresh_Rate_Default, defaultstore = AmiMfgDefault,
+      endnumeric;
+    endif;
+
+    oneof varid = SYSTEM_CONFIGURATION.refreshMode,
+        prompt  = STRING_TOKEN(STR_REFRESH_MODE_PROMPT),
+        help    = STRING_TOKEN(STR_REFRESH_MODE_HELP),
+        option text = STRING_TOKEN(STR_ACCELERATED_SELF_REFRESH),    value = A2R_DISABLE, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_2X_REFRESH),    value = A2R_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+#endif // #if defined (ROW_HAMMER_SUPPORT) && (ROW_HAMMER_SUPPORT ==1)
+// APTIOV_OVERRIDE_RC_END
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+
+
+    numeric varid = SYSTEM_CONFIGURATION.mcBgfThreshold,
+        prompt    = STRING_TOKEN (STR_MC_BGF_THRESHOLD_PROMPT),
+        help      = STRING_TOKEN (STR_MC_BGF_THRESHOLD_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = MAX_MC_BGF_THRESHOLD,
+        step      = 1,
+        default   = 0,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.dllResetTestLoops,
+        prompt    = STRING_TOKEN(STR_DLL_RESET_TEST_PROMPT),
+        help      = STRING_TOKEN(STR_DLL_RESET_TEST_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFF,
+        step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                             // otherwise it will auto-increment with a left/right arrow
+        default   = DLL_RESET_TEST_LOOPS,
+        default   = DLL_RESET_TEST_LOOPS, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+
+    oneof varid = SYSTEM_CONFIGURATION.mcODTOverride,
+        prompt  = STRING_TOKEN(STR_MC_ODT_MODE_PROMPT),
+        help    = STRING_TOKEN(STR_MC_ODT_MODE_HELP),
+        option text = STRING_TOKEN(STR_AUTO),                    value = MC_ODT_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_100_OHMS),                value = MC_ODT_100_OHMS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_50_OHMS),                 value = MC_ODT_50_OHMS, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.oppReadInWmm,
+        prompt  = STRING_TOKEN(STR_OPP_READ_DURING_WMM_PROMPT),
+        help    = STRING_TOKEN(STR_OPP_READ_DURING_WMM_HELP),
+        option text = STRING_TOKEN(STR_AUTO),                    value = OPP_RD_WMM_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = OPP_RD_WMM_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = OPP_RD_WMM_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.normOppInterval,
+        prompt    = STRING_TOKEN(STR_NORM_OPP_INTERVAL_PROMPT),
+        help      = STRING_TOKEN(STR_NORM_OPP_INTERVAL_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFF,
+        step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                             // otherwise it will auto-increment with a left/right arrow
+        default   = NORMAL_OPPERATION_INTERVAL,
+        default   = NORMAL_OPPERATION_INTERVAL, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+    numeric varid = SYSTEM_CONFIGURATION.numSparingTransactions,
+        prompt    = STRING_TOKEN(STR_NUM_OF_SPARING_TRANSAC_PROMPT),
+        help      = STRING_TOKEN(STR_NUM_OF_SPARING_TRANSAC_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 0xFFFF,
+        step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                             // otherwise it will auto-increment with a left/right arrow
+        default   = SPARING_TRANS_INTERVAL,
+        default   = SPARING_TRANS_INTERVAL, defaultstore = AmiMfgDefault,
+    endnumeric;
+
+    oneof varid = SYSTEM_CONFIGURATION.PSMISupport,
+        prompt  = STRING_TOKEN(STR_PSMI_SUPPORT_PROMPT),
+        help    = STRING_TOKEN(STR_PSMI_SUPPORT_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.caParity,
+        prompt  = STRING_TOKEN(STR_CA_PARITY_PROMPT),
+        help    = STRING_TOKEN(STR_CA_PARITY_HELP),
+        option text = STRING_TOKEN (STR_AUTO),                            value = CA_PARITY_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = CA_PARITY_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = CA_PARITY_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.smbSpeed,
+        prompt  = STRING_TOKEN(STR_SMB_SPEED_PROMPT),
+        help    = STRING_TOKEN(STR_SMB_SPEED_HELP),
+        option text = STRING_TOKEN (STR_AUTO),                            value = SMB_CLK_DEFAULT, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_SMB_400K),         value = SMB_CLK_400K, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_SMB_1M),          value = SMB_CLK_1M, flags = RESET_REQUIRED;
+    endoneof;
+
+    //
+    // Jump to Memory Topology display form
+    //
+    goto VFR_FORMID_MEMTOPOLOGY_DISPLAY,
+        prompt  = STRING_TOKEN(STR_MEMTOPOLOGY_DISPLAY_FORM_TITLE),
+        help    = STRING_TOKEN(STR_MEMTOPOLOGY_DISPLAY_FORM_HELP);
+
+    // Memory Thermal
+    goto VFR_FORMID_MEM_THERMAL_ID,
+      prompt  = STRING_TOKEN(STR_MEM_THERMAL_SUBTITLE),
+      help    = STRING_TOKEN(STR_MEM_THERMAL_SUBTITLE_HELP);
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - Start
+    // Page Policy
+suppressif TRUE;
+    goto VFR_FORMID_PAGE_POLICY_DISPLAY,
+      prompt  = STRING_TOKEN(STR_PAGE_POLICY_DISPLAY_FORM_TITLE),
+      help    = STRING_TOKEN(STR_PAGE_POLICY_DISPLAY_FORM_HELP);
+
+    // Memory Training
+    goto VFR_FORMID_MEMORY_TRAINING_DISPLAY,
+      prompt  = STRING_TOKEN(STR_MEMORY_TRAINING_DISPLAY_FORM_TITLE),
+      help    = STRING_TOKEN(STR_MEMORY_TRAINING_DISPLAY_FORM_HELP);
+endif;    
+// Aptio V Server override : For CRB BIOS, decided to suppress the Intel Silicon Validation Setup qns - End
+
+    // XMP Profiles
+    goto VFR_FORMID_XMP_DISPLAY,
+      prompt  = STRING_TOKEN(STR_XMP_FORM_SUBTITLE),
+      help    = STRING_TOKEN(STR_XMP_PROFILE_HELP);
+
+    // Memory Mapping
+    goto VFR_FORMID_MEM_MAP,
+      prompt  = STRING_TOKEN(STR_MEM_MAP_SUBTITLE),
+      help    = STRING_TOKEN(STR_MEM_MAP_HELP);
+
+    // Memory RAS
+    goto VFR_FORMID_MEMORY_RAS,
+      prompt  = STRING_TOKEN(STR_MEMORY_RAS_CONFIG_FORM_TITLE),
+      help    = STRING_TOKEN(STR_MEMORY_RAS_CONFIG_FORM_HELP );
+
+    oneof varid = SYSTEM_CONFIGURATION.rankMaskEn,
+        prompt  = STRING_TOKEN(STR_RANK_MASK_EN_PROMPT),
+        help    = STRING_TOKEN(STR_RANK_MASK_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.rankMaskEn == 0;
+        numeric varid = SYSTEM_CONFIGURATION.sck0ch0,
+            prompt    = STRING_TOKEN (STR_SCKT_0_CH_0_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_0_CH_0_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck0ch1,
+            prompt    = STRING_TOKEN (STR_SCKT_0_CH_1_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_0_CH_1_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck0ch2,
+            prompt    = STRING_TOKEN (STR_SCKT_0_CH_2_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_0_CH_2_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck0ch3,
+            prompt    = STRING_TOKEN (STR_SCKT_0_CH_3_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_0_CH_3_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck1ch0,
+            prompt    = STRING_TOKEN (STR_SCKT_1_CH_0_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_1_CH_0_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck1ch1,
+            prompt    = STRING_TOKEN (STR_SCKT_1_CH_1_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_1_CH_1_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck1ch2,
+            prompt    = STRING_TOKEN (STR_SCKT_1_CH_2_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_1_CH_2_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck1ch3,
+            prompt    = STRING_TOKEN (STR_SCKT_1_CH_3_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_1_CH_3_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck2ch0,
+            prompt    = STRING_TOKEN (STR_SCKT_2_CH_0_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_2_CH_0_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck2ch1,
+            prompt    = STRING_TOKEN (STR_SCKT_2_CH_1_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_2_CH_1_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck2ch2,
+            prompt    = STRING_TOKEN (STR_SCKT_2_CH_2_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_2_CH_2_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck2ch3,
+            prompt    = STRING_TOKEN (STR_SCKT_2_CH_3_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_2_CH_3_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck3ch0,
+            prompt    = STRING_TOKEN (STR_SCKT_3_CH_0_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_3_CH_0_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck3ch1,
+            prompt    = STRING_TOKEN (STR_SCKT_3_CH_1_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_3_CH_1_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck3ch2,
+            prompt    = STRING_TOKEN (STR_SCKT_3_CH_2_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_3_CH_2_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+        numeric varid = SYSTEM_CONFIGURATION.sck3ch3,
+            prompt    = STRING_TOKEN (STR_SCKT_3_CH_3_RANK_EN_PROMPT),
+            help      = STRING_TOKEN (STR_SOCKET_3_CH_3_RANK_EN_HELP),
+            flags     = RESET_REQUIRED,
+            minimum   = 0,
+            maximum   = 0xFF,
+            step      = 0,        // Stepping of 0 equates to a manual entering of a value,
+                                  // otherwise it will auto-increment with a left/right arrow
+            default   = 0xFF,
+            default   = 0xFF, defaultstore = AmiMfgDefault,
+        endnumeric;
+
+    endif;
+
+  endform;
+
+
+form formid = VFR_FORMID_MEMTOPOLOGY_DISPLAY,
+    title   = STRING_TOKEN(STR_MEMTOPOLOGY_DISPLAY_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING1);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING2);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING3);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING4);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING5);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING6);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING7);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING8);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING9);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING10);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING11);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING12);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING13);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING14);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING15);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING16);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING17);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING18);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING19);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING20);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING21);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING22);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING23);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING24);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING25);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING26);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING27);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING28);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING29);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING30);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING31);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING32);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING33);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING34);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING35);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING36);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING37);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING38);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING39);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING40);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING41);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING42);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING43);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING44);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING45);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING46);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING47);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING48);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING49);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING50);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING51);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING52);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING53);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING54);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING55);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING56);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING57);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING58);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING59);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING60);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING61);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING62);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING63);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING64);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING65);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING66);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING67);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING68);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING69);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING70);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING71);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING72);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING73);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING74);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING75);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING76);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING77);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING78);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING79);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING80);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING81);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING82);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING83);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING84);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING85);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING86);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING87);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING88);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING89);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING90);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING91);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING92);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING93);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING94);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING95);
+    subtitle  text = STRING_TOKEN(STR_MEM_STRING96);
+
+endform;
+
+form formid = VFR_FORMID_PAGE_POLICY_DISPLAY,
+    title   = STRING_TOKEN(STR_PAGE_POLICY_DISPLAY_FORM_TITLE);
+
+    oneof varid = SYSTEM_CONFIGURATION.PagePolicy,
+        prompt  = STRING_TOKEN(STR_PAGE_POLICY_PROMPT),
+        help    = STRING_TOKEN(STR_PAGE_POLICY_HELP),
+        option text = STRING_TOKEN(STR_AUTO),               value = CLOSED_PAGE_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CLOSED_PAGE),        value = CLOSED_PAGE_EN, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_OPEN_PAGE),          value = CLOSED_PAGE_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ADAPTIVE_PAGE),      value = OPEN_PAGE_ADAPTIVE, flags = RESET_REQUIRED;
+    endoneof;
+
+
+endform;
+
+    form formid = VFR_FORMID_MEMORY_TRAINING_DISPLAY,
+    title   = STRING_TOKEN(STR_MEMORY_TRAINING_DISPLAY_FORM_TITLE);
+
+
+    suppressif ideqval SYSTEM_CONFIGURATION.cpuType == CPU_HSX;
+
+    oneof varid  = SYSTEM_CONFIGURATION.trainrxctle,
+        prompt   = STRING_TOKEN (STR_RX_CTLE_PROMPT),
+        help     = STRING_TOKEN (STR_RX_CTLE_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = RX_CTLE_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = RX_CTLE_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = RX_CTLE_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+    
+    oneof varid  = SYSTEM_CONFIGURATION.txEqCalibration,
+        prompt   = STRING_TOKEN (STR_TX_EQ_PROMPT),
+        help     = STRING_TOKEN (STR_TX_EQ_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = TX_EQ_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = TX_EQ_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = TX_EQ_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.iModeTraining,
+        prompt   = STRING_TOKEN (STR_IMODE_PROMPT),
+        help     = STRING_TOKEN (STR_IMODE_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = IMODE_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = IMODE_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = IMODE_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.earlyCmdTraining,
+        prompt   = STRING_TOKEN (STR_EARLY_CMD_TRAINING_PROMPT),
+        help     = STRING_TOKEN (STR_EARLY_CMD_TRAINING_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = EARLY_CMD_CLK_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = EARLY_CMD_CLK_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = EARLY_CMD_CLK_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.earlyCtlTraining,
+        prompt   = STRING_TOKEN (STR_EARLY_CTL_TRAINING_PROMPT),
+        help     = STRING_TOKEN (STR_EARLY_CTL_TRAINING_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = EARLY_CTL_CLK_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = EARLY_CTL_CLK_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = EARLY_CTL_CLK_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.advancedClkTraining,
+        prompt   = STRING_TOKEN (STR_ADVANCED_CLK_TRAINING_PROMPT),
+        help     = STRING_TOKEN (STR_ADVANCED_CLK_TRAINING_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = CMD_CLK_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = CMD_CLK_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = CMD_CLK_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.cmdNormalize,
+        prompt   = STRING_TOKEN (STR_CMD_NORMAL_PROMPT),
+        help     = STRING_TOKEN (STR_CMD_NORMAL_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = CMD_NORMAL_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = CMD_NORMAL_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = CMD_NORMAL_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.RoundTripLatency,
+        prompt   = STRING_TOKEN (STR_ROUND_TRIP_LATENCY_PROMPT),
+        help     = STRING_TOKEN (STR_ROUND_TRIP_LATENCY_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = ROUND_TRIP_LATENCY_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = ROUND_TRIP_LATENCY_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = ROUND_TRIP_LATENCY_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.DutyCycleTraining,
+        prompt   = STRING_TOKEN (STR_DUTY_CYCLE_PROMPT),
+        help     = STRING_TOKEN (STR_DUTY_CYCLE_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = DUTY_CYCLE_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = DUTY_CYCLE_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = DUTY_CYCLE_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.advancedStrobeCentering,
+        prompt   = STRING_TOKEN (STR_ADVANCED_STROBE_CENTERING_PROMPT),
+        help     = STRING_TOKEN (STR_ADVANCED_STROBE_CENTERING_HELP),
+        option text = STRING_TOKEN (STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    oneof varid  = SYSTEM_CONFIGURATION.perBitDeskew,
+        prompt   = STRING_TOKEN (STR_PER_BIT_DESKEW_PROMPT),
+        help     = STRING_TOKEN (STR_PER_BIT_DESKEW_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = BIT_DESKEW_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = BIT_DESKEW_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = BIT_DESKEW_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    //oneof varid  = SYSTEM_CONFIGURATION.extDimmVrefCircuit,
+    //    prompt   = STRING_TOKEN (STR_EXT_DIMM_VREF_CIRCUIT_PROMPT),
+    //    help     = STRING_TOKEN (STR_EXT_DIMM_VREF_CIRCUIT_HELP),
+    //    option text = STRING_TOKEN (STR_INTERNAL), value = 0, flags = RESET_REQUIRED;
+    //    option text = STRING_TOKEN (STR_EXTERNAL),  value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    //endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.readVrefCenter,
+        prompt  = STRING_TOKEN(STR_READ_VREF_CENTERING_PROMPT),
+        help    = STRING_TOKEN(STR_READ_VREF_CENTERING_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = RX_VREF_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = RX_VREF_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = RX_VREF_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.turnaroundOpt,
+        prompt  = STRING_TOKEN(STR_TURNAROUND_PROMPT),
+        help    = STRING_TOKEN(STR_TURNAROUND_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = TURNAROUND_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = TURNAROUND_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = TURNAROUND_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.pda,
+        prompt  = STRING_TOKEN(STR_PDA_PROMPT),
+        help    = STRING_TOKEN(STR_PDA_HELP),
+        option text = STRING_TOKEN (STR_AUTO),    value = PDA_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = PDA_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = PDA_ENABLE, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.pda == 0;
+      oneof varid = SYSTEM_CONFIGURATION.wrVrefCenter,
+          prompt  = STRING_TOKEN(STR_WRITE_VREF_CENTERING_PROMPT),
+          help    = STRING_TOKEN(STR_WRITE_VREF_CENTERING_HELP),
+          option text = STRING_TOKEN (STR_AUTO),    value = TX_VREF_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_DISABLE), value = TX_VREF_DISABLE, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_ENABLE),  value = TX_VREF_ENABLE, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.cpuType == CPU_HSX;
+      oneof varid = SYSTEM_CONFIGURATION.cmdVrefCenter,
+          prompt  = STRING_TOKEN(STR_COMMAND_VREF_CENTERING_PROMPT),
+          help    = STRING_TOKEN(STR_COMMAND_VREF_CENTERING_HELP),
+          option text = STRING_TOKEN (STR_AUTO),    value = CMD_VREF_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_DISABLE), value = CMD_VREF_DISABLE, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_ENABLE),  value = CMD_VREF_ENABLE, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid = SYSTEM_CONFIGURATION.lrdimmbacksideVref,
+          prompt  = STRING_TOKEN(STR_LRDIMM_BACKSIDE_VREF_CENTERING_PROMPT),
+          help    = STRING_TOKEN(STR_LRDIMM_BACKSIDE_VREF_CENTERING_HELP),
+          option text = STRING_TOKEN (STR_AUTO),    value = LRDIMM_BACKSIDE_VREF_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_DISABLE), value = LRDIMM_BACKSIDE_VREF_DISABLE, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_ENABLE),  value = LRDIMM_BACKSIDE_VREF_ENABLE, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.lrdimmbacksideVref == LRDIMM_BACKSIDE_VREF_DISABLE;
+      oneof varid = SYSTEM_CONFIGURATION.lrdimmWrVref,
+          prompt  = STRING_TOKEN(STR_LRDIMM_WR_VREF_PROMPT),
+          help    = STRING_TOKEN(STR_LRDIMM_WR_VREF_HELP),
+          option text = STRING_TOKEN (STR_AUTO),    value = LRDIMM_WR_VREF_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_DISABLE), value = LRDIMM_WR_VREF_DISABLE, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_ENABLE),  value = LRDIMM_WR_VREF_ENABLE, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid = SYSTEM_CONFIGURATION.lrdimmRdVref,
+          prompt  = STRING_TOKEN(STR_LRDIMM_RD_VREF_PROMPT),
+          help    = STRING_TOKEN(STR_LRDIMM_RD_VREF_HELP),
+          option text = STRING_TOKEN (STR_AUTO),    value = LRDIMM_RD_VREF_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_DISABLE), value = LRDIMM_RD_VREF_DISABLE, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_ENABLE),  value = LRDIMM_RD_VREF_ENABLE, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid = SYSTEM_CONFIGURATION.lrdimmRxDqCentering,
+          prompt  = STRING_TOKEN(STR_LRDIMM_RX_DQ_CENTERING_PROMPT),
+          help    = STRING_TOKEN(STR_LRDIMM_RX_DQ_CENTERING_HELP),
+          option text = STRING_TOKEN (STR_AUTO),    value = LRDIMM_RX_DQ_CENTERING_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_DISABLE), value = LRDIMM_RX_DQ_CENTERING_DISABLE, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_ENABLE),  value = LRDIMM_RX_DQ_CENTERING_ENABLE, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid = SYSTEM_CONFIGURATION.lrdimmTxDqCentering,
+          prompt  = STRING_TOKEN(STR_LRDIMM_TX_DQ_CENTERING_PROMPT),
+          help    = STRING_TOKEN(STR_LRDIMM_TX_DQ_CENTERING_HELP),
+          option text = STRING_TOKEN (STR_AUTO),    value = LRDIMM_TX_DQ_CENTERING_AUTO, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_DISABLE), value = LRDIMM_TX_DQ_CENTERING_DISABLE, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_ENABLE),  value = LRDIMM_TX_DQ_CENTERING_ENABLE, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    //oneof varid = SYSTEM_CONFIGURATION.cmd2DataTuning,
+    //    prompt  = STRING_TOKEN(STR_COMMAND_2_DATA_TUNING_PROMPT),
+    //    help    = STRING_TOKEN(STR_COMMAND_2_DATA_TUNING_HELP),
+    //    option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = RESET_REQUIRED;
+    //    option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    //endoneof;
+
+    endform;
+
+form formid = VFR_FORMID_MEM_THERMAL_ID,
+    title   = STRING_TOKEN(STR_MEM_THERMAL_SUBTITLE);
+
+    oneof varid = SYSTEM_CONFIGURATION.thermalthrottlingsupport,
+        prompt  = STRING_TOKEN(STR_FAN_SPD_CTRL_THRTL_MODE),
+        help    = STRING_TOKEN(STR_FAN_SPD_CTRL_THRTL_MODE_HELP),
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_OPEN_LOOP_THERMAL_THROTTLING),         value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CLOSE_LOOP_THERMAL_THROTTLING),          value = 2, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+
+    oneof varid = SYSTEM_CONFIGURATION.DdrVrPhaseShedding,
+        prompt  = STRING_TOKEN(STR_DDR_PHASE_SHEDDING_PROMPT),
+        help    = STRING_TOKEN(STR_DDR_PHASE_SHEDDING_PROMPT_HELP),
+        option text = STRING_TOKEN(STR_AUTO),             value = PHASE_SHEDDING_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED_STRING), value = PHASE_SHEDDING_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLED_STRING),  value = PHASE_SHEDDING_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.cpuType == CPU_HSX;
+      oneof varid = SYSTEM_CONFIGURATION.MemPwrSave,
+          prompt      = STRING_TOKEN(STR_MEM_PWR_SAV_PROMPT),
+          help        = STRING_TOKEN(STR_MEM_PWR_SAV_PROMPT_HELP),
+          option text = STRING_TOKEN(STR_AUTO),     value = MEM_PWR_SAV_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_DISABLED), value = MEM_PWR_SAV_DISABLE, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_SLOW),     value = MEM_PWR_SAV_SLOW, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FAST),     value = MEM_PWR_SAV_FAST, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_APD),      value = MEM_PWR_SAV_APD, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_USER_DEF), value = MEM_PWR_SAV_USER, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.cpuType == CPU_HSX;
+      oneof varid = SYSTEM_CONFIGURATION.MemPwrSave,
+          prompt      = STRING_TOKEN(STR_MEM_PWR_SAV_PROMPT),
+          help        = STRING_TOKEN(STR_MEM_PWR_SAV_PROMPT_HELP),
+          option text = STRING_TOKEN(STR_AUTO),     value = MEM_PWR_SAV_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_DISABLED), value = MEM_PWR_SAV_DISABLE, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_APD),      value = MEM_PWR_SAV_APD, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_USER_DEF), value = MEM_PWR_SAV_USER, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_SLOW_RESVD),     value = MEM_PWR_SAV_SLOW, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_FAST_RESVD),     value = MEM_PWR_SAV_FAST, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+      // Memory Power Savings Advanced Options
+      goto VFR_FORMID_MEM_PWR_SAVE_ADV_ID,
+      prompt  = STRING_TOKEN(STR_MEM_PWR_SAVE_ADV_SUBTITLE),
+      help    = STRING_TOKEN(STR_MEM_PWR_SAVE_ADV_SUBTITLE_HELP);
+
+    oneof varid = SYSTEM_CONFIGURATION.mdllSden,
+        prompt      = STRING_TOKEN(STR_MDLL_SDEN_PROMPT),
+        help        = STRING_TOKEN(STR_MDLL_SDEN_PROMPT_HELP),
+        option text = STRING_TOKEN(STR_AUTO),     value = MDLL_SDEN_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DISABLED), value = MDLL_SDEN_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED),  value = MDLL_SDEN_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.memhotSupport,
+        prompt      = STRING_TOKEN(STR_MEMHOT_THROTTLING_MODE_PROMPT),
+        help        = STRING_TOKEN(STR_MEMHOT_THROTTLING_MODE_PROMPT_HELP),
+        option text = STRING_TOKEN(STR_DISABLED), value = MEMHOT_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_OUTPUT_ONLY),  value = MEMHOT_OUTPUT_ONLY, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_INPUT_ONLY),  value = MEMHOT_INPUT_ONLY, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        //option text = STRING_TOKEN(STR_INPUT_OUTPUT_ENABLED),  value = MEMHOT_INPUT_OUTPUT_EN, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.ElectricalThrottlingMode,
+        prompt      = STRING_TOKEN(STR_ELECTRICAL_THROTTLING_MODE_PROMPT),
+        help        = STRING_TOKEN(STR_ELECTRICAL_THROTTLING_MODE_PROMPT_HELP),
+        option text = STRING_TOKEN(STR_DISABLED), value = ET_DISABLE, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLED), value = ET_ENABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_AUTO_STRING), value = ET_AUTO, flags = RESET_REQUIRED;
+    endoneof;
+
+    endform;
+
+    form formid = VFR_FORMID_MEM_PWR_SAVE_ADV_ID,
+    title = STRING_TOKEN(STR_MEM_PWR_SAVE_ADV_SUBTITLE);
+
+
+    oneof varid = SYSTEM_CONFIGURATION.pdwnCkMode,
+        prompt      = STRING_TOKEN(STR_CK_SELF_REFRESH_PROMPT),
+        help        = STRING_TOKEN(STR_CK_SELF_REFRESH_PROMPT_HELP),
+        option text = STRING_TOKEN(STR_AUTO),       value = CK_SELF_REF_AUTO,      flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_DRIVEN),     value = CK_SELF_REF_DRIVEN,    flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_TRI_STATE),  value = CK_SELF_REF_TRI_STATE,   flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PULL_LOW),   value = CK_SELF_REF_LOW,       flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_PULL_HIGH),  value = CK_SELF_REF_HIGH,      flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.MemPwrSave == MEM_PWR_SAV_USER;
+    suppressif ideqval SYSTEM_CONFIGURATION.cpuType == CPU_HSX;
+      oneof varid = SYSTEM_CONFIGURATION.ckeThrottling,
+          prompt      = STRING_TOKEN(STR_CKE_THROT_PROMPT),
+          help        = STRING_TOKEN(STR_CKE_THROT_PROMPT_HELP),
+          option text = STRING_TOKEN(STR_AUTO),     value = CKE_MODE_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_OFF),      value = CKE_MODE_OFF, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_APD),      value = CKE_APD, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PPDF),     value = CKE_PPDF, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PPDS),     value = CKE_PPDS, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_APD_PPDF), value = CKE_APD_PPDF, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_APD_PPDS), value = CKE_APD_PPDS, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.cpuType == CPU_HSX;
+      oneof varid = SYSTEM_CONFIGURATION.ckeThrottling,
+          prompt      = STRING_TOKEN(STR_CKE_THROT_PROMPT),
+          help        = STRING_TOKEN(STR_CKE_THROT_PROMPT_HELP),
+          option text = STRING_TOKEN(STR_AUTO),     value = CKE_MODE_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_OFF),      value = CKE_MODE_OFF, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_APD),      value = CKE_APD, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PPDF_RESVD),     value = CKE_PPDF, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_PPDS_RESVD),     value = CKE_PPDS, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_APD_PPDF_RESVD), value = CKE_APD_PPDF, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_APD_PPDS_RESVD), value = CKE_APD_PPDS, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+    endif;
+
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.MemPwrSave == MEM_PWR_SAV_USER;
+      oneof varid = SYSTEM_CONFIGURATION.oppSR,
+          prompt      = STRING_TOKEN(STR_OPP_SR_PROMPT),
+          help        = STRING_TOKEN(STR_OPP_SR_PROMPT_HELP),
+          option text = STRING_TOKEN(STR_AUTO),     value = OPP_SR_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_DISABLED), value = OPP_SR_DIS, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED),  value = OPP_SR_EN, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    endform;
+
+    form formid = VFR_FORMID_XMP_DISPLAY,
+    title   = STRING_TOKEN(STR_XMP_FORM_SUBTITLE);
+
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.XMPProfilesSup == 0;
+      oneof varid   = SYSTEM_CONFIGURATION.XMPMode,
+          prompt      = STRING_TOKEN (STR_XMP_PROFILE_PROMPT),
+          help        = STRING_TOKEN (STR_XMP_PROFILE_HELP),
+          option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN (STR_MANUAL),          value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif  NOT ideqval SYSTEM_CONFIGURATION.XMPProfilesSup == 1;
+      oneof varid   = SYSTEM_CONFIGURATION.XMPMode,
+          questionid  = KEY_XMP_PROFILE,
+          prompt      = STRING_TOKEN (STR_XMP_PROFILE_PROMPT),
+          help        = STRING_TOKEN (STR_XMP_PROFILE_HELP),
+          option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT | INTERACTIVE;
+          option text = STRING_TOKEN (STR_MANUAL),          value = 1, flags = RESET_REQUIRED | INTERACTIVE;
+          option text = STRING_TOKEN (STR_XMP_PROFILE1),    value = 2, flags = RESET_REQUIRED | INTERACTIVE;
+      endoneof;
+    endif;
+
+    suppressif  NOT ideqval SYSTEM_CONFIGURATION.XMPProfilesSup == 3;
+      oneof varid   = SYSTEM_CONFIGURATION.XMPMode,
+          questionid  = KEY_XMP_PROFILE1,
+          prompt      = STRING_TOKEN (STR_XMP_PROFILE_PROMPT),
+          help        = STRING_TOKEN (STR_XMP_PROFILE_HELP),
+          option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT | INTERACTIVE;
+          option text = STRING_TOKEN (STR_MANUAL),          value = 1, flags = RESET_REQUIRED | INTERACTIVE;
+          option text = STRING_TOKEN (STR_XMP_PROFILE1),    value = 2, flags = RESET_REQUIRED | INTERACTIVE;
+          option text = STRING_TOKEN (STR_XMP_PROFILE2),    value = 3, flags = RESET_REQUIRED | INTERACTIVE;
+      endoneof;
+    endif;
+
+    oneof varid = SYSTEM_CONFIGURATION.DdrFreqLimit,
+        prompt  = STRING_TOKEN(STR_XMP_DDR_FREQ_LIMIT_PROMPT),
+        help    = STRING_TOKEN(STR_XMP_DDR_FREQ_LIMIT_HELP),
+        option text = STRING_TOKEN(STR_AUTO),           value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_800_STRING), value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1000_STRING), value = 2, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1067_STRING), value = 3, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1200_STRING), value = 4, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1333_STRING), value = 5, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1400_STRING), value = 6, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1600_STRING), value = 7, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1800_STRING), value = 8, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_1867_STRING), value = 9, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2000_STRING), value = 10, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2133_STRING), value = 11, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2200_STRING), value = 12, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2400_STRING), value = 13, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2600_STRING), value = 14, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2667_STRING), value = 15, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2800_STRING), value = 16, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_2933_STRING), value = 17, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_3000_STRING), value = 18, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DDR_FREQ_3200_STRING), value = 19, flags = RESET_REQUIRED;
+    endoneof;
+
+    suppressif   ideqval SYSTEM_CONFIGURATION.XMPMode == 0;
+      numeric varid = SYSTEM_CONFIGURATION.Vdd,
+          prompt    = STRING_TOKEN (STR_VDD_PROMPT),
+          help      = STRING_TOKEN (STR_VDD_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = 165,
+          step      = 0,
+          default   = 0,
+      endnumeric;
+
+      oneof varid     = SYSTEM_CONFIGURATION.commandTiming,
+          prompt      = STRING_TOKEN(STR_COMMAND_TIMING_PROMPT),
+          help        = STRING_TOKEN(STR_COMMAND_TIMING_HELP),
+          option text = STRING_TOKEN(STR_AUTO),               value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_1N),                 value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_2N),                 value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_3N),                 value = 3, flags = RESET_REQUIRED;
+      endoneof;
+
+      numeric varid = SYSTEM_CONFIGURATION.tREFI,
+          prompt    = STRING_TOKEN(STR_REFRESH_RATE),
+          help      = STRING_TOKEN(STR_REFRESH_RATE_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_REFRESH_RATE,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tCAS,
+          prompt    = STRING_TOKEN(STR_CAS_LATENCY),
+          help      = STRING_TOKEN(STR_CAS_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_CAS_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tRP,
+          prompt    = STRING_TOKEN(STR_TRP_LATENCY),
+          help      = STRING_TOKEN(STR_TRP_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TRP_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tRCD,
+          prompt    = STRING_TOKEN(STR_TRCD_LATENCY),
+          help      = STRING_TOKEN(STR_TRCD_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TRCD_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tRAS,
+          prompt    = STRING_TOKEN(STR_TRAS_LATENCY),
+          help      = STRING_TOKEN(STR_TRAS_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TRAS_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tWR,
+          prompt    = STRING_TOKEN(STR_TWR_LATENCY),
+          help      = STRING_TOKEN(STR_TWR_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TWR_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tRFC,
+          prompt    = STRING_TOKEN(STR_TRFC_LATENCY),
+          help      = STRING_TOKEN(STR_TRFC_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TRFC_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tRRD,
+          prompt    = STRING_TOKEN(STR_TRRD_LATENCY),
+          help      = STRING_TOKEN(STR_TRRD_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TRRD_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tRTP,
+          prompt    = STRING_TOKEN(STR_TRTP_LATENCY),
+          help      = STRING_TOKEN(STR_TRTP_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TRTP_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tWTR,
+          prompt    = STRING_TOKEN(STR_TWTR_LATENCY),
+          help      = STRING_TOKEN(STR_TWTR_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TWTR_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tFAW,
+          prompt    = STRING_TOKEN(STR_TFAW_LATENCY),
+          help      = STRING_TOKEN(STR_TFAW_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TFAW_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tRC,
+          prompt    = STRING_TOKEN(STR_TRC_LATENCY),
+          help      = STRING_TOKEN(STR_TRC_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TRC_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+
+      numeric varid = SYSTEM_CONFIGURATION.tCWL,
+          prompt    = STRING_TOKEN(STR_TCWL_LATENCY),
+          help      = STRING_TOKEN(STR_TCWL_LATENCY_HELP),
+          flags     = RESET_REQUIRED,
+          minimum   = 0,
+          maximum   = MAX_TCWL_LATENCY,
+          step      = 0,       // Stepping of 0 equates to a manual entering of a value,
+                               // otherwise it will auto-increment with a left/right arrow
+          default   = 0,
+      endnumeric;
+    endif;
+    endform;
+
+    form formid = VFR_FORMID_MEM_MAP,
+    title   = STRING_TOKEN(STR_MEM_MAP_SUBTITLE);
+
+
+    oneof varid = SYSTEM_CONFIGURATION.SocketInterleaveBelow4GB,
+        prompt  = STRING_TOKEN(STR_SKT_INTERLEAVE_BELOW4GB),
+        help    = STRING_TOKEN(STR_SKT_INTERLEAVE_BELOW4GB_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),        value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),         value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.ChannelInterleaving,
+        prompt  = STRING_TOKEN(STR_CHANNEL_INTERLEAVING_PROMPT),
+        help    = STRING_TOKEN(STR_CHANNEL_INTERLEAVING_HELP),
+        option text = STRING_TOKEN(STR_AUTO),                  value = CH_INTER_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_1WAY_STRING),           value = CH_1WAY, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_2WAY_STRING),           value = CH_2WAY, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_3WAY_STRING),           value = CH_3WAY, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_4WAY_STRING),           value = CH_4WAY, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.RankInterleaving,
+        prompt  = STRING_TOKEN(STR_RANK_INTERLEAVING_PROMPT),
+        help    = STRING_TOKEN(STR_RANK_INTERLEAVING_HELP),
+        option text = STRING_TOKEN(STR_AUTO),                  value = RANK_INTER_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_1WAY_STRING),           value = RANK_1WAY, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_2WAY_STRING),           value = RANK_2WAY, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_4WAY_STRING),           value = RANK_4WAY, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_8WAY_STRING),           value = RANK_8WAY, flags = RESET_REQUIRED;
+    endoneof;
+
+    numeric varid = SYSTEM_CONFIGURATION.IotMemBufferRsvtn,
+        prompt  = STRING_TOKEN(STR_IOT_BUFFER_PROMPT),
+        help    = STRING_TOKEN(STR_IOT_BUFFER_HELP),
+        flags     = RESET_REQUIRED,
+        minimum   = 0,
+        maximum   = 65535,
+        step      = 0,
+        default   = 0,
+    endnumeric;
+
+    oneof varid  = SYSTEM_CONFIGURATION.a7Mode,
+        prompt   = STRING_TOKEN (STR_A7_MODE_EN_PROMPT),
+        help     = STRING_TOKEN (STR_A7_MODE_EN_HELP),
+        option text = STRING_TOKEN (STR_DISABLE), value = A7_MODE_DISABLE, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = A7_MODE_ENABLE, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+
+endform;

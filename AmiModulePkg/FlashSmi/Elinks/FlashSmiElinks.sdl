@@ -1,0 +1,77 @@
+#****************************************************************************
+#****************************************************************************
+#**                                                                        **
+#**           (C)Copyright 1985-2015, American Megatrends, Inc.            **
+#**                                                                        **
+#**                          All Rights Reserved.                          **
+#**                                                                        **
+#**           5555 Oakbrook Parkway, Suite 200, Norcross, GA 30071         **
+#**                                                                        **
+#**                          Phone (770)-246-8600                          **
+#**                                                                        **
+#****************************************************************************
+#****************************************************************************
+#****************************************************************************
+# $Header: $
+#
+# $Revision: $
+#
+# $Date: $
+#
+#****************************************************************************
+# Revision History
+# ----------------
+# $Log: $
+# 
+#
+#****************************************************************************
+TOKEN
+    Name  = "FlashSmiLinksSupport"
+    Value  = "1"
+    Help  = "Main switch to enable Flash SMI support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+    Token = "CORE_BUILD_NUMBER" ">" "10"
+End
+
+INFComponent
+    Name  = "FlashSmiElinks"
+    File  = "FlashSmiElinks.inf"
+    Package  = "AmiModulePkg"
+End
+
+ELINK
+    Name  = "FlashSmiPrologueHook,"
+    Parent  = "OemBeforeFlashUpdateList"
+    Priority  = -100
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "FlashSmiEpilogueHook,"
+    Parent  = "OemAfterFlashUpdateList"
+    Priority  = 100
+    InvokeOrder = BeforeParent
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiModulePkg.FlashSmiElinks"
+	Override  = "AmiModulePkg.Reflash"
+End
+#****************************************************************************
+#****************************************************************************
+#**                                                                        **
+#**           (C)Copyright 1985-2015, American Megatrends, Inc.            **
+#**                                                                        **
+#**                          All Rights Reserved.                          **
+#**                                                                        **
+#**           5555 Oakbrook Parkway, Suite 200, Norcross, GA 30071         **
+#**                                                                        **
+#**                          Phone (770)-246-8600                          **
+#**                                                                        **
+#****************************************************************************
+#****************************************************************************

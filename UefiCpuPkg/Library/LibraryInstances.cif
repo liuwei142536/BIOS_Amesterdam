@@ -1,0 +1,15 @@
+<component>
+	name = "LibraryInstances"
+	category = ModulePart
+	LocalRoot = "UefiCpuPkg\Library\"
+	RefName = "UefiCpuPkg.LibraryInstances"
+[INF]
+"BaseUefiCpuLib\BaseUefiCpuLib.inf"
+"BaseXApicLib\BaseXApicLib.inf"
+"BaseXApicX2ApicLib\BaseXApicX2ApicLib.inf"
+"CpuExceptionHandlerLib\DxeCpuExceptionHandlerLib.inf"
+"CpuExceptionHandlerLib\SecPeiCpuExceptionHandlerLib.inf"
+"CpuExceptionHandlerLib\SmmCpuExceptionHandlerLib.inf"
+"MtrrLib\MtrrLib.inf"
+"SecPeiDxeTimerLibUefiCpu\SecPeiDxeTimerLibUefiCpu.inf"
+<endComponent>

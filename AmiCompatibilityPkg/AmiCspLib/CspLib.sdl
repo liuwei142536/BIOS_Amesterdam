@@ -1,0 +1,101 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2011, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+#
+#*************************************************************************
+# $Header: $
+#
+# $Revision: $
+#
+# $Date: $
+#*************************************************************************
+#<AMI_FHDR_START>
+#
+# Name:  <CspLib.SDL>
+#
+# Description:     
+#
+#<AMI_FHDR_END>
+#*************************************************************************
+TOKEN
+	Name  = "CSPLIB_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable CSP Library support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "LAST_MAKEFILE"
+	Value  = "$(CSP_LIB_DIR)/CspLib.mak"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+PATH
+	Name  = "CSP_LIB_DIR"
+End
+
+ELINK
+	Name  = "AMI_CSP_PEI_SOURCES"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "AMI_CSP_DXE_SOURCES"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "PLATFORM_DSC_INCLUDE_PATHS"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "AMI_CSP_LIBRARIES"
+	InvokeOrder = ReplaceParent
+End
+
+INFComponent
+	Name  = "AmiCspLibPei"
+	File  = "../../Build/AmiCspLibPei.inf"
+	Package  = "AmiCompatibilityPkg"
+End
+
+INFComponent
+	Name  = "AmiCspLibDxe"
+	File  = "../../Build/AmiCspLibDxe.inf"
+	Package  = "AmiCompatibilityPkg"
+End
+
+INFComponent
+	Name  = "PciTableInit"
+	File  = "PciTableInit.inf"
+	Package  = "AmiCompatibilityPkg"
+	ModuleTypes = "PEIM"
+End
+
+LibraryMapping
+	Class  = "AmiCspLib"
+	Instance  = "AmiCompatibilityPkg.AmiCspLibPei"
+	ModuleTypes  = "PEIM PEI_CORE SEC"
+End
+
+LibraryMapping
+	Class  = "AmiCspLib"
+	Instance  = "AmiCompatibilityPkg.AmiCspLibDxe"
+	ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SAL_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+End
+

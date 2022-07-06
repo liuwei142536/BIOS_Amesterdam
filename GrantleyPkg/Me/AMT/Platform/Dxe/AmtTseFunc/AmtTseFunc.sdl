@@ -1,0 +1,78 @@
+TOKEN
+    Name  = "AMT_TSE_FUNC"
+    Value  = "1"
+    Help  = "Main switch to enable AMT TSE function support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+PATH
+    Name  = "AMT_TSE_FUNC_DIR"
+End
+
+ELINK
+    Name  = "AMTProcessProceedToBootHook,"
+    Parent  = "ProcessProceedToBoot,"
+    Help  = "AMT hook into TSE for TSE specific functions "
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+	Name  = "AMTProcessEnterSetupHook,"
+	Parent  = "PostManagerHandShakeHook,"
+	Help  = "AMT hook into TSE for TSE specific functions "
+	InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "GrantleyPkg\Me\MePkg.dec"
+    Parent  = "ADDITIONAL_AMITSE_Packages"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AMT_TSE_FUNC_DIR)\AmtTseFunc.c"
+    Parent  = "TSE_SOURCE_FILES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AMTProcessConInAvailabilityHook,"
+    Parent  = "ProcessConInAvailability,"
+    Help  = "AMT hook into TSE for TSE specific functions "
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AMTBypassPasswordCheck,"
+    Parent  = "ProcessConInAvailabilityHook,"
+    Priority  = 0
+    InvokeOrder = AfterParent
+End
+
+#TOKEN
+#    Name  = "AMT_SMIFLASH_LIB"
+#    Value  = "$(BUILD_DIR)\AmtSetup.lib"
+#    TokenType = Expression
+#    TargetMAK = Yes
+#End
+
+ELINK
+    Name  = "gEfiHeciProtocolGuid"
+    Parent  = "ADDITIONAL_AMITSE_Protocols"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gDxePlatformAmtPolicyGuid"
+    Parent  = "ADDITIONAL_AMITSE_Guid"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gEfiAlertStandardFormatProtocolGuid"
+    Parent  = "ADDITIONAL_AMITSE_Protocols"
+    InvokeOrder = AfterParent
+End

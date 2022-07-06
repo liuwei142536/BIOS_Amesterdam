@@ -1,0 +1,51 @@
+TOKEN
+    Name  = "BaseCryptLibOnProtocolPpi_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling BaseCryptLibOnProtocolPpi support in the project"
+    TokenType = Boolean
+    Master = Yes
+    TargetMAK = Yes
+    Token = "APTIOV_TOOLS_VERSION" ">=" "37"
+End
+
+INFComponent
+    Name  = "DxeCryptLibOnProtocolPpi"
+    File  = "DxeCryptLib.inf"
+    Package  = "CryptoPkg"
+	Arch  = "IA32 X64 IPF ARM"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+     Name  = "PeiCryptLibOnProtcolPpi"
+    File  = "PeiCryptLib.inf"
+    Package  = "CryptoPkg"
+	Arch  = "IA32 X64 IPF ARM"
+   ModuleTypes  = "PEIM"
+End
+
+INFComponent
+    Name  = "SmmCryptLibOnProtcolPpi"
+    File  = "SmmCryptLib.inf"
+    Package  = "CryptoPkg"
+	Arch  = "IA32 X64 IPF ARM"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+    Class  = "BaseCryptLibOnProtocolPpi"
+    Instance  = "CryptoPkg.DxeCryptLibOnProtocolPpi"
+    ModuleTypes = "DXE_DRIVER DXE_CORE UEFI_APPLICATION UEFI_DRIVER"
+End
+
+LibraryMapping
+    Class  = "BaseCryptLibOnProtocolPpi"
+    Instance  = "CryptoPkg.PeiCryptLibOnProtcolPpi"
+    ModuleTypes = "PEIM"
+End
+
+LibraryMapping
+    Class  = "BaseCryptLibOnProtocolPpi"
+    Instance  = "CryptoPkg.SmmCryptLibOnProtcolPpi"
+    ModuleTypes = "DXE_SMM_DRIVER"
+End

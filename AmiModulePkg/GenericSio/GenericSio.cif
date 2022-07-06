@@ -1,0 +1,27 @@
+<component>
+	name = "GenericSio"
+	category = eModule
+	LocalRoot = "AmiModulePkg\GenericSio\"
+	RefName = "AmiModulePkg.GenericSio"
+[INF]
+"SioDynamicSetup.inf"
+"SioDxeInit.inf"
+"GenericSio.inf"
+"SmmGenericSio.inf"
+"SioBdsPlugin.inf"
+[files]
+"GenericSio.sdl"	
+"GenericSio.chm"	
+"GenericSio.sd"	
+[parts]
+"GenericIoAsl"
+"SioStaticSetup"
+"AmiModulePkg.SioHeaders"
+"AmiModulePkg.SioLibraryInstances"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_45"
+AmiModulePkg.AmiBoardInfo >= "SS: AptioV;$/AptioV/Source/Modules/BoardInfo;BoardInfo_04b"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_14"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_18"
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;AmiTse_2_17_1249"
+<endComponent>

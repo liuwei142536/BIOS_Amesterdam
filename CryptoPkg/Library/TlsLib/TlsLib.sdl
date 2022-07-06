@@ -1,0 +1,35 @@
+TOKEN
+    Name  = "TLS_LIB_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable TlsLib support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+INFComponent
+    Name  = "TlsLib"
+    File  = "TlsLib.inf"
+    Package  = "CryptoPkg"
+    PreProcess = Yes
+End
+
+INFComponent
+    Name  = "TlsLibNull"
+    File  = "..\TlsLibNull\TlsLibNull.inf"
+    Package  = "CryptoPkg"
+    PreProcess = Yes
+End
+
+LibraryMapping
+    Class  = "TlsLib"
+    Instance  = "CryptoPkg.TlsLib"
+    ModuleTypes = "DXE_DRIVER DXE_CORE UEFI_APPLICATION UEFI_DRIVER"
+End
+
+LibraryMapping
+    Class  = "TlsLib"
+    Instance  = "CryptoPkg.TlsLibNull"
+    ModuleTypes = "PEIM DXE_SMM_DRIVER"
+End

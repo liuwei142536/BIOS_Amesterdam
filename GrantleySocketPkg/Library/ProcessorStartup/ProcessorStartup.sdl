@@ -1,0 +1,145 @@
+
+PATH
+	Name  = "GRANTLEY_PROCESSOR_STARTUP_PATH"
+End
+
+TOKEN
+   Name  = "CAR_BASE_ADDRESS"
+   Value  = "0xfe100000"
+   Help  = "DO NOT CHANGE THIS VALUE.\Cache-as-RAM physical base location"
+   TokenType = Integer
+   TargetEQU = Yes
+   TargetH = Yes
+End
+
+TOKEN
+   Name  = "CAR_TOTAL_SIZE"
+   Value  = "0x100000"
+   Help  = "Total Cache-as-RAM size available (in bytes)"
+   TokenType = Integer
+   TargetEQU = Yes
+   TargetH = Yes
+End
+
+PcdMapping
+    Name  = "PcdTemporaryRamBase"
+    GuidSpace  = "gEfiCpuTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(CAR_BASE_ADDRESS)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdTemporaryRamSize"
+    GuidSpace  = "gEfiCpuTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(CAR_TOTAL_SIZE)"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartup.asm"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartupChipset.asm"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartupCore.asm"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartupOem.asm"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartupUncore.asm"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/Flat32.inc"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartupPlatform.inc"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartupChipset.inc"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartup.inc"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(GRANTLEY_PROCESSOR_STARTUP_PATH)/Ia32/ProcessorStartupUncore.inc"
+    Parent  = "SEC_STARTUP_SRC"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gCpuUncoreTokenSpaceGuid.PcdFlashSecCacheRegionBase"
+    Parent  = "SEC_STARTUP_PCDS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gCpuUncoreTokenSpaceGuid.PcdFlashSecCacheRegionSize"
+    Parent  = "SEC_STARTUP_PCDS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "MdePkg/MdePkg.dec"
+    Parent  = "SEC_STARTUP_PKG"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec"
+    Parent  = "SEC_STARTUP_PKG"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "GrantleySocketPkg/SocketPkg.dec"
+    Parent  = "SEC_STARTUP_PKG"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SecOemHookLib"
+    Parent  = "SEC_STARTUP_LIB_CLASSES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "_ProcessorStartup"
+    Parent  = "SecPlatformLibEntry"
+    InvokeOrder = AfterParent
+End
+

@@ -1,0 +1,202 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//**********************************************************************
+// $Header: /Alaska/BIN/Modules/ACPI/Template/Board/ACPI.sd 19    12/06/10 4:18p Oleksiyy $
+//
+// $Revision: 19 $
+//
+// $Date: 12/06/10 4:18p $
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:	ACPI.sd
+//
+// Description:	ACPI Form Template
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+
+#ifdef SETUP_DATA_DEFINITION
+/***********************************************************/
+// Put NVRAM data definitions here.
+// For example: UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SETUP_DATA fields.
+/***********************************************************/
+    UINT8   AcpiAuto;
+    UINT16  AcpiSleepState;
+#if AMI_SIO_MINOR_VERSION < 11
+    UINT8   AcpiLockLegacyRes;
+#endif
+    UINT8   AcpiHibernate;
+    UINT8   S3ResumeVideoRepost;
+    UINT8   ForceToAcpi1;
+#endif
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+#define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+
+        #define ACPI_CHECKBOX_ACPIAUTO\
+				checkbox varid = SETUP_DATA.AcpiAuto,\
+					prompt = STRING_TOKEN(STR_ACPI_AUTO_PROMPT),\
+					help = STRING_TOKEN(STR_ACPI_AUTO_HELP),\
+					flags = 0,\
+					default = DEFAULT_AUTO_ACPI,\
+					default = DEFAULT_AUTO_ACPI, defaultstore = AmiMfgDefault,\
+				endcheckbox;
+        #define ACPI_CHECKBOX_ACPIHIBERNATE\
+				checkbox varid = SETUP_DATA.AcpiHibernate,\
+					prompt = STRING_TOKEN(STR_ACPI_S4_PROMPT),\
+					help = STRING_TOKEN(STR_ACPI_S4_HELP),\
+					default = DEFAULT_SS4,\
+					default = DEFAULT_SS4, defaultstore = AmiMfgDefault,\
+				endcheckbox;
+#if A_S3 == 1
+#define S3_STRING option text = STRING_TOKEN(STR_ACPI_SLEEP_S3), value = 2, flags = RESET_REQUIRED; default = 2, default = 2, defaultstore = AmiMfgDefault,
+#else 
+#define S3_STRING 
+#endif
+
+#if A_S1 == 1
+#if A_S3 == 1
+#define S1_STRING option text = STRING_TOKEN(STR_ACPI_SLEEP_S1), value = 1, flags = RESET_REQUIRED;
+#else 
+#define S1_STRING option text = STRING_TOKEN(STR_ACPI_SLEEP_S1), value = 1, flags = RESET_REQUIRED; default = 1, default = 1, defaultstore = AmiMfgDefault,
+#endif
+#else
+#define S1_STRING 
+#endif
+
+#if (A_S1 == 0) && (A_S3 == 0)
+#define S0_STRING option text = STRING_TOKEN(STR_ACPI_SLEEP_NO), value = 0, flags = RESET_REQUIRED; default = 0, default = 0, defaultstore = AmiMfgDefault,
+#else
+#define S0_STRING option text = STRING_TOKEN(STR_ACPI_SLEEP_NO), value = 0, flags = RESET_REQUIRED;
+#endif
+
+        #define ACPI_ONEOF_ACPISLEEPSTATE\
+				oneof varid  = SETUP_DATA.AcpiSleepState,\
+					prompt = STRING_TOKEN(STR_ACPI_SLEEP_PROMPT),\
+					help = STRING_TOKEN(STR_ACPI_SLEEP_HELP),\
+					S0_STRING\
+					S1_STRING\
+					S3_STRING\
+				endoneof;
+	#if AMI_SIO_MINOR_VERSION < 11
+    #if LOCK_LEGACY_RES_SETUP_ENABLE == 1
+        #define ACPI_CHECKBOX_ACPILOCKLEGACYRES\
+				checkbox varid = SETUP_DATA.AcpiLockLegacyRes,\
+					prompt = STRING_TOKEN(STR_ACPI_LOCK_LEGACY_DEV_PROMPT),\
+					help = STRING_TOKEN(STR_ACPI_LOCK_LEGACY_DEV_HELP),\
+					flags = RESET_REQUIRED,\
+					default = DEFAULT_ACPI_LOCK_LEGACY_DEV,\
+					default = DEFAULT_ACPI_LOCK_LEGACY_DEV, defaultstore = AmiMfgDefault,\
+				endcheckbox;
+    #else
+        #define ACPI_CHECKBOX_ACPILOCKLEGACYRES
+    #endif
+    #endif
+    #if S3_VIDEO_REPOST_SUPPORT == 1
+        #define ACPI_ONEOF_S3RESUMEVIDEOREPOST\
+				oneof varid  = SETUP_DATA.S3ResumeVideoRepost,\
+					prompt = STRING_TOKEN(STR_S3_VIDEO_REPOST_PROMPT),\
+					help = STRING_TOKEN(STR_S3_VIDEO_REPOST_HELP),\
+					option text = STRING_TOKEN(STR_ACPI_DISABLED), value = 0, flags = RESET_REQUIRED;\
+				    option text = STRING_TOKEN(STR_ACPI_ENABLED), value = 1, flags = RESET_REQUIRED;\
+				    default = 0, default = 0, defaultstore = AmiMfgDefault,\
+				endoneof;
+    #else
+        #define ACPI_ONEOF_S3RESUMEVIDEOREPOST
+    #endif
+
+#endif //#ifdef CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+
+    ACPI_CHECKBOX_ACPIAUTO
+    ACPI_CHECKBOX_ACPIHIBERNATE
+    ACPI_ONEOF_ACPISLEEPSTATE
+#if AMI_SIO_MINOR_VERSION < 11
+    ACPI_CHECKBOX_ACPILOCKLEGACYRES
+#endif
+    ACPI_ONEOF_S3RESUMEVIDEOREPOST
+
+#endif //#ifdef CONTROLS_WITH_DEFAULTS
+
+#ifdef ADVANCED_FORM_SET
+    #ifndef SUPPRESS_GRAYOUT_ENDIF //old Core
+    #define SUPPRESS_GRAYOUT_ENDIF endif;
+    #endif
+	#ifdef FORM_SET_ITEM
+	// Define controls to be added to the main page of the formset
+	#endif
+
+	#ifdef FORM_SET_GOTO
+	// Define goto commands for the forms defined in this file
+		goto ACPI_FORM_ID, 
+			prompt = STRING_TOKEN(STR_ACPI_FORM),
+			help = STRING_TOKEN(STR_ACPI_FORM_HELP);
+	#endif
+
+	#ifdef FORM_SET_FORM
+	// Define forms
+        #ifndef ACPI_FORM_MAIN
+        #define ACPI_FORM_MAIN
+
+		    form formid = AUTO_ID(ACPI_FORM_ID),
+			    title = STRING_TOKEN(STR_ACPI_FORM);
+            SUBTITLE(STRING_TOKEN(STR_ACPI_FORM))
+            SEPARATOR
+        
+			    grayoutif ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_USER;
+                    ACPI_CHECKBOX_ACPIAUTO
+			    endif;
+
+			    SEPARATOR
+			    suppressif ideqval SETUP_DATA.AcpiAuto == 0x1;
+			    grayoutif ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_USER;
+#if (A_S4 == 1)
+                    ACPI_CHECKBOX_ACPIHIBERNATE
+#endif
+#if (A_S1 == 1) || (A_S3 == 1)
+                    ACPI_ONEOF_ACPISLEEPSTATE
+#endif
+#if AMI_SIO_MINOR_VERSION < 11
+                    ACPI_CHECKBOX_ACPILOCKLEGACYRES
+#endif
+                    ACPI_ONEOF_S3RESUMEVIDEOREPOST
+
+			    SUPPRESS_GRAYOUT_ENDIF
+		    endform;  // ACPI_FORM_ID
+        #endif // ACPI_FORM_MAIN
+	#endif  // FORM_SET_FORM
+
+#endif  // ADVANCED_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

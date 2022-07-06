@@ -1,0 +1,9 @@
+TOKEN
+	Name  = "RAS_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Ras support in the project"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+    Master = Yes
+End

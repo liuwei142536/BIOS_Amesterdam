@@ -1,0 +1,21 @@
+<component>
+	name = "ProcessorStartup"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Library\ProcessorStartup\"
+	RefName = "GrantleySocketPkg.ProcessorStartup"
+[inf]
+"ProcessorStartup.inf"
+[files]
+"ProcessorStartup.sdl"
+"Ia32/Flat32.asm"
+"Ia32/ProcessorStartup.asm"
+"Ia32/ProcessorStartupChipset.asm"
+"Ia32/ProcessorStartupCore.asm"
+"Ia32/ProcessorStartupOem.asm"
+"Ia32/ProcessorStartupUncore.asm"
+"Ia32/Flat32.inc"
+"Ia32/ProcessorStartupPlatform.inc"
+"Ia32/ProcessorStartupChipset.inc"
+"Ia32/ProcessorStartup.inc"
+"Ia32/ProcessorStartupUncore.inc"
+<endComponent>

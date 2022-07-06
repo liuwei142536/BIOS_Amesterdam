@@ -1,0 +1,763 @@
+﻿//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 1999 - 2014 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   EventLogSetupStrings.uni
+// 
+// Abstract:
+// 
+//   String definitions for the event log screen
+// 
+// Revision History:
+// 
+// --*/
+
+/=#
+
+#langdef   en-US "English"
+#langdef   x-AMI "AmiMappingLanguage"
+#langdef uqi "UQI"
+
+//
+// Event Log
+//
+#string STR_ELOG_FORM_TITLE             #language en-US "Runtime Error Logging"   //AptioV server override: #language en-US "System Event Log"
+
+#string STR_ELOG_MAIN_SCREEN_TITLE      #language en-US "Runtime Error log Main Screen "  //AptioV server override: #language en-US "System Event Main Screen"
+#string STR_ELOG_FORM_HELP              #language en-US  "Press <Enter> to view or change the runtime error log configuration." //AptioV server override: #language en-US "Press <Enter> to view or change the event log configuration."
+
+#string STR_MCBANK_INJECTION_PROMPT     #language en-US "McBankErrorInjectionSupport "
+                                        #language x-AMI "EVLG000"         
+#string STR_MCBANK_INJECTION_HELP       #language en-US "Enables or Disables McBank Error Injection Support."
+
+#string STR_MCBANK_CLEARERROR_PROMPT     #language en-US "Clear McBankErrors "
+                                         #language x-AMI "EVLG001"       
+#string STR_MCBANK_CLEARERROR_HELP       #language en-US "Enables or Disables clearing MCBank erros on warm reset."
+
+// CMCI not supported in Grantley (HSD s4168862)
+//#string STR_CMCI_PROMPT                 #language en-US "CMCI "
+//#string STR_CMCI_HELP                   #language en-US " Enables or Disables CMCI generation Support."
+
+#string STR_WHEA_FORM_TITLE             #language en-US "Whea Settings : "
+                                        #language x-AMI "EVLG02E"  
+#string STR_WHEA_FORM_HELP              #language en-US  "Press <Enter> to view or change the WHEA configuration."
+
+#string STR_IIO_ERR_FORM_TITLE             #language en-US "IIO Error Enable : "
+                                           #language x-AMI "EVLG02F"  
+#string STR_IIO_ERR_FORM_HELP              #language en-US  "Press <Enter> to view or change the IIO errors enabling options."
+
+#string STR_PROC_ERR_FORM_TITLE            #language en-US "Processor Error Enabling : "
+                                           #language x-AMI "EVLG030"  
+#string STR_PROC_ERR_FORM_HELP             #language en-US  "Press <Enter> to view or change the Processor errors enabling options."
+
+#string STR_QPI_ERR_FORM_TITLE             #language en-US "QPI Error Enabling : "
+                                           #language x-AMI "EVLG031"  
+#string STR_QPI_ERR_FORM_HELP              #language en-US  "Press <Enter> to view or change the QPI errors enabling options."
+
+#string STR_MEM_ERR_FORM_TITLE             #language en-US "Memory Error Enabling : "
+                                           #language x-AMI "EVLG032"  
+#string STR_MEM_ERR_FORM_HELP              #language en-US  "Press <Enter> to view or change the Memory errors enabling options."
+
+#string STR_PCH_ERR_FORM_TITLE             #language en-US "PCH Error Enabling : "
+                                           #language x-AMI "EVLG033"  
+#string STR_PCH_ERR_FORM_HELP              #language en-US  "Press <Enter> to view or change the PCH errors enabling options."
+
+#string STR_PCI_ERR_FORM_TITLE             #language en-US "PCI/PCI Error Enabling : "
+                                           #language x-AMI "EVLG034"  
+#string STR_PCI_ERR_FORM_HELP              #language en-US  "Press <Enter> to view or change the PCH errors enabling options."
+
+#string STR_IRPP_ERR_FORM_TITLE             #language en-US "IIO Coherency Interface Error Enable : "
+#string STR_IRPP_ERR_FORM_HELP              #language en-US  "Press <Enter> to view or change the Coherency errors enabling options."
+
+#string STR_LOG_IRP0_PARITY_ERROR_PROMPT #language en-US "IIO IRP0 protocol parity error"
+                                         #language x-AMI "EVLG003"       
+#string STR_LOG_IRP1_PARITY_ERROR_PROMPT #language en-US "IIO IRP1 protocol parity error"
+                                         #language x-AMI "EVLG004"       
+#string STR_LOG_IRP_PARITY_ERROR_HELP    #language en-US "Enable or disable Coherent Interface protocol IIO  parity error reporting"
+
+#string STR_LOG_IRP0_QTOVERFLOW_ERROR_PROMPT #language en-US "IIO IRP0 protocol qt overflow underflow error"
+                                             #language x-AMI "EVLG035"  
+#string STR_LOG_IRP1_QTOVERFLOW_ERROR_PROMPT #language en-US "IIO IRP1 protocol qt overflow underflow error"
+                                            #language x-AMI "EVLG036"  
+#string STR_LOG_IRP_QTOVERFLOW_ERROR_HELP   #language en-US "Enable or disable IIO Coherent Interface protocol queue table overflow or underflow error reporting"
+
+#string STR_LOG_IRP0_UNEXPRSP_ERROR_PROMPT #language en-US "IIO IRP0 protocol rcvd unexprsp"
+                                           #language x-AMI "EVLG005"
+#string STR_LOG_IRP1_UNEXPRSP_ERROR_PROMPT #language en-US "IIO IRP1 protocol rcvd unexprsp"
+                                           #language x-AMI "EVLG006"
+#string STR_LOG_IRP_UNEXPRSP_ERROR_HELP   #language en-US "Enable or disable IIO Coherent Interface protocol layer received unexpected response or completion error reporting"
+
+#string STR_LOG_IRP0_UNALIGNEDACC_ERROR_PROMPT #language en-US "IIO IRP0 csr acc 32b unaligned"
+                                               #language x-AMI "EVLG007"
+#string STR_LOG_IRP1_UNALIGNEDACC_ERROR_PROMPT #language en-US "IIO IRP1 csr acc 32b unaligned"
+                                               #language x-AMI "EVLG008"
+#string STR_LOG_IRP_UNALIGNEDACC_ERROR_HELP    #language en-US "Enable or disable IIO Coherent Interface CSR Access Crossing 32-bit Boundary error reporting"
+
+#string STR_LOG_IRP0_UNCECC_ERROR_PROMPT #language en-US "IIO IRP0 wrcache uncecc error"
+                                         #language x-AMI "EVLG009"    
+#string STR_LOG_IRP1_UNCECC_ERROR_PROMPT #language en-US "IIO IRP1 wrcache uncecc error"
+                                         #language x-AMI "EVLG00a"    
+#string STR_LOG_IRP_UNCECC_ERROR_HELP    #language en-US "Enable or disable IIO Coherent Interface Write Cache Un-correctable ECC error reporting"
+
+#string STR_LOG_IRP0_RCVDPOISON_ERROR_PROMPT #language en-US "IIO IRP0 protocol rcvd poison error"
+											 #language x-AMI "EVLG00B"
+#string STR_LOG_IRP1_RCVDPOISON_ERROR_PROMPT #language en-US "IIO IRP1 protocol rcvd poison error"
+                                             #language x-AMI "EVLG00C"
+#string STR_LOG_IRP_RCVDPOISON_ERROR_HELP    #language en-US "Enable or disable IIO Coherent Interface Protocol Layer Received Poisoned Packet error reporting"
+
+#string STR_LOG_IRP0_CRRECC_ERROR_PROMPT #language en-US "IIO IRP0 wrcache correcc error"
+                                         #language x-AMI "EVLG00D"    
+#string STR_LOG_IRP1_CRRECC_ERROR_PROMPT #language en-US "IIO IRP1 wrcache correcc error"
+                                         #language x-AMI "EVLG00E"    
+#string STR_LOG_IRP_CRRECC_ERROR_HELP    #language en-US "Enable or disable IIO Coherent Interface Write Cache Correctable ECC error reporting"
+
+#string STR_EVENT_LOGGING_PROMPT        #language en-US "Event Logging"
+#string STR_EVENT_LOGGING_HELP          #language en-US  "Enable or disable logging of non-ECC events."
+
+#string STR_ECC_EVENT_LOGGING_PROMPT    #language en-US "ECC Event Logging"
+#string STR_ECC_EVENT_LOGGING_HELP      #language en-US  "Enable or disable logging of ECC events."
+
+#string STR_ERROR_REPORTING_PROMPT      #language en-US "Error Reporting (not logging)"
+                                        #language x-AMI "EVLG00F"    
+#string STR_ERROR_REPORTING_HELP        #language en-US "Enable or disable reporting of FSB/FBD errors.  Note MRC non-A0 BNB enables all FBD."
+
+#string STR_SYSTEM_ERRORS_PROMPT           #language en-US "System Errors"
+                                           #language x-AMI "EVLG010"    
+#string STR_SYSTEM_ERRORS_HELP             #language en-US " System Error enabling and logging setup option. "
+
+#string STR_ERROR_DISABLE               #language en-US "Error Disable"
+#string STR_ERROR_ENABLE                #language en-US "Error Enable"
+#string STR_SKIP_ERRLOG_DRIVER          #language en-US "Skip Error Enabling and Disabling"
+
+#string STR_WHEA_SUPPORT_PROMPT			#language en-US "WHEA Support"
+                                        #language x-AMI "EVLG011"    
+#string STR_WHEA_SUPPORT_HELP			#language en-US "Enable or disable the WHEA support" 
+
+#string STR_WHEA_ACPI5_SUPPORT_PROMPT   #language en-US "WHEA Error Injection 5.0 Extension"
+                                        #language x-AMI "EVLG012"    
+#string STR_WHEA_ACPI5_SUPPORT_HELP     #language en-US "Whea EINJ ACPI 5.0 support for set error type with address and vendor extensions."
+
+#string STR_WHEA_FFM_LOG_PROMPT			#language en-US "WHEA FFM Logging"
+                                        #language x-AMI "EVLG013"    
+#string STR_WHEA_FFM_LOG_HELP			#language en-US "Enable/Disable Whea FFM logging of errors."
+
+#string STR_WHEA_UEFI_REV_PROMPT        #language en-US "Whea UEFI Revision"
+                                        #language x-AMI "EVLG014"    
+#string STR_WHEA_UEFI_REV_HELP          #language en-US "UEFI revision of Whea error format."
+
+#string STR_PCIE_EINJ_PROMPT			#language en-US "WHEA PCIe Error Injection"
+                                        #language x-AMI "EVLG015"    
+#string STR_PCIE_EINJ_HELP			    #language en-US "Enable/Disable Whea PCIe Error Injection"
+
+#string STR_PCIE_EINJAT_PROMPT			#language en-US "WHEA PCIe EInj Action Table"
+                                        #language x-AMI "EVLG016"    
+#string STR_PCIE_EINJAT_HELP			#language en-US "Use Action Table for Whea PCIe Error Injection"
+
+
+#string STR_UEFI22                       #language en-US "UEFI 2.2"
+#string STR_UEFI23                       #language en-US "UEFI 2.3.1"
+
+#string STR_CORECONSUME                 #language en-US "CoreConsume"
+#string STR_PATROLSCRUB                 #language en-US "PatrolScrubber"
+#string STR_TRIGGERACTION               #language en-US "TriggerAction/DirectRead"
+
+#string STR_FATAL_ERRORS_PROMPT         #language en-US "Fatal Error Enable"
+                                        #language x-AMI "EVLG017"    
+#string STR_FATAL_ERRORS_HELP           #language en-US "Enable/Disable PCIe Fatal errors."
+
+#string STR_UR_ERRORS_PROMPT            #language en-US "Uncorrected Error Enable "
+                                        #language x-AMI "EVLG018"    
+#string STR_UR_ERRORS_HELP              #language en-US "Enable/Disable PCIe Uncorrectable errors."
+
+#string STR_COR_ERRORS_PROMPT           #language en-US "Corrected Error Enable "
+                                        #language x-AMI "EVLG019"    
+#string STR_COR_ERRORS_HELP             #language en-US "Enable/Disable PCIe Correctable errors."
+
+#string STR_PCIE_CERR_THRESHOLD_PROMPT  #language en-US "PCIe Correctable error threshold"
+#string STR_PCIE_CERR_THRESHOLD_HELP    #language en-US "PCIe CE threshold(1-255), 0-No threshold."
+
+#string STR_ERROR_PIN_LOG_PROMPT        #language en-US "Error pin Programming for IIO"
+                                        #language x-AMI "EVLG01A"    
+#string STR_ERROR_PIN_LOG_HELP          #language en-US "Error pin Programming"
+
+#string STR_VTDERROR_EN_PROMPT          #language en-US "Vtd Errors"
+#string STR_VTDERROR_EN_HELP            #language en-US "Enable/Disable Vtd errors"
+
+#string STR_MISCERROR_EN_PROMPT         #language en-US "Misc Errors"
+#string STR_MISCERROR_EN_HELP           #language en-US "Enable/Disable Miscellenous errors"
+
+#string STR_IIOCORE_ERROR_EN_PROMPT     #language en-US "IIO core Errors"
+#string STR_IIOCORE_ERROR_EN_HELP       #language en-US "Enable/Disable IIO core errors"
+
+#string STR_DMAERROR_EN_PROMPT          #language en-US "DMA Errors"
+#string STR_DMAERROR_EN_HELP            #language en-US "Enable/Disable DMA errors"
+
+#string STR_DMIERROR_EN_PROMPT          #language en-US "DMI Errors"
+#string STR_DMIERROR_EN_HELP            #language en-US "Enable/Disable DMI errors"
+
+#string STR_CIERROR_EN_PROMPT           #language en-US "Coherency Interface Errors"
+#string STR_CIERROR_EN_HELP             #language en-US "Enable/Disable Coherency Interface errors"
+
+//#string STR_IOMCA_EN_PROMPT             #language en-US "Enable IOMCA on IIO"
+//                                        #language x-AMI "EVLG01B"    
+//#string STR_IOMCA_EN_HELP               #language en-US "Enable IIO to send Machine Check Error(MCE) on Non Fatal and Fatal events. Note: This disables inband(SMI/PMI) and Pin based IIO error events"
+
+#string STR_EMCALOG_EN_PROMPT           #language en-US "EMCA Logging Support"
+                                        #language x-AMI "EVLG01C"    
+#string STR_EMCALOG_EN_HELP             #language en-US "Enable/Disable EMCA Logging"
+
+#string STR_EMCAFORCE_OPTIN_PROMPT      #language en-US "Ignore OS EMCA Opt-in"
+                                        #language x-AMI "EVLG01D"    
+#string STR_EMCAFORCE_OPTIN_HELP        #language en-US "Enable/Disable Ignore OS EMCA Opt-in and log"
+
+#string STR_EMCACSMI_EN_PROMPT          #language en-US "EMCA CMCI-SMI Morphing"
+                                        #language x-AMI "EVLG01E"    
+#string STR_EMCACSMI_EN_HELP            #language en-US "Enable/Disable EMCA CSMI"
+#string STR_MCESMIMORPHING_EN_PROMPT    #language en-US "EMCA MCE-SMI Morphing"
+					 #language x-AMI "EVLG002" 
+#string STR_MCESMIMORPHING_EN_HELP      #language en-US "Enable/Disable EMCA MSMI"
+
+#string STR_UBOX_UMC_SMI_EN_PROMPT      #language en-US "UBOX UMC TO SMI ENABLE"
+					 #language x-AMI "EVLG03B"
+#string STR_UBOX_UMC_SMI_EN_HELP        #language en-US "Enable/Disable UBOX UMC SMI SIGNALLING"
+
+#string STR_CLOAKING_EN_PROMPT          #language en-US "Enable Cloaking"
+#string STR_CLOAKING_EN_HELP            #language en-US "Enable / Disable Corrected Error Cloaking"
+
+#string STR_NOINBAND                    #language en-US "None"
+#string STR_SMIPMI                      #language en-US "SMI"
+#string STR_ERR0                        #language en-US "Error0"
+#string STR_ERR1                        #language en-US "Error1"
+#string STR_ERR2                        #language en-US "Error2"
+#string STR_MCERR                       #language en-US "MCERR"
+
+#string STR_CLEAR_ALL_EVENT_LOGS_PROMPT #language en-US "Clear All Event Logs"
+#string STR_CLEAR_ALL_EVENT_LOGS_HELP   #language en-US "Erase all logged events from non-volatile storage."
+
+#string STR_LOAD_SMM_ERROR_LOG_PROMPT   #language en-US "Load SMM Error Logging Module"
+#string STR_LOAD_SMM_ERROR_LOG_HELP     #language en-US ""
+
+#string STR_PCIEX_LOG_PROMPT            #language en-US "PCI-Ex Error Enable"
+                                        #language x-AMI "EVLG01F"    
+#string STR_PCIEX_LOG_HELP              #language en-US ""
+
+#string STR_PLATFORM_LOG_PROMPT         #language en-US "Platform Errors"
+                                        #language x-AMI "EVLG020"    
+#string STR_PLATFORM_LOG_HELP           #language en-US ""
+
+#string STR_ENAB_SERR_PROP_PROMPT       #language en-US "Enable SERR propagation"
+                                        #language x-AMI "EVLG021"    
+#string STR_ENAB_SERR_PROP_HELP         #language en-US ""
+
+#string STR_ENAB_PERR_PROP_PROMPT       #language en-US "Enable PERR propagation"
+                                        #language x-AMI "EVLG022"  
+#string STR_ENAB_PERR_PROP_HELP         #language en-US ""
+
+#string STR_UNC_UNCORE_PROMPT           #language en-US "Uncorrected Errors enabling"
+                                        #language x-AMI "EVLG023"  
+#string STR_UNC_UNCORE_HELP             #language en-US "Enable/Disable Uncorrected Processor UnCore Errors "
+
+#string STR_COR_MEM_PROMPT              #language en-US "Memory corrected Error enbaling"
+                                        #language x-AMI "EVLG024"  
+#string STR_COR_MEM_HELP                #language en-US "Enable/ Disable Memory corrected Errors "
+
+#string STR_MCASMI_PROMPT               #language en-US "SMI on MCA"
+										#language x-AMI "EVLG025"  
+#string STR_MCASMI_HELP                 #language en-US "Enable/Disable Mca to SMI generation of Uncorrected Processor UnCore Errors"
+
+#string STR_UMCSMI_PROMPT               #language en-US "Generate SMI on local UMC"
+#string STR_UMCSMI_HELP                 #language en-US "Enable/disables SMI when MCA is set"
+
+#string STR_QPIFOSMI_PROMPT             #language en-US "SMI QPI Lane Failover "
+                                        #language x-AMI "EVLG026"  
+#string STR_QPIFOSMI_HELP               #language en-US "Enable/disables SMI when clock/data failover is set"
+
+// Aptio V Server Override Start- Unlocking the MSR 0x790 for the ErrorInjection to work from RAS tools
+#string STR_UNLOCK_MSR_PROMPT        	#language en-US "S/W Error Injection Support "
+                                        #language x-AMI "EVLG027"  
+#string STR_UNLOCK_MSR_HELP         	#language en-US "When Enabled S/W Error Injection is supported by unlocking MSR 0x790"
+// Aptio V Server Override End- Unlocking the MSR 0x790 for the ErrorInjection to work from RAS tools
+
+#string STR_MIRR_FAILOVER_SMI_PROMPT    #language en-US "Mirror FailOver Smi"
+                                        #language x-AMI "EVLG028"  
+#string STR_MIRR_FAILOVER_SMI_HELP      #language en-US "Enable/Disable Mirror FailOver SMI generation"
+
+#string STR_MIRR_FAILOVER_CMCI_PROMPT   #language en-US "Mirror FailOver CMCI"
+                                        #language x-AMI "EVLG029"  
+#string STR_MIRR_FAILOVER_CMCI_HELP     #language en-US "Enable/Disable Mirror FailOver CMCI generation"
+
+#string STR_LINK_FAILURE_SMI_PROMPT     #language en-US "Link Failure Smi"
+                                        #language x-AMI "EVLG02A"  
+#string STR_LINK_FAILURE_SMI_HELP       #language en-US "Enable/Disable Link Failure SMI generation"
+
+//#string STR_VIRAL_PROMPT				#language en-US "System QPI Viral"
+//#string STR_VIRAL_HELP					#language en-US "Enable/Disable System QPI Viral"
+
+#string STR_POISON_PROMPT		        #language en-US "System Poison "
+                                        #language x-AMI "EVLG02B"  
+#string STR_POISON_HELP			        #language en-US "Enable/Disable Core, Uncore and IIO Poison"
+
+//#string STR_LINK_FAILURE_CMCI_PROMPT     #language en-US "CMCI on VMSE Link Failure"
+//#string STR_LINK_FAILURE_CMCI_HELP       #language en-US "Enable/Disable Link Failure CMCI generation"
+
+#string STR_DDR_PARITY_SMI_PROMPT       #language en-US "SMI on DDR parity error"
+                                        #language x-AMI "EVLG038"  
+#string STR_DDR_PARITY_SMI_HELP         #language en-US "Enable/Disable Ddr parity error SMI generation"
+
+#string STR_DDR_PARITY_CMCI_PROMPT       #language en-US "CMCI on Ddr parity error"
+#string STR_DDR_PARITY_CMCI_HELP         #language en-US "Enable/Disable Ddr parity error CMCI generation"
+
+#string STR_NB_PERS_SMI_PROMPT          #language en-US "Smi on NB Persistent Error"
+                                        #language x-AMI "EVLG039"  
+#string STR_NB_PERS_SMI_HELP            #language en-US "Enable/Disable NB Persistent error SMI generation"
+
+#string STR_NB_PERS_CMCI_PROMPT          #language en-US "CMCI on NB Persistent"
+#string STR_NB_PERS_CMCI_HELP            #language en-US "Enable/Disable NB Persistent error CMCI generation"
+
+#string STR_SB_PERS_SMI_PROMPT          #language en-US "SMI on SB Persistent Error"
+                                        #language x-AMI "EVLG03A"  
+#string STR_SB_PERS_SMI_HELP            #language en-US "Enable/Disable SB Persistent error SMI generation"
+
+#string STR_SB_PERS_CMCI_PROMPT          #language en-US "CMCI on SB Persistent Error"
+#string STR_SB_PERS_CMCI_HELP            #language en-US "Enable/Disable SB Persistent error CMCI generation"
+
+#string STR_SMIMCA_PROMPT               #language en-US "Configure SMI / MCA delay"
+#string STR_SMIMCA_HELP                 #language en-US "Counter threshold for MCA to SMI delay"
+
+#string STR_PECIDN_ERROR_PROMPT         #language en-US "Down Stream PECI"
+                                        #language x-AMI "EVLG03C"
+#string STR_PECIDN_ERROR_HELP           #language en-US "Enable PCIe Down Stream PECI Write"
+
+#string STR_SPARE_PROMPT                #language en-US "Spare interrupt "
+                                        #language x-AMI "EVLG037"  
+#string STR_SPARE_HELP                  #language en-US "Select SMI/CMCI/ErrPin for spare interrupt"
+
+#string STR_SMI                         #language en-US "SMI "
+#string STR_CMCI                        #language en-US "CMCI"
+#string STR_ERRPIN                      #language en-US "Error Pin"
+#string STR_NONE                        #language en-US "None"
+
+#string STR_PCH_ERROR_PROMPT            #language en-US "PCH Error Enable"
+                                        #language x-AMI "EVLG02C"  
+#string STR_PCH_ERROR_HELP              #language en-US ""
+
+#string STR_IOH_ERROR_PROMPT            #language en-US "IIO Error Enable"
+                                        #language x-AMI "EVLG02D"  
+#string STR_IOH_ERROR_HELP              #language en-US ""
+
+#string STR_NO                          #language en-US  "No"
+#string STR_YES                         #language en-US "Yes"
+
+#string STR_MEM_SMI_THROTTLING_PROMPT   #language en-US "SMI Throttling"
+#string STR_MEM_SMI_THROTTLING_HELP     #language en-US "When set to Enable, the number of Corrected Memory Error SMIs is limited."
+
+
+// ***********************************************************************************
+// ***********************************************************************************
+// ***********************************************************************************
+// *************** ERROR SCREEN STRINGS FROM THIS POINT ON ***************************
+// ***********************************************************************************
+// ***********************************************************************************
+// ***********************************************************************************
+
+//
+// String definitions
+//
+#string STR_TITLE_IPMI_ERROR_SCREEN     #language en-US "IPMI Error Logging"
+#string STR_TITLE_ERROR_SCREEN          #language en-US "Error Logging"
+#string STR_TITLE_ERASE_ERROR_LOG       #language en-US "<< Erase Error Log >>"
+#string STR_TITLE_ERASE_ERROR_LOG_DESC  #language en-US "Press Enter to Clear The Current Error Log"
+#string STR_ERROR_MANAGER_TITLE         #language en-US "Error Manager"
+
+
+#string STR_BLANK                       #language en-US ""
+#string STR_RULER                       #language en-US "0        1         2         3         4         5         6         7         8"
+
+#string STR_COLUMN_TITLE_ERROR_SCREEN   #language en-US "DATE      TIME       ERROR CODE     SEVERITY"
+#string STR_DESCRIPTION_HEADER          #language en-US "DESCRIPTION                                       "
+#string STR_NO_ERROR_FOUND              #language en-US "No errors found."
+#string STR_NO_PROTOCOL_FOUND           #language en-US "Proper components not found."
+#string STR_SMBIOS_16_DESCRIPTION       #language en-US "DESCRIPTION                                       Smbios Error Code 0x16:  Error Log Erased"
+
+//
+// String for error code field
+//
+#string STR_ERROR_CODE_DESCRIPTION      #language en-US "The error code value identifies the error."
+
+//
+// String for Instance field
+//
+#string STR_INSTANCE_DESCRIPTION        #language en-US "The instance value identifies the component in error."
+
+
+//
+// Severity strings and their description
+//
+
+#string STR_ERROR_MINOR                 #language en-US "Minor"
+#string STR_ERROR_MAJOR                 #language en-US "Major"
+#string STR_ERROR_UNRECOVERED           #language en-US "Fatal"
+#string STR_ERROR_UNCONTAINED           #language en-US "Fatal"
+#string STR_ERROR_UNRECOGNIZED          #language en-US "Unrecognized"
+#string STR_ERROR_MINOR_DESCRIPTION     #language en-US "Minor severity do not require user intervention or stop the booting of the system."
+#string STR_ERROR_MAJOR_DESCRIPTION     #language en-US "Major severity requires user intervention but does not stop system boot."
+
+#string STR_ERROR_UNRECOVERED_DESCRIPTION         #language en-US "Fatal severity requires user intervention and prohibits system boot."
+#string STR_ERROR_UNCONTAINED_DESCRIPTION         #language en-US "Fatal severity requires user intervention and prohibits system boot."
+#string STR_ERROR_UNRECOGNIZED_DESCRIPTION        #language en-US "The error severity is not recognized."
+
+//
+// Strings for ClassSubClass.
+// The Class/Subclass is used as the "subject" of a "generic" error message.
+// A "Generic" error message is displayed when the IsSpecificToken is FALSE
+//
+
+#string STR_EFI_COMPUTING_UNIT_UNSPECIFIED        #language en-US "Unspecified processor"
+#string STR_EFI_COMPUTING_UNIT_HOST_PROCESSOR     #language en-US "Host processor"
+#string STR_EFI_COMPUTING_UNIT_FIRMWARE_PROCESSOR #language en-US "Firmware processor"
+#string STR_EFI_COMPUTING_UNIT_SERVICE_PROCESSOR  #language en-US "Service processor"
+#string STR_EFI_COMPUTING_UNIT_IO_PROCESSOR       #language en-US "IO processor"
+
+#string STR_EFI_COMPUTING_UNIT_CACHE    #language en-US "Cache"
+#string STR_EFI_COMPUTING_UNIT_MEMORY   #language en-US "Memory"
+#string STR_EFI_COMPUTING_UNIT_CHIPSET  #language en-US "Chipset"
+#string STR_EFI_PERIPHERAL_UNSPECIFIED  #language en-US "Unspecified peripheral"
+#string STR_EFI_PERIPHERAL_KEYBOARD     #language en-US "Keyboard"
+#string STR_EFI_PERIPHERAL_MOUSE        #language en-US "Mouse"
+
+#string STR_EFI_PERIPHERAL_LOCAL_CONSOLE          #language en-US "Local console"
+#string STR_EFI_PERIPHERAL_REMOTE_CONSOLE         #language en-US "Remote console"
+#string STR_EFI_PERIPHERAL_SERIAL_PORT            #language en-US "Serial port"
+#string STR_EFI_PERIPHERAL_PARALLEL_PORT          #language en-US "Parallel port"
+#string STR_EFI_PERIPHERAL_FIXED_MEDIA            #language en-US "Fixed media"
+#string STR_EFI_PERIPHERAL_REMOVABLE_MEDIA        #language en-US "Removable media"
+
+#string STR_EFI_PERIPHERAL_AUDIO_INPUT  #language en-US "Audio input"
+#string STR_EFI_PERIPHERAL_AUDIO_OUTPUT #language en-US "Audio output"
+#string STR_EFI_PERIPHERAL_LCD_DEVICE   #language en-US "LCD"
+#string STR_EFI_IO_BUS_UNSPECIFIED      #language en-US "Unspecified IO bus"
+#string STR_EFI_IO_BUS_PCI              #language en-US "PCI"
+#string STR_EFI_IO_BUS_USB              #language en-US "USB"
+#string STR_EFI_IO_BUS_IBA              #language en-US "IBA"
+#string STR_EFI_IO_BUS_AGP              #language en-US "AGP"
+#string STR_EFI_IO_BUS_PC_CARD          #language en-US "PC Card"
+#string STR_EFI_IO_BUS_LPC              #language en-US "LPC"
+#string STR_EFI_IO_BUS_SCSI             #language en-US "SCSI"
+#string STR_EFI_IO_BUS_ATA_ATAPI        #language en-US "ATA/ATAPI"
+#string STR_EFI_IO_BUS_SERIAL_ATA       #language en-US "Serial ATA"
+#string STR_EFI_IO_BUS_FC               #language en-US "Fiber Channel"
+#string STR_EFI_IO_BUS_IP_NETWORK       #language en-US "IP Network"
+#string STR_EFI_IO_BUS_SMBUS            #language en-US "SMBUS"
+#string STR_EFI_IO_BUS_I2C              #language en-US "I2C"
+#string STR_EFI_SOFTWARE_UNSPECIFIED    #language en-US "Unspecified software"
+#string STR_EFI_SOFTWARE_SEC            #language en-US "SEC"
+#string STR_EFI_SOFTWARE_PEI_CORE       #language en-US "PEI Core"
+#string STR_EFI_SOFTWARE_PEI_MODULE     #language en-US "PEI Module"
+#string STR_EFI_SOFTWARE_DXE_CORE       #language en-US "DXE Core"
+#string STR_EFI_SOFTWARE_DXE_BS_DRIVER  #language en-US "DXE BS driver"
+#string STR_EFI_SOFTWARE_DXE_RT_DRIVER  #language en-US "DXE RT driver"
+#string STR_EFI_SOFTWARE_SMM_DRIVER     #language en-US "SMM driver"
+#string STR_EFI_SOFTWARE_EFI_OS_LOADER  #language en-US "OS loader"
+#string STR_EFI_SOFTWARE_RT             #language en-US "Runtime"
+#string STR_EFI_SOFTWARE_AL             #language en-US "AfterLife"
+#string STR_EFI_SOFTWARE_EBC_EXCEPTION  #language en-US "EBC Exception"
+#string STR_EFI_SOFTWARE_IA32_EXCEPTION #language en-US "IA32 Exception"
+#string STR_EFI_SOFTWARE_IPF_EXCEPTION  #language en-US "Itanium(TM) Processor Exception"
+#string STR_EFI_SOFTWARE_PEI_SERVICE    #language en-US "PEI Service"
+#string STR_EFI_SOFTWARE_EFI_SECURITY   #language en-US "Password Security"
+
+#string STR_EFI_SOFTWARE_EFI_APPLICATION          #language en-US "EFI application"
+#string STR_EFI_SOFTWARE_EFI_BOOT_SERVICE         #language en-US "EFI Boot Service"
+#string STR_EFI_SOFTWARE_EFI_RUNTIME_SERVICE      #language en-US "EFI Runtime Service"
+#string STR_EFI_SOFTWARE_EFI_DXE_SERVICE          #language en-US "EFI DXE Service"
+
+//
+// "Generic" error operation strings 
+// These "generic" operation strings are used as verbs of the error message
+// A "Generic" error message is displayed when the IsSpecificToken is FALSE
+//
+
+#string STR_EC_NON_SPECIFIC             #language en-US "component has encountered a non specific error."
+#string STR_EC_DISABLED                 #language en-US "component has been disabled"
+#string STR_EC_NOT_SUPPORTED            #language en-US "component encountered a not-supported error."
+#string STR_EC_NOT_DETECTED             #language en-US "component was not detected."
+#string STR_EC_NOT_CONFIGURED           #language en-US "component was not configured."
+#string STR_EC_INVALID_TYPE             #language en-US "component encountered a invalid type error."
+#string STR_EC_INVALID_SPEED            #language en-US "component encountered an invalid speed error."
+#string STR_EC_INVALID_SIZE             #language en-US "component encountered a invalid size error."
+#string STR_EC_MISMATCH                 #language en-US "component encountered a mismatch error."
+#string STR_EC_TIMER_EXPIRED            #language en-US "component encountered a timer expired error."
+#string STR_EC_SELF_TEST                #language en-US "component encountered a self test error."
+#string STR_EC_INTERNAL                 #language en-US "component encountered an internal error."
+#string STR_EC_THERMAL                  #language en-US "component encountered a thermal error."
+#string STR_EC_LOW_VOLTAGE              #language en-US "component encountered a low voltage error."
+#string STR_EC_HIGH_VOLTAGE             #language en-US "component encountered a high voltage error."
+#string STR_EC_CACHE                    #language en-US "component encountered a cache error."
+#string STR_EC_MICROCODE_UPDATE         #language en-US "component encountered a  microcode update error."
+#string STR_EC_CORRECTABLE              #language en-US "component encountered correctable ECC errors."
+#string STR_EC_UNCORRECTABLE            #language en-US "component encountered un-correctable ECC errors."
+#string STR_EC_HARD_FAIL                #language en-US "component encountered a hard failure."
+#string STR_EC_SOFT_FAIL                #language en-US "component encountered a soft failure."
+#string STR_EC_COMM_ERROR               #language en-US "component encountered a communication error."
+#string STR_EC_SPD_FAIL                 #language en-US "component encountered a Serial Presence Detection (SPD) fail error."
+#string STR_EC_S3_RESUME_FAIL           #language en-US "component encountered S3 resume failed."
+#string STR_EC_UPDATE_FAIL              #language en-US "component encountered update failure."
+#string STR_EC_NONE_DETECTED            #language en-US "component encountered a None detected error."
+#string STR_EC_NONE_USEFUL              #language en-US "component encountered None useful error."
+#string STR_EC_INTERFACE_ERROR          #language en-US "component encountered an interface error."
+#string STR_EC_CONTROLLER_ERROR         #language en-US "component encountered a controller error."
+#string STR_EC_INPUT_ERROR              #language en-US "component encountered an input error."
+#string STR_EC_OUTPUT_ERROR             #language en-US "component encountered an output error."
+#string STR_EC_RESOURCE_CONFLICT        #language en-US "component encountered a resource conflict error."
+#string STR_EC_LOCKED                   #language en-US "component encountered a locked error."
+#string STR_EC_STUCK_KEY                #language en-US "component encountered a stuck key error."
+#string STR_EC_READ_ERROR               #language en-US "component encountered a read error."
+#string STR_EC_WRITE_ERROR              #language en-US "component encountered a write error."
+#string STR_EC_PERR                     #language en-US "component encountered a PERR error."
+#string STR_EC_SERR                     #language en-US "component encountered a SERR error."
+#string STR_EC_LOAD_ERROR               #language en-US "component encountered a load error."
+#string STR_EC_INVALID_PARAMETER        #language en-US "component encountered a invalid parameter error."
+#string STR_EC_UNSUPPORTED              #language en-US "component encountered a unsupported error."
+#string STR_EC_INVALID_BUFFER           #language en-US "component encountered a invalid buffer error"
+#string STR_EC_OUT_OF_RESOURCES         #language en-US "component encountered a OUT_OF_RESOURCES error."
+#string STR_EC_ABORTED                  #language en-US "component encountered a ABORTED error."
+#string STR_EC_ILLEGAL_SOFTWARE_STATE   #language en-US "component encountered a illegal software stateerror."
+#string STR_EC_ILLEGAL_HARDWARE_STATE   #language en-US "component encountered a illegal hardware state error."
+#string STR_EC_START_ERROR              #language en-US "component encountered a start error."
+#string STR_EC_BAD_DATE_TIME            #language en-US "component encountered bad date or time error."
+#string STR_EC_CFG_INVALID              #language en-US "component encountered invalid configuration."
+#string STR_EC_CFG_CLR_REQUEST          #language en-US "component encountered a request to clear configuration."
+#string STR_EC_CFG_DEFAULT              #language en-US "component has set configuration to default."
+#string STR_EC_PWD_INVALID              #language en-US "component had invalid password."
+#string STR_EC_PWD_CLR_REQUEST          #language en-US "component encountered password clear request."
+#string STR_EC_PWD_CLEARED              #language en-US "component password was cleared."
+#string STR_EC_EVENT_LOG_FULL           #language en-US "event log was full."
+#string STR_EC_DXE_CORRUPT              #language en-US "Unable to handoff to DXE as DXE core could not be found."
+#string STR_EC_NO_RECOVERY_CAPSULE      #language en-US "Unable to continue with crisis recovery because recovery capsule could not be found."
+#string STR_EC_LEG_OPROM_NO_SPACE       #language en-US "Not enough memory available to shadow a legacy option ROM."
+#string STR_EC_AUTHENTICATION_FAILED    #language en-US "component encountered a authentication failed error."
+#string STR_EC_SECURITY_COMPROMISED     #language en-US "component encountered a security compromised error."
+#string STR_EC_SECURITY_PASSWORD_FAILED #language en-US "component encountered a Password Failed error."
+#string STR_EC_CONFIGURATION_CLEARED    #language en-US "configuration cleared."
+#string STR_EC_SECURITY_VARIABLES_CORRUPTED          #language en-US "component encountered a security variable corrupted error."
+
+//
+// Strings for the ReportStatusCode extended data
+//
+#string STR_TBD                         #language en-US " TBD "
+#string STR_TRUE                        #language en-US " TRUE"
+#string STR_FALSE                       #language en-US " FALSE "
+#string STR_EC_MICROCODE_VERSION        #language en-US "Microcode version: "
+#string STR_EC_VOLTAGE                  #language en-US "Voltage: "
+#string STR_EC_THRESHOLD                #language en-US "Threshold: "
+#string STR_EC_TIMER_LIMIT              #language en-US "Timer limit: "
+#string STR_EC_INSTANCE                 #language en-US "Instance: "
+#string STR_EC_ATTRIBUTES               #language en-US "Attributes: "
+#string STR_EC_TEMPERATURE              #language en-US "Temperature: "
+#string STR_SW_DISABLED                 #language en-US "Disabled by software"
+#string STR_NO_SW_DISABLED              #language en-US "Not disabled by software"
+#string STR_EC_CPU_DISABLED_CAUSE       #language en-US "Processor disable cause: "
+#string STR_TYPE                        #language en-US "Type: "
+#string STR_EC_MISMATCH_SPEED           #language en-US "Speed mismatch"
+#string STR_EC_MISMATCH_FSB_SPEED       #language en-US "Front Side Bus speed mismatch"
+#string STR_EC_MISMATCH_FAMILY          #language en-US "Family mismatch"
+#string STR_EC_MISMATCH_MODEL           #language en-US "Model mismatch"
+#string STR_EC_MISMATCH_STEPPING        #language en-US "Stepping mismatch"
+#string STR_EC_MISMATCH_CACHE_SIZE      #language en-US "Cache size mismatch"
+#string STR_EC_MISMATCH_OEM1            #language en-US "OEM1 mismatch"
+#string STR_EC_MISMATCH_OEM2            #language en-US "OEM2 mismatch"
+#string STR_EC_MISMATCH_OEM3            #language en-US "OEM3 mismatch"
+#string STR_EC_MISMATCH_OEM4            #language en-US "OEM4 mismatch"
+#string STR_EC_SOFTWARE_DISABLED        #language en-US "Software Disabled: "
+#string STR_EC_CACHE_LEVEL              #language en-US "Cache level: "
+#string STR_EC_DATA_CACHE               #language en-US "Type: data cache."
+#string STR_EC_INSTR_CACHE              #language en-US "Type: instruction cache."
+#string STR_EC_DATA_INSTR_CACHE         #language en-US "Type: data and instruction cache."
+#string STR_EC_UNSPECIFIED_CACHE        #language en-US "Type: unspecified cache "
+#string STR_EC_GRANULARITY_OTHER        #language en-US "Granularity: other "
+#string STR_EC_GRANULARITY_UNKNOWN      #language en-US "Granularity: unknown"
+#string STR_EC_GRANULARITY_DEVICE       #language en-US "Granularity: device"
+#string STR_EC_GRANULARITY_PARTITION    #language en-US "Granularity: partition"
+#string STR_EC_OPERATION_OTHER          #language en-US "Operation: other"
+#string STR_EC_OPERATION_UNKNOWN        #language en-US "Operation: unknown"
+#string STR_EC_OPERATION_READ           #language en-US "Operation: read"
+#string STR_EC_OPERATION_WRITE          #language en-US "Operation: write"
+#string STR_EC_OPERATION_PARTIAL_WRITE  #language en-US "Operation: partial write"
+#string STR_EC_ADDRESS                  #language en-US "Address: "
+#string STR_EC_RESOLUTION               #language en-US "Resolution: "
+#string STR_CPU_CAUSE_NOT_DISABLED      #language en-US "Cause: not disabled "
+#string STR_CPU_CAUSE_INTERNAL_ERROR    #language en-US "Cause: internal error "
+#string STR_CPU_CAUSE_THERMAL_ERROR     #language en-US "Cause: thermal error "
+#string STR_CPU_CAUSE_SELFTEST_FAILURE  #language en-US "Cause: self test failure "
+#string STR_CPU_CAUSE_PREBOOT_TIMEOUT   #language en-US "Cause: pre-boot timeout "
+#string STR_CPU_CAUSE_FAILED_TO_START   #language en-US "Cause: failed to start "
+#string STR_CPU_CAUSE_CONFIG_ERROR      #language en-US "Cause: configuration error "
+#string STR_CPU_CAUSE_USER_SELECTION    #language en-US "Cause: user selection "
+#string STR_CPU_CAUSE_BY_ASSOCIATION    #language en-US "Cause: by association "
+#string STR_CPU_CAUSE_UNSPECIFIED       #language en-US "Cause: unspecified "
+#string STR_HANDLE                      #language en-US "Handle: "
+#string STR_DIMM_ARRAY                  #language en-US "DIMM Array: "
+#string STR_DIMM_DEVICE                 #language en-US "DIMM Device: "
+#string STR_DEVICE_HANDLE               #language en-US "Device handle: "
+#string STR_ROM_IMAGE_BASE              #language en-US "ROM image base: "
+#string STR_DEVICE_PATH                 #language en-US "Device path: "
+
+//
+// The following messages are specifically customized for the error.
+// CUSTOM error messages are displayed without concatenating of class/subclass
+//
+#string STR_EC_CORRECTABLE_CUSTOM       #language en-US "Correctable ECC error encountered.  Instance field specifies DIMM number."
+#string STR_EC_UNCORRECTABLE_CUSTOM     #language en-US "Uncorrectable ECC error encountered.  Instance field specifies DIMM number."
+
+#string STR_EC_AUTHENTICATION_FAILED_CUSTOM       #language en-US "System login retry limit exhausted.  System halted."
+#string STR_EC_SECURITY_COMPROMISED_CUSTOM        #language en-US "EFI Security variables have been compromised.  Power down system and set CMOS clear jumper."
+#string STR_EC_SECURITY_PASSWORD_FAILED_CUSTOM    #language en-US "Password Failed.  System halted."
+
+#string STR_NOT_APPLICABLE              #language en-US "n/a"
+#string STR_DASH                        #language en-US "-"
+#string STR_COMA_SPACE                  #language en-US ", "
+#string STR_EXIT                        #language en-US "Press <Esc> to exit."
+
+//
+// String definitions
+//
+#string CUS_STR_ERROR_MINOR             #language en-US " Minor        | "
+#string CUS_STR_ERROR_MAJOR             #language en-US " Major        | "
+#string CUS_STR_ERROR_UNRECOVERED       #language en-US " Unrecovered  | "
+#string CUS_STR_ERROR_UNCONTAINED       #language en-US " Uncontained  | "
+#string CUS_STR_ERROR_UNRECOGNIZED      #language en-US " Unrecognized | "
+
+//
+// Source Strings for ClassSubClass
+//
+#string CUS_STR_EFI_COMPUTING_UNIT_UNSPECIFIED              #language en-US "unspecified processor  | "
+#string CUS_STR_EFI_COMPUTING_UNIT_HOST_PROCESSOR           #language en-US "host processor         | "
+#string CUS_STR_EFI_COMPUTING_UNIT_FIRMWARE_PROCESSOR       #language en-US "firmware processor     | "
+#string CUS_STR_EFI_COMPUTING_UNIT_SERVICE_PROCESSOR        #language en-US "service processor      | "
+
+#string CUS_STR_EFI_COMPUTING_UNIT_IO_PROCESSOR   #language en-US "IO processor           | "
+#string CUS_STR_EFI_COMPUTING_UNIT_CACHE          #language en-US "cache                  | "
+#string CUS_STR_EFI_COMPUTING_UNIT_MEMORY         #language en-US "memory                 | "
+#string CUS_STR_EFI_COMPUTING_UNIT_CHIPSET        #language en-US "chipset                | "
+#string CUS_STR_EFI_PERIPHERAL_UNSPECIFIED        #language en-US "unspecified peripheral | "
+#string CUS_STR_EFI_PERIPHERAL_KEYBOARD           #language en-US "keyboard               | "
+#string CUS_STR_EFI_PERIPHERAL_MOUSE              #language en-US "mouse                  | "
+#string CUS_STR_EFI_PERIPHERAL_LOCAL_CONSOLE      #language en-US "local console          | "
+#string CUS_STR_EFI_PERIPHERAL_REMOTE_CONSOLE     #language en-US "remote console         | "
+#string CUS_STR_EFI_PERIPHERAL_SERIAL_PORT        #language en-US "serial port            | "
+#string CUS_STR_EFI_PERIPHERAL_PARALLEL_PORT      #language en-US "parallel port          | "
+#string CUS_STR_EFI_PERIPHERAL_FIXED_MEDIA        #language en-US "fixed media            | "
+#string CUS_STR_EFI_PERIPHERAL_REMOVABLE_MEDIA    #language en-US "removable media        | "
+#string CUS_STR_EFI_PERIPHERAL_AUDIO_INPUT        #language en-US "audio input            | "
+#string CUS_STR_EFI_PERIPHERAL_AUDIO_OUTPUT       #language en-US "audio output           | "
+#string CUS_STR_EFI_PERIPHERAL_LCD_DEVICE         #language en-US "LCD                    | "
+#string CUS_STR_EFI_IO_BUS_UNSPECIFIED            #language en-US "unspecified IO bus     | "
+#string CUS_STR_EFI_IO_BUS_PCI                    #language en-US "PCI                    | "
+#string CUS_STR_EFI_IO_BUS_USB                    #language en-US "USB                    | "
+#string CUS_STR_EFI_IO_BUS_IBA                    #language en-US "IBA                    | "
+#string CUS_STR_EFI_IO_BUS_AGP                    #language en-US "AGP                    | "
+#string CUS_STR_EFI_IO_BUS_PC_CARD                #language en-US "PC Card                | "
+#string CUS_STR_EFI_IO_BUS_LPC                    #language en-US "LPC                    | "
+#string CUS_STR_EFI_IO_BUS_SCSI                   #language en-US "SCSI                   | "
+#string CUS_STR_EFI_IO_BUS_ATA_ATAPI              #language en-US "ATA/ATAPI              | "
+#string CUS_STR_EFI_IO_BUS_SERIAL_ATA             #language en-US "Serial ATA             | "
+#string CUS_STR_EFI_IO_BUS_FC                     #language en-US "Fiber Channel          | "
+#string CUS_STR_EFI_IO_BUS_IP_NETWORK             #language en-US "IP Network             | "
+#string CUS_STR_EFI_IO_BUS_SMBUS                  #language en-US "SMBUS                  | "
+#string CUS_STR_EFI_IO_BUS_I2C                    #language en-US "I2C                    | "
+#string CUS_STR_EFI_SOFTWARE_UNSPECIFIED          #language en-US "unspecified software   | "
+#string CUS_STR_EFI_SOFTWARE_SEC                  #language en-US "SEC                    | "
+#string CUS_STR_EFI_SOFTWARE_PEI_CORE             #language en-US "PEI Core               | "
+#string CUS_STR_EFI_SOFTWARE_PEI_MODULE           #language en-US "PEI Module             | "
+#string CUS_STR_EFI_SOFTWARE_DXE_CORE             #language en-US "DXE Core               | "
+#string CUS_STR_EFI_SOFTWARE_EFI_BOOT_SERVICE     #language en-US "EFI Boot Service       | "
+#string CUS_STR_EFI_SOFTWARE_EFI_RUNTIME_SERVICE  #language en-US "EFI Runtime Service    | "
+#string CUS_STR_EFI_SOFTWARE_DXE_BS_DRIVER        #language en-US "DXE BS driver          | "
+#string CUS_STR_EFI_SOFTWARE_DXE_RT_DRIVER        #language en-US "DXE RT driver          | "
+#string CUS_STR_EFI_SOFTWARE_SMM_DRIVER           #language en-US "SMM driver             | "
+#string CUS_STR_EFI_SOFTWARE_EFI_RT               #language en-US "Runtime                | "
+#string CUS_STR_EFI_SOFTWARE_EFI_AL               #language en-US "AfterLife              | "
+#string CUS_STR_EFI_SOFTWARE_EFI_APPLICATION      #language en-US "EFI application        | "
+#string CUS_STR_EFI_SOFTWARE_EFI_OS_LOADER        #language en-US "OS loader              | "
+#string CUS_STR_EFI_SOFTWARE_EFI_SECURITY         #language en-US "Password Security      | "
+
+//
+// Error strings for Error Codes
+//
+#string CUS_STR_EC_NON_SPECIFIC         #language en-US "NON_SPECIFIC error          | "
+#string CUS_STR_EC_DISABLED             #language en-US "DISABLED error              | "
+#string CUS_STR_EC_NOT_SUPPORTED        #language en-US "NOT_SUPPORTED error         | "
+#string CUS_STR_EC_NOT_DETECTED         #language en-US "NOT_DETECTED error          | "
+#string CUS_STR_EC_NOT_CONFIGURED       #language en-US "NOT_CONFIGURED error        | "
+#string CUS_STR_EC_INVALID_TYPE         #language en-US "INVALID_TYPE error          | "
+#string CUS_STR_EC_INVALID_SPEED        #language en-US "INVALID_SPEED error         | "
+#string CUS_STR_EC_INVALID_SIZE         #language en-US "INVALID_SIZE error          | "
+#string CUS_STR_EC_MISMATCH             #language en-US "MISMATCH error              | "
+#string CUS_STR_EC_TIMER_EXPIRED        #language en-US "TIMER_EXPIRED error         | "
+#string CUS_STR_EC_SELF_TEST            #language en-US "SELF_TEST error             | "
+#string CUS_STR_EC_INTERNAL             #language en-US "INTERNAL error              | "
+#string CUS_STR_EC_THERMAL              #language en-US "THERMAL error               | "
+#string CUS_STR_EC_LOW_VOLTAGE          #language en-US "LOW_VOLTAGE error           | "
+#string CUS_STR_EC_HIGH_VOLTAGE         #language en-US "HIGH_VOLTAGE error          | "
+#string CUS_STR_EC_CACHE                #language en-US "CACHE error                 | "
+#string CUS_STR_EC_MICROCODE_UPDATE     #language en-US "MICROCODE_UPDATE error      | "
+#string CUS_STR_EC_CORRECTABLE          #language en-US "Correctable error           | "
+#string CUS_STR_EC_UNCORRECTABLE        #language en-US "Uncorrectable error         | "
+#string CUS_STR_EC_SPD_FAIL             #language en-US "SPD_FAIL error              | "
+#string CUS_STR_EC_S3_RESUME_FAIL       #language en-US "S3_RESUME_FAIL error        | "
+#string CUS_STR_EC_UPDATE_FAIL          #language en-US "UPDATE_FAIL error           | "
+#string CUS_STR_EC_NONE_DETECTED        #language en-US "None detected error         | "
+#string CUS_STR_EC_NONE_USEFUL          #language en-US "None useful error           | "
+#string CUS_STR_EC_INTERFACE_ERROR      #language en-US "INTERFACE_ERROR error       | "
+#string CUS_STR_EC_CONTROLLER_ERROR     #language en-US "CONTROLLER_ERROR error      | "
+#string CUS_STR_EC_INPUT_ERROR          #language en-US "INPUT_ERROR error           | "
+#string CUS_STR_EC_OUTPUT_ERROR         #language en-US "OUTPUT_ERROR error          | "
+#string CUS_STR_EC_RESOURCE_CONFLICT    #language en-US "RESOURCE_CONFLICT error     | "
+#string CUS_STR_EC_LOCKED               #language en-US "LOCKED error                | "
+#string CUS_STR_EC_STUCK_KEY            #language en-US "STUCK_KEY error             | "
+#string CUS_STR_EC_READ_ERROR           #language en-US "READ_ERROR error            | "
+#string CUS_STR_EC_WRITE_ERROR          #language en-US "WRITE_ERROR error           | "
+#string CUS_STR_EC_PERR                 #language en-US "PERR error                  | "
+#string CUS_STR_EC_SERR                 #language en-US "SERR error                  | "
+#string CUS_STR_EC_LOAD_ERROR           #language en-US "LOAD_ERROR error            | "
+#string CUS_STR_EC_INVALID_PARAMETER    #language en-US "INVALID_PARAMETER error     | "
+#string CUS_STR_EC_UNSUPPORTED          #language en-US "UNSUPPORTED error           | "
+#string CUS_STR_EC_INVALID_BUFFER       #language en-US "INVALID_BUFFER error        | "
+#string CUS_STR_EC_OUT_OF_RESOURCES     #language en-US "OUT_OF_RESOURCES error      | "
+#string CUS_STR_EC_ABORTED              #language en-US "ABORTED error               | "
+
+#string CUS_STR_EC_ILLEGAL_SOFTWARE_STATE         #language en-US "ILLEGAL_SOFTWARE_STATE err. | "
+#string CUS_STR_EC_ILLEGAL_HARDWARE_STATE         #language en-US "ILLEGAL_HARDWARE_STATE err. | "
+#string CUS_STR_EC_AUTHENTICATION_FAILED          #language en-US "Authenticate fail reset jmps| "
+#string CUS_STR_EC_SECURITY_COMPROMISED           #language en-US "Security compromised        | "
+#string CUS_STR_EC_SECURITY_PASSWORD_FAILED       #language en-US "Password Fails, jump jump   | "
+#string CUS_STR_EC_SECURITY_VARIABLES_CORRUPTED   #language en-US "Environment vars vaporized  | "
+
+//
+// End of file
+#string CUS_STR_EC_SECURITY_PASSWORD_FAILED       #language en-US "Password Fails, jump jump   | "
+#string CUS_STR_EC_SECURITY_VARIABLES_CORRUPTED   #language en-US "Environment vars vaporized  | "
+
+#string STR_PCIEXTND_LOG_PROMPT            #language en-US "Pcie Extended errors"
+#string STR_PCIEXTND_LOG_HELP              #language en-US "Enable/Disable -IIO Pcie Rootport errors"
+
+//
+// End of file
+//

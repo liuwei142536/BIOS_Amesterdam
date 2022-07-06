@@ -1,0 +1,16 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Include\"
+	RefName = "GrantleyPkg.Me.AMT.Include.Include"
+[files]
+"MePlatformPolicy.h"	
+"MePlatformPolicyUpdateDxe.h"	
+"MkhiMsgs.h"	
+"AmtSetup.h"
+[parts]
+"GrantleyPkg.Me.AMT.Include.Guid.Guid"
+"GrantleyPkg.Me.AMT.Include.Library.Library"
+"GrantleyPkg.Me.AMT.Include.Ppi.Ppi"
+"GrantleyPkg.Me.AMT.Include.Protocol.Protocol"
+<endComponent>

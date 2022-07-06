@@ -1,0 +1,14 @@
+TOKEN
+    Name  = "HeciSmm_SUPPORT"
+    Value  = "1"			
+    Help  = "Main switch to enable HeciSmm support in Project"
+    TokenType = Boolean
+End
+
+INFComponent
+    Name  = "HeciSmm"
+    File  = "HeciSmm.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "HeciSmm_SUPPORT" "=" "1"
+End

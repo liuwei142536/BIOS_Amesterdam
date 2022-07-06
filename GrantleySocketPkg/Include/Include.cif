@@ -1,0 +1,18 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Include\"
+	RefName = "GrantleySocketPkg.Include"
+[files]
+"UncoreCommonIncludes.h"	
+"PfatDefinitions.h"
+[parts]
+"GrantleySocketPkg.Cpu"
+"GrantleySocketPkg.Guid"
+"GrantleySocketPkg.Iio"
+"GrantleySocketPkg.Include.Library"
+"GrantleySocketPkg.Ppi"
+"GrantleySocketPkg.Protocol"
+"GrantleySocketPkg.Setup"
+"GrantleySocketPkg.Tbd"
+<endComponent>

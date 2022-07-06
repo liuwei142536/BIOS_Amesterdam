@@ -1,0 +1,153 @@
+TOKEN
+	Name  = "CpuMpDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling CpuMpDxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_PROC_FAMILY"
+	Value  = "0xb3"
+	Help  = "0 - Autodetect\0xce - Intel Core i3\0xcd - Intel Core i5\0xc6 - Intel Core i7\0xb3 - Intel Xeon"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-ffff"
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_PROC_UPGRADE"
+	Value  = "0x2B"
+	Help  = "0x27 - Haswell-EX - Socket LGA2011-0\0x2B - Haswell-EP - Socket LGA2011-3\0x2C - Haswell-EN - Socket LGA1356-3\"
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-ff"
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_MAX_SPEED"
+	Value  = "0"
+	Help  = "Value in MHz."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-ffff"
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_EXTERNAL_CLOCK"
+	Value  = "100"
+	Help  = "Value in MHz."
+	TokenType = Integer
+	TargetH = Yes
+	Range  = "0-ffff"
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_ASSET_TAG"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_PART_NUMBER"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_0"
+	Value  = "SOCKET 0"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_1"
+	Value  = "SOCKET 1"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_2"
+	Value  = "SOCKET 2"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_3"
+	Value  = "SOCKET 3"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_4"
+	Value  = "SOCKET 4"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_5"
+	Value  = "SOCKET 5"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_6"
+	Value  = "SOCKET 6"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_7"
+	Value  = "SOCKET 7"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_7_L1_SOCKET_DESIGNATION"
+	Value  = "CPU Internal L1"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_7_L2_SOCKET_DESIGNATION"
+	Value  = "CPU Internal L2"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SMBIOS_TYPE_7_L3_SOCKET_DESIGNATION"
+	Value  = "CPU Internal L3"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+INFComponent
+	Name  = "CpuMpDxe"
+	File  = "CpuMpDxe.inf"
+	Package  = "GrantleySocketPkg"
+	Arch  = "IA32 X64"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "CpuMpDxe_SUPPORT" "=" "1"
+End
+
+#LibraryMapping
+#	Class  = "PcdLib"
+#	Instance  = "MdePkg.DxePcdLib"
+#	Override  = "GrantleySocketPkg.CpuMpDxe"
+#End
+
+#LibraryMapping
+#    Class  = "DebugLib"
+#    Instance  = "MdePkg.BaseDebugLibSerialPort"
+#    Override  = "GrantleySocketPkg.CpuMpDxe"
+#End

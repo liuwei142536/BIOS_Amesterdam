@@ -1,0 +1,10 @@
+<component>
+	name = "Tcg2Platform"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\TCG2\Tcg2Platform\"
+	RefName = "Tcg2Platform"
+[INF]
+"MeasureMicrocodeSampleLibNull.inf"
+[files]
+"Tcg2Platform.sdl"	
+<endComponent>

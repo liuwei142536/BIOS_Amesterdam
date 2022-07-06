@@ -1,0 +1,162 @@
+#//***********************************************************************
+#//*                                                                     *
+#//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#//*                                                                     *
+#//*      All rights reserved. Subject to AMI licensing agreement.       *
+#//*                                                                     *
+#//***********************************************************************
+
+## @file
+# AmiNetworkPkg.
+#
+# This package provides network modules that conform to UEFI 2.4 specification.
+#
+# Copyright (c) 2009 - 2017, Intel Corporation. All rights reserved.<BR>
+# (C) Copyright 2015-2017 Hewlett Packard Enterprise Development LP<BR>
+#
+# This program and the accompanying materials are licensed and made available under
+# the terms and conditions of the BSD License which accompanies this distribution.
+# The full text of the license may be found at
+# http://opensource.org/licenses/bsd-license.php
+#
+# THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+# WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiNetworkPkg
+  PACKAGE_GUID                   = 947988BE-8D5C-471a-893D-AD181C46BEBB
+  PACKAGE_VERSION                = 0.97
+
+[Includes]
+  Include
+  Include/Protocol
+  Library
+  Include/Guid
+  Include/Library
+  ../Build
+  
+[Protocols]
+  # Include/Protocol/AmiIpAvail.h
+  AmiIpAvailProtocolGuid = { 0xd4e3c8b9, 0x548b, 0x4dcb, {0x80, 0x42, 0xba, 0x3c, 0xe7, 0x47, 0xf6, 0xf0 } }
+
+  ## Include/Protocol/Dpc.h
+  gEfiDpcProtocolGuid           = {0x480f8ae9, 0xc46, 0x4aa9,  { 0xbc, 0x89, 0xdb, 0x9f, 0xba, 0x61, 0x98, 0x6 }}
+
+  # AMI PORTING START
+  gEfiRedfishIScsiConfigProtocolGuid   = { 0xcc05d795, 0x198f, 0x4bbd, { 0xb7, 0x2c, 0x9c, 0xf7, 0x2,  0xeb, 0xec, 0x1a }}
+  gAmiNwsShutdownNotifyProtocolGuid = { 0xc667a390, 0xbcca, 0x4261, {0x90, 0x4, 0xa0, 0xdb, 0x9, 0x3b, 0x5e, 0x93} }
+  
+  # New GUID for Redfish Vlan support
+  gEfiRedfishVlanConfigProtocolGuid = {0x9e27ea3e, 0x491d, 0x4051, {0xa4, 0xc9, 0x7, 0x7b, 0x65, 0xf1, 0xc9, 0x13} }
+  # AMI PORTING END
+    
+[Guids]
+  gWifiConfigGuid = {0x55cb143a, 0x6b9c, 0x47c2, {0x98, 0x70, 0x32, 0x3d, 0x43, 0xe9, 0xd6, 0x5a}}  
+  ## Network package token space guid.
+  # Include/Guid/NetworkPkgTokenSpace.h
+  gEfiNetworkPkgTokenSpaceGuid  = { 0x40e064b2, 0x0ae0, 0x48b1, { 0xa0, 0x7d, 0xf8, 0xcf, 0x1e, 0x1a, 0x23, 0x10}}
+
+  # Include/Guid/Ip6ConfigHii.h
+  gIp6ConfigNvDataGuid          = { 0x2eea107, 0x98db, 0x400e, { 0x98, 0x30, 0x46, 0xa, 0x15, 0x42, 0xd7, 0x99}}
+
+  # Include/Guid/IscsiConfigHii.h
+  gIScsiConfigGuid              = { 0x4b47d616, 0xa8d6, 0x4552, { 0x9d, 0x44, 0xcc, 0xad, 0x2e, 0xf, 0x4c, 0xf9}}
+
+  # Include/Guid/HttpBootConfigHii.h
+  gHttpBootConfigGuid           = { 0x4d20583a, 0x7765, 0x4e7a, { 0x8a, 0x67, 0xdc, 0xde, 0x74, 0xee, 0x3e, 0xc5 }}
+  
+  # Include/Guid/NetworkStackSetup.h  
+  gEfiNetworkStackSetupGuid             = { 0xD1405D16, 0x7AFC, 0x4695, { 0xBB, 0x12, 0x41, 0x45, 0x9D, 0x36, 0x95, 0xA2}} 
+  
+  # New GUID for pre PXE boot
+  gReadyToPxeBootGuid             =  { 0xe51f643f, 0x5f3c, 0x4cfd, { 0x91, 0x26, 0x46, 0x87, 0x30, 0x5f, 0x18, 0xda}}
+
+  # Include/Guid/TlsAuthConfigHii.h
+  gTlsAuthConfigGuid            = { 0xb0eae4f8, 0x9a04, 0x4c6d, { 0xa7, 0x48, 0x79, 0x3d, 0xaa, 0xf, 0x65, 0xdf }}
+  
+  # Include/Guid/TlsAuthentication.h
+  gEfiTlsCaCertificateGuid      = { 0xfd2340D0, 0x3dab, 0x4349, { 0xa6, 0xc7, 0x3b, 0x4f, 0x12, 0xb4, 0x8e, 0xae }}
+
+  # New GUID for RSD2.2 support
+  gEfiRsdIScsiAttemptConfigGuid   = { 0xa7354220, 0x4bfc, 0x4d24, { 0xa7, 0x68, 0x13, 0x42, 0x3f, 0x3e, 0xd1, 0xb1 }}
+  
+  gEfiRedfishIScsiAttemptConfigGuid =    { 0x5171845a, 0x7c60, 0x49dd, { 0x8f, 0x6d, 0x52, 0x3c, 0x62, 0x2, 0x88, 0xfd }}
+  gEfiRedfishIscsiDataGuid = {0x43a4d902, 0x3835, 0x4418, {0x86, 0x1, 0x97, 0x19, 0x3a, 0xed, 0x26, 0x4b}}
+  
+  #preserving IP4 Config data
+  MACNamesListVarDataGuid             = { 0xf70ebfe2, 0x7bad, 0x4683, { 0x8d, 0xaf, 0x0, 0xad,  0x21, 0x25, 0x6, 0x9d}} 
+    
+  # Include/Guid/HttpTlsCipherList.h
+  gEdkiiHttpTlsCipherListGuid   = { 0x46ddb415, 0x5244, 0x49c7, { 0x93, 0x74, 0xf0, 0xe2, 0x98, 0xe7, 0xd3, 0x86 }}                                      
+  gEfiRsdMACNamesListVarDataGuid  = {0xbb74dbaf, 0x0a70, 0x40b7, {0xa2, 0xdb, 0xeb, 0xf3, 0x39, 0x62, 0x7d, 0xd5}}
+[PcdsFixedAtBuild]
+  ## The max attempt number will be created by iSCSI driver.
+  # @Prompt Max attempt number.
+  gEfiNetworkPkgTokenSpaceGuid.PcdMaxIScsiAttemptNumber|0x08|UINT8|0x0000000D
+
+
+[PcdsFixedAtBuild, PcdsPatchableInModule]
+  ## Indicates whether HTTP connections (i.e., unsecured) are permitted or not.
+  # TRUE  - HTTP connections are allowed. Both the "https://" and "http://" URI schemes are permitted.
+  # FALSE - HTTP connections are denied. Only the "https://" URI scheme is permitted.
+  # @Prompt Indicates whether HTTP connections are permitted or not.
+  gEfiNetworkPkgTokenSpaceGuid.PcdAllowHttpConnections|FALSE|BOOLEAN|0x00000008
+  
+   ## This setting is to specify the MTFTP windowsize used by UEFI PXE driver.
+  # A value of 0 indicates the default value of windowsize(1).
+  # A non-zero value will be used as windowsize.
+  # @Prompt PXE TFTP windowsize.
+  gEfiNetworkPkgTokenSpaceGuid.PcdPxeTftpWindowSize|0x04|UINT64|0x10000008
+  
+  # AMI PORTING START
+  ## Indicates whether Multiple ISCSI Target connections Per NIC are permitted or not.
+  # TRUE  -  Multiple ISCSI Target connections Per NIC are allowed. 
+  # FALSE - Multiple ISCSI Target connections Per NIC are denied. 
+  # @Prompt Indicates whether Multiple ISCSI Target connections Per NIC are permitted or not.
+  gEfiNetworkPkgTokenSpaceGuid.PcdAllowMultipleTargetsOnNIC|FALSE|BOOLEAN|0x00010000
+  # AMI PORTING END
+  
+[PcdsFixedAtBuild, PcdsPatchableInModule, PcdsDynamic, PcdsDynamicEx]
+  ## IPv6 DHCP Unique Identifier (DUID) Type configuration (From RFCs 3315 and 6355).
+  # 01 = DUID Based on Link-layer Address Plus Time [DUID-LLT]
+  # 04 = UUID-Based DHCPv6 Unique Identifier (DUID-UUID)
+  # 02 = DUID Assigned by Vendor Based on Enterprise Number [DUID-EN] (not supported)
+  # 03 = DUID Based on Link-layer Address [DUID-LL] (not supported)
+  # @Prompt Type Value of Dhcp6 Unique Identifier (DUID).
+  gEfiNetworkPkgTokenSpaceGuid.PcdDhcp6UidType|4|UINT8|0x10000001
+
+  ## Network boot policy to stop UEFI iSCSI if applicable.
+  # 0x00 = Always use UEFI iSCSI and ignore iSCSI HBA.
+  # 0x01 = Stop UEFI iSCSI if iSCSI HBA adapter produces AIP protocol with Network Boot.
+  # 0x02 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv4 targets.
+  # 0x04 = Stop UEFI iSCSI if iSCSI HBA adapter supports booting from iSCSI IPv6 targets.
+  # 0x08 = Stop UEFI iSCSI if iSCSI HBA adapter supports an offload engine for iSCSI boot.
+  # 0x10 = Stop UEFI iSCSI if iSCSI HBA adapter supports multipath I/O for iSCSI boot.
+  # 0x20 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv4 targets.
+  # 0x40 = Stop UEFI iSCSI if iSCSI HBA adapter is currently configured to boot from iSCSI IPv6 targets.
+  # 0xFF = Always use iSCSI HBA and ignore UEFI iSCSI.
+  # @Prompt Type Value of network boot policy used in iSCSI.
+  gEfiNetworkPkgTokenSpaceGuid.PcdIScsiAIPNetworkBootPolicy|0x08|UINT8|0x10000007
+
+  ## IPv4 PXE support
+  # 0x01 = PXE Enabled
+  # 0x00 = PXE Disabled
+  gEfiNetworkPkgTokenSpaceGuid.PcdIPv4PXESupport|0x01|UINT8|0x10000009
+
+  ## IPv6 PXE support
+  # 0x01 = PXE Enabled
+  # 0x00 = PXE Disabled
+  gEfiNetworkPkgTokenSpaceGuid.PcdIPv6PXESupport|0x01|UINT8|0x1000000a
+
+  # AMI PORTING START
+  [PcdsDynamicEx]
+  ## Indicates the value of HTTP Response timeout(HTTP_RESPONSE_TIMEOUT).
+  gEfiNetworkPkgTokenSpaceGuid.PcdHttpResponseTimeout|5|UINT64|0x00010001
+  gEfiNetworkPkgTokenSpaceGuid.PcdSkipHttpsCertValidation|0|UINT8|0x00010002
+  # Indicates the value to skip Host Name Validation
+  gEfiNetworkPkgTokenSpaceGuid.PcdSkipHostNameValidation|0|UINT8|0x00010003
+  # Indicates the value to skip Media Detection
+  gEfiNetworkPkgTokenSpaceGuid.PcdSkipMediaDetection|0|UINT8|0x00010004

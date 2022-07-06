@@ -1,0 +1,44 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DebugStatusCodeLib
+  FILE_GUID                      = 2529929D-7399-404d-948A-2FD4D128F159
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 0.1
+  LIBRARY_CLASS                  = DebugStatusCodeLib
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+
+[Binaries.Ia32]
+  BIN | PeiDebugStatusCodeLib.lib|*|*|MYTOOLS
+  BIN | PeiDebugStatusCodeLib.lib|*|*|MSFT
+  BIN | PeiDebugStatusCodeVS2015Lib.lib|*|*|VS2015
+[Binaries.X64]
+  BIN | DxeDebugStatusCodeLibx64.lib|*|*|MYTOOLS
+  BIN | DxeDebugStatusCodeLibx64.lib|*|*|MSFT
+  BIN | DxeDebugStatusCodeLibVS2015x64.lib|*|*|VS2015
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AMIDebuggerPkg/AMIDebuggerPkg.dec
+
+[LibraryClasses]
+  CommonDebugStatusCodeLib

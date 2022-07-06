@@ -1,0 +1,108 @@
+#
+# This file contains an 'Intel Peripheral Driver' and is
+# licensed for Intel CPUs and chipsets under the terms of your
+# license agreement with Intel or your vendor.  This file may
+# be modified by the user, subject to additional terms of the
+# license agreement
+#
+#/*++
+#
+#  Copyright (c) 2011 - 2012 Intel Corporation. All rights reserved
+#  This software and associated documentation (if any) is furnished
+#  under a license and may only be used or copied in accordance
+#  with the terms of the license. Except as permitted by such
+#  license, no part of this software or documentation may be
+#  reproduced, stored in a retrieval system, or transmitted in any
+#  form or by any means without the express written consent of
+#  Intel Corporation.
+#
+#  Module Name:
+#
+#    PfatServices.inf
+#
+#  Abstract:
+#
+#    Component description file for PFAT module
+#
+#--*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PfatServices
+  FILE_GUID                      = 6D4BAA0B-F431-4370-AF19-99D6209239F6
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = InstallPfatProtocol
+
+[Sources]
+  PfatServices.c
+  PfatServices.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  #BpCommonPkg/BpCommonPkg.dec AptioV server override
+  WellsburgPkg/WellsburgPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  #SecurityPkg/SecurityPkg.dec AptioV server override
+  AmiModulePkg/AmiModulePkg.dec #AptioV server override: Pfat function implement for Grantley workstation.
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  SmmServicesTableLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  PchPlatformLib
+  DebugLib
+  HobLib
+  IoLib
+  PciLib
+  PlatformHooksLib
+  PrintLib
+  PciExpressLib 
+  PchPciExpressHelpersLib  
+  UefiRuntimeServicesTableLib
+  UefiLib
+  S3BootScriptLib
+  DxeServicesTableLib
+  RcFviLib
+  PchAslUpdateLib
+  DxeServicesLib #AptioV server override: Pfat function implement for Grantley workstation.
+
+[Protocols]
+  gEfiGlobalNvsAreaProtocolGuid
+  gEfiSmmSpiProtocolGuid          # CONSUMES
+  gEfiSmmSwDispatch2ProtocolGuid  # CONSUMES
+  gEfiSmmCpuProtocolGuid          # CONSUMES
+  gEfiSmmFirmwareVolumeBlockProtocolGuid # CONSUMES
+  gEfiSmmBase2ProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+  gSmmPfatProtocolGuid
+  gEfiAcpiTableProtocolGuid
+  gEfiAcpiSupportProtocolGuid
+  gEfiSmmIoTrapDispatch2ProtocolGuid
+  gEfiSmmVariableProtocolGuid
+
+[Guids]
+  gEfiPlatformInfoGuid
+  gPfatModuleGuid
+
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdMaxSizeNonPopulateCapsule
+  gPlatformTokenSpaceGuid.PcdFlashAreaBaseAddress
+
+[Depex]
+  gEfiSmmBase2ProtocolGuid              AND
+  gEfiSmmIoTrapDispatch2ProtocolGuid    AND
+  gAmiSmiVariableDxeDriverStartedGuid   AND #AptioV server override: Pfat function implement for Grantley workstation.
+  gEfiDprRegsProgrammedGuid
+  

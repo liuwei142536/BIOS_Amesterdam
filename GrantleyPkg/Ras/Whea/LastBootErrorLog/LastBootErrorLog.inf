@@ -1,0 +1,104 @@
+              
+#/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# This file contains an 'Intel Peripheral Driver' and is
+# licensed for Intel CPUs and chipsets under the terms of your
+# license agreement with Intel or your vendor.  This file may
+# be modified by the user, subject to additional terms of the
+# license agreement
+#
+#
+# Copyright (c)2009-2016 Intel Corporation. All rights reserved
+# This software and associated documentation (if any) is furnished
+# under a license and may only be used or copied in accordance
+# with the terms of the license. Except as permitted by such
+# license, no part of this software or documentation may be
+# reproduced, stored in a retrieval system, or transmitted in any
+# form or by any means without the express written consent of
+# Intel Corporation.
+
+#
+#  Module Name:
+#
+#   LastBootErrorLog.inf
+#
+#  Abstract:
+#
+#    Component description file for lastBootErrorHandler module
+#
+#-------------------------------------------------------------------*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LastBootErrorLog
+  FILE_GUID                      = 91a737e6-7b54-4b5f-a491-ed5ef5c5a732
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = LastBootErrorEntry 
+
+
+[Sources]
+LastBootErrorLog.c
+#AptioV server override Start: Adding files included in .c to INF for component  download.
+LastBootErrorLog.h
+#AptioV server override End: Adding files included in .c to INF for component  download.
+
+[Packages]
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec 
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  BaseMemoryLib
+  IoLib
+  BaseLib
+  PciLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  SmmServicesTableLib
+  HobLib
+  PciExpressLib
+  
+[Protocols]
+  gEfiIioUdsProtocolGuid
+  gEfiWheaPlatformSupportProtocolGuid
+  gEfiGlobalNvsAreaProtocolGuid
+  gEfiSmmRuntimeProtocolGuid
+  gEfiSmmVariableProtocolGuid
+  gEfiMemRasProtocolGuid
+  gEfiSmmSwDispatch2ProtocolGuid
+  gEfiCpuIoProtocolGuid
+  gEfiSmbiosProtocolGuid
+  gEfiCpuCsrAccessGuid
+#  
+# BDX core Upgrade CP203-217D02
+#
+#  gEfiWheaBootProtocolGuid
+#  
+# BDX core Upgrade CP203-217D02
+#
+[Guids]
+  gEfiSetupVariableGuid
+  gEfiMemoryConfigDataGuid
+  gPrevBootErrSrcHobGuid
+  gEfiMemoryMapGuid # AptioV Server Override: Added to skip LastBoot Error Handler for cold boot.
+
+[Depex]
+  gEfiSmmIchnDispatch2ProtocolGuid AND
+  gEfiLoadedImageProtocolGuid AND
+  gEfiSmmBase2ProtocolGuid AND
+#  gEfiSmmRuntimeProtocolGuid AND  #Aptio V Server Override
+#  gEfiSmmVariableProtocolGuid AND #Aptio V Server Override
+  gEfiMemRasProtocolGuid AND
+  gEfiSmmSxDispatch2ProtocolGuid
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS     = /wd4142 /wd4244 /Gs999999 /GL-
+  

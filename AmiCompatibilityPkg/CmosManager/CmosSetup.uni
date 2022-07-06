@@ -1,0 +1,44 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+/** @file CmosSetup.uni
+    CmosManager Setup page strings
+
+**/
+
+//---------------------------------------------------------------------------
+/=#
+#include "VFR.uni"
+
+//---------------------------------------------------------------------------
+
+#ifndef x-AMI
+#langdef   x-AMI "x-AMI"    // AMI Configuration Language
+#endif
+
+#string STR_CMOS_FORM                   #language eng "CMOS"
+
+#string STR_CMOS_FORM_HELP              #language eng "CMOS Settings/Information"
+
+#string STR_TRUE                        #language eng "TRUE"
+#string STR_FALSE                       #language eng "FALSE"
+
+#string STR_EMPTY                       #language eng ""
+
+#string STR_UNUSABLE_CMOS_PROMPT        #language eng "CMOS NOT usable"
+                                        #language x-AMI "CMOS000"
+#string STR_BAD_CMOS_BATTERY_PROMPT     #language eng "Bad battery"
+                                        #language x-AMI "CMOS001"
+#string STR_DEFAULTS_LOADED_PROMPT      #language eng "Defaults loaded"
+                                        #language x-AMI "CMOS002"
+#string STR_FIRST_BOOT_DETECTED_PROMPT  #language eng "First boot"
+                                        #language x-AMI "CMOS003"
+#string STR_BAD_CHECKSUM_PROMPT         #language eng "Bad checksum"
+                                        #language x-AMI "CMOS004"
+
+#string STR_CMOS_SUPPORT_HELP  	        #language eng "Displays CMOS settings and related information."

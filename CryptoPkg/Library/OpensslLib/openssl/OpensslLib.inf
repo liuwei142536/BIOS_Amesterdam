@@ -1,0 +1,746 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+## @file
+#  This module provides OpenSSL Library implementation.
+#
+#  Copyright (c) 2010 - 2020, Intel Corporation. All rights reserved.<BR>
+#  (C) Copyright 2020 Hewlett Packard Enterprise Development LP<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OpensslLib
+  MODULE_UNI_FILE                = OpensslLib.uni
+  FILE_GUID                      = C873A7D0-9824-409f-9B42-2C158B992E69
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OpensslLib
+  DEFINE OPENSSL_PATH            = openssl
+  DEFINE OPENSSL_FLAGS           = -DOPENSSL_SYSNAME_UWIN -DOPENSSL_NO_LHASH -DL_ENDIAN -DOPENSSL_SMALL_FOOTPRINT -D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE -DOPENSSL_NO_ASM
+  DEFINE OPENSSL_EXFLAGS         = -DOPENSSL_NO_SOCK
+  
+# OPENSSL_FLAGS is set to define the following flags to be compatible with
+# EDK II build system and UEFI executiuon environment
+#
+#   OPENSSL_SYSNAME_UWIN
+#   OPENSSL_SYS_UEFI
+#   L_ENDIAN
+#   _CRT_SECURE_NO_DEPRECATE
+#   _CRT_NONSTDC_NO_DEPRECATE
+#   OPENSSL_NO_CAMELLIA
+#   OPENSSL_NO_SEED
+#   OPENSSL_NO_RC5
+#   OPENSSL_NO_MDC2
+#   OPENSSL_NO_SOCK
+#   OPENSSL_NO_CMS
+#   OPENSSL_NO_JPAKE
+#   OPENSSL_NO_CAPIENG
+#   OPENSSL_NO_ERR
+#   OPENSSL_NO_KRB5
+#   OPENSSL_NO_DYNAMIC_ENGINE
+#   GETPID_IS_MEANINGLESS
+#   OPENSSL_NO_STDIO
+#   OPENSSL_NO_POSIX_IO
+#   OPENSSL_NO_FP_API
+#   OPENSSL_NO_DGRAM
+#   OPENSSL_NO_ASM
+#
+
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF ARM AARCH64
+#
+
+[Sources]
+e_os.h
+ms/uplink.h
+crypto/aes/aes_cbc.c
+crypto/aes/aes_cfb.c
+crypto/aes/aes_core.c
+crypto/aes/aes_ige.c
+crypto/aes/aes_misc.c
+crypto/aes/aes_ofb.c
+crypto/aes/aes_wrap.c
+crypto/aria/aria.c
+crypto/asn1/a_bitstr.c
+crypto/asn1/a_d2i_fp.c
+crypto/asn1/a_digest.c
+crypto/asn1/a_dup.c
+crypto/asn1/a_gentm.c
+crypto/asn1/a_i2d_fp.c
+crypto/asn1/a_int.c
+crypto/asn1/a_mbstr.c
+crypto/asn1/a_object.c
+crypto/asn1/a_octet.c
+crypto/asn1/a_print.c
+crypto/asn1/a_sign.c
+crypto/asn1/a_strex.c
+crypto/asn1/a_strnid.c
+crypto/asn1/a_time.c
+crypto/asn1/a_type.c
+crypto/asn1/a_utctm.c
+crypto/asn1/a_utf8.c
+crypto/asn1/a_verify.c
+crypto/asn1/ameth_lib.c
+crypto/asn1/asn1_err.c
+crypto/asn1/asn1_gen.c
+crypto/asn1/asn1_item_list.c
+crypto/asn1/asn1_lib.c
+crypto/asn1/asn1_par.c
+crypto/asn1/asn_mime.c
+crypto/asn1/asn_moid.c
+crypto/asn1/asn_mstbl.c
+crypto/asn1/asn_pack.c
+crypto/asn1/bio_asn1.c
+crypto/asn1/bio_ndef.c
+crypto/asn1/d2i_pr.c
+crypto/asn1/d2i_pu.c
+crypto/asn1/evp_asn1.c
+crypto/asn1/f_int.c
+crypto/asn1/f_string.c
+crypto/asn1/i2d_pr.c
+crypto/asn1/i2d_pu.c
+crypto/asn1/n_pkey.c
+crypto/asn1/nsseq.c
+crypto/asn1/p5_pbe.c
+crypto/asn1/p5_pbev2.c
+crypto/asn1/p5_scrypt.c
+crypto/asn1/p8_pkey.c
+crypto/asn1/t_bitst.c
+crypto/asn1/t_pkey.c
+crypto/asn1/t_spki.c
+crypto/asn1/tasn_dec.c
+crypto/asn1/tasn_enc.c
+crypto/asn1/tasn_fre.c
+crypto/asn1/tasn_new.c
+crypto/asn1/tasn_prn.c
+crypto/asn1/tasn_scn.c
+crypto/asn1/tasn_typ.c
+crypto/asn1/tasn_utl.c
+crypto/asn1/x_algor.c
+crypto/asn1/x_bignum.c
+crypto/asn1/x_info.c
+crypto/asn1/x_int64.c
+crypto/asn1/x_long.c
+crypto/asn1/x_pkey.c
+crypto/asn1/x_sig.c
+crypto/asn1/x_spki.c
+crypto/asn1/x_val.c
+crypto/async/arch/async_null.c
+crypto/async/arch/async_posix.c
+crypto/async/arch/async_win.c
+crypto/async/async.c
+crypto/async/async_err.c
+crypto/async/async_wait.c
+crypto/bio/b_addr.c
+crypto/bio/b_dump.c
+crypto/bio/b_sock.c
+crypto/bio/b_sock2.c
+crypto/bio/bf_buff.c
+crypto/bio/bf_lbuf.c
+crypto/bio/bf_nbio.c
+crypto/bio/bf_null.c
+crypto/bio/bio_cb.c
+crypto/bio/bio_err.c
+crypto/bio/bio_lib.c
+crypto/bio/bio_meth.c
+crypto/bio/bss_acpt.c
+crypto/bio/bss_bio.c
+crypto/bio/bss_conn.c
+crypto/bio/bss_dgram.c
+crypto/bio/bss_fd.c
+crypto/bio/bss_file.c
+crypto/bio/bss_log.c
+crypto/bio/bss_mem.c
+crypto/bio/bss_null.c
+crypto/bio/bss_sock.c
+crypto/bn/bn_add.c
+crypto/bn/bn_asm.c
+crypto/bn/bn_blind.c
+crypto/bn/bn_const.c
+crypto/bn/bn_ctx.c
+crypto/bn/bn_depr.c
+crypto/bn/bn_dh.c
+crypto/bn/bn_div.c
+crypto/bn/bn_err.c
+crypto/bn/bn_exp.c
+crypto/bn/bn_exp2.c
+crypto/bn/bn_gcd.c
+crypto/bn/bn_gf2m.c
+crypto/bn/bn_intern.c
+crypto/bn/bn_kron.c
+crypto/bn/bn_lib.c
+crypto/bn/bn_mod.c
+crypto/bn/bn_mont.c
+crypto/bn/bn_mpi.c
+crypto/bn/bn_mul.c
+crypto/bn/bn_nist.c
+crypto/bn/bn_prime.c
+crypto/bn/bn_print.c
+crypto/bn/bn_rand.c
+crypto/bn/bn_recp.c
+crypto/bn/bn_shift.c
+crypto/bn/bn_sqr.c
+crypto/bn/bn_sqrt.c
+crypto/bn/bn_srp.c
+crypto/bn/bn_word.c
+crypto/bn/bn_x931p.c
+crypto/buffer/buf_err.c
+crypto/buffer/buffer.c
+crypto/cmac/cm_ameth.c
+crypto/cmac/cm_pmeth.c
+crypto/cmac/cmac.c
+crypto/comp/c_zlib.c
+crypto/comp/comp_err.c
+crypto/comp/comp_lib.c
+crypto/conf/conf_api.c
+crypto/conf/conf_def.c
+crypto/conf/conf_err.c
+crypto/conf/conf_lib.c
+crypto/conf/conf_mall.c
+crypto/conf/conf_mod.c
+crypto/conf/conf_sap.c
+crypto/conf/conf_ssl.c
+crypto/cpt_err.c
+crypto/cryptlib.c
+crypto/ctype.c
+crypto/cversion.c
+crypto/dh/dh_ameth.c
+crypto/dh/dh_asn1.c
+crypto/dh/dh_check.c
+crypto/dh/dh_depr.c
+crypto/dh/dh_err.c
+crypto/dh/dh_gen.c
+crypto/dh/dh_kdf.c
+crypto/dh/dh_key.c
+crypto/dh/dh_lib.c
+crypto/dh/dh_meth.c
+crypto/dh/dh_pmeth.c
+crypto/dh/dh_prn.c
+crypto/dh/dh_rfc5114.c
+crypto/dh/dh_rfc7919.c
+crypto/dso/dso_dl.c
+crypto/dso/dso_dlfcn.c
+crypto/dso/dso_err.c
+crypto/dso/dso_lib.c
+crypto/dso/dso_openssl.c
+crypto/dso/dso_vms.c
+crypto/dso/dso_win32.c
+crypto/ebcdic.c
+crypto/ec/ec_lib.c
+crypto/ec/ec_ameth.c
+crypto/ec/ec_asn1.c
+crypto/ec/ec_check.c
+crypto/ec/ec_cvt.c
+crypto/ec/ec_err.c
+crypto/ec/ec_key.c
+crypto/ec/ec_mult.c
+crypto/ec/ec_oct.c
+crypto/ec/ec_pmeth.c
+crypto/ec/ec_print.c
+crypto/ec/ec2_oct.c
+crypto/ec/ec2_smpl.c
+crypto/ec/eck_prn.c
+crypto/ec/ecp_mont.c
+crypto/ec/ecp_nist.c
+crypto/ec/ecp_nistp224.c
+crypto/ec/ecp_nistp256.c
+crypto/ec/ecp_nistp521.c
+crypto/ec/ecp_nistputil.c
+crypto/ec/ecp_nistz256.c
+crypto/ec/ecp_oct.c
+crypto/ec/ecp_smpl.c
+crypto/ec/ec_curve.c
+crypto/ec/ec_kmeth.c
+crypto/ec/ecx_meth.c
+crypto/ec/ecdsa_vrf.c
+crypto/ec/ecdsa_sign.c
+crypto/ec/ecdsa_ossl.c
+crypto/ec/ecdh_ossl.c
+crypto/ec/ecdh_kdf.c
+crypto/ec/curve25519.c
+crypto/ec/curve448/scalar.c
+crypto/ec/curve448/f_generic.c
+crypto/ec/curve448/eddsa.c
+crypto/ec/curve448/curve448_tables.c
+crypto/ec/curve448/curve448.c
+crypto/ec/curve448/arch_32/f_impl.c
+crypto/err/err.c
+crypto/err/err_prn.c
+crypto/evp/bio_b64.c
+crypto/evp/bio_enc.c
+crypto/evp/bio_md.c
+crypto/evp/bio_ok.c
+crypto/evp/c_allc.c
+crypto/evp/c_alld.c
+crypto/evp/cmeth_lib.c
+crypto/evp/digest.c
+crypto/evp/e_aes.c
+crypto/evp/e_aes_cbc_hmac_sha1.c
+crypto/evp/e_aes_cbc_hmac_sha256.c
+crypto/evp/e_aria.c
+crypto/evp/e_bf.c
+crypto/evp/e_camellia.c
+crypto/evp/e_cast.c
+crypto/evp/e_chacha20_poly1305.c
+crypto/evp/e_des.c
+crypto/evp/e_des3.c
+crypto/evp/e_idea.c
+crypto/evp/e_null.c
+crypto/evp/e_old.c
+crypto/evp/e_rc2.c
+crypto/evp/e_rc4.c
+crypto/evp/e_rc4_hmac_md5.c
+crypto/evp/e_rc5.c
+crypto/evp/e_seed.c
+crypto/evp/e_sm4.c
+crypto/evp/e_xcbc_d.c
+crypto/evp/encode.c
+crypto/evp/evp_cnf.c
+crypto/evp/evp_enc.c
+crypto/evp/evp_err.c
+crypto/evp/evp_key.c
+crypto/evp/evp_lib.c
+crypto/evp/evp_pbe.c
+crypto/evp/evp_pkey.c
+crypto/evp/m_md2.c
+crypto/evp/m_md4.c
+crypto/evp/m_md5.c
+crypto/evp/m_md5_sha1.c
+crypto/evp/m_mdc2.c
+crypto/evp/m_null.c
+crypto/evp/m_ripemd.c
+crypto/evp/m_sha1.c
+crypto/evp/m_sha3.c
+crypto/evp/m_sigver.c
+crypto/evp/m_wp.c
+crypto/evp/names.c
+crypto/evp/p5_crpt.c
+crypto/evp/p5_crpt2.c
+crypto/evp/p_dec.c
+crypto/evp/p_enc.c
+crypto/evp/p_lib.c
+crypto/evp/p_open.c
+crypto/evp/p_seal.c
+crypto/evp/p_sign.c
+crypto/evp/p_verify.c
+crypto/evp/pbe_scrypt.c
+crypto/evp/pmeth_fn.c
+crypto/evp/pmeth_gn.c
+crypto/evp/pmeth_lib.c
+crypto/ex_data.c
+crypto/getenv.c
+crypto/hmac/hm_ameth.c
+crypto/hmac/hm_pmeth.c
+crypto/hmac/hmac.c
+crypto/init.c
+crypto/kdf/hkdf.c
+crypto/kdf/kdf_err.c
+crypto/kdf/scrypt.c
+crypto/kdf/tls1_prf.c
+crypto/lhash/lh_stats.c
+crypto/lhash/lhash.c
+crypto/md5/md5_dgst.c
+crypto/md5/md5_one.c
+crypto/mem.c
+crypto/mem_clr.c
+crypto/mem_dbg.c
+crypto/mem_sec.c
+crypto/modes/cbc128.c
+crypto/modes/ccm128.c
+crypto/modes/cfb128.c
+crypto/modes/ctr128.c
+crypto/modes/cts128.c
+crypto/modes/gcm128.c
+crypto/modes/ocb128.c
+crypto/modes/ofb128.c
+crypto/modes/wrap128.c
+crypto/modes/xts128.c
+crypto/o_dir.c
+crypto/o_fips.c
+crypto/o_fopen.c
+crypto/o_init.c
+crypto/o_str.c
+crypto/o_time.c
+crypto/objects/o_names.c
+crypto/objects/obj_dat.c
+crypto/objects/obj_err.c
+crypto/objects/obj_lib.c
+crypto/objects/obj_xref.c
+crypto/ocsp/ocsp_asn.c
+crypto/ocsp/ocsp_cl.c
+crypto/ocsp/ocsp_err.c
+crypto/ocsp/ocsp_ext.c
+crypto/ocsp/ocsp_ht.c
+crypto/ocsp/ocsp_lib.c
+crypto/ocsp/ocsp_prn.c
+crypto/ocsp/ocsp_srv.c
+crypto/ocsp/ocsp_vfy.c
+crypto/ocsp/v3_ocsp.c
+crypto/pem/pem_all.c
+crypto/pem/pem_err.c
+crypto/pem/pem_info.c
+crypto/pem/pem_lib.c
+crypto/pem/pem_oth.c
+crypto/pem/pem_pk8.c
+crypto/pem/pem_pkey.c
+crypto/pem/pem_sign.c
+crypto/pem/pem_x509.c
+crypto/pem/pem_xaux.c
+crypto/pem/pvkfmt.c
+crypto/pkcs12/p12_add.c
+crypto/pkcs12/p12_asn.c
+crypto/pkcs12/p12_attr.c
+crypto/pkcs12/p12_crpt.c
+crypto/pkcs12/p12_crt.c
+crypto/pkcs12/p12_decr.c
+crypto/pkcs12/p12_init.c
+crypto/pkcs12/p12_key.c
+crypto/pkcs12/p12_kiss.c
+crypto/pkcs12/p12_mutl.c
+crypto/pkcs12/p12_npas.c
+crypto/pkcs12/p12_p8d.c
+crypto/pkcs12/p12_p8e.c
+crypto/pkcs12/p12_sbag.c
+crypto/pkcs12/p12_utl.c
+crypto/pkcs12/pk12err.c
+crypto/pkcs7/bio_pk7.c
+crypto/pkcs7/pk7_asn1.c
+crypto/pkcs7/pk7_attr.c
+crypto/pkcs7/pk7_doit.c
+crypto/pkcs7/pk7_lib.c
+crypto/pkcs7/pk7_mime.c
+crypto/pkcs7/pk7_smime.c
+crypto/pkcs7/pkcs7err.c
+crypto/rand/drbg_ctr.c
+crypto/rand/drbg_lib.c
+crypto/rand/rand_egd.c
+crypto/rand/rand_err.c
+crypto/rand/rand_lib.c
+crypto/rand/rand_unix.c
+crypto/rand/rand_vms.c
+crypto/rand/rand_win.c
+crypto/rsa/rsa_ameth.c
+crypto/rsa/rsa_asn1.c
+crypto/rsa/rsa_chk.c
+crypto/rsa/rsa_crpt.c
+crypto/rsa/rsa_depr.c
+crypto/rsa/rsa_err.c
+crypto/rsa/rsa_gen.c
+crypto/rsa/rsa_lib.c
+crypto/rsa/rsa_meth.c
+crypto/rsa/rsa_mp.c
+crypto/rsa/rsa_none.c
+crypto/rsa/rsa_oaep.c
+crypto/rsa/rsa_ossl.c
+crypto/rsa/rsa_pk1.c
+crypto/rsa/rsa_pmeth.c
+crypto/rsa/rsa_prn.c
+crypto/rsa/rsa_pss.c
+crypto/rsa/rsa_saos.c
+crypto/rsa/rsa_sign.c
+crypto/rsa/rsa_ssl.c
+crypto/rsa/rsa_x931.c
+crypto/rsa/rsa_x931g.c
+crypto/sha/keccak1600.c
+crypto/sha/sha1_one.c
+crypto/sha/sha1dgst.c
+crypto/sha/sha256.c
+crypto/sha/sha512.c
+crypto/siphash/siphash.c
+crypto/siphash/siphash_ameth.c
+crypto/siphash/siphash_pmeth.c
+crypto/sm2/sm2_crypt.c
+crypto/sm2/sm2_err.c
+crypto/sm2/sm2_pmeth.c
+crypto/sm2/sm2_sign.c
+crypto/sm3/m_sm3.c
+crypto/sm3/sm3.c
+crypto/sm4/sm4.c
+crypto/stack/stack.c
+crypto/threads_none.c
+crypto/threads_pthread.c
+crypto/threads_win.c
+crypto/txt_db/txt_db.c
+crypto/ui/ui_err.c
+crypto/ui/ui_lib.c
+crypto/ui/ui_null.c
+crypto/ui/ui_openssl.c
+crypto/ui/ui_util.c
+crypto/uid.c
+crypto/x509/by_dir.c
+crypto/x509/by_file.c
+crypto/x509/t_crl.c
+crypto/x509/t_req.c
+crypto/x509/t_x509.c
+crypto/x509/x509_att.c
+crypto/x509/x509_cmp.c
+crypto/x509/x509_d2.c
+crypto/x509/x509_def.c
+crypto/x509/x509_err.c
+crypto/x509/x509_ext.c
+crypto/x509/x509_lu.c
+crypto/x509/x509_meth.c
+crypto/x509/x509_obj.c
+crypto/x509/x509_r2x.c
+crypto/x509/x509_req.c
+crypto/x509/x509_set.c
+crypto/x509/x509_trs.c
+crypto/x509/x509_txt.c
+crypto/x509/x509_v3.c
+crypto/x509/x509_vfy.c
+crypto/x509/x509_vpm.c
+crypto/x509/x509cset.c
+crypto/x509/x509name.c
+crypto/x509/x509rset.c
+crypto/x509/x509spki.c
+crypto/x509/x509type.c
+crypto/x509/x_all.c
+crypto/x509/x_attrib.c
+crypto/x509/x_crl.c
+crypto/x509/x_exten.c
+crypto/x509/x_name.c
+crypto/x509/x_pubkey.c
+crypto/x509/x_req.c
+crypto/x509/x_x509.c
+crypto/x509/x_x509a.c
+crypto/x509v3/pcy_cache.c
+crypto/x509v3/pcy_data.c
+crypto/x509v3/pcy_lib.c
+crypto/x509v3/pcy_map.c
+crypto/x509v3/pcy_node.c
+crypto/x509v3/pcy_tree.c
+crypto/x509v3/v3_addr.c
+crypto/x509v3/v3_admis.c
+crypto/x509v3/v3_akey.c
+crypto/x509v3/v3_akeya.c
+crypto/x509v3/v3_alt.c
+crypto/x509v3/v3_asid.c
+crypto/x509v3/v3_bcons.c
+crypto/x509v3/v3_bitst.c
+crypto/x509v3/v3_conf.c
+crypto/x509v3/v3_cpols.c
+crypto/x509v3/v3_crld.c
+crypto/x509v3/v3_enum.c
+crypto/x509v3/v3_extku.c
+crypto/x509v3/v3_genn.c
+crypto/x509v3/v3_ia5.c
+crypto/x509v3/v3_info.c
+crypto/x509v3/v3_int.c
+crypto/x509v3/v3_lib.c
+crypto/x509v3/v3_ncons.c
+crypto/x509v3/v3_pci.c
+crypto/x509v3/v3_pcia.c
+crypto/x509v3/v3_pcons.c
+crypto/x509v3/v3_pku.c
+crypto/x509v3/v3_pmaps.c
+crypto/x509v3/v3_prn.c
+crypto/x509v3/v3_purp.c
+crypto/x509v3/v3_skey.c
+crypto/x509v3/v3_sxnet.c
+crypto/x509v3/v3_tlsf.c
+crypto/x509v3/v3_utl.c
+crypto/x509v3/v3err.c
+crypto/arm_arch.h
+crypto/mips_arch.h
+crypto/ppc_arch.h
+crypto/s390x_arch.h
+crypto/sparc_arch.h
+crypto/vms_rms.h
+crypto/aes/aes_local.h
+crypto/asn1/asn1_item_list.h
+crypto/asn1/asn1_local.h
+crypto/asn1/charmap.h
+crypto/asn1/standard_methods.h
+crypto/asn1/tbl_standard.h
+crypto/async/async_local.h
+crypto/async/arch/async_null.h
+crypto/async/arch/async_posix.h
+crypto/async/arch/async_win.h
+crypto/bio/bio_local.h
+crypto/bn/bn_local.h
+crypto/bn/bn_prime.h
+crypto/bn/rsaz_exp.h
+crypto/comp/comp_local.h
+crypto/conf/conf_def.h
+crypto/conf/conf_local.h
+crypto/dh/dh_local.h
+crypto/dso/dso_local.h
+crypto/evp/evp_local.h
+crypto/hmac/hmac_local.h
+crypto/lhash/lhash_local.h
+crypto/md5/md5_local.h
+crypto/modes/modes_local.h
+crypto/objects/obj_dat.h
+crypto/objects/obj_local.h
+crypto/objects/obj_xref.h
+crypto/ocsp/ocsp_local.h
+crypto/pkcs12/p12_local.h
+crypto/rand/rand_local.h
+crypto/rsa/rsa_local.h
+crypto/sha/sha_local.h
+crypto/siphash/siphash_local.h
+crypto/sm3/sm3_local.h
+crypto/store/store_local.h
+crypto/ui/ui_local.h
+crypto/x509/x509_local.h
+crypto/x509v3/ext_dat.h
+crypto/x509v3/pcy_local.h
+crypto/x509v3/standard_exts.h
+crypto/x509v3/v3_admis.h
+crypto/poly1305/poly1305.c
+crypto/poly1305/poly1305_ameth.c
+crypto/poly1305/poly1305_pmeth.c
+crypto/poly1305/poly1305_local.h
+crypto/chacha/chacha_enc.c
+ssl/bio_ssl.c
+ssl/d1_lib.c
+ssl/d1_msg.c
+ssl/d1_srtp.c
+ssl/methods.c
+ssl/packet.c
+ssl/pqueue.c
+ssl/record/dtls1_bitmap.c
+ssl/record/rec_layer_d1.c
+ssl/record/rec_layer_s3.c
+ssl/record/ssl3_buffer.c
+ssl/record/ssl3_record.c
+ssl/record/ssl3_record_tls13.c
+ssl/s3_cbc.c
+ssl/s3_enc.c
+ssl/s3_lib.c
+ssl/s3_msg.c
+ssl/ssl_asn1.c
+ssl/ssl_cert.c
+ssl/ssl_ciph.c
+ssl/ssl_conf.c
+ssl/ssl_err.c
+ssl/ssl_init.c
+ssl/ssl_lib.c
+ssl/ssl_mcnf.c
+ssl/ssl_rsa.c
+ssl/ssl_sess.c
+ssl/ssl_stat.c
+ssl/ssl_txt.c
+ssl/ssl_utst.c
+ssl/statem/extensions.c
+ssl/statem/extensions_clnt.c
+ssl/statem/extensions_cust.c
+ssl/statem/extensions_srvr.c
+ssl/statem/statem.c
+ssl/statem/statem_clnt.c
+ssl/statem/statem_dtls.c
+ssl/statem/statem_lib.c
+ssl/statem/statem_srvr.c
+ssl/t1_enc.c
+ssl/t1_lib.c
+ssl/t1_trce.c
+ssl/tls13_enc.c
+ssl/tls_srp.c
+ssl/packet_local.h
+ssl/ssl_cert_table.h
+ssl/ssl_local.h
+ssl/record/record.h
+ssl/record/record_local.h
+ssl/statem/statem.h
+ssl/statem/statem_local.h
+MacOS/buildinf.h
+  ossl_store.c
+  rand_pool.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  CryptoPkg/CryptoPkg.dec
+  $(ADDITIONAL_OpenSsl_Packages)
+  
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  #RngLib #APTIOV OVERRIDE- To avoid build error when used in ARM projects.
+  PrintLib
+  $(ADDITIONAL_OpenSsl_LibraryClasses)
+  $(ADDITIONAL_LibraryClasses)
+  
+[LibraryClasses.ARM]
+  ArmSoftFloatLib
+  
+  [BuildOptions]
+  #
+  # Disables the following Visual Studio compiler warnings brought by openssl source,
+  # so we do not break the build with /WX option:
+  #   C4090: 'function' : different 'const' qualifiers
+  #   C4132: 'object' : const object should be initialized (tls13_enc.c)
+  #   C4244: conversion from type1 to type2, possible loss of data
+  #   C4245: conversion from type1 to type2, signed/unsigned mismatch
+  #   C4267: conversion from size_t to type, possible loss of data
+  #   C4306: 'identifier' : conversion from 'type1' to 'type2' of greater size
+  #   C4310: cast truncates constant value
+  #   C4389: 'operator' : signed/unsigned mismatch (xxxx)
+  #   C4700: uninitialized local variable 'name' used. (conf_sap.c(71))
+  #   C4702: unreachable code
+  #   C4706: assignment within conditional expression
+  #   C4819: The file contains a character that cannot be represented in the current code page
+  #   /Od : Added to disable Optimization to avoid _ftol2 build error.
+  MSFT:*_*_IA32_CC_FLAGS   = -U_WIN32 -U_WIN64 -U_MSC_VER $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) /wd4090 /wd4132 /wd4244 /wd4245 /wd4267 /wd4310 /wd4389 /wd4700 /wd4702 /wd4706 /wd4819 /w /Od
+  MSFT:*_*_X64_CC_FLAGS    = -U_WIN32 -U_WIN64 -U_MSC_VER $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) /wd4090 /wd4132 /wd4244 /wd4245 /wd4267 /wd4306 /wd4310 /wd4700 /wd4389 /wd4702 /wd4706 /wd4819 /w /Od
+
+  INTEL:*_*_IA32_CC_FLAGS  = -U_WIN32 -U_WIN64 -U_MSC_VER -U__ICC $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) /w
+  INTEL:*_*_X64_CC_FLAGS   = -U_WIN32 -U_WIN64 -U_MSC_VER -U__ICC $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) /w
+
+  #
+  # Suppress the following build warnings in openssl so we don't break the build with -Werror
+  #   -Werror=maybe-uninitialized: there exist some other paths for which the variable is not initialized.
+  #   -Werror=format: Check calls to printf and scanf, etc., to make sure that the arguments supplied have
+  #                   types appropriate to the format string specified.
+  #   -Werror=unused-but-set-variable: Warn whenever a local variable is assigned to, but otherwise unused (aside from its declaration).
+  #
+  GCC:*_*_IA32_CC_FLAGS    = -U_WIN32 -U_WIN64 $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) -Wno-error=maybe-uninitialized -Wno-error=unused-but-set-variable
+  GCC:*_*_X64_CC_FLAGS     = -U_WIN32 -U_WIN64 $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) -Wno-error=maybe-uninitialized -Wno-error=format -Wno-format -Wno-error=unused-but-set-variable -DNO_MSABI_VA_FUNCS
+  GCC:*_*_IPF_CC_FLAGS      = -U_WIN32 -U_WIN64 $(OPENSSL_FLAGS) -Wno-error=maybe-uninitialized -Wno-format $(OPENSSL_EXFLAGS)
+  GCC:*_*_ARM_CC_FLAGS     = $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) -Wno-error=maybe-uninitialized -Wno-error=unused-but-set-variable
+  GCC:*_*_AARCH64_CC_FLAGS = $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) -Wno-error=maybe-uninitialized -Wno-format -Wno-error=unused-but-set-variable
+  GCC:*_*_RISCV64_CC_FLAGS = $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) -Wno-error=maybe-uninitialized -Wno-format -Wno-error=unused-but-set-variable
+  GCC:*_CLANG35_*_CC_FLAGS = -std=c99 -Wno-error=uninitialized
+  GCC:*_CLANG38_*_CC_FLAGS = -std=c99 -Wno-error=uninitialized
+  GCC:*_CLANGPDB_*_CC_FLAGS = -std=c99 -Wno-error=uninitialized -Wno-error=incompatible-pointer-types -Wno-error=pointer-sign -Wno-error=implicit-function-declaration -Wno-error=ignored-pragma-optimize
+
+  # suppress the following warnings in openssl so we don't break the build with warnings-as-errors:
+  # 1295: Deprecated declaration <entity> - give arg types
+  #  550: <entity> was set but never used
+  # 1293: assignment in condition
+  #  111: statement is unreachable (invariably "break;" after "return X;" in case statement)
+  #   68: integer conversion resulted in a change of sign ("if (Status == -1)")
+  #  177: <entity> was declared but never referenced
+  #  223: function <entity> declared implicitly
+  #  144: a value of type <type> cannot be used to initialize an entity of type <type>
+  #  513: a value of type <type> cannot be assigned to an entity of type <type>
+  #  188: enumerated type mixed with another type (i.e. passing an integer as an enum without a cast)
+  # 1296: Extended constant initialiser used
+  #  128: loop is not reachable - may be emitted inappropriately if code follows a conditional return
+  #       from the function that evaluates to true at compile time
+  #  546: transfer of control bypasses initialization - may be emitted inappropriately if the uninitialized
+  #       variable is never referenced after the jump
+  #    1: ignore "#1-D: last line of file ends without a newline"
+  # 3017: <entity> may be used before being set (NOTE: This was fixed in OpenSSL 1.1 HEAD with
+  #       commit d9b8b89bec4480de3a10bdaf9425db371c19145b, and can be dropped then.)
+  RVCT:*_*_ARM_CC_FLAGS     = $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) --library_interface=aeabi_clib99 --fpu=vfpv3 --diag_suppress=1296,1295,550,1293,111,68,177,223,144,513,188,128,546,1,3017 -JCryptoPkg/Include
+  XCODE:*_*_IA32_CC_FLAGS   = -mmmx -msse -U_WIN32 -U_WIN64 $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) -w -std=c99 -Wno-error=uninitialized
+  XCODE:*_*_X64_CC_FLAGS    = -mmmx -msse -U_WIN32 -U_WIN64 $(OPENSSL_FLAGS) $(OPENSSL_EXFLAGS) -w -std=c99 -Wno-error=uninitialized
+
+  #
+  # AARCH64 uses strict alignment and avoids SIMD registers for code that may execute
+  # with the MMU off. This involves SEC, PEI_CORE and PEIM modules as well as BASE
+  # libraries, given that they may be included into such modules.
+  # This library, even though of the BASE type, is never used in such cases, and
+  # avoiding the SIMD register file (which is shared with the FPU) prevents the
+  # compiler from successfully building some of the OpenSSL source files that
+  # use floating point types, so clear the flags here.
+  #
+  GCC:*_*_AARCH64_CC_XIPFLAGS ==

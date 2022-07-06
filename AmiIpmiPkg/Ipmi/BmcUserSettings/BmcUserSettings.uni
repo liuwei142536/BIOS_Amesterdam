@@ -1,0 +1,117 @@
+﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @file BmcUserSettings.uni
+//
+//  String definitions for the BMC User settings
+//
+
+//#include "VFR.uni"
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"    // AMI Mapping Language
+
+#string STR_NULL_STRING                             #language en-US ""
+
+#string STR_BMC_USER_SETTINGS_TITLE                 #language en-US "BMC User Settings"
+#string STR_BMC_USER_SETTINGS_HELP                  #language en-US "Press <Enter> to Add, Delete and Set Privilege level for users."
+
+#string STR_ADD_BMC_USER                            #language en-US "Add User"
+#string STR_ADD_BMC_USER_HELP                       #language en-US "Press <Enter> to Add a User."
+
+#string STR_DELETE_BMC_USER                         #language en-US "Delete User"
+#string STR_DELETE_BMC_USER_HELP                    #language en-US "Press <Enter> to Delete a User."
+
+#string STR_CHANGE_BMC_USER_SETTINGS                #language en-US "Change User Settings"
+#string STR_CHANGE_BMC_USER_SETTINGS_HELP           #language en-US "Press <Enter> to Change User Settings."
+
+#string STR_BMC_ADD_USER_TITLE                      #language en-US "BMC Add User Details"
+
+#string STR_BMC_USER_NAME                           #language en-US "User Name"
+                                                    #language x-AMI "IPMI800"
+#string STR_BMC_USER_NAME_HELP                      #language en-US "Enter BMC User Name"
+
+
+#string STR_BMC_USER_PASSWORD                       #language en-US "User Password"
+                                                    #language x-AMI "IPMI801"
+#string STR_BMC_USER_PASSWORD_HELP                  #language en-US "Enter BMC User Password"
+
+#string STR_BMC_CHANNEL_NUMBER                      #language en-US "Channel No"
+                                                    #language x-AMI "IPMI802"
+#string STR_BMC_CHANNEL_NUMBER_HELP                 #language en-US "Enter BMC Channel Number"
+
+#string STR_BMC_USER_PRIVILEGE_LIMIT                #language en-US "User Privilege Limit"
+                                                    #language x-AMI "IPMI803"
+#string STR_BMC_USER_PRIVILEGE_LIMIT_HELP           #language en-US "Enter BMC User Privilege Limit for Selected Channel"
+
+#string STR_RESERVED                                #language en-US "Reserved"
+#string STR_CALLBACK                                #language en-US "Callback"
+#string STR_USER                                    #language en-US "User"
+#string STR_OPERATOR                                #language en-US "Operator"
+#string STR_ADMINISTRATOR                           #language en-US "Administrator"
+#string STR_OEM_PROPRIETARY                         #language en-US "OEM Proprietary"
+#string STR_NO_ACCESS                               #language en-US "No Access"
+
+#string STR_BMC_DELETE_USER_TITLE                   #language en-US "BMC Delete User Details"
+
+#string STR_BMC_CHANGE_USER_SETTINGS_TITLE          #language en-US "BMC Change User Settings"
+
+#string STR_BMC_CHANGE_USER_PASSWORD                #language en-US "Change User Password"
+                                                    #language x-AMI "IPMI804"
+#string STR_BMC_CHANGE_USER_PASSWORD_HELP           #language en-US "Enter New Password to change."
+
+#string STR_BMC_USER_ACCESS                         #language en-US "User Access"
+                                                    #language x-AMI "IPMI805"
+#string STR_BMC_USER_HELP                           #language en-US "Enable/Disable the BMC User's Access."
+#string STR_USER_ENABLE                             #language en-US "Enable"
+#string STR_USER_DISABLE                            #language en-US "Disable"
+
+#string STR_BMC_USER_SETTINGS_INFO                  #language en-US "BMC USER SETTINGS INFO"
+#string STR_IPMI_PROTOCOL_ERROR                     #language en-US " IPMI Protocol Error!!! "
+#string STR_NEW_USER_ADD_ERROR                      #language en-US " Add New User Not Possible!!! "
+#string STR_USER_NAME_EXISTS                        #language en-US " User Name Already Exist!!! Enter New User Name "
+#string STR_USER_ADD_NOT_POSSIBLE                   #language en-US " No More User Allowed!!!"
+#string STR_SET_USER_NAME_CMD_FAIL                  #language en-US " Set User Name Command Failed!!!"
+#string STR_SET_USER_PASSWORD_FAIL                  #language en-US " Set User Password Failed!!! "
+#string STR_GET_CHANNEL_ACCESS_CMD_FAIL             #language en-US " Get Channel Access Command Failed!!! "
+#string STR_SET_USER_ACCESS_CMD_FAIL                #language en-US " Set User Access Command Failed!!! "
+#string STR_SET_USER_ACCESS_CMD_PASS                #language en-US " Set User Access Command Passed!!! "
+#string STR_USER_NAME_NOT_AVAILABLE                 #language en-US " User Name Not Available!!! "
+#string STR_USER_PASSWORD_INVALID_SIZE              #language en-US " User Password Of Invalid Size!!! "
+#string STR_USER_PASSWORD_MISMATCH                  #language en-US " User Password Not Matched!!! "
+#string STR_USER_NAME_DELETE_FAIL                   #language en-US " Delete User Name Failed!!! "
+#string STR_USER_DELETED                            #language en-US " User Deleted!!! "
+#string STR_USER_NAME_NOT_FOUND                     #language en-US " User Name Not Found "
+#string STR_INVALID_USER_PASSWORD                   #language en-US " User Password Invalid!!! "
+#string STR_USER_ENABLE_OPERATION_FAIL              #language en-US " User Enable Operation Failed!!! "
+#string STR_USER_DISABLE_OPERATION_FAIL             #language en-US " User Disable Operation Failed!!! "
+#string STR_USER_ENABLE_OPERATION_PASS              #language en-US " User Enable Operation Passed!!! "
+#string STR_USER_DISABLE_OPERATION_PASS             #language en-US " User Disable Operation Passed!!! "
+#string STR_ADD_USERNAME_OPERATION_PASSED           #language en-US " Added User successfully "
+#string STR_VALID_BMC_LAN_CHANNEL_NOT_FOUND         #language en-US " Valid BMC LAN Channel Not Found "
+#string STR_CHANGED_USERPASSWORD_OPERATION_PASSED   #language en-US " Password Changed successfully "
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

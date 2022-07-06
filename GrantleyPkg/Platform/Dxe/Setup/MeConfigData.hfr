@@ -1,0 +1,1252 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+// /*++
+// Copyright (c) 2011-2021 Intel Corporation. All rights reserved.
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// --*/
+
+#include "Configuration.h"
+#include "SetupMisc.h"
+
+#include <Token.h> // Aptio V server override
+
+#define ME_CONFIG_DATA_FILE
+#include "Library/MeTypeLib.h"
+#if defined(AMT_SUPPORT) && AMT_SUPPORT
+#include "AmtSetup.h"
+#include "MeState.h"
+#if defined(ICC_SUPPORT) && ICC_SUPPORT
+#include "IccSetup.h"
+#endif // ICC_SUPPORT
+#endif // AMT_SUPPORT
+
+#ifndef INVENTORY
+#define INVENTORY(Name,Value) \
+    text \
+      help  = STRING_TOKEN(STR_EMPTY), \
+      text  = Name, \
+      text  = Value, \
+      flags = 0, \
+      key   = 0;
+#endif // INVENTORY
+
+//**********************************************************************
+//                ADVANCED - ME Configuration Form
+//**********************************************************************
+
+//
+// ME Configuration Form
+//
+form formid = VFR_FORMID_ME,
+  title   = STRING_TOKEN(STR_SERVER_ME_FORM_TITLE);
+  subtitle text = STRING_TOKEN(STR_SERVER_ME_SUBTITLE);
+  //
+  // Display the ME Firmware Version available in MKHI interface
+  //
+  text
+    help  = STRING_TOKEN(STR_ME_FWVER_OPERATIONAL_HELP),
+    text  = STRING_TOKEN(STR_ME_FWVER_OPERATIONAL_PROMPT),
+    text  = STRING_TOKEN(STR_ME_FWVER_OPERATIONAL_VALUE),
+    flags = 0,
+    key   = 0;
+
+  suppressif NOT ideqval SYSTEM_CONFIGURATION.MeFirmwareInfo == 0xFF;
+    INVENTORY(STRING_TOKEN(STR_ME_FW_TYPE_PROMPT),STRING_TOKEN(STR_ME_FW_TYPE_SPS))
+    INVENTORY(STRING_TOKEN(STR_ME_FW_TYPE_PROMPT),STRING_TOKEN(STR_ME_FW_TYPE_AMT))
+    INVENTORY(STRING_TOKEN(STR_ME_FW_TYPE_PROMPT),STRING_TOKEN(STR_ME_FW_TYPE_UNKNOWN))
+  endif;
+
+  text
+    help   = STRING_TOKEN(STR_ME_FW_TYPE_HELP),
+    text   = STRING_TOKEN(STR_ME_FW_TYPE_PROMPT),
+    text   = STRING_TOKEN(STR_ME_FW_TYPE_VALUE),
+    flags  = 0,
+    key    = 0;
+
+#if defined(AMT_SUPPORT) && AMT_SUPPORT
+  suppressif NOT ideqval SYSTEM_CONFIGURATION.MeType == METYPE_ME9;
+
+    suppressif NOT ideqval SYSTEM_CONFIGURATION.MeFirmwareInfo == 0xFF;
+      INVENTORY(STRING_TOKEN(STR_ME_FW_INFO_PROMPT),STRING_TOKEN(STR_ME_NORMAL_MODE))
+      INVENTORY(STRING_TOKEN(STR_ME_FW_INFO_PROMPT),STRING_TOKEN(STR_ME_ALT_DISABLED))
+      INVENTORY(STRING_TOKEN(STR_ME_FW_INFO_PROMPT),STRING_TOKEN(STR_ME_TEMP_DISABLED))
+      INVENTORY(STRING_TOKEN(STR_ME_FW_INFO_PROMPT),STRING_TOKEN(STR_ME_SECOVER))
+      INVENTORY(STRING_TOKEN(STR_ME_FW_INFO_PROMPT),STRING_TOKEN(STR_ME_FAILED))
+    endif;
+    text
+      help   = STRING_TOKEN(STR_ME_FW_INFO_HELP),
+      text   = STRING_TOKEN(STR_ME_FW_INFO_PROMPT),
+      text   = STRING_TOKEN(STR_ME_FW_INFO_VALUE),
+      flags  = 0,
+      key    = 0;
+
+    text
+      help   = STRING_TOKEN(STR_ME_FW_SKU_HELP),
+      text   = STRING_TOKEN(STR_ME_FW_SKU_PROMPT),
+      text   = STRING_TOKEN(STR_ME_FW_SKU_VALUE),
+      flags  = 0,
+      key    = 0;
+
+    text
+      help   = STRING_TOKEN(STR_ME_FILE_SYSTEM_CORRUPTION_HELP),
+      text   = STRING_TOKEN(STR_ME_FILE_SYSTEM_CORRUPTION_PROMPT),
+      text   = STRING_TOKEN(STR_ME_FILE_SYSTEM_CORRUPTION_VALUE),
+      flags  = 0,
+      key    = 0;
+  endif; // Suppress if MeType != AMT
+#endif // AMT_SUPPORT
+    
+  suppressif TRUE;  //AptioV server override: ME File System Backup version is not obtained using any of the HECI commands.
+  text
+    help  = STRING_TOKEN(STR_ME_FWVER_BACKUP_HELP),
+    text  = STRING_TOKEN(STR_ME_FWVER_BACKUP_PROMPT),
+    text  = STRING_TOKEN(STR_ME_FWVER_BACKUP_VALUE),
+    flags = 0,
+    key   = 0;
+  endif;    
+  
+  text
+    help  = STRING_TOKEN(STR_ME_FWVER_RECOVERY_HELP),
+    text  = STRING_TOKEN(STR_ME_FWVER_RECOVERY_PROMPT),
+    text  = STRING_TOKEN(STR_ME_FWVER_RECOVERY_VALUE),
+    flags = 0,
+    key   = 0;
+  
+  suppressif ideqval SYSTEM_CONFIGURATION.MeType == METYPE_ME9;
+    text
+      help  = STRING_TOKEN(STR_ME_FWSKU_HELP),
+      text  = STRING_TOKEN(STR_ME_FWSKU_PROMPT),
+      text  = STRING_TOKEN(STR_ME_FWSKU_VALUE),
+      flags = 0,
+      key   = 0;
+  endif;
+
+  //
+  // Display the ME Firmware Status registers available in HECI-1/2 config space
+  //
+  text
+    help  = STRING_TOKEN(STR_ME_FWSTS1_HELP),
+    text  = STRING_TOKEN(STR_ME_FWSTS1_PROMPT),
+    text  = STRING_TOKEN(STR_ME_FWSTS1_VALUE),
+    flags = 0,
+    key   = 0;
+  
+  text
+    help  = STRING_TOKEN(STR_ME_FWSTS2_HELP),
+    text  = STRING_TOKEN(STR_ME_FWSTS2_PROMPT),
+    text  = STRING_TOKEN(STR_ME_FWSTS2_VALUE),
+    flags = 0,
+    key   = 0;
+  
+  text
+    help  = STRING_TOKEN(STR_ME_FWCURSTE_HELP),
+    text  = STRING_TOKEN(STR_ME_FWCURSTE_PROMPT),
+    text  = STRING_TOKEN(STR_ME_FWCURSTE_VALUE),
+    flags = 0,
+    key   = 0;
+  
+  text
+    help  = STRING_TOKEN(STR_ME_FWERRCODE_HELP),
+    text  = STRING_TOKEN(STR_ME_FWERRCODE_PROMPT),
+    text  = STRING_TOKEN(STR_ME_FWERRCODE_VALUE),
+    flags = 0,
+    key   = 0;
+  
+#if SPS_SUPPORT
+  numeric varid = SYSTEM_CONFIGURATION.SpsAltitude,
+    prompt      = STRING_TOKEN(STR_SPSALTITUDE_PROMPT),
+    help        = STRING_TOKEN(STR_SPSALTITUDE_HELP),
+    flags       = DISPLAY_UINT_HEX | RESET_REQUIRED,
+    minimum     = 0,
+    maximum     = 0xFFFFFFFF,
+    step        = 0,          // Stepping of 0 equates to a manual entering
+    default     = 0x80000000,
+    default     = 0x80000000, defaultstore = AmiMfgDefault,
+  endnumeric;
+
+  numeric varid = SYSTEM_CONFIGURATION.SpsMctpBusOwner,
+    prompt  = STRING_TOKEN(STR_MCTP_BUS_OWNER_PROMPT),
+    help    = STRING_TOKEN(STR_MCTP_BUS_OWNER_HELP),
+    flags   = DISPLAY_UINT_HEX | RESET_REQUIRED,
+    minimum = 0,
+    maximum = 0xFFFF,
+    step    = 0,
+    default = 0,
+  endnumeric;
+#endif
+ 
+#if defined(AMT_SUPPORT) && AMT_SUPPORT
+  suppressif NOT ideqval SYSTEM_CONFIGURATION.MeType == METYPE_ME9;
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+    oneof varid      = SYSTEM_CONFIGURATION.MeStateControl,
+      prompt         = STRING_TOKEN(STR_ME_STATE_CONTROL_PROMPT),
+      help           = STRING_TOKEN(STR_ME_STATE_CONTROL_HELP),
+      option text    = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+      option text    = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+    oneof varid = SYSTEM_CONFIGURATION.Amt,
+      prompt   = STRING_TOKEN(STR_AMT_PROMPT),
+      help     = STRING_TOKEN(STR_AMT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED), value = 0, flags =  RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+    endoneof;
+    goto VFR_FORMID_AMT,
+      prompt  = STRING_TOKEN(STR_AMT_FORM),
+      help    = STRING_TOKEN(STR_AMT_FORM_HELP);
+  endif; // Suppress if MeType != AMT
+#endif // AMT_SUPPORT
+endform;
+
+#if defined(AMT_SUPPORT) && AMT_SUPPORT
+  suppressif NOT ideqval SYSTEM_CONFIGURATION.MeType == METYPE_ME9;
+    //
+    // AMT information
+    //
+    form formid = VFR_FORMID_AMT,
+    title       = STRING_TOKEN(STR_AMT_FORM);
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+    subtitle text = STRING_TOKEN(STR_FW_UPGRADE_SUBTITLE);
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.Amt == 0;
+      oneof varid      = SYSTEM_CONFIGURATION.MeFwDowngrade,
+        prompt         = STRING_TOKEN(STR_AMT_ME_FW_DOWNGRADE_PROMPT),
+        help           = STRING_TOKEN(STR_AMT_ME_FW_DOWNGRADE_HELP),
+        option text    = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text    = STRING_TOKEN(STR_ENABLED), value = 1, flags =  RESET_REQUIRED;
+      endoneof;
+      suppressif
+      NOT ideqval SYSTEM_CONFIGURATION.MeImageType == ME_IMAGE_1_5MB_FW;
+        oneof varid      = SYSTEM_CONFIGURATION.LocalFwUpdEnabled,
+          prompt         = STRING_TOKEN(STR_AMT_LOCAL_FW_UPDATE_PROMPT),
+          help           = STRING_TOKEN(STR_AMT_LOCAL_FW_UPDATE_HELP),
+          option text    = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING;
+          option text    = STRING_TOKEN(STR_ENABLED), value = 1, flags = 0;
+        endoneof;
+      endif;
+
+      subtitle text = STRING_TOKEN(STR_NULL_STRING);
+      subtitle text = STRING_TOKEN(STR_AMT_SUBTITLE);
+
+      suppressif
+      ideqval SYSTEM_CONFIGURATION.MeImageType == ME_IMAGE_1_5MB_FW
+      OR ideqval SYSTEM_CONFIGURATION.MeStateControl == 0
+      OR NOT ideqval SYSTEM_CONFIGURATION.MeFirmwareInfo == ME_MODE_NORMAL;
+        oneof varid      = SYSTEM_CONFIGURATION.MngState,
+          prompt         = STRING_TOKEN(STR_MNG_STATE_PROMPT),
+          help           = STRING_TOKEN(STR_MNG_STATE_HELP),
+          option text    = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED;
+          option text    = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      suppressif
+      ideqval SYSTEM_CONFIGURATION.MeStateControl == 0 OR
+      NOT ideqval SYSTEM_CONFIGURATION.MeFirmwareInfo == ME_MODE_NORMAL;
+        oneof varid = SYSTEM_CONFIGURATION.IfrUpdateEnabled,
+          prompt = STRING_TOKEN(STR_AMT_IFR_UPDATE_PROMPT),
+          help   = STRING_TOKEN(STR_AMT_IFR_UPDATE_HELP),
+          option text = STRING_TOKEN(STR_DISABLED),  value = 0, flags = DEFAULT | MANUFACTURING |RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      oneof varid      = SYSTEM_CONFIGURATION.MdesCapability,
+        prompt = STRING_TOKEN(STR_MDES_PROMPT),
+        help   = STRING_TOKEN(STR_MDES_HELP),
+        option text    = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED;
+        option text    = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid      = SYSTEM_CONFIGURATION.SvtForPchCap,
+        prompt = STRING_TOKEN(STR_SVT_FOR_PCH_PROMPT),
+        help   = STRING_TOKEN(STR_SVT_FOR_PCH_HELP),
+        option text    = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | RESET_REQUIRED;
+        option text    = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      checkbox varid  = SYSTEM_CONFIGURATION.AmtbxHotKeyPressed,
+        prompt   = STRING_TOKEN(STR_AMTBX_HOTKEY_PRESSED_PROMPT),
+        help     = STRING_TOKEN(STR_AMTBX_HOTKEY_PRESSED_HELP),
+        // Flags behavior for checkbox is overloaded so that it equals
+        // a DEFAULT value.  CHECKBOX_DEFAULT = ON, 0 = off
+        flags    = 0 | RESET_REQUIRED,
+        key      = 0,
+      endcheckbox;
+
+      checkbox varid  = SYSTEM_CONFIGURATION.HideUnConfigureMeConfirm,
+        prompt   = STRING_TOKEN(STR_AMT_HIDE_CONFIRMATION_UNCONFIGURE_ME_PROMPT),
+        help     = STRING_TOKEN(STR_AMT_HIDE_CONFIRMATION_UNCONFIGURE_ME_HELP),
+        // Flags behavior for checkbox is overloaded so that it equals
+        // a DEFAULT value.  CHECKBOX_DEFAULT = ON, 0 = off
+        flags    = 0 | RESET_REQUIRED,
+        key      = 0,
+      endcheckbox;
+
+      checkbox varid  = SYSTEM_CONFIGURATION.UnConfigureMe,
+        prompt   = STRING_TOKEN(STR_AMT_UNCONFIGURE_ME_PROMPT),
+        help     = STRING_TOKEN(STR_AMT_UNCONFIGURE_ME_HELP),
+        // Flags behavior for checkbox is overloaded so that it equals
+        // a DEFAULT value.  CHECKBOX_DEFAULT = ON, 0 = off
+        flags    = 0 | RESET_REQUIRED,
+        key      = 0,
+      endcheckbox;
+
+      oneof varid = SYSTEM_CONFIGURATION.USBProvision,
+        prompt   = STRING_TOKEN(STR_AMT_USB_CONFIGURE_PROMPT),
+        help     = STRING_TOKEN(STR_AMT_USB_CONFIGURE_HELP),
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      oneof varid = SYSTEM_CONFIGURATION.FWProgress,
+        prompt   = STRING_TOKEN(STR_AMT_PET_PROGRESS_PROMPT),
+        help     = STRING_TOKEN(STR_AMT_PET_PROGRESS_HELP),
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+
+      checkbox varid  = SYSTEM_CONFIGURATION.AmtCiraRequest,
+        prompt   = STRING_TOKEN(STR_AMT_CIRA_REQUEST_PROMPT),
+        help     = STRING_TOKEN(STR_AMT_CIRA_REQUEST_HELP),
+        // Flags behavior for checkbox is overloaded so that it equals
+        // a DEFAULT value.  CHECKBOX_DEFAULT = ON, 0 = off
+        flags    = 0 | RESET_REQUIRED,
+        key      = 0,
+      endcheckbox;
+
+      grayoutif ideqval SYSTEM_CONFIGURATION.AmtCiraRequest == 0 OR ideqval SYSTEM_CONFIGURATION.Amt == 0;
+        numeric varid   = SYSTEM_CONFIGURATION.AmtCiraTimeout,
+          prompt  = STRING_TOKEN (STR_AMT_CIRA_TIMEOUT_PROMPT),
+          help    = STRING_TOKEN (STR_AMT_CIRA_TIMEOUT_HELP),
+          flags   = RESET_REQUIRED,
+          minimum = 0,
+          maximum = 255,
+          step    = 1 ,       // Stepping of 0 equates to a manual entering
+                              // of a value, otherwise it will auto-increment
+                              // with a left/right arrow
+          default = 0,
+        endnumeric;
+      endif;
+
+      oneof varid = SYSTEM_CONFIGURATION.Asf,
+        prompt   = STRING_TOKEN(STR_ASF_PROMPT),
+        help     = STRING_TOKEN(STR_ASF_HELP),
+        option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+      endoneof;
+
+      grayoutif ideqval SYSTEM_CONFIGURATION.Asf == 0;
+        oneof varid = SYSTEM_CONFIGURATION.WatchDog,
+          prompt   = STRING_TOKEN(STR_WATCHDOG_PROMPT),
+          help     = STRING_TOKEN(STR_WATCHDOG_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+      endif;
+
+      grayoutif ideqval SYSTEM_CONFIGURATION.Asf == 0 OR ideqval SYSTEM_CONFIGURATION.WatchDog == 0;
+        numeric varid   = SYSTEM_CONFIGURATION.WatchDogTimerBios,
+          prompt  = STRING_TOKEN (STR_WATCHDOG_TIMER_BIOS_PROMPT),
+          help    = STRING_TOKEN (STR_WATCHDOG_TIMER_BIOS_HELP),
+          minimum = 0,
+          maximum = 65535,
+          step    = 1 , // Stepping of 0 equates to a manual entering
+                        // of a value, otherwise it will auto-increment
+                        // with a left/right arrow
+          default = 0,
+        endnumeric;
+      
+        oneof varid = SYSTEM_CONFIGURATION.WatchDogOs,
+          prompt   = STRING_TOKEN(STR_WATCHDOG_OS_PROMPT),
+          help     = STRING_TOKEN(STR_WATCHDOG_OS_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = RESET_REQUIRED;
+        endoneof;
+      
+
+        grayoutif ideqval SYSTEM_CONFIGURATION.WatchDogOs == 0;
+          numeric varid   = SYSTEM_CONFIGURATION.WatchDogTimerOs,
+            prompt  = STRING_TOKEN (STR_WATCHDOG_TIMER_OS_PROMPT),
+            help    = STRING_TOKEN (STR_WATCHDOG_TIMER_OS_HELP),
+            minimum = 0,
+            maximum = 65535,
+            step    = 1 , // Stepping of 0 equates to a manual entering
+                          // of a value, otherwise it will auto-increment
+                          // with a left/right arrow
+            default = 0,
+          endnumeric;
+        endif;
+      endif;
+	  
+      subtitle text = STRING_TOKEN(STR_NULL_STRING);
+      checkbox varid  = SYSTEM_CONFIGURATION.MebxDebugMsg,
+        prompt   = STRING_TOKEN(STR_AMT_MEBX_DEBUG_MSG_PROMPT),
+        help     = STRING_TOKEN(STR_AMT_MEBX_DEBUG_MSG_HELP),
+        // Flags behavior for checkbox is overloaded so that it equals
+        // a DEFAULT value.  CHECKBOX_DEFAULT = ON, 0 = off
+        flags    = 0 | RESET_REQUIRED,
+        key      = 0,
+      endcheckbox;
+
+      checkbox varid  = SYSTEM_CONFIGURATION.AmtbxSelectionScreen,
+        prompt   = STRING_TOKEN(STR_AMTBX_SELECTION_SCREEN_PROMPT),
+        help     = STRING_TOKEN(STR_AMTBX_SELECTION_SCREEN_HELP),
+        // Flags behavior for checkbox is overloaded so that it equals
+        // a DEFAULT value.  CHECKBOX_DEFAULT = ON, 0 = off
+        flags    = 0 | RESET_REQUIRED,
+        key      = 0,
+      endcheckbox;
+
+      goto VFR_FORMID_MEBX,
+        prompt  = STRING_TOKEN(STR_MEBX_FORM),
+        help    = STRING_TOKEN(STR_MEBX_FORM_HELP);
+
+    endif; // grayoutif ideqval SYSTEM_CONFIGURATION.Amt == 0;
+  endform;
+
+  form formid = VFR_FORMID_MEBX,
+    title     = STRING_TOKEN(STR_MEBX_FORM);
+
+    oneof varid = SYSTEM_CONFIGURATION.MebxNonUiTextMode,
+      prompt   = STRING_TOKEN(STR_MEBX_NONUI_MODE_PROMPT),
+      help     = STRING_TOKEN(STR_MEBX_NONUI_MODE_HELP),
+      option text = STRING_TOKEN(STR_MEBX_MODE_AUTO), value = 0, flags = DEFAULT | MANUFACTURING;
+      option text = STRING_TOKEN(STR_MEBX_TEXT_80_25), value = 1, flags = 0;
+      option text = STRING_TOKEN(STR_MEBX_TEXT_100_31), value = 2, flags = 0;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MebxUiTextMode,
+      prompt   = STRING_TOKEN(STR_MEBX_UI_MODE_PROMPT),
+      help     = STRING_TOKEN(STR_MEBX_UI_MODE_HELP),
+      option text = STRING_TOKEN(STR_MEBX_MODE_AUTO), value = 0, flags = DEFAULT | MANUFACTURING;
+      option text = STRING_TOKEN(STR_MEBX_TEXT_80_25), value = 1, flags = 0;
+      option text = STRING_TOKEN(STR_MEBX_TEXT_100_31), value = 2, flags = 0;
+    endoneof;
+
+    oneof varid = SYSTEM_CONFIGURATION.MebxGraphicsMode,
+      prompt   = STRING_TOKEN(STR_MEBX_GRAPHICS_MODE_PROMPT),
+      help     = STRING_TOKEN(STR_MEBX_GRAPHICS_MODE_HELP),
+      option text = STRING_TOKEN(STR_MEBX_MODE_AUTO), value = 0, flags = DEFAULT | MANUFACTURING;
+      option text = STRING_TOKEN(STR_MEBX_GRAPHICS_640_480), value = 1, flags = 0;
+      option text = STRING_TOKEN(STR_MEBX_GRAPHICS_800_600), value = 2, flags = 0;
+      option text = STRING_TOKEN(STR_MEBX_GRAPHICS_1024_768), value = 3, flags = 0;
+    endoneof;
+  endform;
+//AptioV Server override: Resolve HpkTool error endif; // Suppress if MeType != AMT
+#endif // AMT_SUPPORT
+
+form formid = VFR_FORMID_FWDEBUG,
+  title     = STRING_TOKEN(STR_FWDEBUG_FORM_TITLE);
+
+  goto VFR_FORMID_SIEN,
+    prompt = STRING_TOKEN(STR_SIEN_FORM),
+    help   = STRING_TOKEN(STR_SIEN_FORM_HELP);
+
+  goto VFR_FORMID_NM,
+    prompt = STRING_TOKEN(STR_NM_FORM),
+    help   = STRING_TOKEN(STR_NM_FORM_HELP);  
+
+
+endform;
+
+form formid = VFR_FORMID_SIEN,
+  title     = STRING_TOKEN(STR_SIEN_FORM);
+
+  numeric varid = SYSTEM_CONFIGURATION.MeTimeout,
+    prompt      = STRING_TOKEN(STR_ME_TIMEOUT_PROMPT),
+    help        = STRING_TOKEN(STR_ME_TIMEOUT_HELP),
+    flags       = 0 | RESET_REQUIRED,
+    minimum     = 0,
+    maximum     = 12,
+    step        = 1,
+    default     = 2,
+    default     = 2, defaultstore = AmiMfgDefault,
+  endnumeric;
+
+  numeric varid = SYSTEM_CONFIGURATION.SpsWaitingTimer,
+    prompt  = STRING_TOKEN (STR_SPS_TIMER_CUSTOM),
+    help    = STRING_TOKEN (STR_SPS_TIMER_CUSTOM),
+    flags   = 0 | RESET_REQUIRED,
+    minimum = 1,
+    maximum = 128,
+    step    = 1,
+    default = 1,
+    default = 1, defaultstore = AmiMfgDefault,
+  endnumeric;
+
+// AptioV Server Override Start: Suppressing Unused setup controls
+  suppressif TRUE;
+
+  checkbox varid = SYSTEM_CONFIGURATION.MeDidEnabled,
+    prompt       = STRING_TOKEN(STR_ME_DID_ENABLE_PROMPT),
+    help         = STRING_TOKEN(STR_ME_DID_ENABLE_HELP),
+    // Flags behavior for checkbox is overloaded so that it equals
+    // a DEFAULT value.  CHECKBOX_DEFAULT = ON, 0 = off
+    flags        = CHECKBOX_DEFAULT | RESET_REQUIRED,
+    key          = 0,
+  endcheckbox;
+
+  grayoutif ideqval SYSTEM_CONFIGURATION.MeDidEnabled == 0; 
+    checkbox varid = SYSTEM_CONFIGURATION.MeDidTimeout,
+      prompt       = STRING_TOKEN(STR_ME_DID_TIMEOUT_PROMPT),
+      help         = STRING_TOKEN(STR_ME_DID_TIMEOUT_HELP),
+      // Flags behavior for checkbox is overloaded so that it equals
+      // a DEFAULT value.  CHECKBOX_DEFAULT = ON, 0 = off
+      flags        = CHECKBOX_DEFAULT | RESET_REQUIRED,
+      key          = 0,
+    endcheckbox;
+
+    oneof varid   = SYSTEM_CONFIGURATION.MeDidInitStat,
+      prompt      = STRING_TOKEN(STR_ME_DID_INIT_STAT_PROMPT),
+      help        = STRING_TOKEN(STR_ME_DID_INIT_STAT_HELP),
+      option text = STRING_TOKEN(STR_ME_DID_INIT_STAT_AUTO), value = 0, flags = DEFAULT | RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ME_DID_INIT_STAT_0), value = 1, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ME_DID_INIT_STAT_1), value = 2, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ME_DID_INIT_STAT_2), value = 3, flags = RESET_REQUIRED;
+    endoneof;
+  endif;
+// AptioV Server Override end: Suppressing Unused setup controls
+  endif;
+#if (defined(ICC_SUPPORT) && ICC_SUPPORT) || (defined(SPS_SUPPORT) && SPS_SUPPORT)
+  goto VFR_FORMID_ICC_ENABLES,
+    prompt  = STRING_TOKEN(STR_ME_ICC_ENABLES_OVERRIDE_FORM),
+    help    = STRING_TOKEN(STR_ME_ICC_ENABLES_OVERRIDE_FORM_HELP),
+    flags   = 0;
+#endif // ICC_SUPPORT || SPS_SUPPORT
+
+#if (defined(SPS_SUPPORT) && SPS_SUPPORT)
+  suppressif NOT ideqval SYSTEM_CONFIGURATION.MeType == METYPE_SPS;
+    goto VFR_FORMID_ICC_SPREAD,
+      prompt  = STRING_TOKEN(STR_ME_ICC_SSC_OVERRIDE_FORM),
+      help    = STRING_TOKEN(STR_ME_ICC_SSC_OVERRIDE_FORM_HELP);
+  endif; // Suppress if MeType != SPS
+#endif
+
+
+// AptioV Server Override start: Suppressing setup controls that should not be changed
+  suppressif TRUE;
+  oneof varid   = SYSTEM_CONFIGURATION.MeHmrfpoLockEnabled,
+    prompt      = STRING_TOKEN(STR_ME_HMRFPOLOCK_PROMPT),
+    help        = STRING_TOKEN(STR_ME_HMRFPOLOCK_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0 | DEFAULT;
+  endoneof;
+        
+  grayoutif ideqval SYSTEM_CONFIGURATION.MeHmrfpoLockEnabled == 0; 
+    oneof varid   = SYSTEM_CONFIGURATION.MeHmrfpoEnableEnabled,
+      prompt      = STRING_TOKEN(STR_ME_HMRFPOENABLE_PROMPT),
+      help        = STRING_TOKEN(STR_ME_HMRFPOENABLE_HELP),
+      option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0 | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0;
+    endoneof;
+  endif;
+        
+  oneof varid   = SYSTEM_CONFIGURATION.MeEndOfPostEnabled,
+    prompt      = STRING_TOKEN(STR_ME_ENDOFPOST_PROMPT),
+    help        = STRING_TOKEN(STR_ME_ENDOFPOST_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0 | DEFAULT;
+  endoneof;
+  
+  //
+  // Depricating this setup option. Always lock and disable global reset capability
+  //
+  suppressif TRUE;
+  oneof varid   = SYSTEM_CONFIGURATION.MeGrLockEnabled,
+    prompt      = STRING_TOKEN(STR_ME_GRLOCK_PROMPT),
+    help        = STRING_TOKEN(STR_ME_GRLOCK_HELP), 
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags =  RESET_REQUIRED | MANUFACTURING | DEFAULT;
+  endoneof;
+  endif;
+
+  oneof varid   = SYSTEM_CONFIGURATION.MeHeci1Enabled,
+    prompt      = STRING_TOKEN(STR_ME_HECI1ENABLE_PROMPT),
+    help        = STRING_TOKEN(STR_ME_HECI1ENABLE_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0;
+    option text = STRING_TOKEN(STR_AUTO),     value = 2, flags = 0 | DEFAULT;
+  endoneof;
+
+  oneof varid   = SYSTEM_CONFIGURATION.MeHeci2Enabled,
+    prompt      = STRING_TOKEN(STR_ME_HECI2ENABLE_PROMPT),
+    help        = STRING_TOKEN(STR_ME_HECI2ENABLE_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0;
+    option text = STRING_TOKEN(STR_AUTO),     value = 2, flags = 0 | DEFAULT;
+  endoneof;
+
+  oneof varid   = SYSTEM_CONFIGURATION.MeIderEnabled,
+    prompt      = STRING_TOKEN(STR_ME_IDERENABLE_PROMPT),
+    help        = STRING_TOKEN(STR_ME_IDERENABLE_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0;
+    option text = STRING_TOKEN(STR_AUTO),     value = 2, flags = 0 | DEFAULT;
+  endoneof;
+  
+  oneof varid   = SYSTEM_CONFIGURATION.MeKtEnabled,
+    prompt      = STRING_TOKEN(STR_ME_KTENABLE_PROMPT),
+    help        = STRING_TOKEN(STR_ME_KTENABLE_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0;
+    option text = STRING_TOKEN(STR_AUTO),     value = 2, flags = 0 | DEFAULT;
+  endoneof;
+
+  oneof varid   = SYSTEM_CONFIGURATION.MeSiliconViewTechEnabled,
+    prompt      = STRING_TOKEN(STR_ME_SVT_ENABLED_PROMPT),
+    help        = STRING_TOKEN(STR_ME_SVT_ENABLED_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0 | DEFAULT;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0;
+  endoneof;
+
+  oneof varid   = SYSTEM_CONFIGURATION.MeMphyDebugEnableSurvivabilityTable,
+    prompt      = STRING_TOKEN(STR_ME_MPHY_EN_SURV_TABLE_PROMPT),
+    help        = STRING_TOKEN(STR_ME_MPHY_EN_SURV_TABLE_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0 | DEFAULT;
+  endoneof;  
+
+  oneof varid   = SYSTEM_CONFIGURATION.MeMphyDebugCorruptEndpoints,
+    prompt      = STRING_TOKEN(STR_ME_MPHY_CORRUPT_ENDPOINTS_PROMPT),
+    help        = STRING_TOKEN(STR_ME_MPHY_CORRUPT_ENDPOINTS_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0 | DEFAULT;
+    option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0;
+  endoneof;  
+  
+  endif;
+// AptioV Server Override end: Suppressing setup controls that should not be changed
+
+#if TESTMENU_FLAG || ME_TESTMENU_FLAG
+  oneof varid   = SYSTEM_CONFIGURATION.CoreBiosDoneEnabled,
+    prompt      = STRING_TOKEN(STR_ME_CORE_BIOS_DONE_PROMPT),
+    help        = STRING_TOKEN(STR_ME_CORE_BIOS_DONE_HELP),
+    option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = RESET_REQUIRED;
+    option text = STRING_TOKEN(STR_ENABLED), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+  endoneof;
+#endif // TESTMENU_FLAG || ME_TESTMENU_FLAG
+endform;
+
+form formid = VFR_FORMID_NM,
+  title     = STRING_TOKEN(STR_NM_FORM_TITLE);
+  
+// AptioV server override start - Use BootPState setup question for changing MSR 0x199
+suppressif TRUE;
+  checkbox varid   = SYSTEM_CONFIGURATION.NmPwrOptBootOverride,
+    prompt      = STRING_TOKEN(STR_NM_BOOT_MODE_OVERRIDE_PROMPT),
+    help        = STRING_TOKEN(STR_NM_BOOT_MODE_OVERRIDE_HELP),
+    flags       = 0 | RESET_REQUIRED,
+    key         = 0,
+  endcheckbox;
+  
+  grayoutif ideqval SYSTEM_CONFIGURATION.NmPwrOptBootOverride == 0;
+    oneof varid   = SYSTEM_CONFIGURATION.NmPwrOptBoot,
+      prompt      = STRING_TOKEN(STR_NM_BOOT_MODE_PROMPT),
+      help        = STRING_TOKEN(STR_NM_BOOT_MODE_HELP),
+      option text = STRING_TOKEN(STR_PERF_OPTIMIZED),  value = 0, flags = RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_POWER_OPTIMIZED), value = 1, flags = RESET_REQUIRED;
+    endoneof;
+  endif;
+endif;
+// AptioV server override end - Use BootPState setup question for changing MSR 0x199
+  
+  checkbox varid   = SYSTEM_CONFIGURATION.NmCores2DisableOverride,
+    prompt      = STRING_TOKEN(STR_NM_CORES_DISABLE_OVERRIDE_PROMPT),
+    help        = STRING_TOKEN(STR_NM_CORES_DISABLE_OVERRIDE_HELP),
+    flags       = 0 | RESET_REQUIRED,
+    key         = 0,
+  endcheckbox;
+  
+  grayoutif ideqval SYSTEM_CONFIGURATION.NmCores2DisableOverride == 0;
+    numeric varid   = SYSTEM_CONFIGURATION.NmCores2Disable,
+      prompt  = STRING_TOKEN(STR_NM_CORES_DISABLE_PROMPT),
+      help    = STRING_TOKEN(STR_NM_CORES_DISABLE_HELP),
+      flags   = 0 | RESET_REQUIRED,
+      minimum = 0,
+      maximum = 0x7F,
+      step    = 1,
+      default = 0,
+    endnumeric;
+  endif;
+  
+  checkbox varid   = SYSTEM_CONFIGURATION.NmPowerMsmtOverride,
+    prompt      = STRING_TOKEN(STR_NM_POWERMSMT_OVERRIDE_PROMPT),
+    help        = STRING_TOKEN(STR_NM_POWERMSMT_OVERRIDE_HELP),
+    flags       = 0 | RESET_REQUIRED,
+    key         = 0,
+  endcheckbox;
+
+  grayoutif ideqval SYSTEM_CONFIGURATION.NmPowerMsmtOverride == 0; 
+    oneof varid   = SYSTEM_CONFIGURATION.NmPowerMsmtSupport,
+      prompt      = STRING_TOKEN(STR_NM_POWERMSMT_SUPPORT_PROMPT),
+      help        = STRING_TOKEN(STR_NM_POWERMSMT_SUPPORT_HELP),
+      option text = STRING_TOKEN(STR_DISABLED), value = 0, flags = 0 | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_ENABLED),  value = 1, flags = 0 | RESET_REQUIRED;
+    endoneof;
+  endif;
+
+  checkbox varid   = SYSTEM_CONFIGURATION.NmHwChangeOverride,
+    prompt      = STRING_TOKEN(STR_NM_HWCHANGE_OVERRIDE_PROMPT),
+    help        = STRING_TOKEN(STR_NM_HWCHANGE_OVERRIDE_HELP),
+    flags       = 0 | RESET_REQUIRED,
+    key         = 0,
+  endcheckbox;
+
+  grayoutif ideqval SYSTEM_CONFIGURATION.NmHwChangeOverride == 0; 
+    oneof varid   = SYSTEM_CONFIGURATION.NmHwChangeStatus,
+      prompt      = STRING_TOKEN(STR_NM_HWCHANGE_STATUS_PROMPT),
+      help        = STRING_TOKEN(STR_NM_HWCHANGE_STATUS_HELP),
+      option text = STRING_TOKEN(STR_NO),  value = 0, flags = 0 | RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_YES), value = 1, flags = 0 | RESET_REQUIRED;
+    endoneof;
+  endif;
+  
+endform;
+
+form formid = VFR_FORMID_ICC_ENABLES,
+  title     = STRING_TOKEN(STR_ME_ICC_ENABLES_OVERRIDE_FORM_TITLE);
+
+
+  checkbox varid = SYSTEM_CONFIGURATION.IccClockEnablesOverride,
+    prompt       = STRING_TOKEN(STR_ME_ICC_ENABLES_OVERRIDE_PROMPT),
+    help         = STRING_TOKEN(STR_ME_ICC_ENABLES_OVERRIDE_HELP),
+    flags        = 0 | RESET_REQUIRED,
+    key          = 0,
+  endcheckbox;
+
+  grayoutif ideqval SYSTEM_CONFIGURATION.IccClockEnablesOverride == 0;
+
+#if (defined(ICC_SUPPORT) && ICC_SUPPORT)
+  suppressif NOT ideqval SYSTEM_CONFIGURATION.MeType == METYPE_ME9;
+    oneof varid     = SYSTEM_CONFIGURATION.IccWdtEnabled,
+        prompt      = STRING_TOKEN(STR_ICC_WDT_ENABLE),
+        help        = STRING_TOKEN(STR_ICC_WDT_ENABLE_HELP),
+        option text = STRING_TOKEN(STR_DISABLED), value = OPTION_DISABLED, flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED),  value = OPTION_ENABLED, flags = RESET_REQUIRED;
+    endoneof;
+
+    oneof varid     = SYSTEM_CONFIGURATION.IccSetClockEnables,
+        prompt      = STRING_TOKEN(STR_ICC_CLOCK_ENABLING),
+        help        = STRING_TOKEN(STR_ICC_CLOCK_ENABLING_HELP),
+        option text = STRING_TOKEN(STR_DISABLED), value = OPTION_DISABLED, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED),  value = OPTION_ENABLED,  flags = DEFAULT | RESET_REQUIRED;
+    endoneof;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.ShowCustomLock == DONT_DISPLAY;
+    grayoutif ideqval SYSTEM_CONFIGURATION.AllowAdvancedOptions == DONT_DISPLAY;
+    oneof varid     = SYSTEM_CONFIGURATION.LockMask,
+        prompt      = STRING_TOKEN(STR_ICC_LOCK),
+        help        = STRING_TOKEN(STR_ICC_LOCK_HELP_CUSTOM),
+        option text = STRING_TOKEN(STR_ICC_LOCK_DEFAULT), value = OPTION_LOCK_STATIC, flags = DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ICC_LOCK_ALL), value = OPTION_LOCK_ALL, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ICC_UNLOCK_ALL), value = OPTION_UNLOCK_ALL, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ICC_LOCK_CUSTOM), value = OPTION_USE_OEM, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+    endif;
+
+    suppressif ideqval SYSTEM_CONFIGURATION.ShowCustomLock == DISPLAY;
+    grayoutif ideqval SYSTEM_CONFIGURATION.AllowAdvancedOptions == DONT_DISPLAY;
+    oneof varid     = SYSTEM_CONFIGURATION.LockMask,
+        prompt      = STRING_TOKEN(STR_ICC_LOCK),
+        help        = STRING_TOKEN(STR_ICC_LOCK_HELP),
+/*
+        default value=cond(ideqvallist SYSTEM_CONFIGURATION.PlatId == BoardIdHarrisBeachFfrd BoardIdFfrdSku2 BoardIdFfrdSku3 BoardIdFfrdSku4 
+                      ? OPTION_LOCK_STATIC:OPTION_UNLOCK_ALL), defaultstore = MyStandardDefault,
+        default value=cond(ideqvallist SYSTEM_CONFIGURATION.PlatId == BoardIdHarrisBeachFfrd BoardIdFfrdSku2 BoardIdFfrdSku3 BoardIdFfrdSku4 
+                      ? OPTION_LOCK_STATIC:OPTION_UNLOCK_ALL), defaultstore = MyManufactureDefault,
+*/
+        option text = STRING_TOKEN(STR_ICC_LOCK_DEFAULT), value = OPTION_LOCK_STATIC, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ICC_LOCK_ALL), value = OPTION_LOCK_ALL, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ICC_UNLOCK_ALL), value = OPTION_UNLOCK_ALL, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+    endif;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.ShowProfile == DONT_DISPLAY;
+    numeric varid = SYSTEM_CONFIGURATION.IccProfile,
+        prompt    = STRING_TOKEN(STR_ICC_PROFILE),
+        help      = STRING_TOKEN(STR_ICC_PROFILE_HELP),
+        flags     = RESET_REQUIRED | INTERACTIVE,
+        key       = KEY_ICC_PROFILE,
+        minimum   = 0,
+        maximum   = 15,
+        step      = 1,
+        default   = 0,
+    endnumeric;
+    endif;
+
+//    suppressif NOT ideqval SYSTEM_CONFIGURATION.PlatformType == 1; // TBD TypeUlt;
+      oneof varid     = SYSTEM_CONFIGURATION.IccPllShutdownEnabled,
+          prompt      = STRING_TOKEN(STR_ICC_PLL_SHUTDOWN),
+          help        = STRING_TOKEN(STR_ICC_PLL_SHUTDOWN_HELP),
+          option text = STRING_TOKEN(STR_DISABLED), value = OPTION_DISABLED, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ENABLED),  value = OPTION_ENABLED, flags = DEFAULT | RESET_REQUIRED;
+      endoneof;
+//    endif;
+
+    subtitle text = STRING_TOKEN(STR_EMPTY_STRING);
+
+    grayoutif TRUE;
+      text
+        help   = STRING_TOKEN(STR_EMPTY_STRING),
+        text   = STRING_TOKEN(STR_ICC_LIB_VERSION),
+        text   = STRING_TOKEN(STR_ICC_LIB_VERSION_NR),
+        flags  = 0, key = 0;
+    endif;
+
+    subtitle text = STRING_TOKEN(STR_EMPTY_STRING);
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.AllowAdvancedOptions == DONT_DISPLAY;
+      suppressif ideqval SYSTEM_CONFIGURATION.ShowClock[CLOCK2] == DONT_DISPLAY;
+        //
+        // CLOCK 2 SETTINGS
+        //
+        subtitle text = STRING_TOKEN(STR_ICC_CLOCK2_TITLE);
+          text
+              help   = STRING_TOKEN(STR_EMPTY_STRING),
+              text   = STRING_TOKEN(STR_ICC_CLOCK_DEFAULT_SETTINGS),
+              text   = STRING_TOKEN(STR_ICC_CLOCK2_DEFAULT_TEXT),
+              flags  = 0, key = 0;
+
+          text
+              help   = STRING_TOKEN(STR_EMPTY_STRING),
+              text   = STRING_TOKEN(STR_ICC_CLOCK_FREQ_RANGE),
+              text   = STRING_TOKEN(STR_ICC_CLOCK2_FREQ_RANGE_TEXT),
+              flags  = 0, key = 0;
+
+          text
+              help   = STRING_TOKEN(STR_EMPTY_STRING),
+              text   = STRING_TOKEN(STR_ICC_CLOCK_MAX_SPREAD),
+              text   = STRING_TOKEN(STR_ICC_CLOCK2_MAX_SPREAD_TEXT),
+              flags  = 0, key = 0;
+
+          text
+              help   = STRING_TOKEN(STR_EMPTY_STRING),
+              text   = STRING_TOKEN(STR_ICC_CLOCK_SPREAD_ADJUSTMENTS),
+              text   = STRING_TOKEN(STR_ICC_CLOCK2_SPREAD_ADJUSTMENTS_TEXT),
+              flags  = 0, key = 0;
+
+          suppressif ideqval SYSTEM_CONFIGURATION.ShowFrequency[CLOCK2] == DONT_DISPLAY;
+            numeric varid = SYSTEM_CONFIGURATION.Frequency[CLOCK2],
+                prompt    = STRING_TOKEN(STR_ICC_CLOCK_FREQUENCY1),
+                help      = STRING_TOKEN(STR_ICC_CLOCK_FREQUENCY_HELP),
+                flags     = INTERACTIVE,
+                key       = KEY_ICC_FREQ2,
+                minimum   = 0,
+                maximum   = 65535,
+                step      = 1,
+                default   = 0,
+            endnumeric;
+          endif;
+
+          suppressif ideqval SYSTEM_CONFIGURATION.ShowSpread[CLOCK2] == DONT_DISPLAY;
+            numeric varid = SYSTEM_CONFIGURATION.Spread[CLOCK2],
+                prompt    = STRING_TOKEN(STR_ICC_CLOCK_SPREAD_PERCENT1),
+                help      = STRING_TOKEN(STR_ICC_CLOCK_SPREAD_PERCENT_HELP),
+                flags     = INTERACTIVE,
+                key       = KEY_ICC_SPREAD2,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 0,
+            endnumeric;
+          endif;
+
+          suppressif ideqval SYSTEM_CONFIGURATION.ShowRatio[CLOCK2] == DONT_DISPLAY;
+            oneof varid     = SYSTEM_CONFIGURATION.DmiPegRatio[CLOCK2],
+              questionid  = KEY_ICC_RATIO2,
+              prompt      = STRING_TOKEN(STR_ICC_DMI_PEG_RATIO),
+              help        = STRING_TOKEN(STR_ICC_DMI_PEG_RATIO_HELP),
+              option text = STRING_TOKEN(STR_ICC_DMI_PEG_RATIO_1_TO_1), value = 0, flags = DEFAULT | RESET_REQUIRED | INTERACTIVE;
+              option text = STRING_TOKEN(STR_ICC_DMI_PEG_RATIO_5_TO_4), value = 1, flags = RESET_REQUIRED | INTERACTIVE;
+              option text = STRING_TOKEN(STR_ICC_DMI_PEG_RATIO_5_TO_3), value = 2, flags = RESET_REQUIRED | INTERACTIVE;
+              option text = STRING_TOKEN(STR_ICC_DMI_PEG_RATIO_5_TO_2), value = 3, flags = RESET_REQUIRED | INTERACTIVE;
+            endoneof;
+          endif;
+        endif;
+    endif;
+
+    subtitle text = STRING_TOKEN(STR_EMPTY_STRING);
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.AllowAdvancedOptions == DONT_DISPLAY;
+      suppressif ideqval SYSTEM_CONFIGURATION.ShowClock[CLOCK3] == DONT_DISPLAY;
+        //
+        // CLOCK 3 SETTINGS
+        //
+        subtitle text = STRING_TOKEN(STR_ICC_CLOCK3_TITLE);
+          text
+              help   = STRING_TOKEN(STR_EMPTY_STRING),
+              text   = STRING_TOKEN(STR_ICC_CLOCK_DEFAULT_SETTINGS),
+              text   = STRING_TOKEN(STR_ICC_CLOCK3_DEFAULT_TEXT),
+              flags  = 0, key = 0;
+
+          text
+              help   = STRING_TOKEN(STR_EMPTY_STRING),
+              text   = STRING_TOKEN(STR_ICC_CLOCK_FREQ_RANGE),
+              text   = STRING_TOKEN(STR_ICC_CLOCK3_FREQ_RANGE_TEXT),
+              flags  = 0, key = 0;
+
+          text
+              help   = STRING_TOKEN(STR_EMPTY_STRING),
+              text   = STRING_TOKEN(STR_ICC_CLOCK_MAX_SPREAD),
+              text   = STRING_TOKEN(STR_ICC_CLOCK3_MAX_SPREAD_TEXT),
+              flags  = 0, key = 0;
+
+          text
+              help   = STRING_TOKEN(STR_EMPTY_STRING),
+              text   = STRING_TOKEN(STR_ICC_CLOCK_SPREAD_ADJUSTMENTS),
+              text   = STRING_TOKEN(STR_ICC_CLOCK3_SPREAD_ADJUSTMENTS_TEXT),
+              flags  = 0, key = 0;
+
+          suppressif ideqval SYSTEM_CONFIGURATION.ShowFrequency[CLOCK3] == DONT_DISPLAY;
+            numeric varid = SYSTEM_CONFIGURATION.Frequency[CLOCK3],
+                prompt    = STRING_TOKEN(STR_ICC_CLOCK_FREQUENCY2),
+                help      = STRING_TOKEN(STR_ICC_CLOCK_FREQUENCY_HELP),
+                flags     = INTERACTIVE,
+                key       = KEY_ICC_FREQ3,
+                minimum   = 0,
+                maximum   = 65535,
+                step      = 1,
+                default   = 0,
+            endnumeric;
+          endif;
+
+          suppressif ideqval SYSTEM_CONFIGURATION.ShowSpread[CLOCK3] == DONT_DISPLAY;
+            numeric
+                varid = SYSTEM_CONFIGURATION.Spread[CLOCK3],
+                prompt    = STRING_TOKEN(STR_ICC_CLOCK_SPREAD_PERCENT2),
+                help      = STRING_TOKEN(STR_ICC_CLOCK_SPREAD_PERCENT_HELP),
+                flags     = INTERACTIVE,
+                key       = KEY_ICC_SPREAD3,
+                minimum   = 0,
+                maximum   = 255,
+                step      = 1,
+                default   = 0,
+            endnumeric;
+          endif;
+        endif;
+    endif;
+  endif; // Suppress if MeType != AMT
+#endif // ICC_SUPPORT
+
+#if (defined(SPS_SUPPORT) && SPS_SUPPORT)
+  suppressif NOT ideqval SYSTEM_CONFIGURATION.MeType == METYPE_SPS;
+    checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_FLEX0,
+      prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_FLEX0_PROMPT),
+      help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+      flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_FLEX1,
+      prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_FLEX1_PROMPT),
+      help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+      flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_FLEX2,
+      prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_FLEX2_PROMPT),
+      help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+      flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_FLEX3,
+      prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_FLEX3_PROMPT),
+      help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+      flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_PCICLK0,
+      prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_PCICLK0_PROMPT),
+      help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+      flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_PCICLK1,
+      prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_PCICLK1_PROMPT),
+      help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+      flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+    checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_PCICLK2,
+      prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_PCICLK2_PROMPT),
+      help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+      flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+      key    = 0,
+    endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_PCICLK3,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_PCICLK3_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_PCICLK4,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_PCICLK4_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_SRC0,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_SRC0_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_SRC1,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_SRC1_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_SRC2,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_SRC2_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_SRC3,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_SRC3_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_SRC4,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_SRC4_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_SRC5,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_SRC5_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_SRC6,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_SRC6_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_SRC7,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_SRC7_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_ITPXDP,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_ITPXDP_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+       flags  = 0 | RESET_REQUIRED,
+       key    = 0,
+      endcheckbox;
+
+#ifdef DE_SKU
+    suppressif TRUE;
+#endif
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_PEG_A,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_PEG_A_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+#ifdef DE_SKU
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+#else
+       flags  = 0 | RESET_REQUIRED,
+#endif
+       key    = 0,
+      endcheckbox;
+#ifdef DE_SKU
+    endif;
+#endif
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_PEG_B,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_PEG_B_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+#ifdef DE_SKU
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+#else
+       flags  = 0 | RESET_REQUIRED,
+#endif
+       key    = 0,
+      endcheckbox;
+
+      grayoutif TRUE; // currently not in "Clock Mask Before POST" in XML
+        checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_DMI,
+         prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_DMI_PROMPT),
+         help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+#ifdef DE_SKU
+         flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+#else
+         flags  = 0 | RESET_REQUIRED,
+#endif
+         key    = 0,
+        endcheckbox;
+      endif;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_DMI2,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_DP_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+#ifdef DE_SKU
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+#else
+       flags  = 0 | RESET_REQUIRED,
+#endif
+       key    = 0,
+      endcheckbox;
+
+      checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_PEG_C,
+       prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_DPNS_PROMPT),
+       help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+#ifdef DE_SKU
+       flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+#else
+       flags  = 0 | RESET_REQUIRED,
+#endif
+       key    = 0,
+      endcheckbox;
+
+      grayoutif TRUE; // currently not in "Clock Mask Before POST" in XML
+        checkbox varid = SYSTEM_CONFIGURATION.IccClockEnables_Modulator4Enable,
+         prompt = STRING_TOKEN(STR_ME_ICC_ENABLES_MODULATOR4ENABLE_PROMPT),
+         help   = STRING_TOKEN(STR_ME_ICC_ENABLES_BITS_HELP),
+#ifdef DE_SKU
+         flags  = 0 | RESET_REQUIRED,
+#else
+         flags  = CHECKBOX_DEFAULT | RESET_REQUIRED,
+#endif
+         key    = 0,
+        endcheckbox;
+      endif;
+  endif;  // Suppress if MeType != SPS
+#endif // SPS_SUPPORT (ICC)
+    endif; //grayoutif ideqval SYSTEM_CONFIGURATION.IccClockEnablesOverride == 0;
+endform; // VFR_FORMID_ICC_ENABLES
+
+#if (defined(SPS_SUPPORT) && SPS_SUPPORT)
+//AptioV Server override: Resolve HpkTool error
+  suppressif NOT ideqval SYSTEM_CONFIGURATION.MeType == METYPE_SPS;
+
+    form formid = VFR_FORMID_ICC_SPREAD,
+      title     = STRING_TOKEN(STR_ME_ICC_SSC_OVERRIDE_FORM_TITLE);
+      oneof varid   = SYSTEM_CONFIGURATION.IccSscOverride,
+          prompt      = STRING_TOKEN(STR_ME_ICC_SSC_OVERRIDE_PROMPT),
+          help        = STRING_TOKEN(STR_ME_ICC_SSC_OVERRIDE_HELP),
+          option text = STRING_TOKEN(STR_ME_ICC_SSC_OVERRIDE_ENABLE),    value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSC_OVERRIDE_AUTO),      value = 2, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+
+
+      grayoutif ideqval SYSTEM_CONFIGURATION.IccSscOverride == 0 OR ideqval SYSTEM_CONFIGURATION.IccSscOverride == 2; 
+        oneof varid   = SYSTEM_CONFIGURATION.IccSscMode[0],
+          prompt      = STRING_TOKEN(STR_ME_ICC_SSC0_PROMPT),
+          help        = STRING_TOKEN(STR_ME_ICC_SSC_HELP),
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DOWN),       value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_CENTER),     value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DISABLE),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DONOTCHANGE),value = 4, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_AUTO),       value = 5, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+
+        oneof varid   = SYSTEM_CONFIGURATION.IccSscMode[1],
+          prompt      = STRING_TOKEN(STR_ME_ICC_SSC1_PROMPT),
+          help        = STRING_TOKEN(STR_ME_ICC_SSC_HELP),
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DOWN),       value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_CENTER),     value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DISABLE),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DONOTCHANGE),value = 4, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_AUTO),       value = 5, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+
+        oneof varid   = SYSTEM_CONFIGURATION.IccSscMode[2],
+          prompt      = STRING_TOKEN(STR_ME_ICC_SSC2_PROMPT),
+          help        = STRING_TOKEN(STR_ME_ICC_SSC_HELP),
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DOWN),       value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_CENTER),     value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DISABLE),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DONOTCHANGE),value = 4, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_AUTO),       value = 5, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+
+        oneof varid   = SYSTEM_CONFIGURATION.IccSscMode[3],
+          prompt      = STRING_TOKEN(STR_ME_ICC_SSC3_PROMPT),
+          help        = STRING_TOKEN(STR_ME_ICC_SSC_HELP),
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DOWN),       value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_CENTER),     value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DISABLE),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DONOTCHANGE),value = 4, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_AUTO),       value = 5, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+
+        oneof varid   = SYSTEM_CONFIGURATION.IccSscMode[4],
+          prompt      = STRING_TOKEN(STR_ME_ICC_SSC4_PROMPT),
+          help        = STRING_TOKEN(STR_ME_ICC_SSC_HELP),
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DOWN),       value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_CENTER),     value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DISABLE),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DONOTCHANGE),value = 4, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_AUTO),       value = 5, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+
+        oneof varid   = SYSTEM_CONFIGURATION.IccSscMode[5],
+          prompt      = STRING_TOKEN(STR_ME_ICC_SSC5_PROMPT),
+          help        = STRING_TOKEN(STR_ME_ICC_SSC_HELP),
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DOWN),       value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_CENTER),     value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DISABLE),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DONOTCHANGE),value = 4, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_AUTO),       value = 5, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+
+        oneof varid   = SYSTEM_CONFIGURATION.IccSscMode[6],
+          prompt      = STRING_TOKEN(STR_ME_ICC_SSC6_PROMPT),
+          help        = STRING_TOKEN(STR_ME_ICC_SSC_HELP),
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DOWN),       value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_CENTER),     value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DISABLE),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DONOTCHANGE),value = 4, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_AUTO),       value = 5, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+
+        oneof varid   = SYSTEM_CONFIGURATION.IccSscMode[7],
+          prompt      = STRING_TOKEN(STR_ME_ICC_SSC7_PROMPT),
+          help        = STRING_TOKEN(STR_ME_ICC_SSC_HELP),
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DOWN),       value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_CENTER),     value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DISABLE),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_DONOTCHANGE),value = 4, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_ME_ICC_SSM_AUTO),       value = 5, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+      endif;
+    endform;
+//AptioV Server override: Resolve HpkTool error
+  endif; // Suppress if MeType == SPS
+#endif // SPS_SUPPORT (ICC)

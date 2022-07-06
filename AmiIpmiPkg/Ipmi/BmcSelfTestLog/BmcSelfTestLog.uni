@@ -1,0 +1,96 @@
+﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @file BmcSelfTestLog.uni
+//
+// String definitions for the Bmc Self Test log screen
+//
+
+//#include "VFR.uni"
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"    // AMI Mapping Language
+
+#string STR_NULL_STRING                     #language en-US ""
+
+#string STR_BMC_SELFTEST_LOG                #language en-US "Bmc self test log"
+
+#string STR_BMC_SELFTEST_LOG_HELP           #language en-US "logs the report returned by BMC self test command"
+#string STR_BST_ERASE_LOG                   #language en-US "Erase Log"
+                                            #language x-AMI "IPMI200"
+#string STR_BST_ERASE_LOG_HELP              #language en-US "Erase Log Options"
+#string STR_BST_ERASE_LOG_FULL              #language en-US "When log is full"
+                                            #language x-AMI "IPMI201"
+
+#string STR_BST_ERASE_LOG_FULL_YES          #language en-US "Clear Log"
+#string STR_BST_ERASE_LOG_FULL_NO           #language en-US "Do not log any more"
+#string STR_BST_ERASE_LOG_YES               #language en-US "Yes, On every reset"
+#string STR_BST_ERASE_LOG_NO                #language en-US "No"
+#string STR_BST_ERASE_LOG_FULL_HELP         #language en-US "Select the action to be taken when log is full"
+#string STR_LOG_CAPACITY                    #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_1            #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_2            #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_3            #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_4            #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_5            #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_6            #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_7            #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_8            #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_9            #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_10           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_11           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_12           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_13           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_14           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_15           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_16           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_17           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_18           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_19           #language en-US ""
+#string STR_IPMI_SELF_TEST_LOG_20           #language en-US ""
+
+#string STR_DATE_TIME_STATUSCODE_HEADING    #language en-US ""
+
+#string STR_BMCSELFTESTLOG_PROTOCOL_NOT_FOUND          #language en-US "BmcSelfTestLog protocol not found"
+#string STR_BMCSELFTESTLOG_EMPTY                       #language en-US "Log Empty"
+#string STR_BMC_HARD_FAIL                              #language en-US "BMC hard fail"
+#string STR_BMC_SOFT_FAIL                              #language en-US "BMC soft fail"
+#string STR_BMC_COMMUNICATION_ERROR                    #language en-US "BMC communication error"
+#string STR_SEL_DEVICE_INACCESSIBLE                    #language en-US "Cannot access SEL device"
+#string STR_SDR_REPOSITORY_INACCESSIBLE                #language en-US "Cannot access SDR Repository"
+#string STR_BMC_FRU_DEVICE_INACCESSIBLE                #language en-US "Cannot access BMC FRU device"
+#string STR_IPMB_SIGNAL_LINES_UNRESPONSIVE             #language en-US "IPMB Signal lines do not respond"
+#string STR_SDR_REPOSITORY_EMPTY                       #language en-US "SDR Repository empty"
+#string STR_BMC_FRU_AREA_CORRUPTED                     #language en-US "Internal Use Area of BMC FRU corrupted"
+#string STR_BOOTBLOCK_FIRMWARE_CORRUPTED               #language en-US "Controller updated 'boot block' firmware corrupted"
+#string STR_CONTROLLER_OPERATIONAL_FIRMWARE_CORRUPTED  #language en-US "Controller operational firmware corrupted"
+#string STR_FORCE_UPDATE_MODE                          #language en-US "Force Update Mode"
+#string STR_PROTOCOL_LOCATE_STATUS_PASSED              #language en-US "PASSED"
+#string STR_PROTOCOL_LOCATE_STATUS_FAILED              #language en-US "FAILED"
+#string STR_LOG_AREA_USAGE                             #language en-US "Log area usage = %02d out of 20 logs"
+#string STR_DATE_TIME_STATUSCODE                       #language en-US "DATE        TIME      STATUS CODE"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

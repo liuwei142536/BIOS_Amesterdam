@@ -1,0 +1,11 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrangevillePkg\Library\"
+	RefName = "GrangevillePkg.Library"
+[INF]
+"CpuInitHooksLib\OemCpuInitHooks.inf"
+"IioInitHooksLib\OemIioInitHooks.inf"
+[files]
+"Library.sdl"	
+<endComponent>

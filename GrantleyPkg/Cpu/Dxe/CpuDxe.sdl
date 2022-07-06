@@ -1,0 +1,29 @@
+TOKEN
+	Name  = "CpuDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Dxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PlatformCpuPolicy_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformCpuPolicy support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PlatformCpuPolicy"
+	File  = "PlatformCpuPolicy\PlatformCpuPolicy.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PlatformCpuPolicy_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "GrantleyPkg.PlatformCpuPolicy"
+End
+

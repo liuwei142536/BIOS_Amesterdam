@@ -1,0 +1,13 @@
+<component>
+	name = "RasSmm"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\Smm\"
+	RefName = "GrantleyPkg.RasSmm"
+[files]
+"RasSmm.sdl"	
+[parts]
+"GrantleyPkg.MemRas"
+"GrantleyPkg.SmmErrorLog"
+"GrantleyPkg.McBankErrorInjection"
+"GrantleyPkg.QuiesceSupport"
+<endComponent>

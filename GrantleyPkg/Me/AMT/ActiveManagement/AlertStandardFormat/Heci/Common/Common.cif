@@ -1,0 +1,9 @@
+<component>
+	name = "Common"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\ActiveManagement\AlertStandardFormat\Heci\Common\"
+	RefName = "GrantleyPkg.Common"
+[files]
+"AlertStandardFormatCommon.c"	
+"AlertStandardFormatCommon.h"	
+<endComponent>

@@ -1,0 +1,179 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+/** @file
+    SecureBoot.UNI: String definitions for Security Module
+**/
+
+/=#
+//#include "VFR.uni"
+#langdef   en-US "English"              // English
+#langdef   x-AMI "x-AMI"                // temp. AMI Configuration Language
+
+#string STR_EMPTY_STRING                #language en-US ""
+
+#string SECURE_BOOT_MENU_FORM_TITLE     #language en-US "Secure Boot"
+#string SECURE_BOOT_MENU_FORM_HELP      #language en-US "Secure Boot configuration"
+
+#string STR_PLATFORM_MODE               #language en-US "System Mode"
+#string STR_SETUP                       #language en-US "Setup"
+#string STR_USER                        #language en-US "User"
+#string STR_AUDIT                       #language en-US "Audit"
+#string STR_DEPLOYED                    #language en-US "Deployed"
+
+#string STR_VENDOR_KEYS_MODE            #language en-US "Vendor Keys"
+#string STR_VALID                       #language en-US "Valid"
+#string STR_MODIFIED                    #language en-US "Modified"
+
+// Secure Boot control
+#string STR_SECURE_BOOT_ENABLE          #language en-US "Secure Boot"
+#string STR_SECURE_BOOT_ENABLE          #language x-AMI "SECB001"
+#string STR_SECURE_BOOT_HELP            #language en-US "Secure Boot feature is Active if Secure Boot is Enabled,\nPlatform Key(PK) is enrolled and the System is in User mode.\nThe mode change requires platform reset"
+#string STR_ACTIVE                      #language en-US "Active"
+#string STR_INACTIVE                    #language en-US "Not Active"
+// Secure Boot mode control
+#string STR_SECURE_BOOT_MODE            #language en-US "Secure Boot Mode"
+#string STR_SECURE_BOOT_MODE            #language x-AMI "SECB002"
+#string STR_SECURE_BOOT_MODE_HELP       #language en-US "Secure Boot mode options:\nStandard or Custom.\nIn Custom mode, Secure Boot Policy variables can be configured by a physically present user without full authentication"
+#string SECURE_BOOT_STANDARD            #language en-US "Standard"
+#string SECURE_BOOT_CUSTOM              #language en-US "Custom"
+//------------------------
+// Custom mode controls
+//------------------------
+// Deployment Mode controls
+#string STR_FORCE_AUDIT_MODE            #language en-US "Enter Audit Mode"
+#string STR_FORCE_AUDIT_MODE_HELP       #language en-US "Enter Audit Mode workflow.\nTransitions from User to Audit\nMode will result in erasing of PK variable"
+#string STR_FORCE_DEPLOYED_MODE         #language en-US "Enter Deployed Mode"
+#string STR_EXIT_DEPLOYED_MODE          #language en-US "Exit Deployed Mode"
+#string STR_FORCE_DEPLOYED_MODE_HELP    #language en-US "Transition between Deployment\nand User Modes"
+#string STR_FORCE_SETUP_MODE            #language en-US "Reset To Setup Mode"
+#string STR_FORCE_SETUP_MODE_HELP       #language en-US "Delete all Secure Boot key databases from NVRAM"
+#string STR_FORCE_DEFAULT_MODE          #language en-US "Restore Factory Keys"
+#string STR_FORCE_DEFAULT_MODE_HELP     #language en-US "Force System to User Mode.\nInstall factory default Secure Boot key databases"
+//Reset the content of all UEFI Secure Boot key databases to their factory default values"
+//Force system to user mode - restore factory default Secure Boot key databases"
+
+// Image Execution Policy controls
+#string IMAGE_EXEC_POLICY_FORM_TITLE    #language en-US "Image Execution Policy"
+#string IMAGE_EXEC_POLICY_FORM_HELP     #language en-US "Manage Image Execution Policy on Security Violation"
+
+#string ALWAYS_ENABLED                  #language en-US  "Always Execute"
+#string ALWAYS_DISABLED                 #language en-US  "Always Deny"
+#string ALLOW_EXECUTE_ON_SECURITY_VIOLATION    #language en-US  "Allow Execute"
+#string DEFER_EXECUTE_ON_SECURITY_VIOLATION    #language en-US  "Defer Execute"
+#string DENY_EXECUTE_ON_SECURITY_VIOLATION     #language en-US  "Deny Execute"
+#string QUERY_USER_ON_SECURITY_VIOLATION       #language en-US  "Query User"
+
+#string STR_LOAD_FROM_HELP              #language en-US "Image Execution Policy on Security Violation per Device Path"
+#string STR_LOAD_FROM_FV                #language en-US "Internal FV"
+#string STR_LOAD_FROM_FV                #language x-AMI "SECB003"
+
+#string STR_LOAD_FROM_OROM              #language en-US "Option ROM"
+#string STR_LOAD_FROM_OROM              #language x-AMI "SECB004"
+
+#string STR_LOAD_FROM_REMOVABLE_MEDIA   #language en-US "Removable Media"
+#string STR_LOAD_FROM_REMOVABLE_MEDIA   #language x-AMI "SECB005"
+
+#string STR_LOAD_FROM_FIXED_MEDIA       #language en-US "Fixed Media"
+#string STR_LOAD_FROM_FIXED_MEDIA       #language x-AMI "SECB006"
+
+// Key Management controls
+#string STR_KEY_MANAGEMENT_TITLE        #language en-US "Key Management"
+#string STR_KEY_MANAGEMENT_HELP         #language en-US "Enables expert users to modify\nSecure Boot Policy variables\nwithout full authentication"
+
+#string STR_DEFAULT_KEY_PROVISION_MODE  #language en-US "Factory Key Provision"
+#string STR_DEFAULT_KEY_PROVISION_MODE  #language x-AMI "SECB008"
+
+#string STR_KEY_PROVISION_MODE_HELP     #language en-US "Install factory default Secure Boot keys after the platform reset and while the System is in Setup mode"
+
+#string STR_DEVICE_GUARD_READY          #language en-US "Device Guard Ready"
+#string STR_REMOVE_UEFI_CA_FROM_DB      #language en-US "Remove 'UEFI CA' from DB"
+#string STR_REMOVE_UEFI_CA_FROM_DB_HELP #language en-US "Device Guard ready system must not list 'Microsoft UEFI CA' Certificate in Authorized Signature database (db)"
+#string STR_RESTORE_DB_DEFAULTS         #language en-US "Restore DB defaults"
+#string STR_RESTORE_DB_DEFAULTS_HELP    #language en-US "Restore DB variable to factory defaults"
+
+#string STR_ABSENT_KEY                  #language en-US "No Keys"
+#string STR_CUSTOM_KEY                  #language en-US "External"
+#string STR_DEFAULT_KEY                 #language en-US "Factory"
+#string STR_MIXED_KEY                   #language en-US "Mixed"
+#string STR_AMI_TEST_KEY                #language en-US "Test(AMI)"
+
+#string STR_GET_ALL_VARS                #language en-US "Export Secure Boot variables"
+#string STR_GET_KEYS_HELP               #language en-US "Copy NVRAM content of Secure Boot variables to files in a root folder on a file system device"
+#string STR_ENROLL_EFI_IMAGE            #language en-US "Enroll Efi Image"
+#string STR_ENROLL_EFI_IMAGE_HELP       #language en-US "Allow the image to run in Secure Boot mode.\nEnroll SHA256 Hash certificate of a PE image into Authorized Signature Database (db)"
+//---------------------------------------------------
+#string STR_FILE_SYSTEM                 #language en-US "Select a File system"
+#string STR_FILE_SELECT                 #language en-US "Select File"
+
+#string STR_SECURE_KEY_INFO             #language en-US "Details"
+#string STR_SAVE_VAR_DATA               #language en-US "Export "
+#string STR_SECURE_SET                  #language en-US "Update "
+#string STR_SECURE_APPEND               #language en-US "Append "
+#string STR_SECURE_DELETE               #language en-US "Delete "
+#string STR_KEY_UPDATE_HELP             #language en-US "Enroll Factory Defaults or load certificates from a file:\n 1.Public Key Certificate:\n  a)EFI_SIGNATURE_LIST\n  b)EFI_CERT_X509 (DER)\n  c)EFI_CERT_RSA2048 (bin)\n  d)EFI_CERT_SHAXXX\n 2.Authenticated UEFI Variable\n 3.EFI PE/COFF Image(SHA256)\nKey Source:\n Factory,External,Mixed"
+
+#string STR_KEY_TITLE                   #language en-US "Secure Boot variable | Size| Keys| Key Source"
+#string STR_PK_TITLE                    #language en-US " "
+#string STR_PK_TITLE_TEXT               #language en-US "Platform Key(PK)     "
+#string STR_KEK_TITLE                   #language en-US " "
+#string STR_KEK_TITLE_TEXT              #language en-US "Key Exchange Keys    "
+#string STR_DB_TITLE                    #language en-US " "
+#string STR_DB_TITLE_TEXT               #language en-US "Authorized Signatures"
+#string STR_DBX_TITLE                   #language en-US " "
+#string STR_DBX_TITLE_TEXT              #language en-US "Forbidden  Signatures"
+#string STR_DBT_TITLE                   #language en-US " "
+#string STR_DBT_TITLE_TEXT              #language en-US "Authorized TimeStamps"
+#string STR_DBR_TITLE                   #language en-US " "
+#string STR_DBR_TITLE_TEXT              #language en-US "OsRecovery Signatures"
+
+#string STR_SECURE_FILE_TITLE           #language en-US "Input File Format"
+#string STR_SECURE_CER                  #language en-US "Public Key Certificate"
+#string STR_SECURE_VAR                  #language en-US "Authenticated Variable"
+#string STR_SECURE_EFI                  #language en-US "EFI PE/COFF Image"
+
+#string STR_CERT_DEL_INFO_TITLE         #language en-US "Select a Signature List to be removed from a key database"
+#string STR_CERT_INFO_TITLE             #language en-US "List| Sig.Type|Count| Size| Owner GUID  | Certificate Legend"
+#string STR_X509_CERT_TYPE              #language en-US "  X.509  "
+#string STR_SHA256_CERT_TYPE            #language en-US " SHA256  "
+#string STR_RSA2048_CERT_TYPE           #language en-US " RSA2048 "
+#string STR_X509_SHA_CERT_TYPE          #language en-US "X509_SHAx"
+
+#string STR_SECURE_BOOT_PROCEED_CANCEL  #language en-US "Press 'Yes' to proceed 'No' to cancel"
+
+#string STR_ENABLE_ERROR_MODE_TITLE     #language en-US "System in Setup Mode!"
+#string STR_ENABLE_ERROR_MODE           #language en-US "Secure Boot can be enabled when System in User Mode. Repeat operation after enrolling Platform Key(PK)"
+#string STR_CSM_LOAD_TITLE              #language en-US "WARNING: CSM is Loaded!"
+#string STR_CSM_LOAD                    #language en-US "Disable the CSM in Setup. Repeat operation after Reboot to ensure UEFI Video (GOP) driver is operational"
+#string STR_RESET_TO_SETUP              #language en-US "Deleting all variables will reset the\nSystem to Setup Mode\nDo you want to proceed?"
+#string STR_LOAD_DEFAULT_VARS_TITLE     #language en-US "Install factory defaults"
+
+#string STR_VAR_UPDATE_LOCKED_TITLE     #language en-US "Secure Variable Update is locked down"
+#string STR_VAR_UPDATE_LOCKED           #language en-US "Try again after System reboot"
+#string STR_UPDATE_FROM_DEFAULTS        #language en-US "Press 'Yes' to load factory default '%s'\n or 'No' to load it from a\n file on external media"
+#string STR_UPDATE_FROM_FILE            #language en-US "Press 'Yes' to update '%s' with content from %s"
+#string STR_FAILED                      #language en-US "Failed"
+#string STR_SUCCESS                     #language en-US "Success"
+#string STR_WRITE_ERROR_TITLE           #language en-US "Error While Writing to a File"
+#string STR_SAVE_SEC_KEY_TITLE          #language en-US "Save Security Key/Database"
+#string STR_SAVE_SEC_KEY                #language en-US "%d variable(s) saved to disk"
+
+#string STR_DELETE_SEC_KEY_TITLE        #language en-US "Delete Security Key/Database"
+#string STR_DELETE_KEY_OPTION           #language en-US "Press 'Yes' to delete the variable, or 'No' to chose a certificate to be deleted from the key database"
+#string STR_PK_DEL_WARNING              #language en-US "WARNING: Removing 'PK' will reset the System to Setup/Audit Mode"
+#string STR_DELETE_SEC_KEY              #language en-US "Confirm deletion of '%s' variable from NVRAM"
+#string STR_DELETE_CERT_FROM_DB         #language en-US "Confirm certificate removal from '%s' database"
+
+#string STR_NO_VALID_FS_TITLE           #language en-US "File System"
+#string STR_NO_VALID_FS                 #language en-US "No Valid File System Available"
+#string STR_NO_VALID_FILE_TITLE         #language en-US "File List"
+#string STR_NO_VALID_FILE               #language en-US "No Valid File Available in the Selected File System"
+
+#string STR_SBOOT_CERT_OWNER_GUID_TITLE #language en-US "Certificate Owner GUID"
+#string STR_SBOOT_CERT_OWNER_GUID       #language en-US "GUID"
+#string STR_SBOOT_CERT_OWNER_GUID_HELP  #language en-US "Input digit character in 11111111-2222-3333-4444-1234567890ab format"

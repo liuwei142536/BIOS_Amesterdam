@@ -1,0 +1,10 @@
+<component>
+	name = "Soc ElkhartLake uCode Patches (9066X)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Mobile\"
+	RefName = "ElkhartLakeSocUc"
+[files]
+"ElkhartLakeSocUc.sdl"
+"M0190660_00000009.pdb"	= "MICROCODE UPDATES"
+"M0190661_00000015.pdb" = "MICROCODE UPDATES"
+<endComponent>

@@ -1,0 +1,10 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "UefiCpuPkg\Include\Library\"
+	RefName = "UefiCpuPkg.Library"
+[files]
+"LocalApicLib.h"	
+"MtrrLib.h"	
+"UefiCpuLib.h"	
+<endComponent>

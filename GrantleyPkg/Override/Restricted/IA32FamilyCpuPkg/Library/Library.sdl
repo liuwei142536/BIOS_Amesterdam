@@ -1,0 +1,20 @@
+TOKEN
+	Name  = "Library_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "SmmCpuPlatformHookLibNull"
+	File  = "SmmCpuPlatformHookLibNull\SmmCpuPlatformHookLibNull.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "SmmCpuPlatformHookLib"
+	Instance  = "GrantleyPkg.SmmCpuPlatformHookLibNull"
+End
+

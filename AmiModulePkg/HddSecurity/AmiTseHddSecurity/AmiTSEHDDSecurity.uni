@@ -1,0 +1,48 @@
+﻿﻿﻿//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************
+
+/** @file AmiTSEHDDSecurity.uni
+    Strings related to Hdd password
+
+**/
+
+/=#
+#include "VFR.uni"
+
+                                
+#string STR_IDE_SECURITY_UNSUPPORTED    #language eng "Setting password is not supported for this drive"
+                                        #language fra "Setting password is not supported for this drive"
+#string STR_IDE_SECURITY_LOCKED         #language eng "This Hard Drive is Locked"
+                                        #language fra "This Hard Drive is Locked"
+#string STR_IDE_ERROR_PSWD              #language eng "Invalid Password. HDD is Locked"
+                                        #language fra "Invalid Password. HDD is Locked"
+#string STR_IDE_SECURITY_PROMPT         #language eng "HDD"
+#string STR_IDE_ENTER_USER              #language eng "Enter User password:"
+#string STR_IDE_ENTER_MASTER            #language eng "Enter Master password:"
+#string STR_IDE_UNLCK_COLD              #language eng "Power-off the system and then power it on to unlock the drive"
+#string STR_IDE_HELP_MESSAGE            #language eng "Press ESC To Enter Master Password"
+
+//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************

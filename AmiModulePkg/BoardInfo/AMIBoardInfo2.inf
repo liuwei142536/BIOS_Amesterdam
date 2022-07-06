@@ -1,0 +1,53 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiBoardInfo2
+  FILE_GUID                      = 9F3A0016-AE55-4288-829D-D55FD3AAC347
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = AmiBoardEntryPoint
+
+
+[Sources]  
+   AmiBoardInfo2.c	
+
+[Packages]
+  MdePkg/MdePkg.dec   
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec ##Needed for AmiSdlLib - must be removed after AmiSdlLib update
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  AmiSdlLib
+  AmiDxeLib ##Needed for AmiSdlLib - must be removed after AmiSdlLib update
+  
+[Protocols]
+  gEfiFirmwareVolume2ProtocolGuid
+  gAmiBoardInfo2ProtocolGuid
+  gAmiBoardSioInitProtocolGuid
+  gAmiBoardPciInitProtocolGuid
+  
+[Guids] 
+  gAmiBoardInfoFileGuid
+  gAmiBoardInfoSectionGuid
+  gAmiAslDsdtFileGuid
+  
+[Depex]
+  TRUE
+  

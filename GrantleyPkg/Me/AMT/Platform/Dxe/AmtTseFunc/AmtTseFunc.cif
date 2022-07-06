@@ -1,0 +1,9 @@
+<component>
+	name = "AmtTseFunc"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Platform\Dxe\AmtTseFunc\"
+	RefName = "GrantleyPkg.Amt.AmtTseFunc"
+[files]
+"AmtTseFunc.sdl"	
+"AmtTseFunc.c"	
+<endComponent>

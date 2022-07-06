@@ -1,0 +1,11 @@
+<component>
+    name = "LibraryInstances"
+    category = ModulePart
+    LocalRoot = "AmiIpmiPkg\Library\"
+    RefName = "AmiIpmiPkg.LibraryInstances"
+[INF]
+"DxeIpmiInterfaceLib\DxeIpmiInterfaceLib.inf"
+"AmiIpmiLib\AmiIpmiLib.inf"
+[files]
+"Library.sdl"
+<endComponent>

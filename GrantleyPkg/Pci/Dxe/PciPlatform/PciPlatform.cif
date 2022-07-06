@@ -1,0 +1,11 @@
+<component>
+	name = "PciPlatform"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Pci\Dxe\PciPlatform\"
+	RefName = "GrantleyPkg.PciPlatform"
+[INF]
+"PciPlatform.inf"
+[files]
+"PciSupportLib.h"	
+"PciPlatform.sdl"	
+<endComponent>

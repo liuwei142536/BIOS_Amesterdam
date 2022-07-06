@@ -1,0 +1,23 @@
+<component>
+    name = "AmiModulePkg"
+    category = eCore
+    LocalRoot = "AmiModulePkg\"
+    RefName = "AmiModulePkg"
+[files]
+"AmiModulePkg.dec"	
+"AmiModulePkg.sdl"	
+"AmiModulePkg.chm"	
+[parts]
+"AmiModulePkg.Include"
+"AmiModulePkg.LibraryInstances"
+[dependency]
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_18"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_13"
+[dependency.optional]
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_19"
+AmiModulePkg.GenericSio >= "SS: AptioV;$/AptioV/Source/Modules/GenericSio;5.004_GenericSio_03"
+AmiModulePkg.PciBus >= "SS: AptioV;$/AptioV/Source/Modules/PCI;5.004_PCI_05"
+AmiModulePkg.Recovery >= "SS: AptioV;$/AptioV/Source/Modules/Recovery;5.009_Recovery_03"
+[dependency.incompatible]
+AmiModulePkg.Recovery = "SS: AptioV;$/AptioV/Source/Modules/Recovery;Recovery_09"
+<endComponent>

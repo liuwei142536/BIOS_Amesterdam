@@ -1,0 +1,45 @@
+﻿﻿﻿﻿﻿﻿//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************
+
+/** @file AmiTseTcgStorageSecurity.uni
+    Strings related to OPAL password
+
+**/
+
+/=#
+#include "VFR.uni"
+
+#string STR_TCG_STORAGE_EMPTY                   #language eng ""
+#string STR_TCG_STORAGE_SECURITY_UNSUPPORTED    #language eng "Setting password is not supported for this drive"
+                                                #language fra "Setting password is not supported for this drive"
+#string STR_TCG_STORAGE_ERROR_PSWD              #language eng "Invalid Password. TCG Storage device is Locked"
+                                                #language fra "Invalid Password. TCG Storage device is Locked"
+#string STR_TCG_STORAGE_SECURITY_PROMPT         #language eng "TCG Storage Security Drive"
+#string STR_TCG_STORAGE_ENTER_USER              #language eng "Enter User password:"
+#string STR_TCG_STORAGE_ENTER_ADMIN             #language eng "Enter Admin password:"
+#string STR_TCG_STORAGE_UNLCK_COLD              #language eng "Power-off the system and then power it on to unlock the drive"
+
+//***********************************************************************
+//***********************************************************************
+//**                                                                   **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.          **
+//**                                                                   **
+//**                       All Rights Reserved.                        **
+//**                                                                   **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093         **
+//**                                                                   **
+//**                       Phone: (770)-246-8600                       **
+//**                                                                   **
+//***********************************************************************
+//***********************************************************************

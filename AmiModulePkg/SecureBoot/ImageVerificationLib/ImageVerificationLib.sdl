@@ -1,0 +1,28 @@
+TOKEN
+    Name  = "ImageVerification_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable ImageVerification library support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+PATH
+    Name  = "ImageVerificationLib_DIR"
+    Help  = "Path to Crypto library Module in Project"
+End
+
+INFComponent
+    Name  = "ImageVerificationLib"
+    File  = "ImageVerificationLib.inf"
+    Package  = "AmiModulePkg"
+    Path  = "ImageVerificationLib_DIR"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.ImageVerificationLib"
+    Override = "MdeModulePkg.SecurityStubDxe"
+    ModuleTypes  = "DXE_DRIVER"
+End

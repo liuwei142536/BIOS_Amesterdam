@@ -1,0 +1,8 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Include\Ppi\"
+	RefName = "GrantleyPkg.Me.Include.Ppi.Ppi"
+[files]
+"Heci.h"	
+<endComponent>

@@ -1,0 +1,12 @@
+<component>
+    name = "OpensslLib"
+    category = ModulePart
+    LocalRoot = "CryptoPkg\Library\OpensslLib\"
+    RefName = "CryptoPkg.OpensslLib"
+[files]
+"OpensslLib.sdl"	
+"OpensslLib.uni"	
+"OpenSSL-HOWTO.txt"	
+[parts]
+"CryptoPkg.OpensslLib.openssl"
+<endComponent>

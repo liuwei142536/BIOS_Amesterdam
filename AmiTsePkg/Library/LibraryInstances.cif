@@ -1,0 +1,9 @@
+<component>
+	name = "LibraryInstances"
+	category = ModulePart
+	LocalRoot = "AmiTsePkg\Library\"
+	RefName = "AmiTsePkg.LibraryInstances"
+[INF]
+"FileBrowser\FileBrowser.inf"
+"AmiProgressReportLib\AmiProgressReportLib.inf"
+<endComponent>

@@ -1,0 +1,8 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Platform\Include\"
+	RefName = "GrantleyPkg.Me.AMT.MePlatform.Include.Include"
+[parts]
+"GrantleyPkg.Me.AMT.Platform.Include.Library.Library"
+<endComponent>

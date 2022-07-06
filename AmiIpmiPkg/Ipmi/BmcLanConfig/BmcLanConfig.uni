@@ -1,0 +1,164 @@
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @file  BmcLanConfigBoard.uni
+//
+//  String definitions for the BmcLanConfig
+//
+
+//#include "VFR.uni"
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"    // AMI Mapping Language
+
+//
+// Last added Mapping language tag "IPMI506"
+//
+
+#string STR_NULL_STRING                  #language en-US ""
+#string STR_UNKNOWN_STRING               #language en-US "-"
+
+#string STR_BMC_NETWORK_TITLE            #language en-US "BMC network configuration"
+#string STR_BMC_NETWORK_SUB_TITLE        #language en-US "--BMC network configuration--"
+#string STR_BMC_NETWORK_HELP             #language en-US "Configure BMC network parameters"
+#string STR_IP_BMC_STAR_SEPARATOR        #language en-US "**********************"
+#string STR_IP_BMC_NETWORK_SUB_TITLE     #language en-US "Configure IPV4 support"
+#string STR_IP6_BMC_NETWORK_SUB_TITLE    #language en-US "Configure IPV6 support"
+#string STR_IP6_BMC_NOT_SUPPORTED        #language en-US "IPV6 is not supported in BMC (OR) IPV6 Support is Disabled."
+#string STR_LAN_OPTION_HELP              #language en-US "Select to configure LAN channel parameters statically or dynamically(by BIOS or BMC). Unspecified option will not modify any BMC network parameters during BIOS phase"
+#string STR_CURR_LAN_OPTION_HELP         #language en-US "Current LAN Configuration statically or dynamically(by BIOS or BMC). Unspecified for not Configured address space"
+#string STR_LAN_CHANNEL_1                #language en-US "Lan channel 1"
+#string STR_LAN_CHANNEL_2                #language en-US "Lan channel 2"
+#string STR_LAN_OPTION                   #language en-US "Configuration Address source"
+                                         #language x-AMI "IPMI500"
+#string STR_CURR_LAN_OPTION              #language en-US "Current Configuration Address source"
+#string STR_STATION_IP_ADDRESS           #language en-US "Station IP address"
+                                         #language x-AMI "IPMI501"
+#string STR_STATION_IP_HELP              #language en-US "Enter station IP address"
+#string STR_STATION_MAC_ADDRESS          #language en-US "Station MAC address"
+#string STR_SUBNET_MASK                  #language en-US "Subnet mask"
+                                         #language x-AMI "IPMI502"
+#string STR_SUBNET_MASK_HELP             #language en-US "Enter subnet mask"
+#string STR_ROUTER_IP_ADDRESS            #language en-US "Router IP address"
+                                         #language x-AMI "IPMI503"
+#string STR_ROUTER_IP_HELP               #language en-US "Enter router IP address"
+#string STR_ROUTER_MAC_ADDRESS           #language en-US "Router MAC address"
+                                         #language x-AMI "IPMI504"
+#string STR_ROUTER_MAC_HELP              #language en-US "Enter router MAC address"
+#string STR_UNSPECIFIED                  #language en-US "Unspecified"
+#string STR_BIOS_STATIC                  #language en-US "Static"
+#string STR_BMC_DYNAMIC                  #language en-US "DynamicBmcDhcp"
+#string STR_BMC_ADDR_PROTOCOL            #language en-US "DynamicBmcNonDhcp"
+
+#string STR_CURR_LANCAS1_VAL             #language en-US  "-"
+#string STR_CURR_LANCAS2_VAL             #language en-US  "-"
+#string STR_STATION_IP1_VAL              #language en-US  "-"
+#string STR_STATION_IP2_VAL              #language en-US  "-"
+#string STR_BMC_STATION_IP_HELP          #language en-US  "Station IP address from BMC"
+#string STR_STATION_MAC1_VAL             #language en-US  "-"
+#string STR_STATION_MAC2_VAL             #language en-US  "-"
+#string STR_BMC_STATION_MAC_ADDRESS      #language en-US  "Station MAC address from BMC"
+#string STR_SUBNET_MASK1_VAL             #language en-US  "-"
+#string STR_SUBNET_MASK2_VAL             #language en-US  "-"
+#string STR_BMC_SUBNET_MASK_HELP         #language en-US  "Subnet mask from BMC"
+#string STR_ROUTER_IP1_VAL               #language en-US  "-"
+#string STR_ROUTER_IP2_VAL               #language en-US  "-"
+#string STR_BMC_ROUTER_IP_HELP           #language en-US  "Router IP address from BMC"
+#string STR_ROUTER_MAC1_VAL              #language en-US  "-"
+#string STR_ROUTER_MAC2_VAL              #language en-US  "-"
+#string STR_BMC_ROUTER_MAC_HELP          #language en-US  "Router MAC address from BMC"
+
+#string STR_STATION_IP_ADDRESS_DEFAULT   #language en-US "0.0.0.0"
+#string STR_ROUTER_IP_ADDRESS_DEFAULT    #language en-US "0.0.0.0"
+#string STR_SUBNET_MASK_DEFAULT          #language en-US "0.0.0.0"
+#string STR_ROUTER_MAC_ADDRESS_DEFAULT   #language en-US "00-00-00-00-00-00"
+
+#string STR_STATION_IP6_ADDRESS_DEFAULT  #language en-US ":::::::"
+
+#string STR_IP6_CURR_LAN_OPTION          #language en-US "Current Configuration Address source"
+#string STR_IP6_CURR_LAN_OPTION_HELP     #language en-US "Current Ipv6 LAN Configuration statically or dynamically by BMC). Unspecified for not Configured address space"
+
+#string STR_IP6_CURR_LANCAS1_VAL         #language en-US  "-"
+#string STR_IP6_CURR_LANCAS2_VAL         #language en-US  "-"
+#string STR_STATION_IP6_ADDRESS          #language en-US "Station IPV6 address"
+                                         #language x-AMI "IPMI506"
+#string STR_STATION_IP6_HELP             #language en-US "Enter station IPV6 address"
+#string STR_STATION_IP6_LAN1_VAL         #language en-US "-"
+#string STR_STATION_IP6_LAN2_VAL         #language en-US "-"
+
+#string STR_STATION_IP6_ADD_STATUS       #language en-US "IPV6 address status"
+#string STR_STATION_IP6_ADD_STATUS_HELP  #language en-US "Status of station IPV6 address to BMC."
+#string STR_STATION_IP6_LAN1_ADD_STATUS  #language en-US "-"
+#string STR_STATION_IP6_LAN2_ADD_STATUS  #language en-US "-"
+
+#string STR_STATION_IP6_DHCP_ALGO        #language en-US "IPV6 DHCP Algorithm"
+#string STR_STATION_IP6_DHCP_ALGO_HELP   #language en-US "Providing the DHCP method used like DHCPv6 or StateLess Address Auto Configuration(SLAAC)."
+#string STR_STATION_IP6_LAN_DHCP_DHCP6  #language en-US "DHCPv6"
+#string STR_STATION_IP6_LAN_DHCP_SLAAC  #language en-US "SLAAC"
+#string STR_STATION_IP6_LAN1_DHCP_ALGO   #language en-US "-"
+#string STR_STATION_IP6_LAN2_DHCP_ALGO   #language en-US "-"
+
+
+#string STR_INVALID_STATION_IP                       #language en-US "Invalid Station Ip Entered!!!"
+#string STR_INVALID_BMC_IPV6_ADDRESS                 #language en-US "Invalid Station Ipv6 value Entered!!!"
+#string STR_INVALID_SUBNETMASK                       #language en-US "Invalid Subnet Mask Entered!!!"
+#string STR_INVALID_ROUTER_IP                        #language en-US "Invalid Router Ip Entered!!!"
+#string STR_INVALID_ROUTER_MAC                       #language en-US "Invalid Router MAC Entered!!!"
+#string STR_BMCLAN_ERROR_INFO                        #language en-US "BMCLAN ERROR INFO"
+#string STR_IPSOURCE_STATIC_ADDRESS                  #language en-US "StaticAddress"
+#string STR_IPSOURCE_DYNAMIC_ADDRESS_BMC_DHCP        #language en-US "DynamicAddressBmcDhcp"
+#string STR_IPSOURCE_DYNAMIC_ADDRESS_BIOS_DHCP       #language en-US "DynamicAddressBiosDhcp"
+#string STR_IPSOURCE_DYNAMIC_ADDRESS_BMC_NON_DHCP    #language en-US "DynamicAddressBmcNonDhcp"
+
+#string STR_BMC_IPV6_ADDRESS_STATUS_ACTIVE           #language en-US "Active"
+#string STR_BMC_IPV6_ADDRESS_STATUS_DISABLE          #language en-US "Disabled"
+#string STR_BMC_IPV6_ADDRESS_STATUS_PENDING          #language en-US "Pending"
+#string STR_BMC_IPV6_ADDRESS_STATUS_FAILED           #language en-US "Failed"
+#string STR_BMC_IPV6_ADDRESS_STATUS_DEPRECATED       #language en-US "Deprecated"
+#string STR_BMC_IPV6_ADDRESS_STATUS_INVALID          #language en-US "Invalid"
+#string STR_BMC_IPV6_ADDRESS_STATUS_RESERVED         #language en-US "Reserved"
+
+#string STR_IPV6_OPTION                              #language en-US "IPV6 Support"
+                                                     #language x-AMI "IPMI507"
+#string STR_IPV6_OPTION_HELP_LAN1                    #language en-US "Enable or Disable LAN1 IPV6 Support"
+#string STR_IPV6_OPTION_HELP_LAN2                    #language en-US "Enable or Disable LAN2 IPV6 Support"
+#string STR_ENABLED                                  #language en-US "Enabled"
+#string STR_DISABLED                                 #language en-US "Disabled"
+
+#string STR_STATION_IP6_ADDRESS_PREFIX_LENGTH        #language en-US "Prefix Length"
+                                                     #language x-AMI "IPMI508"
+#string STR_STATION_IP6_ADDRESS_PREFIX_LENGTH_HELP   #language en-US "Change the prefix length"
+#string STR_STATION_IP6_LAN1_PREFIX_LENGTH_VAL       #language en-US "-"
+#string STR_STATION_IP6_LAN2_PREFIX_LENGTH_VAL       #language en-US "-"
+
+#string STR_STATION_IP6_ROUTER_ADDRESS              #language en-US "IPV6 Router1 IP Address"
+                                                    #language x-AMI "IPMI509"
+#string STR_STATION_IP6_ROUTER_ADDRESS_HELP         #language en-US "Change the IPV6 Router1 IP Address"
+#string STR_STATION_IP6_ROUTER_ADDRESS1_VAL         #language en-US "-"
+#string STR_STATION_IP6_ROUTER_ADDRESS2_VAL         #language en-US "-"
+
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

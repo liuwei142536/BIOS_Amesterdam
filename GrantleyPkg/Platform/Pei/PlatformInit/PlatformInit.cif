@@ -1,0 +1,12 @@
+<component>
+	name = "PlatformInit"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\Pei\PlatformInit\"
+	RefName = "GrantleyPkg.PlatformInit"
+[INF]
+"PlatformEarlyInit.inf"
+[files]
+"PlatformEarlyInit.h"
+"PlatformInit.sdl"	
+"TridentData.h"
+<endComponent>

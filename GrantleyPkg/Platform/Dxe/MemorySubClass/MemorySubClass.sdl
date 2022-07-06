@@ -1,0 +1,22 @@
+TOKEN
+	Name  = "MemorySubClass_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MemorySubClass support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MemorySubClass"
+	File  = "MemorySubClass.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "MemorySubClass_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "GrantleyPkg.MemorySubClass"
+End
+

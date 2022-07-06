@@ -1,0 +1,70 @@
+## @file
+#  PlatformInfo PEIM
+#
+#  Copyright (c) 2009 - 2010, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PlatformInfo
+  FILE_GUID                      = 34CC6167-7AE7-403e-8AB2-23837F398A30
+  MODULE_TYPE                    = PEIM
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PlatformInfoInit
+  
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 
+#
+
+[Sources]
+  PlatformInfo.c
+  PlatformInfo.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec   #AptioV server override start: Setting value of Pci64BitResourceAllocation based on Above4gDecode setup control from PCI bus driver
+  
+[LibraryClasses]
+  PeimEntryPoint
+  PcdLib
+  DebugLib
+  HobLib
+  IoLib
+  PlatformHooksLib
+  PchPlatformLib
+      
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+
+[Guids]
+  gEfiPlatformInfoGuid
+  gEfiSetupVariableGuid
+  
+[Ppis]
+  gPeiSpiPpiGuid
+  gEfiPeiReadOnlyVariable2PpiGuid
+  gPeiSpiSoftStrapsPpiGuid
+
+[Depex]
+    #gPeiSpiPpiGuid AND AptioV server override
+    gEfiPciCfg2PpiGuid AND
+    gEfiPeiReadOnlyVariable2PpiGuid 
+    
+    
+  

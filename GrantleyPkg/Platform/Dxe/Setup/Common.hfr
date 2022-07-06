@@ -1,0 +1,39 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+//
+//Common.hfr
+//
+
+#define VFR_BLANK_LINE subtitle text = STRING_TOKEN(STR_NULL_STRING);
+#define VFR_END_FORM endform;
+#define VFR_END_FORMSET endformset;
+#define VFR_HORIZ_LINE subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+#define SYSTEM_CONFIGURATION_CONTROL_KEY  0xFAF0
+#define SYSTEM_CONFIGURATION_KEY 0xFAFE
+
+
+// AptioV server override: Changed variable name to IntelSetup
+#define VFR_VARSTORE_SETUP \
+    varstore SYSTEM_CONFIGURATION, \
+    key   = SYSTEM_CONFIGURATION_KEY, \
+    name  = IntelSetup, \
+    guid  = SYSTEM_CONFIGURATION_GUID;
+
+// AptioV server override: Added Varstore for Password
+#define VFR_SYSTEM_PASSWORD\
+    efivarstore EFI_PASSWORD_STATUS, \
+    attribute = EFI_VARIABLE_BOOTSERVICE_ACCESS, \
+    name = PasswordStatus, \
+    guid = SYSTEM_CONFIGURATION_GUID;
+
+#define VFR_VARSTORE_CONTROL \
+    varstore SYSTEM_CONFIGURATION_CONTROL, \
+    key   = SYSTEM_CONFIGURATION_CONTROL_KEY, \
+    name  = SetupCtrl, \
+    guid  = SYSTEM_CONFIGURATION_CONTROL_GUID;
+

@@ -1,0 +1,14 @@
+<component>
+	name = "HeciLibrary"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Heci\Library\"
+	RefName = "GrantleyPkg.HeciLibrary"
+[INF]
+"HeciCoreLib\HeciCoreLib.inf"
+"MeChipsetLib\MeChipsetLib.inf"
+"MePeiPolicyUpdateLib\MePeiPolicyUpdateLib.inf"
+"MeTypeLib\MeTypeLib.inf"
+"MeTypeLib\MeTypeSetLib.inf"
+[files]
+"HeciLibrary.sdl"	
+<endComponent>

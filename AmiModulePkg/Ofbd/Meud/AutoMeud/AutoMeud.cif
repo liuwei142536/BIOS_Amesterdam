@@ -1,0 +1,22 @@
+<component>
+	name = "Auto ME Update"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Ofbd\Meud\AutoMeud\"
+	RefName = "AutoMeud"
+[INF]
+"AutoMeud.inf"
+"AutoMeudLib.inf"
+"MeFwCapsulePei\MeFwCapsulePei.inf"
+"MeFwLayout\MeFwLayout.inf"
+"MeFwLayout\IshFwLayout.inf"
+"MeFwLayout\BiosMeFwLayout.inf"
+"MeFwLayout\DummyMeudLayout.inf"
+"MeFwVersion\MeFwVersion.inf"
+"MeFwVersion\IshFwVersion.inf"
+[files]
+"AutoMeud.sdl"
+"AutoMeud.mak"
+"MeRegionFdfFileStatement.txt"
+[dependency.optional]
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_27"
+<endComponent>

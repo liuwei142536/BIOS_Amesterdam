@@ -1,0 +1,14 @@
+<component>
+	name = "RasWhea"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\Whea\"
+	RefName = "GrantleyPkg.RasWhea"
+[INF]
+"IsPlatformSupportWhea\IsPlatformSupportWhea.inf"
+"WheaPlatformHooksLib\WheaPlatformHooksLib.inf"
+[files]
+"RasWhea.sdl"	
+[parts]
+"GrantleyPkg.WheaErrorInj"
+"GrantleyPkg.LastBootErrorLog"
+<endComponent>

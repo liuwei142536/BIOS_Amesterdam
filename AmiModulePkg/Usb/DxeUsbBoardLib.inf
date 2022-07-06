@@ -1,0 +1,65 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   This AMI DxeUsbBoardLib Lib
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DxeUsbBoardLib
+  FILE_GUID                      = c42a97ed-a77a-4698-ac71-36a5b8927f58
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = AmiDxeUsbBoardLib|DXE_DRIVER
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#
+
+[Sources]
+  $(DXE_USB_BOARD_LIB_SOURCES_LIST)
+  UsbPort2.c
+
+[Packages]
+  $(DXE_USB_BOARD_LIB_PACKAGES_LIST)
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  Build/AmiUsbPkg.dec
+  
+[Protocols]
+  $(DXE_USB_BOARD_LIB_PROTOCOLS_LIST)
+
+[LibraryClasses]
+  $(DXE_USB_BOARD_LIB_CLASSES_LIST)
+  PcdLib
+
+  
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

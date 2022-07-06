@@ -1,0 +1,88 @@
+TOKEN
+	Name  = "RuntimeErrorLogBmc_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable RuntimeErrorLogBmc support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+	Token = "IPMI_SUPPORT" "=" "1"
+End
+
+
+ELINK
+	Name  = "LogMeToSel,"
+	Parent  = "MemErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogPciErrorToBmc,"
+	Parent  = "PciErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogCoreToSel,"
+	Parent  = "CoreErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogQpiToSel,"
+	Parent  = "QpiErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogCboToSel,"
+	Parent  = "CboErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogIohQpiToSel,"
+	Parent  = "IohQpiErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogIohCoreToSel,"
+	Parent  = "IohCoreErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "LogIohVtdToSel,"
+	Parent  = "IohVtdErrorHandlers"
+	InvokeOrder = AfterParent
+End
+
+TOKEN
+	Name  = "RTERRORLOGBMCLIB"
+	Value  = "$(BUILD_DIR)\RtErrorLogBmc.lib"
+	TokenType = Expression
+	TargetMAK = Yes
+End
+
+ELINK
+	Name  = "$(RTERRORLOGBMCLIB)"
+	Parent  = "RT_ERROR_LOG_ELINK_LIBS"
+	InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "RtErrorLogBmcLib"
+	File  = "RtErrorLogBmc.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "RuntimeErrorLogBmc_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "RtErrorLogBmcLib"
+	Instance  = "GrantleyPkg.RtErrorLogBmcLib"
+	Arch  = "common"
+	ModuleTypes  = "DXE_DRIVER DXE_SMM_DRIVER"
+	Token = "RuntimeErrorLogBmc_SUPPORT" "=" "1"
+End

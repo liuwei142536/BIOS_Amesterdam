@@ -1,0 +1,76 @@
+﻿﻿﻿﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @files  DxeFrb.uni
+//
+// String definitions for FRB
+//
+
+//#include "VFR.uni"
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"    // AMI Mapping Language
+
+#string STR_RESET                                   #language en-US  "Reset"
+#string STR_POWERDOWN                               #language en-US  "Power Down"
+#string STR_DO_NOTHING                              #language en-US  "Do Nothing"
+#string STR_POWERCYCLE                              #language en-US  "Power Cycle"
+#string STR_TIME_3MIN                               #language en-US  "3 minutes"
+#string STR_TIME_4MIN                               #language en-US  "4 minutes"
+#string STR_TIME_5MIN                               #language en-US  "5 minutes"
+#string STR_TIME_6MIN                               #language en-US  "6 minutes"
+#string STR_TIME_10MIN                              #language en-US  "10 minutes"
+#string STR_TIME_15MIN                              #language en-US  "15 minutes"
+#string STR_TIME_20MIN                              #language en-US  "20 minutes"
+
+
+
+#string STR_SRVRMGMT_FRB_2ENABLE                    #language en-US  "FRB-2 Timer"
+                                                    #language x-AMI  "IPMI100"
+#string STR_SRVRMGMT_FRB_2ENABLE_HELP               #language en-US  "Enable or Disable FRB-2 timer(POST timer)"
+
+#string STR_SRVRMGMT_FRB_TIMEOUT                    #language en-US  "FRB-2 Timer timeout"
+                                                    #language x-AMI  "IPMI101"
+#string STR_SRVRMGMT_FRB_TIMEOUT_HELP               #language en-US  "Enter value Between 3 to 6 min for FRB-2 Timer Expiration value"
+
+#string STR_SRVRMGMT_FRB_TIMEOUT_POLICY             #language en-US  "FRB-2 Timer Policy"
+                                                    #language x-AMI  "IPMI102"
+#string STR_SRVRMGMT_FRB_TIMEOUT_POLICY_HELP        #language en-US  "Configure how the system should respond if the FRB-2 Timer expires. Not available if FRB-2 Timer is disabled."
+
+#string STR_OS_BOOT_WD_TIMER                        #language en-US  "OS Watchdog Timer"
+                                                    #language x-AMI  "IPMI103"
+#string STR_OS_BOOT_WD_TIMER_HELP                   #language en-US  "If enabled, starts a BIOS timer which can only be shut off by Management Software after the OS loads.  Helps determine that the OS successfully loaded or follows the OS Boot Watchdog Timer policy."
+
+#string STR_OS_BOOT_WD_TIMER_TIMEOUT                #language en-US  "OS Wtd Timer Timeout"
+                                                    #language x-AMI  "IPMI104"
+#string STR_OS_BOOT_WD_TIMER_TIMEOUT_HELP           #language en-US  "Configure the length of the OS Boot Watchdog Timer.  Not available if OS Boot Watchdog Timer is disabled."
+
+#string STR_OS_BOOT_WD_TIMER_TIMEOUT_POLICY         #language en-US  "OS Wtd Timer Policy"
+                                                    #language x-AMI  "IPMI105"
+#string STR_OS_BOOT_WD_TIMER_TIMEOUT_POLICY_HELP    #language en-US  "Configure how the system should respond if the OS Boot Watchdog Timer expires. Not available if OS Boot Watchdog Timer is disabled."
+
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

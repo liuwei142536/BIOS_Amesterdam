@@ -1,0 +1,66 @@
+/*++
+  This file contains an 'Intel Peripheral Driver' and is        
+  licensed for Intel CPUs and chipsets under the terms of your  
+  license agreement with Intel or your vendor.  This file may   
+  be modified by the user, subject to additional terms of the   
+  license agreement                                             
+--*/
+/*++
+
+Copyright (c) 2005 - 2007 Intel Corporation. All rights reserved
+This software and associated documentation (if any) is furnished
+under a license and may only be used or copied in accordance
+with the terms of the license. Except as permitted by such
+license, no part of this software or documentation may be
+reproduced, stored in a retrieval system, or transmitted in any
+form or by any means without the express written consent of
+Intel Corporation.
+
+
+Module Name:
+
+  Dbgp.c
+
+Abstract:
+
+  debug port table
+
+--*/
+
+//
+// Statements that include other files
+//
+#include <Acpi/Dbgp.h>
+
+EFI_ACPI_DEBUG_PORT_DESCRIPTION_TABLE Dbgp = {
+  EFI_ACPI_3_0_DEBUG_PORT_TABLE_SIGNATURE,
+  sizeof (EFI_ACPI_DEBUG_PORT_DESCRIPTION_TABLE),
+  EFI_ACPI_DBGP_TABLE_REVISION,
+  0x00,                       // Checksum will be updated at runtime
+  ' ',                        // OEMID 6 BYTES - It is expected that these values will be updated at runtime
+  ' ',                        // OEMID 6 BYTES - It is expected that these values will be updated at runtime
+  ' ',                        // OEMID 6 BYTES - It is expected that these values will be updated at runtime
+  ' ',                        // OEMID 6 BYTES - It is expected that these values will be updated at runtime
+  ' ',                        // OEMID 6 BYTES - It is expected that these values will be updated at runtime
+  ' ',                        // OEMID 6 BYTES - It is expected that these values will be updated at runtime
+  0,                          // OEM TABLE ID 8 BYTES -
+  EFI_ACPI_OEM_DBGP_REVISION, // OEM REVISION
+  0,                          // CREATOR ID
+  0,                          // CREATOR REVISION
+  0,                          // Interfacetype, 0 = full 16550 interface
+  0,                          // Reserved 3 bytes, must be 0.
+  0                           // Base address.  Put actual value later.
+};
+
+VOID*
+ReferenceAcpiTable (
+  VOID
+  )
+
+{
+  //
+  // Reference the table being generated to prevent the optimizer from removing the 
+  // data structure from the exeutable
+  //
+  return (VOID*)&Dbgp;
+}

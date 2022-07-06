@@ -1,0 +1,13 @@
+<component>
+	name = "Pei"
+	category = ModulePart
+	LocalRoot = "GrangevillePkg\Platform\Pei\"
+	RefName = "GrangevillePkg.Platform.Pei"
+[INF]
+"PlatformInfo\PlatformInfo.inf"
+"PlatformPolicy\PlatformEarlyPolicy.inf"
+[files]
+"Pei.sdl"	
+[parts]
+"GrangevillePkg.PlatformInit"
+<endComponent>

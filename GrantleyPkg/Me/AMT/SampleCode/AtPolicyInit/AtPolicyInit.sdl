@@ -1,0 +1,24 @@
+TOKEN
+	Name  = "AtPolicyInit_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AtPolicyInit support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AtDxePolicyInit_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AtDxePolicyInit support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AtDxePolicyInit"
+	File  = "Dxe\AtDxePolicyInit.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AtDxePolicyInit_SUPPORT" "=" "1"
+	Token = "AT_ENABLE" "=" "1"
+End
+

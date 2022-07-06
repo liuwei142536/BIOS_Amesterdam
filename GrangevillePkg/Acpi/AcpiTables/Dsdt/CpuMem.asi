@@ -1,0 +1,478 @@
+/*++
+  This file contains 'Framework Code' and is licensed as such
+  under the terms of your license agreement with Intel or your
+  vendor.  This file may not be modified, except as allowed by
+  additional terms of your license agreement.
+--*/
+/*++
+
+  Copyright (c)  2001 - 2014 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval 
+  system, or transmitted in any form or by any means without the express 
+  written consent of Intel Corporation.
+
+  Module Name:
+
+    CpuMem.asi
+
+  Abstract:
+
+    Contains root level name space objects for the platform
+
+--*/ 
+
+// Processor Objects
+// Broadwell based systems can have maximum of 8 physical proc packages and 2 Memory devices
+// 24 cores/ package
+// 96 processor cores
+
+Device(\_SB.SCK0){              // Processor Board 0
+
+  Name(_HID, "ACPI0004")        // Module Device: bus node with child devices
+  Name(_UID, "00")
+
+  Processor(CP00, 0, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP01, 1, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP02, 2, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP03, 3, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP04, 4, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP05, 5, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP06, 6, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP07, 7, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP08, 8, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP09, 9, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP0A, 10, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP0B, 11, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP0C, 12, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP0D, 13, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP0E, 14, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP0F, 15, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP10, 16, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP11, 17, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP12, 18, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP13, 19, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP14, 20, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP15, 21, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP16, 22, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP17, 23, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP18, 24, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP19, 25, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP1A, 26, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP1B, 27, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP1C, 28, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP1D, 29, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP1E, 30, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP1F, 31, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP20, 32, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP21, 33, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP22, 34, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP23, 35, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP24, 36, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP25, 37, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP26, 38, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP27, 39, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP28, 40, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP29, 41, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2A, 42, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2B, 43, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2C, 44, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2D, 45, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2E, 46, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2F, 47, 0x410, 6) {Name(_PXM, 0)}
+
+  Method(_STA){                 // Status of socket presence
+    Return(\_SB.PSTA(0x00))
+  }
+} // End of Socket 0
+
+
+Device(\_SB.SCK1){              // Processor Board 1
+
+  Name(_HID, "ACPI0004")        // Module Device: bus node with child devices
+  Name(_UID, "01")
+
+  Processor(CP00, 48, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP01, 49, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP02, 50, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP03, 51, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP04, 52, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP05, 53, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP06, 54, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP07, 55, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP08, 56, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP09, 57, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP0A, 58, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP0B, 59, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP0C, 60, 0x410, 6) {Name(_PXM, 1)}
+    
+  Processor(CP0D, 61, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP0E, 62, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP0F, 63, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP10, 64, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP11, 65, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP12, 66, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP13, 67, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP14, 68, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP15, 69, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP16, 70, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP17, 71, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP18, 72, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP19, 73, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP1A, 74, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP1B, 75, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP1C, 76, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP1D, 77, 0x410, 6) {Name(_PXM, 1)}
+
+  Processor(CP1E, 78, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP1F, 79, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP20, 80, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP21, 81, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP22, 82, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP23, 83, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP24, 84, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP25, 85, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP26, 86, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP27, 87, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP28, 88, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP29, 89, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2A, 90, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2B, 91, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2C, 92, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2D, 93, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2E, 94, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2F, 95, 0x410, 6) {Name(_PXM, 0)}
+
+  Method(_STA){                 // Status of socket presence
+    Return(\_SB.PSTA(0x01))
+  }
+} // End of Socket 1
+
+Device(\_SB.SCK2){              // Processor Board 2
+
+  Name(_HID, "ACPI0004")        // Module Device: bus node with child devices
+  Name(_UID, "02")
+
+  Processor(CP00, 96, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP01, 97, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP02, 98, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP03, 99, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP04, 100, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP05, 101, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP06, 102, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP07, 103, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP08, 104, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP09, 105, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP0A, 106, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP0B, 107, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP0C, 108, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP0D, 109, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP0E, 110, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP0F, 111, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP10, 112, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP11, 113, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP12, 114, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP13, 115, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP14, 116, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP15, 117, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP16, 118, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP17, 119, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP18, 120, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP19, 121, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP1A, 122, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP1B, 123, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP1C, 124, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP1D, 125, 0x410, 6) {Name(_PXM, 2)}
+
+  Processor(CP1E, 126, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP1F, 127, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP20, 128, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP21, 129, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP22, 130, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP23, 131, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP24, 132, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP25, 133, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP26, 134, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP27, 135, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP28, 136, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP29, 137, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2A, 138, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2B, 139, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2C, 140, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2D, 141, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2E, 142, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2F, 143, 0x410, 6) {Name(_PXM, 0)}
+
+  Method(_STA){                 // Status of socket presence
+    Return(\_SB.PSTA(0x02))
+  }
+} // End of Socket 2
+
+Device(\_SB.SCK3){              // Processor Board 3
+
+  Name(_HID, "ACPI0004")        // Module Device: bus node with child devices
+  Name(_UID, "03")
+
+  Processor(CP00, 144, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP01, 145, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP02, 146, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP03, 147, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP04, 148, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP05, 149, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP06, 150, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP07, 151, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP08, 152, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP09, 153, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP0A, 154, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP0B, 155, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP0C, 156, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP0D, 157, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP0E, 158, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP0F, 159, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP10, 160, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP11, 161, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP12, 162, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP13, 163, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP14, 164, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP15, 165, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP16, 166, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP17, 167, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP18, 168, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP19, 169, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP1A, 170, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP1B, 171, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP1C, 172, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP1D, 173, 0x410, 6) {Name(_PXM, 3)}
+
+  Processor(CP1E, 174, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP1F, 175, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP20, 176, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP21, 177, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP22, 178, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP23, 179, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP24, 180, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP25, 181, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP26, 182, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP27, 183, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP28, 184, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP29, 185, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2A, 186, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2B, 187, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2C, 188, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2D, 189, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2E, 190, 0x410, 6) {Name(_PXM, 0)}
+
+  Processor(CP2F, 191, 0x410, 6) {Name(_PXM, 0)}
+
+  Method(_STA){                 // Status of socket presence
+    Return(\_SB.PSTA(0x03))
+  }
+
+} // End of Socket 3
+
+
+Scope(\_SB) {
+
+  //----------------------------------------------------------------
+  //  Method PSTA()
+  //      Return package state
+  //
+  //  Inputs: Arg0 = socket number for which to return the _STA code.
+  //----------------------------------------------------------------
+  Method(PSTA, 1){        // Socket Status
+    ShiftRight(PRBM, Arg0, Local6)
+    And(Local6, 0x1, Local6)
+    if(LEqual(Local6, 0x0)) {
+      Return(0x00)
+    } else {
+      Return(0x0F)
+    }
+  } // End Method PSTA
+
+}

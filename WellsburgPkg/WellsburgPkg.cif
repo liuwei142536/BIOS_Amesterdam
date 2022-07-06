@@ -1,0 +1,38 @@
+<component>
+	name = "WellsburgPkg"
+	category = eChipset
+	LocalRoot = "WellsburgPkg\"
+	RefName = "WellsburgPkg"
+[INF]
+"RtcWakeup\RtcWakeup.inf"
+"IoTrap\Smm\IoTrap.inf"
+"LegacyInterrupt\Dxe\LegacyInterrupt.inf"
+"PchInit\Dxe\PchInitDxe.inf"
+"PchInit\Pei\PchInitPeim.inf"
+"PchSmiDispatcher\Smm\PchSmiDispatcher.inf"
+"PchSmiRegister\Smm\PchSmiRegister.inf"
+"Reset\Pei\PchResetPeim.inf"
+"Reset\RuntimeDxe\PchResetRuntime.inf"
+"S3Support\Dxe\PchS3Support.inf"
+"S3Support\S3\PchS3Peim.inf"
+"SataController\Dxe\SataController.inf"
+"SampleCode\BiosWriteProtect\Smm\PchBiosWriteProtect.inf"
+"SerialGpio\Dxe\PchSerialGpio.inf"
+"SmartTimer\Dxe\SmartTimer.inf"
+"Smbus\Pei\PchSmbusArpDisabled.inf"
+"Smbus\Dxe\PchSmbusDxe.inf"
+"Smbus\Smm\PchSmbusSmm.inf"
+"SmmControl2\Dxe\SmmControl2Dxe.inf"
+"SmmControlPei\SmmControlPei.inf"
+"Wdt\Dxe\WdtDxe.inf"
+"Wdt\Pei\WdtPeim.inf"
+"PowerButtonHandler\PowerButtonHandler.inf"
+[files]
+"WellsburgPkg.dec"	
+"WellsburgPkg.sdl"	
+"Roms\SataOrom.bin"	
+"Roms\ScuOrom.bin"	
+[parts]
+"WellsburgPkg.Include"
+"WellsburgPkg.Library"
+<endComponent>

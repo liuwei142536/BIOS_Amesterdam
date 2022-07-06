@@ -1,0 +1,33 @@
+TOKEN
+	Name  = "RamDisk_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable RamDisk support in Project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Master = Yes
+End
+
+PATH
+	Name  = "RAMDISK_DIR"
+End
+
+ELINK
+    Name  = "MdeModulePkg/Universal/Disk/RamDiskDxe/RamDiskSsdtRule.txt"
+    Parent  = "FdfRules"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+	Name  = "RamDiskDxe"
+	File  = "RamDiskDxe.inf"
+	Package  = "MdeModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+FFS_FILE
+    Name  = "RamDiskDxe"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "MdeModulePkg.RamDiskDxe"
+    Rule_Override  = "RAMDISK_SSDT"
+End

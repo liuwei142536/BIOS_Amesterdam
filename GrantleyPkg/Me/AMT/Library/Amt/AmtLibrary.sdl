@@ -1,0 +1,34 @@
+TOKEN
+	Name  = "AMTLIB_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Amt support in the project"
+	TokenType = Boolean
+	TargetH = Yes
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AmtLib"
+	File  = "Dxe\AmtLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "AmtLibPei"
+	File  = "Pei\AmtLibPei.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+	Class  = "AmtLib"
+	Instance  = "GrantleyPkg.AmtLib"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+LibraryMapping
+	Class  = "AmtLibPei"
+	Instance  = "GrantleyPkg.AmtLibPei"
+End
+

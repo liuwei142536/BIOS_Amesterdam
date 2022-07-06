@@ -1,0 +1,203 @@
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************
+// *++
+//
+// Copyright (c) 2004 - 2017, Intel Corporation. All rights reserved.<BR>
+// This program and the accompanying materials
+// are licensed and made available under the terms and conditions of the BSD License
+// which accompanies this distribution.  The full text of the license may be found at
+// http://opensource.org/licenses/bsd-license.php
+//
+// THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+// WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+//
+// Module Name:
+//
+//   IScsiConfigStrings.uni
+// 
+// Abstract:
+// 
+//   String definitions for iSCSI configuration.
+// 
+// Revision History:
+// 
+// --*/
+
+/=#
+
+#langdef   en-US "English"
+
+#string STR_ISCSI_CONFIG_FORM_TITLE     #language en-US "iSCSI Configuration"  
+#string STR_ISCSI_CONFIG_FORM_HELP      #language en-US "Configure the iSCSI parameters."   
+#string STR_ISCSI_MAIN_FORM_TITLE       #language en-US "iSCSI Configuration"
+#string STR_ISCSI_MAC_FORM_TITLE        #language en-US "MAC Selection"
+#string STR_ISCSI_CONFIG_INIT_NAME      #language en-US "iSCSI Initiator Name"
+                                      
+#string STR_ISCSI_CONFIG_INIT_NAME_HELP #language en-US "The worldwide unique name of iSCSI Initiator. Only IQN format is accepted. Range is from 4 to 223" // AMI PORTING  : Changing help text
+#string STR_ISCSI_ATTEMPT_NAME          #language en-US "iSCSI Attempt Name"
+                                        
+#string STR_ISCSI_ATTEMPT_NAME_HELP     #language en-US "The human name defined for this attempt. Maximum length is upto 12 characters" // AMI PORTING  : Changing help text
+#string STR_ISCSI_CONFIG_RETRY          #language en-US "Connection Retry Count"
+                                        
+#string STR_ISCSI_CONFIG_RETRY_HELP     #language en-US "The minimum value is 0 and the maximum is 16. 0 means no retry."
+#string STR_ISCSI_CONFIG_TIMEOUT        #language en-US "Connection Establishing Timeout"
+                                        
+#string STR_ISCSI_CONFIG_TIMEOUT_HELP   #language en-US "The timeout value in milliseconds. The minimum value is 100 milliseconds and the maximum is 20 seconds."
+#string STR_ADD_ATTEMPT_ENTRY           #language en-US "Add an Attempt"
+#string STR_ISCSI_ATTEMPT_FORM_TITLE    #language en-US "Attempt Configuration"
+#string STR_DEL_ATTEMPT_ENTRY           #language en-US "Delete Attempts"
+#string STR_DEL_ATTEMPT_ENTRY_HELP      #language en-US "Delete one or more attempts"
+#string STR_ORDER_ATTEMPT_ENTRY         #language en-US "Change Attempt Order"
+//
+// AMI PORTING.
+//
+#string STR_ORDER_ATTEMPT_ENTRY_HELP    #language en-US "Change the order of Attempts using +/- keys. Use arrow keys to select the attempt then press +/- to move the attempt up/down in the attempt order list."
+#string STR_ISCSI_MODE_PROMPT           #language en-US "iSCSI Mode"
+                                        
+#string STR_ISCSI_MODE_HELP             #language en-US "Disabled, Enabled, Enabled for MPIO"
+#string STR_ISCSI_MODE_DISABLED         #language en-US "Disabled"
+#string STR_ISCSI_MODE_ENABLED          #language en-US "Enabled"
+#string STR_ISCSI_MODE_ENABLED_FOR_MPIO #language en-US "Enabled for MPIO"
+#string STR_IP_MODE_PROMPT              #language en-US "Internet Protocol"
+                                        
+#string STR_IP_MODE_HELP                #language en-US "Initiator IP address is system assigned in IP6 mode. In Autoconfigure mode, iSCSI driver will attempt to connect iSCSI target via IPv4 stack, if failed then attempt IPv6 stack."
+#string STR_IP_MODE_IP4                 #language en-US "IP4"
+#string STR_IP_MODE_IP6                 #language en-US "IP6"
+#string STR_IP_MODE_AUTOCONFIG          #language en-US "Autoconfigure"
+#string STR_AUTHEN_TYPE_PROMPT          #language en-US "Authentication Type"
+                                        
+#string STR_AUTHEN_TYPE_HELP            #language en-US "Authentication method: CHAP, Kerberos, or None"
+#string STR_AUTHEN_TYPE_CHAP            #language en-US "CHAP"
+#string STR_AUTHEN_TYPE_KERBEROS        #language en-US "Kerberos"
+#string STR_AUTHEN_TYPE_NONE            #language en-US "None"
+#string STR_ISCSI_LOCAL_IP_ADDRESS      #language en-US "  Initiator IP Address"
+                                        
+#string STR_DEFAULT_LOCAL_IP            #language en-US "0.0.0.0"         // AMI PORTING  : Default value for Initiator IP
+#string STR_ISCSI_LOCAL_MASK            #language en-US "  Initiator Subnet Mask"
+                                        
+#string STR_DEFAULT_SUBNET_MASK         #language en-US "0.0.0.0"         // AMI PORTING  : Default value for subnet mask
+
+#string STR_ISCSI_LOCAL_GATEWAY         #language en-US "  Gateway"
+                                        
+#string STR_DEFAULT_GATEWAY             #language en-US "0.0.0.0"         // AMI PORTING  : Default value for Gateway
+
+#string STR_ISCSI_IP_ADDRESS_HELP       #language en-US "Enter IP address in dotted-decimal notation."
+#string STR_ISCSI_TARGET_NAME           #language en-US "  Target Name"
+                                        
+
+#string STR_ISCSI_TARGET_NAME_HELP      #language en-US "The worldwide unique name of the target. Only iqn. format is accepted."
+#string STR_ISCSI_TARGET_ADDRESS        #language en-US "  Target Address"
+                                        
+#string STR_ISCSI_TARGET_ADDRESS_HELP   #language en-US "Enter Target address in IPv4,IPv6 or URL format.You need to configure DNS server address in advance if input a URL string."
+#string STR_DEFAULT_TARGET_IP           #language en-US "0.0.0.0"         // AMI PORTING  : Default value for Target IP
+
+#string STR_ISCSI_TARGET_PORT           #language en-US "  Target Port"
+                                        
+#string STR_ISCSI_BOOT_LUN              #language en-US "  Boot LUN"
+                                        
+#string STR_DEFAULT_BOOT_LUN            #language en-US "0"               // AMI PORTING  : Default value for Boot LUN
+
+#string STR_ISCSI_BOOT_LUN_HELP         #language en-US "Hexadecimal representation of the LU number. Examples are: 4752-3A4F-6b7e-2F99, 6734-9-156f-127, 4186-9"
+#string STR_ISCSI_ENABLE_DHCP           #language en-US "Enable DHCP"         
+                                        
+
+#string STR_ISCSI_ENABLE_DHCP_ON_TARGET #language en-US "Get target info via DHCP"
+                                        
+#string STR_CHAP_TYPE_PROMPT            #language en-US "  CHAP Type"
+                                        
+#string STR_CHAP_TYPE_HELP              #language en-US "None, One way CHAP or mutual CHAP"
+#string STR_CHAP_TYPE_UNI               #language en-US "One way"
+#string STR_CHAP_TYPE_MUTUAL            #language en-US "Mutual"
+#string STR_ISCSI_CHAP_NAME             #language en-US "    CHAP Name"
+                                        
+#string STR_ISCSI_CHAP_SECRET           #language en-US "    CHAP Secret"
+                                        
+//
+// AMI PORTING START : Strings of CHAP Secret and Reverse CHAP status.
+//
+#string STR_CHAP_SECRET_STATUS          #language en-US "    CHAP Status"
+#string STR_ISCSI_CHAP_STATUS           #language en-US "" //dynamically updated
+#string STR_ISCSI_REVERSE_CHAP_STATUS   #language en-US "" //dynamically updated
+#string STR_REVERSE_CHAP_SECRET_STATUS  #language en-US "    Reverse CHAP Status"
+//
+// AMI PORTING END : Strings of CHAP Secret and Reverse CHAP status.
+//
+#string STR_ISCSI_CHAP_SECRET_HELP      #language en-US "The minimum length is 12 bytes and the maximum length is 16 bytes."
+#string STR_ISCSI_REVERSE_CHAP_NAME     #language en-US "    Reverse CHAP Name"
+                                        
+#string STR_ISCSI_REVERSE_CHAP_SECRET   #language en-US "    Reverse CHAP Secret"
+                                        
+#string STR_RETURN_MAIN_FORM            #language en-US "Back to Previous Page"
+#string STR_SAVE_CHANGES                #language en-US "Save Changes"
+#string STR_SAVE_CHANGES_HELP           #language en-US "Must reboot system manually for changes to take place."
+#string STR_NULL                        #language en-US ""
+#string STR_SAVE_AND_EXIT               #language en-US "Commit Changes and Exit"
+#string STR_NO_SAVE_AND_EXIT            #language en-US "Discard Changes and Exit"
+#string STR_ISCSI_CONFIG_ISID           #language en-US "ISID"
+#string STR_ISCSI_CONFIG_ISID_HELP      #language en-US "OUI-format ISID in 6 bytes, default value are derived from MAC address. Only last 3 bytes are configurable. Example: update 0ABBCCDDEEFF to 0ABBCCF07901 by input F07901."
+#string STR_ISCSI_MAC_PROMPT            #language en-US "Configure the mac address for the attempt"
+#string STR_ISCSI_ADD_ATTEMPTS          #language en-US "Add Attempts"
+#string STR_ISCSI_DELETE_ATTEMPTS       #language en-US "Delete Attempts"
+#string STR_ISCSI_DISPLAY_ATTEMPTS      #language en-US "Display Attempts"
+#string STR_ISCSI_ATTEMPT_ORDER         #language en-US "New Attempt Order"
+#string STR_ISCSI_ISID_HELP             #language en-US "The iSCSI ISID. Default value are derived from MAC address. Only last 3 bytes are configurable."
+//
+// AMI PORTING START.                                      
+//
+#string STR_ISCSI_OUI_FROMAT_ISID       #language en-US "OUI-format ISID"
+#string STR_ISCSI_OUI_FROMAT_ISID_VALUE #language en-US "" //dynamically updated
+#string STR_ISCSI_OUI_FROMAT_ISID_HELP  #language en-US "OUI-format ISID in 6 bytes, default value are derived from MAC address. Only last 3 bytes are configurable. These values are taken from "Configure ISID" control."
+#string STR_ISCSI_CONFIG_ISID           #language en-US "Configure ISID"
+                                        
+#string STR_EMPTY                       #language en-US ""
+#string STR_MAC_STRING_NOT_FOUND        #language en-US "Necessary network protocols are not available to retrieve MAC address. Please try enabling Network Stack."
+// AMI PORTING END.
+//
+#string STR_ISCSI_CONFIG_ISID_HELP      #language en-US "OUI-format ISID in 6 bytes, default value are derived from MAC address. Only last 3 bytes are configurable. Example: update 0ABBCCDDEEFF to 0ABBCCF07901 by input F07901."
+
+//
+//  AMI PORTING START - To give Multilanguage Support for iSCSI module.
+//
+
+#string STR_INVALID_ISID                    #language  en-US "Error! Input is incorrect, please input 6 hex numbers!\n"
+#string STR_INVALID_CONNECT_MIN_TIMEOUT     #language  en-US "Connection Establishing Timeout is less than minimum value 100ms."
+#string STR_GATEWAY_SET_SUBNETMASK_ZERO     #language  en-US "Gateway address is set but subnet mask is zero." 
+#string STR_IP_GATEWAY_IN_DIFF_SUBNET       #language  en-US "Local IP and Gateway are not in the same subnet."
+#string STR_INVALID_TARGET_IP               #language  en-US "Target IP is invalid!"
+#string STR_INVALID_CHAP_NAME               #language  en-US "CHAP Name or CHAP Secret is invalid!"
+#string STR_INVALID_REVERSE_CHAP_NAME       #language  en-US "Reverse CHAP Name or Reverse CHAP Secret is invalid!"
+#string STR_ATTEMPTS_SAME_NIC               #language  en-US "Warning! Attempt \"%s\" uses same NIC as Attempt \"%s\"."
+#string STR_PFA_MODE_IPVER                  #language  en-US "MAC: %s, PFA: Bus %d | Dev %d | Func %d, iSCSI mode: %s, IP version: %s"
+#string STR_MAC                             #language  en-US "MAC %s"
+#string STR_PFA                             #language  en-US "PFA: Bus %d | Dev %d | Func %d"
+#string STR_ATTEMPT                         #language  en-US "%s"
+#string STR_MAC_INFO                        #language  en-US "MAC: %s, PFA: Bus %d | Dev %d | Func %d"
+#string STR_OFFSET_WIDTH                    #language  en-US "%s&OFFSET=0&WIDTH=%016LX"
+#string STR_INVALID_ISCSI_NAME              #language  en-US "Invalid iSCSI Name!!"
+#string STR_INVALID_IP_ADDRESS              #language  en-US "Invalid IP address!"
+#string STR_INVALID_SUBNETMASK              #language  en-US "Invalid Subnet Mask!"
+#string STR_INVALID_GATEWAY                 #language  en-US "Invalid Gateway!"
+#string STR_INVALID_LUN                     #language  en-US "Invalid LUN string!"
+#string STR_INVALID_TARGETNAME              #language  en-US "iSCSI target name is NULL!"
+#string STR_ISCSI_NIC_INDEX                 #language  en-US "iSCSI (%s, NicIndex=%d)"
+#string STR_CHAP_STATUS_INSTALLED           #language  en-US "[Installed]"
+#string STR_CHAP_STATUS_NOT_INSTALLED       #language  en-US "[Not Installed]"
+
+#string STR_INVALID_TARGET_URL               #language  en-US "iSCSI target Url should not be NULL!"
+
+//
+//  AMI PORTING END - To give Multilanguage Support for iSCSI module.
+//
+
+#string STR_NO_INITIATOR_NAME              #language  en-US "Error: please configure iSCSI initiator name first!"	// AMI PORTING

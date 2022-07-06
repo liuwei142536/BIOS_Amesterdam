@@ -1,0 +1,72 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file NvmeDynamicSetup.uni
+    Unicode string file that defines the strings used by the setup emodule
+*/
+
+#langdef   en-US "English"    // English
+
+#string STR_NVME_CONFIG_FORM                    #language en-US "NVMe Configuration"
+#string STR_NVME_CONFIG_FORM_HELP               #language en-US "NVMe Device Options Settings"
+
+#string STR_NVME_SUBTITLE_STRING                #language en-US "NVMe controller and Drive information"
+#string STR_NVME_HELP_STRING                    #language en-US "NVMe controller and Drive information."
+
+#string STR_NVME_MODEL_NUMBER                   #language en-US "Model Number"
+#string STR_NVME_SIZE                           #language en-US "Total Size"
+#string STR_NVME_BUS_NUMBER                     #language en-US "Seg:Bus:Dev:Func"
+#string STR_NVME_VENDOR_ID                      #language en-US "Vendor ID"
+#string STR_NVME_DEVICE_ID                      #language en-US "Device ID"
+
+
+#string STR_DEVICE_SELF_TEST_TITLE              #language en-US "Device Self Test:"
+
+#string STR_NVME_SHORT_DEVICE_SELFTEST          #language en-US "Short Device Selftest Result"
+#string STR_NVME_EXT_DEVICE_SELFTEST            #language en-US "Extended Device Selftest Result"
+#string STR_NVME_DEVICE_SELFTEST_PASS           #language en-US "Pass"
+#string STR_NVME_DEVICE_SELFTEST_FAIL           #language en-US "Fail"
+#string STR_NVME_DEVICE_SELFTEST_ABORTED        #language en-US "Aborted"
+#string STR_NVME_DEVICE_SELFTEST_NA             #language en-US "Not Available"
+
+#string STR_NVME_RUN_DEVICE_SELFTEST            #language en-US "Run Device Self Test"
+#string STR_NVME_RUN_DEVICE_SELFTEST_HELP       #language en-US "Perform device self test for the corresponding Option and Action selected by user.Pressing 'Esc' key will abort the test. Result shown below is the recent result logged in the device."
+
+#string STR_NVME_SHORT_SELFTEST_TEST_ACTION     #language en-US  "Self Test Action"
+#string STR_NVME_SHORT_SELFTEST_TEST_ACTION_HELP #language en-US "Select either to test Contoller alone or Controller and NameSpace. Selecting Controller and Namespace option will take lot longer to complete the test."
+#string STR_NVME_SHORT_SELFTEST_CTRL_ONLY       #language en-US "Controller Only Test"
+#string STR_NVME_EXTENDED_SELFTEST_NAMESPACE    #language en-US "Controller and NameSpace Test"
+
+#string STR_NVME_DEVICE_SELFTEST                #language en-US "Self Test Option"
+#string STR_NVME_DEVICE_SELFTEST_HELP           #language en-US "Select either Short or Extended Self Test. Short option will take couple of minutes and extended option will take several minutes to complete."
+
+#string STR_NVME_SHORT_SELFTEST                 #language en-US "Short"
+#string STR_NVME_EXTENDED_SELFTEST              #language en-US "Extended"
+
+#string STR_NVME_SELF_TEST_RESULT_TITLE         #language en-US "Self Test Execution Result"
+#string STR_EMPTY                               #language en-US ""
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

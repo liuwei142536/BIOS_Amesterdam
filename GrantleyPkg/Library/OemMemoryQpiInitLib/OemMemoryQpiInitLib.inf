@@ -1,0 +1,84 @@
+## @file
+#  OemMemoryQpiInitLib PEIM
+#
+#  Copyright (c) 2009 - 2020, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OemMemoryQpiInitLib
+  FILE_GUID                      = FBC62E13-365E-43cb-AE4E-EA56107F8F0E
+  MODULE_TYPE                    = BASE
+  LIBRARY_CLASS                  = OemMemoryQpiInitLib | PEIM DXE_DRIVER DXE_SMM_DRIVER  
+
+[Sources.Ia32]
+  EdkMemoryQpiInit.c      
+  OemMemoryQpiInit.c
+
+  
+[Packages]
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
+  MdePkg/MdePkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  GrantleyPkg/PlatformPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  GrantleyPkg/Me/MePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec # AptioV Server Override: DEC file is added for include path
+  GrangevillePkg/PlatformPkg.dec
+  
+[LibraryClasses.Ia32]
+  PeimEntryPoint
+  
+[LibraryClasses] 
+  DebugLib
+  HobLib
+  IoLib
+  PciLib
+  PcdLib #AptioV server overrride: Dynamic mmcfg base address change
+  MeTypeLib
+  PfatInitLib
+  BaseLib
+  UefiDecompressLib
+
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gServerCommonTokenSpaceGuid.PcdProcessorLtsxEnable  # AptioV Server Override: Eip 443149 change
+  
+[Guids]
+  gEfiAcpiVariableGuid
+  gEfiMemoryConfigDataGuid
+  gEfiSetupVariableGuid
+  gEfiGenericVariableGuid
+  gEfiMemoryConfigDataHobGuid
+  gEfiMemoryOverwriteControlDataGuid
+  gPrevBootErrSrcHobGuid
+  gEfiOcDataGuid
+  gEfiPprVariableGuid
+
+  
+[Ppis]
+  gMeUmaPpiGuid
+  gEfiPeiStallPpiGuid
+  #gPeiTpmSaveStatePpiGuid
+[Depex]
+gMeUmaPpiGuid #AptioV Grangeville override : Need to be available , in dsc
+
+[BuildOptions.Ia32]
+  MSFT:*_*_*_CC_FLAGS     = /W4 /Gs999999 /GF /GL- /wd4214 /wd4334 /wd4142 /wd4819 /DBUILDING_FOR_IA32  /DIA32 $(DSC_GLOBAL_BUILD_OPTIONS)
+
+[BuildOptions.X64]
+  MSFT:*_*_X64_CC_FLAGS   = /W2 /Gs32768 /DCONFIG_DP /DQPI_HW_PLATFORM /DBUILDING_FOR_X64 /UIA32 /DEXTERNAL_PACKAGE /DRAS_FEATURES /wd4142 /wd4819 $(DSC_GLOBAL_BUILD_OPTIONS)
+  

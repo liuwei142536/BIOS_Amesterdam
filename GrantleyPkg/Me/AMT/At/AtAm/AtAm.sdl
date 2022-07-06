@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "AtAm_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AtAm support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "AtAm"
+	File  = "Dxe\AtAm.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AtAm_SUPPORT" "=" "1"
+End
+

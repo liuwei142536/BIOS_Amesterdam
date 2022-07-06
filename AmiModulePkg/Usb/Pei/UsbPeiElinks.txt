@@ -1,0 +1,5 @@
+@Elink(USB_PEI_HOST_DRIVER_LIST, "EFI_STATUS @Child(
+    IN EFI_FFS_FILE_HEADER *FfsHeader,
+    IN EFI_PEI_SERVICES    **PeiServices );
+", "", "")
+#define USB_PEI_HOST_DRIVER @Elink(USB_PEI_HOST_DRIVER_LIST, "@Child,", "", "")

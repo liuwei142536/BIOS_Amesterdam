@@ -1,0 +1,89 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**     5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093            **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//**********************************************************************
+// $Header: $
+//
+// $Revision: $
+//
+// $Date: $
+//**********************************************************************
+// Revision History
+// ----------------
+// $Log: $
+// 
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:	AmiTcgPlatfromDxeString.uni
+//
+// Description:	String definitions for PPI interface
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+/=#
+#langdef en-US "English"
+
+#string TPM_CLEAR_STR                 #language en-US "A configuration change was requested to Clear this computer's TPM (Trusted Platform Module)\n"
+#string TPM_PPI_HEAD_STR              #language en-US "A configuration change was requested to allow the Operating System to Clear the computer's TPM (Trusted Platform Module) without asking for user confirmation in the future.\n\n"
+#string TPM_PPI_PCR_A_STR             #language en-US "A configuration change was requested to change the boot measurements to use "
+#string TPM_PPI_HEAD2_STR              #language en-US "A configuration change was requested to allow the Operating System to "
+#string TPM_PPI_HEAD2_PCR_STR          #language en-US "change the format of boot measurement log without asking for user confirmation in the future \n\n"
+
+#string TPM_ACCEPT_KEY                #language en-US "Press F10 " 
+#string TPM_CAUTION_KEY               #language en-US "Press F12 " 
+#string TPM_REJECT_KEY                #language en-US "to Clear the TPM \nPress ESC to reject this change request and continue\n"
+
+#string TPM_REJECT_ONLY_KEY           #language en-US "Press ESC "
+
+#string TPM_CLEAR                     #language en-US "clear"
+#string TPM_PCR_ACCEPT                #language en-US "to change the PCR bank(s)"
+#string TPM_PCR_DECLINE               #language en-US "to keep the PCR bank(s) currently in use"
+
+#string TPM_NO_PPI_INFO               #language en-US "A configuration change was requested to approve future Operating System requests "
+
+#string TPM_WARNING_CLEAR             #language en-US "WARNING: Clearing erases information stored on the TPM. You will lose all created keys and access to data encrypted by these keys.\n"
+#string TPM_WARNING1_PCR              #language en-US "WARNING:Changing the PCR bank(s) of the boot measurements may prevent the Operating System from properly processing the measurements. Please check if your Operating System supports the new PCR bank(s)."
+#string TPM_WARNING2_PCR              #language en-US "WARNING:Secrets in the TPM that are bound to the boot state of your machine may become unusable"
+#string TPM_WARNING3_PCR              #language en-US "WARNING: Allowing future changes to the format of the boot measurement log may affect the Operating System."
+#string TPM_PPI_OS_FUTURE             #language en-US "to approve future Operating System requests"
+#string TPM_PPI_OS_FUTURE_PCR         #language en-US " to change the boot log format."
+#string TPM_PPI_OS_FUTURE_REJECT      #language en-US " to reject this change request and continue"
+#string TPM_NOTE_CLEAR                #language en-US "NOTE: This action does not clear the TPM, but by approving this configuration change, future actions to clear the TPM will not require user confirmation.\n\n"
+#string STR_TCG_BLANK                 #language en-US "                                                                                "
+
+//BlockSID Strings
+#string TPM_SIDHDR_STR                #language en-US "A configuration change was requested to"
+#string TPM_ENABLEBLOCKSID_STR        #language en-US " issue a Block SID authentication command\on subsequent boots\n\n"
+#string TPM_DISABLEBLOCKSID_STR       #language en-US " Disable issuing a Block SID\nAuthentication command on the next boot only\n\n"
+
+#string TPM_SETPPREQUIREDFORENABLEBLOCKSIDFUNCFALSE_STR       #language en-US #language en-US " allow the Operating System (O.S.) \nto Enable blocking SID authentication without asking for user confirmation\nin the future\n\n"
+#string TPM_SETPPREQUIREDFORDISABLEBLOCKSIDFUNCFALSE_STR      #language en-US #language en-US " allow the Operating System \nto Disable blocking SID authentication without asking for user confirmation in the future\n\n"
+#string TPM_SID_ACCEPT_STR                     #language en-US "Press F10 to to accept this request\n"
+#string TPM_SID_ACCEPT_ENABLE_STR              #language en-US "Press F10 to to approve future O.S. request to block SID authentication\n"
+#string TPM_SID_ACCEPT_DISABLE_STR             #language en-US "Press F10 to to approve future O.S. request to Disable block SID authentication\n"
+#string TPM_SID_REJECT_STR                     #language en-US "Press ESC to reject this request and continue\n\n"
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**     5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093            **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

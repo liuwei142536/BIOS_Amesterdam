@@ -1,0 +1,10 @@
+<component>
+	name = "AmtBdsLib"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Platform\Dxe\AmtBdsLib\"
+	RefName = "GrantleyPkg.Amt.AmtBdsLib"
+[INF]
+"AmtBdsLib.inf"
+[files]
+"AmtBdsLib.sdl"	
+<endComponent>

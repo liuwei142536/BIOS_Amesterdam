@@ -1,0 +1,13 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "IA32FamilyCpuPkg\Include\"
+	RefName = "IA32FamilyCpuPkg.Include"
+	Generic Module = "SS: AptioV;$\AptioV\Source\Hardware\Cpu\Intel\IA32FamilyCpuPkg\Include;5.004_IA32FamilyCpuPkg_04"
+[files]
+"AcpiCpuData.h"	
+[parts]
+"IA32FamilyCpuPkg.Guid"
+"IA32FamilyCpuPkg.Library"
+"IA32FamilyCpuPkg.Ppi"
+<endComponent>

@@ -1,0 +1,43 @@
+TOKEN
+    Name  = "SmmTcgStorageSec_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SmmTcgStorageSec support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+    Token = "SMM_SUPPORT" "=" "1"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "TCG_SW_SMI_OPAL_UNLOCK_PASSWORD"
+    Value  = "0D8h"
+    Help  = "SMI value triggered to unlock OPAL device during S3 resume"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+#Cloned to override PcdDebugPrintErrorLevel in SmmTcgStorageSec module.
+PcdMapping
+    Name  = "PcdDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0xFFFFFFFF"
+    Override  = "AmiModulePkg.SmmTcgStorageSec"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+    Token = "TCG_STORAGE_SEC_VERBOSE_PRINT" "=" "1"
+End
+
+INFComponent
+    Name  = "SmmTcgStorageSec"
+    File  = "SmmTcgStorageSec.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+    Class  = "AmiMsftIntrinsicsLib"
+    Instance  = "AmiModulePkg.AmiMsftIntrinsicsLib"
+End

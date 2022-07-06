@@ -1,0 +1,22 @@
+<component>
+	name = "Protocol"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Include\Protocol\"
+	RefName = "GrantleyPkg.Me.AMT.Include.Protocol.Protocol"
+[files]
+"ActiveManagementProtocol.h"	
+"AlertStandardFormat.h"	
+"AmtPlatformPolicy.h"	
+"AmtReadyToBoot.h"	
+"AmtWrapperProtocol.h"	
+"AtAmProtocol.h"	
+"AtPlatformPolicy.h"	
+"AtProtocol.h"	
+"IderControllerDriverProtocol.h"	
+"MeBiosPayloadData.h"	
+"MebxProtocol.h"	
+"MeRcInfo.h"	
+"PlatformMeHook.h"	
+"IccDataProtocol.h"
+"IccOverClocking.h"
+<endComponent>

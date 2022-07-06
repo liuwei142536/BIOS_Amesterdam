@@ -1,0 +1,18 @@
+TOKEN
+    Name  = "TcmPeiSupport"
+    Value  = "1"
+    Help  = "Enable or Diasble TcmSupport"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH   = Yes
+    TargetMAK = Yes
+    Master = Yes
+    Token = "TCG2Support" "=" "1"
+End
+
+INFComponent
+    Name  = "TCMPEI"
+    File  = "TCMPEI.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "PEIM"
+End

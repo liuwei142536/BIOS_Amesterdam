@@ -1,0 +1,42 @@
+[Defines]
+ INF_VERSION    = 0x00010005
+ VERSION_STRING = 1.0
+ BASE_NAME      = TCMDXE
+ MODULE_TYPE    = DXE_DRIVER
+ FILE_GUID      = 0135229A-EBB5-4A21-957D-1D20057CF752
+ ENTRY_POINT    = TcmMP_EntryPoint
+ 
+[Sources]
+  Tcmsdrv.c
+  Tcmsdrv.h
+  TisPc.c
+  TisPc.h
+[Sources.x64]
+  IODelay.asm
+  Tcmtoos.asm
+[Sources.ia32]
+  IODelay32.asm
+  Tcmtoos32.asm
+
+[LibraryClasses]
+ UefiDriverEntryPoint
+ BaseLib
+ MemoryAllocationLib
+ UefiLib
+ PcdLib
+ ShaLib
+ TimerLib
+ 
+[Protocols]
+ gTcgPlatformSetupPolicyGuid
+ 
+[Packages]
+ MdePkg/MdePkg.dec
+ UefiCpuPkg/UefiCpuPkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ AmiModulePkg/AmiModulePkg.dec
+ AmiTcgPkg/AmiTcgPkg.dec
+ MdeModulePkg/MdeModulePkg.dec
+  
+[Depex]
+  TRUE

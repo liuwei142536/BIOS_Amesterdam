@@ -1,0 +1,56 @@
+TOKEN
+    Name  = "BmcSelfTestLog_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable BmcSelfTestLog support in Project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+PATH
+    Name  = "BmcSelfTestLog_DIR"
+    Path  = "AmiIpmiPkg/Ipmi/BmcSelfTestLog"
+    Help = "Path to BmcSelfTestLog sub module in project."
+End
+
+ELINK
+    Name  = "$(BmcSelfTestLog_DIR)/BmcSelfTestLog.c"
+    Parent  = "SERVER_MGMT_SETUP_CALLBACK_FILES"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include BmcSelfTestLog.c file in ServerMgmtSetup callback files list."
+End
+
+ELINK
+    Name  = "$(BmcSelfTestLog_DIR)/BmcSelfTestLog.h"
+    Parent  = "SERVER_MGMT_SETUP_CALLBACK_FILES"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include BmcSelfTestLog.h file in ServerMgmtSetup callback files list."
+End
+
+ELINK
+    Name  = "BmcSelfTestLogStrings,"
+    Parent  = "SERVER_MGMT_SETUP_STRING_INIT"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include default function to initialize the BMC Self test log in setup strings."
+End
+
+ELINK
+    Name  = "gEfiBmcSelfTestLogProtocolGuid"
+    Parent  = "SERVER_MGMT_SETUP_PROTOCOLS"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include Efi Bmc Self Test Log Protocol Guid in Additional ServerMgmt Setup Protocols list."
+End
+
+ELINK
+    Name  = "$(BmcSelfTestLog_DIR)/BmcSelfTestLog.sd"
+    Parent  = "SERVER_MGMT_SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include BmcSelfTestLog.sd file in ServerMgmtSetup definitions files list."
+End
+
+ELINK
+    Name  = "$(BmcSelfTestLog_DIR)/BmcSelfTestLog.uni"
+    Parent  = "SERVER_MGMT_SETUP_STRING_FILES"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include BmcSelfTestLog.uni file in ServerMgmtSetup string files list."
+End
+

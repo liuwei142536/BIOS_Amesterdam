@@ -1,0 +1,854 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 1999 - 2012 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   EventLogSetup.hfr 
+// 
+// Abstract:
+// 
+//   Setup Event Log formset.
+// 
+// Revision History: 
+// 
+// --*/
+#include "token.h" // AptioV Server Override: Added to get the value of sdl tokens
+
+  form formid = VFR_FORMID_ELOG,
+
+    title  = STRING_TOKEN(STR_ELOG_FORM_TITLE);
+
+    subtitle text = STRING_TOKEN(STR_ELOG_FORM_TITLE);
+    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+//    subtitle text = STRING_TOKEN(STR_NULL_STRING); //AptioV Server Override: Extra Horizontal Lines display removal
+
+    //
+    // Log Errors
+    //
+    oneof varid = SYSTEM_CONFIGURATION.SystemErrorEn,
+      prompt = STRING_TOKEN(STR_SYSTEM_ERRORS_PROMPT),
+      help        = STRING_TOKEN(STR_SYSTEM_ERRORS_HELP),
+#if defined(GRANGEVILLE_FLAG) && defined(CRB_FLAG)
+      option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+      option text = STRING_TOKEN(STR_AUTO),  value = 2, flags = RESET_REQUIRED ;
+#else
+      option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+      option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED ;
+      option text = STRING_TOKEN(STR_AUTO),  value = 2, flags = RESET_REQUIRED | DEFAULT;
+#endif
+    endoneof; 
+   
+#ifndef DE_SKU
+    grayoutif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+      oneof varid = SYSTEM_CONFIGURATION.McBankErrorInjectionSupport,
+        prompt = STRING_TOKEN(STR_MCBANK_INJECTION_PROMPT),
+        help        = STRING_TOKEN(STR_MCBANK_INJECTION_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+            endoneof;
+        endif;
+#endif
+
+// Aptio V Server Override Start- Unlocking the MSR 0x790 for the ErrorInjection to work from RAS tools
+#if ENABLE_ERROR_INJECTOR_SUPPORT
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00;
+        oneof varid    = SYSTEM_CONFIGURATION.UnlockMsr,
+           prompt      = STRING_TOKEN(STR_UNLOCK_MSR_PROMPT),
+           help        = STRING_TOKEN(STR_UNLOCK_MSR_HELP),
+           option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+           option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+        endoneof;
+      endif;
+#endif
+// Aptio V Server Override End- Unlocking the MSR 0x790 for the ErrorInjection to work from RAS tools
+
+     grayoutif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+      oneof varid = SYSTEM_CONFIGURATION.McBankWarmBootClearError,
+        prompt = STRING_TOKEN(STR_MCBANK_CLEARERROR_PROMPT),
+        help        = STRING_TOKEN(STR_MCBANK_CLEARERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+            endoneof;
+    endif;   
+
+
+    //Investigate other hfr/vfr files to see how they flag out these items. e.g. CRB flag or EX flag
+   //oneof varid     = SYSTEM_CONFIGURATION.ViralEn,
+      //prompt      = STRING_TOKEN(STR_VIRAL_PROMPT),
+      //help        = STRING_TOKEN(STR_VIRAL_HELP),
+      //option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED | DEFAULT;
+      //option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED;
+    //endoneof;
+
+    grayoutif ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+    oneof varid     = SYSTEM_CONFIGURATION.PoisonEn,
+	    prompt      = STRING_TOKEN(STR_POISON_PROMPT),
+  	    help        = STRING_TOKEN(STR_POISON_HELP),
+#if !(defined(BDX_HOST) && defined(DE_SKU))
+       option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+       option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+#else
+       option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | DEFAULT;
+       option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED ;
+#endif
+    endoneof;
+    endif; 
+    //
+    // IIO errors
+    //
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+		oneof varid     = SYSTEM_CONFIGURATION.IohErrorEn,
+			prompt      = STRING_TOKEN(STR_IOH_ERROR_PROMPT),
+			help        = STRING_TOKEN(STR_IOH_ERROR_HELP),
+#if !(defined(BDX_HOST) && defined(DE_SKU)) 
+			option text = STRING_TOKEN(STR_NO),   value = 0, flags = RESET_REQUIRED | DEFAULT;
+			option text = STRING_TOKEN(STR_YES),  value = 1, flags = RESET_REQUIRED;
+#else
+                        option text = STRING_TOKEN(STR_NO),   value = 0, flags = RESET_REQUIRED;
+			option text = STRING_TOKEN(STR_YES),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+#endif
+    endoneof;
+    endif;
+
+    //
+	  // PCH errors
+    //
+	  suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+	    oneof varid     = SYSTEM_CONFIGURATION.PchErrorEn,
+			  prompt      = STRING_TOKEN(STR_PCH_ERROR_PROMPT),
+			  help        = STRING_TOKEN(STR_PCH_ERROR_HELP),
+#ifdef GRANGEVILLE_FLAG
+          option text = STRING_TOKEN(STR_NO),   value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_YES),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+#else
+          option text = STRING_TOKEN(STR_NO),   value = 0, flags = RESET_REQUIRED| DEFAULT;
+          option text = STRING_TOKEN(STR_YES),  value = 1, flags = RESET_REQUIRED;
+#endif;
+    endoneof;
+    endif;
+
+    //
+    // EMCA 
+    //
+	// CMCI not supported in Grantley (HSD s4168862)
+    //suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+	//oneof varid     = SYSTEM_CONFIGURATION.Cmci,
+	//    prompt      = STRING_TOKEN(STR_CMCI_PROMPT),
+	//    help        = STRING_TOKEN(STR_CMCI_HELP),
+    //        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+  	//    option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+    //    endoneof;
+    //endif;
+
+#ifndef GRANGEVILLE_FLAG
+    //
+    // EMCA 
+    //
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+      oneof varid     = SYSTEM_CONFIGURATION.EMcaLogEn,
+        prompt      = STRING_TOKEN(STR_EMCALOG_EN_PROMPT),
+        help        = STRING_TOKEN(STR_EMCALOG_EN_HELP),
+          option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | DEFAULT;
+          option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+      oneof varid     = SYSTEM_CONFIGURATION.EMcaForceOptin,
+        prompt      = STRING_TOKEN(STR_EMCAFORCE_OPTIN_PROMPT),
+        help        = STRING_TOKEN(STR_EMCAFORCE_OPTIN_HELP),
+          option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | DEFAULT;
+          option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+      oneof varid     = SYSTEM_CONFIGURATION.EMcaCSmiEn,
+        prompt      = STRING_TOKEN(STR_EMCACSMI_EN_PROMPT),
+        help        = STRING_TOKEN(STR_EMCACSMI_EN_HELP),
+          option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | DEFAULT;
+          option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    endif;
+
+// Aptio V Server Override Start : Check SmmErrorHandler.c SetupInterface() .
+//								 : Enable MceSmiMorphingEn Setup option & disable UboxUmcSmiEn Setup option by default when EMcaLogEn Setup option is enabled.  
+// 								 : Enable UboxUmcSmiEn Setup option & disable MceSmiMorphingEn Setup option by default when EMcaLogEn Setup option is disabled.
+suppressif TRUE;   
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+      oneof varid     = SYSTEM_CONFIGURATION.MceSmiMorphingEn,
+        prompt      = STRING_TOKEN(STR_MCESMIMORPHING_EN_PROMPT),
+        help        = STRING_TOKEN(STR_MCESMIMORPHING_EN_HELP),
+          option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | DEFAULT;
+          option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+      endoneof;
+    endif;   
+
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02 OR ideqval SYSTEM_CONFIGURATION.MceSmiMorphingEn == 0x01;
+	    oneof varid     = SYSTEM_CONFIGURATION.UboxUmcSmiEn,
+			  prompt      = STRING_TOKEN(STR_UBOX_UMC_SMI_EN_PROMPT),
+			  help        = STRING_TOKEN(STR_UBOX_UMC_SMI_EN_HELP),
+          option text = STRING_TOKEN(STR_NO),   value = 0, flags = RESET_REQUIRED | DEFAULT;
+          option text = STRING_TOKEN(STR_YES),  value = 1, flags = RESET_REQUIRED;
+    endoneof;
+    endif;
+endif;    
+    #endif
+// Aptio V Server Override Start : Check SmmErrorHandler.c SetupInterface() .
+//								 : Enable MceSmiMorphingEn Setup option & disable UboxUmcSmiEn Setup option by default when EMcaLogEn Setup option is enabled.  
+// 							     : Enable UboxUmcSmiEn Setup option & disable MceSmiMorphingEn Setup option by default when EMcaLogEn Setup option is disabled.     
+    //
+	// IOMCA
+    //
+    //suppressif  ideqval SYSTEM_CONFIGURATION.EMcaEn == 0x00;
+        //oneof varid     = SYSTEM_CONFIGURATION.IoMcaEn,
+            //prompt      = STRING_TOKEN(STR_IOMCA_EN_PROMPT),
+            //help        = STRING_TOKEN(STR_IOMCA_EN_HELP),
+            //option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | DEFAULT;
+            //option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED;
+        //endoneof;
+
+    //endif;
+
+    // CLOAKING
+    //cpuType HSX=0,BDX=2
+    suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02 OR ideqval SYSTEM_CONFIGURATION.cpuType == 0;
+	oneof varid     = SYSTEM_CONFIGURATION.CloakingEn,
+	    prompt      = STRING_TOKEN(STR_CLOAKING_EN_PROMPT),
+	    help        = STRING_TOKEN(STR_CLOAKING_EN_HELP),
+        option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED;
+  	    option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        endoneof;
+    endif; 
+    //
+		// Whea setup options
+    //
+	  suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00;
+#ifdef WHEA_SUPPORT // AptioV Server Override: Added support for setup based on Whea Master Token
+		  goto VFR_FORMID_WHEA, 
+			  prompt = STRING_TOKEN(STR_WHEA_FORM_TITLE),
+			  help   = STRING_TOKEN(STR_WHEA_FORM_HELP);
+#endif // AptioV Server Override
+    endif;	
+
+    //
+    // Processor errros    
+    //
+    
+    //
+    // HSX 4167733: Processor Error Enabling is blank
+    // There is no options available, so comment out the code temporarily
+    //
+    //	  suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+    //	  	  goto VFR_FORMID_PROC_ERR, 
+    //	  	  	  prompt = STRING_TOKEN(STR_PROC_ERR_FORM_TITLE),
+    //	  	  	  help   = STRING_TOKEN(STR_PROC_ERR_FORM_HELP);
+    //	  endif;
+
+    //
+    // QPI Errors
+    //
+#ifndef DE_SKU    
+	  suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+		  goto VFR_FORMID_QPI_ERR, 
+			  prompt = STRING_TOKEN(STR_QPI_ERR_FORM_TITLE),
+			  help   = STRING_TOKEN(STR_QPI_ERR_FORM_HELP);
+    endif;
+#endif
+    //
+    // Memory Errors
+    //
+	  suppressif ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+		  goto VFR_FORMID_MEM_ERR, 
+			  prompt = STRING_TOKEN(STR_MEM_ERR_FORM_TITLE),
+			  help   = STRING_TOKEN(STR_MEM_ERR_FORM_HELP);
+	  endif;
+
+    //
+    // IIO Errors
+    //
+	  suppressif  ideqval SYSTEM_CONFIGURATION.IohErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+		  goto VFR_FORMID_IIO_ERR, 
+			  prompt = STRING_TOKEN(STR_IIO_ERR_FORM_TITLE),
+			  help   = STRING_TOKEN(STR_IIO_ERR_FORM_HELP);
+	  endif;
+
+    //
+    // Pch Errors
+    //
+    suppressif TRUE; // AptioV Server Override
+	  suppressif  ideqval SYSTEM_CONFIGURATION.PchErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+		  goto VFR_FORMID_PCH_ERR, 
+			  prompt = STRING_TOKEN(STR_PCH_ERR_FORM_TITLE),
+			  help   = STRING_TOKEN(STR_PCH_ERR_FORM_HELP);
+	  endif;
+	  endif; // AptioV Server Override
+
+    //
+    // Pci-Ex Errors
+    //
+	  suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+	    goto VFR_FORMID_PCI_ERR, 
+		  prompt = STRING_TOKEN(STR_PCI_ERR_FORM_TITLE),
+		  help   = STRING_TOKEN(STR_PCI_ERR_FORM_HELP);
+	  endif;
+
+  endform;
+
+  //
+  // Processor Errors
+  //	
+  form formid = VFR_FORMID_PROC_ERR, 
+
+	  title  = STRING_TOKEN(STR_PROC_ERR_FORM_TITLE);
+
+  endform;
+
+#ifndef DE_SKU
+  //
+  // QPI Errors
+  //
+  form formid = VFR_FORMID_QPI_ERR,
+
+	  title  = STRING_TOKEN(STR_QPI_ERR_FORM_TITLE);
+	  //
+	  // Qpi link failover SMI
+	  //
+	  oneof varid     = SYSTEM_CONFIGURATION.QPIFailoverSmiEn,
+		  prompt      = STRING_TOKEN(STR_QPIFOSMI_PROMPT),
+		  help        = STRING_TOKEN(STR_QPIFOSMI_HELP),
+		  option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED | DEFAULT;
+		  option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED;
+    endoneof;
+
+  endform;
+#endif
+
+  //
+  // IIO Errors
+  //
+  form formid = VFR_FORMID_IIO_ERR,
+
+	  title  = STRING_TOKEN(STR_IIO_ERR_FORM_TITLE);
+
+	  // Error pin Programming for IIO 
+    
+    oneof varid     = SYSTEM_CONFIGURATION.ErrorPinProgrammingForIIO,
+        prompt      = STRING_TOKEN(STR_ERROR_PIN_LOG_PROMPT),
+        help        = STRING_TOKEN(STR_ERROR_PIN_LOG_HELP),
+#if !(defined(BDX_HOST) && defined(DE_SKU))
+        option text = STRING_TOKEN(STR_NOINBAND), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_SMIPMI),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+#else
+        option text = STRING_TOKEN(STR_NOINBAND), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT ;
+        option text = STRING_TOKEN(STR_SMIPMI),   value = 1, flags = RESET_REQUIRED ;
+#endif
+      endoneof;
+
+#if defined(BDX_HOST) && defined(DE_SKU)
+      //Enable DMI errors
+
+    oneof varid     = SYSTEM_CONFIGURATION.DmiErrorEn,
+        prompt      = STRING_TOKEN(STR_DMIERROR_EN_PROMPT),
+        help        = STRING_TOKEN(STR_DMIERROR_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED| MANUFACTURING | DEFAULT;
+      endoneof;
+
+
+      //Enable Vtd Errors
+
+    oneof varid     = SYSTEM_CONFIGURATION.VtdErrorEn,
+        prompt      = STRING_TOKEN(STR_VTDERROR_EN_PROMPT),
+        help        = STRING_TOKEN(STR_VTDERROR_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+       //Enable Misc Errors
+
+    oneof varid     = SYSTEM_CONFIGURATION.MiErrorEn,
+        prompt      = STRING_TOKEN(STR_MISCERROR_EN_PROMPT),
+        help        = STRING_TOKEN(STR_MISCERROR_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+     //Enable IIO core Errors
+
+    oneof varid     = SYSTEM_CONFIGURATION.IioCoreErrorEn,
+        prompt      = STRING_TOKEN(STR_IIOCORE_ERROR_EN_PROMPT),
+        help        = STRING_TOKEN(STR_IIOCORE_ERROR_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED ;
+      endoneof;
+ 
+    //Enable CB DMA errors
+
+    oneof varid     = SYSTEM_CONFIGURATION.DmaErrorEn,
+        prompt      = STRING_TOKEN(STR_DMAERROR_EN_PROMPT),
+        help        = STRING_TOKEN(STR_DMAERROR_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+      endoneof;
+
+      // Enable Coherent InterfaceErrorEn errors
+    
+    oneof varid     = SYSTEM_CONFIGURATION.CoherentInterfaceErrorEn,
+        prompt      = STRING_TOKEN(STR_CIERROR_EN_PROMPT),
+        help        = STRING_TOKEN(STR_CIERROR_EN_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+      endoneof;
+       //
+    // Coherent Interface Error
+    //
+	  suppressif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+	    goto VFR_FORMID_IRRP_ERR, 
+		  prompt = STRING_TOKEN(STR_IRPP_ERR_FORM_TITLE),
+		  help   = STRING_TOKEN(STR_IRPP_ERR_FORM_HELP);
+	  endif;
+
+	  
+endform;
+//
+  // IRPP Errors
+  //
+  form formid = VFR_FORMID_IRRP_ERR,
+
+	  title  = STRING_TOKEN(STR_IRPP_ERR_FORM_TITLE);
+
+#endif
+    // 
+    // Enable IRP errors by setting IRPP0CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp0_parityError,
+        prompt = STRING_TOKEN(STR_LOG_IRP0_PARITY_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_PARITY_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED  | DEFAULT;
+    endoneof;
+      
+    // Enable IRP errors by setting IRPP0CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp0_qtOverflow,
+        prompt = STRING_TOKEN(STR_LOG_IRP0_QTOVERFLOW_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_QTOVERFLOW_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED  | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP0CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp0_unexprsp,
+        prompt = STRING_TOKEN(STR_LOG_IRP0_UNEXPRSP_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_UNEXPRSP_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED  | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP0CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp0_csraccunaligned,
+        prompt = STRING_TOKEN(STR_LOG_IRP0_UNALIGNEDACC_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_UNALIGNEDACC_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED  | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP0CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp0_uncecc,
+        prompt = STRING_TOKEN(STR_LOG_IRP0_UNCECC_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_UNCECC_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED  | DEFAULT;
+    endoneof;
+
+     // Enable IRP errors by setting IRPP0CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp0_rcvdpoison,
+        prompt = STRING_TOKEN(STR_LOG_IRP0_RCVDPOISON_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_RCVDPOISON_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED  | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP0CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp0_crrecc,
+        prompt = STRING_TOKEN(STR_LOG_IRP0_CRRECC_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_CRRECC_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP1CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp1_parityError,
+        prompt = STRING_TOKEN(STR_LOG_IRP1_PARITY_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_PARITY_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP1CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp1_qtOverflow,
+        prompt = STRING_TOKEN(STR_LOG_IRP1_QTOVERFLOW_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_QTOVERFLOW_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED  | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP1CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp1_unexprsp,
+        prompt = STRING_TOKEN(STR_LOG_IRP1_UNEXPRSP_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_UNEXPRSP_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP1CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp1_csraccunaligned,
+        prompt = STRING_TOKEN(STR_LOG_IRP1_UNALIGNEDACC_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_UNALIGNEDACC_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP1CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp1_uncecc,
+        prompt = STRING_TOKEN(STR_LOG_IRP1_UNCECC_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_UNCECC_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP1CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp1_rcvdpoison,
+        prompt = STRING_TOKEN(STR_LOG_IRP1_RCVDPOISON_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_RCVDPOISON_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+    endoneof;
+
+    // Enable IRP errors by setting IRPP1CTL 
+    //
+    oneof varid = SYSTEM_CONFIGURATION.irpp1_crrecc,
+        prompt = STRING_TOKEN(STR_LOG_IRP1_CRRECC_ERROR_PROMPT),
+        help        = STRING_TOKEN(STR_LOG_IRP_CRRECC_ERROR_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+    endoneof;
+    
+	  // LER ENBALE (TBD)
+
+  endform;
+
+  //
+  // Pch Errors
+  //
+  form formid = VFR_FORMID_PCH_ERR,
+  		
+		title  = STRING_TOKEN(STR_PCH_ERR_FORM_TITLE);
+
+  endform;
+
+  //
+  // PCI Errors
+  //
+  form formid = VFR_FORMID_PCI_ERR,
+
+		title  = STRING_TOKEN(STR_PCI_ERR_FORM_TITLE);
+
+		 oneof varid     = SYSTEM_CONFIGURATION.PcieErrorsEn,
+			prompt      = STRING_TOKEN(STR_PCIEX_LOG_PROMPT),
+			help        = STRING_TOKEN(STR_PCIEX_LOG_HELP),
+#if !(defined(BDX_HOST) && defined(DE_SKU))
+			option text = STRING_TOKEN(STR_NO),   value = 0, flags = RESET_REQUIRED | DEFAULT;
+			option text = STRING_TOKEN(STR_YES),  value = 1, flags = RESET_REQUIRED ;
+#else
+                        option text = STRING_TOKEN(STR_NO),   value = 0, flags = RESET_REQUIRED ;
+	                option text = STRING_TOKEN(STR_YES),  value = 1, flags = RESET_REQUIRED | DEFAULT;
+#endif
+		 endoneof;
+		 
+	//
+	// Correctable Errors
+	//
+    suppressif  ideqval SYSTEM_CONFIGURATION.PcieErrorsEn == 0x00;
+		oneof varid     = SYSTEM_CONFIGURATION.PCIECorrErrorEn,
+            prompt      = STRING_TOKEN(STR_COR_ERRORS_PROMPT),
+            help        = STRING_TOKEN(STR_COR_ERRORS_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED ;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+    endif;
+       
+    //
+    // Uncorrectable/Recoverable Errors
+    //
+    suppressif  ideqval SYSTEM_CONFIGURATION.PcieErrorsEn == 0x00;
+		oneof varid     = SYSTEM_CONFIGURATION.PCIEUnCorrErrorEn,
+            prompt      = STRING_TOKEN(STR_UR_ERRORS_PROMPT),
+            help        = STRING_TOKEN(STR_UR_ERRORS_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED ;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+    endif;
+
+    //
+	// Fatal Errors
+    //
+    suppressif  ideqval SYSTEM_CONFIGURATION.PcieErrorsEn == 0x00;
+		oneof varid     = SYSTEM_CONFIGURATION.PCIEFatalErrorEn,
+			prompt      = STRING_TOKEN(STR_FATAL_ERRORS_PROMPT),
+			help        = STRING_TOKEN(STR_FATAL_ERRORS_HELP),
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED ;
+        option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED | DEFAULT;
+        endoneof;
+    endif;
+
+    //
+	// Pcie error count
+    //
+    suppressif  ideqval SYSTEM_CONFIGURATION.PcieErrorsEn == 0x00;
+     numeric varid = SYSTEM_CONFIGURATION.PcieCeErrThreshold,
+        prompt = STRING_TOKEN(STR_PCIE_CERR_THRESHOLD_PROMPT),
+        help = STRING_TOKEN(STR_PCIE_CERR_THRESHOLD_HELP),
+        flags = RESET_REQUIRED,
+        minimum = 0,
+        maximum = 0xFF,
+        step = 1, // Stepping of 0 equates to a manual entering of a value,
+        // otherwise it will auto-increment with a left/right arrow
+        default = 0,
+     endnumeric;
+    endif;
+    
+    //
+		// Enable SERR/PERR# propagation.
+    //
+		oneof varid     = SYSTEM_CONFIGURATION.PropagateSerr,
+			prompt      = STRING_TOKEN(STR_ENAB_SERR_PROP_PROMPT),
+			help        = STRING_TOKEN(STR_ENAB_SERR_PROP_HELP),
+			option text = STRING_TOKEN(STR_NO),   value = 0, flags = RESET_REQUIRED | DEFAULT;
+			option text = STRING_TOKEN(STR_YES),  value = 1, flags = RESET_REQUIRED | MANUFACTURING;
+    endoneof;
+
+		oneof varid     = SYSTEM_CONFIGURATION.PropagatePerr,
+			prompt      = STRING_TOKEN(STR_ENAB_PERR_PROP_PROMPT),
+			help        = STRING_TOKEN(STR_ENAB_PERR_PROP_HELP),
+			option text = STRING_TOKEN(STR_NO),   value = 0, flags = RESET_REQUIRED | DEFAULT;
+			option text = STRING_TOKEN(STR_YES),  value = 1, flags = RESET_REQUIRED | MANUFACTURING ;
+		endoneof;
+		
+#if (defined(BDX_HOST) && defined(DE_SKU))
+         oneof varid     = SYSTEM_CONFIGURATION.PcieExtndErrorsEn,
+			prompt      = STRING_TOKEN(STR_PCIEXTND_LOG_PROMPT),
+			help        = STRING_TOKEN(STR_PCIEXTND_LOG_HELP),
+            option text = STRING_TOKEN(STR_DISABLE),   value = 0, flags = RESET_REQUIRED |DEFAULT;
+			option text = STRING_TOKEN(STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
+
+		 endoneof;
+#endif
+    //oneof varid     = SYSTEM_CONFIGURATION.LerEnable,
+            //prompt      = STRING_TOKEN(STR_LER_PROMPT),
+            //help        = STRING_TOKEN(STR_LER_HELP),
+        //option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        //option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED;
+    //endoneof;
+
+     //suppressif  ideqval SYSTEM_CONFIGURATION.LerEnable == 0x00;
+	    //oneof varid     = SYSTEM_CONFIGURATION.DisableC4LoggingDueToLER,
+	            //prompt      = STRING_TOKEN(STR_C4LOG_LER_PROMPT),
+	            //help        = STRING_TOKEN(STR_C4LOG_LER_HELP),
+	            //option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED ;
+	            //option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+	    //endoneof;
+    //endif;    
+
+  endform;
+
+#ifdef WHEA_SUPPORT // AptioV Server Override: Added support for setup based on Whea Master Token
+    //
+  // Whea
+    //
+  form formid = VFR_FORMID_WHEA,
+
+	  title  = STRING_TOKEN(STR_WHEA_FORM_TITLE);
+
+	  subtitle text = STRING_TOKEN(STR_WHEA_FORM_TITLE);
+	  subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+//	subtitle text = STRING_TOKEN(STR_NULL_STRING); //AptioV Server Override: Extra Horizontal Lines display removal
+
+	  oneof varid = SYSTEM_CONFIGURATION.WheaSupport,
+			  prompt = STRING_TOKEN(STR_WHEA_SUPPORT_PROMPT),  
+			  help = STRING_TOKEN(STR_WHEA_SUPPORT_HELP),
+			  option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED|DEFAULT;
+			  option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED;
+	  endoneof;
+
+	  suppressif  ideqval SYSTEM_CONFIGURATION.WheaSupport == 0x00;
+		  oneof varid = SYSTEM_CONFIGURATION.WheaEinj_05Extn,
+			  prompt = STRING_TOKEN(STR_WHEA_ACPI5_SUPPORT_PROMPT),  
+			  help = STRING_TOKEN(STR_WHEA_ACPI5_SUPPORT_HELP),
+			  option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED|DEFAULT;
+			  option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED;
+		  endoneof;
+    endif;
+
+      suppressif  ideqval SYSTEM_CONFIGURATION.WheaSupport == 0x00;
+          oneof varid = SYSTEM_CONFIGURATION.WheaLogging,
+              prompt = STRING_TOKEN(STR_WHEA_FFM_LOG_PROMPT),  
+              help = STRING_TOKEN(STR_WHEA_FFM_LOG_HELP),
+              option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED|DEFAULT;
+       option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED;
+    endoneof;
+      endif;
+
+	  suppressif  ideqval SYSTEM_CONFIGURATION.WheaSupport == 0x00 ;
+		  oneof varid = SYSTEM_CONFIGURATION.WheaErrorRecordFormat,
+			  prompt = STRING_TOKEN(STR_WHEA_UEFI_REV_PROMPT),  
+			  help = STRING_TOKEN(STR_WHEA_UEFI_REV_HELP),
+			  option text = STRING_TOKEN(STR_UEFI22), value = 0, flags = RESET_REQUIRED | DEFAULT;
+			  option text = STRING_TOKEN(STR_UEFI23),  value = 1, flags = RESET_REQUIRED;
+		  endoneof;
+	  endif;
+    
+	  suppressif  ideqval SYSTEM_CONFIGURATION.WheaSupport == 0x00 ;	  
+	    oneof varid = SYSTEM_CONFIGURATION.PciExpressErrInj,
+			  prompt = STRING_TOKEN(STR_PCIE_EINJ_PROMPT),  
+			  help = STRING_TOKEN(STR_PCIE_EINJ_HELP),
+			  option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+			  option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED|DEFAULT;
+	    endoneof;
+	  endif;
+  
+    suppressif  ideqval SYSTEM_CONFIGURATION.WheaSupport == 0x00 ;    
+      oneof varid = SYSTEM_CONFIGURATION.PcieErrInjActionTable,
+        prompt = STRING_TOKEN(STR_PCIE_EINJAT_PROMPT),  
+        help = STRING_TOKEN(STR_PCIE_EINJAT_HELP),
+        option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED|DEFAULT;
+      endoneof;
+    endif;
+    
+  endform;
+#endif // AptioV Server Override
+
+    //
+  // Memory Errors
+    //
+  form formid = VFR_FORMID_MEM_ERR,
+
+	    title  = STRING_TOKEN(STR_MEM_ERR_FORM_TITLE);
+
+	    subtitle text = STRING_TOKEN(STR_MEM_ERR_FORM_TITLE);
+	    subtitle text = STRING_TOKEN(STR_HORIZONTAL_LINE);
+//	subtitle text = STRING_TOKEN(STR_NULL_STRING); //AptioV Server Override: Extra Horizontal Lines display removal
+
+	    grayoutif  ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x00 OR ideqval SYSTEM_CONFIGURATION.EMcaCSmiEn == 0x1 OR ideqval SYSTEM_CONFIGURATION.SystemErrorEn == 0x02;
+		    oneof varid     = SYSTEM_CONFIGURATION.CorrectedMemoryErrors,
+			    prompt      = STRING_TOKEN(STR_COR_MEM_PROMPT),
+			    help        = STRING_TOKEN(STR_COR_MEM_HELP),
+       option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+       option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED;
+    endoneof;
+	    endif;
+
+    //
+      // Spare Interrupt Selection
+    //
+      grayoutif ideqval SYSTEM_CONFIGURATION.CorrectedMemoryErrors == 0;
+        oneof varid    = SYSTEM_CONFIGURATION.SpareInt,
+           prompt      = STRING_TOKEN(STR_SPARE_PROMPT),
+           help        = STRING_TOKEN(STR_SPARE_HELP),
+           option text = STRING_TOKEN(STR_SMI),  value = 0, flags = RESET_REQUIRED;
+           option text = STRING_TOKEN(STR_CMCI),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+           option text = STRING_TOKEN(STR_ERRPIN),   value = 2, flags = RESET_REQUIRED;
+    endoneof;
+      endif;
+
+#ifndef GRANGEVILLE_FLAG
+	  //
+      // Mirror FailOver
+      //
+      grayoutif ideqval SYSTEM_CONFIGURATION.CorrectedMemoryErrors == 0 OR ideqval SYSTEM_CONFIGURATION.EMcaCSmiEn == 0x1;
+		    oneof varid     = SYSTEM_CONFIGURATION.MirrorFailOver,
+			    prompt      = STRING_TOKEN(STR_MIRR_FAILOVER_SMI_PROMPT),
+			    help        = STRING_TOKEN(STR_MIRR_FAILOVER_SMI_HELP),
+           option text = STRING_TOKEN(STR_SMI),  value = 1, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_CMCI),   value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+      endoneof;
+    endif;
+#endif
+
+
+
+	  //
+	  // VmseDdrParityError 
+	  //grayoutif ideqval SYSTEM_CONFIGURATION.CorrectedMemoryErrors == 0;//
+	    //neof varid     = SYSTEM_CONFIGURATION.VmseDdrParityError,
+		    //prompt      = STRING_TOKEN(STR_DDR_PARITY_SMI_PROMPT),
+		    //help        = STRING_TOKEN(STR_DDR_PARITY_SMI_HELP),
+           //option text = STRING_TOKEN(STR_SMI),  value = 0, flags = RESET_REQUIRED;
+           //option text = STRING_TOKEN(STR_CMCI),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+	    //endoneof;    
+      //endif;
+    //
+		// VmseLinkFailure 
+		//
+	  //grayoutif ideqval SYSTEM_CONFIGURATION.CorrectedMemoryErrors == 0;//
+		  //oneof varid     = SYSTEM_CONFIGURATION.VmseLinkFailure,
+			  //      = STRING_TOKEN(STR_LINK_FAILURE_SMI_PROMPT),
+			 // help        = STRING_TOKEN(STR_LINK_FAILURE_SMI_HELP),
+        //option text = STRING_TOKEN(STR_SMI),  value = 0, flags = RESET_REQUIRED;
+        //option text = STRING_TOKEN(STR_CMCI),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+		  //endoneof;
+    //endif;
+   
+    //
+    // VmseNbPersistentError
+    //
+	  //grayoutif ideqval SYSTEM_CONFIGURATION.CorrectedMemoryErrors == 0;//
+      //oneof varid     = SYSTEM_CONFIGURATION.VmseNbPersistentError,
+          //prompt      = STRING_TOKEN(STR_NB_PERS_SMI_PROMPT),
+          //help        = STRING_TOKEN(STR_NB_PERS_SMI_HELP),
+          //option text = STRING_TOKEN(STR_SMI),  value = 0, flags = RESET_REQUIRED;
+          //option text = STRING_TOKEN(STR_CMCI),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+      //endoneof;
+    //endif;    
+    //
+    // VmseSbPersistentError 
+    //
+	  //grayoutif ideqval SYSTEM_CONFIGURATION.CorrectedMemoryErrors == 0;//
+	    //oneof varid     = SYSTEM_CONFIGURATION.VmseSbPersistentError,
+        //prompt      = STRING_TOKEN(STR_SB_PERS_SMI_PROMPT),
+        //help        = STRING_TOKEN(STR_SB_PERS_SMI_HELP),
+        //option text = STRING_TOKEN(STR_SMI),  value = 0, flags = RESET_REQUIRED;
+        //option text = STRING_TOKEN(STR_CMCI),   value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+      //endoneof;
+    //endif;  
+  endform;

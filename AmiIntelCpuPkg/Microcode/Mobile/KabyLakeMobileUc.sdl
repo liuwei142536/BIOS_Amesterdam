@@ -1,0 +1,83 @@
+TOKEN
+	Name  = "MOBILE_406EY"
+	Value  = "0"
+    Help = "Intel(R) KabyLake"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "MOBILE_M80406E8"
+    Value  = "1"
+    Help  = "Intel(R) KabyLake Processor G-0 Stepping"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_MC0806E9"
+    Value  = "1"
+    Help  = "Intel(R) KabyLake-U/Y, U23e(806E9) H-0, J-1 Stepping"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "MOBILE_MC0806EA"
+    Value  = "1"
+    Help  = "Intel(R) KabyLake Refresh U(806EA) Y-0 Stepping"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "MOBILE_M10806E9"
+    Value  = "1"
+    Help  = "Intel(R) Amber Lake-Y/22(806E9) H-0 Stepping"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "MOBILE_M90806EC_AmberLake"
+    Value  = "1"
+    Help  = "Intel(R) Amber Lake-Y42 V-0 Stepping(806EC)"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M80406E8_00000026.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) KabyLake(406E8) Processor G-0 Stepping"
+    Token = "MOBILE_M80406E8" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/MC0806E9_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) KabyLake-U/Y, U23e H-0, J-1 Stepping(806E9)"
+    Token = "MOBILE_MC0806E9" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/MC0806EA_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) KabyLake Refresh U Y-0 Stepping(806EA)"
+    Token = "MOBILE_MC0806EA" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M10806E9_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Amber Lake-Y/22 H-0 Stepping(806E9)"
+    Token = "MOBILE_M10806E9" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M94806EC_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Amber Lake-Y42 V-0 Stepping(806EC)"
+    Token = "MOBILE_M90806EC_AmberLake" "=" "1"
+    InvokeOrder = AfterParent
+End

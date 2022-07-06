@@ -1,0 +1,131 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 2006 - 2008 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   Strings.uni
+// 
+// Abstract:
+// 
+//   String definitions for Sample Setup formset.
+// 
+// Revision History:
+// 
+// --*/
+
+/=#
+
+#langdef   en-US "English"
+#langdef   fr-FR "Français"
+#langdef   es-ES "Español"
+#langdef   x-AMI "AmiMappingLanguage"
+
+#string VAR_EQ_CONFIG_MODE_NAME         #language en-US  "67"
+
+
+                     
+#string STR_ENABLE                       #language en-US  "Enable"
+
+
+                                         
+#string STR_DISABLE                      #language en-US  "Disable"
+
+
+                                         
+#string STR_AUTO                         #language en-US  "Auto"
+
+
+                                         
+#string STR_SLOW                         #language en-US  "Slow"
+#string STR_FAST                         #language en-US  "Fast"                                         
+                                         
+#string STR_ERROR_POPUP                  #language en-US  "Try Again"
+
+
+                                         
+#string STR_ERROR_POPUP                  #language en-US  "Try Again"
+
+
+
+#string STR_BUILD_TIME_VALUE             #language en-US  ""
+
+
+
+#string STR_BUILD_TIME_STRING 	         #language en-US "Build Time"
+
+                                      
+                          
+#string STR_NULL_STRING  	               #language en-US  ""
+
+
+                                                          
+// TPM 
+#string STR_TPM_TITLE              #language en-US  "TPM"
+#string STR_TPM_HELP               #language en-US  "Press <Enter> to select the TPM Setup options."
+#string STR_TPM_DEVICE_PROMPT      #language en-US "TPM Device"
+#string STR_TPM_DEVICE_HELP        #language en-US "Enable/Disable the TPM device, setting takes effect on the next boot."
+#string STR_TPM_STATE_PROMPT       #language en-US "TPM State"
+#string STR_TPM_STATE_HELP         #language en-US "Activate/Deactivate the TPM device, setting takes effect on the next boot."
+#string STR_ACTIVATE               #language en-US "Activate"
+#string STR_DEACTIVATE             #language en-US "Deactivate"
+#string STR_TPM_FORCE_CLEAR_PROMPT #language en-US "TPM Force Clear"
+#string STR_TPM_FORCE_CLEAR_HELP   #language en-US "Force Clear TPM data."
+#string VAR_EQ_ADMIN_NAME               #language en-US  "65"
+
+// Passwords
+#string STR_SECURITY_TITLE                #language en-US  "Security"
+#string STR_SECURITY_HELP                 #language en-US  "Press <Enter> to select the Security Setup options."
+#string STR_USER_PASSWORD_PROMPT          #language en-US  "User Password"
+#string STR_USER_PASSWORD_HELP            #language en-US  "Sets personal password"
+#string STR_ADMIN_PASSWORD_PROMPT         #language en-US  "Admin Password"
+#string STR_ADMIN_PASSWORD_HELP           #language en-US  "Sets administrative password"
+#string STR_SECURITY_PASSWORD_INVALID     #language en-US  "Incorrect password"
+#string STR_SECURITY_PASSWORD_VALID       #language en-US  "Setup is now unlocked"
+#string STR_SECURITY_PASSWORD_LENGTH      #language en-US  "The password needs to be at least 6 characters long."
+#string STR_CLEAR_PASSWORD_TEXT           #language en-US  "Clear password"
+#string STR_CLEAR_PASSWORD_HELP           #language en-US  "This allows user to clear passwords."
+#string STR_ENTER_PASSWORD_TEXT           #language en-US  "Unlock Setup"
+#string STR_ENTER_PASSWORD_HELP           #language en-US  "This allows user to enter passwords."
+                                        
+#string STR_ACPI_SLEEP_PROMPT              #language en-US "ACPI Sleep State"
+#string STR_ACPI_SLEEP_HELP                #language en-US "Select the highest ACPI sleep state the system will enter."
+
+#string STR_ACPI_SLEEP_NO                  #language en-US "Suspend Disabled"
+#string STR_ACPI_SLEEP_S1                  #language en-US "S1 (CPU Stop Clock)"
+#string STR_ACPI_SLEEP_S3                  #language en-US "S3 (Suspend to RAM)"
+                 
+#string STR_USER_PASSWORD_STATUS           #language en-US  "Current Status of User Password"
+#string STR_ADMIN_PASSWORD_STATUS          #language en-US  "Current Status of Admin Password"
+                       
+#string VAR_EQ_ADMIN_NAME                 #language en-US  "65"               
+#string VAR_EQ_USER_NAME                  #language en-US  "66"
+
+#string STR_ACCESS_LEVEL                  #language en-US "Access Level"
+#string STR_ACCESS_USER                   #language en-US "User"
+#string STR_ACCESS_ADMIN                  #language en-US "Administrator"
+#string STR_USER_HELP                     #language en-US "Entered in User mode - Restricted Access"
+#string STR_ADMIN_HELP                    #language en-US "Entered in Administrator mode "
+
+//Aptio V Server Override - Start : Changes done for loading the IntelRcSetup page in Defaults.bin during build time itself.
+#string RC_SETUP_HIDE_FORM_TITLE      	  #language en-US "Intel Ref.code setup hide Title"
+#string RC_SETUP_HIDE_STRING           			  #language en-US "Intel Ref.code setup hide"
+#string RC_SETUP_HIDE_STRING_HELP                 #language en-US "Intel Ref.code setup hide HELP"
+#string RC_SETUP_HIDE_STR_DISABLE                 #language en-US "Intel Ref.code setup hide Disable"
+#string RC_SETUP_HIDE_STR_ENABLE                  #language en-US "Intel Ref.code setup hide Enable"
+//Aptio V Server Override - End : Changes done for loading the IntelRcSetup page in Defaults.bin during build time itself.

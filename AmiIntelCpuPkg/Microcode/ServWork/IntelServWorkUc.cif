@@ -1,0 +1,29 @@
+<component>
+	name = "Server/Workstation CPU uCode Patches"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\ServWork\"
+	RefName = "AmiIntelCpuPkg.IntelServWorkUc"
+[files]
+"IntelServWorkUc.sdl"	
+[parts]
+"IceLakeServerUc"
+"DenvertonServerUc"
+"SkyLakeHServerUc"
+"KnightsLanding"
+"KnightsMill"
+"SkyLakeServerUc"
+"BroadwellDEUc"
+"BroadwellHServerUc"
+"BroadwellServerUc"
+"HaswellServerExUc"
+"HaswellServer2Uc"
+"HaswellServerUc"
+"IvyBridgeServerUc"
+"SandyBridgeServerUc"
+"KabyLakeHServerUc"
+"SnowridgeServerUc"
+"CoffeeLakeSServerUc"
+"CooperLakeServerUc"
+"RocketLakeServerUc"
+" SapphireRapidsServerUc"
+<endComponent>

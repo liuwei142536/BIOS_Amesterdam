@@ -1,0 +1,15 @@
+<component>
+    name = "AmiUsbLib"
+    category = ModulePart
+    LocalRoot = "AmiModulePkg\Usb\AmiUsbLib\"
+    RefName = "AmiUsbLib"
+[INF]
+"AmiUsbSmmGlobalDataValidationLib.inf"
+"SmmAmiUsbHcdLib\SmmAmiUsbHcdLib.inf"
+"DxeAmiUsbHcdLib\DxeAmiUsbHcdLib.inf"
+"DxeAmiUsbBdsLib\DxeAmiUsbBdsLib.inf"
+[files]
+"AmiUsbLib.sdl"
+[parts]
+"AmiUsbLibInclude"
+<endComponent>

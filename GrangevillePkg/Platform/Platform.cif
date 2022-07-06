@@ -1,0 +1,9 @@
+<component>
+	name = "Platform"
+	category = ModulePart
+	LocalRoot = "GrangevillePkg\Platform\"
+	RefName = "GrangevillePkg.Platform"
+[parts]
+"GrangevillePkg.Platform.Pei"
+"GrangevillePkg.Platform.DxeSmm"
+<endComponent>

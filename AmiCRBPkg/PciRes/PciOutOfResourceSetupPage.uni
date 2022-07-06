@@ -1,0 +1,62 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2009, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+//#**********************************************************************
+//# $Header: /Alaska/BIN/Core/Modules/PciOutOfResourceSetupPage/PciOutOfResourceSetupPage.mak 
+//#
+//# $Revision: 1 $
+//#
+//# $Date:  $
+//#**********************************************************************
+//# Revision History
+//# ----------------
+//# $Log: /Alaska/BIN/Core/Modules/PciOutOfResourceSetupPage/PciOutOfResourceSetupPage.mak $
+//# 
+//# 
+//#**********************************************************************
+//#<AMI_FHDR_START>
+//#
+//# Name:	PciOutOfResourceSetupPage.uni
+//#
+//# Description:	
+//#
+//#<AMI_FHDR_END>
+//#**********************************************************************
+/=#
+#include "VFR.uni"
+#string STR_PCI_OUT_OF_RESOURCE_PAGE #language eng "!!!! PCI Resource ERROR !!!!"
+#string STR_INSUFFICIENT_PCI_RESOURCE #language eng "PCI OUT OF RESOURCES CONDITION:"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_1   #language eng "ERROR: Insufficient PCI Resources Detected!!!" 
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_2   #language eng "System is running with Insufficient PCI Resources!"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_3   #language eng "In order to display this message some"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_3_1 #language eng "PCI devices were set to disabled state!"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_4   #language eng "It is strongly recommended to Power Off the system "
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_4_1 #language eng "and remove some PCI/PCI Express cards from the system!"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_5   #language eng "To continue booting, proceed to <Save & Exit> Menu Option "
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_5_1 #language eng "and select Boot Device or <Discard Changes and Exit>."
+#string STR_INSUFFICIENT_PCI_RESOURCE_WARNING  #language eng "WARNING: If you choose to continue booting some Operating"
+#string STR_INSUFFICIENT_PCI_RESOURCE_WARNING1 #language eng "    Systems might not be able to complete boot correctly!"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2009, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

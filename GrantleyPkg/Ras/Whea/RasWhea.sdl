@@ -1,0 +1,44 @@
+TOKEN
+	Name  = "RasWhea_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling RasWhea support in the project"
+	TokenType = Boolean
+	Master = Yes
+	Token  = "WHEA_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "IsPlatformSupportWhea_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable IsPlatformSupportWhea support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "WheaPlatformHooksLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable WheaPlatformHooksLib support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "IsPlatformSupportWhea"
+	File  = "IsPlatformSupportWhea\IsPlatformSupportWhea.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "IsPlatformSupportWhea_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "WheaPlatformHooksLib"
+	File  = "WheaPlatformHooksLib\WheaPlatformHooksLib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "BASE"
+	Token = "WheaPlatformHooksLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "WheaPlatformHooksLib"
+	Instance  = "GrantleyPkg.WheaPlatformHooksLib"
+End
+

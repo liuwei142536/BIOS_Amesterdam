@@ -1,0 +1,8 @@
+AptioVDebugger.cif 
+install.bat
+Extract.vbs
+loaderExtract.vbs
+update.bat
+com.ami.debug_
+excludelist.txt
+org.eclipse.ui.intro.universal_

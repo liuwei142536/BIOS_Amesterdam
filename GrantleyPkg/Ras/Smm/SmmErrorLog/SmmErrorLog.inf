@@ -1,0 +1,157 @@
+              
+#/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# This file contains an 'Intel Peripheral Driver' and is
+# licensed for Intel CPUs and chipsets under the terms of your
+# license agreement with Intel or your vendor.  This file may
+# be modified by the user, subject to additional terms of the
+# license agreement
+#
+#
+# Copyright (c)2009-2016 Intel Corporation. All rights reserved
+# This software and associated documentation (if any) is furnished
+# under a license and may only be used or copied in accordance
+# with the terms of the license. Except as permitted by such
+# license, no part of this software or documentation may be
+# reproduced, stored in a retrieval system, or transmitted in any
+# form or by any means without the express written consent of
+# Intel Corporation.
+
+#
+#  Module Name:
+#
+#   SmmErrorLog.inf
+#
+#  Abstract:
+#
+#    Component description file for SMM Platform handler module
+#
+#-------------------------------------------------------------------*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmErrorLog
+  FILE_GUID                      = 36026EFE-E214-4ede-A5D3-85053890D4A1
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = InitializeSmmErrorLog 
+
+
+[Sources]
+  ProcessorErrorHandler.c
+  ProcessorErrorHandler.h
+  PlatformErrorHandler.c
+  PlatformErrorHandler.h
+  SmmErrorHandler.c
+  SmmErrorHandler.h
+  IIoErrorHandler.c
+  IIoErrorHandler.h
+  PcieErrorHandler.c
+  PcieErrorHandler.h
+  OemErrorHandler.c
+  OemErrorHandler.h
+  PCHErrorHandler.c
+  PCHErrorHandler.h
+  MemoryErrorHandler.c
+  MemoryErrorHandler.h
+  McaHandler.h
+  McaHandler.c
+  CommonErrorHandlerIncludes.h
+#AptioV Server Override Start: Support for IOH Error Handlers
+  IohErrorHandler.c 
+  IohErrorHandler.h
+#AptioV Server Override End: Support for IOH Error Handlers
+
+[Packages]
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec 
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+  AmiModulePkg/AmiModulePkg.dec #Aptio V Server Override : SmmErrorLog driver is running before PciDriver. SMM Error Log driver initialzing the PCI ERROR register but got overwritten by PCI Driver
+  #BpCommonPkg/BpCommonPkg.dec #Aptio V Server Override: Commenting Dec file
+  UefiCpuPkg/UefiCpuPkg.dec 
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+   
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  BaseMemoryLib
+  IoLib
+  BaseLib
+  PciLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  SmmServicesTableLib
+  PciExpressLib
+  EmcaLib
+  EmcaPlatformHooksLib
+  SynchronizationLib
+  LocalApicLib
+  PcdLib
+  ResetSystemLib
+  PrintLib
+  SerialPortLib
+  WheaErrorLib
+  HobLib # AptioV Server Override: Added to skip LastBoot Error Handler for cold boot.
+  RtErrorLogBoardLib #AptioV Server Override: For Runtime Error Logging Support
+  AmiDxeLib
+  
+[Protocols]
+  gEfiIioUdsProtocolGuid
+  gEfiMpServiceProtocolGuid
+  gEfiWheaPlatformSupportProtocolGuid
+  gEfiGlobalNvsAreaProtocolGuid
+  gEfiSmmSxDispatch2ProtocolGuid
+  gEfiSmmGpiDispatch2ProtocolGuid
+  gEfiSmmBase2ProtocolGuid
+  gEfiSmmRuntimeProtocolGuid
+  gEfiSmmVariableProtocolGuid
+  gEfiMemRasProtocolGuid
+  gEfiSmmSwDispatch2ProtocolGuid
+  gEfiCpuIoProtocolGuid
+  gEfiSmbiosProtocolGuid
+  gEfiCpuCsrAccessGuid
+  gEfiSmmCpuServiceProtocolGuid
+  gEfiSmmReadyToLockProtocolGuid
+  gPlatformSlotInfoProtocolGuid
+  gEfiSmmErrorLogProtocolGuid
+  gEfiWheaSupportProtocolGuid
+
+[Guids]
+  gIioVVarGuid
+  gEfiMemoryConfigDataGuid
+  gEfiSetupVariableGuid
+  gEfiMemoryConfigDataGuid
+  gEfiWheaPlatformMemoryErrorSectionGuid
+  gEfiWheaProcessorGenericErrorSectionGuid
+  gEfiWheaProcessorSpecificErrorSectionGuid
+  gEfiWheaPcieErrorSectionGuid
+  gEfiWheaPciDevErrorSectionGuid
+  gEfiPprVariableGuid
+  gEfiMemoryMapGuid # AptioV Server Override: Added to skip LastBoot Error Handler for cold boot.
+
+[FixedPcd]
+  gEfiCpuTokenSpaceGuid.PcdCpuMaxLogicalProcessorNumber
+  
+[Depex]
+  gEfiSmmIchnDispatch2ProtocolGuid AND
+  gEfiLoadedImageProtocolGuid AND
+  gEfiSmmBase2ProtocolGuid AND
+#  gEfiSmmRuntimeProtocolGuid AND #Aptio V Server override
+# gEfiSmmVariableProtocolGuid AND   #Aptio V Server override
+  gEfiMemRasProtocolGuid AND
+  gEfiCpuCsrAccessGuid AND
+  gEfiSmmSxDispatch2ProtocolGuid AND
+  gEfiSmmCpuServiceProtocolGuid
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS     = /Od /wd4142 /wd4244 /Gs999999 /GL-
+  
+[PCD]
+  gUefiCpuPkgTokenSpaceGuid.PcdCpuLocalApicBaseAddress

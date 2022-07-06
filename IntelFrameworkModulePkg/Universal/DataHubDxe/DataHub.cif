@@ -1,0 +1,13 @@
+<component>
+	name = "DataHub"
+	category = eCore
+	LocalRoot = "IntelFrameworkModulePkg\Universal\DataHubDxe\"
+	RefName = "IntelFrameworkModulePkg.DataHub"
+[files]
+"DataHub.sdl"	
+"DataHub.chm"	
+[INF]
+"DataHubDxe.inf"
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_13"
+<endComponent>

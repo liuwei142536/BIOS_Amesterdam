@@ -1,0 +1,10 @@
+<component>
+	name = "IdeR"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\ActiveManagement\IdeR\"
+	RefName = "GrantleyPkg.IdeR"
+[INF]
+"Dxe\IdeRController.inf"
+[files]
+"IdeR.sdl"	
+<endComponent>

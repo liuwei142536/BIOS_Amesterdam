@@ -1,0 +1,11 @@
+<component>
+	name = "MePlatform"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Platform\"
+	RefName = "GrantleyPkg.MePlatform"
+[parts]
+"GrantleyPkg.Me.AMT.MePlatform.Dxe.Dxe"
+"GrantleyPkg.Me.AMT.MePlatform.Include.Include"
+"GrantleyPkg.Me.AMT.MePlatform.Library.Library"
+"GrantleyPkg.Me.AMT.MePlatform.Pei.Pei"
+<endComponent>

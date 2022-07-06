@@ -1,0 +1,504 @@
+/*++
+  This file contains 'Framework Code' and is licensed as such
+  under the terms of your license agreement with Intel or your
+  vendor.  This file may not be modified, except as allowed by
+  additional terms of your license agreement.
+--*/
+/*++
+
+  Copyright (c) 2001 - 2014 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval 
+  system, or transmitted in any form or by any means without the express 
+  written consent of Intel Corporation.
+
+  Module Name:
+
+    CpuMemHp.asi
+
+  Abstract:
+
+    Contains root level name space objects for the platform
+
+--*/
+
+#define HECI_CMD_CPUHOTPLUG    1
+#define HECI_CMD_CPUHOTREMOVE  2
+
+#define  SIZE_LAPIC_STRUC   8
+#define  LAPIC_TYPE         0
+
+#define  MAK_STR(x)   #x
+
+#define  MAX_CORES_PER_SOCKET     24
+//max num of thread per socket = 2 * MAX_CORES
+#define  MAX_THREADS_PER_SOCKET   48
+//max number of cores in system = 4(sockets) * 24(cores)
+#define  MAX_NUM_CORES            96
+
+  
+//AptioV server override start: Add TokenAsl.h SDL output 
+#if ASL_RAS_ASL_SUPPORT  
+//
+// This macro creates method that calculates
+// number of active threads for its socket
+//
+#define CPU_THREADS_NUM(socket)                                             \
+  Method(THNU, 0) {                                                         \
+    Store(0, Local0)                                                        \
+    Store(P##socket##BM, Local1)                                            \
+    While (Local1) {                                                        \
+      Add(Local0, And(Local1, 1), Local0)                                   \
+      ShiftRight(Local1, 1, Local1)                                         \
+    }                                                                       \
+    return (Or(ShiftLeft(socket, 8), Local0))                               \
+  }
+
+//set procName ProcId field and IO to CP##thread and ProcId field as '%' 
+//to make dynamic search easier, IOAddress field wiil
+//be updated in PatchDsdtTable in BIOS boot
+#define  CPU_THREAD(socket, thread)                                         \
+  Processor(CP##thread, 0x25, 0x##socket##thread, 6) {                      \
+    Name(_HID, "ACPI0007")                                                  \
+    Name(_UID, MAK_STR(SCK##socket-CP##thread))                             \
+    Method(_PXM) {                                                          \
+      if (LEqual (CLOD, 0)) {                                               \
+        Return(0x0##socket)                                                 \
+      } else {                                                              \
+        Store(DerefOf(Index(\_SB.APTC, 0x##thread)), Local0)                \
+        Store(CNBS, Local1)                                                 \
+        Subtract(Local1, 1, Local1)                                         \
+        ShiftRight(Local0, Local1, Local0)                                  \
+        And(Local0, 1, Local0)                                              \
+        Store(0x##socket, Local1)                                           \
+        Multiply(Local1, 2, Local1)                                         \
+        if(LEqual(Local0, 1)) {                                             \
+          Add(Local1, 1, Local1)                                            \
+        }                                                                   \
+        Return(Local1)                                                      \
+      }                                                                     \
+    }                                                                       \
+    Method(_STA) {                                                          \
+      if(LEqual(\_SB.CSTA(0x0##socket, 0x##thread), 0x00)) {                \
+        Return(0x00)                                                        \
+      } else {                                                              \
+        If (LGreaterEqual (\_SB.OSYS, 12)) {                                \
+          Return(0x0F)                                                      \
+        } Else {                                                            \
+          Return(0x0B)                                                      \
+        }                                                                   \
+      }                                                                     \
+    }                                                                       \
+    Method(_MAT) {                                                          \
+      Return(\_SB.LAPC(0x0##socket, 0x##thread))                            \
+    }                                                                       \
+  }
+
+#define  CPU_SOCKET(socket)                                                 \
+  Device(\_SB.SCK##socket) {                                                \
+    Name (_HID, "ACPI0004")                                                 \
+    Name (_UID, MAK_STR(CPUSCK##socket))                                    \
+    Name (LSTA, 0xff)                                                       \
+    Method(_STA) {                                                          \
+      Store(MAK_STR(CPUSCK##socket), CUU##socket)                           \
+      Store(\_SB.PSTA(0x0##socket), Local0)                                 \
+      And(Local0, 0x03, Local1)                                             \
+      If (LAnd(LNotEqual(LSTA, 0xff), LNotEqual(Local1, LSTA))) {           \
+        If (LEqual(Local1, 0x03)) {                                         \
+          /*\_SB.PCI0.HEC2.HPNF(HECI_CMD_CPUHOTPLUG, socket, THNU) TODO: Obsolete with _PUR?*/\
+        } Else {                                                            \
+          /*\_SB.PCI0.HEC2.HPNF(HECI_CMD_CPUHOTREMOVE, socket, THNU) TODO: Obsolete with _PUR?*/\
+        }                                                                   \
+      }                                                                     \
+      Store(Local1, LSTA)                                                   \
+      return(Local0)                                                        \
+    }                                                                       \
+    Method(_EJ0, 1) {                                                       \
+      \_SB.GSMI (1, 0x0##socket)                                            \
+      Store(0, Local0)                                                      \
+      While (LAnd(LLess(Local0, 200), LNotEqual(\_SB.PSTA(0x0##socket), 0))) { \
+        Add(Local0, 1, Local0)                                              \
+        Sleep(200)                                                          \
+      }                                                                     \
+      If (LEqual(LSTA, 0x03)) {                                             \
+        /*\_SB.PCI0.HEC2.HPNF(HECI_CMD_CPUHOTREMOVE, socket, THNU) TODO: Obsolete with _PUR?*/ \
+      }                                                                     \
+      Store(0, LSTA)                                                        \
+    }                                                                       \
+    CPU_THREADS_NUM(socket)   \
+    CPU_THREAD (socket, 00)   \
+    CPU_THREAD (socket, 01)   \
+    CPU_THREAD (socket, 02)   \
+    CPU_THREAD (socket, 03)   \
+    CPU_THREAD (socket, 04)   \
+    CPU_THREAD (socket, 05)   \
+    CPU_THREAD (socket, 06)   \
+    CPU_THREAD (socket, 07)   \
+    CPU_THREAD (socket, 08)   \
+    CPU_THREAD (socket, 09)   \
+    CPU_THREAD (socket, 0A)   \
+    CPU_THREAD (socket, 0B)   \
+    CPU_THREAD (socket, 0C)   \
+    CPU_THREAD (socket, 0D)   \
+    CPU_THREAD (socket, 0E)   \
+    CPU_THREAD (socket, 0F)   \
+    CPU_THREAD (socket, 10)   \
+    CPU_THREAD (socket, 11)   \
+    CPU_THREAD (socket, 12)   \
+    CPU_THREAD (socket, 13)   \
+    CPU_THREAD (socket, 14)   \
+    CPU_THREAD (socket, 15)   \
+    CPU_THREAD (socket, 16)   \
+    CPU_THREAD (socket, 17)   \
+    CPU_THREAD (socket, 18)   \
+    CPU_THREAD (socket, 19)   \
+    CPU_THREAD (socket, 1A)   \
+    CPU_THREAD (socket, 1B)   \
+    CPU_THREAD (socket, 1C)   \
+    CPU_THREAD (socket, 1D)   \
+    CPU_THREAD (socket, 1E)   \
+    CPU_THREAD (socket, 1F)   \
+    CPU_THREAD (socket, 20)   \
+    CPU_THREAD (socket, 21)   \
+    CPU_THREAD (socket, 22)   \
+    CPU_THREAD (socket, 23)   \
+    CPU_THREAD (socket, 24)   \
+    CPU_THREAD (socket, 25)   \
+    CPU_THREAD (socket, 26)   \
+    CPU_THREAD (socket, 27)   \
+    CPU_THREAD (socket, 28)   \
+    CPU_THREAD (socket, 29)   \
+    CPU_THREAD (socket, 2A)   \
+    CPU_THREAD (socket, 2B)   \
+    CPU_THREAD (socket, 2C)   \
+    CPU_THREAD (socket, 2D)   \
+    CPU_THREAD (socket, 2E)   \
+    CPU_THREAD (socket, 2F)   \
+  }
+  
+#else
+// AptioV server override start
+// Remove unneeded objects from thread and socket.
+// Change thread device object to processor object.
+
+#define  CPU_THREAD(socket, thread)  \
+  Processor(CP##thread, 0x25, 0x##socket##thread, 6) {}
+          
+#define  CPU_SOCKET(socket)                                                   \
+  Device(\_SB.SCK##socket) {                                                  \
+      Name (_HID, "ACPI0004")                                                 \
+      Name (_UID, MAK_STR(CPUSCK##socket))                                    \
+    CPU_THREAD (socket, 00)   \
+    CPU_THREAD (socket, 01)   \
+    CPU_THREAD (socket, 02)   \
+    CPU_THREAD (socket, 03)   \
+    CPU_THREAD (socket, 04)   \
+    CPU_THREAD (socket, 05)   \
+    CPU_THREAD (socket, 06)   \
+    CPU_THREAD (socket, 07)   \
+    CPU_THREAD (socket, 08)   \
+    CPU_THREAD (socket, 09)   \
+    CPU_THREAD (socket, 0A)   \
+    CPU_THREAD (socket, 0B)   \
+    CPU_THREAD (socket, 0C)   \
+    CPU_THREAD (socket, 0D)   \
+    CPU_THREAD (socket, 0E)   \
+    CPU_THREAD (socket, 0F)   \
+    CPU_THREAD (socket, 10)   \
+    CPU_THREAD (socket, 11)   \
+    CPU_THREAD (socket, 12)   \
+    CPU_THREAD (socket, 13)   \
+    CPU_THREAD (socket, 14)   \
+    CPU_THREAD (socket, 15)   \
+    CPU_THREAD (socket, 16)   \
+    CPU_THREAD (socket, 17)   \
+    CPU_THREAD (socket, 18)   \
+    CPU_THREAD (socket, 19)   \
+    CPU_THREAD (socket, 1A)   \
+    CPU_THREAD (socket, 1B)   \
+    CPU_THREAD (socket, 1C)   \
+    CPU_THREAD (socket, 1D)   \
+    CPU_THREAD (socket, 1E)   \
+    CPU_THREAD (socket, 1F)   \
+    CPU_THREAD (socket, 20)   \
+    CPU_THREAD (socket, 21)   \
+    CPU_THREAD (socket, 22)   \
+    CPU_THREAD (socket, 23)   \
+    CPU_THREAD (socket, 24)   \
+    CPU_THREAD (socket, 25)   \
+    CPU_THREAD (socket, 26)   \
+    CPU_THREAD (socket, 27)   \
+    CPU_THREAD (socket, 28)   \
+    CPU_THREAD (socket, 29)   \
+    CPU_THREAD (socket, 2A)   \
+    CPU_THREAD (socket, 2B)   \
+    CPU_THREAD (socket, 2C)   \
+    CPU_THREAD (socket, 2D)   \
+    CPU_THREAD (socket, 2E)   \
+    CPU_THREAD (socket, 2F)   \
+  }
+#endif // ASL_RAS_ASL_SUPPORT AptioV server override end: Add TokenAsl.h SDL output 
+
+  Scope(\_SB) {
+
+    //----------------------------------------------------------------
+    //  Method PSTA()
+    //      Return package state
+    //
+    //  Inputs: Arg0 = Core number for which to return the _STA code.
+    //----------------------------------------------------------------
+    Method(PSTA, 1){        // Socket Status
+      ShiftRight(PRBM, Arg0, Local6)
+      And(Local6, 0x1, Local6)
+      if(LEqual(Local6, 0x0)) {
+        Return(0x00)
+      } else {
+        Return(0x0F)
+      }
+    } // End Method PSTA
+
+    //----------------------------------------------------------------
+    //  Method TMID()
+    //      Convert the socket and branch index to memory node index
+    //
+    //  Inputs: Arg0 = socket index
+    //          Arg1 = branch index   
+    //  Output: Memory node index (0-7)
+    //----------------------------------------------------------------
+    Method(TMID, 2) {
+      Multiply (Arg0, 2, Local0)
+      Add (Local0, Arg1, Local1)
+      Return (Local1)
+    }
+
+    //----------------------------------------------------------------
+    // HSX A0 14C SKU APICID: 14 + 0 + 14 + 0 + 8 here: 
+    //     8 is place holder for max 36 ASL CPU obj, 1st 24 will have 
+    // valid ID, next 8 obj will return invalid IDs so the obj will be disabled
+    //
+    // Note: This is a sample table for max 24 Cores (48 threads). 
+    //       APTC object will be dynamically patched by the ACPI driver 
+    //       based on the actual APIC IDs returned by the hardware.
+    //----------------------------------------------------------------
+    Name (APTC, Buffer (0x30) {
+          0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
+          0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
+          0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29,
+          0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
+          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+          0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
+    })
+            
+        //----------------------------------------------------------------
+    //  Method TPID()
+    //      Convert the socket and thread index to the actual APIC ID
+    //
+    //  Inputs: Arg0 = socket index
+    //          Arg1 = thread index
+    //----------------------------------------------------------------
+    Method (TPID, 2, NotSerialized) {
+      Store (0x00, Local0)
+      If (LEqual (Arg0, 0x00))
+      {
+        Store (P0ID, Local0)
+      }
+
+      If (LEqual (Arg0, 0x01))
+      {
+        Store (P1ID, Local0)
+      }
+
+      If (LEqual (Arg0, 0x02))
+      {
+        Store (P2ID, Local0)
+      }
+
+      If (LEqual (Arg0, 0x03))
+      {
+        Store (P3ID, Local0)
+      }
+
+      Add (Local0, DerefOf(Index(APTC, Arg1)), Local0)
+      
+      Return (Local0)
+    }
+
+    //----------------------------------------------------------------     
+    //  Method MSTA()
+    //     Memory board Status
+    //
+    //  Inputs: Arg0 = Memory board for which to return the _STA code.
+    //----------------------------------------------------------------
+    Method(MSTA, 1) {
+      // Check memory board Flag is 0 then disabled else enabled
+      ShiftRight(MEBM, Arg0, Local6)
+      And(Local6, 0x1, Local6)
+      if(LEqual(Local6, 0x0)) {
+        Return(0x00)
+      } else {
+        Return(0x0F)
+      }
+    } // End Method MSTA
+
+
+    //----------------------------------------------------------------
+    //  Method CSTA()
+    //      Get current processor state
+    //  Inputs: Arg0 = Socket Number where core belongs
+    //          Arg1 = Thread number for which to return the _STA code 
+    //                 (Bit0 - Core Id, BIT1- Thread Id)
+    //----------------------------------------------------------------
+    Method(CSTA, 2){        // Core Status
+      Store(0, Local0)
+      Store(0, Local1)
+      Store (\_SB.TPID(Arg0, Arg1), Local1) //get APICID
+      Store(0, Local2)    //for Core#
+
+      //Get Proc bit index from ApicId
+      // bitIndex = Core# << 1 + Thread# from APICID
+      Add (Local2, DerefOf(Index(APTC, Arg1)), Local2)
+   
+      if (LEqual(Local2, 0xFF)) {
+        Return(0x00)
+      }
+
+      if (LEqual(Arg0, 0x0)) {
+        ShiftRight(P0BM, Local2, Local0)
+      }
+      if (LEqual(Arg0, 0x1)) {
+        ShiftRight(P1BM, Local2, Local0)
+      }
+      if (LEqual(Arg0, 0x2)) {
+        ShiftRight(P2BM, Local2, Local0)
+      }
+      if (LEqual(Arg0, 0x3)) {
+        ShiftRight(P3BM, Local2, Local0)
+      }
+      And(Local0, 0x1, Local0)
+      if(LEqual(Local0, 0x0)) {
+        Return(0x00)
+      } else {
+        Return(0x01)
+      }
+    } // End Method CSTA
+
+    //----------------------------------------------------------------
+    //  Method LAPC()
+    //    Return the _MAT APIC data structure
+    //
+    //  Inputs: Arg0 = Socket ID
+    //  Inputs: Arg1 = Thread ID
+    //          PRID = socket * MAX_CORE + (thread & 0x1) * MAX_SOCKET*MAX_CORE*MAX_THREAD +(thread >> 1)
+    //----------------------------------------------------------------+
+    Method(LAPC, 2) {
+
+      Name(APIC, Buffer(SIZE_LAPIC_STRUC) {} ) // initialize a buffer with CRST size
+
+      CreateByteField (APIC, 0x00,  TYPE) // Type
+      CreateByteField (APIC, 0x01,  LLEN) // Length
+      CreateByteField (APIC, 0x02,  PRID) // ACPI Processor ID
+      CreateByteField (APIC, 0x03,  APID) // APIC ID
+      CreateDwordField(APIC, 0x04,  FLAG) // Flags
+
+      Store(LAPIC_TYPE, TYPE)
+      Store(SIZE_LAPIC_STRUC, LLEN)
+
+      //Store(0, Local0)
+      //Store(0, Local1)
+      //Multiply(Arg0, MAX_THREADS_PER_SOCKET, Local0)  //Local0 = socket# * 2 * MAX_CORE
+      //And(Arg1, 1, Local1)                            //keep bit0 of thread#
+      //Multiply(Local1, MAX_NUM_CORES, Local1)         //local1 = (thread & 1) * (MAX_NUM_THREADS / 2)
+      //Add(Local0, Local1, Local0)                     //Local0 = socket* 2 * MAX_CORE + thread#
+      //Store(0, Local1)
+      //ShiftRight(Arg1, 1, Local1)       //Local1 = thread >> 1
+      //Add(Local0, Local1, Local0)       //Local0 = socket*MAX_CORE + (thread & 1) * MAX_NUM_THREADS + (thread >>1)
+      //Store(Local0, PRID)
+
+      // Update APIC ID
+      Store (\_SB.TPID(Arg0, Arg1), APID)
+
+      // Update Flag
+      if(LEqual(\_SB.CSTA(Arg0, Arg1), 0x00)) {
+        Store(0x00, FLAG)
+        Store(0xFF, PRID)
+        Store(0xFF, APID)
+      } else {
+        // calculate PROCID based on APICID using same algorithm in AcpiPlatformHook.c
+        // PROCID = ApicId.package << 6 + ApicId.core + ApciId.Thread
+        Store(APID, local0)
+        Store(local0, PRID)
+
+        //set Enable flag
+        Store(0x01, FLAG)
+      }
+
+      // calculate PROCID based on APICID using same algorithm in AcpiPlatformHook.c
+
+      Return(APIC)
+    }
+
+//AptioV server override start: Add TokenAsl.h SDL output 
+#if ASL_RAS_ASL_SUPPORT
+    Method (GSMI, 2){
+      // Invert GPIO 14, trigger SMI
+      If (LEqual(Arg0, 2)) {  // Memory RAS event.
+        Store(0, Local0)
+        While (LAnd(LLess(Local0, 100), LNotEqual(SMI0, 0))) {
+          Add(Local0, 1, Local0)
+          Sleep(200)
+        }
+        ShiftRight(MEBM, Arg1, Local1)
+        if (LEqual(Local1, 1)) {
+          // Request hot removal from BIOS
+          Store (1, SMI0)
+          Store (Add(ShiftLeft (0x0100, Arg1), 0x20000003), SMI1)
+          Store (0, SMI2)
+          Store (0, SMI3) 
+          Store (0, RASI)
+        } else {
+          // Request hot add from BIOS
+          Store (1, SMI0)
+          Store (Add(ShiftLeft (0x0100, Arg1), 0x02), SMI1)
+          Store (0, SMI2)
+          Store (0, SMI3) 
+          Store (0, RASI)
+        }
+      } ElseIf (LAnd(LEqual(Arg0, 1), LEqual(SCI0, 3))) {  // CPU eject event (SCI0==3).
+        Store(0, Local0)
+        While (LAnd(LLess(Local0, 100), LNotEqual(SMI0, 0))) {
+          Add(Local0, 1, Local0)
+          Sleep(200)
+        }
+        // Request hot removal from BIOS
+        Store (2, SMI0)    // CPU Eject event.
+        Store (1, SMI1)    // CPU Offline specified.
+        Store (Arg1, SMI2) // Socket ID to offline.
+        Store (0, SMI3) 
+        Store (0, RASI)
+      } ElseIf (LAnd(LEqual(Arg0, 3), LEqual(SCI0, 3))) {  // IIO eject event
+        Store(0, Local0)
+        While (LAnd(LLess(Local0, 100), LNotEqual(SMI0, 0))) {
+          Add(Local0, 1, Local0)
+          Sleep(200)
+        }
+        // Request hot removal from BIOS
+        Store (5, SMI0)    // IIO RAS event.
+        Store (1, SMI1)    // IIO Offline specified.
+        Store (Arg1, SMI2) // Socket ID to offline.
+        Store (0, SMI3) 
+        Store (0, RASI)
+      }
+    }
+#endif
+
+    CPU_SOCKET(0)
+
+    CPU_SOCKET(1)
+
+    CPU_SOCKET(2)
+
+    CPU_SOCKET(3)
+  }

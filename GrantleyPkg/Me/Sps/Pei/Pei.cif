@@ -1,0 +1,11 @@
+<component>
+	name = "Pei"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Sps\Pei\"
+	RefName = "GrantleyPkg.Me.Sps.Pei.Pei"
+[INF]
+"SpsPei.inf"
+[files]
+"MeDisable.c"	
+"Pei.sdl"	
+<endComponent>

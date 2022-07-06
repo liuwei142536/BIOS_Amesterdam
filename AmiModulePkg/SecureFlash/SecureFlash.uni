@@ -1,0 +1,40 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+//----------------------------------------------------------------------
+//
+// Name:        SecureFlash.UNI
+//
+// Description:    String definitions for Security Module
+//
+//----------------------------------------------------------------------
+
+
+/=#
+#include "VFR.uni"
+
+#string SECURE_FLASH_MENU_FORM_TITLE    #language eng  "Secure Flash Update"
+#string SECURE_FLASH_MENU_FORM_HELP     #language eng  "Secure Flash Update support"
+
+#string STR_SECURE_FLASH_MODE           #language eng  "Signed BIOS Update"
+#string STR_SECURE_FLASH_KEY_STORE      #language eng  "FW Key Type"
+#string STR_KEY_FILE_RSA2048            #language eng  "RSA2048"
+#string STR_KEY_FILE_SHA256             #language eng  "SHA256"
+#string STR_KEY_FILE_X509               #language eng  "X.509 DER"
+#string STR_KEY_FILE_NA                 #language eng  "Undefined"
+#string STR_SECURE_FLASH_KEY_TYPE       #language eng  "FW Key Name"
+#string STR_SECURE_FLASH_KEY_DUMMY      #language eng  "Dummy"
+#string STR_SECURE_FLASH_KEY_AMITEST    #language eng  "Test,AMI"
+#string STR_SECURE_FLASH_KEY_OEM        #language eng  "OEM"
+#string STR_SECURE_FLASH_UPDATE_MODES   #language eng  "FW Update Method"
+#string STR_SECURE_FLASH_UPDATE_MODE1   #language eng  "Runtime,Capsule,Recovery"
+#string STR_SECURE_FLASH_UPDATE_MODE2   #language eng  "Runtime,Recovery"
+#string STR_SECURE_FLASH_UPDATE_MODE3   #language eng  "Capsule,Recovery"
+#string STR_SECURE_FLASH_UPDATE_MODE4   #language eng  "Runtime"
+#string STR_SECURE_FLASH_UPDATE_MODE5   #language eng  "Recovery"
+#string STR_SECURE_FLASH_ROLLBACK       #language eng  "FW Rollback Protection"
+#string STR_SECURE_FLASH_LOCK           #language eng  "Flash Write Protection"

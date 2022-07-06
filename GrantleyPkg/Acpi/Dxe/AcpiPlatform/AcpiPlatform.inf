@@ -1,0 +1,109 @@
+## @file
+#
+#  Copyright (c) 2009 - 2016, Intel Corporation. All rights reserved.<BR>
+#
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution. The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#
+#
+##
+
+[Defines]
+  INF_VERSION                   = 0x00010005
+  BASE_NAME                     = AcpiPlatform
+  FILE_GUID                     = 87AB821C-79B8-4ef6-A913-21D22063F55F
+  MODULE_TYPE                   = DXE_DRIVER
+  VERSION_STRING                = 1.0
+  ENTRY_POINT                   = AcpiPlatformEntryPoint
+  
+[Sources]
+  AcpiPlatform.c
+  AcpiPlatform.h
+  AcpiPlatformHooksLib.h
+  AcpiPlatformHooks.c
+  AcpiPlatformHooks.h
+  AcpiPlatformVTDHooks.c
+  AmiAcpiPlatform.c  #Aptio V Server Override
+
+[Packages]
+  GrantleyPkg/PlatformPkg.dec
+  GrantleySocketPkg/SocketPkg.dec
+# following will be removed when IA32FamilyCpuPkg overrides are merged back to trunk
+  ServerCommonPkg/ServerCommonPkg.dec
+  #GrantleySocketPkg/Override/IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec # Aptio V server override
+  MdePkg/MdePkg.dec
+#  MdeModulePkg/MdeModulePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec ##
+  WellsburgPkg/WellsburgPkg.dec
+  IA32FamilyCpuPkg/IA32FamilyCpuPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec  # Aptio V server override
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  UefiLib
+  UefiRuntimeServicesTableLib
+  HobLib
+  PciLib
+  PciExpressLib
+  CpuConfigLib
+  S3BootScriptLib
+  PchPlatformLib
+  AmiDxeLib  #AptioV Server Override: Fix for Asl name object not being getting updated.
+  # APTIOV_OVERRIDE_START: EIP#  
+  AmiPlatformAcpiLib
+  # APTIOV_OVERRIDE_END: EIP#
+
+[Protocols]
+  #gEfiLpcPolicyProtocolGuid # AptioV server override: Remove LpcPlatform component.
+  gEfiMpServiceProtocolGuid
+  gEfiIioUdsProtocolGuid
+  gEfiGlobalNvsAreaProtocolGuid
+  gEfiPciIoProtocolGuid
+  gEfiFirmwareVolume2ProtocolGuid
+  gEfiAcpiSupportProtocolGuid
+  gEfiSerialIoProtocolGuid
+  gDxeEnhancedSpeedstepProtocolGuid
+  gEfiPlatformTypeProtocolGuid
+  gEfiDmaRemapProtocolGuid
+  gEfiMpstSupportProtocolGuid
+  gEfiCpuCsrAccessGuid
+  gEfiSmbiosProtocolGuid
+  gEfiIioSystemProtocolGuid
+  gEfiPciRootBridgeIoProtocolGuid
+  gEfiAcpiTableProtocolGuid
+  
+[Guids]
+  gEfiGlobalVariableGuid
+  gEfiAcpiTableStorageGuid
+  gEfiMemoryMapGuid
+  gEfiPcAnsiGuid
+  gEfiVT100PlusGuid
+  gEfiVT100Guid
+  gEfiVTUTF8Guid
+  gEfiHobListGuid
+  gEfiPlatformInfoGuid
+  gEfiSetupVariableGuid
+  gEfiAcpiHwpStorageGuid
+  gEfiEventVirtualAddressChangeGuid             ## CONSUMES ## Event
+  
+
+[Pcd]
+  gPlatformTokenSpaceGuid.PcdAcpiOemId
+  gPlatformTokenSpaceGuid.PcdAcpiTableOemId
+
+[Depex]
+#  gEfiAcpiSupportProtocolGuid AND
+  gEfiAcpiTableProtocolGuid AND
+  gEfiMpServiceProtocolGuid AND
+  gEfiIioSystemProtocolGuid 
+  
+#  gEfiSmmConfigurationProtocolGuid    # Aptio V server override
+

@@ -1,0 +1,42 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+## @file CmosManagerSmmLib.inf
+#   INF file for the module
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CmosManagerSmmLib
+  FILE_GUID                      = 70A3AC12-EDEC-4f1a-B063-EBCB8A037AEA   
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CmosManagerLib | DXE_SMM_DRIVER
+
+[Sources]
+  CmosManagerSmmLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  
+[Guids]
+
+[Protocols]
+  gAmiCmosAccessSmmProtocolGuid
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  SmmServicesTableLib
+
+[Depex]
+  gAmiCmosAccessSmmProtocolGuid
+  

@@ -1,0 +1,10 @@
+<component>
+	name = "TpmNvmeSupport"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\TCG2\Common\TpmNvmeSupport\"
+	RefName = "TpmNvmeSupport"
+[INF]
+"TpmNvmeSupport.inf"
+[files]
+"TpmNvmeSupport.sdl"	
+<endComponent>

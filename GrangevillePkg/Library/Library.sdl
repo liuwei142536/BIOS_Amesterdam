@@ -1,0 +1,38 @@
+TOKEN
+	Name  = "Library_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "CpuInitHooksLib"
+	File  = "CpuInitHooksLib\OemCpuInitHooks.inf"
+	Package  = "GrangevillePkg"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_SMM_DRIVER"
+	Token = "GRANGEVILLE_PLATFORM" "=" "1"
+End
+
+LibraryMapping
+	Class  = "CpuInitHooksLib"
+	Instance  = "GrangevillePkg.CpuInitHooksLib"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "GRANGEVILLE_PLATFORM" "=" "1"
+End
+
+INFComponent
+	Name  = "IioInitHooksLib"
+	File  = "IioInitHooksLib\OemIioInitHooks.inf"
+	Package  = "GrangevillePkg"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_SMM_DRIVER"
+	Token = "GRANGEVILLE_PLATFORM" "=" "1"
+End
+
+LibraryMapping
+	Class  = "IioInitHooksLib"
+	Instance  = "GrangevillePkg.IioInitHooksLib"
+	ModuleTypes  = "PEIM DXE_DRIVER DXE_SMM_DRIVER"
+	Token = "GRANGEVILLE_PLATFORM" "=" "1"
+End
+

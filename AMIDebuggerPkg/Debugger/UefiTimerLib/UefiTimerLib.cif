@@ -1,0 +1,10 @@
+<component>
+	name = "UefiTimerLib"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Debugger\UefiTimerLib\"
+	RefName = "Debugger.UefiTimerLib"
+[INF]
+"UefiTimerLib.inf"
+[files]
+"UefiTimerLib.sdl"	
+<endComponent>

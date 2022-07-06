@@ -1,0 +1,13 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Override\IA32FamilyCpuPkg\Include\"
+	RefName = "GrantleySocketPkg.Override.IA32FamilyCpuPkg.Include.Include"
+[files]
+"AcpiCpuData.h"
+"Protocol\IntelCpuPcdsSetDone.h"	
+[parts]
+"GrantleySocketPkg.Override.IA32FamilyCpuPkg.Include.Guid.Guid"
+"GrantleySocketPkg.Override.IA32FamilyCpuPkg.Include.Library.Library"
+"GrantleySocketPkg.Override.IA32FamilyCpuPkg.Include.Ppi.Ppi"
+<endComponent>

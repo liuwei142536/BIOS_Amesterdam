@@ -1,0 +1,517 @@
+TOKEN
+	Name  = "WellsburgPkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling WellsburgPkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PCH_DEFAULT_SVID"
+	Value  = "0x8086"
+	Help  = "Pch default Sub Sytem Vendor ID. This value is taken from PchRegs.h file."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "PCH_DEFAULT_SID"
+	Value  = "0x7270"
+	Help  = "Pch default Sub Sytem ID. This value is taken from PchRegs.h file."
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "DISABLE_SPDW"
+    Value  = "0"
+    Help  = "Set this to 1 to disable SPDWD bit in SMBUS HOSTC register."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+	Name  = "RtcWakeup_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable RtcWakeup support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "RtcWakeup"
+	File  = "RtcWakeup\RtcWakeup.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "RtcWakeup_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "WellsburgPkg.RtcWakeup"
+End
+
+TOKEN
+	Name  = "IoTrap_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling IoTrap support in the project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "IoTrap"
+	File  = "IoTrap\Smm\IoTrap.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "IoTrap_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "WellsburgPkg.IoTrap"
+End
+
+TOKEN
+	Name  = "LegacyInterrupt_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling LegacyInterrupt support in the project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "IntelPchLegacyInterrupt"
+	File  = "LegacyInterrupt\Dxe\LegacyInterrupt.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "LegacyInterrupt_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PchInitDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchInitDxe support in Project"
+	TokenType = Boolean
+End
+
+ELINK
+	Name  = "PROGRAM_PCH_OEM_SVID_SID"
+	InvokeOrder = ReplaceParent
+End
+
+INFComponent
+	Name  = "PchInitDxe"
+	File  = "PchInit\Dxe\PchInitDxe.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PchInitDxe_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "WellsburgPkg.PchInitDxe"
+	Token = "PchInitDxe_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PchInitPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchInitPeim support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PchInitPeim"
+	File  = "PchInit\Pei\PchInitPeim.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "PEIM"
+	Token = "PchInitPeim_SUPPORT" "=" "1"
+End
+
+FFS_FILE 
+	Name  = "PchInitPeim"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "WellsburgPkg.PchInitPeim"
+	Apriori_Index  = "5"
+	Token = "PchInitPeim_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PchSmiDispatcher_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling PchSmiDispatcher support in the project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PchSmiDispatcher"
+	File  = "PchSmiDispatcher\Smm\PchSmiDispatcher.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "PchSmiDispatcher_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+    Override  = "WellsburgPkg.PchSmiDispatcher"
+End
+
+TOKEN
+    Name  = "PchSmiRegister_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling PchSmiRegister support in the project"
+    TokenType = Boolean
+End
+
+INFComponent
+    Name  = "PchSmiRegister"
+    File  = "PchSmiRegister\Smm\PchSmiRegister.inf"
+    Package  = "WellsburgPkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "PchSmiRegister_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "PcdLib"
+    Instance  = "MdePkg.DxePcdLib"
+    Override  = "WellsburgPkg.PchSmiRegister"
+End
+
+TOKEN
+	Name  = "PchResetPeim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchResetPeim support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PchReset_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchReset support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PchResetPeim"
+	File  = "Reset\Pei\PchResetPeim.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "PEIM"
+	Token = "PchResetPeim_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PchReset"
+	File  = "Reset\RuntimeDxe\PchResetRuntime.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+	Token = "PchReset_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PchS3Support_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchS3Support support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PchS3Support"
+	File  = "S3Support\Dxe\PchS3Support.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PchS3Support_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+    Override  = "WellsburgPkg.PchS3Support"
+End
+
+TOKEN
+	Name  = "PchS3Peim_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchS3Peim support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PchS3Peim"
+	File  = "S3Support\S3\PchS3Peim.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "PEIM"
+	Token = "PchS3Peim_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SataController_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SataController support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SataController"
+	File  = "SataController\Dxe\SataController.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "UEFI_DRIVER"
+	Token = "SataController_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PchBiosWriteProtect_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable PchBiosWriteProtect support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PchBiosWriteProtect"
+	File  = "SampleCode\BiosWriteProtect\Smm\PchBiosWriteProtect.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "PchBiosWriteProtect_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "WellsburgPkg.SataController"
+End
+
+TOKEN
+	Name  = "PchSerialGpio_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchSerialGpio support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PchSerialGpio"
+	File  = "SerialGpio\Dxe\PchSerialGpio.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PchSerialGpio_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SmartTimer_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SmartTimer support in the project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SmartTimer"
+	File  = "SmartTimer\Dxe\SmartTimer.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "SmartTimer_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PchSmbusDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchSmbusDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "PchSmbusSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchSmbusSmm support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PchSmbusDxe"
+	File  = "Smbus\Dxe\PchSmbusDxe.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PchSmbusDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PchSmbusSmm"
+	File  = "Smbus\Smm\PchSmbusSmm.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "PchSmbusSmm_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PchSmbusArpDisabled_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PchSmbusArpDisabled support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PchSmbusArpDisabled"
+	File  = "Smbus\Pei\PchSmbusArpDisabled.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "PEIM"
+	Token = "PchSmbusArpDisabled_SUPPORT" "=" "1"
+End
+
+# AptioV Server Override Start : Smbus base must be initialized before MRC
+FFS_FILE
+	Name  = "PchSmbusArpDisabled"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "WellsburgPkg.PchSmbusArpDisabled"
+	Index  = '"BEFORE" "UncoreInitPeim"'
+	Token = "PchSmbusArpDisabled_SUPPORT" "=" "1"	
+End
+# AptioV Server Override end : Smbus base must be initialized before MRC
+
+TOKEN
+	Name  = "SmmControl2Dxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SmmControl2Dxe support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SmmControl2Dxe"
+	File  = "SmmControl2\Dxe\SmmControl2Dxe.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_RUNTIME_DRIVER"
+	Token = "SmmControl2Dxe_SUPPORT" "=" "1"
+End
+
+PcdMapping
+	Name  = "PcdDebugPrintErrorLevel"
+	GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+	PcdType  = "PcdsFixedAtBuild"
+	Value  = "0x80000000"
+	TargetDSC = Yes
+	Override  = "WellsburgPkg.SmmControl2Dxe"
+End
+
+PcdMapping
+    Name  = "PcdDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000000"
+    TargetDSC = Yes
+    Override  = "AmiModulePkg.Ahci"
+End
+
+PcdMapping
+    Name  = "PcdDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000000"
+    TargetDSC = Yes
+    Override  = "AmiModulePkg.PciRootBridge"
+End
+
+PcdMapping
+    Name  = "PcdDebugPrintErrorLevel"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "0x80000000"
+    TargetDSC = Yes
+    Override  = "AmiModulePkg.SmmPciRbIo"
+End
+
+LibraryMapping
+	Class  = "DebugPrintErrorLevelLib"
+	Instance  = "MdePkg.BaseDebugPrintErrorLevelLib"
+	Override  = "WellsburgPkg.SmmControl2Dxe"
+End
+
+TOKEN
+	Name  = "SmmControlPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SmmControl2Dxe support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "SmmControlPei"
+	File  = "SmmControlPei\SmmControlPei.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "PEIM"
+	Token = "SmmControlPei_SUPPORT" "=" "1"
+End
+
+
+TOKEN
+	Name  = "WdtDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable WdtDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "WdtPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable WdtPei support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "WdtDxe"
+	File  = "Wdt\Dxe\WdtDxe.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "WdtDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "WdtPei"
+	File  = "Wdt\Pei\WdtPeim.inf"
+	Package  = "WellsburgPkg"
+	ModuleTypes  = "PEIM"
+	Token = "WdtPei_SUPPORT" "=" "1"
+End
+
+FFS_FILE 
+	Name  = "WdtPei"
+	FD_AREA  = "FV_BB"
+	INFComponent  = "WellsburgPkg.WdtPei"
+	Index  = "2"
+	Apriori_Index  = "5"
+	Token = "WdtPei_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "PowerButtonHandler_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Power Button support in Project"
+	TokenType = Boolean
+	Token = "SMM_SUPPORT" "=" "1"
+End
+
+INFComponent
+        Name  = "PowerButtonHandler"
+        File  = "PowerButtonHandler\PowerButtonHandler.inf"
+        Package  = "WellsburgPkg"
+        ModuleTypes = "DXE_SMM_DRIVER"
+	Token = "PowerButtonHandler_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "PchSmiRegister_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling IoTrap support in the project"
+    TokenType = Boolean
+End
+
+INFComponent
+    Name  = "PchSmiRegister"
+    File  = "PchSmiRegister\Smm\PchSmiRegister.inf"
+    Package  = "WellsburgPkg"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "PchSmiRegister_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "S3BootScriptLib"
+    Instance  = "MdeModulePkg.DxeS3BootScriptLib"
+    Override  = "WellsburgPkg.PchInitDxe"
+    Token = "PchInitDxe_SUPPORT" "=" "1"
+End

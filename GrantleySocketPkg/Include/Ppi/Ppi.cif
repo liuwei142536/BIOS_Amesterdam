@@ -1,0 +1,11 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Include\Ppi\"
+	RefName = "GrantleySocketPkg.Ppi"
+[files]
+"BaseMemoryTest.h"
+"MpService.h"	
+"PlatformMemoryRange.h"	
+"PlatformMemorySize.h"	
+<endComponent>

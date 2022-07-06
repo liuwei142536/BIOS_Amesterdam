@@ -1,0 +1,58 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file TpmNvmeSupport.inf
+#   TpmNvmeSupport Dxe Driver 
+##
+
+[Defines]
+  INF_VERSION = 0x00010015
+  BASE_NAME = TpmNvmeSupport
+  FILE_GUID = ADD70A4D-1067-4fa3-A669-94C82877F106
+  VERSION_STRING = 1.0
+  MODULE_TYPE = DXE_DRIVER
+  ENTRY_POINT = TpmNvmeSupportDxeEntry
+  
+[Sources]
+  TpmNvmeSupport.h
+  TpmNvmeSupport.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiTcgPkg/AmiTcgPkg.dec
+   
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  ReportStatusCodeLib
+  PcdLib
+  BaseTisLib20
+  BaseAmiTcmlib
+  UefiAmiNvmeLib
+  
+[Protocols]
+  gEfiNvmExpressPassThruProtocolGuid
+  gEdkiiVariableLockProtocolGuid
+
+[Guids]
+  gSetupVariableGuid
+  AmitcgefiOsVariableGuid
+  
+[Depex]
+  TRUE
+
+

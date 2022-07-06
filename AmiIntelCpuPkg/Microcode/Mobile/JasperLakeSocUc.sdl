@@ -1,0 +1,22 @@
+TOKEN
+    Name  = "SOC_906CX_JASPERLAKE"
+    Value = "0"
+    Help  = "Intel(R) Soc JasperLake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SOC_M01906C0"
+    Value  = "1"
+    Help  = "Intel(R) SOC Jasper Lake A-0/A-1 Stepping(906C0)"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M01906C0_2400001F.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) SOC Jasper Lake A-0/A-1 Stepping(906C0)"
+    Token = "SOC_M01906C0" "=" "1"
+    InvokeOrder = AfterParent
+End

@@ -1,0 +1,107 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @file  PowerControlPolicy.sd
+//
+// Contains the setup description for PowerControlPolicy module
+//
+
+#ifdef SERVER_MGMT_CONFIGURATION_DATA_DEFINITION
+//***********************************************************
+// Put NVRAM data definitions here.
+// For example:    UINT8 Data1;
+// These definitions will be converted by the build process
+// to a definitions of SERVER_MGMT_CONFIGURATION_DATA fields.
+//***********************************************************
+    UINT8         PowerControlPolicy;
+#endif //#ifdef SERVER_MGMT_CONFIGURATION_DATA_DEFINITION
+
+
+#if defined(VFRCOMPILE) && !defined(CONTROLS_ARE_DEFINED)
+    #define CONTROL_DEFINITION
+#endif
+
+#ifdef CONTROL_DEFINITION
+   
+#define ONEOF_POWERCONTROLPOLICY\
+    oneof varid = SERVER_MGMT_CONFIGURATION_DATA.PowerControlPolicy,\
+        questionid = AUTO_ID(PWR_CONTROL_POLICY_KEY),\
+        prompt      = STRING_TOKEN(STR_SRVRMGMT_PWR_CONTROL_POLICY),\
+        help        = STRING_TOKEN(STR_SRVRMGMT_PWR_CONTROL_POLICY_HELP),\
+        option text = STRING_TOKEN(STR_PWR_CONTROL_POLICY_DONOT_POWER), value = 0, flags = INTERACTIVE;\
+        option text = STRING_TOKEN(STR_PWR_CONTROL_POLICY_LAST_STATE),  value = 1, flags = INTERACTIVE;\
+        option text = STRING_TOKEN(STR_PWR_CONTROL_POLICY_RESTORE), value = 2, flags = INTERACTIVE;\
+        option text = STRING_TOKEN(STR_PWR_CONTROL_POLICY_NO_CHANGE), value = 3, flags = INTERACTIVE;\
+        default = 3,\
+        default = 3, defaultstore = AmiMfgDefault,\
+    endoneof;
+
+#endif //#ifdef CONTROL_DEFINITION
+
+#ifdef CONTROLS_WITH_DEFAULTS
+    ONEOF_POWERCONTROLPOLICY
+#endif //#ifdef CONTROLS_WITH_DEFAULTS
+
+#ifdef SERVER_MGMT_FORM_SET
+
+#ifdef FORM_SET_TYPEDEF
+//
+// If you need any additional type definitions add them here
+//
+#endif
+
+#ifdef FORM_SET_VARSTORE
+//
+//If you need custom varstore's define them here
+//
+#endif
+
+#ifdef FORM_SET_ITEM
+       
+    suppressif  ideqval SERVER_MGMT_CONFIGURATION_DATA.BmcSupport == 0;
+    grayoutif ideqval SYSTEM_ACCESS.Access == SYSTEM_PASSWORD_USER;
+        ONEOF_POWERCONTROLPOLICY
+    SUPPRESS_GRAYOUT_ENDIF
+
+
+#endif //#ifdef FORM_SET_ITEM
+
+#ifdef FORM_SET_GOTO
+//
+// Define goto commands for the forms defined in this file
+//
+#endif
+
+#ifdef FORM_SET_FORM
+//
+// Define forms using macros from the control definition section above
+//
+#endif
+
+#endif //#ifdef SERVER_MGMT_FORM_SET
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

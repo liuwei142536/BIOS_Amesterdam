@@ -1,0 +1,16 @@
+<component>
+	name = "Setup"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\Dxe\Setup\"
+	RefName = "GrantleyPkg.Setup"
+[INF]
+"DxePlatform.inf"
+[files]
+"Common.hfr"		
+"ResetMisc.h"	
+"SetupMisc.h"	
+"IccCallbacks.h"
+"IccSetup.h"
+"SetupPlatform.dxs"	
+"Setup.sdl"	
+<endComponent>

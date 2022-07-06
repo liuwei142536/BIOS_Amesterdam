@@ -1,0 +1,104 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   Collection of compiler intrinsics for Microsoft C compiler.
+#
+#   Microsoft C compilers inject calls to these functions into a compiler generated code when
+#   certain C constructs are used.
+#   Usage of these C constructs, and consequently usage of this library, is not recommended in most cases.
+#   Modifying your code to avoid usage of these C constructs is recommended.
+#   The rationale behind this recommendation is provided below.
+#   Microsoft does not provide documentation for intrinsic functions used by the compiler.
+#   Therefore, it is impossible to guarantee full compatibility of this library with the compiler.
+#   Moreover, different versions of the compiler may use different set of intrinsics or different
+#   parameters and/or calling conversions for the same intrinsics.
+#   Finally, C constructs that trigger usage of compiler intrinsics with Microsoft compilers
+#   can potentially have side effects on other compilers.
+#
+#   The library is provided as a part of Aptio distribution because it might be useful in certain special cases.
+#   For example, when large body of a third party code is imported into an Aptio project, fixing all the build errors
+#   may be impractical or undesirable due to requirement of being in synch with the
+#   original code to facilitate future code upgrades.
+#   Usage of the library may also be justified in projects that are targeted for a specific version of the compiler,
+#   or in situations when quick error resolution is more important than theoretical considerations above.
+#
+#   The following C constructs lead to usage of compiler intrinsics when code is compiled in debug 32-bit(a.k.a IA32, a.k.a x86) mode:
+#   - Multiplication, division, and modulus operation with at least one 64-bit operand
+#   - Shift of a 64-bit value
+#   - Access to array element using 64-bit array index.
+#   The following techniques are recommended to prevent generation of code with intrinsics:
+#   - If operands of the operation always take 32-bit values, use type casts to convert the values to 32-bit types
+#   - Use 64-bit arithmetic functions from BaseLib such as MultU64x64, DivU64x64Remainder, ModU64x32, LShiftU64, and RShiftU64
+#
+#   The following C constructs lead to usage of compiler intrinsics in 32-bit(IA32,x86) and 64-bit(x64) mode
+#   - Structure assignment
+#   - Array initialization with a single value. For example: UINT32 x[50] = { 0 }
+#   - memcpy-like and memset-like loops. For example
+##   for(i=0; i<sizeof(x); i++) x[i] = i[i]; // compiler recognizes that the loop implements memcpy operation and replaces it with memcpy call
+#   To prevent generation of code with intrinsics, it is recommended to use CopyMem and SetMem functions from BaseMemoryLib.
+##
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiMsftIntrinsicsLib
+  FILE_GUID                      = 78F30672-2943-46ED-811C-95CD516D0BC4
+  MODULE_TYPE                    = BASE
+  LIBRARY_CLASS                  = AmiMsftIntrinsicsLib
+
+[Sources]
+# The library have to have at least one source file to build.
+# Since AmiMsftIntrinsicsLib is intended only for Microsoft compilers,
+# Stub.c is used with other tool chains to prevent a build error.
+  Stub.c
+
+[Sources.Ia32]
+# Unsigned division
+  Aulldvrm.asm | MSFT
+  Aullrem.asm | MSFT
+  Aulldiv.asm | MSFT
+# Signed division
+  Alldvrm.asm | MSFT
+  Allrem.asm | MSFT
+  Alldiv.asm | MSFT
+# Signed/Unsigned multiplication
+  Allmul.asm | MSFT
+# Shift operations
+  Aullshr.asm | MSFT
+  Allshr.asm | MSFT
+  Allshl.asm | MSFT
+# Memory operations
+  MemCpyIa32.asm | MSFT
+  MemSetIa32.asm | MSFT
+
+[Sources.X64]
+# Memory operations
+  MemCpyX64.asm | MSFT
+  MemSetX64.asm | MSFT
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

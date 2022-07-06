@@ -1,0 +1,12 @@
+<component>
+    name = "SmmConfidentialMemModule"
+    category = eModule
+    LocalRoot = "MdeModulePkg\"
+    RefName = "SmmConfidentialMemModule"
+[files]
+"SmmConfidentialMemModule.sdl"	
+"SmmConfidentialMemModule.chm"	
+[parts]
+"MdeModulePkg.SmmConfMemLibInclude"
+"MdeModulePkg.SmmConfMemLibNullLibraryInstances"
+<endComponent>

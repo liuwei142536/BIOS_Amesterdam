@@ -1,0 +1,121 @@
+TOKEN
+	Name  = "HeciLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable HeciLibrary support in Project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "MeTypeLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MeTypeLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AMI_HECI_WAIT_DELAY_MULTIPLE"
+	Value  = "10"
+	Help  = "1 for ME; 10 for SPS"
+	TokenType = Integer
+	TargetH = Yes
+	Range = "1 ~ N"
+End
+
+INFComponent
+	Name  = "MeTypeLib"
+	File  = "MeTypeLib\MeTypeLib.inf"
+	Package  = "GrantleyPkg"
+	Token = "MeTypeLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "MeTypeLib"
+	Instance  = "GrantleyPkg.MeTypeLib"
+	Arch  = "IA32 X64"
+	Token = "MeTypeLib_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "MeTypeSetLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MeTypeSetLib support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "MeTypeSetLib"
+	File  = "MeTypeLib\MeTypeSetLib.inf"
+	Package  = "GrantleyPkg"
+	Token = "MeTypeSetLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "MeTypeSetLib"
+	Instance  = "GrantleyPkg.MeTypeSetLib"
+	Arch  = "X64"
+	Token = "MeTypeSetLib_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MeChipsetLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable MeChipsetLib support in Project"
+    TokenType = Boolean
+End
+
+INFComponent
+    Name  = "MeChipsetLib"
+    File  = "MeChipsetLib\MeChipsetLib.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "PEIM"
+    Token = "MeChipsetLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "MeChipsetLib"
+    Instance  = "GrantleyPkg.MeChipsetLib"
+    Token = "MeChipsetLib_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "MePeiPolicyUpdateLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable MePeiPolicyUpdateLib support in Project"
+    TokenType = Boolean
+End
+
+INFComponent
+    Name  = "MePeiPolicyUpdateLib"
+    File  = "MePeiPolicyUpdateLib\MePeiPolicyUpdateLib.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "PEIM"
+    Token = "MePeiPolicyUpdateLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "MePeiPolicyUpdateLib"
+    Instance  = "GrantleyPkg.MePeiPolicyUpdateLib"
+    Token = "MePeiPolicyUpdateLib_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "HeciCoreLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable HeciCoreLib support in Project"
+    TokenType = Boolean
+End
+
+INFComponent
+    Name  = "HeciCoreLib"
+    File  = "HeciCoreLib\HeciCoreLib.inf"
+    Package  = "GrantleyPkg"
+    ModuleTypes  = "PEIM"
+    Token = "HeciCoreLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "HeciCoreLib"
+    Instance  = "GrantleyPkg.HeciCoreLib"
+    Token = "HeciCoreLib_SUPPORT" "=" "1"
+End

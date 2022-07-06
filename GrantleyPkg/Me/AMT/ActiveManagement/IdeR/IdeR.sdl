@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "IdeR_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling IdeR support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "IdeRController_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable IdeRController support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "IdeRController"
+	File  = "Dxe\IdeRController.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "IdeRController_SUPPORT" "=" "1"
+End
+

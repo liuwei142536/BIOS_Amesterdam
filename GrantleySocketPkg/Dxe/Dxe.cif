@@ -1,0 +1,14 @@
+<component>
+	name = "Dxe"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Dxe\"
+	RefName = "GrantleySocketPkg.Dxe"
+[INF]
+"CpuCsrAccess\CpuCsrAccess.inf"
+"CpuCsrAccess\CpuCsrAccessSMM.inf"
+"PowerManagement\PpmInitialize.inf"
+"IioInit\IioInit.inf"
+"CpuSpSmi\CpuSpSmi.inf"
+[files]
+"SocketPkgDxe.sdl"	
+<endComponent>

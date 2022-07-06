@@ -1,0 +1,29 @@
+TOKEN
+	Name  = "AcpiSmm_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling AcpiSmm support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AcpiSmmPlatform_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AcpiSmmPlatform support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AcpiSmmPlatform"
+	File  = "AcpiSmmPlatform.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "AcpiSmmPlatform_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "PcdLib"
+    Instance  = "MdePkg.DxePcdLib"
+    Override  = "GrantleyPkg.AcpiSmmPlatform"
+End
+

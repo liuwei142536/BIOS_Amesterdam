@@ -1,0 +1,47 @@
+TOKEN
+	Name  = "SPS_ENABLE"
+	Value  = "1"
+	Help  = "Switch for Enabling Sps support in the project"
+	TokenType = Boolean
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AslExtension_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AslExtension support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AslInformation_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AslInformation support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AslExtension"
+	File  = "Asl\AslExtension.inf"
+	Package  = "GrantleyPkg"
+    ModuleTypes  = "USER_DEFINED"
+	Token = "AslExtension_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+    Name  = "AslExtension"
+    FD_AREA  = "FV_MAIN"
+    INFComponent  = "GrantleyPkg.AslExtension"
+    Rule_Override  = "ACPITABLE"
+    Token = "AslExtension_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AslInformation"
+	File  = "Asl\Nvs\AslInformation.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AslInformation_SUPPORT" "=" "1"
+End
+

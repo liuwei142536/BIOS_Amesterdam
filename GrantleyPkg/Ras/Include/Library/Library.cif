@@ -1,0 +1,9 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\Include\Library\"
+	RefName = "GrantleyPkg.Ras.Include.Library.Library"
+[files]
+"emcalib.h"	
+"emcaplatformhookslib.h"	
+<endComponent>

@@ -1,0 +1,65 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+
+/** @file ServerMgmtSetupDataDefinitions.h
+    Contains Server Mgmt Setup data definitions, callbacks list etc.
+
+**/
+
+#ifndef VFRCOMPILE
+#if SERVER_MGMT_SETUP_DATA_LAYOUT_OVERRIDE_SUPPORT
+@elink(SERVER_MGMT_SETUP_DATA_LAYOUT_OVERRIDE_HEADER, "#include <@Child>", "", "")
+#endif
+#endif
+
+#include<Token.h>
+#ifndef SERVER_MGMT_CONFIGURATION_DATA_DEFINED
+#define SERVER_MGMT_CONFIGURATION_DATA_DEFINED
+typedef struct {
+  UINT8        BmcSupport;
+#if BMC_INIT_DELAY
+  UINT8        WaitForBmc;
+#endif
+#if BMC_TIMEZONE_SUPPORT
+  CHAR16    TimeZone[6];
+#endif
+  #define SERVER_MGMT_CONFIGURATION_DATA_DEFINITION
+  @elink(SERVER_MGMT_SETUP_DEFINITIONS, "#include <@Child>", "%n", "")
+  #undef SERVER_MGMT_CONFIGURATION_DATA_DEFINITION
+} SERVER_MGMT_CONFIGURATION_DATA;
+#endif  // #ifndef SERVER_MGMT_CONFIGURATION_DATA_DEFINED
+
+#define SERVER_MGMT_SETUP_ITEM_CALLBACK_LIST @elink(SERVER_MGMT_SETUP_ITEM_CALLBACKS, "@Child", "", "")
+#define SERSVER_MGMT_STRING_INIT_LIST @elink(SERVER_MGMT_SETUP_STRING_INIT, "@Child", "", "")
+
+#ifdef VFRCOMPILE
+#define CONTROL_DEFINITION@elink(SERVER_MGMT_SETUP_DEFINITIONS, "#include <@Child>", "%n", "")
+#undef CONTROL_DEFINITION 
+#define CONTROLS_ARE_DEFINED
+#endif  // #ifdef VFRCOMPILE
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

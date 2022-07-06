@@ -1,0 +1,11 @@
+<component>
+	name = "SmmLockBox"
+	category = eCore
+	LocalRoot = "MdeModulePkg\Universal\LockBox\SmmLockBox\"
+	RefName = "MdeModulePkg.SmmLockBox"
+[INF]
+"SmmLockBox.inf"
+[files]
+"SmmLockBox.sdl"
+"SmmLockBox.chm"
+<endComponent>

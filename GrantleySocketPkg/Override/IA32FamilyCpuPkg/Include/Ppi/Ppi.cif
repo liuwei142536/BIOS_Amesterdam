@@ -1,0 +1,8 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "GrantleySocketPkg\Override\IA32FamilyCpuPkg\Include\Ppi\"
+	RefName = "GrantleySocketPkg.Override.IA32FamilyCpuPkg.Include.Ppi.Ppi"
+[files]
+"Cache.h"	
+<endComponent>

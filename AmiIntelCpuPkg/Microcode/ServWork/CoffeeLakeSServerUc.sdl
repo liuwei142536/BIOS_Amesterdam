@@ -1,0 +1,67 @@
+TOKEN
+    Name  = "SERVER_906EX_COFFELAKES"
+    Value = "0"
+    Help  = "Intel(R) Server CoffeeLakeS"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SERVER_M22906EA"
+    Value  = "1"
+    Help  = "Intel(R) Server Coffee Lake-S 4+2 Xeon E U-0 Stepping(906EA)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SERVER_M02906EB"
+    Value  = "1"
+    Help  = "Intel(R) Server Coffee Lake-S 4+2 Xeon E3 B-0 Stepping(906EB)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SERVER_M22906EC"
+    Value  = "1"
+    Help  = "Intel(R) Server Coffee Lake-S 8+2 Xeon E P-0 Stepping(906EC)"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "SERVER_M22906ED"
+    Value  = "1"
+    Help  = "Intel(R) Server Coffee Lake-S 8+2 Xeon E P-0 Stepping(906ED)"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M22906EA_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server Coffee Lake-S 4+2 Xeon E U-0 Stepping(906EA)"
+    Token = "SERVER_M22906EA" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M02906EB_000000DE.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server Coffee Lake-S 4+2 Xeon E3 B-0 Stepping(906EB)"
+    Token = "SERVER_M02906EB" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M22906EC_000000D6.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server Coffee Lake-S 8+2 Xeon E P-0 Stepping(906EC)"
+    Token = "SERVER_M22906EC" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M22906ED_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server Coffee Lake-S 8+2 Xeon E P-0 Stepping(906ED)"
+    Token = "SERVER_M22906ED" "=" "1"
+    InvokeOrder = AfterParent
+End

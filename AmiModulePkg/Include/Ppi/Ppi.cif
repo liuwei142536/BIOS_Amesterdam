@@ -1,0 +1,16 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Include\Ppi\"
+	RefName = "AmiModulePkg.Ppi"
+[files]
+"AmiDebugPrintErrorLevelService.h"
+"AmiDebugService.h"
+"AmiMultiPlatform.h"
+"AmiPeiPciEnumeration.h"
+"AmiPeiPciResetResources.h"
+"AmiPublishBlockIo.h"
+"AmiReadyToLoadDxeCore.h"
+"AmiTreePpi.h"
+"PeiRecoverySerialModePpi.h"
+<endComponent>

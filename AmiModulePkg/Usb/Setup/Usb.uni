@@ -1,0 +1,158 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/=#
+#include "VFR.uni"
+
+#ifndef x-AMI
+#langdef   x-AMI "x-AMI"    // AMI Configuration Language
+#endif
+
+#string STR_USB_CONFIGURATION           #language eng "USB Configuration"
+#string STR_USB_CONFIGURATION_HELP      #language eng "USB Configuration Parameters"
+#string STR_USB_SUPPORT                 #language eng "USB Support"
+                                        #language x-AMI "USB000"
+#string STR_USB_SUPPORT_HELP            #language eng "USB Support Parameters"
+#string STR_USB_XHCI_SUPPORT            #language eng "XHCI Legacy Support"
+                                        #language x-AMI "USB001"
+#string STR_USB_XHCI_SUPPORT_HELP       #language eng "Enable/Disable XHCI Controller Legacy support."
+#string STR_USB_ENABLED                 #language eng "Enabled"
+#string STR_USB_DISABLED                #language eng "Disabled"
+#string STR_USB_AUTO                    #language eng "Auto"
+#string STR_USB_MODULE_VERSION_VALUE    #language eng "N/A"
+#string STR_USB_CONTROLLERS_ENABLED     #language eng "USB Controllers:"
+#string STR_USB_CONTROLLERS_ENABLED_LIST #language eng "N/A" //dynamically updated
+#string STR_USB_DEVICES_ENABLED         #language eng "USB Devices:"
+#string STR_USB_DEVICES_ENABLED_LIST    #language eng "N/A" //dynamically updated
+#string STR_USB_LEGACY_SUPPORT          #language eng "Legacy USB Support"
+                                        #language x-AMI "USB002"
+#string STR_USB_LEGACY_SUPPORT_HELP     #language eng "Enables Legacy USB support. AUTO option disables legacy support if no USB devices are connected. DISABLE option will keep USB devices available only for EFI applications."
+#string STR_USB_LEGACY_SUPPORT_HELP1    #language eng "Enables Legacy USB support. AUTO option disables legacy support if no USB devices are connected."
+#string STR_USB_BIOS_XHCI_HANDOFF       #language eng "XHCI Hand-off"
+                                        #language x-AMI "USB003" 
+#string STR_USB_BIOS_XHCI_HANDOFF_HELP  #language eng "This is a workaround for OSes without XHCI hand-off support. The XHCI ownership change should be claimed by XHCI driver."
+#string STR_USB_BIOS_EHCI_HANDOFF       #language eng "EHCI Hand-off"
+                                        #language x-AMI "USB004"  
+#string STR_USB_BIOS_EHCI_HANDOFF_HELP  #language eng "This is a workaround for OSes without EHCI hand-off support. The EHCI ownership change should be claimed by EHCI driver."
+#string STR_USB_BIOS_OHCI_HANDOFF       #language eng "OHCI Hand-off"
+                                        #language x-AMI "USB005" 
+#string STR_USB_BIOS_OHCI_HANDOFF_HELP  #language eng "This is a workaround for OSes without OHCI hand-off support. The OHCI ownership change should be claimed by OHCI driver."
+#string STR_USB_HOTPLUG_FDD             #language eng "Hotplug USB FDD"
+                                        #language x-AMI "USB006"
+#string STR_USB_HOTPLUG_FDD_HELP        #language eng "A dummy FDD device is created that will be associated with the hot-plugged FDD later. AUTO option creates this dummy device only if there is no USB FDD present."
+#string STR_USB_HOTPLUG_HDD             #language eng "Hotplug USB HDD"
+                                        #language x-AMI "USB007"
+#string STR_USB_HOTPLUG_HDD_HELP        #language eng "A dummy HDD device is created that will be associated with the hot-plugged HDD later. AUTO option creates this dummy device only if there is no USB HDD present."
+#string STR_USB_HOTPLUG_CDROM           #language eng "Hotplug USB CD-ROM"
+                                        #language x-AMI "USB008"
+#string STR_USB_HOTPLUG_CDROM_HELP      #language eng "A dummy CDROM device is created that will be associated with the hot-plugged CDROM later. AUTO option creates this dummy device only if there is no USB CDROM present."
+#string STR_USB_MASS_DEVICE_CONFIG      #language eng "USB Mass Storage Device Configuration"
+#string STR_USB_MASS_DEVICE_CONFIG_HELP #language eng "Configure the USB Mass Storage Devices."
+#string STR_USB_DELAYS                  #language eng "USB hardware delays and time-outs:"
+#string STR_USB_MASS_RESET_DELAY        #language eng "Device reset time-out"
+                                        #language x-AMI "USB009" 
+#string STR_USB_MASS_RESET_DELAY_HELP   #language eng "USB mass storage device Start Unit command time-out."
+#string STR_USB_CONTROL_TIME_OUT        #language eng "USB transfer time-out"  //(EIP30079+)
+                                        #language x-AMI "USB00A" 
+#string STR_USB_CONTROL_TIME_OUT_HELP   #language eng "The time-out value for Control, Bulk, and Interrupt transfers." //(EIP30079+)
+#string STR_USB_POWERGOOD_DELAY         #language eng "Device power-up delay"
+                                        #language x-AMI "USB00B"
+#string STR_USB_POWERGOOD_DELAY_HELP    #language eng "Maximum time the device will take before it properly reports itself to the Host Controller. 'Auto' uses default value: for a Root port it is 100 ms, for a Hub port the delay is taken from Hub descriptor."
+#string STR_USB_DELAY_VALUE             #language eng "Manual"
+#string STR_USB_DELAY_NUM_VALUE         #language eng "Device power-up delay in seconds"
+                                        #language x-AMI "USB00C"
+#string STR_USB_DELAY_NUM_VALUE_HELP    #language eng "Delay range is 1..40 seconds, in one second increments"
+#string STR_USB_DELAY_01                #language eng "1 sec" //(EIP30079+)
+#string STR_USB_DELAY_05                #language eng "5 sec" //(EIP30079+)
+#string STR_USB_DELAY_06                #language eng "6 sec"
+#string STR_USB_DELAY_07                #language eng "7 sec"
+#string STR_USB_DELAY_08                #language eng "8 sec"
+#string STR_USB_DELAY_09                #language eng "9 sec"
+#string STR_USB_DELAY_10                #language eng "10 sec"
+#string STR_USB_DELAY_20                #language eng "20 sec"
+#string STR_USB_DELAY_30                #language eng "30 sec"
+#string STR_USB_DELAY_40                #language eng "40 sec"
+#string STR_USB_MASS_DEVICE1            #language eng "N/A"
+#string STR_USB_MASS_DEVICE2            #language eng "N/A"
+#string STR_USB_MASS_DEVICE3            #language eng "N/A"
+#string STR_USB_MASS_DEVICE4            #language eng "N/A"
+#string STR_USB_MASS_DEVICE5            #language eng "N/A"
+#string STR_USB_MASS_DEVICE6            #language eng "N/A"
+#string STR_USB_MASS_DEVICE7            #language eng "N/A"
+#string STR_USB_MASS_DEVICE8            #language eng "N/A"
+#string STR_USB_MASS_DEVICE9            #language eng "N/A"
+#string STR_USB_MASS_DEVICE10           #language eng "N/A"
+#string STR_USB_MASS_DEVICE11           #language eng "N/A"
+#string STR_USB_MASS_DEVICE12           #language eng "N/A"
+#string STR_USB_MASS_DEVICE13           #language eng "N/A"
+#string STR_USB_MASS_DEVICE14           #language eng "N/A"
+#string STR_USB_MASS_DEVICE15           #language eng "N/A"
+#string STR_USB_MASS_DEVICE16           #language eng "N/A"
+#string STR_USB_MASS_DEVICE17           #language eng "N/A"
+#string STR_USB_MASS_DEVICE18           #language eng "N/A"
+#string STR_USB_MASS_DEVICE19           #language eng "N/A"
+#string STR_USB_MASS_DEVICE20           #language eng "N/A"
+#string STR_USB_MASS_DEVICE21           #language eng "N/A"
+#string STR_USB_MASS_DEVICE22           #language eng "N/A"
+#string STR_USB_MASS_DEVICE23           #language eng "N/A"
+#string STR_USB_MASS_DEVICE24           #language eng "N/A"
+#string STR_USB_MASS_DEVICE25           #language eng "N/A"
+#string STR_USB_MASS_DEVICE26           #language eng "N/A"
+#string STR_USB_MASS_DEVICE27           #language eng "N/A"
+#string STR_USB_MASS_DEVICE28           #language eng "N/A"
+#string STR_USB_MASS_DEVICE29           #language eng "N/A"
+#string STR_USB_MASS_DEVICE30           #language eng "N/A"
+#string STR_USB_MASS_DEVICE31           #language eng "N/A"
+#string STR_USB_MASS_DEVICE32           #language eng "N/A"
+#string STR_USB_EMULATION               #language eng "Mass Storage Devices:"
+#string STR_USB_EMUL_FLOPPY             #language eng "Floppy"
+#string STR_USB_EMUL_FORCED_FDD         #language eng "Forced FDD"
+#string STR_USB_EMUL_HDD                #language eng "Hard Disk"
+#string STR_USB_EMUL_CDROM              #language eng "CD-ROM"
+#string STR_USB_EMULATION_TYPE_HELP     #language eng "Mass storage device emulation type. 'AUTO' enumerates devices less than 530MB as floppies. Forced FDD option can be used to force HDD formatted drive to boot as FDD (e.g. ZIP drive)."
+#string STR_USB_EMULATION_TYPE_HELP1    #language eng "Mass storage device emulation type. 'AUTO' enumerates devices according to their media format. Optical drives are emulated as 'CDROM', drives with no media will be emulated according to a drive type."
+#string STR_USB_6064                    #language eng "Port 60/64 Emulation"
+                                        #language x-AMI "USB00D"
+#string STR_USB_6064_HELP               #language eng "Enables I/O port 60h/64h emulation support. This should be enabled for the complete USB keyboard legacy support for non-USB aware OSes."
+#string STR_USB_HISPEED_SUPPORT         #language eng "USB 2.0 Controller Mode"
+                                        #language x-AMI "USB00E"
+#string STR_USB_HISPEED_SUPPORT_HELP    #language eng "Configures the USB 2.0 controller in HiSpeed (480Mbps) or FullSpeed (12Mbps)."
+#string STR_USB_HISPEED                 #language eng "HiSpeed"
+#string STR_USB_FULLSPEED               #language eng "FullSpeed"
+#string STR_USB_MASS_DRIVER_SUPPORT     #language eng "USB Mass Storage Driver Support"
+                                        #language x-AMI "USB00F"
+#string STR_USB_MASS_DRIVER_SUPPORT_HELP #language eng "Enable/Disable USB Mass Storage Driver Support."
+#string STR_USB_MODULE_VER              #language eng "00.00"
+#string STR_USB_MODULE_VER_HELP         #language eng "USB Module Version"
+#string STR_USB_S5_WAKEUP_SUPPORT       #language eng "USB S5 Wakeup Support"
+                                        #language x-AMI "USB010"
+#string STR_USB_S5_WAKEUP_SUPPORT_HELP  #language eng "Enable/Disable USB S5 Wakeup Support."
+
+#string STR_USB_VIDEO_TITLE             #language eng "USB Camera"
+#string STR_USB_VIDEO_TITLE_HELP        #language eng "USB Video Class (UVC) compliant camera settings"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+

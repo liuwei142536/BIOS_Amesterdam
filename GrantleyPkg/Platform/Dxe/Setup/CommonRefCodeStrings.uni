@@ -1,0 +1,68 @@
+﻿//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c) 1999 - 2006 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   CommonRefCodStrings.uni
+// 
+// Abstract:
+// 
+//   String definitions for ommon RefCode Setup formset.
+// 
+// Revision History:
+// 
+// --*/
+
+/=#
+
+#langdef   en-US "English"
+#langdef   x-AMI "AmiMappingLanguage"
+
+#string STR_RC_COMMON_FORM_TITLE	#language en-US "Common RefCode Configuration"
+#string STR_RC_COMMON_FORM_HELP         #language en-US "Displays and provides option to change the Common RefCode Settings"
+
+#string STR_CSI_MMCFG_BASE				#language en-US "MMCFG Base"
+                                        #language x-AMI "CMRF000"
+#string STR_CSI_MMCFG_BASE_HELP			#language en-US "Select MMCFG Base"
+#string STR_CSI_MMCFG_SIZE				#language en-US "MMCFG Size"
+                                        #language x-AMI "CMRF001"
+#string STR_CSI_MMCFG_SIZE_HELP			#language en-US "Select MMCFG Size"
+#string STR_CSI_MMIOL_BASE				#language en-US "MMIO Low Base"
+                                        #language x-AMI "CMRF002"
+#string STR_CSI_MMIOL_BASE_HELP			#language en-US "Select MMIO Low Base"
+#string STR_CSI_MMIOL_SIZE				#language en-US "MMIO Low Size"
+                                        #language x-AMI "CMRF003"
+#string STR_CSI_MMIOL_SIZE_HELP			#language en-US "Select MMIO Low Size"
+#string STR_CSI_MMIOH_BASE				#language en-US "MMIO High Base"
+                                        #language x-AMI "CMRF004"
+#string STR_CSI_MMIOH_BASE_HELP			#language en-US "Select MMIO High Base"
+#string STR_CSI_MMIOH_SIZE				#language en-US "MMIO High Size"
+                                        #language x-AMI "CMRF005"
+#string STR_CSI_MMIOH_SIZE_HELP			#language en-US "Select MMIO HIgh Size"
+
+#string STR_ISOCEN				        #language en-US "Isoc Mode"
+                                        #language x-AMI "CMRF006"
+#string STR_ISOCEN_HELP					#language en-US "Isoc: Disable,Enable"
+#string STR_MESEGEN		                #language en-US "MeSeg Mode"
+                                        #language x-AMI "CMRF007"
+#string STR_MESEGEN_HELP		        #language en-US "MeSeg: Disable,Enable"
+#string STR_NUMAEN		                #language en-US "Numa"
+                                        #language x-AMI "CMRF008"
+#string STR_NUMAEN_HELP		  		    #language en-US "Enable or Disable Non uniform Memory Access (NUMA)."
+

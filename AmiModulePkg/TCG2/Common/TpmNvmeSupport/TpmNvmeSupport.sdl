@@ -1,0 +1,33 @@
+TOKEN
+    Name  = "TpmNvme_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable TpmSmbios support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+    Master = Yes
+    Token = "AMI_MODULE_PKG_VERSION" ">=" "39"
+End
+
+PATH
+    Name = "TpmNvme_DIR"
+End
+
+ELINK
+    Name  = "$(TpmNvme_DIR)"
+    Parent  = "PLATFORM_DSC_INCLUDE_PATHS"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "TpmNvmeSupport"
+    File  = "TpmNvmeSupport.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_DRIVER"
+End
+
+ELINK
+    Name  = "gEfiNvmExpressPassThruProtocolGuid"
+    Parent  = "ADDITIONAL_AMITSE_Protocols"
+    InvokeOrder = AfterParent    
+End

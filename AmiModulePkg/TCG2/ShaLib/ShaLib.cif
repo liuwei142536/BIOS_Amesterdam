@@ -1,0 +1,10 @@
+<component>
+	name = "ShaLib"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\TCG2\ShaLib\"
+	RefName = "ShaLib"
+[INF]
+"ShaLib.inf"
+[files]
+"ShaLib.sdl"	
+<endComponent>

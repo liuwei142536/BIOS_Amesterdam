@@ -1,0 +1,28 @@
+<component>
+	name = "LibraryInstances"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Library\"
+	RefName = "AMIDebuggerPkg.Bin.LibraryInstances"
+[INF]
+"AMIDebugAgent\PeiAMIDebugAgentLib.inf"
+"AMIDebugAgent\DxeAMIDebugAgentLib.inf"
+"AMIDebugAgent\SmmAMIDebugAgentLib.inf"
+"AMIDebugAgent\CommonDebugAgentLib.inf"
+"DebugStatusCodeLib\DebugStatusCodeLib.inf"
+"DebugStatusCodeLib\SmmDebugStatusCodeLib.inf"
+"DebugStatusCodeLib\CommonDebugStatusCodeLib.inf"
+"DbgHostStatusLib\DbgHostStatusLib.inf"
+"SmmDbgHostStatusLib\SmmDbgHostStatusLib.inf"
+"CommonDebugLib\CommonDebugLib.inf"
+"DbgRxAuthenticationLib\DbgRxAuthenticationLib.inf"
+"DbgRxDebugSupportLib\DbgRxDebugSupportLib.inf"
+"CommonDebugSupportLib\CommonDebugSupportLib.inf"
+"DbgRxEndOfPeiLib\DbgRxEndOfPeiLib.inf"
+"DebuggerLib\DebuggerLib.inf"
+"CommonDebugPortLib\CommonDebugPortLib.inf"
+"PeiDbgPciExpressLib\PeiDbgPciExpressLib.inf"
+"DxeDbgPciExpressLib\DxeDbgPciExpressLib.inf"
+"InitializeLocalApicLib\InitializeLocalApicLib.inf"
+[files]
+"DbgLibraryInstances.sdl"	
+<endComponent>

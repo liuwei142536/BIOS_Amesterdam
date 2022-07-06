@@ -1,0 +1,13 @@
+<component>
+	name = "Intel Wellsburg"
+	category = ModulePart
+	LocalRoot = "AmiCRBPkg\Board\SB\"
+	RefName = "Intel Wellsburg"
+[INF]
+"SBPei.inf"
+"SBDxe.inf"
+[parts]
+"Intel Wellsburg SB Board"
+"Intel Wellsburg SB Chipset"
+"SBDebugPorting"
+<endComponent>

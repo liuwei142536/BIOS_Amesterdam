@@ -1,0 +1,41 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file UefiNetworkStackElink.txt
+    This is the Template file which contains the Grammar 
+    for the elinks to be generated in header file. 
+      
+**/
+
+#define BLOCKED_NETWORK_DEVICE_INFO_LIST @Elink(SkipPxeBootNetworkList,"@Child","","%n") 
+
+//
+// SKIP_HTTPS_CERT_VALIDATION_IPS Elinks MACRO values
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+#define SKIP_HTTPS_CERT_VALIDATION_IPS_LIST 	@elink(SKIP_HTTPS_CERT_VALIDATION_IPS, "@Child", "", "")
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

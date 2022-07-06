@@ -1,0 +1,9 @@
+<component>
+	name = "MebxPrompt"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Platform\Dxe\MebxPrompt\"
+	RefName = "GrantleyPkg.Amt.MebxPrompt"
+[files]
+"MebxPrompt.sdl"
+"MebxPrompt.c"
+<endComponent>

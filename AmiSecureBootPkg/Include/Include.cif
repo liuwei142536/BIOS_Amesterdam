@@ -1,0 +1,11 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmiSecureBootPkg\Include\"
+	RefName = "AmiSecureBootPkg.Include"
+[files]
+"SecureBoot.h"	
+[parts]
+"AmiSecureBootPkg.Protocol"
+"AmiSecureBootPkg.Library"
+<endComponent>

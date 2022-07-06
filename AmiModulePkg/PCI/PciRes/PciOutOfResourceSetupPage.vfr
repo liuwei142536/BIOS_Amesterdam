@@ -1,0 +1,59 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/**
+  @file  PciOutOfResourceSetupPage.vfr
+
+  Pci Out Of Resource Setup formset.
+**/
+
+#include "PciOutOfResourceSetupPage.h"
+formset guid = PCI_OUT_OF_RESOURCE_FORM_SET_GUID,
+    title = STRING_TOKEN(STR_PCI_OUT_OF_RESOURCE_PAGE),
+    help = STRING_TOKEN(STR_EMPTY),
+    class = PCI_OUT_OF_RESOURCE_FORM_SET_CLASS, subclass = 0,
+
+    form formid = PCI_OUT_OF_RESOURCE_FORM_MAIN,
+        title = STRING_TOKEN(STR_PCI_OUT_OF_RESOURCE_PAGE);
+
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE))
+        SEPARATOR
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_HELP_1))
+        SEPARATOR
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_HELP_2))
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_HELP_3))
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_HELP_3_1))
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_HELP_4))
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_HELP_4_1))
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_HELP_5))
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_HELP_5_1))
+        SEPARATOR
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_WARNING))
+        SUBTITLE(STRING_TOKEN(STR_INSUFFICIENT_PCI_RESOURCE_WARNING1))
+
+	endform;
+endformset;
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

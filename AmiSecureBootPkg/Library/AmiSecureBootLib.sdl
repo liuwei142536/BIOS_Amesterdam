@@ -1,0 +1,62 @@
+TOKEN
+    Name  = "AmiSecureBootLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SecureBootLib support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SECUREBOOT_HOOK_LIB_COMMA"
+    Value  = ","
+    Help  = "This strange token is used by the SDL template expression in SecureBootLibHooksTemplate.h.\DO NOT CHANGE!"
+    TokenType = Expression
+    Lock = Yes
+End
+
+TOKEN
+    Name  = "SecureBootLib_DEBUG_LEVEL"
+    Value  = "EFI_D_INFO"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SecureBootLib_DEBUG_LEVEL"
+    Value  = "EFI_D_ERROR"
+    TokenType = Expression
+    TargetH = Yes
+    Token = "SecureBoot_DEBUG_MESSAGES" "=" "1"
+End
+
+PATH
+    Name  = "AmiSecureBootLib_DIR"
+    Help  = "Path to SecureBootLib Module in Project"
+End
+
+OUTPUTREGISTER
+    Name  = "SECUREBOOT_ELINKS_H"
+    Path  = "Build"
+    File  = "AmiSecureBootLibHooks.h"
+    Template  = "AmiSecureBootLibTemplate.h"
+End
+
+ELINK
+    Name  = "SecureBootLib_BadCertificates"
+    Help  = "Called by SecureBootLibBadCertificates. Input format: 'X.509 Certificate Subject Name, {Signature Owner GUID}'"
+    InvokeOrder = ReplaceParent
+End
+
+INFComponent
+    Name  = "AmiSecureBootLib"
+    File  = "AmiSecureBootLib.inf"
+    Package  = "AmiSecureBootPkg"
+End
+
+LibraryMapping
+    Class  = "AmiSecureBootLib"
+    Instance  = "AmiSecureBootPkg.AmiSecureBootLib"
+    Arch  = "IA32 X64 IPF ARM AARCH64"
+    ModuleTypes  = "DXE_SMM_DRIVER DXE_RUNTIME_DRIVER DXE_DRIVER DXE_CORE UEFI_APPLICATION UEFI_DRIVER"
+End

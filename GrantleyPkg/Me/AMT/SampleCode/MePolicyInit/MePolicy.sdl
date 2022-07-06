@@ -1,0 +1,24 @@
+TOKEN
+	Name  = "MePolicy_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling MePolicy support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "MeDxePolicyInit_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MeDxePolicyInit support in Project"
+	TokenType = Boolean
+    Token = "AMT_ENABLE" "=" "1"
+End
+
+INFComponent
+	Name  = "MeDxePolicyInit"
+	File  = "Dxe\MeDxePolicyInit.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "MeDxePolicyInit_SUPPORT" "=" "1"
+End
+

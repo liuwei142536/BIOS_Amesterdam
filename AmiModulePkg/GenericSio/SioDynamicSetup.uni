@@ -1,0 +1,86 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**           5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093      **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+/** @file SioDynamicSetup.vfr
+
+    Generic Sio Setup Screens string definition.
+**/
+/=#
+#include "VFR.uni"
+#ifndef x-UEFI-AMI
+#langdef   x-UEFI-AMI "x-UEFI-AMI"    // AMI Configuration Language
+#endif
+
+
+////////////////////Mapping language following: GSIO0xx////////////////////
+////////////////////GSIO000 ------------------- GSIO099////////////////////
+#string STR_SIO_CONFIGURATION           #language eng "SIO Configuration"
+#string STR_SIO_CONFIGURATION_HELP      #language eng "SIO Chip configuration. Enable or Disable SIO Logical Devices, Resources and Features settings, etc."
+#string STR_SUBTITLE1                   #language eng "Super IO Chip Logical Device(s) Configuration"
+#string STR_SIO_DRIVER_WARNING          #language eng "WARNING: Logical Devices state on the left side of the control, reflects the current Logical Device state. Changes made during Setup Session will be shown after you restart the system."
+#string STR_SIO_LD_WARNING              #language eng "WARNING: Disabling SIO Logical Devices may have unwanted side effects.\nPROCEED WITH CAUTION."
+#string STR_SIO_DRIVER_VER_PROMPT       #language eng "AMI SIO Driver Version :   "
+                                        #language x-UEFI-AMI "GSIO010"
+
+#string STR_SIO_DRIVER_VER              #language eng "To Be Updated..."
+#string STR_SIO_GOTO_HELP               #language eng "View and Set Basic properties of the SIO Logical device. Like IO Base, IRQ Range, DMA Channel and Device Mode."
+#string STR_SIO_LD_FORM_TITLE           #language eng "n/a"
+#string STR_RESET_REQUIRED              #language eng "To Refresh - Reset Required!"
+#string STR_CURRENT_SETTINGS_TEXT2      #language eng "n/a"
+#string STR_CURRENT_SETTINGS_HELP       #language eng "Displays Logical Device Current Settings."
+#string STR_POSSIBLE_SETTINGS           #language eng "Possible:"
+#string STR_CURRENT_SETTINGS            #language eng "Current :"
+#string STR_MODE_SETTINGS               #language eng "Mode    :"
+
+#string STR_LD_CONFIG_SUB               #language eng "Logical Device Settings:"
+#string STR_POSSIBLE_SETTINGS_HELP      #language eng "Allows the user to change the device resource settings. New settings will be reflected on this setup page after system restarts."
+                                                       
+#string STR_CONFIGURATION               #language eng "Configuration"
+#string STR_SERIAL_PORT                 #language eng "Serial Port "
+#string STR_PARALLEL_PORT               #language eng "Parallel Port "
+#string STR_FLOPPY                      #language eng "Floppy Disk Controller "
+#string STR_PS2_KEYBOARD                #language eng "PS2 Keyboard "
+#string STR_PS2_MOUSE                   #language eng "PS2 Mouse "
+#string STR_PS2_CONTROLLER              #language eng "PS2 Controller(KB&MS) "
+#string STR_CIR_CONTROLLER              #language eng "Infrared Port "
+
+
+#string STR_LD_ENABLE_PROMPT            #language eng "Use This Device"
+                                        #language x-UEFI-AMI "GSIO011"
+                                    
+#string STR_LD_ENABLE_HELP              #language eng "Enable or Disable this Logical Device."
+#string STR_STATUS_ON                   #language eng "[*Active*] "
+#string STR_STATUS_OFF                  #language eng "[Disabled] "
+
+#string STR_AUTO_RES                    #language eng "Use Automatic Settings"
+
+
+#string STR_SIO_COMMON_SETTING          #language eng "SIO Common Setting"
+#string STR_SIO_COMMON_SETTING_HELP     #language eng "SIO Common Setting"
+#string STR_LOCK_LEGACY_DEV_PROMPT      #language eng "Lock Legacy Resources"
+                                        #language x-UEFI-AMI "GSIO020"
+#string STR_LOCK_LEGACY_DEV_HELP        #language eng "Enables or Disables Lock of Legacy Resources"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**           5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093      **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

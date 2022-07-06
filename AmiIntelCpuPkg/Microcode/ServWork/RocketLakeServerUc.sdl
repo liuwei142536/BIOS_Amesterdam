@@ -1,0 +1,37 @@
+TOKEN
+	Name  = "SERVER_A067X_ROCKETLAKE"
+	Value  = "0"
+    Help = "Intel(R) Server RocketLake"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "SERVER_M02A0670_ROCKETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) Server RocketLake-S A-0 Stepping(A0670) "
+    TokenType = Boolean    
+End
+
+TOKEN
+    Name  = "SERVER_M02A0671_ROCKETLAKE"
+    Value  = "1"
+    Help  = "Intel(R) Server RocketLake-S B-0 Stepping(A0671) "
+    TokenType = Boolean    
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M02A0670_0000002C.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server RocketLake-S A-0 Stepping(A0670) "
+    Token = "SERVER_M02A0670_ROCKETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M02A0671_0000004C.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server RocketLake-S B-0 Stepping(A0671) "
+    Token = "SERVER_M02A0671_ROCKETLAKE" "=" "1"
+    InvokeOrder = AfterParent
+End

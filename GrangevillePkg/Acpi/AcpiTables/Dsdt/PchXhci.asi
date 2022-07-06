@@ -1,0 +1,2066 @@
+/**************************************************************************;
+;*                                                                        *;
+;*    Intel Confidential                                                  *;
+;*                                                                        *;
+;*    Intel Corporation - ACPI Reference Code for the Haswell             *;
+;*    Family of Customer Reference Boards.                                *;
+;*                                                                        *;
+;*                                                                        *;
+;*    Copyright (c)  2010 - 2012 Intel Corporation. All rights reserved   *;
+;*    This software and associated documentation (if any) is furnished    *;
+;*    under a license and may only be used or copied in accordance        *;
+;*    with the terms of the license. Except as permitted by such          *;
+;*    license, no part of this software or documentation may be           *;
+;*    reproduced, stored in a retrieval system, or transmitted in any     *;
+;*    form or by any means without the express written consent of         *;
+;*    Intel Corporation.                                                  *;
+;*                                                                        *;
+;*                                                                        *;
+;**************************************************************************/
+/*++
+  This file contains an 'Intel Peripheral Driver' and is
+  licensed for Intel CPUs and chipsets under the terms of your
+  license agreement with Intel or your vendor.  This file may
+  be modified by the user, subject to additional terms of the
+  license agreement
+--*/
+
+//
+// The USB port pairing defined here will not pass WHQL testing on Aztec
+// No one knows why yet
+// Define this to change the pairing to what WHQL expects to see
+//  vs. what is shown in the Aztec schematic
+//
+// Answer: WQHL won't pass solely depending on any board schematics
+// simply because it is not all maping that take place. 
+// The port number changes depending on Host controller interface 
+// PCH pin is routed to. Internal multiplexers don't keep the port
+// numbering qual for both EHCI High Speed ports and XHCI HS ports.
+//
+// Summary
+// First mapping:
+// Internal PCH mapping to either EHCI or XHCI controller.
+//
+// Second mapping:
+// How the PCH pins are routed to one of the connectors, using 
+// board schematics map (one connector can have 2.0 and 3.0 lanes
+// routed, toghether c.a 3 pairs == 6 lanes)
+
+
+#define WHQL 1
+
+Name (OPAC, 0)
+Name (XRST, 0)
+Name (XUSB, 0)
+
+OperationRegion (XPRT, PCI_Config, 0x74, 0x6C)
+Field (XPRT, DWordAcc, NoLock, Preserve)
+{
+      , 8,
+  PMEE, 1,   // PWR_CNTL_STS.PME_En
+      , 6,
+  PMES, 1,   // PWR_CNTL_STS.PME_Sts
+  Offset (0x5C),
+  PR2,  32,  // XUSB2PR: xHC USB 2.0 Port Routing Register.
+  PR2M, 32,  // XUSB2PRM: xHC USB 2.0 Port Routing Mask Register.
+  PR3,  32,  // USB3_PSSEN: USB3.0 Port SuperSpeed Enable Register.
+  PR3M, 32   // USB3PRM: USB3.0 Port Routing Mask Register
+}
+
+//
+// Set/reset PME enable
+//
+Method (_PSW, 1) {
+  If (Arg0) {
+    Store (1, PMEE)
+  }
+
+  Else {
+    Store (0,PMEE)
+  }
+}
+
+
+//
+// Indicate access to OperationRegions is enabled/disabled
+//
+Method (_REG, 2) {
+  //
+  // If OperationRegion ID = PCI_Config
+  //
+  If (LEqual (Arg0, 2)) {
+  //
+    // If access is enabled
+    //
+    If (LEqual(Arg1, 1)) {
+      //
+      // Set local flag
+      //
+      Store (1, OPAC)
+
+    } Else {
+      //
+      // Clear local flag
+      //
+      Store (0, OPAC)
+    }
+  }
+}
+
+//
+// Initialization for this controller
+//
+Method (_INI, 0) {
+  //
+  // If access to OperationRegion is enabled
+  //
+  If (LEqual (OPAC, 1)) {
+    Store (1, PMES)     // clear PME status
+    Store (0, PMEE)     // clear PME enable
+  }
+}
+
+//
+// _OSC for xHCI
+// This method enables XHCI controller if available.
+//
+// Arguments:
+//  Arg0 (Integer): Revision ID - should be set to 1
+//
+//  Arg1 (Integer): Count of DWords in Arg3
+//
+//  Arg2 (Buffer) : Capabilities Buffer
+//                  DWORD #0 (Status/Error):
+//                  Bit 0 - Query Support Flag
+//                  Bit 1 - Always clear(0)
+//                  Bit 2 - Always clear(0)
+//                  Bit 3 - Always clear(0)
+//
+//                  All others - reserved
+//
+//                  DWORD #1 (Supported):
+//                  Bit 0 - 1: Switch to xHCI
+//
+//                  All others - reserved
+//
+//                  DWORD #2 (Controlled):
+//                  Bit 0 - 1: Clear Smart Auto state (disable xHCI)
+//
+//                  All others - reserved
+//
+// Returns:
+//  Capabilities Buffer:
+//                  DWORD #0 (Status):
+//                  Bit 0 - Reserved (not used)
+//
+//                  Bit 1 - _OSC failure. Platform Firmware was unable to process the request or query.
+//                          Capabilities bits may have been masked.
+//
+//                  Bit 2 - Unrecognized UUID. This bit is set to indicate that the platform firmware
+//                          does not recognize the UUID passed in _OSC Arg0.
+//                          Capabilities bits are preserved.
+//
+//                  Bit 3 - Unrecognized Revision. This bit is set to indicate that the platform firmware
+//                          does not recognize the Revision ID passed in via Arg1.
+//                          Capabilities bits beyond those comprehended by the firmware will be masked.
+//
+//                  Bit 4 - Capabilities Masked. This bit is set to indicate
+//                          that capabilities bits set by driver software
+//                          have been cleared by platform firmware.
+//
+//                  Bit 5 - 0: EHCI controller exposed to OS
+//                          1: xHCI controller exposed to OS
+//
+//                  All others - reserved (return 0)
+//
+//                  DWORD #1 (Supported):
+//                  Bit 0 - 0: EHCI supported
+//                          1: xHCI supported
+//
+//                  All others - reserved
+//
+//                  DWORD #2 (Controlled):
+//
+//                  All bits - reserved
+//
+
+Method (POSC, 3) {
+
+  Store (0x81, IO80)
+
+  //
+  // Create DWord fields from the Capabilities Buffer
+  //
+  CreateDWordField (Arg2, 0, CDW1)    // CDW1 = DWORD that starts at offset 0 of Arg2
+  CreateDWordField (Arg2, 4, CDW2)    // CDW2 = DWORD that starts at offset 4 of Arg2
+  CreateDWordField (Arg2, 8, CDW3)    // CDW3 = DWORD that starts at offset 8 of Arg2
+
+  //
+  // Are we running a version of Windows that runs the Intel xHCI driver?
+  // i.e. Windows Server 2008 through Windows Server 2008 R2 & Windows 7
+  //
+  If (LAnd (LGreaterEqual (\_SB.OSYS, 9), LLessEqual (\_SB.OSYS, 12))) {
+    //
+    // Running Windows
+    // Check revision is >= 2
+    //
+    If (LLess (Arg0, 2)) {
+      //
+      // Set unknown revision bit
+      //
+      Or (CDW1, 8, CDW1)
+      Store (0x82, IO80)
+    }
+  } Else {
+    //
+    // If the Intel xHCI driver not calling,
+    //  then it must be SVOS
+    If (LNotEqual (Arg0, 1)) {
+      //
+      // Set unknown revision bit
+      //
+      Or (CDW1, 8, CDW1)
+      Store (0x82, IO80)
+    }
+  }
+
+  //
+  // Set failure if xHCI is disabled by BIOS
+  //
+  If (LEqual (XHMD, 0)) {
+    Or (CDW1, 2, CDW1)
+    Store (0x83, IO80)
+  }
+
+  //
+  // If no error bits set
+  //
+  If (LEqual (And (CDW1, 0xE), 0)) {
+    //
+    // If not just querying support
+    //
+    If (LNot (And (CDW1, 1))) {
+      //
+      // If uninstaller calling
+      //  to switch back to EHCI
+      //
+      If (And (CDW3, 1)) {
+        //
+        // Switch to EHCI
+        //
+        ESEL()
+        Store (0x85, IO80)
+
+        //
+        // And clear ACPINVS variable
+        //  that is a copy of USB3.0 setup option
+        //  so that we will not re-enable xHCI until
+        //  the next reboot
+        //
+        Store (0, XHMD)
+      }
+
+      //
+      // Uninstaller not calling,
+      //  OS wants to enable xHCI?
+      //
+      If (And (CDW2, 1)) {
+        //
+        // Switch to xHCI
+        //
+        XSEL(0)
+        Store (0x84, IO80)
+      } Else {
+        //
+        // Switch to EHCI
+        //
+        ESEL()
+        Store (0x85, IO80)
+      }
+    }
+  }
+
+  Return(Arg2)
+}
+
+//
+// Put all ports in XHCI mode
+//
+Method (XSEL, 1, Serialized) {
+  //
+  // If xHCI in auto or smart auto mode
+  //  or Arg0 == 1
+  //
+  If ( LOr (LOr (LEqual (XHMD, 2), LEqual (XHMD, 3)), Arg0) ) {
+    //
+    // If xHCI in smart auto mode
+    //
+    If (LEqual (XHMD, 3)) {
+      //
+      // Set B0:D31:F0 ACh[16] to indicate OS has routed ports to xHCI controller
+      //
+      Store (1, \_SB.PCI0.LPC0.XSMB)
+    }
+
+    //
+    // Set flags so on Sx resume, we'll know OS has previously
+    //  routed ports to xHCI
+    //
+    Store (1, XUSB)
+    Store (1, XRST) // Backup XUSB, cause it might lost in iRST G3 or DeepSx
+
+    //
+    // Enable selected SS ports, route corresponding HS ports to xHCI
+    //
+    Store (0, Local0)
+    And (PR3, 0xFFFFFFC0, Local0)
+    Or (Local0, PR3M, PR3)
+    Store (0, Local0)
+    And (PR2, 0xFFFF8000, Local0)
+    Or (Local0, PR2M, PR2)
+  }
+}
+
+//
+// Put all ports in EHCI mode
+//
+Method (ESEL, 0, Serialized) {
+  //
+  // xHCI in auto or smart auto mode
+  //
+  If (LOr (LEqual (XHMD, 2), LEqual (XHMD, 3))) {
+    //
+    // Disable all SS ports, route all HS ports to EHCI
+    //
+    And (PR3, 0xFFFFFFC0, PR3)
+    And (PR2, 0xFFFF8000, PR2)
+
+    //
+    // Mark as not routed.
+    //
+    Store (0, XUSB)
+    Store (0, XRST)
+  }
+}
+
+Method (XWAK, 0, Serialized) {
+  //
+  // If ports were routed to xHCI before sleep
+  //
+  If (LOr (LEqual (XUSB, 1), LEqual (XRST, 1))) {
+    //
+    // Restore back to xHCI, ignore XHMD
+    //
+    XSEL(1)
+
+    //
+    // And tell OS to re-enumerate xHCI
+    //
+    Notify (\_SB.PCI0.XHCI, 0x00)
+  }
+}
+
+//
+// Report what D state the controller is in
+//  when the system changes to S3 and S4
+//
+Method(_S3D, 0, NotSerialized) {
+  Return(2)
+}
+
+Method(_S4D, 0, NotSerialized) {
+  Return(2)
+}
+
+Device(RHUB) {
+  Name(_ADR, 0)
+
+  //
+  // High Speed Ports
+  //
+  Device (HS01) {
+    Name (_ADR, 1)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+          
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }        
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+        
+        // Used on Durango - back right bottom panel, paired with SSP1
+        If (LEqual (\PLAT, DRGO)) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 1, group position 1, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0xC1, 0x80, 0x00,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - back right bottom panel, paired with SSP1
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x55, PANL)
+      }
+      
+      Return (PLDP)
+    }
+  }
+
+  Device (HS02) {
+    Name (_ADR, 2)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+          
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }        
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+
+        // Used on Durango - back right top panel, paired with SSP2
+        If (LEqual (\PLAT, DRGO)) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 2, group position 2, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x01, 0x01,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - back right top panel, paired with SSP2
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x45, PANL)
+      }
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS03) {
+    Name (_ADR, 3)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //        
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+        
+        // Used on Durango - back left bottom panel, paired with SSP3
+        If (LEqual (\PLAT, DRGO)) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+
+        // Used on Beverly Cove - front center bottom panel, paired with SSP1
+        If (LOr (LEqual (\PLAT, BVCR), LEqual (\PLAT, BVCS))) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+        
+        // Used on Trabuco Canyon - front center bottom panel, paired with SSP1
+        If (LEqual (\PLAT, TBCN)) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 3, group position 3, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0xC1, 0x81, 0x01,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - back left bottom panel, paired with SSP3
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x15, PANL)
+      }
+
+      // Used on Beverly Cove - front center bottom panel, paired with SSP1
+      //
+      If (LOr (LEqual (\PLAT, BVCR), LEqual (\PLAT, BVCS))) {
+        Store (One, VISB)
+        Store (0x34, PANL)
+      }
+      
+      // Used on Trabuco Canyon - front center bottom panel, paired with SSP1
+      //
+      If (LEqual (\PLAT, TBCN)) {
+        Store (One, VISB)
+        Store (0x34, PANL)
+      }
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS04) {
+    Name (_ADR, 4)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+        
+        // Used on Durango - back left top panel, paired with SSP4
+        If (LEqual (\PLAT, DRGO)) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+        
+        // Used on Beverly Cove - front center top panel, paired with SSP2
+        If (LOr (LEqual (\PLAT, BVCR), LEqual (\PLAT, BVCS))) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+        
+        // Used on Trabuco Canyon - front center top panel, paired with SSP2
+        If (LEqual (\PLAT, TBCN)) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+
+      }
+
+      Return(UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 4, group position 4, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x02, 0x02,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - back left top panel, paired with SSP4
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x05, PANL)
+      }
+
+      // Used on Beverly Cove - front center top panel, paired with SSP2
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x24, PANL)
+      }
+
+      // Used on Trabuco Canyon - front center top panel, paired with SSP2
+      //
+      If (LEqual (\PLAT, TBCN)) {
+        Store (One, VISB)
+        Store (0x24, PANL)
+      }
+      
+      Return (PLDP)
+    }
+  }
+
+  Device (HS05) {
+    Name (_ADR, 5)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+          
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }        
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+        
+        // Used on Durango - back center bottom, paired with SSP5
+        If (LEqual (\PLAT, DRGO)) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 5, group position 5, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0xC1, 0x82, 0x02,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - back center bottom, paired with SSP5
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x35, PANL)
+      }
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS06) {
+    Name (_ADR, 6)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+          
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }        
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+        // Used on Durango - back center top, paired with SSP6
+        If (LEqual (\PLAT, DRGO)) {
+          Store (0xFF, Index (UPCP, 0))
+        }
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 6, group position 6, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x03, 0x03,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - back center top, paired with SSP6
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x25, PANL)
+      }
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS07) {
+    Name (_ADR, 7)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Durango DVP
+          //
+          Case (DRGO) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 7, group position 7, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0xC1, 0x83, 0x03,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS08) {
+    Name (_ADR, 8)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Durango DVP
+          //
+          Case (DRGO) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 8, group position 8, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x04, 0x04,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS09) {
+    Name (_ADR, 9)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Durango DVP
+          //
+          Case (DRGO) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 9, group position 9, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0xC1, 0x84, 0x04,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS10) {
+    Name (_ADR, 10)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Durango DVP
+          //
+          Case (DRGO) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 10, group position 10, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x05, 0x05,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS11) {
+    Name (_ADR, 11)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Durango DVP
+          //
+          Case (DRGO) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+        
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 11, group position 11, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0xC1, 0x85, 0x05,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS12) {
+    Name (_ADR, 12)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Durango DVP
+          //
+          Case (DRGO) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 12, group position 12, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x06, 0x06,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS13) {
+    Name (_ADR, 13)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Durango DVP
+          //
+          Case (DRGO) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 13, group position 13, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0xC1, 0x86, 0x06,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      Return (PLDP)
+    }
+  }
+
+  Device (HS14) {
+    Name (_ADR, 14)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x00, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Durango DVP
+          //
+          Case (DRGO) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+
+        }
+      }
+
+      Else {
+        //
+        // If Win 7/Svr 2008 or less i.e. using Intel xHCI driver
+        //  seed Connectable = 0
+        //
+        Store (0, Index (UPCP, 0))
+
+        //
+        // Report connectable only on plaforms
+        //  where it is paired with an SS port
+        //
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  group token 14, group position 14, ejectable
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x07, 0x07,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      Return (PLDP)
+    }
+  }
+
+  //
+  // Super Speed Ports
+  //
+  Device (SSP1) {
+    Name (_ADR, 16)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x03, 0x00, 0x00 })
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  ejectable, group token/position = according to pairing
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x00, 0x00,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateField (DeRefOf (Index (PLDP, 0)), 79, 8, GTOK)
+      CreateField (DeRefOf (Index (PLDP, 0)), 87, 8, GPOS)
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - rear panel, paired with HS01
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x55, PANL)
+        Store (1, GTOK)
+        Store (1, GPOS)
+      }
+
+      // Used on Beverly Cove - front center bottom panel, paired with HS03
+      //
+      If (LOr (LEqual (\PLAT, BVCR), LEqual (\PLAT, BVCS))) {
+        Store (One, VISB)
+        Store (0x34, PANL)
+        Store (3, GTOK)
+        Store (3, GPOS)
+      }
+
+      // Used on Trabuco Canyon - front center bottom panel, paired with HS03
+      //
+      If (LEqual (\PLAT, TBCN)) {
+        Store (One, VISB)
+        Store (0x34, PANL)
+        Store (3, GTOK)
+        Store (3, GPOS)
+      }
+      
+      Return (PLDP)
+    }
+  }
+
+  Device (SSP2) {
+    Name (_ADR, 17)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x03, 0x00, 0x00 })
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  ejectable, group token/position = according to pairing
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x00, 0x00,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateField (DeRefOf (Index (PLDP, 0)), 79, 8, GTOK)
+      CreateField (DeRefOf (Index (PLDP, 0)), 87, 8, GPOS)
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - back right top panel, paired with HS02
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x45, PANL)
+        Store (2, GTOK)
+        Store (2, GPOS)
+      }
+
+      // Used on Beverly Cove - front center top panel, paired with HS04
+      //
+      If (LOr (LEqual (\PLAT, BVCR), LEqual (\PLAT, BVCS))) {
+        Store (One, VISB)
+        Store (0x24, PANL)
+        Store (4, GTOK)
+        Store (4, GPOS)
+      }
+
+      // Used on Trabuco Canyon - front center top panel, paired with HS04
+      //
+      If (LEqual (\PLAT, TBCN)) {
+        Store (One, VISB)
+        Store (0x24, PANL)
+        Store (4, GTOK)
+        Store (4, GPOS)
+      }
+      
+      Return (PLDP)
+    }
+  }
+
+  Device (SSP3) {
+    Name (_ADR, 18)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x03, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+        }
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  ejectable, group token/position = according to pairing
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x00, 0x00,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateField (DeRefOf (Index (PLDP, 0)), 79, 8, GTOK)
+      CreateField (DeRefOf (Index (PLDP, 0)), 87, 8, GPOS)
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - rear panel, paired with HS03
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x05, PANL)
+        Store (3, GTOK)
+        Store (3, GPOS)
+      }
+      
+      Return (PLDP)
+    }
+  }
+
+  Device (SSP4) {
+    Name (_ADR, 19)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x03, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+        }
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  ejectable, group token/position = according to pairing
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x00, 0x00,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateField (DeRefOf (Index (PLDP, 0)), 79, 8, GTOK)
+      CreateField (DeRefOf (Index (PLDP, 0)), 87, 8, GPOS)
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - rear panel, paired with HS04
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x05, PANL)
+        Store (4, GTOK)
+        Store (4, GPOS)
+      }
+
+      Return (PLDP)
+    }
+  }
+
+  Device (SSP5) {
+    Name (_ADR, 20)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x03, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+        }
+      }
+      
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  ejectable, group token/position = according to pairing
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x00, 0x00,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateField (DeRefOf (Index (PLDP, 0)), 79, 8, GTOK)
+      CreateField (DeRefOf (Index (PLDP, 0)), 87, 8, GPOS)
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - rear panel, not paired
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x05, PANL)
+        Store (0, GTOK)
+        Store (0, GPOS)
+      }
+
+      Return (PLDP)
+    }
+  }
+
+  Device (SSP6) {
+    Name (_ADR, 21)
+
+    Method (_STA, 0) {
+      Return (0x0F)
+    }
+
+    Method (_UPC, 0, Serialized) {
+      Name (UPCP, Package() { 0xFF, 0x03, 0x00, 0x00 })
+
+      // If Win 8/Svr 2012 or greater i.e. using Microsoft xHCI driver
+      //
+      If (LGreaterEqual (\_SB.OSYS, 13)) {
+        //
+        // Report not connectable on plaforms
+        //  where it is not routed
+        //
+        Switch (ToInteger (\PLAT)) {
+
+          // Not routed on Beverly Cove RDIMM
+          //
+          Case (BVCR) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Beverly Cove SODIMM
+          //
+          Case (BVCS) {
+            Store (0, Index (UPCP, 0))
+          }
+
+          // Not routed on Trabuco Canyon
+          //
+          Case (TBCN) {
+            Store (0, Index (UPCP, 0))
+          }
+        }
+      }
+
+      Return (UPCP)
+    }
+
+    Method (_PLD, 0, Serialized) {
+
+      // Default buffer
+      // Rev. 2, ignore color, center/center,
+      //  horizontal/rectangular, group orientation vertical,
+      //  ejectable, group token/position = according to pairing
+      //
+      Name (PLDP, Package(1) {
+        Buffer (0x14) {
+          0x82, 0x00, 0x00, 0x00,   // [7:0], [15:8], [23:16], [31:24]
+          0x00, 0x00, 0x00, 0x00,   // [39:32], [47:40], [55:48], [63:56]
+          0x40, 0x41, 0x00, 0x00,   // [71:64], [79:72], [87:80], [95:88]
+          0x01, 0x00, 0x00, 0x00,   // [103:96], [111:104], [119:112], [127:120]
+          0xFF, 0xFF, 0xFF, 0xFF    // [135:128], [143:136], [151:144], [159:152]
+        }
+      })
+
+      CreateField (DeRefOf (Index (PLDP, 0)), 67, 7, PANL) // Extended to 7 bits to include Panel[3], Horizontal[2] & Vertical[2] position
+      CreateField (DeRefOf (Index (PLDP, 0)), 79, 8, GTOK)
+      CreateField (DeRefOf (Index (PLDP, 0)), 87, 8, GPOS)
+      CreateBitField (DeRefOf (Index (PLDP, 0)), 64, VISB)
+
+      // Used on Durango - rear panel, not paired
+      //
+      If (LEqual (\PLAT, DRGO)) {
+        Store (One, VISB)
+        Store (0x05, PANL)
+        Store (0, GTOK)
+        Store (0, GPOS)
+      }
+
+      Return (PLDP)
+    }
+  }
+}

@@ -1,0 +1,50 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file
+# SmmMemLib instance implemented on top of AmiBufferValidationLib
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmmMemLibAmiBufferValidation
+  FILE_GUID                      = 6AD28A14-F238-4910-88FE-569C7CBB1992
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  LIBRARY_CLASS                  = SmmMemLib|DXE_SMM_DRIVER SMM_CORE
+  LIBRARY_CLASS                  = SmmIoLib|DXE_SMM_DRIVER SMM_CORE
+
+[Sources]
+  SmmMemLibAmiBufferValidation.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  AmiBufferValidationLib
+  BaseMemoryLib
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

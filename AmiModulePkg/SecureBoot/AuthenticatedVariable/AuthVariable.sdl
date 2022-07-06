@@ -1,0 +1,124 @@
+TOKEN
+    Name  = "AuthVariable_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AuthVariable support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+End
+
+TOKEN
+    Name  = "USER_MODE_POLICY_OVERRIDE"
+    Value  = "1"
+    Help  = "Ignore Variable Authentication rules until exit boot services event\A backdoor for physically present or authenticated users to modify Secure boot Variables"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "SELF_SIGNED_CERTIFICATE_IN_PRIVATE_VARIABLES"
+    Value  = "0"
+    Help  = "1-Enforce the rule for the private variables the signature to be verified only with the keys from the self-signed certificates"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AUTHVAR_HOOK_LIB_COMMA"
+    Value  = ","
+    Help  = "This strange token is used by the SDL template expression in AuthVariableHooksTemplate.h.\DO NOT CHANGE!"
+    TokenType = Expression
+    Lock = Yes
+End
+
+PATH
+    Name  = "AuthVariable_DIR"
+    Help  = "Path to AuthVariable Module in Project"
+End
+
+OUTPUTREGISTER
+    Name  = "AUTHVAR_ELINKS_H"
+    Path  = "Build"
+    File  = "AuthVariableHooks.h"
+    Template  = "AuthVariableHooksTemplate.h"
+End
+
+ELINK
+    Name  = "AuthVariablePhysicalUserOverride"
+    Help  = "Called by AuthVariablePhysicalUserOverride"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "PhysicalUserPresent,"
+    Parent  = "AuthVariablePhysicalUserOverride"
+    Help  = "Called from AuthVariablePhysicalUserOverride"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SetSecureBootSetupVarHook,"
+    Parent  = "SetVariableHook"
+    Help  = "Called before SetVariable"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SetSecureBootVariablesHook,"
+    Parent  = "SetVariableHook"
+    Help  = "Called before SetVariable"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SetDeploymentModeVarHook,"
+    Parent  = "SetVariableHook"
+    Help  = "Called before SetVariable"
+    InvokeOrder = AfterParent
+    Token = "CUSTOMIZED_SECURE_BOOT_DEPLOYMENT" "=" "1"
+End
+
+ELINK
+    Name  = "SetAuthServicesNVVarHook,"
+    Parent  = "SetVariableHook"
+    Help  = "Called before SetVariable"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "AuthVariable"
+    File  = "AuthVariable.inf"
+    Package  = "AmiModulePkg"
+End
+
+INFComponent
+    Name  = "AuthVariableLink"
+    File  = "AuthVariableLink.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.AuthVariableLink"
+    Override = "AmiModulePkg.NvramDxe"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.AuthVariableLink"
+    Override = "AmiModulePkg.NvramSmm"
+    Token = "SMM_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.AuthVariable"
+    Override = "AmiModulePkg.NvramDxe"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.AuthVariable"
+    Override = "AmiModulePkg.NvramSmm"
+    Token = "SMM_SUPPORT" "=" "1"
+End

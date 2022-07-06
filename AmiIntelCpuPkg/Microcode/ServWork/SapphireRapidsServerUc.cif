@@ -1,0 +1,9 @@
+<component>
+	name = "Server  SapphireRapids uCode Patches (806FX)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\ServWork\"
+	RefName = " SapphireRapidsServerUc"
+[files]
+"SapphireRapidsServerUc.sdl"
+"M87806F3_0D000361.pdb" = "SERVER WORKSTATION MICROCODE UPDATES"
+<endComponent>

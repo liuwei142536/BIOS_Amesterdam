@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "LastBootErrorLog_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling LastBootErrorLog support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "LastBootErrorLog"
+	File  = "LastBootErrorLog.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "LastBootErrorLog_SUPPORT" "=" "1"
+End
+

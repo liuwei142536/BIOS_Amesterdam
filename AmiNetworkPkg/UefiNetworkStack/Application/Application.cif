@@ -1,0 +1,8 @@
+<component>
+    name = "Application"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\UefiNetworkStack\Application\"
+    RefName = "AmiNetworkPkg.UefiNetworkStack.Application"
+[parts]
+"NwInfoApp"
+<endComponent>

@@ -1,0 +1,2 @@
+#define ISCSI_INIT_NAME_HOOK_LIST     @elink(DefaultIscsiInitiatorNameManagementHook, "@Child", "", "")
+

@@ -1,0 +1,18 @@
+<component>
+	name = "AMT"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\"
+	RefName = "GrantleyPkg.AMT"
+[files]
+"AMT.sdl"	
+[parts]
+"GrantleyPkg.ActiveManagement"
+"GrantleyPkg.At"
+"GrantleyPkg.BiosExtension"
+"GrantleyPkg.FwUpdate"
+"GrantleyPkg.Icc"
+"GrantleyPkg.Me.AMT.Include.Include"
+"GrantleyPkg.Me.AMT.Library.Library"
+"GrantleyPkg.SampleCode"
+"GrantleyPkg.MePlatform"
+<endComponent>

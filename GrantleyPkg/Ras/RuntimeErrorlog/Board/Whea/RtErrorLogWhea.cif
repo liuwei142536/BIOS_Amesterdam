@@ -1,0 +1,11 @@
+<component>
+	name = "RtErrorLog WHEA"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\RuntimeErrorlog\Board\Whea\"
+	RefName = "RtErrorLogWhea"
+[INF]
+"RtErrorLogWhea.inf"
+"RtErrorLogWheaNullLib.inf"
+[files]
+"RtErrorLogWhea.sdl"	
+<endComponent>

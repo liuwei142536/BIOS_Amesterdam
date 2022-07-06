@@ -1,0 +1,49 @@
+TOKEN
+	Name  = "RasLibrary_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Library support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "BPEmcaLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable BPEmcaLib support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "BPEmcaPlatformHooksLib_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable BPEmcaLib support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "BPEmcaLib"
+	File  = "emcalib\emcalib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "BASE"
+    Token = "BPEmcaLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "BPEmcaPlatformHooksLib"
+	File  = "emcaplatformhookslib\emcaplatformhookslib.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "BPEmcaplatformhookslib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "EmcaLib"
+	Instance  = "GrantleyPkg.BPEmcaLib"
+End
+
+LibraryMapping
+	Class  = "EmcaPlatformHooksLib"
+	Instance  = "GrantleyPkg.BPEmcaPlatformHooksLib"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+

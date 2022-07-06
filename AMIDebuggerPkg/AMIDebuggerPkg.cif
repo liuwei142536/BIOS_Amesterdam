@@ -1,0 +1,17 @@
+<component>
+    name = "AMIDebuggerPkg"
+    category = eModule
+    Rank = 46
+    LocalRoot = "AMIDebuggerPkg\"
+    RefName = "AMIDebuggerPkg.Bin"
+[files]
+"AMIDebuggerPkg.sdl"	
+"AMIDebuggerPkg.dec"	
+[parts]
+"AMIDebuggerPkg.Bin.Include"
+"AMIDebuggerPkg.Bin.LibraryInstances"
+[dependency.incompatible]
+SerialDebugger <= "SS: AptioV;$/AptioV/Binary/Modules/SerialDebugger;SerialDebugger_3_04_32"
+AMIDebugRx.AMIDebugRx <= "SS: AptioV;$/AptioV/Binary/Modules/AMIDebugRx;AMIDebugRx_3_04_32"
+Debugger <= "SS: AptioV;$/AptioV/Binary/Modules/Debugger;Debugger_3_04_32"
+<endComponent>

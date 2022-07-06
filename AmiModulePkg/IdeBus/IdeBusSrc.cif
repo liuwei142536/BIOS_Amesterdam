@@ -1,0 +1,17 @@
+<component>
+	name = "IdeBus"
+	category = eModule
+	LocalRoot = "AmiModulePkg\IdeBus\"
+	RefName = "AmiModulePkg.IdeBusSrc"
+[INF]
+"IdeBusSrc.inf"
+"IdeBusBoard\IdeBusBoard.inf"
+[files]
+"IdeBusSrc.sdl"	
+"IdeBusSrc.chm"	
+[parts]
+"IdeBusProtocol"
+"IdeBusBoardProtocol"
+[dependency]
+AmiModulePkg  >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_28"
+<endComponent>

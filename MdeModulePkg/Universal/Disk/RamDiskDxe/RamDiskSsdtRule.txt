@@ -1,0 +1,38 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Rule.Common.DXE_DRIVER.RAMDISK_SSDT]
+  FILE DRIVER = $(NAMED_GUID) $(FFS_FILE_CHECKSUM_KEYWORD) {
+    DXE_DEPEX   DXE_DEPEX Optional      |.depex
+    $(DXE_COMPRESSION_SECTION) {
+        PE32      PE32                  |.efi
+	RAW ASL   Optional              |.aml
+        UI        STRING="$(MODULE_NAME)" Optional
+        VERSION   STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+    }
+  }
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

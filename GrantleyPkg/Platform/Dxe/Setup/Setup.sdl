@@ -1,0 +1,60 @@
+TOKEN
+	Name  = "Setup_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Setup support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "Platform_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable Platform support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "INTELRCSETUP_HiiValidateSettings"
+	Value  = "1"
+	Help  = "Switch to enable or disable platform setup driver validating IntelRcSetup IFR controls."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+INFComponent
+	Name  = "Platform"
+	File  = "DxePlatform.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "Platform_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "GrantleyPkg.Platform"
+	Token = "Platform_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "DebugLib"
+	Instance  = "MdePkg.BaseDebugLibSerialPort"
+	Override  = "GrantleyPkg.Platform"
+	Token = "Platform_SUPPORT" "=" "1"
+End
+
+# Aptio V Server Override - Start : Changes done for loading the IntelRcSetup page in Defaults.bin during build time itself.
+ELINK
+	Name  = "$(ABS_BUILD_DIR)$(PATH_SLASH)$(PLATFORM_NAME)$(PATH_SLASH)$(TARGET)_$(TOOL_CHAIN_TAG)\X64\GrantleyPkg\Platform\Dxe\Setup\DxePlatform\OUTPUT"
+	Parent  = "IFR_DIR_LIST"
+	InvokeOrder = BeforeParent
+	Token = "X64_SUPPORT" "=" "1"
+End
+
+ELINK
+	Name  = "$(ABS_BUILD_DIR)$(PATH_SLASH)$(PLATFORM_NAME)$(PATH_SLASH)$(TARGET)_$(TOOL_CHAIN_TAG)\IA32\GrantleyPkg\Platform\Dxe\Setup\DxePlatform\OUTPUT"
+	Parent  = "IFR_DIR_LIST"
+	InvokeOrder = BeforeParent
+	Token = "X64_SUPPORT" "=" "0"
+End
+# Aptio V Server Override - End : Changes done for loading the IntelRcSetup page in Defaults.bin during build time itself.

@@ -1,0 +1,9 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AMIDebuggerPkg\Include\"
+	RefName = "AMIDebuggerPkg.Bin.Include"
+[parts]
+"AMIDebuggerPkg.Bin.IncludeLibrary"
+"AMIDebuggerPkg.Bin.Protocol"
+<endComponent>

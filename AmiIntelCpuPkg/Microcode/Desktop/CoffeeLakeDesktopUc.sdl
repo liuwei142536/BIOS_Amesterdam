@@ -1,0 +1,107 @@
+TOKEN
+    Name  = "DESKTOP_906EX"
+    Value = "0"
+    Help  = "Intel(R) CoffeeLake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "DESKTOP_M22906EA"
+    Value  = "1"
+    Help  = "Intel(R) Desktop Coffee Lake-S U-0 Stepping, 0:Disable \ 1:With Cannon Lake PCH \ 2:With Kaby Lake PCH"
+    TokenType = Boolean    
+End
+
+TOKEN
+    Name  = "DESKTOP_M22906EA"
+    Value  = "2"
+    Help  = "Intel(R) Desktop Coffee Lake-S U-0 Stepping, 0:Disable \ 1:With Cannon Lake PCH \ 2:With Kaby Lake PCH"
+    TokenType = Boolean    
+End
+
+TOKEN
+    Name  = "DESKTOP_M02906EB"
+    Value  = "1"
+    Help  = "Intel(R) Desktop Coffee Lake-S B-0 Stepping, 0:Disable \ 1:With Cannon Lake PCH \ 2:With Kaby Lake PCH"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M02906EB"
+    Value  = "2"
+    Help  = "Intel(R) Desktop Coffee Lake-S B-0 Stepping, 0:Disable \ 1:With Cannon Lake PCH \ 2:With Kaby Lake PCH"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M02906EC"
+    Value  = "1"
+    Help  = "Intel(R) Desktop Coffee Lake-S P-0 Stepping, , 0:Disable \ 1:With Cannon Lake PCH \ 2:With Kaby Lake PCH"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "DESKTOP_M22906ED"
+    Value  = "1"
+    Help  = "Intel(R) Desktop Coffee Lake-S R-0 Stepping(906ED) With CNL/KBL PCH"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22906EA_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Coffee Lake-S U-0 Stepping(906EA) with Cannon Lake PCH"
+    Token = "DESKTOP_M22906EA" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22906EA_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Coffee Lake-S U-0 Stepping(906EA) with Kaby Lake PCH"
+    Token = "DESKTOP_M22906EA" "=" "2"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M02906EB_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Coffee Lake-S B-0 Stepping(906EB) with Cannon Lake PCH"
+    Token = "DESKTOP_M02906EB" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M02906EB_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Coffee Lake-S B-0 Stepping(906EB) with Kaby Lake PCH"
+    Token = "DESKTOP_M02906EB" "=" "2"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22906EC_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Coffee Lake-S P-0 Stepping(906EC) with Cannon Lake PCH"
+    Token = "DESKTOP_M02906EC" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22906EC_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Coffee Lake-S P-0 Stepping(906EC) with Kaby Lake PCH"
+    Token = "DESKTOP_M02906EC" "=" "2"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22906ED_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Coffee Lake-S R-0 Stepping(906ED) With CNL/KBL PCH"
+    Token = "DESKTOP_M22906ED" "=" "1"
+    InvokeOrder = AfterParent
+End

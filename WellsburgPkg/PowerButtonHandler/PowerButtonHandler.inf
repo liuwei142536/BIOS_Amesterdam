@@ -1,0 +1,38 @@
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PowerButtonHandler
+  FILE_GUID                      = 46B94C2D-AF5D-4915-814D-159323AE780A
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A  
+  ENTRY_POINT                    = PowerButtonHandlerEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+
+[Sources]
+  PowerButtonHandler.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  BaseLib
+  DebugLib
+  IoLib
+  SmmServicesTableLib
+
+[Protocols]
+  gEfiSmmPowerButtonDispatch2ProtocolGuid
+
+[Pcd]
+  gEfiPchTokenSpaceGuid.PcdPchAcpiIoPortBaseAddress
+ 
+[Depex]
+  gEfiSmmPowerButtonDispatch2ProtocolGuid

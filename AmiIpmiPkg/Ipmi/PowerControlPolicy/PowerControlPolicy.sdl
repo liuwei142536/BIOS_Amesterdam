@@ -1,0 +1,55 @@
+TOKEN
+    Name  = "PowerControlPolicy_SUPPORT"
+    Value  = "0"
+    Help  = "Switch for Enabling PowerControlPolicy support in the project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+PATH
+    Name  = "PowerControlPolicy_DIR"
+    Path  = "AmiIpmiPkg/Ipmi/PowerControlPolicy"
+    Help = "Path to PowerControlPolicy sub module in project."
+End
+
+ELINK
+    Name  = "gEfiDxeIpmiTransportProtocolGuid"
+    Parent  = "SERVER_MGMT_SETUP_PROTOCOLS"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include Efi Dxe Ipmi Transport Protocol Guid in Additional ServerMgmt Setup Protocols list."
+End
+
+ELINK
+    Name  = "InitPowerControlPolicyStrings,"
+    Parent  = "SERVER_MGMT_SETUP_STRING_INIT"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include default function to initialize the Power Control Policy in setup strings."
+End
+
+ELINK
+    Name  = "$(PowerControlPolicy_DIR)/PowerControlPolicy.c"
+    Parent  = "SERVER_MGMT_SETUP_CALLBACK_FILES"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include PowerControlPolicy.c file in ServerMgmtSetup callback files list."
+End
+
+ELINK
+    Name  = "$(PowerControlPolicy_DIR)/PowerControlPolicy.sd"
+    Parent  = "SERVER_MGMT_SETUP_DEFINITIONS"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include PowerControlPolicy.sd in ServerMgmtSetup definitions files list."
+End
+
+ELINK
+    Name  = "$(PowerControlPolicy_DIR)/PowerControlPolicy.uni"
+    Parent  = "SERVER_MGMT_SETUP_STRING_FILES"
+    InvokeOrder = AfterParent
+    Help  = "Elink to include PowerControlPolicy.uni in ServerMgmtSetup string files list."
+End
+
+ELINK
+    Name  = "ITEM_CALLBACK(SERVER_MGMT_CLASS_ID,SERVER_MGMT_SUBCLASS_ID,PWR_CONTROL_POLICY_KEY,PowerControlPolicyCallbackFunction),"
+    parent  ="SERVER_MGMT_SETUP_ITEM_CALLBACKS"
+    InvokeOrder  = AfterParent
+    Help  = "Elink to include PowerControlPolicyCallbackFunction in ServerMgmt Setup Item Callbacks list for PowerControlPolicy key."
+End

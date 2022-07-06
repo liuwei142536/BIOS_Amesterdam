@@ -1,0 +1,29 @@
+<component>
+    name = "MdePkg"
+    category = eCore
+    LocalRoot = "MdePkg\"
+    RefName = "MdePkg"
+[files]
+"MdePkg.dec"	
+"MdePkg.sdl"	
+"MdePkg.mak"	
+"MdePkg.uni"	
+"MdePkgExtra.uni"	
+"License.txt"	
+"MdePkg.chm"	
+[parts]
+"MdePkg.Include"
+"MdePkg.LibraryInstances"
+[dependency.optional]
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;5.004_AmiTse_2_15_1237"
+MdeModulePkg.DevicePath >= "SS: AptioV;$/AptioV/Source/Modules/DevicePath;DevicePath_02"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_21"
+CSM >= "SS: AptioV;$/AptioV/Source/Modules/Csm;Csm_7.78_08"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_36"
+AHCI >= "SS: AptioV;$/AptioV/Source/Modules/AHCI;AHCI_14"
+TCG2 >= "SS: AptioV;$/AptioV/Source/Modules/TCG2;TCG2_15"
+MdeModulePkg.Pcd >= "SS: AptioV;$/AptioV/Source/Modules/Pcd;PCD_06"
+AmiNetworkPkg.UefiNetworkStack >= "SS: AptioV;$/AptioV/Source/Modules/UefiNetworkStack;UefiNetworkStack_25"
+UefiCpuPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/UefiCpuPkg;UefiCpuPkg_10"
+AmiModulePkg.ACPI >= "SS: AptioV;$/AptioV/Source/Modules/ACPI;ACPI_18"
+<endComponent>

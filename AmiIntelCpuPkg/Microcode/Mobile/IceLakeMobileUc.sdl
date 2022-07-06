@@ -1,0 +1,87 @@
+TOKEN
+	Name  = "MOBILE_706EX"
+	Value  = "0"
+    Help = "Intel(R) IceLake"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "MOBILE_MC0706E0"
+    Value  = "1"
+    Help  = "Intel(R) Ice Lake-Y/U42 A-2 Stepping(706E0)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_MC0706E1"
+    Value  = "1"
+    Help  = "Intel(R) Ice Lake-Y/U42 ES1 B-0 Stepping(706E1)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_MC0706E1_ES2"
+    Value  = "1"
+    Help  = "Intel(R) Ice Lake-Y/U42 ES2 B-4 Stepping(706E1)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_M80706E4"
+    Value  = "1"
+    Help  = "Intel(R) Ice Lake-Y/U42 ES2 D-0 Stepping(706E4)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "MOBILE_M80706E5"
+    Value  = "1"
+    Help  = "Intel(R) Ice Lake-Y/U42 D-1 Stepping(706E5)"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/MC0706E0_0000002C.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Ice Lake-Y/U42 A-2 Stepping(706E0)"
+    Token = "MOBILE_MC0706E0" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M80706E1_00000028.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Ice Lake-Y/U42 ES1 B-0 Stepping(706E1)"
+    Token = "MOBILE_MC0706E1" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M80706E1_00000042.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Ice Lake-Y/U42 ES2 B-4 Stepping(706E1)"
+    Token = "MOBILE_MC0706E1_ES2" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M80706E4_00000042.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Ice Lake-Y/U42 ES2 D-0 Stepping(706E4)"
+    Token = "MOBILE_M80706E4" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_MOBILE_DIR)/M80706E5_000000A8.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Ice Lake-Y/U42 D-1 Stepping(706E5)"
+    Token = "MOBILE_M80706E5" "=" "1"
+    InvokeOrder = AfterParent
+End

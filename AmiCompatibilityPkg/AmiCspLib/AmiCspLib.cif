@@ -1,0 +1,12 @@
+<component>
+	name = "AmiCspLib"
+	category = ModulePart
+	LocalRoot = "AmiCompatibilityPkg/AmiCspLib/"
+	RefName = "AmiCompatibilityPkg.AmiCspLib"
+[files]
+"CspLib.sdl"
+"CspLib.mak"
+"CspLibPei.c"
+[INF]
+"PciTableInit.inf"	
+<endComponent>

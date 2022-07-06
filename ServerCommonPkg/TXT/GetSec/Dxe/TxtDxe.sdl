@@ -1,0 +1,36 @@
+TOKEN
+	Name  = "TxtDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable TxtDxe support in Project"
+	TokenType = Boolean
+	Token = "INTEL_TXT_SUPPORT" "=" "1"  
+End
+
+TOKEN
+	Name  = "TxtDxe_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable TxtDxe support in Project"
+	TokenType = Boolean
+ 	Token = "INTEL_TXT_SUPPORT" "=" "0"   
+End
+
+INFComponent
+	Name  = "TxtDxe"
+	File  = "TxtDxe.inf"
+	Package  = "ServerCommonPkg"
+	ModuleTypes  = "DXE_DRIVER"
+    Token = "TxtDxe_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "PcdLib"
+	Instance  = "MdePkg.DxePcdLib"
+	Override  = "ServerCommonPkg.TxtDxe"
+End
+
+LibraryMapping
+	Class  = "LocalApicLib"
+	Instance  = "UefiCpuPkg.BaseXApicX2ApicLib"
+	Override  = "ServerCommonPkg.TxtDxe"
+End
+

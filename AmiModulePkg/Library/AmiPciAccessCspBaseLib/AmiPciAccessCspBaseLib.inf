@@ -1,0 +1,70 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   An instance of PciAccessCspLib
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiPciAccessCspBaseLib
+  FILE_GUID                      = 6E53E391-40FC-4539-9040-06469C50AFBA
+  MODULE_TYPE                    = DXE_DRIVER
+  LIBRARY_CLASS                  = PciAccessCspLib|DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER
+
+[Sources]
+  AmiPciAccessCspBaseLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  GrantleyPkg/PlatformPkg.dec # AptioV server override
+  GrantleySocketPkg/SocketPkg.dec # AptioV server override
+
+[Protocols]
+  gAmiBoardInfo2ProtocolGuid
+  gAmiBoardSioInitProtocolGuid
+  gAmiBoardPciInitProtocolGuid
+  gEfiAcpiTableProtocolGuid
+  gEfiIioUdsProtocolGuid  # Aptio V Server override
+
+[LibraryClasses]
+  AmiDxeLib
+  IoLib
+  PcdLib
+  DebugLib
+  PciLib
+
+[Guids]
+  gEfiSetupVariableGuid # AptioV server override  
+[Pcd]
+  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
+  gAmiModulePkgTokenSpaceGuid.AmiPcdPcieBaseAddressBuffer
+  gAmiModulePkgTokenSpaceGuid.AmiPcdMaxSegmentSupported
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

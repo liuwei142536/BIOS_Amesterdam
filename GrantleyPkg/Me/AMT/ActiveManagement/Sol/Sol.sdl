@@ -1,0 +1,23 @@
+TOKEN
+	Name  = "Sol_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Sol support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PciSerial_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PciSerial support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PciSerial"
+	File  = "Dxe\PciSerial.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "PciSerial_SUPPORT" "=" "1"
+End
+

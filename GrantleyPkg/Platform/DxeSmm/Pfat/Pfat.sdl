@@ -1,0 +1,30 @@
+TOKEN
+	Name  = "Pfat_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Pfat support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PfatServices_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PfatServices support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PfatServices"
+	File  = "PfatServices.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+	Token = "PfatServices_SUPPORT" "=" "1"
+End
+
+FFS_FILE
+	Name  = "PfatEfi"
+	FD_AREA  = "FV_MAIN"
+	FILE_Stmt  = "GrantleyPkg\Platform\DxeSmm\Pfat\PfatEfiFdfFileStatement.txt"
+	Token = "PfatServices_SUPPORT" "=" "1"
+End
+

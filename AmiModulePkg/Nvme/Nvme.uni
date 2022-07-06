@@ -1,0 +1,68 @@
+﻿//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************
+
+/** @file Nvme.uni
+    Nvme driver setup string definitions
+
+**/
+
+//---------------------------------------------------------------------------
+
+/=#
+#include "VFR.uni"
+
+//---------------------------------------------------------------------------
+
+STR_NVME_CONFIG_FORM
+
+#string STR_NVME_CONFIG_FORM                    #language eng "NVMe Configuration"
+#string STR_NVME_CONFIG_FORM_HELP               #language eng "NVMe Device Options Settings"
+
+#string STR_NVME_SUBTITLE_STRING                #language eng "NVMe controller and Drive information"
+#string STR_NVME_HELP_STRING                    #language eng "NVMe controller and Drive information."
+#string STR_NVME_SIZE                           #language eng "Nvme Size"
+
+#string STR_NVME0_CONTROLLER                    #language eng "Controller 0"
+#string STR_NVME0_NAME                          #language eng "Empty"
+#string STR_NVME0_SIZE                          #language eng "Empty"
+
+#string STR_NVME1_CONTROLLER                    #language eng "Controller 1"
+#string STR_NVME1_NAME                          #language eng "Empty"
+#string STR_NVME1_SIZE                          #language eng "Empty"
+
+#string STR_NVME2_CONTROLLER                    #language eng "Controller 2"
+#string STR_NVME2_NAME                          #language eng "Empty"
+#string STR_NVME2_SIZE                          #language eng "Empty"
+
+#string STR_NVME3_CONTROLLER                    #language eng "Controller 3"
+#string STR_NVME3_NAME                          #language eng "Empty"
+#string STR_NVME3_SIZE                          #language eng "Empty"
+
+#string STR_NO_NVME_DEVICE                      #language eng "No NVME Device Found"
+
+
+
+//*************************************************************************
+//*************************************************************************
+//**                                                                     **
+//**        (C)Copyright 1985-2015, American Megatrends, Inc.            **
+//**                                                                     **
+//**                       All Rights Reserved.                          **
+//**                                                                     **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+//**                                                                     **
+//**                       Phone: (770)-246-8600                         **
+//**                                                                     **
+//*************************************************************************
+//*************************************************************************

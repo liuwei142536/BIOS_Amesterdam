@@ -1,0 +1,99 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @file FruSetupScreen.uni
+//
+//   String definitions for the FRU setup screen
+//
+
+//#include "VFR.uni"
+#langdef   en-US "English"    // English
+
+#string STR_SRVRMGMT_FRU_FORM_TITLE     #language en-US  "FRU Information"
+
+#string STR_SRVRMGMT_FRU_VIEW           #language en-US  "View FRU information"
+#string STR_SRVRMGMT_FRU_VIEW_HELP      #language en-US  "Press <Enter> to view FRU information."
+
+#string STR_SYS_MANUFACTURER            #language en-US  "System Manufacturer"
+#string STR_SYS_MANUFACTURER_VAL        #language en-US  "-"
+#string STR_SYS_MANUFACTURER_HELP       #language en-US  "System Manufacturer"
+
+#string STR_SYS_PROD_NAME               #language en-US  "System Product Name"
+#string STR_SYS_PROD_NAME_VAL           #language en-US  "-"
+#string STR_SYS_PROD_NAME_HELP          #language en-US  "System Product Name"
+
+#string STR_SYS_VERSION                 #language en-US  "System Version"
+#string STR_SYS_VERSION_VAL             #language en-US  "-"
+#string STR_SYS_VERSION_HELP            #language en-US  "System Version"
+
+#string STR_SYS_SERIAL_NUM              #language en-US  "System Serial Number"
+#string STR_SYS_SERIAL_NUM_VAL          #language en-US  "-"
+#string STR_SYS_SERIAL_NUM_HELP         #language en-US  "System Serial Number"
+
+#string STR_BRD_MANUFACTURER            #language en-US  "Board Manufacturer"
+#string STR_BRD_MANUFACTURER_VAL        #language en-US  "-"
+#string STR_BRD_MANUFACTURER_HELP       #language en-US  "Board Manufacturer"
+
+#string STR_BRD_PROD_NAME               #language en-US  "Board Product Name"
+#string STR_BRD_PROD_NAME_VAL           #language en-US  "-"
+#string STR_BRD_PROD_NAME_HELP          #language en-US  "Board Product Name"
+
+#string STR_BRD_VERSION                 #language en-US  "Board Version"
+#string STR_BRD_VERSION_VAL             #language en-US  "-"
+#string STR_BRD_VERSION_HELP            #language en-US  "Board Version"
+
+#string STR_BRD_SERIAL_NUM              #language en-US  "Board Serial Number"
+#string STR_BRD_SERIAL_NUM_VAL          #language en-US  "-"
+#string STR_BRD_SERIAL_NUM_HELP         #language en-US  "Board Serial Number"
+
+#string STR_CHA_MANUFACTURER            #language en-US  "Chassis Manufacturer"
+#string STR_CHA_MANUFACTURER_VAL        #language en-US  "-"
+#string STR_CHA_MANUFACTURER_HELP       #language en-US  "Chassis Manufacturer"
+
+#string STR_CHA_VERSION                 #language en-US  "Chassis Version"
+#string STR_CHA_VERSION_VAL             #language en-US  "-"
+#string STR_CHA_VERSION_HELP            #language en-US  "Chassis Version"
+
+#string STR_CHA_SERIAL_NUM              #language en-US  "Chassis Serial Number"
+#string STR_CHA_SERIAL_NUM_VAL          #language en-US  "-"
+#string STR_CHA_SERIAL_NUM_HELP         #language en-US  "Chassis Serial Number"
+
+
+#string STR_SDR_VERSION                 #language en-US  "SDR Version"
+#string STR_SDR_VERSION_HELP            #language en-US  "Version of Sensor Data Records."
+#string STR_SDR_VERSION_VAL             #language en-US  "-"
+
+#string STR_SYSTEM_UUID                 #language en-US  "System UUID"
+#string STR_SYSTEM_UUID_HELP            #language en-US  "System Unique ID."
+#string STR_SYSTEM_UUID_VAL             #language en-US  "-"
+
+#string STR_NULL_STRING                 #language en-US  ""
+
+#string STR_NOTE1                       #language en-US  "NOTE:No FRU information for fields indicate"
+#string STR_NOTE2                       #language en-US  "information needs to be filled by O.E.M"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

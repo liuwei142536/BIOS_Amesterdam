@@ -1,0 +1,64 @@
+TOKEN
+	Name  = "DbgModuleLocator_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable DbgModuleLocator support in Project"
+	TokenType = Boolean
+	Master = Yes
+	TargetH = Yes
+	Token = "REDIRECTION_ONLY_MODE" "=" "0"
+	Token = "GENERIC_USB_CABLE_SUPPORT" "!=" "1"
+End
+
+PATH
+	Name  = "DbgModuleLocator_DIR"
+	Path  = "AMIDebuggerPkg\Debugger\DbgModuleLocator"
+End
+
+INFComponent
+	Name  = "CommonDbgMLLib"
+	File  = "CommonDbgMLLib.inf"
+	Package  = "Debugger"
+	Arch  = "common"
+	Path  = "DbgModuleLocator_DIR"
+End
+
+INFComponent
+	Name  = "DbgModuleLocator"
+	File  = "PeiDbgModuleLocator.inf"
+	Package  = "Debugger"
+End
+
+LibraryMapping
+	Class  = "CommonDbgMLLib"
+	Instance  = "Debugger.CommonDbgMLLib"
+End
+
+LibraryMapping
+	Class  = "DbgModuleLocator"
+	Instance  = "Debugger.DbgModuleLocator"
+End
+
+LibraryMapping
+    Class = "NULL"
+    Instance = "Debugger.DbgModuleLocator"
+    Override = "AmiModulePkg.StatusCodePei"
+End
+
+LibraryMapping
+    Class = "NULL"
+    Instance = "Debugger.DbgModuleLocator"
+    Override = "AmiModulePkg.StatusCodeDxe"
+End
+
+ELINK
+	Name  = "InitDbgLdImageNotifyPPI,"
+	Parent  = "PeiStatusCodeInitialize"
+	InvokeOrder = AfterParent
+End
+
+ELINK
+	Name  = "InitDbgLdImageNotify,"
+	Parent  = "DxeStatusCodeInitialize"
+	InvokeOrder = AfterParent
+End
+

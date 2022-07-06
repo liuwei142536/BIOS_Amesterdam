@@ -1,0 +1,10 @@
+<component>
+	name = "Server/Workstation RocketLake uCode Patches (A067X)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\ServWork\"
+	RefName = "RocketLakeServerUc"
+[files]
+"RocketLakeServerUc.sdl"
+"M02A0670_0000002C.pdb" = "SERVER WORKSTATION MICROCODE UPDATES"
+"M02A0671_0000004C.pdb" = "SERVER WORKSTATION MICROCODE UPDATES"
+<endComponent>

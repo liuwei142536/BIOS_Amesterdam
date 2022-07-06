@@ -1,0 +1,22 @@
+TOKEN
+    Name  = "SERVWORK_906EX"
+    Value = "0"
+    Help  = "Intel(R) KabyLake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "SERVWORK_M2A906E9"
+    Value  = "1"
+    Help  = "Intel(R) Server Kaby Lake Xeon E3 B-0 Stepping(906E9)"
+    TokenType = Boolean	
+End
+
+ELINK
+    Name  = "$(MICROCODE_SERVWORK_DIR)/M2A906E9_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Server Kaby Lake Xeon E3 B-0 Stepping(906E9)"
+    Token = "SERVWORK_M2A906E9" "=" "1"
+    InvokeOrder = AfterParent
+End

@@ -1,0 +1,69 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//**********************************************************************
+// Languages Definitions.
+//**********************************************************************
+/=#
+// Language Definitions
+// To add support for one of these languages in your project, append language identifier to
+// a list of languages under SUPPORTED_LANGUAGES SDL token.
+#langdef   en-US "English"    // English
+#langdef   fr-FR "Français"   // French
+#langdef   es-ES "Español"    // Spanish
+#langdef   de-DE "Deutsch"    // German
+#langdef   ru-RU "Русский"    // Russian
+#langdef   ko-KR "Korean"     // Korean
+#langdef   it-IT "Italiano"   // Italian
+#langdef   da-DK "Dansk"      // Danish
+#langdef   fi-FI "Suomi"      // Finnish
+#langdef   nl-NL "Nederlands" // Dutch
+#langdef   no-NO "Norsk"      // Norweigan
+#langdef   nb-NO "Norsk"      // Norweigan
+#langdef   nn-NO "Norsk"      // Norweigan
+#langdef   pt-PT "Português"  // Portuguese
+#langdef   pt-BR "Português"  // Portuguese
+#langdef   sv-SE "Svenska"    // Swedish
+#langdef   ja-JP "日本語"      // Japansese
+#langdef   zh-chs "中文 (简体)" // Chinese simplified
+#langdef   zh-cht "中文 (繁體)" // Chinese traditional
+#langdef   zh-Hans "中文 (简体)" // Chinese simplified alias
+#langdef   zh-Hant "中文 (繁體)" // Chinese traditional alias
+#langdef   vi-VN "Vietnamese" // Vietnamese
+
+// Configuration Language Definitions
+// These are languages that are not intended for human consumption.
+// They are typically used by tools or by firmware feature modules.
+// To add support for one of these languages in your project, append language identifier to
+// a list of languages under RFC_LANGUAGES SDL token.
+// (Be sure to add configuration languages after the human readable languages
+// defined by $(SUPPORTED_LANGUAGES).
+#langdef   x-UEFI-AMI "x-UEFI-AMI"    // AMI Configuration Language in UEFI 2.5 compliant format
+#langdef   x-AMI "x-AMI"    // Legacy (pre-UEFI 2.5) AMI Configuration Language definition.
+#langdef   x-OEM "x-OEM"    // OEM Configuration Language
+#langdef   x-BAR "x-BAR"    // QR Code
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

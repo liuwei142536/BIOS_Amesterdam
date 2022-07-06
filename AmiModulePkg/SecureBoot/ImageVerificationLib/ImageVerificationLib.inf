@@ -1,0 +1,55 @@
+[Defines]
+INF_VERSION                    = 0x00010005
+BASE_NAME                      = ImageVerificationLib   
+FILE_GUID                      = 3D2B83D9-F6EA-476A-B462-FC4365BBC022
+MODULE_TYPE                    = DXE_DRIVER
+VERSION_STRING                 = 1.0
+LIBRARY_CLASS                  = NULL|DXE_DRIVER
+CONSTRUCTOR                    = DxeImageVerificationLibConstructor
+
+[Sources]
+ DxeImageVerificationLib.c
+ DxeImageVerificationLib.h
+
+[Packages]
+ MdePkg/MdePkg.dec
+ MdeModulePkg/MdeModulePkg.dec
+ AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+ AmiSecureBootPkg/AmiSecureBootPkg.dec
+ AmiCryptoPkg/AmiCryptoPkg.dec
+
+[LibraryClasses]
+ MemoryAllocationLib
+ AmiDxeLib
+ SecurityManagementLib
+ PeCoffLib
+ DebugLib
+ AmiSecureBootLib
+# APTIOV_OVERRIDE_START : Address Security Advisory SA50088
+ SafeIntLib
+# APTIOV_OVERRIDE_END
+# DBG
+#  PerformanceLib
+
+[Guids]
+ gEfiCertRsa2048Guid
+ gEfiCertRsa2048Sha256Guid
+ gEfiHashAlgorithmSha1Guid
+ gEfiHashAlgorithmSha256Guid
+ gEfiHashAlgorithmSha384Guid
+ gEfiHashAlgorithmSha512Guid
+ gEfiImageSecurityDatabaseGuid
+ gEfiCertPkcs7Guid
+ gEfiCertX509Guid
+ gEfiCertSha1Guid
+ gEfiCertSha256Guid
+ gEfiCertSha384Guid
+ gEfiCertSha512Guid
+ gEfiCertX509Sha256Guid
+ gEfiCertX509Sha384Guid
+ gEfiCertX509Sha512Guid
+ gEfiCertTypeRsa2048Sha256Guid
+ gEfiGlobalVariableGuid
+
+ [Protocols]
+ gAmiDigitalSignatureProtocolGuid

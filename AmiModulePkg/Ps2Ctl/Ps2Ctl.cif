@@ -1,0 +1,13 @@
+<component>
+	name = "Ps2Ctl"
+	category = eModule
+	LocalRoot = "AmiModulePkg\Ps2Ctl\"
+	RefName = "AmiModulePkg.Ps2Ctl"
+[INF]
+"Ps2Ctl.inf"
+"Ps2KbdPei.inf"
+[files]
+"Ps2Ctl.sdl"	
+"Ps2CtlOem.txt"	
+"Ps2Ctl.chm"	
+<endComponent>

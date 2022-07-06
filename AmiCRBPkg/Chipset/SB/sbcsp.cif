@@ -1,0 +1,16 @@
+<component>
+	name = "Intel Wellsburg SB Chipset"
+	category = ModulePart
+	LocalRoot = "AmiCRBPkg\Chipset\SB\"
+	RefName = "Intel Wellsburg SB Chipset"
+[files]
+"SBGeneric.c"	
+"SBCspLib.h"	
+"IRQLINK.ASL"	
+"SB_EXT.ASL"
+[INF]
+"SbPciHotPlugLib\SbPciHotPlugLib.inf"
+"TcoSmiHandler\TcoSmiHandler.inf"
+[parts]
+"AcpiModeEnable"
+<endComponent>

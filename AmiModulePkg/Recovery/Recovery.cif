@@ -1,0 +1,26 @@
+<component>
+    name = "Recovery"
+    category = eModule
+    LocalRoot = "AmiModulePkg\Recovery\"
+    RefName = "AmiModulePkg.Recovery"
+[INF]
+"Recovery.inf"
+[files]
+"Recovery.sdl"	
+"Recovery.chm"	
+[parts]
+"ReFlash"
+"FsRecovery"
+"FtRecovery"
+"SerialRecovery"
+"IdeRecovery"
+[dependency]
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_30"
+IntelFrameworkModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/IntelFrameworkModulePkg;IntelFrameworkModulePkg_10"
+IntelFrameworkPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/IntelFrameworkPkg;IntelFrameworkPkg_09"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_15"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_19"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_44"
+[dependency.optional]
+AmiModulePkg.OemActivation >= "SS: AptioV;$/AptioV/Source/Modules/OemActivation;OemActivation_11"
+<endComponent>

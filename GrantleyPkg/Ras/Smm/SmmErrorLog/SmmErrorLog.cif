@@ -1,0 +1,11 @@
+<component>
+	name = "SmmErrorLog"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\Smm\SmmErrorLog\"
+	RefName = "GrantleyPkg.SmmErrorLog"
+[INF]
+"SmmErrorLog.inf"
+"AmiErrorLog.inf"
+[files]
+"SmmErrorLog.sdl"	
+<endComponent>

@@ -1,0 +1,13 @@
+<component>
+	name = "Grantley CPU Overrides"
+	category = CPU
+	LocalRoot = "GrantleySocketPkg\"
+	RefName = "GrantleyCpuOverrides"
+[parts]
+"IA32FamilyCpuPkg.CpuPei"
+"IA32FamilyCpuPkg.CpuMpPei"
+"IA32FamilyCpuPkg.CpuMpDxe"
+"GrantleySocketPkg.Override.IA32FamilyCpuPkg.Include.Include"
+"GrantleySocketPkg.Override.IA32FamilyCpuPkg.Library"
+"AmiCpuInfo"
+<endComponent>

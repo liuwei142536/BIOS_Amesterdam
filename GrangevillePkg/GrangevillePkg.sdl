@@ -1,0 +1,115 @@
+TOKEN
+	Name  = "GrangevillePkg_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling GrangevillePkg support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "Build_GrangevillePkg"
+	Value  = "1"
+	Help  = "Switch for building GrangevillePkg Package"
+	TokenType = Boolean
+End
+
+PCIDEVICE
+    Title  = "Platform ASL Files"
+    Parent  = "PciHost (Virtual)"
+    Attribute  = "0x0"
+    Dev_type  = "Container"
+    Dev  = 00h
+    SleepNum  = 01h
+    ASLfile  = "'GrangevillePkg\Acpi\AcpiTables\Dsdt\CommonPlatform.asi;Before Pci Tree','GrangevillePkg\Acpi\AcpiTables\Dsdt\PlatformGpe.asi;After Pci Tree'"
+    DeviceType = OnBoard
+    PCIBusSize = 32bit
+    ROMMain = No
+    Virtual = Yes
+End
+
+TOKEN
+	Name  = "PLATFORM_NAME"
+	Value  = "GrangevillePkg"
+	TokenType = Expression
+	TargetDSC = Yes
+	TargetMAK = Yes
+	Token = "Build_GrangevillePkg" "=" "1"
+End
+
+PATH
+   Name = "FTOOL_DIR"
+   Path = "GrangevillePkg/Tool/FTool/SPS"
+End
+
+PATH
+   Name = "FITC_EXE_DIR"
+   Path = "GrangevillePkg/Tool/FTool/SPS/Tools/FlashImageTool"
+End
+
+PATH
+   Name = "FITC_BIN_DIR"
+   Path = "GrangevillePkg/Tool/FTool/Common"
+End
+
+PATH
+   Name = "FITC_XML_DIR"
+   Path = "GrangevillePkg/Tool/FTool/SPS/Config"
+End
+
+PATH
+   Name = "FITC_ROM_DIR"
+   Path = "GrangevillePkg/Tool/FTool/SPS"
+End
+
+TOKEN
+    Name  = "GBE_BIN"
+    Value  = "I218_Nahum6-LPTH_V_No-LAN-Switch_Version_0.11.bin"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PDR_BIN"
+    Value  = "PDR_64K_BCV.bin"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "PTU_ROM"
+    Value  = "Grangeville_SpsNMPTU_signed.rom"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+TOKEN
+    Name  = "Grangeville_XML_config"
+    Value  = "LPTCB_NM_MONO_CRB.xml"
+    TokenType = Expression
+    TargetMAK = Yes
+End
+
+# AptioV Server Override: Eip 443149 changes - Start
+# System Lock should not be configurable in release BIOS
+PcdMapping
+    Name  = "PcdLtConfigLockEnable"
+    GuidSpace  = "gServerCommonTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    Value  = "TRUE"
+    Arch  = "common"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdProcessorLtsxEnable"
+    GuidSpace  = "gServerCommonTokenSpaceGuid"
+    PcdType  = "PcdsDynamicDefault"
+    Value  = "FALSE"
+    Arch  = "common"
+    Offset  = 00h
+    Length  = 00h
+    TargetDSC = Yes
+End
+# AptioV Server Override: Eip 443149 changes - End

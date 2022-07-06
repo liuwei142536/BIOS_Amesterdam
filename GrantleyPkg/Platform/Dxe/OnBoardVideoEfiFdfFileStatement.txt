@@ -1,0 +1,5 @@
+FILE DRIVER = 56A1B86F-0D4A-485d-87DE-AD0EBA1C8C2A {
+    SECTION $(COMPRESSION_SECTION){
+     SECTION PE32  = GrantleyPkg/Platform/Dxe/OnBoardVideoEfi/OnboardVideoEfi.efi
+     }
+  }

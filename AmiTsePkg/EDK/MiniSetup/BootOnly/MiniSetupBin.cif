@@ -1,0 +1,15 @@
+<component>
+	name = "TSE Binary - BootOnly"
+	category = ModulePart
+	LocalRoot = "AmiTsePkg\EDK\MiniSetup\BootOnly\"
+	RefName = "AMITSE.MinisetupBin"
+[INF]
+"MinisetupBin.inf"
+"PasswordEncode/PasswordEncode.inf"
+"PasswordEncode/TsePasswordEncodeBin.inf"
+"MinisetupBinBT32.inf"
+"PasswordEncode/TsePasswordEncodeBinBT32.inf"
+[files]
+"MiniSetupBin.sdl"	
+"hiistring21.c"	
+<endComponent>

@@ -1,0 +1,10 @@
+<component>
+	name = "AmtBootOptions"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\ActiveManagement\AmtBootOptions\"
+	RefName = "GrantleyPkg.AmtBootOptions"
+[INF]
+"Dxe\ActiveManagement.inf"
+[files]
+"AmtBootOptions.sdl"	
+<endComponent>

@@ -1,0 +1,11 @@
+<component>
+	name = "RuntimeSmm"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\RuntimeSmm\"
+	RefName = "AmiModulePkg.RuntimeSmm"
+[INF]
+"RuntimeSmm.inf"
+[files]
+"RuntimeSmm.chm"
+"RuntimeSmm.sdl"	
+<endComponent>

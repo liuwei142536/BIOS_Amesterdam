@@ -1,0 +1,70 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+
+//**********************************************************************
+// $Header: $
+//
+// $Revision: $
+//
+// $Date: $
+//**********************************************************************
+// Revision History
+// ----------------
+// $Log: $
+// 
+// 
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name: NetworkStackSetupScreen.UNI
+//
+// Description: String definitions for network Template
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+
+/=#
+#langdef   eng   "English"    // English
+#langdef   x-AMI "x-AMI"      // AMI Configuration Language
+
+#string STR_NETWORK_STACK_ENABLE        #language eng   "Network Stack"
+                                        #language x-AMI "NWSK000"
+#string STR_NETWORK_STACK_HELP          #language eng   "Enable/Disable UEFI Network Stack"
+#string STR_STACK_FORM                  #language eng   "Network Stack Configuration"
+#string STR_STACK_FORM_HELP             #language eng   "Network Stack Settings"
+#string STR_IPV4_PXE_ENABLE             #language eng   "IPv4 PXE Support"
+                                        #language x-AMI "NWSK001"
+#string STR_IPV4_PXE_HELP               #language eng   "Enable/Disable IPv4 PXE boot support. If disabled, IPv4 PXE boot support will not be available."
+#string STR_IPV6_PXE_ENABLE             #language eng   "IPv6 PXE Support"
+                                        #language x-AMI "NWSK002"
+#string STR_IPV6_PXE_HELP               #language eng   "Enable/Disable IPv6 PXE boot support. If disabled, IPv6 PXE boot support will not be available."
+
+#string STR_IPSEC_CERTIFICATE_ENABLE    #language eng   "IPSEC Certificate"
+                                        #language x-AMI "NWSK003"
+#string STR_IPSEC_CERTIFICATE_HELP      #language eng   "Support to Enable/Disable IPSEC certificate for Ikev."
+
+#string STR_PXE_BOOT_WAIT_TIME          #language eng   "PXE boot wait time"
+                                        #language x-AMI "NWSK004"
+#string STR_PXE_BOOT_WAIT_TIME_HELP     #language eng   "Wait time in seconds to press ESC key to abort the PXE boot. Use either +/- or numeric keys to set the value."
+
+#string STR_MEDIA_DETECT_COUNT          #language eng   "Media detect count"
+                                        #language x-AMI "NWSK005"
+#string STR_MEDIA_DETECT_COUNT_HELP     #language eng  "Number of times the presence of media will be checked. Use either +/- or numeric keys to set the value."
+
+#string STR_IPV4_HTTP_ENABLE            #language eng   "IPv4 HTTP Support"
+                                        #language x-AMI "NWSK006"
+#string STR_IPV4_HTTP_HELP              #language eng   "Enable/Disable IPv4 HTTP boot support. If disabled, IPv4 HTTP boot support will not be available."
+                                                        
+#string STR_IPV6_HTTP_ENABLE            #language eng   "IPv6 HTTP Support"
+                                        #language x-AMI "NWSK007"
+#string STR_IPV6_HTTP_HELP              #language eng   "Enable/Disable IPv6 HTTP boot support. If disabled, IPv6 HTTP boot support will not be available."
+
+#string STR_REDFISH_VLAN_FORM_TITLE       #language eng "Redfish VLAN Configuration"
+#string STR_REDFISH_VLAN_FORM_PROMPT      #language eng "Redfish VLAN Configuration"
+#string STR_REDFISH_VLAN_FORM_PROMPT_HELP #language eng "Redfish VLAN Configuration Help"

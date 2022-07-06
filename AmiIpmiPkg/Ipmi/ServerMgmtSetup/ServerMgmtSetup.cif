@@ -1,0 +1,12 @@
+<component>
+    name = "ServerMgmtSetup"
+    category = ModulePart
+    LocalRoot = "AmiIpmiPkg\Ipmi\ServerMgmtSetup\"
+    RefName = "AmiIpmiPkg.Ipmi.ServerMgmtSetup"
+[INF]
+"ServerMgmtSetup.inf"
+[files]
+"ServerMgmtSetup.sdl"
+"ServerMgmtSetup.mak"
+"ServerMgmtSetupDataDefinitions.txt"
+<endComponent>

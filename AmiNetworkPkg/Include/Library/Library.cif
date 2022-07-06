@@ -1,0 +1,17 @@
+<component>
+    name = "Library"
+    category = ModulePart
+    LocalRoot = "AmiNetworkPkg\Include\Library\"
+    RefName = "AmiNetworkPkg.Library"
+[files]
+"AmiNetworkPostManagerLib.h"	
+"iSCSICHAPEncrypt.h"	
+"AmiNetworkLib.h"	
+"AMIRedFishVlan.h"	
+"DpcLib.h"	
+"HttpLib.h"	
+"IpIoLib.h"	
+"NetLib.h"	
+"TcpIoLib.h"	
+"UdpIoLib.h"	
+<endComponent>

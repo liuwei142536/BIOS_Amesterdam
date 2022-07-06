@@ -1,0 +1,11 @@
+<component>
+	name = "AcpiDxe"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Acpi\Dxe\"
+	RefName = "GrantleyPkg.AcpiDxe"
+[INF]
+"AcpiPlatform\AcpiPlatform.inf"
+"AcpiVtd\AcpiVTD.inf"
+[files]
+"AcpiDxe.sdl"	
+<endComponent>

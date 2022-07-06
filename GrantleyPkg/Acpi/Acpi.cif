@@ -1,0 +1,10 @@
+<component>
+	name = "Acpi"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Acpi\"
+	RefName = "GrantleyPkg.Acpi"
+[parts]
+"GrantleyPkg.AcpiDxe"
+"GrantleyPkg.AcpiSmm"
+"GrantleyPkg.AcpiTables"
+<endComponent>

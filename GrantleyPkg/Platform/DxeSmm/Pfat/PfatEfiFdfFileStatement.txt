@@ -1,0 +1,3 @@
+FILE RAW = 7934156D-CFCE-460e-92F5-A07909A59ECA {
+    GrantleyPkg/Platform/DxeSmm/Pfat/PfatBinary/BIOS_Guard_module.bin
+  }

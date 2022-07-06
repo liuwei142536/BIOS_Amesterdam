@@ -1,0 +1,84 @@
+TOKEN
+    Name  = "DESKTOP_506EX"
+    Value = "0"
+    Help  = "Intel(R) SkyLake"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "DESKTOP_M22506E0"
+    Value  = "1"
+    Help  = "Intel(R) SkyLake Processor P-0 Stepping"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M22506E1"
+    Value  = "1"
+    Help  = "Intel(R) SkyLake Processor Q-0 Stepping"
+    TokenType = Boolean
+    Token = "NON_PRODUCTION_MICROCODE" "=" "1"
+End
+
+TOKEN
+    Name  = "DESKTOP_M36506E3"
+    Value  = "1"
+    Help  = "Intel(R) SkyLake Processor R-0, S-0 Stepping"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "DESKTOP_M9750654"
+    Value  = "1"
+    Help  = "Intel(R) Skylake-X(50654) M-0, U-0 Stepping"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "DESKTOP_MBF50657"
+    Value  = "1"
+    Help  = "Intel(R) Desktop CascadeLake(50657) B-1 Stepping microcode"
+    TokenType = Boolean
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22506E0_00000012.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) SkyLake Processor P-0 Stepping"
+    Token = "DESKTOP_M22506E0" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M22506E1_0000001E.mcb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) SkyLake Processor Q-0 Stepping"
+    Token = "DESKTOP_M22506E1" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/M36506E3_000000EC.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) SkyLake R-0, S-0 Stepping(506E3)"
+    Token = "DESKTOP_M36506E3" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/MB750654_02006C0A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop Skylake-X M-0, U-0 Stepping(50654)"
+    Token = "DESKTOP_M9750654" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(MICROCODE_DESKTOP_DIR)/MBF50657_0500320A.pdb"
+    Parent  = "MICROCODE_FILES"
+    Help  = "Intel(R) Desktop CascadeLake B-1, L-1 Stepping(50657)"
+    Token = "DESKTOP_MBF50657" "=" "1"
+    InvokeOrder = AfterParent
+End

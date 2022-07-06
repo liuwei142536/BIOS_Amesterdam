@@ -1,0 +1,11 @@
+<component>
+	name = "Guid"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\AMT\Include\Guid\"
+	RefName = "GrantleyPkg.Me.AMT.Include.Guid.Guid"
+[files]
+"AmtForcePushPetPolicy.h"	
+"ConsoleLock.h"	
+"MeBiosExtensionSetup.h"	
+"MePlatformReadyToBoot.h"	
+<endComponent>

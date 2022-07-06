@@ -1,0 +1,92 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file IdeBusSrc.inf
+#  This driver installs IdeBus
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = IdeBusSrc
+  FILE_GUID                      = AAECDC89-2A49-46f1-A163-F7979C039998
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = IdeBusEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC
+#
+
+[Sources]
+  IdeBus.h
+  IdeBus.c
+  Ata.c
+  Atapi.c
+  IdeBusMaster.c
+  IdePowerManagement.c
+  IdeHPA.c
+  IDEBusComponentName.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+
+[Protocols]
+  gAmiIdeBusInitProtocolGuid
+  gEfiDriverBindingProtocolGuid
+  gEfiDiskInfoProtocolGuid
+  gEfiDevicePathProtocolGuid  
+  gEfiBlockIoProtocolGuid
+  gAmiHddSecurityInitProtocolGuid
+  gAmiHddSecurityEndProtocolGuid
+  gAmiHddSecurityProtocolGuid
+  gAmiHddSmartInitProtocolGuid
+  gAmiHddSmartProtocolGuid
+  gAmiHddOpalSecInitProtocolGuid
+  gEfiStorageSecurityCommandProtocolGuid
+  gAmiAtaPassThruInitProtocolGuid
+  gAmiScsiPassThruInitProtocolGuid
+  gAmiPlatformIdeProtocolGuid
+  gEfiPciIoProtocolGuid
+  gAmiHddHpaProtocolGuid
+  gAmiHddPowerMgmtProtocolGuid
+  gAmiBlockIoWriteProtectionProtocolGuid
+  
+[Guids]
+  gEfiDiskInfoIdeInterfaceGuid
+  
+[Depex]
+  TRUE
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2014, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

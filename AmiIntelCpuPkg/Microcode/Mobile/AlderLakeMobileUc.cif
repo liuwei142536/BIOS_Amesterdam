@@ -1,0 +1,12 @@
+<component>
+	name = "Mobile Alder Lake uCode Patches (9067x)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Mobile\"
+	RefName = "AlderLakeMobileUc"
+[files]
+"AlderLakeMobileUc.sdl"
+"M8290671_0000001C.pdb"	= "Mobile MICROCODE UPDATES"
+"M82906A1_0000011C.pdb"	= "Mobile MICROCODE UPDATES"
+"M80906A2_0000030E.pdb"	= "Mobile MICROCODE UPDATES"
+"M80906A3_00000413.pdb"	= "Mobile MICROCODE UPDATES"
+<endComponent>

@@ -1,0 +1,16 @@
+<component>
+	name = "Me"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\"
+	RefName = "GrantleyPkg.Me"
+[files]
+"MePkg.dec"	
+"MePkg.sdl"	
+[parts]
+"GrantleyPkg.MePolicy"
+"GrantleyPkg.AMT"
+"GrantleyPkg.Me.Heci.Heci"
+"GrantleyPkg.Me.Include.Include"
+"GrantleyPkg.Sps"
+"GrantleyPkg.Me.PTU_Loader"
+<endComponent>

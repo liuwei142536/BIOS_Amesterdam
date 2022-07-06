@@ -1,0 +1,66 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   This AMI DxeSmmUsb_Sb Lib
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DxeSmmUsbSbLib
+  FILE_GUID                      = B709886F-A8A7-4EA0-9B64-783F7A37F210
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DxeSmmUsbSbLib|DXE_SMM_DRIVER
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+#
+
+[Sources]
+$(DxeSmmUsbSbLibSources)
+UsbSb.c
+
+[Packages]
+$(USB_RT_SMM_PACKAGES_LIST)
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  Build/AmiUsbPkg.dec
+  
+[Protocols]
+$(DxeSmmUsbSbLibProtocols)
+  gEfiSmmPeriodicTimerDispatch2ProtocolGuid
+  gEfiSmmGpiDispatch2ProtocolGuid
+  gEfiUsbPolicyProtocolGuid
+[LibraryClasses]
+  SmmServicesTableLib
+  AmiSmmUsbHcdLib
+  
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

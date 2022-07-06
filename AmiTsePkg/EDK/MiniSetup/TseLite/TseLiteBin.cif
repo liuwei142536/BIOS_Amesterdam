@@ -1,0 +1,13 @@
+<component>
+	name = "TSE Binary - TSE Lite"
+	category = ModulePart
+	LocalRoot = "AmiTsePkg\EDK\MiniSetup\TseLite\"
+	RefName = "AMITSE.TseLiteBin"
+[INF]
+"TseLiteBin.inf"
+"StyleHook\StyleHookBin.inf"
+"TseLiteBinBT32.inf"
+"StyleHook\StyleHookBinBT32.inf"
+[files]
+"TseLiteBin.sdl"	
+<endComponent>

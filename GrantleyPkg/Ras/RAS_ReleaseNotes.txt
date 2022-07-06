@@ -1,0 +1,439 @@
+------------------------------------------------------------------------------------------------------------
+Aptio V Grangeville RAS Features Support:
+------------------------------------------------------------------------------------------------------------
+12/11/2014
+Module Label: GrantleyPkg_12
+-----------------------------------------------------------------------------
+Features Tested in this Label: Intel Reference Code version 0.7.0 Alpha
+-----------------------------------------------------------------------------
+Intel ITP II Version                : 1.0.3880.400
+Intel ITP II C Scripts Version      : 0.8.13838.472081
+
+1. Memory Correctable and Uncorrectable Error Logging - Errors were getting logged to Setup Page and Windows Event Viewer.
+
+2. PCIE Error Logging - Errors were getting logged to Setup Page and Windows Event Viewer.
+
+;------------------------------------------------------------------------------;
+;------------------------------------------------------------------------------;
+
+XX/XX/2013
+Module Label: XXXX_XX
+
+-----------------------------------------------------------------------------
+ New Features Added in this Label: 
+-----------------------------------------------------------------------------
+
+1. Support for Memory Correctable and Uncorrectable Error Logging.
+
+2. Support for PCIE Error Logging.
+
+3. Support for IOH QPI Error Logging.
+
+4. Support for IOH Core Error Logging.
+
+5. Support for IOH VT-d Error Logging.
+
+6. Support for LastBootError Handler.
+
+7. Support for Logging the Memory and PCIe errors to APEI (WHEA).
+
+;-----------------------------------------------------------------------------;
+; Issues Fixed in Intel RAS Reference Code version 0.xx:
+;-----------------------------------------------------------------------------;
+
+1.  SMI is not getting generated immediately when PCIE error is injected from Dos/Windows.
+
+2.  Fixed the SMI flood issue because of the DMI errors while booting to DOS.
+
+
+;-----------------------------------------------------------------------------;
+; Notes on feature support
+;-----------------------------------------------------------------------------;
+
+1. Memory Error Injection with Sparing and Mirroring not yet validated.
+
+2. EMCA features needs to be validated.
+
+;------------------------------------------------------------------------------;
+Known Issues
+;------------------------------------------------------------------------------;
+1. Memory uncorrectable and PCIE errors are logged only in BMC and not in WHEA.
+
+;------------------------------------------------------------------------------;
+Setup Options to change to support Grantley RAS Features
+;------------------------------------------------------------------------------;
+
+------------------------------------------------------------------------------------------------------------
+Functionality:
+------------------------------------------------------------------------------------------------------------
+
+Setup Questions:
+
+We have below setup questions Support for Error Logging:
+
+1.  System Errors               : Enable/Disable Runtime Error Logging Support.
+
+2.  S/W Error Injection Support : RAS tool and other utilities needs MSR 0x790 to be unlocked.
+
+3.  System Memory Poison        : Enable/Disable Poison Support.
+
+4.  IIO Error Enable            : Enable/Disable the IIO Error Logging.
+
+5.  PCH Error Enable            : Enable/Disable the PCH Error Logging.
+
+6.  EMCA Logging Support        : Enable/Disable the EMCA Logging.
+
+7.  EMCA CMCI-SMI Morphing      : Enable/Disable EMCA CSMI for Correctable Errors
+
+8.  WHEA Settings       
+    WHEA Support                : Enable/Disable the WHEA ACPI support
+    WHEA FFM Logging            : Enable/Disable the WHEA FFM logging of errors
+
+9.  QPI Error Enabling       
+    SMI QPI Lane Failover       : Enable/Disable SMI when QPI failover 
+    
+10. Memory Error Enabling    
+    Memory Corrected Error      : Enable/Disable the Correctable Error Logging support 
+    Spare Interrupt             : Enabling SMI when correctable error events
+    
+11. Memory RAS Configuration 
+    SpareError/Memory Correctable Threshold : Enter the Spare/Correctable Error Threshold value.
+    
+12. PCI Error Enabling 
+    PCI-EX Error Enable     : Enable/Disable the PCIE Error Logging.
+    Enable SERR propagation : Enable/Disable the SERR.
+    Enable PERR propagation : Enable/Disable the PERR.
+
+--------------------
+Memory RAS Features
+--------------------
+
+Memory error logging
+--------------------
+
+Setup Options to be changed for supporting Memory error logging:
+
+1. IntelRCSetup ->Runtime Error Logging -> System Errors -  Enable/Disable Runtime Error Logging Support.
+2. IntelRCSetup ->Runtime Error Logging ->Memory Error Enabling -> Memory Corrected Error - Enable/Disable the Correctable Error Logging support 
+3. IntelRCSetup ->Runtime Error Logging ->Memory Error Enabling -> Spare Interrupt [SMI]
+4. IntelRCSetup ->Memory RAS configuration -> Spare Threshold 
+
+
+Memory Rank Sparing Support
+---------------------------
+
+Hardware Requirements :
+
+1. Minimum need to use 2R DIMM's to validate the Rank Sparing support.
+
+Setup Options to be changed for supporting Memory Rank Spare logging:
+
+1. IntelRCSetup ->Runtime Error Logging -> System Errors -  Enable/Disable Runtime Error Logging Support.
+2. IntelRCSetup ->Runtime Error Logging ->Memory Error Enabling -> Memory Corrected Error - Enable/Disable the Correctable Error Logging support 
+3. IntelRCSetup ->Runtime Error Logging ->Memory Error Enabling -> Spare Interrupt [SMI]
+4. IntelRCSetup ->Memory RAS configuration -> Spare Threshold 
+5. IntelRCSetup ->Memory RAS configuration -> Memory Rank Sparing [Enable]
+6. IntelRCSetup ->Memory RAS configuration -> Multi Rank Sparing [Auto or whichever Rank needs to be validated]
+
+Memory Mirroring Support
+------------------------
+
+Harware Requirements :
+
+1. Popuate DIMM's of same size and rank in each CHannel's under same Memory Controller.
+
+Setup Options to be changed for supporting Mirror Logging:
+
+1. IntelRCSetup ->Runtime Error Logging -> System Errors -  Enable/Disable Runtime Error Logging Support.
+2. IntelRCSetup ->Runtime Error Logging ->Memory Error Enabling -> Memory Corrected Error - Enable/Disable the Correctable Error Logging support 
+3. IntelRCSetup ->Runtime Error Logging ->Memory Error Enabling -> Mirror FailOver [SMI]
+4. IntelRCSetup ->Memory RAS configuration -> RAS Mode [Mirror] 
+
+
+DevTagging Logging Support
+---------------------------
+
+
+Setup Options to be changed for supporting DevTagging Logging:
+
+1. IntelRCSetup ->Runtime Error Logging -> System Errors -  Enable/Disable Runtime Error Logging Support.
+2. IntelRCSetup ->Runtime Error Logging ->Memory Error Enabling -> Memory Corrected Error - Enable/Disable the Correctable Error Logging support 
+3. IntelRCSetup ->Runtime Error Logging ->Memory Error Enabling -> Spare Interrupt [SMI]
+4. IntelRCSetup ->Memory RAS configuration -> Spare Threshold 
+5. IntelRCSetup ->Memory RAS configuration ->Device Tagging -> Enable
+
+
+Memory Error Logging with eMCA Support:
+
+Setup Options to be changed for supporting Memory ErrorLogging:
+
+1. IntelRCSetup ->Runtime Error Logging -> System Errors -  Enable/Disable Runtime Error Logging Support.
+2. IntelRCSetup ->Runtime Error Logging -> Memory Error Enabling -> Memory Corrected Error - Enable/Disable the Correctable Error Logging support 
+3. IntelRCSetup ->Runtime Error Logging -> Memory Error Enabling -> Spare Interrupt [SMI]
+4. IntelRCSetup ->Runtime Error Logging -> EMCA Logging Support - Enable/Disable the EMCA Logging.
+5. IntelRCSetup ->Runtime Error Logging -> EMCA CMCI-SMI Morphing - Enable/Disable EMCA CSMI for Correctable Errors
+
+Demand Scrub Support
+--------------------
+
+1. IntelRCSetup -> Memory RAS configuration ->Demand Scrub-> Enable
+
+Patrol Scrub Support
+--------------------
+
+1. IntelRCSetup -> Memory RAS configuration ->Patrol Scrub-> Enable
+
+PCI-e error logging
+--------------------
+
+Setup Options to be changed for supporting PCI-e error logging:
+
+1. IntelRCSetup ->Runtime Error Logging -> System Errors
+2. IntelRCSetup ->Runtime Error Logging -> IIO Error Enable - Enable/Disable the IIO Error Logging
+3. IntelRCSetup ->Runtime Error Logging -> PCH Error Enable - Enable/Disable the IIO Error Logging
+4. IntelRCSetup ->Runtime Error Logging -> PCI/PCI Error Enabling -> PCI-EX Error Enable - Enable/Disable the PCIE Error Logging
+5. IntelRCSetup ->Runtime Error Logging -> PCI/PCI Error Enabling -> Enable SERR propagation - Enable/Disable the SERR
+6. IntelRCSetup ->Runtime Error Logging -> PCI/PCI Error Enabling -> Enable PERR propagation - Enable/Disable the PERR
+
+
+WHEA/APEI
+---------
+
+Setup Options to be changed for supporting WHEA Errorlogging:
+1. IntelRCSetup ->Runtime Error Logging -> System Errors
+2. IntelRCSetup ->Runtime Error Logging -> Whea settings->WHEA Support - Enable/Disable WHEA Support.
+3. IntelRCSetup ->Runtime Error Logging -> Whea settings->WHEA Error Injection - Enable/Disable WHEA Injection Support.
+4. IntelRCSetup ->Runtime Error Logging -> Whea settings->WHEA Error Injection - Enable/Disable WHEA FFM Logging Support.
+
+
+================================================
+Test procedure used to validate the Error Logging
+================================================
+
+1. Memory Error logging:
+
+Hardware Method: Correctable Memory Error Logging: Used the Faulty DIMM (shorting the two data pins) which generates correctable memory errors.
+
+Software Method : Used Intel ITP II C Scripts to inject memory errors.
+
+Procedure to use Intel C Scripts :
+
+a. Intel ITP II Version                : 1.0.2048.400
+
+b. Intel ITP II C Scripts Version      : 0.8.10427.167356
+
+c. In windows Start” menu Intel->Intel DFx Abstraction Layer->Config Console. 
+   select  HSX_Grantley_ReferenceSettings and click the Apply button and close the window.
+
+d. Double-click on the “starthsxCscripts.py” file that is found in the CScritps II “haswellx” folder. 
+
+e. Error Injection Syntax :
+   Examples : 
+    ei.injectMemError(0x100000, errType = "uce") for uncorrectable
+    ei.injectMemError(0x100000)  for correctable
+    
+    To generate 3 multiple errors at once : it should be more than threshold
+    for x in range(0x3):
+    ...     ei.injectMemError(0x1000 + x)
+    ...
+   
+    sv.socket0.uncore0.imc0_c0_correrrcnt_0.show to check Error Count for correctable errors
+    sv.socket0.uncore0.imc0_c0_correrrorstatus.show to check error status check for correctale errors
+    sv.socket0.uncore0.ha0_mc5_status.show to check the status of uncorrectable errors
+
+2. PCI Error logging:
+PCI errors are generated Using Adaptec SCSI Card 29320LPE. 
+    1. Plug in Adaptec SCSI Card 29320LPE on to the system.
+    2. Boot the system to DOS, Windows or Linux Operating System.
+    3. Use any utility to change the Adaptec PCI card Configuration space offset 43h value to 01 for generate SERR, 04 for PERR. Sometimes will trigger SERR/PERR signal at the same time.
+    4. You may see System generating NMI.
+    5. Reset the system and Use the SEL view Utility to view the SEL log of the PCI errors. 
+
+3. QPI, IOH core, VT-d Error Logging:
+No hardware or software utilities are available to generate these Errors. Verified code flow with debugger utilities like Intel ITP. 
+
+================================================
+IPMI SEL log Format with Different Errors
+================================================
+
+BMC SEL log format on Memory errors:
+------------------------------------
+
+Memory SEL Log:
+
+  SensorType Bit[7:0] = EFI_MEMORY_SENSOR_TYPE <0x0C>
+  SensorNumber Bit[7:0] = 0x8
+
+  Event Data 1 Bit[7:4] = 0xA (Indicates that OEMEvData2 and OEMEvData3 are OEM values)
+  Event Data 1 Bit[0] = Error Type 
+    Error Type:
+      Correctable Memory Error: 0x00
+      UnCorrectable Memory Error: 0x01
+
+  Event Data 2 Bit[0] = Current/Last Boot Error 
+    Current Boot : 0
+    Last Boot    : 1
+
+   DIMM Location is logged to "Event Data 2 and 3" as Follows 
+   
+     Event Data 2 Bit[2:1] = Memory Controller Number
+     
+     Event Data 3 Bit[7:6]: CPU Socket Number.
+     Event Data 3 Bit[5:4]: Channel Number.
+     Event Data 3 Bit[3:0]: DIMM Number.
+
+BMC SEL log format on PCI errors.
+------------------------------------
+
+PCIe SEL Log:
+  SensorType Bit[7:0] = SEL_SENS_TYPE_CRIT_ERR <0x13>
+  SensorNumber Bit[7:0] = 0x00
+  OEMEvData1 Bit[7:4] = 0xA (Indicates that OEMEvData2 and OEMEvData3 are OEM values)
+  OEMEvData1 Bit[3:0] = Error Type 
+Error Type
+NON_FATAL_ERROR_TYPE 0x01
+FATAL_ERROR_TYPE 0x02
+COR_ERROR_TYPE   0x03
+SERROR_TYPE      0x04
+PERROR_TYPE      0x05
+  OEMEvData2 Bit[7:0] = PCI bus number for failed device.
+  OEMEvData3 Bit[7:3] = PCI device number for failed device.
+  OEMEvData3 Bit[2:0] = PCI function number for failed device.
+
+LastBootError Behavior on  PCI errors :
+---------------------------------------
+
+PCIe SEL Log:
+  SensorType Bit[7:0] = SEL_SENS_TYPE_CRIT_ERR <0x13>
+  SensorNumber Bit[7:0] = 0x00
+  OEMEvData1 Bit[7:4] = 0xA (Indicates that OEMEvData2 and OEMEvData3 are OEM values)
+  OEMEvData1 Bit[3:0] = 0xA (Indicates LastBoot PCIe Error )
+  OEMEvData2 Bit[7:0] = PCI bus number for failed device.
+  OEMEvData3 Bit[7:3] = PCI device number for failed device.
+  OEMEvData3 Bit[2:0] = PCI function number for failed device.
+
+BMC SEL log format on CPU QPI Uncorrectble errors.
+---------------------------------------------------
+
+QPI error is logged as Processor configuration error in the SEL.
+
+  OEMEvData1 Bit[7:4] = 0xA (Indicates that OEMEvData2 and OEMEvData3 are OEM values)
+  OEMEvData1 Bit[3:0] = Error Type (PROCESSOR CONFIGURATION_ERROR)
+  OEMEvData2 Bit[3:0] = QPI Port number.
+  OEMEvData2 Bit[7:4] = CPU Socket Number.
+  OEMEvData3          = QPI error code as per IvyBridge-EX 4S Processor
+            External Design Specification (EDS) specification.
+
+            00h - QPI Physical Layer Control Error
+            02h - QPI Physical Layer Detected Drift Buffer Alarm
+            03h - QPI Physical Layer Detected Latency Buffer Rollover
+            10h - QPI Link Layer Detected Control Error from R3QPI
+            11h - Rx detected CRC error Unsuccessful Link Level Retry (entered LLR abort state)
+            12h - QPI Link Layer detected unsupported/undefined packet (e.g. RSVD_CHK, message class, opcode, or VN)
+            13h - QPI Link Layer Detected Control Error.
+            14h - L0p not exited prior to retrain interval
+            15h - RBT used un-initialized value
+            16h - Debug Flit CRC
+            1Fh - QPI Config access crossing 32-bit boundary.
+
+BMC SEL log format on IOH QPI errors.
+---------------------------------------------------
+
+QPI error is logged as Processor configuration error in the SEL.
+
+  OEMEvData1 Bit[7:4] = 0xA (Indicates that OEMEvData2 and OEMEvData3 are OEM values)
+  OEMEvData1 Bit[3:0] = Error Type (PROCESSOR CONFIGURATION_ERROR)
+  OEMEvData2 Bit[3:0] = QPI Port number.
+  OEMEvData2 Bit[7:4] = CPU Socket Number.
+  OEMEvData3          =  Coherent Interface (IRP) Local Group Error code as per IvyBridge-EX 4S Processor
+            External Design Specification (EDS) specification.
+
+            B4h - Write Cache Detected ECC Correctable Error.
+            C1h - Coherency Interface Protocol Layer Received Poisoned packet
+            C2h - I/O module Write Cache uncorrectable Data ECC error
+            C3h - I/O module CSR access crossing 32-bit boundary.
+            D7h - Coherent Interface Protocol Layer Received Unexpected or Illegal Response/Completion
+            DAh - Coherent Interface Protocol Layer Queue/Table Overflow or Underflow
+            DBh - Coherent Interface Protocol Parity Error. 
+
+BMC SEL log format on IOH Core errors.
+---------------------------------------------------
+
+IOH Core error is logged as Processor configuration error in the SEL.
+
+  OEMEvData1 Bit[7:4] = 0xA (Indicates that OEMEvData2 and OEMEvData3 are OEM values)
+  OEMEvData1 Bit[3:0] = Error Type (PROCESSOR CONFIGURATION_ERROR)
+  OEMEvData2 Bit[7:0] = CPU Socket Number.
+  OEMEvData3          = IIO Core Local Group Error code as per Ivy Bridge-EX 4S Processor
+            External Design Specification (EDS) specification.
+
+            c4h - Master Abort Error
+            c5h - Completer Abort Error
+            c6h - Overflow/Underflow Error
+
+
+BMC SEL log format on Intel VT-d errors.
+---------------------------------------------------
+
+VT-d error is logged as Processor configuration error in the SEL.
+
+  OEMEvData1 Bit[7:4] = 0xA (Indicates that OEMEvData2 and OEMEvData3 are OEM values)
+  OEMEvData1 Bit[3:0] = Error Type (PROCESSOR CONFIGURATION_ERROR)
+  OEMEvData2 Bit[7:0] = CPU Socket Number.
+  OEMEvData3          = Intel VT-d Local Group error code as per IvyBridge-EX 4S Processor
+            External Design Specification (EDS)
+
+            90h - Data Parity Error during Context Cache Lookup
+            91h - Data Parity Error during L1 Lookup 
+            92h - Data Parity Error during L2 Lookup 
+            93h - Data Parity Error during L3 Lookup 
+            94h - TLB0 Data Parity Error
+            95h - TLB1 Data Parity Error
+            96h - Unsuccessful completion status received in the coherent interface
+            97h - Illegal request to 0xFEE 
+            98h - Protected Memory region space violated status
+            A0h - Intel VT-d spec defined errors
+
+BMC SEL log format on CPU Core errors.
+---------------------------------------------------
+
+CPU core error is logged as Processor configuration error in the SEL.
+
+  OEMEvData1 Bit[7:4] = 0xA (Indicates that OEMEvData2 and OEMEvData3 are OEM values)
+  OEMEvData1 Bit[3:0] = Error Type (PROCESSOR CONFIGURATION_ERROR)
+  OEMEvData2 Bit[7:4] = Error Source - CoreSource.
+  OEMEvData2 Bit[3:0] = Error Severity.
+  OEMEvData3 Bit[7:4] = CPU Socket Number.
+  OEMEvData3 Bit[3:0] = Core MCA Bank
+
+    Error Severity:
+     02 - Fatal Error
+     03 - Correctable Error
+
+    Core MCA Bank: 
+     00 - Instruction Fetch Unit
+     01 - Data Cache Unit
+     02 - Data Translation Look-aside Buffer
+     03 - Mid Level Cache
+
+BMC SEL log format on Cbo errors.
+---------------------------------------------------
+
+Cbo error is logged as Processor configuration error in the SEL.
+
+  OEMEvData1 Bit[7:4] = 0xA (Indicates that OEMEvData2 and OEMEvData3 are OEM values)
+  OEMEvData1 Bit[3:0] = Error Type (PROCESSOR CONFIGURATION_ERROR)
+  OEMEvData2 Bit[7:4] = Error Source - CboSource.
+  OEMEvData2 Bit[3:0] = Error Severity.
+  OEMEvData3 Bit[7:5] = Core ID
+  OEMEvData3 Bit[4:3] = Thread ID
+  OEMEvData3 Bit[2:0] = Caching Agent MCA Bank
+
+    Error Severity:
+     02 - Fatal Error
+     03 - Correctable Error
+
+    Core MCA Bank: 
+     00 - Cbo0
+     01 - Cbo1
+     02 - Cbo2

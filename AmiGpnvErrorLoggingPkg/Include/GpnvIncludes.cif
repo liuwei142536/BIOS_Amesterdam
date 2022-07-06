@@ -1,0 +1,12 @@
+<component>
+        name = "GpnvIncludes"
+        category = ModulePart
+        LocalRoot = "AmiGpnvErrorLoggingPkg\Include\"
+        RefName = "GpnvIncludes"
+[parts]
+"GpnvProtocol"
+[files]
+"SmbiosElog.h"
+"SmbiosElogFlashFuncs.h"
+"SmbiosElogType15.h"
+<endComponent>

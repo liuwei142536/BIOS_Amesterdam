@@ -1,0 +1,14 @@
+TOKEN
+    Name  = "AmiRedFishApi_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for enabling Secure Boot RedFish Api support in the project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+INFComponent
+    Name  = "AmiRedFishApi"
+    File  = "AmiRedFishApi.inf"
+    Package  = "AmiSecureBootPkg"
+    ModuleTypes = "DXE_DRIVER"
+End

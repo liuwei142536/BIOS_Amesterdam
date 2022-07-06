@@ -1,0 +1,231 @@
+TOKEN
+    Name  = "AmiCryptoLib_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling Ami CryptoLib support in the project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "AmiBaseCryptLib_SUPPORT"
+    Value  = "1"
+    Help  = "Include AmiCryptoPkg instance of BaseCryptLib in the project"
+    TokenType = Boolean
+    Token = "BaseCryptLib_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "CRYPTO_trace_level"
+    Value  = "0"
+    Help  = "0-skip debug messages, 1- short trace, 2- full trace"
+    TokenType = Integer
+    TargetH = Yes
+    TargetMAK = Yes
+    Range  = "0-1-2"
+End
+
+TOKEN
+    Name  = "CRYPTO_trace_level"
+    Value  = "1"
+    Help  = "0-skip debug messages, 1- short trace, 2- full trace"
+    TokenType = Integer
+    TargetH = Yes
+    TargetMAK = Yes
+    Range  = "0-1-2"
+    Token = "DEBUG_MODE" "!=" "0"
+End
+
+TOKEN
+    Name  = "SHA256_FAST"
+    Value  = "0"
+    Help  = "Generates faster hash code (SHA256, SHA384 & SHA512). Adds ~4k to compressed Crypto PPI and DXE driver binaries"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-1"
+End
+
+TOKEN
+    Name  = "CONFIG_PEI_PKCS7"
+    Value  = "1"
+    Help  = "Support x509 & Pkcs7 algorithms in CryptoPPI. Adds ~8kb to CryptoPPI binary."
+    TokenType = Integer
+    TargetH = Yes
+    TargetMAK = Yes
+    Range  = "0-1"
+End
+
+TOKEN
+    Name  = "CONFIG_X509_EXT_ALT_NAME_KEY_USAGE"
+    Value  = "0"
+    Help  = "0- Ignore extended x509 cert alt names and ext key usage fields."
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-1"
+End
+
+TOKEN
+    Name  = "CONFIG_X509_CERTIFICATE_EXPIRATION"
+    Value  = "0"
+    Help  = "0- Ignore time stamp in x509 certs"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-1"
+End
+
+TOKEN
+    Name  = "ASN1_BASE64_DECODE"
+    Value  = "0"
+    Help  = "Support RSA Key files in ASN base64 encoding"
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "0-1"
+End
+
+TOKEN
+    Name  = "AmiCryptoLib_GL"
+    Value  = "/GL"
+    Help  = "Enable code optimization"
+    TokenType = Expression
+    Token = "BaseCryptLib_SUPPORT" "=" "0"
+End
+
+TOKEN
+    Name  = "AmiCryptoLib_NO_PEI_PKCS7"
+    Value  = "/DCONFIG_NO_PEI_PKCS7"
+    Help  = "Do not include x509/PKCS7 in PEI CryptoLib"
+    TokenType = Expression
+    Token = "CONFIG_PEI_PKCS7" "=" "0"
+End
+
+PATH
+    Name  = "Cryptlib_DIR"
+End
+
+INFComponent
+    Name  = "AmiCryptLib"
+    File  = "AmiCryptLib.inf"
+    Package  = "AmiCryptoPkg"
+End
+
+INFComponent
+    Name  = "AmiCryptLibSmm"
+    File  = "AmiCryptLibSmm.inf"
+    Package  = "AmiCryptoPkg"
+    Arch  = "IA32 X64 IPF ARM"
+    ModuleTypes  = "DXE_RUNTIME_DRIVER"
+End
+
+INFComponent
+    Name  = "AmiCryptLibRun"
+    File  = "AmiCryptLibRun.inf"
+    Package  = "AmiCryptoPkg"
+    Arch  = "IA32 X64 IPF ARM"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+INFComponent
+    Name  = "PeiCryptLib"
+    File  = "PeiCryptLib.inf"
+    Package  = "AmiCryptoPkg"
+    ModuleTypes  = "PEIM PEI_CORE"
+    PreProcess = Yes
+End
+
+INFComponent
+    Name  = "AmiPeiCryptLibTiny"
+    File  = "AmiPeiCryptLibTiny.inf"
+    Package  = "AmiCryptoPkg"
+    ModuleTypes  = "PEIM PEI_CORE"
+End
+
+INFComponent
+    Name  = "IntrinsicLib"
+    File  = "IntrinsicLib.inf"
+    Package  = "AmiCryptoPkg"
+    Arch  = "IA32"
+    PreProcess = Yes
+    Token = "AMI_MODULE_PKG_VERSION" "<" "39"
+End
+
+LibraryMapping
+    Class  = "AmiCryptLib"
+    Instance  = "AmiCryptoPkg.AmiCryptLib"
+    ModuleTypes  = "DXE_DRIVER DXE_CORE UEFI_APPLICATION UEFI_DRIVER"
+End
+
+LibraryMapping
+    Class  = "AmiCryptLib"
+    Instance  = "AmiCryptoPkg.AmiCryptLibRun"
+    ModuleTypes  = "DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+    Class  = "AmiCryptLib"
+    Instance  = "AmiCryptoPkg.AmiCryptLibSmm"
+    ModuleTypes  = "DXE_SMM_DRIVER"
+End
+
+LibraryMapping
+    Class  = "AmiPeiCryptLibTiny"
+    Instance  = "AmiCryptoPkg.AmiPeiCryptLibTiny"
+    Arch  = "IA32 AARCH64"
+End
+
+LibraryMapping
+    Class  = "AmiPeiCryptLib"
+    Instance  = "AmiCryptoPkg.AmiPeiCryptLibTiny"
+    Arch  = "IA32 AARCH64"
+    ModuleTypes  = "PEIM PEI_CORE"
+    Token = "CONFIG_PEI_PKCS7" "=" "0"
+End
+
+LibraryMapping
+    Class  = "AmiPeiCryptLib"
+    Instance  = "AmiCryptoPkg.PeiCryptLib"
+    Arch  = "IA32 AARCH64"
+    ModuleTypes  = "PEIM PEI_CORE"
+    Token = "CONFIG_PEI_PKCS7" "=" "1"
+End
+
+#left for backward compatibility with old BiosGuard/FIT modules
+LibraryMapping
+    Class  = "PeiCryptLib"
+    Instance  = "AmiCryptoPkg.PeiCryptLib"
+    Arch  = "IA32 AARCH64"
+    ModuleTypes  = "PEIM PEI_CORE"
+End
+
+LibraryMapping
+    Class  = "BaseCryptLib"
+    Instance  = "AmiCryptoPkg.AmiCryptLib"
+    Token = "AmiBaseCryptLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "BaseCryptLib"
+    Instance  = "AmiCryptoPkg.AmiCryptLibRun"
+    ModuleTypes  = "DXE_RUNTIME_DRIVER"
+    Token = "AmiBaseCryptLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "BaseCryptLib"
+    Instance  = "AmiCryptoPkg.PeiCryptLib"
+    ModuleTypes  = "PEIM"
+#    Token = "AmiBaseCryptLib_SUPPORT" "=" "1"
+    Token = "BUILD_EDKII_PEI_CRYPT_LIB" "=" "0"
+End
+
+LibraryMapping
+    Class  = "AmiCryptIntrinsicLib"
+    Instance  = "AmiCryptoPkg.IntrinsicLib"
+    Arch  = "IA32"
+    Token = "AMI_MODULE_PKG_VERSION" "<" "39"
+End
+
+LibraryMapping
+    Class  = "AmiCryptIntrinsicLib"
+    Instance  = "AmiModulePkg.AmiMsftIntrinsicsLib"
+    Arch  = "IA32"
+    Token = "AMI_MODULE_PKG_VERSION" ">=" "39"
+End

@@ -1,0 +1,70 @@
+﻿﻿﻿﻿﻿﻿﻿//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+//
+// @file  ViewSelLog.uni
+//
+// Description: String definitions for the ViewSelLog
+//
+
+//#include "VFR.uni"
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"    // AMI Mapping Language
+
+#string STR_NULL_STRING                 #language en-US ""
+
+#string STR_VIEW_SEL_LOG_TITLE          #language en-US "View System Event Log"
+#string STR_VIEW_SEL_LOG_HELP           #language en-US "Press <Enter> to view the System Event Log Records."
+
+#string STR_VIEW_SEL_LOG_PROMPT          #language en-US "Retrieving all system events will take time. Do you want to continue?"
+
+#string STR_VIEW_MORE_SEL_LOG_TITLE     #language en-US "View remaining System Event Log"
+#string STR_VIEW_MORE_SEL_LOG_HELP      #language en-US "Press <Enter> to view the remaining System Event Log Records."
+
+#string STR_STATION_MAC_ADDRESS         #language en-US "Station MAC address"
+#string STR_STATION_IP1_VAL             #language en-US "-"
+
+#string STR_SYSTEM_ELOG_COUNT_STRING    #language en-US ""  //Dynamically updated
+
+#string STR_SEL_COLUMN_TITLE_SCREEN     #language en-US "DATE      TIME       SENSOR TYPE"
+#string STR_SEL_NO_PROTOCOL_FOUND       #language en-US "Proper components are not found to view the SEL."
+#string STR_SEL_NO_RECORDS_FOUND        #language en-US "<< System Event Log Is Empty >>"
+
+#string STR_SEL_RECORDS_DATA              #language en-US "HEX:"
+#string STR_GENERATORID_CHANNELNO         #language en-US "\nGenerator ID: %s (%s%d)"
+#string STR_BMCLUN_GENERATORID_CHANNELNO  #language en-US "\nGenerator ID: %s%d (%s%d)"
+#string STR_SENSOR_NUMBER                 #language en-US "\nSensor Number: 0x%2X  %s"
+#string STR_EVENT_DESCRIPTION             #language en-US "\nEvent Description: "
+#string STR_RECORD_TYPE                   #language en-US "Record Type-0x%02X. "
+#string STR_ASSERTION_EVENT               #language en-US "Assertion Event"
+#string STR_DEASSERTION_EVENT             #language en-US "Deassertion Event"
+#string STR_LOG_ENTRY_IN_SEL              #language en-US "No. of log entries in SEL : %d"
+#string STR_BMC_LUN                       #language en-US "BMC - LUN #"
+#string STR_CHANNEL_NUMBER                #language en-US "Channel #"
+#string STR_OEM_RECORD_TYPE               #language en-US "   OEM Record  %02X" //Added extra space for alignment
+#string STR_MANUFACTURER_ID               #language en-US "\nManufacturer ID (In Decimal):\n %d"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2016, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

@@ -1,0 +1,87 @@
+#/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+#  This file contains a 'Sample Driver' and is licensed as such
+#  under the terms of your license agreement with Intel or your
+#  vendor.  This file may be modified by the user, subject to
+#  the additional terms of the license agreement
+#
+#
+# Copyright (c)2009-2013 Intel Corporation. All rights reserved
+# This software and associated documentation (if any) is furnished
+# under a license and may only be used or copied in accordance
+# with the terms of the license. Except as permitted by such
+# license, no part of this software or documentation may be
+# reproduced, stored in a retrieval system, or transmitted in any
+# form or by any means without the express written consent of
+# Intel Corporation.
+
+#
+#  Module Name:
+#
+#   WheaElog.inf
+#
+#  Abstract:
+#
+#    Component description file for WheaElog handler module
+#
+#------------------------------------------------------------------------*/
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = WheaElog
+  FILE_GUID                      = 20B181E2-33E8-4211-B9D7-9B8696764E66
+  MODULE_TYPE                    = DXE_SMM_DRIVER
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x0001000A
+  ENTRY_POINT                    = WheaErstInit #AptioV Server Override: Using our ERST implementation as fatal error was not working with Intel WHEA
+
+[Sources]
+   WheaElog.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ServerCommonPkg/ServerCommonPkg.dec
+  IntelFrameworkPkg/IntelFrameworkPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec # AptioV Server Override: Whea Flash Block Porting
+  # APTIOV_SERVER_OVERRIDE_RC_START: Security fix
+  AmiModulePkg/AmiModulePkg.dec
+  # APTIOV_SERVER_OVERRIDE_RC_END: Security fix
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  IoLib
+  SmmServicesTableLib
+  BaseLib
+  # APTIOV_SERVER_OVERRIDE_RC_START: Security fix
+  BaseMemoryLib
+  AmiBufferValidationLib
+  # APTIOV_SERVER_OVERRIDE_RC_END: Security fix
+
+[Guids]
+ gEfiWheaElogFvGuid
+
+[Protocols]
+ gEfiSmmBase2ProtocolGuid
+ gEfiWheaSupportProtocolGuid 
+ gEfiSmmSwDispatch2ProtocolGuid
+ gEfiSmmFirmwareVolumeBlockProtocolGuid
+ gFlashSmmProtocolGuid #AptioV Server Override: Using our ERST implementation as fatal error was not working with Intel WHEA
+ gFlashProtocolGuid #AptioV Server Override: Using our ERST implementation as fatal error was not working with Intel WHEA
+
+[Depex]
+  gEfiAcpiSupportProtocolGuid AND
+  gEfiWheaSupportProtocolGuid AND
+  gEfiSmmBase2ProtocolGuid     AND
+  gEfiFirmwareVolumeBlockProtocolGuid AND
+  gEfiSmmSwDispatch2ProtocolGuid AND
+  gFlashSmmProtocolGuid #AptioV Server Override: Using our ERST implementation as fatal error was not working with Intel WHEA
+  
+  [Pcd]
+ #  gServerCommonTokenSpaceGuid.PcdWheaLogFvBase  #AptioV Server Override: Using our ERST implementation, hence commenting
+
+  

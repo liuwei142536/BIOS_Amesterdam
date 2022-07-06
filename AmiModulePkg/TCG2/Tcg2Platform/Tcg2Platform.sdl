@@ -1,0 +1,26 @@
+TOKEN
+    Name  = "TCG2PLATFORM_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Tcg platform Support Libraries"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+End
+
+PATH
+    Name  = "TCG2_PLATFORM"
+    Help  = ""
+End
+
+INFComponent
+    Name  = "MeasureMicrocodeSampleNullLib"
+    File  = "MeasureMicrocodeSampleLibNull.inf"
+    Package  = "AmiModulePkg"
+End
+
+LibraryMapping
+    Class  = "MeasureMicrocodeLib"
+    Instance  = "AmiModulePkg.MeasureMicrocodeSampleNullLib"
+End

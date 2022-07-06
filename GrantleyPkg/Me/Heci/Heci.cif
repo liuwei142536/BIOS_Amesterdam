@@ -1,0 +1,13 @@
+<component>
+	name = "Heci"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Heci\"
+	RefName = "GrantleyPkg.Me.Heci.Heci"
+[parts]
+"GrantleyPkg.HeciPei"
+"GrantleyPkg.HeciDxe"
+"GrantleyPkg.HeciSmm"
+"GrantleyPkg.HeciLibrary"
+"GrantleyPkg.MePolicyInitPei"
+"GrantleyPkg.MeUma"
+<endComponent>

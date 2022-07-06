@@ -1,0 +1,8 @@
+<component>
+	name = "Override"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Override\"
+	RefName = "GrantleyPkg.Override"
+[parts]
+"GrantleyPkg.Restricted"
+<endComponent>

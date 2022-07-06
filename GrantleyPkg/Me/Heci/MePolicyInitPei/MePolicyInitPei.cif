@@ -1,0 +1,10 @@
+<component>
+	name = "MePolicyInitPei"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Heci\MePolicyInitPei\"
+	RefName = "GrantleyPkg.MePolicyInitPei"
+[INF]
+"MePolicyInitPei.inf"
+[files]
+"MePolicyInitPei.sdl"	
+<endComponent>

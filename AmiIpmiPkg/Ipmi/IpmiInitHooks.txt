@@ -1,0 +1,63 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+
+/** @file IpmiInitHooks.h
+    Ipmi initialization hooks.
+
+**/
+
+#ifndef __IPMI_INIT_HOOKS_H__
+#define __IPMI_INIT_HOOKS_H__
+
+#define INIT_LPC_BMC_HOOK_LIST @elink(INIT_LPC_BMC_HOOK, "@Child", "", "")
+
+#if BMC_INIT_DELAY
+#define BMC_INIT_DELAY_HOOK_LIST @elink(BMC_INIT_DELAY_HOOK, "@Child", "", "")
+#endif  // #if BMC_INIT_DELAY
+
+#define SSIF_ALERT_PIN_CHECK_HOOK_LIST @elink(SSIF_ALERT_PIN_CHECK_HOOK, "@Child", "", "")
+
+#if (!IPMI_DEFAULT_HOOK_SUPPORT)
+#define IPMI_OEM_PEI_INIT_HOOK_LIST @elink(IPMI_OEM_PEI_INIT_HOOK, "@Child", "", "")
+#define IPMI_OEM_DXE_INIT_HOOK_LIST @elink(IPMI_OEM_DXE_INIT_HOOK, "@Child", "", "")
+#define IPMI_OEM_SMM_INIT_HOOK_LIST @elink(IPMI_OEM_SMM_INIT_HOOK, "@Child", "", "")
+#define IPMI_OEM_SPMI_UPDATE_HOOK_LIST @elink(IPMI_OEM_SPMI_UPDATE_HOOK, "@Child", "", "")
+#define IPMI_OEM_SMBIOS_TYPES_UPDATE_HOOK_LIST @elink(IPMI_OEM_SMBIOS_TYPES_UPDATE_HOOK, "@Child", "", "")
+#define IPMI_OEM_SYSTEM_INFO_UPDATE_HOOK_LIST @elink(IPMI_OEM_SYSTEM_INFO_UPDATE_HOOK, "@Child", "", "")
+#endif  // #if (!IPMI_DEFAULT_HOOK_SUPPORT)
+
+#if VIRTUAL_BMC_USB_INTERFACE
+#define BMC_USB_HOOK_LIST @elink(BMC_USB_INTERFACE_HOOK, "@Child", "", "")
+#endif  // #if VIRTUAL_BMC_USB_INTERFACE
+
+#if COMMAND_SPECIFIC_COUNTER_UPDATE_SUPPORT
+#define END_OF_COMMAND_SPECIFIC_RETRY_COUNT_TABLE {0xFF, 0xFF, 0xFFFFFFFF}
+#define COMMAND_SPECIFIC_RETRY_COUNT_TABLE_LIST @elink (COMMAND_SPECIFIC_RETRY_COUNT_TABLE, "@Child", " ", "") END_OF_COMMAND_SPECIFIC_RETRY_COUNT_TABLE
+#endif  // #if COMMAND_SPECIFIC_COUNTER_UPDATE_SUPPORT
+
+#endif  // #ifndef __IPMI_INIT_HOOKS_H__
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**         5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093     **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

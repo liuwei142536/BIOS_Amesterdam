@@ -1,0 +1,99 @@
+TOKEN
+    Name  = "DbgrLib_SUPPORT"
+    Value  = "1"
+    Help  = "Switch for Enabling DbgDbgrLib\DbgDbgrX64Lib support in the project"
+    TokenType = Boolean
+    Master = Yes
+    Token = "REDIRECTION_ONLY_MODE" "=" "0"
+End
+
+TOKEN
+    Name  = "DbgDbgrLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable DbgDbgrLib support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "DbgDbgrX64Lib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable DbgDbgrX64Lib support in Project"
+    TokenType = Boolean
+    Token = "X64_SUPPORT" "=" "1"
+End
+
+TOKEN
+    Name  = "OverRide_DebugCodeAddressLib_SUPPORT"
+    Value  = "0"
+    Help  = "1:Overide DebugCodeAdreesLib inf. 0: Executes AmiDebugger DebugCodeAdreesLib inf "
+    TokenType = Boolean
+End
+
+PATH
+    Name  = "DbgDbgrLib_DIR"
+    Path  = "AMIDebuggerPkg\Debugger\DbgDbgrLib"
+End
+
+INFComponent
+    Name  = "DbgDbgrLib"
+    File  = "DbgDbgrLib.inf"
+    Package  = "Debugger"
+    Arch  = "common"
+    Path  = "DbgDbgrLib_DIR"
+End
+
+INFComponent
+    Name  = "CommonDbgDbgrLib"
+    File  = "CommonDbgDbgrLib.inf"
+    Package  = "Debugger"
+    Arch  = "common"
+    Path  = "DbgDbgrLib_DIR"
+End
+
+INFComponent
+    Name  = "DebugCodeAddressLib"
+    File  = "DebugCodeAddressLib.inf"
+    Package  = "Debugger"
+    Token = "OverRide_DebugCodeAddressLib_SUPPORT" "=" "0"
+End
+
+LibraryMapping
+    Class  = "DebugDbgrLib"
+    Instance  = "Debugger.DbgDbgrLib"
+    Arch  = "IA32 X64"
+End
+
+LibraryMapping
+    Class  = "CommonDbgDbgrLib"
+    Instance  = "Debugger.CommonDbgDbgrLib"
+End
+
+LibraryMapping
+    Class  = "DebugCodeAddressLib"
+    Instance  = "Debugger.DebugCodeAddressLib"
+    Token = "OverRide_DebugCodeAddressLib_SUPPORT" "=" "0"
+End
+
+PcdMapping
+    Name  = "PcdNvramBaseAddres"
+    GuidSpace  = "gEfiAMIDebugRxPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(NVRAM_ADDRESS)"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Starting address of the NVRAM flash area"
+    TargetDSC = Yes
+End
+
+PcdMapping
+    Name  = "PcdNvramHeaderSize"
+    GuidSpace  = "gEfiAMIDebugRxPkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    Value  = "$(NVRAM_HEADER_SIZE)"
+    Offset  = 00h
+    Length  = 00h
+    Help  = "Size of NVRAM header, which is number of bytes from\the NVRAM_ADDRESS to the first variable record.\Currently defined as:\72(FV Header Size) + 24 (FFS File Header Size) + 48 Extended header size."
+    TargetDSC = Yes
+    Token = "SHELL_DEBUGGER_SUPPORT" "=" "0"
+End
+

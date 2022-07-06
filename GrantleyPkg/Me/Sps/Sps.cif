@@ -1,0 +1,15 @@
+<component>
+	name = "Sps"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Me\Sps\"
+	RefName = "GrantleyPkg.Sps"
+[INF]
+"Asl\AslExtension.inf"
+"Asl\Nvs\AslInformation.inf"
+[files]
+"Sps.sdl"	
+[parts]
+"GrantleyPkg.Me.Sps.Dxe.Dxe"
+"GrantleyPkg.Me.Sps.Pei.Pei"
+"GrantleyPkg.Me.Sps.Smm"
+<endComponent>

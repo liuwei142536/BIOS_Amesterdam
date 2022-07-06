@@ -1,0 +1,78 @@
+TOKEN
+	Name  = "SmmErrorLog_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling SmmErrorLog support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+    Name  = "AmiErrorLog_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmiErrorLog support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+	Name  = "MODE1_MEM_ERROR_REPORTING"
+	Value  = "0"
+	Help  = "Enables iMC to log additional error information when Corrected Error is detected"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONBOARD_VIDEO_ROOT_PORT_BUS_NUM"
+	Value  = "0"
+	Help  = "Onboard Video Bus number"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONBOARD_VIDEO_ROOT_PORT_DEV_NUM"
+	Value  = "0x1C"
+	Help  = "Onboard Video Device number"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "ONBOARD_VIDEO_ROOT_PORT_FUN_NUM"
+	Value  = "3"
+	Help  = "Onboard Video Function number"
+	TokenType = Integer
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "DISABLE_CA_ERROR_ON_WELLSBURG_ROOTPORT_VIDEO_DEVICE"
+	Value  = "1"
+	Help  = "Disable complete abort errors from on board video device."
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+TOKEN
+    Name  = "PCIE_ELOG_SWSMI"
+    Value  = "0xD5"
+    Help  = "This is the value of the SW SMI to use for PCIe Error Logging Configuration."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+INFComponent
+	Name  = "SmmErrorLog"
+	File  = "SmmErrorLog.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+    Token = "SmmErrorLog_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmiErrorLog"
+	File  = "AmiErrorLog.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmiErrorLog_SUPPORT" "=" "1"
+End

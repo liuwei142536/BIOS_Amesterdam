@@ -1,0 +1,69 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+
+/**
+   @file PciOutOfResourceSetupPage.uni
+
+   String Definitions for Pci Out Of Resource.
+**/
+
+/=#
+
+#langdef   en-US "English"    // English
+#langdef   x-AMI "x-AMI"      // AMI Mapping Language
+
+#string STR_EMPTY                               #language en-US ""
+#string STR_ENABLED                             #language en-US "Enabled"
+#string STR_DISABLED                            #language en-US "Disabled"
+#string STR_NONE                                #language en-US "None"
+#string STR_AUTO                                #language en-US "Auto"
+
+#string STR_PCI_OUT_OF_RESOURCE_PAGE            #language en-US "!!!! PCI Resource ERROR !!!!"
+                                                #language x-AMI "PCIO001"
+
+#string STR_INSUFFICIENT_PCI_RESOURCE           #language en-US "PCI OUT OF RESOURCES CONDITION:"
+                                                #language x-AMI "PCIO002"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_1    #language en-US "ERROR: Insufficient PCI Resources Detected!!!" 
+                                                #language x-AMI "PCIO003"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_2    #language en-US "System is running with Insufficient PCI Resources!"
+                                                #language x-AMI "PCIO004"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_3    #language en-US "In order to display this message some"
+                                                #language x-AMI "PCIO005"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_3_1  #language en-US "PCI devices were set to disabled state!"
+                                                #language x-AMI "PCIO006"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_4    #language en-US "It is strongly recommended to Power Off the system "
+                                                #language x-AMI "PCIO007"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_4_1  #language en-US "and remove some PCI/PCI Express cards from the system!"
+                                                #language x-AMI "PCIO008"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_5    #language en-US "To continue booting, proceed to <Save & Exit> Menu Option "
+                                                #language x-AMI "PCIO009"
+#string STR_INSUFFICIENT_PCI_RESOURCE_HELP_5_1  #language en-US "and select Boot Device or <Discard Changes and Exit>."
+                                                #language x-AMI "PCIO010"
+#string STR_INSUFFICIENT_PCI_RESOURCE_WARNING   #language en-US "WARNING: If you choose to continue booting some Operating"
+                                                #language x-AMI "PCIO011"
+#string STR_INSUFFICIENT_PCI_RESOURCE_WARNING1  #language en-US "    Systems might not be able to complete boot correctly!"
+                                                #language x-AMI "PCIO012"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2018, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

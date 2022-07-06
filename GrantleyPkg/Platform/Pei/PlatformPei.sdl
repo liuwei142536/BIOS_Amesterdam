@@ -1,0 +1,32 @@
+TOKEN
+	Name  = "PlatformPei_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Pei support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "PlatformInfo_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable PlatformInfo support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "PlatformInfo"
+	File  = "PlatformInfo\PlatformInfo.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+	Token = "PlatformInfo_SUPPORT" "=" "1"
+    Token = "GRANGEVILLE_PLATFORM" "=" "0"
+End
+
+#FFS_FILE 
+#	Name  = "PlatformInfo"
+#	FD_AREA  = "FV_BB"
+#	INFComponent  = "PlatformInfo"
+#	Index  = "1"
+#	Apriori_Index  = "5"
+#	Token = "PlatformInfo_SUPPORT" "=" "1"
+#End

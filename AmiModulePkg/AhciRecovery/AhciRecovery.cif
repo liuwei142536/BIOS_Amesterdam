@@ -1,0 +1,19 @@
+<component>
+	name = "AhciRecovery"
+	category = eModule
+	LocalRoot = "AmiModulePkg\AhciRecovery\"
+	RefName = "AhciRecovery"
+[INF]
+"AhciRecovery.inf"
+[files]
+"AhciRecovery.sdl"	
+"AhciRecovery.chm"	
+"AhciRecoveryElink.txt"	
+[parts]
+"AhciControllerRecPpi"
+[dependency]
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_32"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_10"
+MdeModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdeModulePkg;MdeModulePkg_19"
+AmiModulePkg.Recovery >= "SS: AptioV;$/AptioV/Source/Modules/Recovery;Recovery_11"
+<endComponent>

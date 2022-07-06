@@ -1,0 +1,18 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "WellsburgPkg\Include\"
+	RefName = "WellsburgPkg.Include"
+[files]
+"IobpDefinitions.h"	
+"PchAccess.h"	
+"PchSmmAccess.h"	
+"PchRegs.h"	
+"PchUsbConfig.h"	
+"S3SupportHob.h"	
+[parts]
+"WellsburgPkg.Include.Library"
+"WellsburgPkg.PchRegs"
+"WellsburgPkg.Ppi"
+"WellsburgPkg.Protocol"
+<endComponent>

@@ -1,0 +1,21 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Include\"
+	RefName = "AmiModulePkg.Include"
+[files]
+"AmiBds.h"	
+"AmiPlatformInfo.h"	
+"AmiRomLayout.h"	
+"AmiSmmCommunicationMailbox.h"	
+"AmiStorageFeatures.h"	
+"BootOptions.h"	
+"Fid.h"	
+"PciE30.h"	
+[parts]
+"AmiModulePkg.Guid"
+"AmiModulePkg.IndustryStandard"
+"AmiModulePkg.Library"
+"AmiModulePkg.Ppi"
+"AmiModulePkg.Protocol"
+<endComponent>

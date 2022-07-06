@@ -1,0 +1,98 @@
+TOKEN
+	Name  = "Dxe_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling Dxe support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "AmtBoot_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmtBoot support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmtPetAlert_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmtPetAlert support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmtSetup_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmtSetup support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AmtWrapperDxe_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AmtWrapperDxe support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "AsfTable_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AsfTable support in Project"
+	TokenType = Boolean
+End
+
+TOKEN
+	Name  = "MeSmbios_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable AsfTable support in Project"
+	TokenType = Boolean
+End
+
+INFComponent
+	Name  = "AmtBoot"
+	File  = "AmtBoot\AmtBoot.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmtBoot_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmtPetAlert"
+	File  = "AmtPetAlert\AmtPetAlert.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmtPetAlert_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmtSetup"
+	File  = "AmtSetup\AmtSetup.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmtSetup_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AmtWrapperDxe"
+	File  = "AmtWrapperDxe\AmtWrapperDxe.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AmtWrapperDxe_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "AsfTable"
+	File  = "AsfTable\AsfTable.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "AsfTable_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "MeSmbios"
+	File  = "MeSmbios\MeSmbios.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "MeSmbios_SUPPORT" "=" "1"
+	Token = "GRANGEVILLE_PLATFORM" "=" "0"
+End

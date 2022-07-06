@@ -1,0 +1,31 @@
+TOKEN
+	Name  = "BiosExtensionLoader_SUPPORT"
+	Value  = "1"
+	Help  = "Switch for Enabling BiosExtensionLoader support in the project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "BiosExtensionLoader"
+	File  = "Efi\BiosExtensionLoader\Dxe\BiosExtensionLoader.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "BiosExtensionLoader_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "Mebx"
+	File  = "Efi\EfiMEBx\Mebx\Mebx.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "BiosExtensionLoader_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "MebxSetupBrowser"
+	File  = "Efi\EfiMEBx\MebxSetupBrowser\MebxSetupBrowser.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "BiosExtensionLoader_SUPPORT" "=" "1"
+End

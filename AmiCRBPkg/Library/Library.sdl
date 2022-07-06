@@ -1,0 +1,116 @@
+#*************************************************************************
+#*************************************************************************
+#**                                                                     **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.            **
+#**                                                                     **
+#**                       All Rights Reserved.                          **
+#**                                                                     **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
+#**                                                                     **
+#**                       Phone: (770)-246-8600                         **
+#**                                                                     **
+#*************************************************************************
+#*************************************************************************
+
+TOKEN
+	Name  = "Library_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable CRB library code support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+TOKEN
+ Name  = "BaseTscTimerLib_SUPPORT"
+ Value  = "0"
+ Help  = "Main switch to enable DxeTscTimerLib support in Project"
+ TokenType = Boolean
+ Token = "PERFORMANCE_ENABLE" "=" "1"
+End
+
+TOKEN
+ Name  = "DxeTscTimerLib_SUPPORT"
+ Value  = "1"
+ Help  = "Main switch to enable DxeTscTimerLib support in Project"
+ TokenType = Boolean
+ Token = "PERFORMANCE_ENABLE" "=" "1"
+End
+
+TOKEN
+ Name  = "PeiTscTimerLib_SUPPORT"
+ Value  = "1"
+ Help  = "Main switch to enable PeiTscTimerLib support in Project"
+ TokenType = Boolean
+ Token = "PERFORMANCE_ENABLE" "=" "1"
+End
+
+INFComponent
+    Name  = "AmiPlatformAcpiLib"
+    File  = "AmiPlatformAcpiLib\AmiPlatformAcpiLib.inf"
+    Package  = "AmiCRBPkg"
+    ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER"
+End
+
+INFComponent
+    Name  = "AmiPlatformAcpiLibNull"
+    File  = "AmiPlatformAcpiLibNull\AmiPlatformAcpiLibNull.inf"
+    Package  = "AmiCRBPkg"
+    ModuleTypes  = "BASE"
+End
+
+INFComponent
+	Name  = "BaseTscTimerLib"
+	File  = "TscTimerLib\BaseTscTimerLib.inf"
+	Package  = "AmiCRBPkg"
+	ModuleTypes  = "PEIM"
+	Token = "BaseTscTimerLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "DxeTscTimerLib"
+	File  = "TscTimerLib\DxeTscTimerLib.inf"
+	Package  = "AmiCRBPkg"
+	ModuleTypes  = "DXE_DRIVER"
+	Token = "DxeTscTimerLib_SUPPORT" "=" "1"
+End
+
+INFComponent
+	Name  = "PeiTscTimerLib"
+	File  = "TscTimerLib\PeiTscTimerLib.inf"
+	Package  = "AmiCRBPkg"
+	ModuleTypes  = "PEIM"
+	Token = "PeiTscTimerLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "TimerLib"
+	Instance  = "AmiCRBPkg.BaseTscTimerLib"
+	Disable = Yes
+End
+
+LibraryMapping
+	Class  = "TimerLib"
+	Instance  = "AmiCRBPkg.DxeTscTimerLib"
+	ModuleTypes  = "DXE_CORE DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER UEFI_APPLICATION UEFI_DRIVER SMM_CORE"
+	Token = "DxeTscTimerLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+	Class  = "TimerLib"
+	Instance  = "AmiCRBPkg.PeiTscTimerLib"
+	ModuleTypes  = "PEIM PEI_CORE"
+	Token = "PeiTscTimerLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "AmiPlatformAcpiLib"
+    Instance  = "AmiCRBPkg.AmiPlatformAcpiLib"
+    ModuleTypes  = "DXE_DRIVER DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+    Class  = "AmiPlatformAcpiLib"
+    Instance  = "AmiCRBPkg.AmiPlatformAcpiLibNull"
+End

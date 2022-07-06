@@ -1,0 +1,8 @@
+<component>
+	name = "Legacy"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Legacy\"
+	RefName = "GrantleyPkg.Legacy"
+[parts]
+"GrantleyPkg.Legacy.Dxe"
+<endComponent>

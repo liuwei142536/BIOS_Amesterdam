@@ -1,0 +1,470 @@
+/*++
+  This file contains 'Framework Code' and is licensed as such
+  under the terms of your license agreement with Intel or your
+  vendor.  This file may not be modified, except as allowed by
+  additional terms of your license agreement.
+--*/
+/*++
+
+  Copyright (c)  2001 - 2014 Intel Corporation.  All rights reserved.
+
+  This software and associated documentation (if any) is furnished under 
+  a license and may only be used or copied in accordance with the terms 
+  of the license.  Except as permitted by such license, no part of this 
+  software or documentation may be reproduced, stored in a retrieval 
+  system, or transmitted in any form or by any means without the express 
+  written consent of Intel Corporation.
+
+  Module Name:
+
+    CommonPlatform.asi
+
+  Abstract:
+
+    Contains common objects for the platform
+
+--*/
+
+#include "tokenasl.h"
+
+//AptioV server override start: Add TokenAsl.h SDL output 
+#if ASL_SPS_ASL_SUPPORT
+  //
+  // External declarations
+  // HECI-1/HECI-2 are in GrantleyPkg\Me\Sps\Asl\SpsNm.asl
+  //
+  External(\_SB.PCI0.HEC2._STA, MethodObj)
+  External(\_SB.PCI0.HEC2.HPTS, MethodObj)
+  External(\_SB.PCI0.HEC2.HWAK, MethodObj)
+#endif	
+  
+  #define DRGO 0x00    // TypeDurangoDVP = 0
+  #define BVCR 0x01    // TypeBeverlyCoveCRB = 1, RDIMM
+  #define BVCS 0x02    // TypeBeverlyCoveSODimmCRB, SODIMM
+  #define TBCN 0x03    // TypeTrabucoCanyon,
+  #define PSWP 0x04    // TypePiestewaPeak,
+  #define CMBM 0x05    // TypeCamelbackMountain,
+  #define TLQE 0x06    // TypeTlaquepaque
+  
+/* AptioV server override start: Auto-generated in build\dsdt.asl
+  //
+  // System Sleep States
+  //
+  Name (\_S0,Package (){0,0,0,0})
+  Name (\_S3,Package (){5,0,0,0})   // Name changed to \DS3 if disabled in Setup
+  Name (\_S4,Package (){6,0,0,0})   // Name changed to \DS4 if disabled in Setup
+  Name (\_S5,Package (){7,0,0,0})
+AptioV server override end */
+  
+  //
+  // Native OS hot plug support, 0->ACPI, 1->OS 
+  //
+  Name (\OSHF, 0)
+
+  //
+  // OS flag
+  //
+  #include "..\GrangevillePkg\Acpi\AcpiTables\Dsdt\OS.asi" //AptioV server override
+//AptioV server override start:  Objects common to CPU PM and ME runtime code is moved into DSDT
+//Add TokenAsl.h SDL output 
+#if ASL_SPS_ASL_SUPPORT
+  //
+  // SPS Node Manager defines current P-State & T-State limit
+  // Objects PSLM and TSLM are referenced in _PPC and _TPC
+  // PETE is a bitmask of P-states T-states support enabled in OS.
+  //
+  Name(HWPE, 0) // CPC object supported and HWPM enabled flag
+  Name(PETE, 0)
+  Name(PSLM, Package(){0,0,0,0,0,0,0,0}) // P-State limit per socket
+  Name(TSLM, Package(){0,0,0,0,0,0,0,0}) // T-State limit per socket
+#endif        
+//AptioV server override end: Objects common to CPU PM and ME runtime code is moved into DSDT.
+
+  //
+  // Fixup for IIO and Uncore BBN number
+  //
+  Name (\BBI0, 0x4C584946)    // (FIXL - Patched by ACPI Platform Driver during POST)
+  Name (\BBI1, 0x4D584946)    // (FIXM - Patched by ACPI Platform Driver during POST)
+  Name (\BBI2, 0x4E584946)    // (FIXN - Patched by ACPI Platform Driver during POST)
+  Name (\BBI3, 0x4F584946)    // (FIXO - Patched by ACPI Platform Driver during POST)
+  Name (\BBU0, 0x50584946)    // (FIXP - Patched by ACPI Platform Driver during POST)
+  Name (\BBU1, 0x51584946)    // (FIXQ - Patched by ACPI Platform Driver during POST)
+  Name (\BBU2, 0x52584946)    // (FIXR - Patched by ACPI Platform Driver during POST)
+  Name (\BBU3, 0x53584946)    // (FIXS - Patched by ACPI Platform Driver during POST)
+  //AptioV server override start: Use method available in ASLLIB.asl
+  //
+  // for determing PIC mode
+  //
+  /*
+  Name (\PICM,Zero)
+  Method (\_PIC, 1, NotSerialized) {
+    Store(Arg0,\PICM)
+  }
+  */
+  //AptioV server override end: Use method available in ASLLIB.asl
+  OperationRegion (DBG0, SystemIO, 0x80, 2)
+  Field (DBG0, ByteAcc,NoLock,Preserve) {
+    IO80, 8,
+    IO81, 8
+  }
+
+  //
+  // Access CMOS range
+  //
+  OperationRegion (ACMS, SystemIO, 0x72, 2)
+  Field ( ACMS, ByteAcc, NoLock, Preserve) {
+    INDX, 8,
+    DATA, 8
+  }
+
+  // 
+  // SWGPE_CTRL
+  //
+  OperationRegion (GPCT, SystemIO, 0x442, 1)
+  Field ( GPCT, ByteAcc, NoLock, Preserve) {
+          ,   1,
+    SGPC  ,   1,
+  }
+
+  // 
+  // GPI_INV
+  //
+  OperationRegion (GPIV, SystemIO, 0x52c, 2)
+  Field ( GPIV, ByteAcc, NoLock, Preserve) {
+    GP0I  ,   1,
+          ,   13, //Set to match Patsburg (GPIO Number for CPU Hotplug Interrupts) - 1. e.g GPIO14 translates to (14 - 1) = 13.
+    RASI  ,   1,
+  }
+
+
+  //
+  // BIOS parameter BIOS_ACPI_PARAM
+  //
+  OperationRegion (PSYS, SystemMemory, 0x30584946, 0x400) // (FIX0 - Patched by ACPI Platform Driver during POST)
+  Field (PSYS, ByteAcc, NoLock, Preserve) {
+    PLAT   ,  32,   // Platform ID
+    Offset (0x04),
+    APC0   ,   1,   // PCH IOAPIC Enable
+    APC1   ,   1,   // PCI0 IOAPIC Enable
+    APC2   ,   1,   // PCI1 IOAPIC Enable
+    APC3   ,   1,   // PCI2 IOAPIC Enable
+    APC4   ,   1,   // PCI3 IOAPIC Enable
+    Offset (0x05),
+    RES0   ,  8,    // Unused
+    TPME   ,  1,    // TPM Enable
+    CSEN   ,  1,    // C State Enable
+    C3EN   ,  1,    // OS C3 Report Enbale
+    C6EN   ,  1,    // C6 Enable
+    C7EN   ,  1,    // C7 Enable
+    MWOS   ,  1,    // MWAIT support Enable
+    PSEN   ,  1,    // P State Enable
+    EMCA   ,  1,    // EMCA Enable
+    Offset (0x07),
+    HWAL   ,  1,    // PSD HW_ALL Enable
+    KPRS   ,  1,    // KB present Flag
+    MPRS   ,  1,    // Mouse present Flag
+    TSEN   ,  1,    // T State Enable Flag
+    FGTS   ,  1,    // Fine grained T state Flag
+    OSCX   ,  1,    // OS C States
+    RESX   ,  2,    // Unused
+    Offset (0x08),
+    // Update every time CPU Hotpug event is registered as valid
+    CPHP   ,  8,    // Bit field for determining CPU hotplug event is happening
+                    // Bit0 CPU0 O*L Request
+                    // Bit1 CPU1 O*L Request
+                    // Bit2 CPU2 O*L Request
+                    // Bit3 CPU3 O*L Request
+                    // Bit4-7 Reserved
+    // Update every time IIO Hotpug event is registered as valid
+    IIOP   ,  8,    // Bit field for determining IIO hotplug event is happening
+                    // Bit0 IIO1 O*L Request
+                    // Bit1 IIO2 O*L Request
+                    // Bit2 IIO3 O*L Request
+                    // Bit3-7 Reserved
+    // Update every time IIO hotplug event happens and at boot time (Patched by ACPI Platform Driver during POST)
+    IIOH   ,  8,    // IIO bit Mask, what IIOs are present for STA method
+    //RPAD   ,  8,    // Pad to let the following aligned at 4
+    CPUT   ,  8,    // Detects CPU type.
+    // Update every time hotplug event happen and at boot time (Patched by ACPI Platform Driver during POST)
+    PRBM   , 32,    // Processor Bit mask, what sockets are present for STA method
+    P0ID   , 32,    // Processor 0 APIC ID base
+    P1ID   , 32,    // Processor 1 APIC ID base
+    P2ID   , 32,    // Processor 2 APIC ID base
+    P3ID   , 32,    // Processor 3 APIC ID base
+    P0BM   , 64,    // Processor 0 Bit mask, what cores are present for STA method 
+    P1BM   , 64,    // Processor 1 Bit mask, what cores are present for STA method 
+    P2BM   , 64,    // Processor 2 Bit mask, what cores are present for STA method 
+    P3BM   , 64,    // Processor 3 Bit mask, what cores are present for STA method 
+    MEBM   , 16,    // Memory controller bit mask what memory controllers are present, for STA Method
+    MEBC   , 16,    // Memory controller change event mask what memory controllers have been changed, for notify
+    CFMM   , 32,    // MMCFG Base
+    TSSZ   , 32,    // TSEG Size.
+    M0BS   , 64,    // Memory Controller Base 0
+    M1BS   , 64,    // Memory Controller Base 1
+    M2BS   , 64,    // Memory Controller Base 2
+    M3BS   , 64,    // Memory Controller Base 3
+    M4BS   , 64,    // Memory Controller Base 4
+    M5BS   , 64,    // Memory Controller Base 5
+    M6BS   , 64,    // Memory Controller Base 6
+    M7BS   , 64,    // Memory Controller Base 7
+    M0RN   , 64,    // Memory Controller Range 0
+    M1RN   , 64,    // Memory Controller Range 1
+    M2RN   , 64,    // Memory Controller Range 2
+    M3RN   , 64,    // Memory Controller Range 3
+    M4RN   , 64,    // Memory Controller Range 4
+    M5RN   , 64,    // Memory Controller Range 5
+    M6RN   , 64,    // Memory Controller Range 6
+    M7RN   , 64,    // Memory Controller Range 7
+    SMI0   , 32,    // Parameter0 used for faked SMI request
+    SMI1   , 32,    // Parameter1 used for faked SMI request
+    SMI2   , 32,    // Parameter2 used for faked SMI request
+    SMI3   , 32,    // Parameter3 used for faked SMI request
+    SCI0   , 32,    // Parameter0 used for faked SCI request
+    SCI1   , 32,    // Parameter1 used for faked SCI request
+    SCI2   , 32,    // Parameter2 used for faked SCI request
+    SCI3   , 32,    // Parameter3 used for faked SCI request
+    //
+    // Migration support written for 8 CPU socket system. In a 4 socket system, CPU4-7 and MEM8-15 are invalid.
+    //
+    MADD   , 64,    // Migration ActionRegion GAS address.
+    CUU0   , 128,   // CPU0 UUID
+    CUU1   , 128,   // CPU1 UUID
+    CUU2   , 128,   // CPU2 UUID
+    CUU3   , 128,   // CPU3 UUID
+    CUU4   , 128,   // CPU4 UUID
+    CUU5   , 128,   // CPU5 UUID
+    CUU6   , 128,   // CPU6 UUID
+    CUU7   , 128,   // CPU7 UUID
+    CPSP   , 8,     // CPU spare bitmap. 1 == IsSpare.
+    ME00   , 128,   // MEM0 UUID
+    ME01   , 128,   // MEM1 UUID
+    ME10   , 128,   // MEM2 UUID
+    ME11   , 128,   // MEM3 UUID
+    ME20   , 128,   // MEM4 UUID
+    ME21   , 128,   // MEM5 UUID
+    ME30   , 128,   // MEM6 UUID
+    ME31   , 128,   // MEM7 UUID
+    ME40   , 128,   // MEM8 UUID
+    ME41   , 128,   // MEM9 UUID
+    ME50   , 128,   // MEM10 UUID
+    ME51   , 128,   // MEM11 UUID
+    ME60   , 128,   // MEM12 UUID
+    ME61   , 128,   // MEM13 UUID
+    ME70   , 128,   // MEM14 UUID
+    ME71   , 128,   // MEM15 UUID
+    MESP   , 16,    // Memory module spare bitmap. 1 == IsSpare.
+    DHRD   , 192,   // DHRD
+    ATSR   , 192,   // ATSR
+    RHSA   , 192,   // RHSA
+    LDIR   , 64,   // L1 Directory Address
+    PRID   , 32,    // Processor ID
+
+    // SR-IOV WA changes
+    WSIC   , 8,
+    WSIS   , 16,
+    WSIB   , 8,
+    WSID   , 8,
+    WSIF   , 8,
+    WSTS   , 8,
+    WHEA   , 8,
+    
+    // PFAT
+    PFMA   , 64,    // PFAT Memory Address
+    PFMS   , 8,     // PFAT Memory Size
+    PFIO   , 16,    // PFAT IO Trap Address
+    CNBS   , 8,     // CPU SKU number bit shift - 0: 16C, 1: 18C, 2: SkuSlices < 16, 3: Reserved 
+
+    // USB3
+    XHMD   , 8,     // copy of setup item PchUsb30Mode
+    SBV1   , 8,     // USB Sideband Deferring GPE Vector (HOST_ALERT#1)
+    SBV2   , 8,     // USB Sideband Deferring GPE Vector (HOST_ALERT#2)
+    
+    // Individual sleep state enables
+    SBS3   , 8,    // S3 enable
+    SBS4   , 8,    // S4 enable
+
+    AHPE   , 8,     // ACPI PCIe hot plug enable. 
+    CLOD   , 8,     // Cluster On Die Support enabled flag
+           
+    //HWPM-start
+    HWEN   ,  2,    // HWPM State Enable option from setup
+    ACEN   ,  1,    // Autonomous C-state Enable option from setup
+    
+    RES1   ,  5,    //HWPM-end
+    SOLE   ,  8,     // Enable and Disable the IPMI  
+	STEP   ,  8,
+  }
+
+  //
+  // Operation region for GPI status bits
+  //
+  OperationRegion (GSTS, SystemIO, 0x422, 2)
+  Field ( GSTS, ByteAcc, NoLock, Preserve) {
+    GP00  , 1,
+          , 12,
+    GP13  , 1,
+  }
+
+  //
+  // GPE0 HOT_PLUG_EN
+  //
+  OperationRegion (GPE0, SystemIO, 0x428, 8)
+  Field (GPE0, ByteAcc,NoLock,Preserve) {
+    ,1,
+    GPEH,1,
+    ,1,
+    USB1,1,
+    USB2,1,
+    USB5,1,
+    ,3, 
+    PCIE,1,
+    ,1,
+    PMEE,1,
+    USB3,1,
+    PMB0,1,
+    USB4,1,
+    ,9,
+    ,1,
+    ,7,
+    USB6,1,
+    ,15,
+  }
+
+  //
+  // GPES Status
+  //
+  OperationRegion (GPES, SystemIO, 0x420, 8)
+  Field (GPES, ByteAcc,NoLock,Preserve) {
+    ,1,
+    GPSH,1,
+    SGPS,1,
+    US1S,1,
+    US2S,1,
+    US5S,1,
+    ,1, 
+    SMWS,1,
+    ,1, 
+    PEES,1,
+    ,1,
+    PMES,1,
+    
+    US3S ,1,
+    PMBS,1,
+    US4S ,1,
+    ,9,
+    ,1,
+    ,7,
+    US6S,1,
+    ,15,
+  }
+  
+  //
+  // System sleep down
+  //
+  Method (IPTS, 1, NotSerialized)  //AptioV server override: _PTS -> IPTS
+  {
+    Store (0x72, IO80)  // Sync with EfiPostCode.h
+
+    //
+    // Clear wake event status.
+    //
+    Store(1,US1S)
+    Store(1,US2S)
+    Store(1,US5S)
+    Store(1,SMWS)
+    Store(1,PMES)
+    Store(1,US3S)
+    Store(1,PMBS)
+    Store(1,US4S)
+    Store(1,US6S)
+
+    //
+    // Enable SCI and wake event sources.
+    //
+    Store(1,GPEH)
+    Store(1,USB1)
+    Store(1,USB2)
+    Store(1,USB5)
+    Store(1,PCIE)
+    Store(1,PMEE)
+    Store(1,USB3)
+    Store(1,PMB0)
+    Store(1,USB4)
+    Store(1,USB6)
+
+#if ASL_SPS_ASL_SUPPORT  //AptioV server override : Add TokenAsl.h SDL output
+    //
+    // If HECI-2 is enabled and decoding resources (i.e. if server platform)
+    //
+    If (And (\_SB.PCI0.HEC2._STA(), 0x02)) {
+    \_SB.PCI0.HEC2.HPTS()
+    }
+#endif   //AptioV server override : Add TokenAsl.h SDL output
+  }
+
+  //
+  // System go to sleep
+  //
+  Method (_GTS, 1, NotSerialized) {
+    Store (Arg0, IO80)
+  }
+
+  #include "..\GrangevillePkg\Acpi\AcpiTables\Dsdt\Uncore.asi" //AptioV server override
+
+  //
+  // System Wake up
+  //
+  Method (IWAK, 1, Serialized) //AptioV server override: _WAK -> IWAK
+  {
+    Store (0x73, IO80)  // Sync with EfiPostCode.h
+
+    //
+    // Make sure OS enumerates USB to avoid losing some of the devices
+    //
+    Notify (\_SB.PCI0.EHC1, 0x00)
+    Notify (\_SB.PCI0.EHC2, 0x00)
+
+#if ASL_SPS_ASL_SUPPORT  //AptioV server override : Add TokenAsl.h SDL output
+    //
+    // If HECI-2 is enabled and decoding resources (i.e. if server platform)
+    //
+    If (And (\_SB.PCI0.HEC2._STA(), 0x02)) {
+    \_SB.PCI0.HEC2.HWAK()
+    }
+#endif  //AptioV server override : Add TokenAsl.h SDL output
+
+    //
+    // If waking from S3 or S4 Resume
+    //
+    If (LOr(LEqual(Arg0,3), LEqual(Arg0,4))) {
+      //
+      // If USB ports were routed to XHCI before sleep entry,
+      //  re-route them back to XHCI now
+      //
+      \_SB.PCI0.XHCI.XWAK()
+    }
+
+    Return(Package(){0, 0})
+  }
+
+  Scope(\_SB) {
+  
+    // Information on CPU and Memory for hotplug SKUs
+    #include "..\GrangevillePkg\Acpi\AcpiTables\Dsdt\CpuMemHp.asi" //AptioV server override
+  
+    // Information on CPU and Memory for non-hotplug SKUs
+    // #include "CpuMem.asi"
+  
+    OperationRegion (IOB2, SystemIO, 0xB2, 2)  //MKF_SMIPORT
+    Field (IOB2, ByteAcc, NoLock, Preserve) {
+      SMIC, 8,                               // SW-SMI ctrl port
+      SMIS, 8,                               // SW-SMI status port
+    }
+
+    //
+    // WHEA
+    //
+    #include "..\GrangevillePkg\Acpi\AcpiTables\Dsdt\Whea.asi" //AptioV server override
+  }   // end _SB scope
+
+  

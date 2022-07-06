@@ -1,0 +1,12 @@
+<component>
+	name = "AmiTseTcgStorageSecurity"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg/TcgStorageSecurity/AmiTseTcgStorageSecurity/"
+	RefName = "AmiTseTcgStorageSecurity"
+[INF]
+"AmiTseTcgStorageSecurity.inf"
+[files]
+"AmiTseTcgStorageSecurity.sdl"
+"AmiTseTcgStorageSecurity.uni"
+"AmiTseTcgStorageSecurityFakeTokens.c"
+<endComponent>

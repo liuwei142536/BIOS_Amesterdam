@@ -1,0 +1,31 @@
+TOKEN
+	Name  = "FirmwarePerformanceDataTable_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable FirmwarePerformanceDataTable support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+End
+
+INFComponent
+	Name  = "FirmwarePerformancePei"
+	File  = "FirmwarePerformanceDataTablePei/FirmwarePerformancePei.inf"
+	Package  = "MdeModulePkg"
+	ModuleTypes  = "PEIM"
+End
+
+INFComponent
+	Name  = "FirmwarePerformanceDxe"
+	File  = "FirmwarePerformanceDataTableDxe/FirmwarePerformanceDxe.inf"
+	Package  = "MdeModulePkg"
+	ModuleTypes  = "DXE_DRIVER"
+End
+
+INFComponent
+	Name  = "FirmwarePerformanceSmm"
+	File  = "FirmwarePerformanceDataTableSmm/FirmwarePerformanceSmm.inf"
+	Package  = "MdeModulePkg"
+	ModuleTypes  = "DXE_SMM_DRIVER"
+End
+

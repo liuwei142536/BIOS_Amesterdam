@@ -1,0 +1,16 @@
+TOKEN
+	Name  = "MePolicyInitPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable MePolicyInitPei support in Project"
+	TokenType = Boolean
+	Master = Yes
+End
+
+INFComponent
+	Name  = "MePolicyInitPei"
+	File  = "MePolicyInitPei.inf"
+	Package  = "GrantleyPkg"
+	ModuleTypes  = "PEIM"
+	Token = "MePolicyInitPei_SUPPORT" "=" "1"
+End
+

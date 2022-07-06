@@ -1,0 +1,11 @@
+<component>
+	name = "Include"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Override\Restricted\IA32FamilyCpuPkg\Include\"
+	RefName = "GrantleyPkg.Override.Restricted.IA32FamilyCpuPkg.Include.Include"
+[files]
+"CpuHotPlugData.h"	
+[parts]
+"GrantleyPkg.Override.Restricted.IA32FamilyCpuPkg.Include.Library.Library"
+"GrantleyPkg.Override.Restricted.IA32FamilyCpuPkg.Include.Protocol.Protocol"
+<endComponent>

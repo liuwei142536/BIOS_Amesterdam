@@ -1,0 +1,31 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+## @file
+#   This AMI Load Image Library
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = AmiListLib
+  FILE_GUID                      = 8ECA67EE-6B63-4fb0-9E5D-C9453C79EFF1
+  MODULE_TYPE                    = BASE
+  LIBRARY_CLASS                  = AmiListLib
+
+[Sources]
+  AmiListLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiModulePkg/AmiModulePkg.dec

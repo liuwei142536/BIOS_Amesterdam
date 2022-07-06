@@ -1,0 +1,48 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DbgModuleLocator
+  FILE_GUID                      = F495F038-71E6-49db-9A80-B2E98F7BA718
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 0.1
+  LIBRARY_CLASS                  = DbgModuleLocator
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64
+#
+[Sources.ia32]
+  PeiDbgModuleLocator.c
+  
+[Sources.common]
+ 
+[Sources.X64]
+  DxeDbgModuleLocator.c
+  DbgImageAsmFuncs.S      | GCC
+  DbgImageAsmFuncs.asm    | MSFT
+
+
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  AMIDebuggerPkg/AMIDebuggerPkg.dec
+  
+[LibraryClasses]
+  HobLib
+  CommonDbgMLLib
+
+[LibraryClasses.x64]
+  AmiDxeLib

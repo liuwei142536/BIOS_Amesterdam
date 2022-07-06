@@ -1,0 +1,561 @@
+﻿﻿﻿//
+// This file contains an 'Intel Peripheral Driver' and is
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may
+// be modified by the user, subject to additional terms of the
+// license agreement
+//
+
+// /*++
+// Copyright (c) 2011 Intel Corporation. All rights reserved.
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// --*/
+//----------------------------------------------------------------------------
+//
+// Name:        OverClocking.uni
+//
+// Description: Unicode strings for OverClocking are implemented
+//
+//----------------------------------------------------------------------------
+/=#
+
+#langdef   x-AMI "AmiMappingLanguage"
+#string STR_OVERCLOCKING_TITLE                     #language en-US "OverClocking"
+
+#string STR_OVERCLOCKING_MENU_CONFIGURATION                     #language en-US "OverClocking Feature"
+                                                                #language x-AMI "OC000"
+#string STR_OVERCLOCKING_CONFIGURATION_HELP                     #language en-US "Performance Menu for Processor and Memory."
+
+#string STR_FILTER_PLL                                          #language en-US "Filter Pll"
+#string STR_FILTER_PLL_HELP                                     #language en-US "Enabled sets GPIO8 low (0) to enable the Filter PLL for high BCKL Overclocking levels."
+
+#string STR_CHANGE_PLL                                          #language en-US "Change Pll Value"
+#string STR_CHANGE_PLL_HELP                                     #language en-US "Change Pll Value PVD ratio to 18 or 24"
+#string STR_CHANGE_PLL_18                                       #language en-US "PVD Ratio-18"
+#string STR_CHANGE_PLL_24                                       #language en-US "PVD Ratio-24"
+#string STR_CHANGE_PLLTRIM                                      #language en-US "Change PllTrim Value"
+#string STR_CHANGE_PLLTRIM_HELP                                 #language en-US "Change Pll Value between +15 to -15 "
+#string STR_PLLTRIM_PREFIX										#language en-US "Change PLLTRIM Prefix"
+#string STR_PLLTRIM_PREFIX_HELP									#language en-US "Change PLLTRIM Prefix to + or -"
+#string STR_TJMAX_VALUE											#language en-US "TJ-Max offset"
+#string STR_TJMAX_VALUE_HELP									#language en-US "change the TJ-Max offset (125'C - fuse value)"
+#string STR_SFRTRIM_OPT											#language en-US "SfrTrim Optin"
+#string STR_SFRTRIM_OPT_HELP									#language en-US "SfrTrim Optin to enable/disable the HSX workaround"
+
+                             
+#string STR_ADJUST_PLL                                          #language en-US "Adjust Pll "
+#string STR_ADJUST_PLL_HELP                                     #language en-US "Adjust Pll Value - send the mailbox command to Adjust the Pll for Higher-BCLK Ratio combination "
+
+#string STR_FLEXENABLE_PROMPT                                   #language en-US "Non-Turbo Flex Support"
+                                                                #language x-AMI "OC001"
+#string STR_FLEXENABLE_PROMPT_HELP                              #language en-US "Enable/Disable Non-Turbo Flex Support."
+
+#string STR_PROCESSORBUS_RATIO_OVERRIDE_VALUE                   #language en-US "  Flex Ratio Override"
+#string STR_PROCESSORBUS_RATIO_OVERRIDE_VALUE_HELP              #language en-US "Processor Flex Ratio Override Parameters with range 0 to 31 and the Min and Max may vary between Processors."
+
+#string STR_FLEX_VID_ENABLE_PROMPT                              #language en-US "CPU VID Support"
+#string STR_FLEX_VID_ENABLE_PROMPT_HELP                         #language en-US "Enable/Disable Cpu Vid Support."
+
+#string STR_PROCESSOR_FLEXVID_OVERRIDE_VALUE                    #language en-US "  Flex VID Override"
+#string STR_PROCESSOR_FLEXVID_OVERRIDE_VALUE_HELP               #language en-US "VID Override Parameters. The value may vary from 8 to 48 which actual relates to volts 1.4000v  to 0.9000v. Each step equates to 0.0125v."
+
+#string STR_PROCESSOR_BUSSPEED_PROMPT                           #language en-US "Bus Speed Support"
+#string STR_PROCESSOR_BUSSPEED_PROMPT_HELP                      #language en-US "Enable/Disable CPU Speed Override Support."
+
+#string STR_PROCESSORBUS_SPEED_OVERRIDE_VALUE                   #language en-US "  Bus Speed Override (%)"
+#string STR_PROCESSORBUS_SPEED_OVERRIDE_VALUE_HELP              #language en-US "Processor Bus Speed Override Parameters. The value entered will be taken as Overclocking Percentage(%) of current Clock frequency. The value varies from 0% to 49%."
+
+#string STR_CPU_XE_PROMPT                                       #language en-US "  Extreme Edition"
+                                                                #language x-AMI "OC02B"
+#string STR_CPU_XE_HELP                                         #language en-US "Enable/Disable Extreme Edition support."
+
+#string STR_CPU_OC_PROMPT                                       #language en-US "  Overclock Part"
+#string STR_CPU_OC_HELP                                         #language en-US "Enable/Disable Overclock Part support."
+
+#string STR_XE_RATIO_LIMIT                                      #language en-US "    Ratio Limit"
+                                                                #language x-AMI "OC02C"
+#string STR_XE_RATIO_LIMIT_HELP                                 #language en-US "Turbo Mode Ratio Limit value"
+
+#string STR_PCIE_PLL                                            #language en-US "  Pcie Pll"
+#string STR_PCIE_PLL_HELP                                       #language en-US "Selects between LCPLL and SBPLL for use in BCLK overclocking. The SBPLL should be used when higher frequencies of BCLK overclocking are attempted."
+#string STR_PCIE_LCPLL                                          #language en-US "LCPLL"
+#string STR_PCIE_SBPLL                                          #language en-US "SBPLL"
+
+#string STR_VCCIN_VOLTAGE_PROMPT                                #language en-US "CPU VCCin Voltage Level"
+                                                                #language x-AMI "OC013"
+#string STR_VCCIN_VOLTAGE_HELP                                  #language en-US "Select VRD12.5 VID Value (in decimal) for CPU VCCin voltage level (Each step = 5mV) default = 1.8V = 359"
+
+#string STR_OVERCLOCK_EXPFREQ_PROMPT                            #language en-US "Expected CPU Freq"
+#string STR_OVERCLOCK_EXPFREQ_VAL                               #language en-US ""
+#string STR_OVERCLOCK_EXPFREQ_HELP                              #language en-US "Expected Processor frequency calculated using Bus ratio and Bus speed."
+
+#string STR_CORE_MAX_OC_RATIO                                   #language en-US "Core Max OC Ratio"
+                                                                #language x-AMI "OC005"
+#string STR_CORE_MAX_OC_RATIO_HELP                              #language en-US "Sets the maximum OC Ratio for the CPU Core. Uses Mailbox MSR 0x150, cmd 0x10, 0x11. Range 0-80."
+
+#string STR_CORE_VOLTAGE_MODE                                   #language en-US "Core Voltage Mode"
+                                                                #language x-AMI "OC006"
+#string STR_CORE_VOLTAGE_MODE_HELP                              #language en-US "Selects between Adaptive and Override Voltage modes. In Override Mode the voltage selected will be applied over all operating frequencies. In Adaptive Mode the voltage is interpolated only in turbo mode. Uses Mailbox MSR 0x150, cmd 0x10, 0x11."
+
+#string STR_CORE_VOLTAGE_OVERRIDE                               #language en-US "Core Voltage Override"
+                                                                #language x-AMI "OC007"
+#string STR_CORE_VOLTAGE_OVERRIDE_HELP                          #language en-US "Specifies the Override Voltage applied to the IA Core domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range 0-2000 mV."
+
+#string STR_CORE_VOLTAGE_OFFSET                                 #language en-US "Core Voltage Offset"
+                                                                #language x-AMI "OC00D"
+#string STR_CORE_VOLTAGE_OFFSET_HELP                            #language en-US "Specifies the Offset Voltage applied to the IA Core domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range -500 to 500 mV"
+
+#string STR_CORE_EXTRA_TURBO_VOLTAGE                            #language en-US "Core Extra Turbo Voltage"
+                                                                #language x-AMI "OC008"
+#string STR_CORE_EXTRA_TURBO_VOLTAGE_HELP                       #language en-US "Specifies the extra turbo voltage applied while IA Core is operating in turbo mode. Uses Mailbox MSR 0x150, cmd 0x10, 0x11. Range 0-2000 mV"
+
+
+#string STR_VCCU_MAX_OC_RATIO                                   #language en-US "VCCU Max OC Ratio"
+#string STR_VCCU_MAX_OC_RATIO_HELP                              #language en-US "Sets the maximum OC Ratio for the CPU VCCU. Uses Mailbox MSR 0x150, cmd 0x10, 0x11. Range 0-80."
+
+#string STR_VCCU_VOLTAGE_MODE                                   #language en-US "VCCU Voltage Mode"
+#string STR_VCCU_VOLTAGE_MODE_HELP                              #language en-US "Selects between Adaptive and Override Voltage modes. In Override Mode the voltage selected will be applied over all operating frequencies. In Adaptive Mode the voltage is interpolated only in turbo mode. Uses Mailbox MSR 0x150, cmd 0x10, 0x11."
+
+#string STR_VCCU_VOLTAGE_OVERRIDE                               #language en-US "VCCU Voltage Override"
+#string STR_VCCU_VOLTAGE_OVERRIDE_HELP                          #language en-US "Specifies the Override Voltage applied to the VCCU domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range 0-2000 mV."
+
+#string STR_VCCU_VOLTAGE_OFFSET                                 #language en-US "VCCU Voltage Offset"
+#string STR_VCCU_VOLTAGE_OFFSET_HELP                            #language en-US "Specifies the Offset Voltage applied to the VCCU domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range -500 to 500 mV"
+
+#string STR_VCCU_EXTRA_TURBO_VOLTAGE                            #language en-US "VCCU Extra Turbo Voltage"
+#string STR_VCCU_EXTRA_TURBO_VOLTAGE_HELP                       #language en-US "Specifies the extra turbo voltage applied while VCCU is operating in turbo mode. Uses Mailbox MSR 0x150, cmd 0x10, 0x11. Range 0-2000 mV"
+
+
+#string STR_VOLTAGE_ADAPTIVE                                    #language en-US "Adaptive"
+#string STR_VOLTAGE_OVERRIDE                                    #language en-US "Override"
+
+#string STR_AVX2_RATIO_OFFSET									#language en-US "AVX2 Negative Offset"
+#string STR_AVX2_RATIO_OFFSET_HELP								#language en-US "AVX2 Negative Offset applied by Pcode OC mailbox read(0x1A)/Write(0x1B)"
+
+#string STR_POSITIVE_SIGN                                       #language en-US "+"
+#string STR_NEGATIVE_SIGN                                       #language en-US "-"
+
+#string STR_VOLTAGE_OFFSET_PREFIX								#language en-US "Offset Prefix"
+#string STR_VOLTAGE_OFFSET_PREFIX_HELP							#language en-US "Sets the offset value as positive or negative."
+
+#string STR_VCCUVOLTAGE_OFFSET_PREFIX							#language en-US "Offset Prefix"
+#string STR_VCCUVOLTAGE_OFFSET_PREFIX_HELP						#language en-US "Sets the offset value as positive or negative."
+
+#string STR_VOLTAGE_CLR_OFFSET_PREFIX                           #language en-US "  Offset Prefix"
+                                                                #language x-AMI "OC02D"
+#string STR_VOLTAGE_CLR_OFFSET_PREFIX_HELP                      #language en-US "Sets the offset value as positive or negative."
+
+#string STR_VOLTAGE_UNCORE_OFFSET_PREFIX                        #language en-US "  Offset Prefix"
+                                                                #language x-AMI "OC00A"
+#string STR_VOLTAGE_UNCORE_OFFSET_PREFIX_HELP                   #language en-US "Sets the offset value as positive or negative."
+
+#string STR_VOLTAGE_IOA_OFFSET_PREFIX                           #language en-US "  Offset Prefix"
+                                                                #language x-AMI "OC00B"
+#string STR_VOLTAGE_IOA_OFFSET_PREFIX_HELP                      #language en-US "Sets the offset value as positive or negative."
+
+#string STR_VOLTAGE_IOD_OFFSET_PREFIX                           #language en-US "  Offset Prefix"
+                                                                #language x-AMI "OC00C"
+#string STR_VOLTAGE_IOD_OFFSET_PREFIX_HELP                      #language en-US "Sets the offset value as positive or negative."
+
+#string STR_MEMORY_CONFIGURATION                                #language en-US "Memory"
+                                                                #language x-AMI "OC02E"
+#string STR_MEMORY_CONFIGURATION_HELP                           #language en-US "Memory Overclocking Menu."
+
+#string STR_IMON_SCALING                                        #language en-US "IMON Scaling Support"
+#string STR_IMON_SCALING_HELP                                   #language en-US "Support to Enable IMON Scaling"
+
+#string STR_MEMORY_VOLTAGE_OVERRIDE                             #language en-US "Memory Voltage Override Support"
+                                                                #language x-AMI "OC027"
+#string STR_MEMORY_VOLTAGE_OVERRIDE_HELP                        #language en-US "Enable/Disable option for Memory Voltage Support."
+#string STR_MEMORY_VOLTAGE_VALUE                                #language en-US "Memory Voltage"
+                                                                #language x-AMI "OC028"
+#string STR_MEMORY_VOLTAGE_VALUE_HELP                           #language en-US "Memory Voltage Override."
+
+#string STR_VOLTAGE_1350                                        #language en-US "1.350 Volts"
+#string STR_VOLTAGE_1401                                        #language en-US "1.401 Volts"
+#string STR_VOLTAGE_1449                                        #language en-US "1.449 Volts"
+#string STR_VOLTAGE_1500                                        #language en-US "1.500 Volts"
+#string STR_VOLTAGE_1503                                        #language en-US "1.503 Volts"
+#string STR_VOLTAGE_1550                                        #language en-US "1.550 Volts"
+#string STR_VOLTAGE_1553                                        #language en-US "1.553 Volts"
+#string STR_VOLTAGE_1600                                        #language en-US "1.600 Volts"
+#string STR_VOLTAGE_1602                                        #language en-US "1.602 Volts"
+#string STR_VOLTAGE_1650                                        #language en-US "1.650 Volts"
+#string STR_VOLTAGE_1652                                        #language en-US "1.652 Volts"
+
+#string STR_1                                                   #language en-US "1"
+#string STR_2                                                   #language en-US "2"
+#string STR_3                                                   #language en-US "3"
+#string STR_4                                                   #language en-US "4"
+#string STR_5                                                   #language en-US "5"
+#string STR_6                                                   #language en-US "6"
+#string STR_7                                                   #language en-US "7"
+#string STR_8                                                   #language en-US "8"
+#string STR_9                                                   #language en-US "9"
+#string STR_10                                                  #language en-US "10"
+#string STR_11                                                  #language en-US "11"
+#string STR_12                                                  #language en-US "12"
+#string STR_13                                                  #language en-US "13"
+#string STR_14                                                  #language en-US "14"
+#string STR_15                                                  #language en-US "15"
+#string STR_16                                                  #language en-US "16"
+#string STR_17                                                  #language en-US "17"
+#string STR_18                                                  #language en-US "18"
+#string STR_19                                                  #language en-US "19"
+#string STR_20                                                  #language en-US "20"
+#string STR_21                                                  #language en-US "21"
+#string STR_22                                                  #language en-US "22"
+#string STR_23                                                  #language en-US "23"
+#string STR_24                                                  #language en-US "24"
+#string STR_25                                                  #language en-US "25"
+#string STR_28                                                  #language en-US "28"
+#string STR_32                                                  #language en-US "32"
+#string STR_40                                                  #language en-US "40"
+#string STR_48                                                  #language en-US "48"
+#string STR_56                                                  #language en-US "56"
+#string STR_64                                                  #language en-US "64"
+#string STR_80                                                  #language en-US "80"
+#string STR_96                                                  #language en-US "96"
+#string STR_112                                                 #language en-US "112"
+#string STR_128                                                 #language en-US "128"
+
+#string STR_MEMORY_OVERCLOCKING_OPTIONS_CONFIGURATION           #language en-US "Memory Overclocking Options"
+
+#string STR_DDR_REFCLK_PROMPT                                   #language en-US "Memory Reference Clock"
+                                                                #language x-AMI "OC016"
+#string STR_DDR_REFCLK_PROMPT_HELP                              #language en-US "Automatic, 100MHz, 133MHz."
+#string STR_DDR_REFCLK_100_STRING                               #language en-US "100"
+#string STR_DDR_REFCLK_133_STRING                               #language en-US "133"
+
+#string STR_DDR_RATIO_PROMPT                                    #language en-US "Memory Ratio"
+                                                                #language x-AMI "OC017"
+#string STR_DDR_RATIO_PROMPT_HELP                               #language en-US "Automatic or the frequency will equal ratio times reference clock. Set to Auto to recalculate memory timings listed below."
+
+#string STR_MEMORY_VDD_HELP                                     #language en-US "VDD value (mVolts)"
+#string STR_MEMORY_VDD_NAME                                     #language en-US "VDD"
+#string STR_MEMORY_VDD_VALUE                                    #language en-US "N/A"
+
+#string STR_MEMORY_CL_HELP                                      #language en-US "tCL value"
+#string STR_MEMORY_CL_NAME                                      #language en-US "CAS Latency (tCL)"
+#string STR_MEMORY_CL_VALUE                                     #language en-US "N/A"
+
+#string STR_MEMORY_DELAY_TIME                                   #language en-US "Minimum delay time"
+
+#string STR_MEMORY_TRCD_HELP                                    #language en-US "tRCD value"
+#string STR_MEMORY_TRCD_NAME                                    #language en-US "    CAS to RAS (tRCDmin)"
+#string STR_MEMORY_TRCD_VALUE                                   #language en-US "N/A"
+
+#string STR_MEMORY_TRP_HELP                                     #language en-US "tRP value"
+#string STR_MEMORY_TRP_NAME                                     #language en-US "    Row Precharge (tRPmin)"
+#string STR_MEMORY_TRP_VALUE                                    #language en-US "N/A"
+
+#string STR_MEMORY_TRAS_HELP                                    #language en-US "tRAS value"
+#string STR_MEMORY_TRAS_NAME                                    #language en-US "    Active to Precharge (tRASmin)"
+#string STR_MEMORY_TRAS_VALUE                                   #language en-US "N/A"
+
+#string STR_DIMM_CH_SLT_SUBTITLE_HELP                           #language en-US "Channel Slot Subtitle"
+#string STR_DIMM_CH0_SLT0_FORM_SUBTITLE                         #language en-US "Channel 0 Slot 0"
+#string STR_DIMM_CH0_SLT1_FORM_SUBTITLE                         #language en-US "Channel 0 Slot 1"
+#string STR_DIMM_CH1_SLT0_FORM_SUBTITLE                         #language en-US "Channel 1 Slot 0"
+#string STR_DIMM_CH1_SLT1_FORM_SUBTITLE                         #language en-US "Channel 1 Slot 1"
+#string STR_DIMM_CH0_SLT0_STATUS                                #language en-US "N/A"
+#string STR_DIMM_CH0_SLT1_STATUS                                #language en-US "N/A"
+#string STR_DIMM_CH1_SLT0_STATUS                                #language en-US "N/A"
+#string STR_DIMM_CH1_SLT1_STATUS                                #language en-US "N/A"
+
+#string STR_SPD_INFO_HELP                                       #language en-US "SPD Information of the slot"
+#string STR_SPD_INFO                                            #language en-US "   *SPD Information"
+#string STR_CH0_SLT0_SPD_INFO                                   #language en-US "N/A"
+#string STR_CH0_SLT1_SPD_INFO                                   #language en-US "N/A"
+#string STR_CH1_SLT0_SPD_INFO                                   #language en-US "N/A"
+#string STR_CH1_SLT1_SPD_INFO                                   #language en-US "N/A"
+#string STR_SPD_INFO_LEGEND                                     #language en-US "* - tCL: tRCD: tRP: tRAS"
+
+#string STR_XMP_PROFILE_PROMPT                                  #language en-US "DIMM profile"
+                                                                #language x-AMI "OC015"
+#string STR_XMP_PROFILE_PROMPT_HELP                             #language en-US "Select DIMM timing profile. The below values start with the currently running values and don't auto populate."
+
+#string STR_DEFAULT_SPD_PROFILE                                 #language en-US "Default DIMM profile"
+#string STR_XMP_PROFILE_1                                       #language en-US "XMP profile 1"
+#string STR_XMP_PROFILE_2                                       #language en-US "XMP profile 2"
+
+#string STR_CUSTOM_PROFILE                                      #language en-US "Custom profile"
+#string STR_TCL_VALUE                                           #language en-US "  tCL"
+                                                                #language x-AMI "OC018"
+#string STR_TCL_VALUE_HELP                                      #language en-US "Cas Latency, valid values 0, 4-18 clocks, 0 means auto."
+#string STR_TRCD_VALUE                                          #language en-US "  tRCD"
+                                                                #language x-AMI "OC019"
+#string STR_TRCD_VALUE_HELP                                     #language en-US "Row to Col Delay, range 0-31 clocks, 0 means auto."
+#string STR_TRP_VALUE                                           #language en-US "  tRP"
+                                                                #language x-AMI "OC01A"
+#string STR_TRP_VALUE_HELP                                      #language en-US "Ras Precharge, range 0-31 clocks, 0 means auto."
+#string STR_TRAS_VALUE                                          #language en-US "  tRAS"
+                                                                #language x-AMI "OC01B"
+#string STR_TRAS_VALUE_HELP                                     #language en-US "Ras Active Time, range 0-63 clocks, 0 means auto."
+
+#string STR_TCWL_VALUE                                          #language en-US "  tCWL"
+                                                                #language x-AMI "OC01C"
+#string STR_TCWL_VALUE_HELP                                     #language en-US "Min CAS Write Latency Delay Time, range 0-31 clocks, 0 means auto."
+#string STR_TFAW_VALUE                                          #language en-US "  tFAW"
+                                                                #language x-AMI "OC01D"
+#string STR_TFAW_VALUE_HELP                                     #language en-US "Min Four Activate Window Delay Time, range 0-255 clocks, 0 means auto."
+#string STR_TRC_VALUE                                           #language en-US "  tRC"
+                                                                #language x-AMI "OC01E"
+#string STR_TRC_VALUE_HELP                                      #language en-US "Min Active to Active/Refresh Delay Time, range 0-586 clocks, 0 means auto."
+#string STR_TREFI_VALUE                                         #language en-US "  tREFI"
+                                                                #language x-AMI "OC01F"
+#string STR_TREFI_VALUE_HELP                                    #language en-US "Refresh Interval, range 0-65535 clocks, 0 means auto."
+#string STR_TRFC_VALUE                                          #language en-US "  tRFC"
+                                                                #language x-AMI "OC020"
+#string STR_TRFC_VALUE_HELP                                     #language en-US "Min Refresh Recovery Delay Time, range 0-511 clocks, 0 means auto."
+#string STR_TRPAB_VALUE                                         #language en-US "  tRPAB"
+                                                                #language x-AMI "OC021"
+#string STR_TRPAB_VALUE_HELP                                    #language en-US "Ras Precharge all banks (LPDDR3 only), range 0-31 clocks, 0 means auto."
+#string STR_TRRD_VALUE                                          #language en-US "  tRRD"
+                                                                #language x-AMI "OC022"
+#string STR_TRRD_VALUE_HELP                                     #language en-US "Min Row Active to Row Active Delay Time, range 0-15 clocks, 0 means auto."
+#string STR_TRTP_VALUE                                          #language en-US "  tRTP"
+                                                                #language x-AMI "OC023"
+#string STR_TRTP_VALUE_HELP                                     #language en-US "Min Internal Read to Precharge Command Delay Time, range 0-15 clocks, 0 means auto."
+#string STR_TWR_VALUE                                           #language en-US "  tWR"
+                                                                #language x-AMI "OC024"
+#string STR_TWR_VALUE_HELP                                      #language en-US "Min Write Recovery Time, valid values 0, 5-8, 10, 12, 14, 16 clocks, 0 means auto."
+#string STR_TWTR_VALUE                                          #language en-US "  tWTR"
+                                                                #language x-AMI "OC025"
+#string STR_TWTR_VALUE_HELP                                     #language en-US "Min Internal Write to Read Command Delay Time, range 0-8 clocks, 0 means auto."
+#string STR_NMODE_SUPPORT_PROMPT                                #language en-US "  NMode"
+                                                                #language x-AMI "OC026"
+#string STR_NMODE_SUPPORT_HELP                                  #language en-US "System command rate, range 0-2, 0 means auto, 1 = 1N, 2 = 2N."
+
+#string STR_GT_CONFIGURATION                                    #language en-US "GT"
+#string STR_GT_CONFIGURATION_HELP                               #language en-US "GT Ratio Override and Delta volatge programming"
+#string STR_GT_OC_SUPPORT_PROMPT                                #language en-US  "GT OverClocking Support"
+#string STR_GT_OC_SUPPORT_HELP                                  #language en-US  "Enable/Disable GT OverClocking Support"
+#string STR_GT_OC_FREQUENCY_PROMPT                              #language en-US  "GT OverClocking Frequency"
+#string STR_GT_OC_FREQUENCY_HELP                                #language en-US  "Overclocked RP0 Frequency (MLC Clk) in multiples of 50 MHz"
+
+#string STR_GT_VOLTAGE_MODE                                     #language en-US "GT Voltage Mode"
+#string STR_GT_VOLTAGE_MODE_HELP                                #language en-US "Selects between Adaptive and Override Voltage modes. In Override Mode the voltage selected will be applied over all operating frequencies. In Adaptive Mode the voltage is interpolated only in turbo mode. Uses Mailbox MSR 0x150, cmd 0x10, 0x11."
+
+#string STR_GT_VOLTAGE_OVERRIDE                                 #language en-US "GT Voltage Override"
+#string STR_GT_VOLTAGE_OVERRIDE_HELP                            #language en-US "Specifies the Override Voltage applied to the GT domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range 0-2000 mV"
+
+#string STR_GT_VOLTAGE_OFFSET                                   #language en-US "GT Voltage Offset"
+#string STR_GT_VOLTAGE_OFFSET_HELP                              #language en-US "Specifies the Offset Voltage applied to the GT domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range -1000 to 1000 mV"
+
+#string STR_GT_EXTRA_TURBO_VOLTAGE                              #language en-US "GT Extra Turbo Voltage"
+#string STR_GT_EXTRA_TURBO_VOLTAGE_HELP                         #language en-US "Specifies the extra turbo voltage applied while GT is operating in turbo mode. Unit is in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range 0-2000 mV"
+
+#string STR_PROCESSOR_CONFIGURATION                             #language en-US "Processor"
+                                                                #language x-AMI "OC002"
+#string STR_PROCESSOR_CONFIGURATION_HELP                        #language en-US "Processor Bus Ratio Override and FIVR Override."
+
+#string STR_CLR_CONFIGURATION                                   #language en-US "CLR/Ring"
+                                                                #language x-AMI "OC003"
+#string STR_CLR_CONFIGURATION_HELP                              #language en-US "CLR (Ring) Overclocking Menu"
+
+#string STR_CLR_MAX_OC_RATIO                                    #language en-US "CLR Max OC Ratio"
+                                                                #language x-AMI "OC02F"
+#string STR_CLR_MAX_OC_RATIO_HELP                               #language en-US "This sets the maximum overclocking ratio for the CLR Domain. Uses Mailbox MSR 0x150, cmd 0x11."
+
+#string STR_CLR_MIN_RATIO										#language en-US "CLR Min Ratio"
+#string STR_CLR_MIN_RATIO_HELP									#language en-US "This sets the minimum ratio for the CLR Domain. Uses BIOS to Pcode Mailbox, cmd 0xA4."
+
+#string STR_CLR_VOLTAGE_MODE                                    #language en-US "CLR Voltage Mode"
+                                                                #language x-AMI "OC030"
+#string STR_CLR_VOLTAGE_MODE_HELP                               #language en-US "Selects between Adaptive and Override Voltage modes. In Override Mode the voltage selected will be applied over all operating frequencies. In Adaptive Mode the voltage is interpolated only in turbo mode. Uses Mailbox MSR 0x150, cmd 0x11."
+
+#string STR_CLR_VOLTAGE_OVERRIDE                                #language en-US "CLR Voltage Override"
+                                                                #language x-AMI "OC031"
+#string STR_CLR_VOLTAGE_OVERRIDE_HELP                           #language en-US "Specifies the Override Voltage applied to the GT domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range 0-2000 mV"
+
+#string STR_CLR_VOLTAGE_OFFSET                                  #language en-US "CLR Voltage Offset"
+                                                                #language x-AMI "OC032"
+#string STR_CLR_VOLTAGE_OFFSET_HELP                             #language en-US "Specifies the Offset Voltage applied to the GT domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range -1000 to 1000 mV."
+
+#string STR_CLR_EXTRA_TURBO_VOLTAGE                             #language en-US "CLR Extra Turbo Voltage"
+                                                                #language x-AMI "OC033"
+#string STR_CLR_EXTRA_TURBO_VOLTAGE_HELP                        #language en-US "Specifies the extra turbo voltage applied while GT is operating in turbo mode. Unit is in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range 0-2000 mV"
+
+#string STR_UNCORE_CONFIGURATION                                #language en-US "Uncore"
+                                                                #language x-AMI "OC004"
+#string STR_UNCORE_CONFIGURATION_HELP                           #language en-US "Uncore Overclocking Menu"
+
+#string STR_UNCORE_VOLTAGE_OFFSET                               #language en-US "Uncore Voltage Offset"
+															    #language x-AMI "OC009"
+#string STR_UNCORE_VOLTAGE_OFFSET_HELP                          #language en-US "Specifies the Offset Voltage applied to the Uncore domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range -1000 to 1000 mV"
+
+#string STR_IOA_VOLTAGE_OFFSET                                  #language en-US "IOA Voltage Offset"
+															    #language x-AMI "OC00E"
+#string STR_IOA_VOLTAGE_OFFSET_HELP                             #language en-US "Specifies the Offset Voltage applied to the IOA domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range -1000 to 1000 mV"
+
+#string STR_IOD_VOLTAGE_OFFSET                                  #language en-US "IOD Voltage Offset"
+															    #language x-AMI "OC00F"
+#string STR_IOD_VOLTAGE_OFFSET_HELP                             #language en-US "Specifies the Offset Voltage applied to the IOD domain. This voltage is specified in millivolts. Uses Mailbox MSR 0x150, cmd 0x11. Range -1000 to 1000 mV"
+
+#string STR_SVID_FIVR_CONFIGURATION                             #language en-US "SVID/FIVR"
+															    #language x-AMI "OC029"
+#string STR_SVID_FIVR_CONFIGURATION_HELP                        #language en-US "SVID/FIVR global controls Menu"
+
+#string STR_SVID_ENABLE_PROMPT                                  #language en-US "SVID Support"
+															    #language x-AMI "OC011"
+#string STR_SVID_ENABLE_PROMPT_HELP                             #language en-US "Enable/Disable SVID. Disabling SVID disables input voltage overrides. Uses Mailbox MSR 0x150, cmd 0x13."
+
+#string STR_SVID_VOLTAGE_OVERRIDE                               #language en-US "SVID Voltage Override"
+															    #language x-AMI "OC012"
+#string STR_SVID_VOLTAGE_OVERRIDE_HELP                          #language en-US "Overrides the Vccin input voltage. This controls the input voltage to the CPU and will affect all CPU domains. Uses Mailbox MSR 0x150, cmd 0x13. Range 0-2500 mV"
+
+#string STR_FIVR_FAULTS_ENABLE_PROMPT                           #language en-US "FIVR Faults"
+															    #language x-AMI "OC014"
+#string STR_FIVR_FAULTS_ENABLE_PROMPT_HELP                      #language en-US "Enable/Disable FIVR Faults. When FIVR faults are disabled, OVP and OCP protection mechanisms will be masked. This is a dangerous configuration and the risk of using it is assumed by the user. Uses Mailbox MSR 0x150, cmd 0x15."
+
+#string STR_FIVR_EFFICIENCY_ENABLE_PROMPT                       #language en-US "FIVR Efficiency Management"
+															    #language x-AMI "OC02A"
+#string STR_FIVR_EFFICIENCY_ENABLE_PROMPT_HELP                  #language en-US "FIVR efficiency management is good for power delivery efficiency, but it may be an impediment to proper power delivery control under overclocking, particularly BCLK overclocking. Uses Mailbox MSR 0x150, cmd 0x15."
+
+#string STR_MEMORY_TIMING_HEADER_HELP                           #language en-US ""
+#string STR_MEMORY_TIMING_HEADER_NAME                           #language en-US "Calculated settings per profile"
+#string STR_MEMORY_TIMING_HEADER_VALUE                          #language en-US "   STD        XMP1       XMP2"
+
+#string STR_MEMORY_TIMING_TCK_HELP                              #language en-US ""
+#string STR_MEMORY_TIMING_TCK_NAME                              #language en-US "  tCK"
+#string STR_MEMORY_TIMING_TCK_VALUE                             #language en-US "0000000000 0000000000 0000000000"
+
+#string STR_MEMORY_TIMING_TCL_HELP                              #language en-US ""
+#string STR_MEMORY_TIMING_TCL_NAME                              #language en-US "  tCL"
+#string STR_MEMORY_TIMING_TCL_VALUE                             #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TRCD_HELP                             #language en-US ""
+#string STR_MEMORY_TIMING_TRCD_NAME                             #language en-US "  tRCD"
+#string STR_MEMORY_TIMING_TRCD_VALUE                            #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TRP_HELP                              #language en-US ""
+#string STR_MEMORY_TIMING_TRP_NAME                              #language en-US "  tRP"
+#string STR_MEMORY_TIMING_TRP_VALUE                             #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TRAS_HELP                             #language en-US ""
+#string STR_MEMORY_TIMING_TRAS_NAME                             #language en-US "  tRAS"
+#string STR_MEMORY_TIMING_TRAS_VALUE                            #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TCWL_HELP                             #language en-US ""
+#string STR_MEMORY_TIMING_TCWL_NAME                             #language en-US "  tCWL"
+#string STR_MEMORY_TIMING_TCWL_VALUE                            #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TFAW_HELP                             #language en-US ""
+#string STR_MEMORY_TIMING_TFAW_NAME                             #language en-US "  tFAW"
+#string STR_MEMORY_TIMING_TFAW_VALUE                            #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TRC_HELP                              #language en-US ""
+#string STR_MEMORY_TIMING_TRC_NAME                              #language en-US "  tRC"
+#string STR_MEMORY_TIMING_TRC_VALUE                             #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TREFI_HELP                            #language en-US ""
+#string STR_MEMORY_TIMING_TREFI_NAME                            #language en-US "  tREFI"
+#string STR_MEMORY_TIMING_TREFI_VALUE                           #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TRFC_HELP                             #language en-US ""
+#string STR_MEMORY_TIMING_TRFC_NAME                             #language en-US "  tRFC"
+#string STR_MEMORY_TIMING_TRFC_VALUE                            #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TRPAB_HELP                            #language en-US ""
+#string STR_MEMORY_TIMING_TRPAB_NAME                            #language en-US "  tRPAB"
+#string STR_MEMORY_TIMING_TRPAB_VALUE                           #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TRRD_HELP                             #language en-US ""
+#string STR_MEMORY_TIMING_TRRD_NAME                             #language en-US "  tRRD"
+#string STR_MEMORY_TIMING_TRRD_VALUE                            #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TRTP_HELP                             #language en-US ""
+#string STR_MEMORY_TIMING_TRTP_NAME                             #language en-US "  tRTP"
+#string STR_MEMORY_TIMING_TRTP_VALUE                            #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TWR_HELP                              #language en-US ""
+#string STR_MEMORY_TIMING_TWR_NAME                              #language en-US "  tWR"
+#string STR_MEMORY_TIMING_TWR_VALUE                             #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_TWTR_HELP                             #language en-US ""
+#string STR_MEMORY_TIMING_TWTR_NAME                             #language en-US "  tWTR"
+#string STR_MEMORY_TIMING_TWTR_VALUE                            #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_TIMING_NMODE_HELP                            #language en-US ""
+#string STR_MEMORY_TIMING_NMODE_NAME                            #language en-US "  NMode"
+#string STR_MEMORY_TIMING_NMODE_VALUE                           #language en-US "     00000      00000      00000"
+
+#string STR_MEMORY_VOLTAGE_VDD_HELP                             #language en-US ""
+#string STR_MEMORY_VOLTAGE_VDD_NAME                             #language en-US "  VDD"
+#string STR_MEMORY_VOLTAGE_VDD_VALUE                            #language en-US "     00000      00000      00000"
+
+#string STR_VOLTAGE_VCCIO                                       #language en-US "VccIo Voltage Control"
+															    #language x-AMI "OC010"
+#string STR_VOLTAGE_VCCIO_HELP                                  #language en-US "VccIo Voltage Control"
+
+#string STR_VOLTAGE_VCCIO_1P0590                                #language en-US "1.0590V"
+#string STR_VOLTAGE_VCCIO_1P0697                                #language en-US "1.0697V"
+#string STR_VOLTAGE_VCCIO_1P0801                                #language en-US "1.0801V"
+#string STR_VOLTAGE_VCCIO_1P0905                                #language en-US "1.0905V"
+#string STR_VOLTAGE_VCCIO_1P1005                                #language en-US "1.1005V"
+#string STR_VOLTAGE_VCCIO_1P1110                                #language en-US "1.1110V"
+#string STR_VOLTAGE_VCCIO_1P1216                                #language en-US "1.1216V"
+#string STR_VOLTAGE_VCCIO_1P1322                                #language en-US "1.1322V"
+#string STR_VOLTAGE_VCCIO_1P1421                                #language en-US "1.1421V"
+#string STR_VOLTAGE_VCCIO_1P1527                                #language en-US "1.1527V"
+#string STR_VOLTAGE_VCCIO_1P1633                                #language en-US "1.1633V"
+#string STR_VOLTAGE_VCCIO_1P1737                                #language en-US "1.1737V"
+#string STR_VOLTAGE_VCCIO_1P1838                                #language en-US "1.1838V"
+#string STR_VOLTAGE_VCCIO_1P1938                                #language en-US "1.1938V"
+#string STR_VOLTAGE_VCCIO_1P2046                                #language en-US "1.2046V"
+#string STR_VOLTAGE_VCCIO_1P2149                                #language en-US "1.2149V"
+#string STR_VOLTAGE_VCCIO_1P2254                                #language en-US "1.2254V"
+#string STR_VOLTAGE_VCCIO_1P2360                                #language en-US "1.2360V"
+#string STR_VOLTAGE_VCCIO_1P2464                                #language en-US "1.2464V"
+#string STR_VOLTAGE_VCCIO_1P2569                                #language en-US "1.2569V"
+#string STR_VOLTAGE_VCCIO_1P2672                                #language en-US "1.2672V"
+#string STR_VOLTAGE_VCCIO_1P2775                                #language en-US "1.2775V"
+#string STR_VOLTAGE_VCCIO_1P2879                                #language en-US "1.2879V"
+#string STR_VOLTAGE_VCCIO_1P2984                                #language en-US "1.2984V"
+#string STR_VOLTAGE_VCCIO_1P3083                                #language en-US "1.3083V"
+#string STR_VOLTAGE_VCCIO_1P3190                                #language en-US "1.3190V"
+#string STR_VOLTAGE_VCCIO_1P3296                                #language en-US "1.3296V"
+#string STR_VOLTAGE_VCCIO_1P3398                                #language en-US "1.3398V"
+#string STR_VOLTAGE_VCCIO_1P3502                                #language en-US "1.3502V"
+#string STR_VOLTAGE_VCCIO_1P3605                                #language en-US "1.3605V"
+#string STR_VOLTAGE_VCCIO_1P3710                                #language en-US "1.3710V"
+#string STR_VOLTAGE_VCCIO_1P3813                                #language en-US "1.3813V"
+#string STR_VOLTAGE_VCCIO_1P3917                                #language en-US "1.3917V"
+#string STR_VOLTAGE_VCCIO_1P4021                                #language en-US "1.4021V"
+#string STR_VOLTAGE_VCCIO_1P4126                                #language en-US "1.4126V"
+#string STR_VOLTAGE_VCCIO_1P4218                                #language en-US "1.4218V"
+#string STR_VOLTAGE_VCCIO_1P4322                                #language en-US "1.4322V"
+#string STR_VOLTAGE_VCCIO_1P4427                                #language en-US "1.4427V"
+#string STR_VOLTAGE_VCCIO_1P4530                                #language en-US "1.4530V"
+#string STR_VOLTAGE_VCCIO_1P4645                                #language en-US "1.4645V"
+#string STR_VOLTAGE_VCCIO_1P4736                                #language en-US "1.4736V"
+#string STR_VOLTAGE_VCCIO_1P4843                                #language en-US "1.4843V"
+#string STR_VOLTAGE_VCCIO_1P4947                                #language en-US "1.4947V"
+#string STR_VOLTAGE_VCCIO_1P5052                                #language en-US "1.5052V"
+#string STR_VOLTAGE_VCCIO_1P5154                                #language en-US "1.5154V"
+#string STR_VOLTAGE_VCCIO_1P5259                                #language en-US "1.5259V"
+#string STR_VOLTAGE_VCCIO_1P5363                                #language en-US "1.5363V"
+#string STR_VOLTAGE_VCCIO_1P5468                                #language en-US "1.5468V"
+#string STR_VOLTAGE_VCCIO_1P5572                                #language en-US "1.5572V"
+#string STR_VOLTAGE_VCCIO_1P5678                                #language en-US "1.5678V"
+#string STR_VOLTAGE_VCCIO_1P5783                                #language en-US "1.5783V"
+#string STR_VOLTAGE_VCCIO_1P5886                                #language en-US "1.5886V"
+#string STR_VOLTAGE_VCCIO_1P5988                                #language en-US "1.5988V"
+#string STR_VOLTAGE_VCCIO_1P6093                                #language en-US "1.6093V"
+#string STR_VOLTAGE_VCCIO_1P6200                                #language en-US "1.6200V"
+#string STR_VOLTAGE_VCCIO_1P6302                                #language en-US "1.6302V"
+#string STR_VOLTAGE_VCCIO_1P6390                                #language en-US "1.6390V"
+#string STR_VOLTAGE_VCCIO_1P6496                                #language en-US "1.6496V"
+#string STR_VOLTAGE_VCCIO_1P6601                                #language en-US "1.6601V"
+#string STR_VOLTAGE_VCCIO_1P6706                                #language en-US "1.6706V"
+#string STR_VOLTAGE_VCCIO_1P6808                                #language en-US "1.6808V"
+#string STR_VOLTAGE_VCCIO_1P6912                                #language en-US "1.6912V"
+#string STR_VOLTAGE_VCCIO_1P7019                                #language en-US "1.7019V"
+#string STR_VOLTAGE_VCCIO_1P7125                                #language en-US "1.7125V"

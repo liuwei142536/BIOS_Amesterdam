@@ -1,0 +1,11 @@
+<component>
+	name = "Platform"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Platform\"
+	RefName = "GrantleyPkg.Platform"
+[parts]
+"GrantleyPkg.Platform.Dxe"
+"GrantleyPkg.Platform.DxeSmm"
+"GrantleyPkg.Platform.Pei"
+"GrantleyPkg.RuntimeDxe"
+<endComponent>

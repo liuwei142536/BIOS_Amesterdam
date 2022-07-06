@@ -1,0 +1,20 @@
+<component>
+	name = "PchRegs"
+	category = ModulePart
+	LocalRoot = "WellsburgPkg\Include\PchRegs\"
+	RefName = "WellsburgPkg.PchRegs"
+[files]
+"PchRegsAdsp.h"	
+"PchRegsEva.h"	
+"PchRegsHda.h"	
+"PchRegsLan.h"	
+"PchRegsLpc.h"	
+"PchRegsSerialIo.h"
+"PchRegsPcie.h"	
+"PchRegsRcrb.h"	
+"PchRegsSata.h"	
+"PchRegsSmbus.h"	
+"PchRegsSpi.h"	
+"PchRegsThermal.h"	
+"PchRegsUsb.h"	
+<endComponent>

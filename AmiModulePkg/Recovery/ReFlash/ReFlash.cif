@@ -1,0 +1,12 @@
+<component>
+	name = "ReFlash"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\Recovery\ReFlash\"
+	RefName = "ReFlash"
+[INF]
+"ReFlash.inf"
+"ReFlashSmm.inf"
+[files]
+"ReFlash.sdl"	
+"ReFlash.txt"	
+<endComponent>

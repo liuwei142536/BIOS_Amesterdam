@@ -1,0 +1,162 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+TOKEN
+    Name  = FWUpdateLib_ME_11
+    Value  = 1
+    TokenType = Boolean
+    Master = Yes
+    Help  = "Main switch to enable MEFwUpdLcl support in Project"
+    Token = "MEFwUpdLcl_SUPPORT" "=" "1"
+    Token = "ME_FW_UPDATE_API_CONTROL" "=" "1"
+End
+
+TOKEN
+    Name  = "ME_FW_OEM_ID"
+    Value  = "{0, 0, 0, {0, 0, 0, 0, 0, 0, 0, 0}}"
+    Help  = "ME Firmware OEM ID."
+    TokenType = Expression
+    TargetH = Yes
+    Range  = "GUID"
+End
+
+INFComponent
+    Name  = "FWUpdateLib"
+    File  = "FWUpdateLib.inf"
+    Package  = "AmiModulePkg"
+    PreProcess = Yes
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.FWUpdateLib"
+    Override  = "AmiModulePkg.MEFwUpdLcl"
+End
+
+INFComponent
+    Name  = "FWUpdatePlatformLib"
+    File  = "FWUpdatePlatformLib.inf"
+    Package  = "AmiModulePkg"
+    PreProcess = Yes
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.FWUpdatePlatformLib"
+    Override  = "AmiModulePkg.MEFwUpdLcl"
+End
+
+ELINK
+    Name  = "Build/ChipsetReference.dec"
+    Parent  = "MEFwUpdLcLPackages"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "gHeciProtocolGuid"
+    Parent  = "MEFwUpdLcLDepex"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "FWUPDATELIB_INF_BINARIES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "FWUPDATELIB_INF_SOURCES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "FWUPDATELIB_INF_PACKAGES"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "FWUPDATELIB_INF_LIBRARY"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "FWUPDATELIB_INF_GUIDS"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "FWUPDATELIB_INF_PROTOCOLS"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "FWUpdateLib.lib"
+    Parent  = "FWUPDATELIB_INF_BINARIES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "Build/ChipsetReference.dec"
+    Parent  = "FWUPDATELIB_INF_PACKAGES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "DxeMeLib"
+    Parent  = "FWUPDATELIB_INF_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "MbpDataLib"
+    Parent  = "FWUPDATELIB_INF_LIBRARY"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gPchGlobalResetGuid"
+    Parent  = "FWUPDATELIB_INF_GUIDS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gMeBiosPayloadHobGuid"
+    Parent  = "FWUPDATELIB_INF_GUIDS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gPchResetProtocolGuid"
+    Parent  = "FWUPDATELIB_INF_PROTOCOLS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gHeciProtocolGuid"
+    Parent  = "FWUPDATELIB_INF_PROTOCOLS"
+    InvokeOrder = AfterParent
+End
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

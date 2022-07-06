@@ -1,0 +1,15 @@
+<component>
+	name = "Ras"
+	category = ModulePart
+	LocalRoot = "GrantleyPkg\Ras\"
+	RefName = "GrantleyPkg.Ras"
+[files]
+"Ras.sdl"	
+"RAS_ReleaseNotes.txt"	
+[parts]
+"GrantleyPkg.RasInclude"
+"GrantleyPkg.RasSmm"
+"GrantleyPkg.RasWhea"
+"GrantleyPkg.Ras.Library.Library"
+"RuntimeErrorlog"
+<endComponent>

@@ -1,0 +1,17 @@
+<component>
+	name = "Ppi"
+	category = ModulePart
+	LocalRoot = "WellsburgPkg\Include\Ppi\"
+	RefName = "WellsburgPkg.Ppi"
+[files]
+"PchDmiTcVcMap.h"	
+"PchInit.h"	
+"PchPeiInitDone.h"	
+"PchPlatformPolicy.h"	
+"PchReset.h"	
+"PchUsbPolicy.h"	
+"SmbusPolicy.h"	
+"Spi.h"	
+"UsbController.h"	
+"Wdt.h"	
+<endComponent>

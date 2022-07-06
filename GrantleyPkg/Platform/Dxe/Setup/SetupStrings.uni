@@ -1,0 +1,616 @@
+//
+// This file contains an 'Intel Peripheral Driver' and is      
+// licensed for Intel CPUs and chipsets under the terms of your
+// license agreement with Intel or your vendor.  This file may 
+// be modified by the user, subject to additional terms of the 
+// license agreement                                           
+//
+// *++
+//
+// Copyright (c)  1999 - 2016 Intel Corporation. All rights reserved
+// This software and associated documentation (if any) is furnished
+// under a license and may only be used or copied in accordance
+// with the terms of the license. Except as permitted by such
+// license, no part of this software or documentation may be
+// reproduced, stored in a retrieval system, or transmitted in any
+// form or by any means without the express written consent of
+// Intel Corporation.
+// 
+// 
+// Module Name:
+//
+//   SetupStrings.vfr
+// 
+// Abstract:
+// 
+//   String definitions for Setup formsets.
+// 
+// Revision History:
+// 
+// --*/
+
+/=#
+
+#langdef   en-US "English"
+#langdef   fr-FR "Français"
+#langdef   es-ES "Español"
+#langdef   x-AMI "AmiMappingLanguage"
+#langdef uqi "UQI"
+
+//
+// Main 
+//
+#string STR_MAIN_TITLE                  #language en-US "Main"
+#string STR_MAIN_HELP                   #language en-US "Press <Enter> to select the Main System Setup options."
+
+#string STR_BIOS_REVISION_PROMPT        #language en-US "BIOS Revision"
+#string STR_BIOS_REVISION_VALUE         #language en-US ""
+
+#string STR_RC_REVISION_PROMPT         #language en-US "RC Revision"
+#string STR_RC_REVISION_VALUE          #language en-US ""
+
+#string STR_CSM_REVISION_PROMPT         #language en-US "CSM Revision"
+#string STR_CSM_REVISION_VALUE          #language en-US ""
+
+#string STR_FIRMWARE_VERSION_PROMPT     #language en-US "Firmware Version"
+#string STR_FIRMWARE_VERSION_VALUE      #language en-US ""
+
+#string STR_SAVE_PROMPT                #language en-US  "Save to file"
+#string STR_SAVE_HELP                  #language en-US  "Save BIOS setup options to file on first device with a file system"
+
+#string STR_RESTORE_PROMPT             #language en-US  "Restore from file"
+#string STR_RESTORE_HELP               #language en-US  "Restore BIOS setup options from first device with a file system"
+
+#string STR_CPU_BSP_REVISION_PROMPT      #language en-US "Processor BSP Revision"
+#string STR_CPU_BSP_REVISION_VALUE       #language en-US ""
+
+#string STR_PCH_REVISION_PROMPT         #language en-US "PCH Revision"
+#string STR_PCH_REVISION_VALUE          #language en-US ""
+
+#string STR_PLATFORM_REVISION_PROMPT    #language en-US "Platform"
+#string STR_PLATFORM_REVISION_VALUE     #language en-US ""
+
+#string STR_TOTAL_MEMORY_SIZE_PROMPT    #language en-US "Total Memory"
+#string STR_TOTAL_MEMORY_SIZE_VALUE     #language en-US "???"
+
+#string STR_MEMORY_MODE_PROMPT          #language en-US "Memory Mode"
+#string STR_MEMORY_MODE_VALUE           #language en-US "???"
+#string STR_MEMORY_MODE_SINGLE          #language en-US "Single"
+#string STR_MEMORY_MODE_DUAL            #language en-US "Dual"
+
+#string STR_TIME_PROMPT                 #language en-US "System Time"
+#string STR_TIME_HOUR_HELP              #language en-US "Use 24 hour format for entering hours: 15:00 for 3pm"
+#string STR_TIME_MINUTE_HELP            #language en-US "0 - 59"
+#string STR_TIME_SECOND_HELP            #language en-US "0 - 59"
+
+#string STR_DATE_PROMPT                 #language en-US "System Date"
+#string STR_DATE_MONTH_HELP             #language en-US "Use Month / Day / Year format"
+#string STR_DATE_DAY_HELP               #language en-US "1 - 31"
+#string STR_DATE_YEAR_HELP              #language en-US "2003 - 2100"
+
+
+#string STR_BMC_FIRMWARE_REVISION_PROMPT        #language en-US "BMC version"
+#string STR_BMC_FIRMWARE_REVISION_VALUE         #language en-US "N/A"
+
+#string STR_ME_REVISION_PROMPT                  #language en-US "ME version"
+#string STR_ME_REVISION_VALUE                   #language en-US "N/A"
+
+#string STR_SYSTEM_UUID_PROMPT                  #language en-US "System UUID"
+#string STR_SYSTEM_UUID_VALUE                   #language en-US "N/A"
+
+#string STR_FRU_SDR_REVISION_PROMPT             #language en-US "FRU/SDR version"
+#string STR_FRU_SDR_REVISION_VALUE              #language en-US "N/A"
+
+#string STR_BOARD_PART_NUMBER_PROMPT            #language en-US "Board Part Number"
+#string STR_BOARD_PART_NUMBER_VALUE             #language en-US "N/A"
+
+#string STR_BOARD_SERIAL_NUMBER_PROMPT          #language en-US "Board Serial Number"
+#string STR_BOARD_SERIAL_NUMBER_VALUE           #language en-US "N/A"
+
+#string STR_SYSTEM_PART_NUMBER_PROMPT           #language en-US "System Part Number"
+#string STR_SYSTEM_PART_NUMBER_VALUE            #language en-US "N/A"
+
+#string STR_SYSTEM_SERIAL_NUMBER_PROMPT         #language en-US "System Serial Number"
+#string STR_SYSTEM_SERIAL_NUMBER_VALUE          #language en-US "N/A"
+
+#string STR_CHASSIS_PART_NUMBER_PROMPT          #language en-US "Chassis Part Number"
+#string STR_CHASSIS_PART_NUMBER_VALUE           #language en-US "N/A"
+
+#string STR_CHASSIS_SERIAL_NUMBER_PROMPT        #language en-US "Chassis Serial Number"
+#string STR_CHASSIS_SERIAL_NUMBER_VALUE         #language en-US "N/A"
+
+#string STR_ASSET_TAG_PROMPT                    #language en-US "Asset Tag"
+#string STR_ASSET_TAG_VALUE                     #language en-US "N/A"
+
+#string STR_ADDITIONAL_SYSTEM_INFO_PROMPT       #language en-US "Additional System Information"
+#string STR_ADDITIONAL_SYSTEM_INFO_HELP         #language en-US "Dispalys additional system information"
+
+#string STR_SERIAL_BAUD_RATE_PROMPT             #language en-US "Serial Port Baud Rate"
+#string STR_SERIAL_BAUD_RATE_HELP               #language en-US "Sets the Serial Baud Rate before booting to the OS"
+#string STR_SERIAL_BAUD_RATE_VALUE_115200       #language en-US "115200"
+#string STR_SERIAL_BAUD_RATE_VALUE_19200        #language en-US "19200"
+#string STR_SERIAL_BAUD_RATE_VALUE_9600         #language en-US "9600"
+
+// AptioV server override start
+//
+// Intel RC Setup
+//
+#string STR_INTELRCSETUP_TITLE              #language en-US "IntelRCSetup"
+#string STR_INTELRCSETUP_TITLE_LINK         #language en-US "Return to IntelRCSetup Options"
+#string STR_INTELRCSETUP_HELP               #language en-US "Press <Enter> to select the IntelRCSetup options."
+// AptioV server override end
+#string STR_WARNING_MESSAGE1            #language en-US "Setup Warning:"
+#string STR_WARNING_MESSAGE2            #language en-US "Setting items on this Screen to incorrect values"
+#string STR_WARNING_MESSAGE3            #language en-US "may cause system to malfunction!"
+
+#string STR_SATA0_STRING                #language en-US "SATA Port 0"
+#string STR_SATA0_NAME                  #language en-US "[Not Installed]"
+#string STR_SATA1_STRING                #language en-US "SATA Port 1"
+#string STR_SATA1_NAME                  #language en-US "[Not Installed]"
+#string STR_SATA2_STRING                #language en-US "SATA Port 2"
+#string STR_SATA2_NAME                  #language en-US "[Not Installed]"
+#string STR_SATA3_STRING                #language en-US "SATA Port 3"
+#string STR_SATA3_NAME                  #language en-US "[Not Installed]"
+#string STR_SATA4_STRING                #language en-US "SATA Port 4"
+#string STR_SATA4_NAME                  #language en-US "[Not Installed]"
+#string STR_SATA5_STRING                #language en-US "SATA Port 5"
+#string STR_SATA5_NAME                  #language en-US "[Not Installed]"
+
+#string STR_PROCESSOR_SPEED_VALUE       #language en-US ""
+#string STR_SYSTEM_BUS_FREQUENCY_VALUE  #language en-US ""
+#string STR_FSB_FREQUENCY_VALUE         #language en-US ""
+
+#string STR_NETWORK_CONFIGURATION       #language en-US "Network Configuration"
+#string STR_NETWORK_CONFIGURATION_HELP  #language en-US "Network Configuration"
+
+#string STR_LEGACY_PXEROM_CONTROL       #language en-US "Legacy PXE ROM"
+#string STR_LEGACY_PXEROM_CONTROL_HELP  #language en-US "Enable/Disable Legacy PXE Option ROM execution for LANs."
+
+#string STR_EFI_NETWORK_CONTROL         #language en-US "EFI Network"
+#string STR_EFI_NETWORK_CONTROL_HELP    #language en-US "Enable/Disable EFI Network support for LANs."
+
+#string STR_LOM_DISABLE_BY_GPIO         #language en-US "LOM"
+#string STR_LOM_DISABLE_BY_GPIO_HELP    #language en-US "Enable/Disable LAN on motherboard."
+
+//
+// Advanced - Miscelleneous Configuration
+//
+#string STR_MISC_FORM_TITLE             #language en-US "Miscellaneous Configuration"
+#string STR_MISC_FORM_HELP              #language en-US ""
+
+#string STR_PCI_64BIT_RESOURCE_ALLOCATION_PROMPT  #language en-US "PCI 64-Bit Resource Allocation"
+#string STR_PCI_64BIT_RESOURCE_ALLOCATION_HELP    #language en-US "Enable or disable the allocation of 64-bit resources for PCI"
+
+//
+// Fan PWM Offset
+//
+#string STR_FAN_PWM_OFFSET_PROMPT                 #language en-US "Fan PWM Offset"
+#string STR_FAN_PWM_OFFSET_HELP                   #language en-US "Specify fan speed offset"
+                                                 
+#string STR_PCIE_PORT_MAX_READ_REQUEST_SIZE_PROMPT  #language en-US "PCIe Max Read Request Size"
+#string STR_PCIE_PORT_MAX_READ_REQUEST_HELP         #language en-US "Set Max Read Request Size"
+#string STR_PCIE_MRRS_AUTO                          #language en-US "Auto leaves HW default values"
+#string STR_PCIE_MRRS_128B                          #language en-US "128B"
+#string STR_PCIE_MRRS_256B                          #language en-US "256B"
+#string STR_PCIE_MRRS_512B                          #language en-US "512B"
+#string STR_PCIE_MRRS_1024B                         #language en-US "1024B"
+#string STR_PCIE_MRRS_2048B                         #language en-US "2048B"
+#string STR_PCIE_MRRS_4096B                         #language en-US "4096B"
+
+
+#string STR_PCI_LTR_PROMPT                              #language en-US "PCIe Latency Tolerance Reporting"
+#string STR_PCI_LTR_HELP                                #language en-US "Enable or disable or Auto the LTR support"
+                                                     
+#string STR_PCI_MIN_SECONDARY_BUS_PROMPT                #language en-US "PCI Minimum Secondary Bus Number"
+#string STR_PCI_MIN_SECONDARY_BUS_HELP                  #language en-US "Specify the PCI minimum secondary bus number in system"
+                                                     
+//#string STR_PCI_ROOT_PORT_BUS_PADDING_PROMPT          #language en-US "PCI Root Port Bus Padding"
+//#string STR_PCI_ROOT_PORT_BUS_PADDING_HELP            #language en-US "Pad specifed number of PCI bus for each Root Port Slot"
+
+#string STR_VALIDATION_BREAKPOINT_TYPE          #language en-US "Breakpoint Type"
+#string STR_VALIDATION_BREAKPOINT_TYPE_HELP     #language en-US "Halt at specified points in BIOS"
+
+#string STR_BREAKPOINT_AFTER_MRC                #language en-US "After MRC"
+#string STR_BREAKPOINT_AFTER_QPIRC              #language en-US "After QPIRC"
+#string STR_BREAKPOINT_AFTER_RESOURCE_ALLOC     #language en-US "After Resource Allocation"
+#string STR_BREAKPOINT_AFTER_POST               #language en-US "After POST"
+#string STR_BREAKPOINT_AFTER_FULL_SPEED_SETUP   #language en-US "After Full Speed Setup"
+#string STR_BREAKPOINT_READY_FOR_IBIST          #language en-US "Ready for IBIST"
+
+//
+// Ps2
+//
+#string STR_PS2PORT_PROMPT              #language en-US "PS2 Port Swap"
+#string STR_PS2PORT_HELP                #language en-US "Enables or Disables the PS2 port swap"
+
+//
+// Serial Disable strings
+//
+#string STR_SERIAL_DEBUG_MSG_PROMPT     #language en-US "Serial Debug Message Level"
+#string STR_SERIAL_DEBUG_MSG_HELP       #language en-US "Disable = no serial debug messages, Minimum = high level debug messages, Normal = general debug messages"
+#string STR_SERIAL_DEBUG_MINIMUM        #language en-US "Minimum"
+#string STR_SERIAL_DEBUG_NORMAL         #language en-US "Normal"
+#string STR_SERIAL_DEBUG_MAXIMUM        #language en-US "Maximum"
+
+
+
+#string STR_SERIAL_DEBUG_TRACE_PROMPT           #language en-US "Trace Messages"
+#string STR_SERIAL_DEBUG_TRACE_HELP             #language en-US "Enables display of every IO access"
+#string STR_ENABLED_WITH_TAG                    #language en-US "Enabled for registry writes only."
+
+
+#string STR_PROMOTE_RC_WARNING_PROMPT           #language en-US "RC Promote Warnings"
+#string STR_PROMOTE_RC_WARNING_HELP             #language en-US "If enabled RC warnings are promoted to errors (except MRC warnings)"
+#string STR_PROMOTE_RC_MRC_WARNING_PROMPT       #language en-US "RC Promote MRC Warnings"
+#string STR_PROMOTE_RC_MRC_WARNING_HELP         #language en-US "If enabled MRC warnings are promoted to errors"
+
+#string STR_PROMOTE_RC_WARNING_PROMPT           #language en-US "RC Promote Warnings"
+#string STR_PROMOTE_RC_WARNING_HELP             #language en-US "If enabled RC warnings are promoted to errors (except MRC warnings)"
+#string STR_PROMOTE_RC_MRC_WARNING_PROMPT       #language en-US "RC Promote MRC Warnings"
+#string STR_PROMOTE_RC_MRC_WARNING_HELP         #language en-US "If enabled MRC warnings are promoted to errors"
+
+//
+// Video Configuration
+//
+#string STR_VIDEO_FORM_TITLE            #language en-US "Video Configuration"
+#string STR_VIDEO_FORM_HELP             #language en-US ""
+
+#string STR_VIDEO_SELECT_PROMPT         #language en-US "Active Video"
+#string STR_VIDEO_SELECT_HELP           #language en-US "Select active Video type"
+#string STR_VIDEO_SELECT_ONBOARD        #language en-US "Onboard Device"
+// AptioV Server Override Start: Added for Vga Priority Porting. Option changed to Offboard Device"
+//#string STR_VIDEO_SELECT_PCIE           #language en-US "PCIE Device"
+#string STR_VIDEO_SELECT_PCIE           #language en-US "Offboard Device"
+// AptioV Server Override End: Added for Vga Priority Porting. Option changed to Offboard Device"
+
+// AptioV Server Override Start: Added for Vga Priority Porting
+#string STR_TARGET_VGA               #language en-US "TargetVGA "
+#string STR_TARGET_VGA_HELP_PROMPT   #language en-US "TargetVGA from RootPort under CPU0/CPU1/CPU2/CPU3"
+#string STR_TARGET_VGA_NAME          #language en-US "CPU 0" // Dynamically updated
+// AptioV Server Override End: Added for Vga Priority Porting
+
+#string STR_POWER_STATE_PROMPT          #language en-US "After Power Failure"
+#string STR_POWER_STATE_HELP            #language en-US "Determines the mode of operation if a power loss occurs. Stays off: system will remain off once power is restored.  Last state: restores system to the same state it was on before power failed."
+
+#string STR_POWEROFF                    #language en-US "Stay off"
+#string STR_LASTSTATE                   #language en-US "Last state"
+#string STR_POWERON                     #language en-US "Power on"
+
+#string STR_EFI_INT10_PROMPT            #language en-US "EFI INT10 workaround"
+#string STR_EFI_INT10_HELP              #language en-US "Select to enable INT10 video with EFI Optimized boot"
+
+#string STR_UEFI_OPTIMIZED_PROMPT       #language en-US "UEFI Optimized Boot"
+#string STR_UEFI_OPTIMIZED_HELP         #language en-US "Modify the UEFI Optimized Boot setting"
+
+//
+// Boot Options Screen
+//
+#string STR_BOOT_OPTIONS                #language en-US "Boot Device Priority"
+
+#string STR_HDD_BOOT                    #language en-US "IDE HDD"
+#string STR_CD_BOOT                     #language en-US "ATAPI CD-ROM"
+#string STR_FLOPPY_BOOT                 #language en-US "Floppy"
+#string STR_PXE_BOOT                    #language en-US "Ethernet"
+#string STR_USB_BOOT                    #language en-US "USB Device"
+
+#string STR_BOOT_NETWORK_PROMPT         #language en-US "Boot to Network"
+#string STR_BOOT_NETWORK_HELP           #language en-US "Enables or Disables Boot to Network."
+
+#string STR_ERROR_INTERNAL              #language en-US  "Internal Error has occurred"
+
+#string STR_WAKE_ON_LAN_PROMPT          #language en-US "Wake on LAN from S5"
+#string STR_WAKE_ON_LAN_HELP            #language en-US "Determines the action taken when the system power is off and a PCI Power Management wake up event occurs."
+
+#string STR_CD_DRIVE_DETECTION_PROMPT   #language en-US "CD-ROM Drive Detection"
+#string STR_CD_DRIVE_DETECTION_HELP     #language en-US "If Enabled, system will present a warning if a CD-ROM Drive is not detected during restart."
+
+#string STR_HARD_DRIVE_DETECTION_PROMPT #language en-US "Hard Drive Detection"
+#string STR_HARD_DRIVE_DETECTION_HELP   #language en-US "If Enabled, system will present a warning if a Hard Drive is not detected during restart."
+
+#string STR_HARD_DRIVE_DIAGNOSTIC_PROMPT #language en-US "HDD Self Diagnostic"
+#string STR_HARD_DRIVE_DIAGNOSTIC_HELP   #language en-US "If Enabled, the system will enable S.M.A.R.T Hard Drive Self Diagnostics. If a potential failure condition exists, it will be reported during restart."
+
+#string STR_HORIZONTAL_LINE             #language en-US "--------------------------------------------------"
+#string STR_DOUBLE_LINE                 #language en-US "========================================"
+#string STR_BOOT_MANAGER_TITLE          #language en-US "Boot Manager"
+#string STR_BOOT_MANAGER_HELP           #language en-US "Boot Manager"
+#string STR_EFI_SHELL                   #language en-US "Launch EFI Shell"
+#string STR_BOOT_OPTION_0               #language en-US "Boot Option 0"
+#string STR_BOOT_OPTION_1               #language en-US "Boot Option 1"
+#string STR_BOOT_OPTION_2               #language en-US "Boot Option 2"
+#string STR_BOOT_OPTION_3               #language en-US "Boot Option 3"
+#string STR_BOOT_OPTION_4               #language en-US "Boot Option 4"
+#string STR_BOOT_OPTION_5               #language en-US "Boot Option 5"
+#string STR_BOOT_OPTION_6               #language en-US "Boot Option 6"
+#string STR_BOOT_OPTIONS_TITLE          #language en-US "Boot Options"
+#string STR_BOOT_OPTIONS_HELP           #language en-US "Boot Options"
+#string STR_BOOT_TIMEOUT_PROMPT         #language en-US "System Boot Timeout"
+#string STR_BOOT_TIMEOUT_HELP           #language en-US "Set the default timeout before system boot.  A value of 65535 will disable the timeout completely."
+#string STR_BOOT_ORDER_HELP             #language en-US "Sets the system boot order"
+#string STR_BOOT_ORDER_1                #language en-US "Boot Option #1"
+#string STR_BOOT_ORDER_2                #language en-US "Boot Option #2"
+#string STR_BOOT_ORDER_3                #language en-US "Boot Option #3"
+#string STR_BOOT_ORDER_4                #language en-US "Boot Option #4"
+#string STR_HARD_DISK_ORDER             #language en-US "Hard Disk Order"
+#string STR_HARD_DISK_ORDER_HELP        #language en-US "Set the order of the hard disks"
+#string STR_CDROM_ORDER                 #language en-US "CDROM Order"
+#string STR_CDROM_ORDER_HELP            #language en-US "Set the order of the CDROM drives"
+#string STR_FLOPPY_DISK_ORDER           #language en-US "Floppy Order"
+#string STR_FLOPPY_DISK_ORDER_HELP      #language en-US "Set the order of the floppy disks"
+#string STR_NETWORK_ORDER               #language en-US "Network Device Order"
+#string STR_NETWORK_ORDER_HELP          #language en-US "Set the order of the network boot devices"
+#string STR_EXIT_TITLE                  #language en-US "Exit"
+#string STR_SAVE_EXIT                   #language en-US "Save & Exit"
+#string STR_DISCARD_EXIT                #language en-US "Discard changes & exit"
+#string STR_SAVE                        #language en-US "Save Changes"
+#string STR_DISCARD                     #language en-US "Discard Changes"
+#string STR_RESTORE_DEFAULTS            #language en-US "Restore Default Values"
+#string STR_SAVE_USER_DEFAULTS          #language en-US "Save the User Default Values"
+#string STR_RESTORE_USER_DEFAULTS       #language en-US "Restore the User Default Values"
+#string STR_BOOT_ORDER_X                #language en-US "Boot Option #%d"
+#string STR_BOOT_ORDER_HELP             #language en-US "Sets the system boot order"
+
+#string STR_HARD_DISK_ORDER_X           #language en-US "Hard Disk #%d"
+#string STR_HARD_DISK_ORDER             #language en-US "Hard Disk Order"
+#string STR_HARD_DISK_ORDER_HELP        #language en-US "Set the order of the hard disks"
+#string STR_CDROM_ORDER_X               #language en-US "CDROM #%d"
+#string STR_CDROM_ORDER                 #language en-US "CDROM Order"
+#string STR_CDROM_ORDER_HELP            #language en-US "Set the order of the CDROM drives"
+#string STR_FLOPPY_DISK_ORDER_X         #language en-US "Floppy Disk #%d"
+#string STR_FLOPPY_DISK_ORDER           #language en-US "Floppy Order"
+#string STR_FLOPPY_DISK_ORDER_HELP      #language en-US "Set the order of the floppy disks"
+#string STR_NETWORK_ORDER_X             #language en-US "Network Device #%d"
+#string STR_NETWORK_ORDER               #language en-US "Network Device Order"
+#string STR_NETWORK_ORDER_HELP          #language en-US "Set the order of the network boot devices"
+#string STR_BEV_ORDER_X                 #language en-US "BEV Device #%d"
+#string STR_BEV_ORDER                   #language en-US "BEV Device Order"
+#string STR_BEV_ORDER_HELP              #language en-US "Sets the boot order of Bootstrap Entry Vector Devices. BEV devices are devices which have a bootable Option ROM such as add-in or onboard NICs."
+
+#string STR_ADD_BOOT_OPTION             #language en-US "Add New Boot Option"
+#string STR_ADD_BOOT_OPTION_HELP        #language en-US "Add a new EFI boot option to the boot order"
+#string STR_DEL_BOOT_OPTION             #language en-US "Delete Boot Option"
+#string STR_DEL_BOOT_OPTION_HELP        #language en-US "Remove an EFI boot option from the boot order"
+#string STR_ADD_BOOT_LABEL              #language en-US "Add boot option label"
+#string STR_BOOT_LABEL_HELP             #language en-US "Create the label for the new boot option"
+#string STR_ADD_BOOT_PATH               #language en-US "Path for boot option"
+#string STR_BOOT_PATH_HELP              #language en-US "Enter the path to the boot option in the format fs0:\\path\\filename.efi"
+#string STR_SAVE_BOOT_OPTION            #language en-US "Save"
+
+//
+// TPM Strings
+//
+#string STR_TPM_SUPPORT_PROMPT          #language en-US "TPM v1.2 Support"
+#string STR_TPM_SUPPORT_HELP            #language en-US "Enable or disable the TPM support"
+
+//
+// TPM Command
+//
+#string STR_TPM_COMMAND_PROMPT          #language en-US  "Pending TPM Command"
+#string STR_TPM_COMMAND_HELP            #language en-US  "Pending TPM Physical Presence command"
+
+#string STR_ONE_OF_TPM0                 #language en-US  "#0 = No pending command"
+#string STR_ONE_OF_TPM1                 #language en-US  "#1 = TPM_PhysicalEnable"
+#string STR_ONE_OF_TPM2                 #language en-US  "#2 = TPM_PhysicalDisable"
+#string STR_ONE_OF_TPM3                 #language en-US  "#3 = TPM_PhysicalSetDeactivated (FALSE)"
+#string STR_ONE_OF_TPM4                 #language en-US  "#4 = TPM_PhysicalSetDeactivated (TRUE)"
+#string STR_ONE_OF_TPM5                 #language en-US  "#5 = TPM_ForceClear"
+#string STR_ONE_OF_TPM6                 #language en-US  "#6 = #1 + #3"
+#string STR_ONE_OF_TPM7                 #language en-US  "#7 = #4 + #2"
+#string STR_ONE_OF_TPM8                 #language en-US  "#8 = TPM_SetOwnerInstall (TRUE)"
+#string STR_ONE_OF_TPM9                 #language en-US  "#9 = TPM_SetOwnerInstall (FALSE)"
+#string STR_ONE_OF_TPM10                #language en-US  "#10 = #6 + #8"
+#string STR_ONE_OF_TPM11                #language en-US  "#11 = #7 + #9"
+#string STR_ONE_OF_TPM12                #language en-US  "#12 = TPM_SetTempDeactivated"
+#string STR_ONE_OF_TPM13                #language en-US  "#13 = TPM_SetOperatorAuth"
+#string STR_ONE_OF_TPM14                #language en-US  "#14 = #5 + #6"
+
+#string STR_MOR_PROMPT                     #language en-US "MOR State"
+#string STR_MOR_HELP                       #language en-US "Enable/Disable the MOR (Memory Overwrite Request) feature"
+//
+// Silent Boot
+//
+#string STR_SILENT_BOOT_PROMPT          #language en-US "Silent Boot"
+#string STR_SILENT_BOOT_HELP            #language en-US "Switch to select Boot Method"
+
+//
+// Fast Boot
+//
+#string STR_FAST_BOOT_PROMPT            #language en-US "Fast Boot"
+#string STR_FAST_BOOT_HELP              #language en-US "Enables / Disables the Fast Boot by skipping some drivers"
+
+//
+// Force Setup
+//
+#string STR_FORCE_SETUP_PROMPT            #language en-US "Force Setup"
+#string STR_FORCE_SETUP_HELP              #language en-US "Enable/Disable loading setup without pressing F2"
+
+//
+// Pfat
+//
+#string STR_PFAT_SETUP_PROMPT           #language en-US "BIOS Guard"
+#string STR_PFAT_SETUP_HELP             #language en-US "Enable/Disable BIOS Guard Platform Protection Technology"
+
+
+//
+// Anti-flash Wearout
+//
+#string STR_PFAT_ANTI_FW_PROMPT         #language en-US "Bios Guard Anti-Flash Wearout"
+#string STR_PFAT_ANTI_FW_HELP           #language en-US "Enable/Disable BIOS Guard feature Anti-Flash Wearout.  Protects flash part from malicious writes inteaded to wear out flash part."
+
+//
+// Max Page Table Size Select
+//
+#string STR_MAX_PAGE_TABLE_SIZE_SELECT_PROMPT     #language en-US "Max Page Table Size Select"
+#string STR_MAX_PAGE_TABLE_SIZE_SELECT_HELP       #language en-US "Select the max page size to use. If 1G size is used, it may cause problems with older OSes."
+#string STR_1G_PAGE_TABLE                         #language en-US "1G"
+#string STR_2M_PAGE_TABLE                         #language en-US "2M"
+
+//
+// Reserve Memory that is hidden from the OS.
+//
+#string STR_RESERVE_MEMORY_OPTION                 #language en-US "Reserve Memory"
+#string STR_RESERVE_MEMORY_OPTION_HELP            #language en-US "Reserve Memory"
+
+#string STR_RESERVE_MEMORY_ENABLE                 #language en-US "Reserve Memory Range"
+#string STR_RESERVE_MEMORY_ENABLE_HELP            #language en-US "Sets aside an empty memory page that is hidden from the OS"
+
+#string STR_RESERVE_MEMORY_START_ADDRESS          #language en-US "Start Address"
+#string STR_RESERVE_MEMORY_START_ADDRESS_HELP     #language en-US "Address that reserved memory page starts at"
+
+#string STR_RESERVE_MEMORY_RESULT                 #language en-US "Reserve Memory Result"
+#string STR_RESERVE_MEMORY_RESULT_VALUE           #language en-US ""
+
+#string STR_TAGEC_MEMORY                          #language en-US "Reserve TAGEC Memory "
+#string STR_TAGEC_MEMORY_HELP                     #language en-US "Reserve 16M for TAGEC"
+
+//
+// Debug Messages
+//
+#string STR_DEBUG_MSG_PROMPT            #language en-US "Debug Messages"
+#string STR_DEBUG_MSG_HELP              #language en-US "Enable or Disable Serial Port Debug Messages"
+#string STR_TERMINAL_PROMPT             #language en-US "Terminal"
+#string STR_TERMINAL_HELP               #language en-US "Enable or Disable Terminal (Serial Port)"
+
+//
+// Common Strings
+//
+#string STR_NULL_STRING                 #language en-US ""
+#string STR_UNKNOWN                     #language en-US "Unknown"
+#string STR_INSTALLED                   #language en-US "Installed"
+#string STR_NOTINSTALLED                #language en-US "Not Installed"
+#string STR_NOTPRESENT                  #language en-US "Not Present"
+#string STR_UNSUPPORTED                 #language en-US "Unsupported"
+#string STR_ENABLE                      #language en-US "Enable"
+#string STR_DISABLE                     #language en-US "Disable"
+#string STR_AUTO                        #language en-US "Auto"
+#string STR_ERROR_POPUP                 #language en-US "Try Again"
+#string STR_ON                          #language en-US "On"
+#string STR_OFF                         #language en-US "Off"
+#string STR_SKIP                        #language en-US "Skip"
+
+#string STR_1                           #language en-US "1"
+#string STR_8                           #language en-US "8"
+#string STR_12                          #language en-US "12"
+#string STR_16                          #language en-US "16"
+#string STR_24                          #language en-US "24"
+#string STR_32                          #language en-US "32"
+#string STR_40                          #language en-US "40"
+#string STR_48                          #language en-US "48"
+#string STR_56                          #language en-US "56"
+#string STR_64                          #language en-US "64"
+#string STR_72                          #language en-US "72"
+#string STR_76                          #language en-US "76"
+#string STR_77                          #language en-US "77"
+#string STR_80                          #language en-US "80"
+#string STR_85                          #language en-US "85"
+#string STR_86                          #language en-US "86"
+#string STR_88                          #language en-US "88"
+#string STR_95                          #language en-US "95"
+#string STR_96                          #language en-US "96"
+#string STR_104                         #language en-US "104"
+#string STR_112                         #language en-US "112"
+#string STR_128                         #language en-US "128"
+
+#string STR_PROCESSOR_REVISION_PROMPT   #language en-US "Processor Type"
+#string STR_PROCESSOR_REVISION_VALUE    #language en-US ""
+#string STR_PROCESSOR_REVISION_VALUE2   #language en-US ""
+
+//
+// Expanded NULL Strings
+//
+#string STR_NULL_ERRCNT_STRING          #language en-US ""
+#string STR_NULL_MAINACCESS_STRING      #language en-US ""
+#string STR_NULL_PROCACCESS_STRING      #language en-US ""
+					 					#language x-AMI "SET001"
+#string STR_NULL_SECACCESS_STRING       #language en-US ""
+#string STR_NULL_VAREQADMINNAME_STRING	#language en-US ""
+#string STR_NULL_VAREQUSERNAME_STRING	#language en-US ""
+#string STR_NULL_USBMASSDEVNUM_STRING   #language en-US ""
+#string STR_NULL_ISINTALLOWED_STRING	#language en-US ""
+
+//
+// Manageability Engine (ME) Strings
+//
+#string STR_ME_SUPPORT_PROMPT           #language en-US "ME Support"
+#string STR_ME_SUPPORT_HELP             #language en-US "Enable or disable the ME support"
+#string STR_ME_VIA_BMC_PROMPT           #language en-US "ME via BMC"
+#string STR_ME_VIA_BMC_HELP             #language en-US "Enable or disable BMC mediation in BIOS-ME communication"
+#string STR_ME_END_OF_POST_PROMPT       #language en-US "ME End of Post"
+#string STR_ME_END_OF_POST_HELP         #language en-US "Enable or disable sending End of Post HECI message to ME and hiding HECI devices (debug option)"
+#string STR_ME_FW_STATE_PROMPT          #language en-US "ME FW State"
+#string STR_ME_FW_STATE_HELP            #language en-US "Enable or disable ME firmware (debug option)"
+
+//
+// Vt related string
+//
+#string STR_ARI_ENABLE_PROMPT              #language en-US "ARI Support"
+#string STR_ARI_ENABLE_HELP                #language en-US "Enable or disable the ARI support"   
+#string STR_ARI_FORWARD_PROMPT             #language en-US "ARI Forward"
+#string STR_ARI_FORWARD_HELP               #language en-US "Enable or disable the ARI Forward"
+#string STR_SR_IOV_ENABLE_PROMPT           #language en-US "SR-IOV Support"
+#string STR_SR_IOV_ENABLE_HELP             #language en-US "Enable or disable the SR-IOV support"   
+#string STR_MR_IOV_ENABLE_PROMPT           #language en-US "MR-IOV Support"
+#string STR_MR_IOV_ENABLE_HELP             #language en-US "Enable or disable the MR-IOV support"   
+#string STR_SR_IOV_SYSTEM_PAGE_SIZE_PROMPT #language en-US "SR-IOV SystemPageSize"
+#string STR_SR_IOV_SYSTEM_PAGE_SIZE_HELP   #language en-US "SR-IOV SystemPageSize"
+#string STR_4K                             #language en-US "4K"
+#string STR_8K                             #language en-US "8K"
+#string STR_64K                            #language en-US "64K"
+#string STR_256K                           #language en-US "256K"
+#string STR_1M                             #language en-US "1M"
+#string STR_4M                             #language en-US "4M"
+
+#string STR_CLOCK_SPREAD_SPEC_ENABLE       #language en-US "External SSC Enable - CK420" 
+										   #language x-AMI "PCH012"  
+#string STR_CLOCK_SPREAD_SPEC_ENABLE_HELP  #language en-US "Enable Spread Spectrum - only affects external clock generator"
+
+//#string STR_LER_PROMPT                     #language en-US "Live Error Recovery"
+//#string STR_LER_HELP                       #language en-US "Enable/Disable Live Error Recovery"
+
+//#string STR_C4LOG_LER_PROMPT               #language en-US "C4 Logging"
+//#string STR_C4LOG_LER_HELP                 #language en-US "Enable/Disable C4 logging when LER is enabled"
+
+//
+// WHEA related strings
+//
+#string STR_WHEA_SUPPORT_ENABLE_PROMPT    #language en-US "WHEA Support"
+#string STR_WHEA_SUPPORT_ENABLE_HELP      #language en-US "Enable or disable the WHEA support"   
+//
+// RTC WakeUp
+//
+//
+// S5 RTC Wakeup
+//
+#string STR_WAKE_ON_RTC_PROMPT                  #language en-US "RTC Wake system from S5"
+#string STR_WAKE_ON_RTC_HELP                    #language en-US "Enable or disable System wake on alarm event. When enabled, System will wake on the day::hr::min::sec specified"
+#string STR_RTC_WAKEUP_HOUR_PROMPT              #language en-US "  Wake up hour"
+#string STR_RTC_HOUR_HELP                       #language en-US "select 0-23 For example enter 3 for 3am and 15 for 3pm"
+#string STR_RTC_WAKEUP_MINUTE_PROMPT            #language en-US "  Wake up minute"
+#string STR_RTC_WAKEUP_SECOND_PROMPT            #language en-US "  Wake up second"
+#string STR_TIME_MINUTE_HELP                    #language en-US  "0 - 59"
+#string STR_TIME_SECOND_HELP                    #language en-US  "0 - 59"
+
+#string STR_ENABLED                             #language en-US "Enabled"
+#string STR_DISABLED                            #language en-US "Disabled"
+
+//
+// BootAllOptions
+//
+#string STR_BOOT_ALL_OPTIONS                     #language en-US "Boot All Options"
+#string STR_BOOT_ALL_OPTIONS_HELP                #language en-US "Boot to Next Option without Setup Menu"
+
+//
+// Set Shell First Option
+//
+#string STR_SET_SHELL_FIRST                     #language en-US "Boot Shell First"
+#string STR_SET_SHELL_FIRST_HELP                #language en-US "If enabled, UEFI Shell will always be the first"
+
+
+#string STR_PCI_ATOMICOP_PROMPT        #language en-US "PCIe AtomicOp Request Support"
+#string STR_PCI_ATOMICOP_HELP          #language en-US "Enable or disable AtomicOp Request support"
+
+#string STR_PCIE_EXTENDED_TAG_PROMPT   #language en-US "PCIe Extended Tag Enable"
+#string STR_EXTENDED_TAG_HELP          #language en-US "Enable or Disable Extended Tag Enable Field Support"
+
+// End of file
+//

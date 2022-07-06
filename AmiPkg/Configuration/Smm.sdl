@@ -1,0 +1,9 @@
+TOKEN
+	Name  = "SMM_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable SMM support in Project"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	TargetH = Yes
+End

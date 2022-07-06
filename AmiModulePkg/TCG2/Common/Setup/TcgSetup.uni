@@ -1,0 +1,185 @@
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**     5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093            **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************
+// $Header: $
+//
+// $Revision: $
+//
+// $Date: $
+//**********************************************************************
+// Revision History
+// ----------------
+// $Log: $
+// 
+//**********************************************************************
+//<AMI_FHDR_START>
+//
+// Name:	TCG.UNI
+//
+// Description:	TCG Form String Definitions.
+//
+//<AMI_FHDR_END>
+//**********************************************************************
+/=#
+#include "VFR.uni"
+#ifndef x-AMI
+#langdef   x-AMI "x-AMI"    // AMI Configuration Language
+#endif
+#string STR_TCG_FORM 		            #language eng "Trusted Computing"
+#string STR_TCG_FORM_HELP 	            #language eng "Trusted Computing Settings"
+
+#string STR_TPM_PROMPT 	                #language eng "  TPM State"
+										#language x-AMI "TCG001"
+#string STR_TCM_PROMPT 	                #language eng "  TCM State"
+										#language x-AMI "TCG002"
+#string STR_TPM_SUPPORT_PROMPT 	        #language eng "  Security Device Support"
+										#language x-AMI "TCG003"
+#string STR_TCM_SUPPORT_PROMPT 	        #language eng "  Security Device Support"
+										#language x-AMI "TCG004"
+#string STR_TPM_PASS_PROMPT             #language eng "  Pwd Authentication"
+										#language x-AMI "TCG005"
+
+#string STR_TPM_HELP   	                #language eng "Enable/Disable Security Device. NOTE: Your Computer will reboot during restart in order to change State of the Device."
+
+#string STR_TPM_CLEAR 	                #language eng "TPM Clear"
+#string STR_TCM_CLEAR 	                #language eng "TCM Clear"
+#string STR_TPM_NONE 	                #language eng "None"
+#string STR_TPM_OWNER 	                #language eng "Enable Take Ownership"
+#string STR_TPM_NOOWNER 	            #language eng "Disable Take Ownership"
+#string STR_TPM_ENABLE 	                #language eng "Enable"
+#string STR_TPM_DISABLE	                #language eng "Disable"
+#string STR_TPM_ENABLED	                #language eng "Enabled"
+#string STR_TPM_DISABLED                #language eng "Disabled"
+#string STR_TPMOP_PROMPT 	            #language eng "Pending operation"
+										#language x-AMI "TCG006"
+#string STR_TPM20_PROMPT                #language eng "  Pending operation"
+										#language x-AMI "TCG007"
+#string STR_TPM_CONFIGURATION			#language eng "Configuration"
+#string STR_TPM_SETUP_ERROR             #language eng "Error reported while executing a setup request"   
+#string STR_TPM_STATUS_INFO				#language eng "Current Status Information"
+#string STR_ENABLED_PROMPT	 	        #language eng "  TPM Enabled Status:"
+#string STR_TCM_ENABLED_PROMPT	        #language eng "  TCM Enabled Status:"
+#string STR_ACTIVATE_PROMPT 	        #language eng "  TPM Active Status:"
+#string STR_TCM_ACTIVATE_PROMPT         #language eng "  TCM Active Status:"
+#string STR_ENABLED_PROMPT_VALUE        #language eng "N/A, reset required"
+#string STR_ACTIVATED_PROMPT_VALUE      #language eng "N/A, reset required"
+#string STR_OWNED_PROMPT_VALUE          #language eng "N/A, reset required"
+#string STR_ONOFFSTATE_HELP				#language eng "Provides the current Capability state of the security device"
+#string STR_TPMDISABLED					#language eng "Disabled"
+#string STR_TPMACTIVATED				#language eng "Activated"
+#string STR_TPMDEACTIVATED				#language eng "Deactivated"
+#string STR_TPMENABLED					#language eng "Enabled"
+#string STR_OWNED_OR_UNOWNED_PROMPT		#language eng "  TPM Owner Status:"
+#string STR_TCM_OWNED_OR_UNOWNED_PROMPT		#language eng "  TCM Owner Status:"
+#string STR_OWNED_OR_UNOWNED_HELP		#language eng "Provides current Ownership state. ie: Owned or Unowned"
+#string STR_OWNED						#language eng "Owned"
+#string STR_UNOWNED						#language eng "Unowned"
+#string STR_TPMOP_HELP  	            #language eng "Schedule an Operation for the Security Device. NOTE: Your Computer will reboot during restart in order to change State of Security Device."
+#string STR_TPMSUPPORT_HELP  	        #language eng "Enables or Disables BIOS support for security device. O.S. will not show Security Device. TCG EFI protocol and INT1A interface will not be available."
+#string STR_EMPTY						#language eng 	""
+#string STR_TPMHARDWARE					#language eng 	"  NO Security Device Found"
+#string STR_TPMSUPP						#language eng 	"  SUPPORT TURNED OFF"
+#string STR_TPMOPTIMIZE					#language eng 	"  Reset Required"
+#string STR_TPM_PASS_HELP               #language eng "Determines whether state change of security device requires Password Authentication"
+#string STR_TPM_FORCE_ENABLE            #language eng "Force TPM Enable"
+										#language x-AMI "TCG008"
+#string STR_HASHPOLICY					#language eng 	"  HashPolicy"
+										#language x-AMI "TCG009"
+#string STR_HASHPOLICY_HELP				#language eng 	"Select the Hash policy to use. SHA-2 is most secure but might not be supported by all Operating Systems"
+#string STR_SHA1    					#language eng 	"Sha-1"
+#string STR_SHA2    					#language eng 	"Sha256"
+#string STR_MD5                         #language eng   "MD5"
+
+#string STR_TCG2_SPEC_VERSION           #language eng   "  TPM2.0 UEFI Spec Version"
+										#language x-AMI "TCG010"
+#string STR_TCG2_SPEC_VERSION_HELP      #language eng   "Select the TCG2 Spec Version Support,\n\r\n\rTCG_1_2: the Compatible mode for Win8/Win10,\n\r\n\rTCG_2: Support new TCG2 protocol and event format for Win10 or later"
+#string STR_PROTOCOL_VER_1_0            #language eng   "TCG_1_2"
+#string STR_PROTOCOL_VER_1_1            #language eng   "TCG_2"
+
+#string STR_TPM_20_DEVICE               #language eng "  TPM20 Device Found"
+#string STR_TPM_20_PH                   #language eng "  Platform Hierarchy"
+										#language x-AMI "TCG011"
+#string STR_TPM_20_PH_HELP              #language eng "Enable or Disable Platform Hierarchy"
+#string STR_TPM_20_SH                   #language eng "  Storage Hierarchy"
+										#language x-AMI "TCG012"
+#string STR_TPM_20_SH_HELP              #language eng "Enable or Disable Storage Hierarchy"
+#string STR_TPM_20_EH                   #language eng "  Endorsement Hierarchy"
+										#language x-AMI "TCG013"
+#string STR_TPM_20_EH_HELP              #language eng "Enable or Disable Endorsement Hierarchy"
+#string STR_TPM_20_REVOKE_TRUST         #language eng "Revoke Trust"
+#string STR_TPM_20_INTERFACE            #language eng "  TPM 20 InterfaceType"
+										#language x-AMI "TCG014"
+#string STR_TPM_20_INTERFACE_HELP       #language eng "  Select the Communication Interface to TPM 20 Device."
+#string STR_TPM_20_PH_RANDOMIZATION    	#language eng "  PH Randomization"
+#string STR_TPM_20_PH_RANDOMIZATION_HELP	#language eng "Enables or Disables Platform Hierarchy randomization. DO NOT ENABLE THIS QUESTION IN PRODUCTION PLATFORMS. THIS IS FOR DEVELOPMENT TESTING. OVERRIDE ChangePlatformAuth ELINK for production platforms supporting TXT."
+#string STR_TPM_20_LOCKOUT_RESET          	#language eng "  Reset TPM Lock out"
+											#language x-AMI "TCG015"
+#string STR_TPM_20_LOCKOUT_RESET_HELP     #language eng "Allows BIOS to reset the TPM lockout via the TPM Clear command. NOTE: This will clear your TPM. You will use Keys and other secrets stored in the TPM. "
+#string STR_CRB                         #language eng "CRB"
+#string STR_TIS                         #language eng "TIS"
+#string STR_DEVICE_TYPE_PROMPT          #language eng "  Device Select"
+										#language x-AMI "TCG016"
+#string STR_TPM_12                      #language eng "TPM 1.2"
+#string STR_TPM_20                      #language eng "TPM 2.0"
+#string STR_TPM_AUTO                    #language eng "Auto"
+#string STR_TPM_DEVICE_TYPE_HELP        #language eng "TPM 1.2 will restrict support to TPM 1.2 devices, TPM 2.0 will restrict support to TPM 2.0 devices, Auto will support both with the default set to TPM 2.0 devices if not found, TPM 1.2 devices will be enumerated "
+#string STR_TPM_ACTIVE_PCR_BANKS        #language eng "  Active PCR banks"
+#string STR_TPM_ACTIVE_PCR_BANKS_HELP       #language eng ""
+#string STR_TPM_ACTIVE_PCR_BANKS_VALUE      #language eng "N/A, reset required"
+#string STR_TPM_SUPPORTED_PCR_BANKS        	#language eng "  Available PCR banks"
+#string STR_TPM_SUPPORTED_PCR_BANKS_HELP	#language eng ""
+#string STR_TPM_SUPPORTED_PCR_BANKS_VALUE   #language eng "N/A, reset required"
+#string STR_TPM_SHA1_PCRBANK_ENABLE        	#language eng "  SHA-1 PCR Bank"
+											#language x-AMI "TCG017"
+#string STR_TPM_SHA1_PCRBANK_ENABLE_HELP   	#language eng "Enable or Disable SHA-1 PCR Bank"
+#string STR_TPM_SHA256_PCRBANK_ENABLE      	#language eng "  SHA256 PCR Bank"
+											#language x-AMI "TCG018"
+#string STR_TPM_SHA256_PCRBANK_ENABLE_HELP 	#language eng "Enable or Disable SHA256 PCR Bank"
+#string STR_TPM_SHA384_PCRBANK_ENABLE      	#language eng "  SHA384 PCR Bank"
+											#language x-AMI "TCG019"
+#string STR_TPM_SHA384_PCRBANK_ENABLE_HELP 	#language eng "Enable or Disable SHA384 PCR Bank"
+#string STR_TPM_SHA512_PCRBANK_ENABLE      	#language eng "  SHA512 PCR Bank"
+											#language x-AMI "TCG020"
+#string STR_TPM_SHA512_PCRBANK_ENABLE_HELP  #language eng "Enable or Disable SHA512 PCR Bank"
+#string STR_TPM_SM3_PCRBANK_ENABLE      	#language eng "  SM3_256 PCR Bank"
+											#language x-AMI "TCG021"
+#string STR_TPM_SM3_PCRBANK_ENABLE_HELP   	#language eng "Enable or Disable SM3_256 PCR Bank"
+
+#string STR_PPI_SPEC_VERSION           		#language eng "  Physical Presence Spec Version"
+											#language x-AMI "TCG022"
+#string STR_PPI_SPEC_VERSION_HELP			#language eng "  Select to Tell O.S. to support PPI Spec Version 1.2 or 1.3. Note some HCK tests might not support 1.3."
+#string STR_PPI_SPEC_VERSION_1_2         	#language eng "1.2"
+#string STR_PPI_SPEC_VERSION_1_3         	#language eng "1.3"
+
+#string STR_TPM_MANUFACTURER                #language eng ""
+#string STR_TPM_FW_VERSION                  #language eng ""
+#string STR_TPM_FW_VERSION_STRING           #language eng "  Firmware Version:"
+#string STR_TPM_FW_VENDOR_STRING            #language eng "  Vendor:"
+
+#string STR_BLOCK_SID_PROMPT                #language eng "  Disable Block Sid"
+                                            #language x-AMI "TCG023"
+#string STR_BLOCK_SID_PROMPT_HELP           #language eng "  Override to allow SID authentication in TCG Storage device"
+
+//**********************************************************************
+//**********************************************************************
+//**                                                                  **
+//**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
+//**                                                                  **
+//**                       All Rights Reserved.                       **
+//**                                                                  **
+//**     5555 Oakbrook Pkwy, Suite 200, Norcross, GA 30093            **
+//**                                                                  **
+//**                       Phone: (770)-246-8600                      **
+//**                                                                  **
+//**********************************************************************
+//**********************************************************************

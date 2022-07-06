@@ -1,0 +1,24 @@
+TOKEN
+	Name  = "TxtPei_SUPPORT"
+	Value  = "1"
+	Help  = "Main switch to enable TxtPei support in Project"
+	TokenType = Boolean
+    Token = "INTEL_TXT_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "TxtPei_SUPPORT"
+	Value  = "0"
+	Help  = "Main switch to enable TxtPei support in Project"
+	TokenType = Boolean
+	Token = "INTEL_TXT_SUPPORT" "=" "0"
+End
+
+INFComponent
+	Name  = "TxtPei"
+	File  = "TxtPei.inf"
+	Package  = "ServerCommonPkg"
+	ModuleTypes = "PEIM"
+    Token = "TxtPei_SUPPORT" "=" "1"
+End
+

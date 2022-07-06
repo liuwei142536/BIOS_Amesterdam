@@ -1,0 +1,94 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2019, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+## @file
+# Piketon Package
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = AmiCRBPkg
+  PACKAGE_GUID                   = d3a90228-d29a-4fd4-9617-ca7e9ec0866a
+  PACKAGE_VERSION                = 0.1
+################################################################################
+#
+# Include Section - list of Include Paths that are provided by this package.
+#                   Comments are used for Keywords and Module Types.
+#
+# Supported Module Types: 
+#  SEC PEIM DXE_DRIVER DXE_RUNTIME_DRIVER DXE_SMM_DRIVER DXE_SAL_DRIVER UEFI_DRIVER
+#
+################################################################################
+[Includes]
+  Chipset/SB					#$(SB_CHIPSET_DIR)
+  Board/SB					#$(SB_BOARD_DIR)
+  Chipset/NB					#$(NB_CHIPSET_DIR)
+  Board/NB					#$(NB_BOARD_DIR)
+  
+################################################################################
+#
+# Library Class Header section - list of Library Class header files that are
+#                                provided by this package.
+#
+################################################################################
+#[LibraryClasses]
+#  ##  @libraryclass  Provides a service to retrieve a pointer to the EFI Boot Services Table.
+#  #                  Only available to DXE and UEFI module types.
+#  #UefiBootServicesTableLib|Include/Library/UefiBootServicesTableLib.h
+#
+################################################################################
+#
+# Global Guid Definition section - list of Global Guid C Name Data Structures
+#                                  that are provided by this package.
+#
+################################################################################
+[Guids]
+  
+  gEfiTscFrequencyGuid                = { 0xdba6a7e3, 0xbb57, 0x4be7, { 0x8a, 0xf8, 0xd5, 0x78, 0xdb, 0x7e, 0x56, 0x87 }} # AptioV Server Override: EIP#446947 - Performance Measurement Support
+  
+################################################################################
+#
+# Global Protocols Definition section - list of Global Protocols C Name Data
+#                                  Structures that are provided by this package.
+#
+################################################################################
+[Protocols]
+
+################################################################################
+#
+# Global Ppis Definition section - list of Global Ppis C Name Data Structures
+#                                  that are provided by this package.
+#
+################################################################################
+[Ppis]
+ 
+################################################################################
+#
+# PCD Declarations section - list of all PCDs Declared by this Package
+#                            Only this package should be providing the
+#                            declaration, other packages should not.
+#
+################################################################################
+[PcdsFeatureFlag]
+
+[PcdsFixedAtBuild]
+ 
+ [PcdsFixedAtBuild,PcdsPatchableInModule,PcdsDynamic,PcdsDynamicEx]
+
+[Ppis]
+
+[Protocols]
+
+[Guids]
+  #SBDxe File GUID
+  gAmiDxeSBGuid 				 = {0xb7d19491, 0xe55a, 0x470d, {0x85, 0x8, 0x85, 0xa5, 0xdf, 0xa4, 0x19, 0x74}}
+  

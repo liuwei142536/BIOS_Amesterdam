@@ -1,0 +1,14 @@
+<component>
+	name = "OA3"
+	category = ModulePart
+	LocalRoot = "AmiModulePkg\OemActivation\OA3\"
+	RefName = "OA3"
+[INF]
+"OA3.inf"
+[files]
+"OA3.sdl"	
+"OA3.mak"	
+[parts]
+"OA3_SMM"
+"OA3_SmiFlashHook"
+<endComponent>

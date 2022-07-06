@@ -1,0 +1,21 @@
+TOKEN
+    Name  = "AmiSerial_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Ami Serial Device support in Project"
+    TokenType = Boolean
+    TargetH = Yes
+    Master = Yes
+    Token = "SERIALIO_PCI_SERIAL_SUPPORT" "=" "1"
+End
+
+PATH
+    Name  = "AmiSerial_DIR"
+End
+
+INFComponent
+    Name  = "AmiSerial"
+    File  = "AmiSerial.inf"
+    Package  = "AmiSerial"
+    ModuleTypes  = "DXE_DRIVER"
+End
+

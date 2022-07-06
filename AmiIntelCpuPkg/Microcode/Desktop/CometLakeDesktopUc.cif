@@ -1,0 +1,13 @@
+<component>
+	name = "Desktop CometLake uCode Patches (A065X)"
+	category = ModulePart
+	LocalRoot = "AmiIntelCpuPkg\Microcode\Desktop\"
+	RefName = "CometLakeDesktopUc"
+[files]
+"CometLakeDesktopUc.sdl"
+"M22A0650_000000BE.pdb" = "DESKTOP MICROCODE UPDATES"
+"M22A0651_000000C2.pdb" = "DESKTOP MICROCODE UPDATES"
+"M22A0653_000000EC.pdb" = "DESKTOP MICROCODE UPDATES"
+"M22A0654_000000C6.pdb" = "DESKTOP MICROCODE UPDATES"
+"M22A0655_000000EE.pdb" = "DESKTOP MICROCODE UPDATES"
+<endComponent>
