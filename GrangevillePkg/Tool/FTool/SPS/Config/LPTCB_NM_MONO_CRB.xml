@@ -1,29 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-   INTEL CONFIDENTIAL
-   Copyright (c) 2013-2015 Intel Corporation. All Rights Reserved. 
-   The source code contained or described herein and all documents related 
-   to the source code ("Material") are owned by Intel Corporation or its 
-   suppliers or licensors. Title to the Material remains with Intel Corporation 
-   or its suppliers and licensors. The Material contains trade secrets and 
-   proprietary and confidential information of Intel or its suppliers and l
-   icensors. The Material is protected by worldwide copyright and trade secret 
-   laws and treaty provisions. No part of the Material may be used, copied, 
-   reproduced, modified, published, uploaded, posted, transmitted, distributed, 
-   or disclosed in any way without Intel's prior express written permission.
-
-   No license under any patent, copyright, trade secret or other intellectual 
-   property right is granted to or conferred upon you by disclosure or delivery 
-   of the Materials, either expressly, by implication, inducement, estoppel or 
-   otherwise. Any license under such intellectual property rights must be express 
-   and approved by Intel in writing.
--->
 <ftoolRoot version="4.0">
 	<ProgSettings>
 		<GenIntermediateFiles value="true"></GenIntermediateFiles>
-		<BuildOutputFilename value="image.bin"></BuildOutputFilename>
+		<BuildOutputFilename value=""></BuildOutputFilename>
 		<BuildCompactImage value="false"></BuildCompactImage>
-		<RegionOrder value="34521"></RegionOrder>
+		<RegionOrder value="345216"></RegionOrder>
 		<Platform value="9"></Platform>
 		<OEM value="0"></OEM>
 	</ProgSettings>
@@ -101,10 +82,10 @@
 					<Reserved1 value="0" name="Reserved" default="0"></Reserved1>
 					<DmiReqIdDisable value="false" name="DMI RequesterID Check Disable" help_text="false: DMI RequesterID Security Checks are enabled. true: DMI RequesterID Security Checks are disabled and no Requester ID checking is done on accesses from DMI. The primary purpose of this strap is to support server environments with multiple CPU's that each have a different RequesterID that can each access the Flash." default="false"></DmiReqIdDisable>
 					<LinkSecDisable value="true" name="MACsec Disable" help_text="true: MACsec is Disabled. false: MACsec is Enabled." default="true"></LinkSecDisable>
-					<LanPhyPcGp12Sel value="0 (General Purpose input)" value_list="0 (General Purpose input),,1 (Native mode)" name="LAN PHY Power Control GPIO12 Select" help_text="Set to 0 for GP12 to be used as GPIO, or 1 for GP12 to be used in native mode as LAN_PHYPC" default="0 (General Purpose input)"></LanPhyPcGp12Sel>
+					<LanPhyPcGp12Sel value="1 (Native mode)" value_list="0 (General Purpose input),,1 (Native mode)" name="LAN PHY Power Control GPIO12 Select" help_text="Set to 0 for GP12 to be used as GPIO, or 1 for GP12 to be used in native mode as LAN_PHYPC" default="1 (Native mode)"></LanPhyPcGp12Sel>
 					<Reserved5 value="false" name="Reserved" default="false"></Reserved5>
 					<Reserved6 value="0" name="Reserved" default="0"></Reserved6>
-					<SMT2Freq value="1MHz" value_list="#80kHz,,100kHz,,400kHz,,1MHz" name="SMLink0 Frequency" help_text="The value of these bits determine the physical bus speed supported by the HW." default="1MHz"></SMT2Freq>
+					<SMT2Freq value="100kHz" value_list="#80kHz,,100kHz,,400kHz,,1MHz" name="SMLink0 Frequency" help_text="The value of these bits determine the physical bus speed supported by the HW." default="100kHz"></SMT2Freq>
 					<SMT1Freq value="100kHz" value_list="#80kHz,,100kHz,,#400kHz,,#1MHz" name="Intel ME SMBus Frequency" help_text="The value of these bits determine the physical bus speed supported by the HW." default="100kHz"></SMT1Freq>
 					<SMT3Freq value="100kHz" value_list="#80kHz,,100kHz,,400kHz,,1MHz" name="SMLink1 Frequency" help_text="The value of these bits determine the physical bus speed supported by the HW." default="100kHz"></SMT3Freq>
 					<Smt3Enable value="true" name="SMLink1 Enable" help_text="Enables SMLink1 (SMT3). This soft strap is backed up in the RTC well." default="true"></Smt3Enable>
@@ -114,7 +95,7 @@
 					<Reserved14 value="Prefetching is allowed to complete prior to the flushing" value_list="Prefetching is allowed to complete prior to the flushing,,Prefetching is prematurely ended if flushing event is detected" name="Reserved" default="Prefetching is allowed to complete prior to the flushing"></Reserved14>
 					<Reserved15 value="DMI posted queue will advertise 16 command and 64 data credits" value_list="DMI posted queue will advertise 16 command and 64 data credits,,DMI posted queue will advertise 2 command and 8 data credits" name="Reserved" default="DMI posted queue will advertise 16 command and 64 data credits"></Reserved15>
 					<Reserved16 value="Receiver detection is bypassed if DMI Force Detect is not 00" value_list="Receiver detection is bypassed if DMI Force Detect is not 00,,Receiver detection is not bypassed" name="Reserved" default="Receiver detection is bypassed if DMI Force Detect is not 00"></Reserved16>
-					<ChipsetConfSS1 value="0x1" name="Chipset Configuration" help_text="Chipset configuration, set to '1'." default="0x0"></ChipsetConfSS1>
+					<ChipsetConfSS1 value="0x1" name="Chipset Configuration" help_text="Chipset Configuration, PCH Strap bits 2:1." default="0x1"></ChipsetConfSS1>
 					<Reserved18 value="DMI Tx operates in half-swing mode" value_list="DMI Tx operates in half-swing mode,,DMI Tx operates in full-swing mode" name="Reserved" default="DMI Tx operates in half-swing mode"></Reserved18>
 					<Reserved19 value="0" name="Reserved" default="0"></Reserved19>
 					<Reserved20 value="0" name="Reserved" default="0"></Reserved20>
@@ -125,17 +106,17 @@
 					<Reserved25 value="0" name="Reserved" default="0"></Reserved25>
 				</IchStrap0>
 				<IchStrap1 name="PCH Strap 1">
-					<ChipsetConfSS2 value="0xF" name="Chipset Configuration 1" help_text="Chipset configuration, PCH Strap bits 3:0." default="0xF"></ChipsetConfSS2>
-					<QuadIOReadEn value="false" name="Quad I/O Read Enable" help_text="This soft-strap only has effect if Quad I/O Read is discovered as" default="true"></QuadIOReadEn>
-					<QuadOutReadEn value="false" name="Quad Output Read Enable" help_text="This soft-strap only has effect if Quad Output Read is discovered as supported via the SFDP" default="true"></QuadOutReadEn>
-					<DualIOReadEn value="false" name="Dual I/O Read Enable" help_text="This soft-strap only has effect if Dual I/O Read is discovered as supported via the SFDP." default="true"></DualIOReadEn>
-					<DualOutReadEn value="false" name="Dual Output Read Enable" help_text="This soft-strap only has effect if Dual Output Read is discovered as supported via the SFDP." default="true"></DualOutReadEn>
-					<ChipsetConfiguration value="false" name="Chipset Configuration 0" help_text=" " default="false"></ChipsetConfiguration>
+					<ChipsetConfSS2 value="0xF" name="Chipset Configuration 1" help_text="Chipset Configuration, PCH Strap bits 3:0." default="0xF"></ChipsetConfSS2>
+					<QuadIOReadEn value="false" name="Quad I/O Read Enable" help_text="This soft-strap only has effect if Quad I/O Read is discovered as supported via the SFDP" default="false"></QuadIOReadEn>
+					<QuadOutReadEn value="false" name="Quad Output Read Enable" help_text="This soft-strap only has effect if Quad Output Read is discovered as supported via the SFDP" default="false"></QuadOutReadEn>
+					<DualIOReadEn value="true" name="Dual I/O Read Enable" help_text="This soft-strap only has effect if Dual I/O Read is discovered as supported via the SFDP." default="true"></DualIOReadEn>
+					<DualOutReadEn value="true" name="Dual Output Read Enable" help_text="This soft-strap only has effect if Dual Output Read is discovered as supported via the SFDP." default="true"></DualOutReadEn>
+					<ChipsetConfiguration value="false" name="Chipset Configuration 0" help_text="Chipset Configuration, PCH Strap bit 8." default="false"></ChipsetConfiguration>
 					<Reserved4 value="0x00" name="Reserved" default="0x00"></Reserved4>
 					<Reserved3 value="0x00" name="Reserved" default="0x00"></Reserved3>
 					<Reserved2 value="false" name="Reserved" default="false"></Reserved2>
-					<TpmOnSpi value="false" name="TPM on SPI" help_text="This soft-strap has no effect if TPM on SPI is fused disabled" default="false"></TpmOnSpi>
-					<SpiTpmClockFreq value="01: 33MHz" value_list="00: 20MHz,,01: 33MHz" name="SPI TPM Clock Frequency" help_text="This field identifies the frequency that should be used with the TPM on SPI." default="01: 33MHz"></SpiTpmClockFreq>
+					<TpmOnSpi value="true" name="TPM on SPI" help_text="This soft-strap has no effect if TPM on SPI is fused disabled" default="true"></TpmOnSpi>
+					<SpiTpmClockFreq value="01: 33MHz" value_list="00: 20MHz,,01: 33MHz,,10: 50MHz" name="SPI TPM Clock Frequency" help_text="This field identifies the frequency that should be used with the TPM on SPI." default="01: 33MHz"></SpiTpmClockFreq>
 					<Reserved11 value="0" name="Reserved" default="0"></Reserved11>
 					<Reserved12 value="0" name="Reserved" default="0"></Reserved12>
 					<Reserved13 value="0" name="Reserved" default="0"></Reserved13>
@@ -162,13 +143,13 @@
 					<Smt2I2cAddr id="MeAddress" value="0x16" name="Intel ME SMLink0 I2C Address" help_text="IPMI SMLink0 Address / SMLink0 Wake-up Address" default="0x16"></Smt2I2cAddr>
 				</IchStrap3>
 				<IchStrap4 name="PCH Strap 4">
-					<PhyConnectivity value="00: No PHY connected" value_list="00: No PHY connected,,01: PHY on SMBus (use SMT1),,10: PHY on SMLink1 (use SMT2),,11: PHY on SMLink2 (use SMT3)" name="Intel PHY Connectivity" help_text="Defines which SMBus/SMLink segment the PHY is connected to." default="00: No PHY connected"></PhyConnectivity>
+					<PhyConnectivity value="10: PHY on SMLink1 (use SMT2)" value_list="00: No PHY connected,,01: PHY on SMBus (use SMT1),,10: PHY on SMLink1 (use SMT2),,11: PHY on SMLink2 (use SMT3)" name="Intel PHY Connectivity" help_text="Defines which SMBus/SMLink segment the PHY is connected to." default="10: PHY on SMLink1 (use SMT2)"></PhyConnectivity>
 					<SataPort5PcieP2Mod value="00 : Statically assigned to SATA Port 5" value_list="00 : Statically assigned to SATA Port 5,,01 : Statically assigned to PCIe Port 2,,10 : Reserved,,11 : Assigned based on the native mode of GPIO49 pin" name="SATA Port 5 PCIe Port 2 Mode" help_text="This soft strap only has effect if it is allowed by the SATA Port 5 PCIe Port 2 Mode fuse." default="00 : Statically assigned to SATA Port 5"></SataPort5PcieP2Mod>
 					<Reserved5 value="0x00" name="Reserved" default="0x00"></Reserved5>
-					<GbeSmBusAddrEn value="false" name="GbE MAC SMBus Address Enable" help_text="false: Disable, true: Enable." default="false"></GbeSmBusAddrEn>
-					<GbeSmBusAddr value="0x00" name="GbE MAC SMBus Address" help_text="This is the Intel integrated wired MAC's SMBus address." default="0x00"></GbeSmBusAddr>
+					<GbeSmBusAddrEn value="true" name="GbE MAC SMBus Address Enable" help_text="false: Disable, true: Enable." default="true"></GbeSmBusAddrEn>
+					<GbeSmBusAddr value="0x70" name="GbE MAC SMBus Address" help_text="This is the Intel integrated wired MAC's SMBus address." default="0x70"></GbeSmBusAddr>
 					<Reserved2 value="false" name="Reserved" default="false"></Reserved2>
-					<GbePhySmBusAddr value="0x00" name="GbE PHY SMBus Address" help_text="This is the Intel PHY's SMBus address." default="0x00"></GbePhySmBusAddr>
+					<GbePhySmBusAddr value="0x64" name="GbE PHY SMBus Address" help_text="This is the Intel PHY's SMBus address." default="0x64"></GbePhySmBusAddr>
 					<Reserved0 value="0xFF" name="Reserved" default="0xFF"></Reserved0>
 				</IchStrap4>
 				<IchStrap5 name="PCH Strap 5">
@@ -178,36 +159,36 @@
 					<Reserved0 value="0x00000000" name="Reserved" default="0x00000000"></Reserved0>
 				</IchStrap6>
 				<IchStrap7 name="PCH Strap 7">
-					<Smt1SubDid value="0x0000" name="Intel ME SMBus Subsystem Device ID" help_text="Subsystem Device ID" default="0x0000"></Smt1SubDid>
-					<Smt1SubVid value="0x0000" name="Intel ME SMBus Subsystem Vendor ID" help_text="Subsystem Vendor ID" default="0x0000"></Smt1SubVid>
+					<Smt1SubDid value="0x0000" name="Intel ME SMBus Subsystem Device ID" help_text="Reserved, set to '0'." default="0x0000"></Smt1SubDid>
+					<Smt1SubVid value="0x0000" name="Intel ME SMBus Subsystem Vendor ID" help_text="Reserved, set to '0'." default="0x0000"></Smt1SubVid>
 				</IchStrap7>
 				<IchStrap8 name="PCH Strap 8">
 					<Reserved0 value="0x00000000" name="Reserved" default="0x00000000"></Reserved0>
 				</IchStrap8>
 				<IchStrap9 name="PCH Strap 9">
-					<PCIePortConf1 value="10: 2x2 Port 1 (x2), Port 3 (x2), Ports 2, 4 (disabled)" value_list="00: 4x1 Ports 1-4 (x1),,01: 1x2, 2x1 Port 1 (x2), Port 2 (disabled), Ports 3, 4 (x1),,10: 2x2 Port 1 (x2), Port 3 (x2), Ports 2, 4 (disabled),,11: 1x4 Port 1 (x4), Ports 2-4 (disabled)" name="PCIe Port Configuration Soft Strap 1" help_text="These straps set the default value of PCIe Port Configuration 1 register covering PCIe ports 1-4." default="10: 2x2 Port 1 (x2), Port 3 (x2), Ports 2, 4 (disabled)"></PCIePortConf1>
+					<PCIePortConf1 value="00: 4x1 Ports 1-4 (x1)" value_list="00: 4x1 Ports 1-4 (x1),,01: 1x2, 2x1 Port 1 (x2), Port 2 (disabled), Ports 3, 4 (x1),,10: 2x2 Port 1 (x2), Port 3 (x2), Ports 2, 4 (disabled),,11: 1x4 Port 1 (x4), Ports 2-4 (disabled)" name="PCIe Port Configuration Soft Strap 1" help_text="These straps set the default value of PCIe Port Configuration 1 register covering PCIe ports 1-4." default="00: 4x1 Ports 1-4 (x1)"></PCIePortConf1>
 					<PCIePortConf2_Pch value="11: 1x4 Port 5 (x4), Ports 6-8 (disabled)" value_list="00: 4x1 Ports 5-8 (x1),,01: 1x2, 2x1 Port 5 (x2), Port 6 (disabled), Ports 7, 8 (x1),,10: 2x2 Port 5 (x2), Port 7 (x2), Ports 6, 8 (disabled),,11: 1x4 Port 5 (x4), Ports 6-8 (disabled)" name="PCIe Port Configuration Soft Strap 2" help_text="These straps set the default value of the PCI Express Port Configuration 2 register covering ports 5-8." default="11: 1x4 Port 5 (x4), Ports 6-8 (disabled)"></PCIePortConf2_Pch>
 					<PCIeLaneReversal1 value="false" name="PCIe Lane Reversal 1" help_text="false: PCIe lanes 0-3 are not reversed. true: PCIe lanes 0-3 are reversed for Port 1 when configured as 1x4. Sets PCIe Port1, Device 28 Function 0, offset D8[27] register." default="false"></PCIeLaneReversal1>
 					<PCIeLaneReversal2 value="false" name="PCIe Lane Reversal 2" help_text="Sets the default value for the PCIe Port 5, Device 28 Function 4, offset D8[27] register." default="false"></PCIeLaneReversal2>
 					<DmiLaneReversal value="false" name="DMI Lane Reversal" help_text="false: DMI lanes 0-3 are not reversed. true: DMI lanes 0-3 are reversed." default="false"></DmiLaneReversal>
-					<ChipsetConfSS3 value="true" name="Chipset Configuration" help_text="Chipset configuration, set to '1'." default="true"></ChipsetConfSS3>
-					<GbePciePortSelect value="000: Port 1" value_list="000: Port 1,,001: Port 2,,010: Port 3,,011: Port 4,,100: Port 5,,101: Port 6,,110: Port 7,,111: Port 8" name="Intel PHY PCIe Port Select" help_text="Sets the default value of the PRC.GBEPCIERPSEL register which is used to determine which PCIe port to use for GbE MAC/PHY over PCI Express communication." default="000: Port 1"></GbePciePortSelect>
-					<GbeOverPcieEn value="false" name="Intel PHY Over PCIe Enable" help_text="false: GbE MAC/PHY comm. is not enabled over PCIe. true: The port selected by GBE PCIe Port Select is used for GbE MAC/PHY over PCIe comm." default="false"></GbeOverPcieEn>
+					<ChipsetConfSS3 value="true" name="Chipset Configuration" help_text="Chipset Configuration, PCH Strap bit 7." default="true"></ChipsetConfSS3>
+					<GbePciePortSelect value="001: Port 2" value_list="000: Port 1,,001: Port 2,,010: Port 3,,011: Port 4,,100: Port 5,,101: Port 6,,110: Port 7,,111: Port 8" name="Intel PHY PCIe Port Select" help_text="Sets the default value of the PRC.GBEPCIERPSEL register which is used to determine which PCIe port to use for GbE MAC/PHY over PCI Express communication." default="001: Port 2"></GbePciePortSelect>
+					<GbeOverPcieEn value="true" name="Intel PHY Over PCIe Enable" help_text="false: GbE MAC/PHY comm. is not enabled over PCIe. true: The port selected by GBE PCIe Port Select is used for GbE MAC/PHY over PCIe comm." default="true"></GbeOverPcieEn>
 					<Reserved16 value="false" name="Reserved" default="false"></Reserved16>
 					<Reserved15 value="false" name="Reserved" default="false"></Reserved15>
-					<Reserved14 value="false" name="Reserved" default="false"></Reserved14>
+					<SubtractDecodeAgentEn value="false" name="Subtractive Decode Agent Enable" help_text="Set this bit to 'true' if there is a PCI bridge chip connnected to the PCH, that requires subtractive decode agent. Set to 'false' if the platform has no PCI bridge chip." default="false"></SubtractDecodeAgentEn>
 					<Reserved13 value="false" name="Reserved" default="false"></Reserved13>
 					<NMI_SMI_EVENT_GPIO_En value="true" name="NMI SMI Native GPIO Enable" help_text="NMI SMI Native GPIO Enable" default="true"></NMI_SMI_EVENT_GPIO_En>
 					<SerialGPIOExpEn value="false" name="Serial GPIO Expander Enable" help_text="'false' : Serial GPIO Expander is disabled; 'true' : Serial GPIO Expander is enabled." default="false"></SerialGPIOExpEn>
-					<USBP2PCIeP1Mode value="01 : PCIe Lane 1 is statically assigned to USB3 Port 2" value_list="00 : PCIe Lane 1 is statically assigned to PCI Express (or GbE),,01 : PCIe Lane 1 is statically assigned to USB3 Port 2,,10 : Reserved,,11 : Assigned based on the ExpressCard USB3# select pin on GPIO71" name="USB3 Port 2 PCIe Port 1 Mode" help_text="USB3 Port 2 PCIe Port 1 Mode" default="01 : PCIe Lane 1 is statically assigned to USB3 Port 2"></USBP2PCIeP1Mode>
-					<USBP3PCIeP2Mode value="01 : PCIe Lane 2 is statically assigned to USB3 Port 3" value_list="00 : PCIe Lane 2 is statically assigned to PCI Express (or GbE),,01 : PCIe Lane 2 is statically assigned to USB3 Port 3,,10 : Reserved,,11 : Assigned based on the ExpressCard USB3# select pin on GPIO70" name="USB3 Port 3 PCIe Port 2 Mode" help_text="USB3 Port 3 PCIe Port 2 Mode" default="01 : PCIe Lane 2 is statically assigned to USB3 Port 3"></USBP3PCIeP2Mode>
+					<USBP2PCIeP1Mode value="00 : PCIe Lane 1 is statically assigned to PCI Express (or GbE)" value_list="00 : PCIe Lane 1 is statically assigned to PCI Express (or GbE),,01 : PCIe Lane 1 is statically assigned to USB3 Port 2,,10 : Reserved,,11 : Assigned based on the ExpressCard USB3# select pin on GPIO71" name="USB3 Port 2 PCIe Port 1 Mode" help_text="USB3 Port 2 PCIe Port 1 Mode" default="00 : PCIe Lane 1 is statically assigned to PCI Express (or GbE)"></USBP2PCIeP1Mode>
+					<USBP3PCIeP2Mode value="00 : PCIe Lane 2 is statically assigned to PCI Express (or GbE)" value_list="00 : PCIe Lane 2 is statically assigned to PCI Express (or GbE),,01 : PCIe Lane 2 is statically assigned to USB3 Port 3,,10 : Reserved,,11 : Assigned based on the ExpressCard USB3# select pin on GPIO70" name="USB3 Port 3 PCIe Port 2 Mode" help_text="USB3 Port 3 PCIe Port 2 Mode" default="00 : PCIe Lane 2 is statically assigned to PCI Express (or GbE)"></USBP3PCIeP2Mode>
 					<PCHHotOrSML1AlertSelect value="true" name="PCHHOT# or SML1ALERT# Select" help_text="This strap determines the native mode operation of GPIO74: 1 - PCHHOT#, 0 - SML1ALERT#" default="true"></PCHHotOrSML1AlertSelect>
 					<Reserved7 value="false" name="Reserved" default="false"></Reserved7>
 					<Reserved6 value="false" name="Reserved" default="false"></Reserved6>
 					<Reserved5 value="false" name="Reserved" default="false"></Reserved5>
 					<Reserved4 value="false" name="Reserved" default="false"></Reserved4>
 					<Reserved3 value="false" name="Reserved" default="false"></Reserved3>
-					<Reserved2 value="true" name="Reserved" default="true"></Reserved2>
+					<Reserved2 value="false" name="Reserved" default="false"></Reserved2>
 					<Reserved1 value="false" name="Reserved" default="false"></Reserved1>
 					<SataPort4PcieP1Mod value="00 : Statically assigned to SATA Port 4" value_list="00 : Statically assigned to SATA Port 4,,01 : Statically assigned to PCIe Port 1,,10 : Reserved,,11 : Assigned based on the native mode of GPIO16 pin" name="SATA Port 4 PCIe Port 1 Mode" help_text="SATA Port 4 PCIe Port 1 Mode" default="00 : Statically assigned to SATA Port 4"></SataPort4PcieP1Mod>
 				</IchStrap9>
@@ -221,7 +202,7 @@
 					<Reserved8 value="false" name="Reserved" default="false"></Reserved8>
 					<Reserved6 value="false" name="Reserved" default="false"></Reserved6>
 					<DeepSxStates value="false" name="Deep Sx Enable" help_text="Deep Sx refers to two low power states that are referred to Deep S4 and Deep S5." default="false"></DeepSxStates>
-					<MeDebugLanEmerMode value="false" name="Intel ME Debug LAN Emergency Mode" help_text="Not supported in SPS Firmware" default="false"></MeDebugLanEmerMode>
+					<MeDebugLanEmerMode value="false" name="Intel ME Debug LAN Emergency Mode" help_text="Not supported in SPS Firmware." default="false"></MeDebugLanEmerMode>
 					<Reserved10 value="0" name="Reserved" default="0"></Reserved10>
 					<Reserved11 value="0" name="Reserved" default="0"></Reserved11>
 					<Reserved12 value="0" name="Reserved" default="0"></Reserved12>
@@ -241,7 +222,7 @@
 				</IchStrap10>
 				<IchStrap11 name="PCH Strap 11">
 					<Smt3GpAddrEn value="false" name="SMLink1 GP Address Enable" help_text="true: Address is enabled. false: Address is disabled." default="false"></Smt3GpAddrEn>
-					<Smt3GpAddr value="0x4B" name="SMLink1 GP Address" help_text="SMLink1 GP Target Address." default="0x4B"></Smt3GpAddr>
+					<Smt3GpAddr value="0x48" name="SMLink1 GP Address" help_text="SMLink1 GP Target Address." default="0x48"></Smt3GpAddr>
 					<Reserved4 value="false" name="Reserved" default="false"></Reserved4>
 					<Reserved5 value="0x00" name="Reserved" default="0x00"></Reserved5>
 					<Reserved2 value="false" name="Reserved" default="false"></Reserved2>
@@ -265,9 +246,9 @@
 					<Reserved2 value="0xA" name="Reserved" default="0xA"></Reserved2>
 					<Ps3tr value="true" name="SMLink1 Thermal Reporting Select" help_text=" " default="true"></Ps3tr>
 					<GP29MGPIO3SlplanSel value="true" name="SLP_LAN#/GPIO29 Select" help_text=" " default="true"></GP29MGPIO3SlplanSel>
-					<LanPhyPowerUpTime value="false" name="LAN PHY configuration" help_text=" " default="false"></LanPhyPowerUpTime>
-					<DeepSxPlatformConfig value="true" name="DeepSx Platform Configuration" help_text=" " default="true"></DeepSxPlatformConfig>
-					<PCIePowerStableTimerEn value="true" name="PCIe Power Stable Timer" help_text="Board dependent. Platform is required to ensure timing of PWROK and SYS_PWROK in such a way that it satisfies the PCIe timing requirement of power stable to reset de-assertion." default="false"></PCIePowerStableTimerEn>
+					<LanPhyPowerUpTime value="true" name="LAN PHY configuration" help_text=" " default="true"></LanPhyPowerUpTime>
+					<DeepSxPlatformConfig value="false" name="DeepSx Platform Configuration" help_text=" " default="false"></DeepSxPlatformConfig>
+					<PCIePowerStableTimerEn value="true" name="PCIe Power Stable Timer" help_text="Board dependent. Platform is required to ensure timing of PWROK and SYS_PWROK in such a way that it satisfies the PCIe timing requirement of power stable to reset de-assertion." default="true"></PCIePowerStableTimerEn>
 					<Reserved8 value="0" name="Reserved" default="0"></Reserved8>
 					<Reserved9 value="0" name="Reserved" default="0"></Reserved9>
 					<Reserved10 value="0" name="Reserved" default="0"></Reserved10>
@@ -289,7 +270,7 @@
 					<Reserved0 value="0x00000000" name="Reserved" default="0x00000000"></Reserved0>
 				</IchStrap16>
 				<IchStrap17 name="PCH Strap 17">
-					<IccClockMode id="ICC_CLK_MODE" value="Native Integrated Clock Control" value_list="Native Integrated Clock Control;0x02" name="ICC Clock Mode" help_text=" " default="Native Integrated Clock Control"></IccClockMode>
+					<IccClockMode id="ICC_CLK_MODE" value="Native Integrated Clock Control" value_list="Native Integrated Clock Control;0x02,,Hybrid Clock Mode;0x82,,External Clock Mode;0x03" name="ICC Clock Mode" help_text=" " default="Native Integrated Clock Control"></IccClockMode>
 					<Reserved1 value="0" name="Reserved" default="0"></Reserved1>
 					<Reserved2 value="0" name="Reserved" default="0"></Reserved2>
 					<Reserved3 value="0" name="Reserved" default="0"></Reserved3>
@@ -438,305 +419,305 @@
 				<ReservedBit0 value="0" edit="true" visible="true" name="Reserved[0]" help_text="Bit 8 is currently reserved." default="0"></ReservedBit0>
 			</MchStrap0>
 			<RegInitTable name="REGINIT Table" visible="true">
-				<RegInitEntry name="1" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC02C" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC02C"></Address>
-					<Data value="0x0F000A00" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x0F000A00"></Data>
+				<RegInitEntry name=" 1" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC02C" edit="true" visible="true" name="" help_text="" default="0xC02C"></Address>
+					<Data value="0x0F000A00" edit="true" visible="true" name="" help_text="" default="0x0F000A00"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="2" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0x822C" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0x822C"></Address>
-					<Data value="0x0F000A00" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x0F000A00"></Data>
+				<RegInitEntry name=" 2" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0x822C" edit="true" visible="true" name="" help_text="" default="0x822C"></Address>
+					<Data value="0x0F000A00" edit="true" visible="true" name="" help_text="" default="0x0F000A00"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="3" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC140" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC140"></Address>
-					<Data value="0x0088059C" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x0088059C"></Data>
+				<RegInitEntry name=" 3" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC140" edit="true" visible="true" name="" help_text="" default="0xC140"></Address>
+					<Data value="0x0088059C" edit="true" visible="true" name="" help_text="" default="0x0088059C"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="4" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC098" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC098"></Address>
-					<Data value="0x1F203B41" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x1F203B41"></Data>
+				<RegInitEntry name=" 4" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC098" edit="true" visible="true" name="" help_text="" default="0xC098"></Address>
+					<Data value="0x1F203B41" edit="true" visible="true" name="" help_text="" default="0x1F203B41"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="5" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC098" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC098"></Address>
-					<Data value="0x1F203B41" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x1F203B41"></Data>
+				<RegInitEntry name=" 5" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC098" edit="true" visible="true" name="" help_text="" default="0xC098"></Address>
+					<Data value="0x1F203B41" edit="true" visible="true" name="" help_text="" default="0x1F203B41"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="6" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0xC098" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC098"></Address>
-					<Data value="0x1F203B41" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x1F203B41"></Data>
+				<RegInitEntry name=" 6" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0xC098" edit="true" visible="true" name="" help_text="" default="0xC098"></Address>
+					<Data value="0x1F203B41" edit="true" visible="true" name="" help_text="" default="0x1F203B41"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="7" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0x822C" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0x822C"></Address>
-					<Data value="0x0F000A00" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x0F000A00"></Data>
+				<RegInitEntry name=" 7" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0x822C" edit="true" visible="true" name="" help_text="" default="0x822C"></Address>
+					<Data value="0x0F000A00" edit="true" visible="true" name="" help_text="" default="0x0F000A00"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="8" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC030" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC030"></Address>
-					<Data value="0x00000F00" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x00000F00"></Data>
+				<RegInitEntry name=" 8" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC030" edit="true" visible="true" name="" help_text="" default="0xC030"></Address>
+					<Data value="0x00000F00" edit="true" visible="true" name="" help_text="" default="0x00000F00"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="9" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC030" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC030"></Address>
-					<Data value="0x00000F00" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x00000F00"></Data>
+				<RegInitEntry name=" 9" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC030" edit="true" visible="true" name="" help_text="" default="0xC030"></Address>
+					<Data value="0x00000F00" edit="true" visible="true" name="" help_text="" default="0x00000F00"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="10" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC094" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC094"></Address>
-					<Data value="0x47406055" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x47406055"></Data>
+				<RegInitEntry name=" 10" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC094" edit="true" visible="true" name="" help_text="" default="0xC094"></Address>
+					<Data value="0x47406055" edit="true" visible="true" name="" help_text="" default="0x47406055"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="11" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0xC030" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC030"></Address>
-					<Data value="0x00000F00" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x00000F00"></Data>
+				<RegInitEntry name=" 11" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0xC030" edit="true" visible="true" name="" help_text="" default="0xC030"></Address>
+					<Data value="0x00000F00" edit="true" visible="true" name="" help_text="" default="0x00000F00"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="12" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0x8340" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0x8340"></Address>
-					<Data value="0x0088059C" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x0088059C"></Data>
+				<RegInitEntry name=" 12" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0x8340" edit="true" visible="true" name="" help_text="" default="0x8340"></Address>
+					<Data value="0x0088059C" edit="true" visible="true" name="" help_text="" default="0x0088059C"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="13" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC178" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC178"></Address>
-					<Data value="0x00001980" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x00001980"></Data>
+				<RegInitEntry name=" 13" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC178" edit="true" visible="true" name="" help_text="" default="0xC178"></Address>
+					<Data value="0x00001980" edit="true" visible="true" name="" help_text="" default="0x00001980"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="14" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC094" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC094"></Address>
-					<Data value="0x47406055" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x47406055"></Data>
+				<RegInitEntry name=" 14" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC094" edit="true" visible="true" name="" help_text="" default="0xC094"></Address>
+					<Data value="0x47406055" edit="true" visible="true" name="" help_text="" default="0x47406055"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="15" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0xC094" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC094"></Address>
-					<Data value="0x47406055" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x47406055"></Data>
+				<RegInitEntry name=" 15" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0xC094" edit="true" visible="true" name="" help_text="" default="0xC094"></Address>
+					<Data value="0x47406055" edit="true" visible="true" name="" help_text="" default="0x47406055"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="16" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC088" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC088"></Address>
-					<Data value="0x5520983A" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x5520983A"></Data>
+				<RegInitEntry name=" 16" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC088" edit="true" visible="true" name="" help_text="" default="0xC088"></Address>
+					<Data value="0x5520983A" edit="true" visible="true" name="" help_text="" default="0x5520983A"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="17" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC178" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC178"></Address>
-					<Data value="0x00001980" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x00001980"></Data>
+				<RegInitEntry name=" 17" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC178" edit="true" visible="true" name="" help_text="" default="0xC178"></Address>
+					<Data value="0x00001980" edit="true" visible="true" name="" help_text="" default="0x00001980"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="18" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC088" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC088"></Address>
-					<Data value="0x5580983A" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x5580983A"></Data>
+				<RegInitEntry name=" 18" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC088" edit="true" visible="true" name="" help_text="" default="0xC088"></Address>
+					<Data value="0x5580983A" edit="true" visible="true" name="" help_text="" default="0x5580983A"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="19" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0x8288" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0x8288"></Address>
-					<Data value="0x5580983A" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x5580983A"></Data>
+				<RegInitEntry name=" 19" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0x8288" edit="true" visible="true" name="" help_text="" default="0x8288"></Address>
+					<Data value="0x5580983A" edit="true" visible="true" name="" help_text="" default="0x5580983A"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="20" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC08C" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC08C"></Address>
-					<Data value="0x0C202046" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x0C202046"></Data>
+				<RegInitEntry name=" 20" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC08C" edit="true" visible="true" name="" help_text="" default="0xC08C"></Address>
+					<Data value="0x0C202046" edit="true" visible="true" name="" help_text="" default="0x0C202046"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="21" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC08C" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC08C"></Address>
-					<Data value="0x0C782046" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x0C782046"></Data>
+				<RegInitEntry name=" 21" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC08C" edit="true" visible="true" name="" help_text="" default="0xC08C"></Address>
+					<Data value="0x0C782046" edit="true" visible="true" name="" help_text="" default="0x0C782046"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="22" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0x828C" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0x828C"></Address>
-					<Data value="0x0C782046" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x0C782046"></Data>
+				<RegInitEntry name=" 22" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0x828C" edit="true" visible="true" name="" help_text="" default="0x828C"></Address>
+					<Data value="0x0C782046" edit="true" visible="true" name="" help_text="" default="0x0C782046"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="23" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0xC178" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC178"></Address>
-					<Data value="0x00001980" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x00001980"></Data>
+				<RegInitEntry name=" 23" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0xC178" edit="true" visible="true" name="" help_text="" default="0xC178"></Address>
+					<Data value="0x00001980" edit="true" visible="true" name="" help_text="" default="0x00001980"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="24" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC1CC" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC1CC"></Address>
-					<Data value="0x38254304" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x38254304"></Data>
+				<RegInitEntry name=" 24" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC1CC" edit="true" visible="true" name="" help_text="" default="0xC1CC"></Address>
+					<Data value="0x38254304" edit="true" visible="true" name="" help_text="" default="0x38254304"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="25" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC1CC" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC1CC"></Address>
-					<Data value="0x38254304" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x38254304"></Data>
+				<RegInitEntry name=" 25" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC1CC" edit="true" visible="true" name="" help_text="" default="0xC1CC"></Address>
+					<Data value="0x38254304" edit="true" visible="true" name="" help_text="" default="0x38254304"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="26" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0xC1CC" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC1CC"></Address>
-					<Data value="0x38254304" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x38254304"></Data>
+				<RegInitEntry name=" 26" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0xC1CC" edit="true" visible="true" name="" help_text="" default="0xC1CC"></Address>
+					<Data value="0x38254304" edit="true" visible="true" name="" help_text="" default="0x38254304"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="27" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC17C" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC17C"></Address>
-					<Data value="0x4EA02400" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x4EA02400"></Data>
+				<RegInitEntry name=" 27" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC17C" edit="true" visible="true" name="" help_text="" default="0xC17C"></Address>
+					<Data value="0x4EA02400" edit="true" visible="true" name="" help_text="" default="0x4EA02400"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="28" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC17C" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC17C"></Address>
-					<Data value="0x3EC02400" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x3EC02400"></Data>
+				<RegInitEntry name=" 28" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC17C" edit="true" visible="true" name="" help_text="" default="0xC17C"></Address>
+					<Data value="0x3EC02400" edit="true" visible="true" name="" help_text="" default="0x3EC02400"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="29" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0xC17C" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC17C"></Address>
-					<Data value="0x3EC02400" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x3EC02400"></Data>
+				<RegInitEntry name=" 29" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0xC17C" edit="true" visible="true" name="" help_text="" default="0xC17C"></Address>
+					<Data value="0x3EC02400" edit="true" visible="true" name="" help_text="" default="0x3EC02400"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="30" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC140" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC140"></Address>
-					<Data value="0x008805AC" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x008805AC"></Data>
+				<RegInitEntry name=" 30" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC140" edit="true" visible="true" name="" help_text="" default="0xC140"></Address>
+					<Data value="0x008805AC" edit="true" visible="true" name="" help_text="" default="0x008805AC"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="31" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC090" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC090"></Address>
-					<Data value="0x2B3E0000" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x2B3E0000"></Data>
+				<RegInitEntry name=" 31" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC090" edit="true" visible="true" name="" help_text="" default="0xC090"></Address>
+					<Data value="0x2B3E0000" edit="true" visible="true" name="" help_text="" default="0x2B3E0000"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="32" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC090" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC090"></Address>
-					<Data value="0x2B3E5155" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x2B3E5155"></Data>
+				<RegInitEntry name=" 32" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC090" edit="true" visible="true" name="" help_text="" default="0xC090"></Address>
+					<Data value="0x2B3E5155" edit="true" visible="true" name="" help_text="" default="0x2B3E5155"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="33" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0x8290" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0x8290"></Address>
-					<Data value="0x2B3E5155" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x2B3E5155"></Data>
+				<RegInitEntry name=" 33" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0x8290" edit="true" visible="true" name="" help_text="" default="0x8290"></Address>
+					<Data value="0x2B3E5155" edit="true" visible="true" name="" help_text="" default="0x2B3E5155"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="34" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC008" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC008"></Address>
-					<Data value="0xB000A000" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0xB000A000"></Data>
+				<RegInitEntry name=" 34" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC008" edit="true" visible="true" name="" help_text="" default="0xC008"></Address>
+					<Data value="0xB000A000" edit="true" visible="true" name="" help_text="" default="0xB000A000"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="35" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0xC008" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC008"></Address>
-					<Data value="0xB000A000" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0xB000A000"></Data>
+				<RegInitEntry name=" 35" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0xC008" edit="true" visible="true" name="" help_text="" default="0xC008"></Address>
+					<Data value="0xB000A000" edit="true" visible="true" name="" help_text="" default="0xB000A000"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="36" visible="true">
-					<Destination value="0xEB" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEB"></Destination>
-					<Address value="0xC144" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC144"></Address>
-					<Data value="0x00840394" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x00840394"></Data>
+				<RegInitEntry name=" 36" visible="true">
+					<Destination value="0xEB" edit="true" visible="true" name="" help_text="" default="0xEB"></Destination>
+					<Address value="0xC144" edit="true" visible="true" name="" help_text="" default="0xC144"></Address>
+					<Data value="0x00840394" edit="true" visible="true" name="" help_text="" default="0x00840394"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="37" visible="true">
-					<Destination value="0xE9" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xE9"></Destination>
-					<Address value="0xC144" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0xC144"></Address>
-					<Data value="0x00840394" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x00840394"></Data>
+				<RegInitEntry name=" 37" visible="true">
+					<Destination value="0xE9" edit="true" visible="true" name="" help_text="" default="0xE9"></Destination>
+					<Address value="0xC144" edit="true" visible="true" name="" help_text="" default="0xC144"></Address>
+					<Data value="0x00840394" edit="true" visible="true" name="" help_text="" default="0x00840394"></Data>
 				</RegInitEntry>
-				<RegInitEntry name="38" visible="true">
-					<Destination value="0xEA" edit="false" visible="false" name="Destination" help_text="PCH IOSF Sideband Message Interface Destination ID." default="0xEA"></Destination>
-					<Address value="0x8344" edit="false" visible="false" name="Address" help_text="Defines a DWORD addressable register." default="0x8344"></Address>
-					<Data value="0x00840394" edit="false" visible="false" name="Data" help_text="One DWORD of register initialization data." default="0x00840394"></Data>
+				<RegInitEntry name=" 38" visible="true">
+					<Destination value="0xEA" edit="true" visible="true" name="" help_text="" default="0xEA"></Destination>
+					<Address value="0x8344" edit="true" visible="true" name="" help_text="" default="0x8344"></Address>
+					<Data value="0x00840394" edit="true" visible="true" name="" help_text="" default="0x00840394"></Data>
 				</RegInitEntry>
 			</RegInitTable>
 			<VsccTable name="VSCC Table" visible="true">
-				<VsccDevice name="Redfort0" visible="true">
-					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="31"></VendorId>
-					<DeviceId0 value="0x47" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="71"></DeviceId0>
-					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0"></DeviceId1>
-					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="538255381"></VsccValue>
+				<VsccDevice name="Flash device 1" visible="true">
+					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x1F"></VendorId>
+					<DeviceId0 value="0x47" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x47"></DeviceId0>
+					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x00"></DeviceId1>
+					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20152015"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Redfort1" visible="true">
-					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
-					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="48"></DeviceId0>
-					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="22"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 2" visible="true">
+					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xEF"></VendorId>
+					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x30"></DeviceId0>
+					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x16"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Redfort2" visible="true">
-					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="191"></VendorId>
-					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="37"></DeviceId0>
-					<DeviceId1 value="0x41" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="65"></DeviceId1>
-					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537468937"></VsccValue>
+				<VsccDevice name="Flash device 3" visible="true">
+					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xBF"></VendorId>
+					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x25"></DeviceId0>
+					<DeviceId1 value="0x41" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x41"></DeviceId1>
+					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20092009"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Atmel 26DF321" visible="true">
-					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="31"></VendorId>
-					<DeviceId0 value="0x47" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="71"></DeviceId0>
-					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0"></DeviceId1>
-					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="538255381"></VsccValue>
+				<VsccDevice name="Flash device 4" visible="true">
+					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x1F"></VendorId>
+					<DeviceId0 value="0x47" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x47"></DeviceId0>
+					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x00"></DeviceId1>
+					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20152015"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Atmel 26DF0801" visible="true">
-					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="31"></VendorId>
-					<DeviceId0 value="0x45" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="69"></DeviceId0>
-					<DeviceId1 value="0x01" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="1"></DeviceId1>
-					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="538255381"></VsccValue>
+				<VsccDevice name="Flash device 5" visible="true">
+					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x1F"></VendorId>
+					<DeviceId0 value="0x45" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x45"></DeviceId0>
+					<DeviceId1 value="0x01" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x01"></DeviceId1>
+					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20152015"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Atmel 26DF1601" visible="true">
-					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="31"></VendorId>
-					<DeviceId0 value="0x46" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="70"></DeviceId0>
-					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0"></DeviceId1>
-					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="538255381"></VsccValue>
+				<VsccDevice name="Flash device 6" visible="true">
+					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x1F"></VendorId>
+					<DeviceId0 value="0x46" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x46"></DeviceId0>
+					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x00"></DeviceId1>
+					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20152015"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Macronix MX25L8005" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
-					<DeviceId1 value="0x14" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="20"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 7" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
+					<DeviceId1 value="0x14" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x14"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Macronix MX25L1605A" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
-					<DeviceId1 value="0x15" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="21"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 8" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
+					<DeviceId1 value="0x15" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x15"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Macronix MX25L3205D" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
-					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="22"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC Register Value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 9" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
+					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x16"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Macronix MX25L6405D" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
-					<DeviceId1 value="0x17" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="23"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 10" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
+					<DeviceId1 value="0x17" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x17"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Macronix MX25L12805D" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
-					<DeviceId1 value="0x18" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="24"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC Register Value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 11" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
+					<DeviceId1 value="0x18" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x18"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="PMC PM25LV080" visible="true">
-					<VendorId value="0x9D" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="157"></VendorId>
-					<DeviceId0 value="0x7F" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="127"></DeviceId0>
-					<DeviceId1 value="0x7A" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="122"></DeviceId1>
-					<VsccValue value="0xD705D705" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="3607484165"></VsccValue>
+				<VsccDevice name="Flash device 12" visible="true">
+					<VendorId value="0x9D" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x9D"></VendorId>
+					<DeviceId0 value="0x7F" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x7F"></DeviceId0>
+					<DeviceId1 value="0x7A" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x7A"></DeviceId1>
+					<VsccValue value="0xD705D705" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0xD705D705"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="SST 25VF080B" visible="true">
-					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="191"></VendorId>
-					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="37"></DeviceId0>
-					<DeviceId1 value="0x8E" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="142"></DeviceId1>
-					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537468937"></VsccValue>
+				<VsccDevice name="Flash device 13" visible="true">
+					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xBF"></VendorId>
+					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x25"></DeviceId0>
+					<DeviceId1 value="0x8E" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x8E"></DeviceId1>
+					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20092009"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="SST 25VF016B" visible="true">
-					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="191"></VendorId>
-					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="37"></DeviceId0>
-					<DeviceId1 value="0x41" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="65"></DeviceId1>
-					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537468937"></VsccValue>
+				<VsccDevice name="Flash device 14" visible="true">
+					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xBF"></VendorId>
+					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x25"></DeviceId0>
+					<DeviceId1 value="0x41" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x41"></DeviceId1>
+					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20092009"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="ST Micro M25PE80" visible="true">
-					<VendorId value="0x20" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="32"></VendorId>
-					<DeviceId0 value="0x80" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="128"></DeviceId0>
-					<DeviceId1 value="0x15" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="21"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 15" visible="true">
+					<VendorId value="0x20" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x20"></VendorId>
+					<DeviceId0 value="0x80" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x80"></DeviceId0>
+					<DeviceId1 value="0x15" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x15"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Winbond W25X80" visible="true">
-					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
-					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="48"></DeviceId0>
-					<DeviceId1 value="0x14" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="20"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 16" visible="true">
+					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xEF"></VendorId>
+					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x30"></DeviceId0>
+					<DeviceId1 value="0x14" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x14"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Winbond W25X16" visible="true">
-					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
-					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="48"></DeviceId0>
-					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="22"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 17" visible="true">
+					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xEF"></VendorId>
+					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x30"></DeviceId0>
+					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x16"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Winbond W25X64" visible="true">
-					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
-					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="48"></DeviceId0>
-					<DeviceId1 value="0x17" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="23"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC Register Value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
+				<VsccDevice name="Flash device 18" visible="true">
+					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xEF"></VendorId>
+					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x30"></DeviceId0>
+					<DeviceId1 value="0x17" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x17"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
 				</VsccDevice>
 				<VsccDevice name="Winbond W25Q64" visible="true">
 					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
