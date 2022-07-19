@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+   INTEL CONFIDENTIAL
+   Copyright (c) 2013-2015 Intel Corporation. All Rights Reserved. 
+   The source code contained or described herein and all documents related 
+   to the source code ("Material") are owned by Intel Corporation or its 
+   suppliers or licensors. Title to the Material remains with Intel Corporation 
+   or its suppliers and licensors. The Material contains trade secrets and 
+   proprietary and confidential information of Intel or its suppliers and l
+   icensors. The Material is protected by worldwide copyright and trade secret 
+   laws and treaty provisions. No part of the Material may be used, copied, 
+   reproduced, modified, published, uploaded, posted, transmitted, distributed, 
+   or disclosed in any way without Intel's prior express written permission.
+
+   No license under any patent, copyright, trade secret or other intellectual 
+   property right is granted to or conferred upon you by disclosure or delivery 
+   of the Materials, either expressly, by implication, inducement, estoppel or 
+   otherwise. Any license under such intellectual property rights must be express 
+   and approved by Intel in writing.
+-->
 <ftoolRoot version="4.0">
 	<ProgSettings>
 		<GenIntermediateFiles value="true"></GenIntermediateFiles>
-		<BuildOutputFilename value=""></BuildOutputFilename>
+		<BuildOutputFilename value="image.bin"></BuildOutputFilename>
 		<BuildCompactImage value="false"></BuildCompactImage>
-		<RegionOrder value="345216"></RegionOrder>
+		<RegionOrder value="34521"></RegionOrder>
 		<Platform value="9"></Platform>
 		<OEM value="0"></OEM>
 	</ProgSettings>
@@ -52,14 +71,14 @@
 					<PciDevice value="0" edit="false" visible="true" name="PCI Device ID" help_text="" default="0"></PciDevice>
 					<PciFunction value="0" edit="false" visible="true" name="PCI Function ID" help_text="" default="0"></PciFunction>
 					<ReadAccess value="0x3B" edit="true" visible="true" name="Read access" help_text="Each bit corresponds to Regions [7:0]. If the bit is set, read access is granted." default="0x3B"></ReadAccess>
-					<WriteAccess value="0x13" edit="true" visible="true" name="Write access" help_text="Each bit corresponds to Regions [7:0]. If the bit is set, write access is granted." default="0x1B"></WriteAccess>
+					<WriteAccess value="0x3B" edit="true" visible="true" name="Write access" help_text="Each bit corresponds to Regions [7:0]. If the bit is set, write access is granted." default="0x3B"></WriteAccess>
 				</Master>
 				<Master name="Manageability Engine (ME)" visible="true">
 					<PciBus value="0" edit="false" visible="true" name="PCI Bus ID" help_text="" default="0"></PciBus>
 					<PciDevice value="0" edit="false" visible="true" name="PCI Device ID" help_text="" default="0"></PciDevice>
 					<PciFunction value="0" edit="false" visible="true" name="PCI Function ID" help_text="" default="0"></PciFunction>
-					<ReadAccess value="0x25" edit="true" visible="true" name="Read access" help_text="Each bit corresponds to Regions [7:0]. If the bit is set, read access is granted." default="0x25"></ReadAccess>
-					<WriteAccess value="0x04" edit="true" visible="true" name="Write access" help_text="Each bit corresponds to Regions [7:0]. If the bit is set, write access is granted." default="0x04"></WriteAccess>
+					<ReadAccess value="0x2D" edit="true" visible="true" name="Read access" help_text="Each bit corresponds to Regions [7:0]. If the bit is set, read access is granted." default="0x2D"></ReadAccess>
+					<WriteAccess value="0x0C" edit="true" visible="true" name="Write access" help_text="Each bit corresponds to Regions [7:0]. If the bit is set, write access is granted." default="0x0C"></WriteAccess>
 				</Master>
 				<Master name="GbE LAN" visible="true">
 					<PciBus value="1" edit="false" visible="true" name="PCI Bus ID" help_text="" default="1"></PciBus>
@@ -159,8 +178,8 @@
 					<Reserved0 value="0x00000000" name="Reserved" default="0x00000000"></Reserved0>
 				</IchStrap6>
 				<IchStrap7 name="PCH Strap 7">
-					<Smt1SubDid value="0x0000" name="Intel ME SMBus Subsystem Device ID" help_text="Reserved, set to '0'." default="0x0000"></Smt1SubDid>
-					<Smt1SubVid value="0x0000" name="Intel ME SMBus Subsystem Vendor ID" help_text="Reserved, set to '0'." default="0x0000"></Smt1SubVid>
+					<Smt1SubDid value="0x0000" name="Intel ME SMBus Subsystem Device ID" help_text="Subsystem Device ID" default="0x0000"></Smt1SubDid>
+					<Smt1SubVid value="0x0000" name="Intel ME SMBus Subsystem Vendor ID" help_text="Subsystem Vendor ID" default="0x0000"></Smt1SubVid>
 				</IchStrap7>
 				<IchStrap8 name="PCH Strap 8">
 					<Reserved0 value="0x00000000" name="Reserved" default="0x00000000"></Reserved0>
@@ -611,113 +630,113 @@
 				</RegInitEntry>
 			</RegInitTable>
 			<VsccTable name="VSCC Table" visible="true">
-				<VsccDevice name="Flash device 1" visible="true">
-					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x1F"></VendorId>
-					<DeviceId0 value="0x47" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x47"></DeviceId0>
-					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x00"></DeviceId1>
-					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20152015"></VsccValue>
+				<VsccDevice name="Redfort0" visible="true">
+					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="31"></VendorId>
+					<DeviceId0 value="0x47" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="71"></DeviceId0>
+					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0"></DeviceId1>
+					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="538255381"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 2" visible="true">
-					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xEF"></VendorId>
-					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x30"></DeviceId0>
-					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x16"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="Redfort1" visible="true">
+					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
+					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="48"></DeviceId0>
+					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="22"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 3" visible="true">
-					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xBF"></VendorId>
-					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x25"></DeviceId0>
-					<DeviceId1 value="0x41" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x41"></DeviceId1>
-					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20092009"></VsccValue>
+				<VsccDevice name="Redfort2" visible="true">
+					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="191"></VendorId>
+					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="37"></DeviceId0>
+					<DeviceId1 value="0x41" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="65"></DeviceId1>
+					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537468937"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 4" visible="true">
-					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x1F"></VendorId>
-					<DeviceId0 value="0x47" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x47"></DeviceId0>
-					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x00"></DeviceId1>
-					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20152015"></VsccValue>
+				<VsccDevice name="Atmel 26DF321" visible="true">
+					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="31"></VendorId>
+					<DeviceId0 value="0x47" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="71"></DeviceId0>
+					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0"></DeviceId1>
+					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="538255381"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 5" visible="true">
-					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x1F"></VendorId>
-					<DeviceId0 value="0x45" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x45"></DeviceId0>
-					<DeviceId1 value="0x01" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x01"></DeviceId1>
-					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20152015"></VsccValue>
+				<VsccDevice name="Atmel 26DF0801" visible="true">
+					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="31"></VendorId>
+					<DeviceId0 value="0x45" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="69"></DeviceId0>
+					<DeviceId1 value="0x01" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="1"></DeviceId1>
+					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="538255381"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 6" visible="true">
-					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x1F"></VendorId>
-					<DeviceId0 value="0x46" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x46"></DeviceId0>
-					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x00"></DeviceId1>
-					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20152015"></VsccValue>
+				<VsccDevice name="Atmel 26DF1601" visible="true">
+					<VendorId value="0x1F" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="31"></VendorId>
+					<DeviceId0 value="0x46" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="70"></DeviceId0>
+					<DeviceId1 value="0x00" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0"></DeviceId1>
+					<VsccValue value="0x20152015" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="538255381"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 7" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
-					<DeviceId1 value="0x14" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x14"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="Macronix MX25L8005" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
+					<DeviceId1 value="0x14" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="20"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 8" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
-					<DeviceId1 value="0x15" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x15"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="Macronix MX25L1605A" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
+					<DeviceId1 value="0x15" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="21"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 9" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
-					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x16"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="Macronix MX25L3205D" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
+					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="22"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC Register Value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 10" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
-					<DeviceId1 value="0x17" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x17"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="Macronix MX25L6405D" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
+					<DeviceId1 value="0x17" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="23"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 11" visible="true">
-					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xC2"></VendorId>
-					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x20"></DeviceId0>
-					<DeviceId1 value="0x18" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x18"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="Macronix MX25L12805D" visible="true">
+					<VendorId value="0xC2" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="194"></VendorId>
+					<DeviceId0 value="0x20" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="32"></DeviceId0>
+					<DeviceId1 value="0x18" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="24"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC Register Value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 12" visible="true">
-					<VendorId value="0x9D" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x9D"></VendorId>
-					<DeviceId0 value="0x7F" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x7F"></DeviceId0>
-					<DeviceId1 value="0x7A" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x7A"></DeviceId1>
-					<VsccValue value="0xD705D705" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0xD705D705"></VsccValue>
+				<VsccDevice name="PMC PM25LV080" visible="true">
+					<VendorId value="0x9D" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="157"></VendorId>
+					<DeviceId0 value="0x7F" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="127"></DeviceId0>
+					<DeviceId1 value="0x7A" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="122"></DeviceId1>
+					<VsccValue value="0xD705D705" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="3607484165"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 13" visible="true">
-					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xBF"></VendorId>
-					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x25"></DeviceId0>
-					<DeviceId1 value="0x8E" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x8E"></DeviceId1>
-					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20092009"></VsccValue>
+				<VsccDevice name="SST 25VF080B" visible="true">
+					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="191"></VendorId>
+					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="37"></DeviceId0>
+					<DeviceId1 value="0x8E" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="142"></DeviceId1>
+					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537468937"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 14" visible="true">
-					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xBF"></VendorId>
-					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x25"></DeviceId0>
-					<DeviceId1 value="0x41" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x41"></DeviceId1>
-					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20092009"></VsccValue>
+				<VsccDevice name="SST 25VF016B" visible="true">
+					<VendorId value="0xBF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="191"></VendorId>
+					<DeviceId0 value="0x25" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="37"></DeviceId0>
+					<DeviceId1 value="0x41" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="65"></DeviceId1>
+					<VsccValue value="0x20092009" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537468937"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 15" visible="true">
-					<VendorId value="0x20" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0x20"></VendorId>
-					<DeviceId0 value="0x80" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x80"></DeviceId0>
-					<DeviceId1 value="0x15" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x15"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="ST Micro M25PE80" visible="true">
+					<VendorId value="0x20" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="32"></VendorId>
+					<DeviceId0 value="0x80" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="128"></DeviceId0>
+					<DeviceId1 value="0x15" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="21"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 16" visible="true">
-					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xEF"></VendorId>
-					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x30"></DeviceId0>
-					<DeviceId1 value="0x14" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x14"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="Winbond W25X80" visible="true">
+					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
+					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="48"></DeviceId0>
+					<DeviceId1 value="0x14" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="20"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 17" visible="true">
-					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xEF"></VendorId>
-					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x30"></DeviceId0>
-					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x16"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="Winbond W25X16" visible="true">
+					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
+					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="48"></DeviceId0>
+					<DeviceId1 value="0x16" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="22"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
-				<VsccDevice name="Flash device 18" visible="true">
-					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="0xEF"></VendorId>
-					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID ." default="0x30"></DeviceId0>
-					<DeviceId1 value="0x17" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="0x17"></DeviceId1>
-					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC register value" help_text="The device specific VSCC register value." default="0x20052005"></VsccValue>
+				<VsccDevice name="Winbond W25X64" visible="true">
+					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
+					<DeviceId0 value="0x30" edit="true" visible="true" name="Device ID 0" help_text="The first device specific byte of the JEDEC ID." default="48"></DeviceId0>
+					<DeviceId1 value="0x17" edit="true" visible="true" name="Device ID 1" help_text="The second device specific byte of the JEDEC ID." default="23"></DeviceId1>
+					<VsccValue value="0x20052005" edit="true" visible="true" name="VSCC Register Value" help_text="The device specific VSCC register value." default="537206789"></VsccValue>
 				</VsccDevice>
 				<VsccDevice name="Winbond W25Q64" visible="true">
 					<VendorId value="0xEF" edit="true" visible="true" name="Vendor ID" help_text="The vendor specific byte of the JEDEC ID." default="239"></VendorId>
@@ -847,9 +866,9 @@
 					<Variable name="CloudSchedulingAgentDisabled" value="false" default="false"></Variable>
 					<Variable name="PtuPayloadDisabled" value="false" default="false"></Variable>
 					<Variable name="HothamDisabled" value="false" default="false"></Variable>
-					<Variable name="PeciProxyDisabled" value="true" default="true"></Variable>
+					<Variable name="PeciProxyDisabled" value="false" default="false"></Variable>
 					<Variable name="MicProxyDisabled" value="true" default="true"></Variable>
-					<Variable name="PmBusProxyDisabled" value="true" default="true"></Variable>
+					<Variable name="PmBusProxyDisabled" value="false" default="false"></Variable>
 					<Variable name="DmDisabled" value="true" default="true"></Variable>
 					<Variable name="ReservedA" value="true" default="true"></Variable>
 					<Variable name="IpmiMeFwUpdateDisabled" value="true" default="true"></Variable>
@@ -1443,7 +1462,7 @@
 					<Variable name="SlotEnabled15" value="false" default="false"></Variable>
 					<Variable name="MuxEnabled15" value="false" default="false"></Variable>
 					<Variable name="BusNum15" value="0" default="0"></Variable>
-					<Variable name="Reserved151" value="0" default="0"></Variable>
+					<Variable name="Reserved115" value="0" default="0"></Variable>
 					<Variable name="MuxAddress15" value="0x00" default="0x00"></Variable>
 					<Variable name="MuxState15" value="0x00" default="0x00"></Variable>
 					<Variable name="SlotIdx15" value="0x00" default="0x00"></Variable>
@@ -1552,9 +1571,9 @@
 					<Variable name="PCI3" value="Enable(1b)" default="Enable(1b)"></Variable>
 					<Variable name="PCI4" value="Enable(1b)" default="Enable(1b)"></Variable>
 					<Variable name="OCKEN_Reserved3" value="0" default="0"></Variable>
-					<Variable name="FLEX0" value="Enable(1b)" default="Enable(1b)"></Variable>
+					<Variable name="FLEX0" value="Disable(0b)" default="Disable(0b)"></Variable>
 					<Variable name="FLEX1" value="Enable(1b)" default="Enable(1b)"></Variable>
-					<Variable name="FLEX2" value="Enable(1b)" default="Enable(1b)"></Variable>
+					<Variable name="FLEX2" value="Disable(0b)" default="Disable(0b)"></Variable>
 					<Variable name="FLEX3" value="Enable(1b)" default="Enable(1b)"></Variable>
 					<Variable name="Clock Run Enable for PCI0" value="Disable(0b)" default="Disable(0b)"></Variable>
 					<Variable name="Clock Run Enable for PCI1" value="Disable(0b)" default="Disable(0b)"></Variable>
@@ -1634,7 +1653,7 @@
 					<Variable name="DCSS_Reserved1" value="0" default="0"></Variable>
 					<Variable name="GPB_PCIE0 Source Clock" value="0:100MHzPCIe" default="0:100MHzPCIe"></Variable>
 					<Variable name="GPB_PCIE1 Source Clock" value="0:100MHzPCIe" default="0:100MHzPCIe"></Variable>
-					<Variable name="GPB_PCIE2 Source Clock" value="0:100MHzPCIe" default="0:100MHzPCIe"></Variable>
+					<Variable name="GPB_PCIE2 Source Clock" value="1:100MHzBCLK" default="1:100MHzBCLK"></Variable>
 					<Variable name="DMI0 Source Clock" value="0:100MHzPCIe" default="0:100MHzPCIe"></Variable>
 					<Variable name="DMI1 Source Clock" value="0:100MHzPCIe" default="0:100MHzPCIe"></Variable>
 					<Variable name="DCSS_Reserved2" value="0" default="0"></Variable>
@@ -1661,7 +1680,7 @@
 					<Variable name="DMI0/DMI1 Clock Source Disable" value="Disable(1b)" default="Disable(1b)"></Variable>
 					<Variable name="DMI_CS_Reserved1" value="0" default="0"></Variable>
 					<Variable name="Clock Frequency" value="100000000" default="100000000"></Variable>
-					<Variable name="Spread Settings" value="50" default="50"></Variable>
+					<Variable name="Spread Spectrum Percentage" value="50" default="50"></Variable>
 					<Variable name="DMI Spread Generator Enable" value="Enable(0b)" default="Enable(0b)"></Variable>
 					<Variable name="DMI0/DMI1 Spread Generator Mode" value="DownSpread" default="DownSpread"></Variable>
 					<Variable name="DMI_CS_Reserved2" value="0" default="0"></Variable>
@@ -1682,10 +1701,10 @@
 					<Variable name="DMI SSC Spread Mode Up Supported Intel Basic" value="false" default="false"></Variable>
 					<Variable name="DMI SSC Spread Mode Down Supported Intel Basic" value="true" default="true"></Variable>
 					<Variable name="DMI SSC Spread Mode Center Supported Intel Basic" value="false" default="false"></Variable>
-					<Variable name="DMI SSC Halt Allowed Intel Basic" value="true" default="true"></Variable>
-					<Variable name="IBDMI_MODIV2_Reserved1" value="0" default="0"></Variable>
-					<Variable name="IBDMI_MODIV2_Reserved2" value="0" default="0"></Variable>
-					<Variable name="IBDMI_MODIV2_Reserved3" value="0" default="0"></Variable>
+					<Variable name="DMI SSC Halt Allowed" value="true" default="true"></Variable>
+					<Variable name="DMI_MODIV2_Reserved1 Intel Basic" value="0" default="0"></Variable>
+					<Variable name="DMI_MODIV2_Reserved2 Intel Basic" value="0" default="0"></Variable>
+					<Variable name="DMI_MODIV2_Reserved3 Intel Basic" value="0" default="0"></Variable>
 					<Variable name="DMI Max Clock Divider / Min Frequency Intel Enh" value="98405500" default="98405500"></Variable>
 					<Variable name="DMI Min Clock Divider / Max Frequency Intel Enh" value="100000000" default="100000000"></Variable>
 					<Variable name="DMI SSC Spread Percentage Intel Enh" value="50" default="50"></Variable>
@@ -1694,9 +1713,9 @@
 					<Variable name="DMI SSC Spread Mode Down Supported Intel Enh" value="true" default="true"></Variable>
 					<Variable name="DMI SSC Spread Mode Center Supported Intel Enh" value="false" default="false"></Variable>
 					<Variable name="DMI SSC Halt Allowed Intel Enh" value="true" default="true"></Variable>
-					<Variable name="IEDMI_MODIV2_Reserved1" value="0" default="0"></Variable>
-					<Variable name="IEDMI_MODIV2_Reserved2" value="0" default="0"></Variable>
-					<Variable name="IEDMI_MODIV2_Reserved3" value="0" default="0"></Variable>
+					<Variable name="DMI_MODIV2_Reserved1 Intel Enh" value="0" default="0"></Variable>
+					<Variable name="DMI_MODIV2_Reserved2 Intel Enh" value="0" default="0"></Variable>
+					<Variable name="DMI_MODIV2_Reserved3 Intel Enh" value="0" default="0"></Variable>
 					<Variable name="DMI Max Clock Divider / Min Frequency Intel Extreme" value="42857000" default="42857000"></Variable>
 					<Variable name="DMI Min Clock Divider / Max Frequency Intel Extreme" value="540000000" default="540000000"></Variable>
 					<Variable name="DMI SSC Spread Percentage Intel Extreme" value="250" default="250"></Variable>
@@ -1705,9 +1724,9 @@
 					<Variable name="DMI SSC Spread Mode Down Supported Intel Extreme" value="true" default="true"></Variable>
 					<Variable name="DMI SSC Spread Mode Center Supported Intel Extreme" value="false" default="false"></Variable>
 					<Variable name="DMI SSC Halt Allowed Intel Extreme" value="true" default="true"></Variable>
-					<Variable name="IXDMI_MODIV2_Reserved1" value="0" default="0"></Variable>
-					<Variable name="IXDMI_MODIV2_Reserved2" value="0" default="0"></Variable>
-					<Variable name="IXDMI_MODIV2_Reserved3" value="0" default="0"></Variable>
+					<Variable name="DMI_MODIV2_Reserved1 Intel Extreme" value="0" default="0"></Variable>
+					<Variable name="DMI_MODIV2_Reserved2 Intel Extreme" value="0" default="0"></Variable>
+					<Variable name="DMI_MODIV2_Reserved3 Intel Extreme" value="0" default="0"></Variable>
 					<Variable name="PCIe Max Clock Divider / Min Frequency Intel Basic" value="100000000" default="100000000"></Variable>
 					<Variable name="PCIe Min Clock Divider / Max Frequency Intel Basic" value="100000000" default="100000000"></Variable>
 					<Variable name="SSC Spread Percentage Intel Basic" value="50" default="50"></Variable>
@@ -1716,9 +1735,9 @@
 					<Variable name="PCIe SSC Spread Mode Down Supported Intel Basic" value="true" default="true"></Variable>
 					<Variable name="PCIe SSC Spread Mode Center Supported Intel Basic" value="false" default="false"></Variable>
 					<Variable name="PCIe SSC Halt Allowed Intel Basic" value="true" default="true"></Variable>
-					<Variable name="IBPCIE_MODIV3_Reserved1" value="0" default="0"></Variable>
-					<Variable name="IBPCIE_MODIV3_Reserved2" value="0" default="0"></Variable>
-					<Variable name="IBPCIE_MODIV3_Reserved3" value="0" default="0"></Variable>
+					<Variable name="PCIE_MODIV3_Reserved1 Intel Basic" value="0" default="0"></Variable>
+					<Variable name="PCIE_MODIV3_Reserved2 Intel Basic" value="0" default="0"></Variable>
+					<Variable name="PCIE_MODIV3_Reserved3 Intel Basic" value="0" default="0"></Variable>
 					<Variable name="PCIe Max Clock Divider / Min Frequency Intel Enh" value="99539200" default="99539200"></Variable>
 					<Variable name="PCIe Min Clock Divider / Max Frequency Intel Enh" value="100000000" default="100000000"></Variable>
 					<Variable name="SSC Spread Percentage Intel Enh" value="50" default="50"></Variable>
@@ -1727,9 +1746,9 @@
 					<Variable name="PCIe SSC Spread Mode Down Supported Intel Enh" value="true" default="true"></Variable>
 					<Variable name="PCIe SSC Spread Mode Center Supported Intel Enh" value="false" default="false"></Variable>
 					<Variable name="PCIe SSC Halt Allowed Intel Enh" value="true" default="true"></Variable>
-					<Variable name="IEPCIE_MODIV3_Reserved1" value="0" default="0"></Variable>
-					<Variable name="IEPCIE_MODIV3_Reserved2" value="0" default="0"></Variable>
-					<Variable name="IEPCIE_MODIV3_Reserved3" value="0" default="0"></Variable>
+					<Variable name="PCIE_MODIV3_Reserved1 Intel Enh" value="0" default="0"></Variable>
+					<Variable name="PCIE_MODIV3_Reserved2 Intel Enh" value="0" default="0"></Variable>
+					<Variable name="PCIE_MODIV3_Reserved3 Intel Enh" value="0" default="0"></Variable>
 					<Variable name="PCIe Max Clock Divider / Min Frequency Intel Extreme" value="99539200" default="99539200"></Variable>
 					<Variable name="PCIe Min Clock Divider / Max Frequency Intel Extreme" value="100000000" default="100000000"></Variable>
 					<Variable name="SSC Spread Percentage Intel Extreme" value="50" default="50"></Variable>
@@ -1738,9 +1757,9 @@
 					<Variable name="PCIe SSC Spread Mode Down Supported Intel Extreme" value="true" default="true"></Variable>
 					<Variable name="PCIe SSC Spread Mode Center Supported Intel Extreme" value="false" default="false"></Variable>
 					<Variable name="PCIe SSC Halt Allowed Intel Extreme" value="true" default="true"></Variable>
-					<Variable name="IXPCIE_MODIV3_Reserved1" value="0" default="0"></Variable>
-					<Variable name="IXPCIE_MODIV3_Reserved2" value="0" default="0"></Variable>
-					<Variable name="IXPCIE_MODIV3_Reserved3" value="0" default="0"></Variable>
+					<Variable name="PCIE_MODIV3_Reserved1 Intel Extreme" value="0" default="0"></Variable>
+					<Variable name="PCIE_MODIV3_Reserved2 Intel Extreme" value="0" default="0"></Variable>
+					<Variable name="PCIE_MODIV3_Reserved3 Intel Extreme" value="0" default="0"></Variable>
 					<Variable name="FLEX0 OE Adjustment Allowed" value="TRUE(1b)" default="TRUE(1b)"></Variable>
 					<Variable name="FLEX1 OE Adjustment Allowed" value="TRUE(1b)" default="TRUE(1b)"></Variable>
 					<Variable name="FLEX2 OE Adjustment Allowed" value="TRUE(1b)" default="TRUE(1b)"></Variable>
@@ -1830,7 +1849,7 @@
 					<Variable name="SSCMISC_DCLK135" value="0x00000000" default="0x00000000"></Variable>
 					<Variable name="SSCTRIPARAMEXTRA_DCLK135" value="0x000029C5" default="0x000029C5"></Variable>
 					<Variable name="SSCRSVD_DCLK135" value="0x00000000" default="0x00000000"></Variable>
-					<Variable name="SSCANACTL_DCLK135" value="0x0A8F61FD" default="0x0A8F61FD"></Variable>
+					<Variable name="SSCANACTL_DCLK135" value="0xFA8F61FF" default="0xFA8F61FF"></Variable>
 					<Variable name="SSCRSTFSM_DCLK135" value="0x004D0012" default="0x004D0012"></Variable>
 					<Variable name="SSCDFXPHSPLN0_DCLK135" value="0x00000000" default="0x00000000"></Variable>
 					<Variable name="SSCDFXPHSPLN1_DCLK135" value="0x00000000" default="0x00000000"></Variable>
@@ -4210,8 +4229,8 @@
 					<Variable name="Reserved16b" value="0" default="0x0000"></Variable>
 				</CollectionClass>
 				<CollectionClass name="Chipset Initialization Settings">
-					<Variable name="CRC16" value="0x6658" default="0x6658"></Variable>
-					<Variable name="Version" value="0x3129" default="0x3129"></Variable>
+					<Variable name="CRC16" value="0x3896" default="0x3896"></Variable>
+					<Variable name="Version" value="0x0329" default="0x0329"></Variable>
 					<Variable name="NumOfEntries" value="0x26" default="0x26"></Variable>
 					<Variable name="Entry_00_Offset" value="0xC02C" default="0xC02C"></Variable>
 					<Variable name="Entry_00_Data" value="0x0F000A00" default="0x0F000A00"></Variable>
@@ -4259,7 +4278,7 @@
 					<Variable name="Entry_14_Data" value="0x47406055" default="0x47406055"></Variable>
 					<Variable name="Entry_14_Endpoint" value="0xEA" default="0xEA"></Variable>
 					<Variable name="Entry_15_Offset" value="0xC088" default="0xC088"></Variable>
-					<Variable name="Entry_15_Data" value="0x5580983A" default="0x5580983A"></Variable>
+					<Variable name="Entry_15_Data" value="0x5520983A" default="0x5520983A"></Variable>
 					<Variable name="Entry_15_Endpoint" value="0xEB" default="0xEB"></Variable>
 					<Variable name="Entry_16_Offset" value="0xC178" default="0xC178"></Variable>
 					<Variable name="Entry_16_Data" value="0x00001980" default="0x00001980"></Variable>
@@ -4271,7 +4290,7 @@
 					<Variable name="Entry_18_Data" value="0x5580983A" default="0x5580983A"></Variable>
 					<Variable name="Entry_18_Endpoint" value="0xEA" default="0xEA"></Variable>
 					<Variable name="Entry_19_Offset" value="0xC08C" default="0xC08C"></Variable>
-					<Variable name="Entry_19_Data" value="0x0C782046" default="0x0C782046"></Variable>
+					<Variable name="Entry_19_Data" value="0x0C202046" default="0x0C202046"></Variable>
 					<Variable name="Entry_19_Endpoint" value="0xEB" default="0xEB"></Variable>
 					<Variable name="Entry_20_Offset" value="0xC08C" default="0xC08C"></Variable>
 					<Variable name="Entry_20_Data" value="0x0C782046" default="0x0C782046"></Variable>
@@ -4304,7 +4323,7 @@
 					<Variable name="Entry_29_Data" value="0x008805AC" default="0x008805AC"></Variable>
 					<Variable name="Entry_29_Endpoint" value="0xEB" default="0xEB"></Variable>
 					<Variable name="Entry_30_Offset" value="0xC090" default="0xC090"></Variable>
-					<Variable name="Entry_30_Data" value="0x2B3E5155" default="0x2B3E5155"></Variable>
+					<Variable name="Entry_30_Data" value="0x2B3E0000" default="0x2B3E0000"></Variable>
 					<Variable name="Entry_30_Endpoint" value="0xEB" default="0xEB"></Variable>
 					<Variable name="Entry_31_Offset" value="0xC090" default="0xC090"></Variable>
 					<Variable name="Entry_31_Data" value="0x2B3E5155" default="0x2B3E5155"></Variable>
@@ -5035,7 +5054,7 @@
 					<Variable name="Shared PSU" value="false" default="false"></Variable>
 					<Variable name="MIC PROCHOT Pin Enabled" value="false" default="false"></Variable>
 					<Variable name="Policy Correction Time Exceeded deassertion" value="false" default="false"></Variable>
-					<Variable name="ReservedB2" value="0" default="0"></Variable>
+					<Variable name="Reserved2" value="0" default="0"></Variable>
 					<Variable name="Total System Power Budget" value="0" default="0"></Variable>
 					<Variable name="CPU Target Power Budget" value="0" default="0"></Variable>
 					<Variable name="Memory Power Budget" value="0" default="0"></Variable>
@@ -5045,8 +5064,8 @@
 					<Variable name="TR Delay" value="500" default="500"></Variable>
 					<Variable name="TR Ignore" value="60" default="60"></Variable>
 					<Variable name="UV Fault Max Time" value="500" default="500"></Variable>
-					<Variable name="SMB Alert MGPIO" value="0" default="0"></Variable>
-					<Variable name="PROCHOT MGPIO" value="7" default="7"></Variable>
+					<Variable name="SMB Alert MGPIO" value="8" default="8"></Variable>
+					<Variable name="PROCHOT MGPIO" value="9" default="9"></Variable>
 					<Variable name="MEMHOT MGPIO" value="-1" default="-1"></Variable>
 					<Variable name="SMB Alert_EN MGPIO" value="-1" default="-1"></Variable>
 				</CollectionClass>
@@ -5598,7 +5617,7 @@
 					<Variable name="InputPowerMode" value="0x01" default="0x01"></Variable>
 					<Variable name="OutputPowerMode" value="0x01" default="0x01"></Variable>
 					<Variable name="PageSupport" value="0x1" default="0x1"></Variable>
-					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved1" value="0x0" default="0x0"></Variable>
 					<Variable name="DiscoveryEnabled" value="0x1" default="0x1"></Variable>
 					<Variable name="MonitoredRegister0" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ReadingFrequency0" value="0x0" default="0x0"></Variable>
@@ -5718,7 +5737,7 @@
 					<Variable name="InputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="OutputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="PageSupport" value="0x1" default="0x1"></Variable>
-					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved1" value="0x0" default="0x0"></Variable>
 					<Variable name="DiscoveryEnabled" value="0x1" default="0x1"></Variable>
 					<Variable name="MonitoredRegister0" value="0x79" default="0x79"></Variable>
 					<Variable name="ReadingFrequency0" value="0x4" default="0x4"></Variable>
@@ -5838,7 +5857,7 @@
 					<Variable name="InputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="OutputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="PageSupport" value="0x2" default="0x2"></Variable>
-					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved1" value="0x0" default="0x0"></Variable>
 					<Variable name="DiscoveryEnabled" value="0x1" default="0x1"></Variable>
 					<Variable name="MonitoredRegister0" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ReadingFrequency0" value="0x3" default="0x3"></Variable>
@@ -5958,7 +5977,7 @@
 					<Variable name="InputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="OutputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="PageSupport" value="0x1" default="0x1"></Variable>
-					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved1" value="0x0" default="0x0"></Variable>
 					<Variable name="DiscoveryEnabled" value="0x1" default="0x1"></Variable>
 					<Variable name="MonitoredRegister0" value="0x03" default="0x03"></Variable>
 					<Variable name="ReadingFrequency0" value="0x1" default="0x1"></Variable>
@@ -6078,7 +6097,7 @@
 					<Variable name="InputPowerMode" value="0x02" default="0x02"></Variable>
 					<Variable name="OutputPowerMode" value="0x02" default="0x02"></Variable>
 					<Variable name="PageSupport" value="0x1" default="0x1"></Variable>
-					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved1" value="0x0" default="0x0"></Variable>
 					<Variable name="DiscoveryEnabled" value="0x1" default="0x1"></Variable>
 					<Variable name="MonitoredRegister0" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ReadingFrequency0" value="0x1" default="0x1"></Variable>
@@ -6198,7 +6217,7 @@
 					<Variable name="InputPowerMode" value="0x02" default="0x02"></Variable>
 					<Variable name="OutputPowerMode" value="0x02" default="0x02"></Variable>
 					<Variable name="PageSupport" value="0x1" default="0x1"></Variable>
-					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved1" value="0x0" default="0x0"></Variable>
 					<Variable name="DiscoveryEnabled" value="0x0" default="0x0"></Variable>
 					<Variable name="MonitoredRegister0" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ReadingFrequency0" value="0x1" default="0x1"></Variable>
@@ -6318,7 +6337,7 @@
 					<Variable name="InputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="OutputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="PageSupport" value="0x1" default="0x1"></Variable>
-					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved1" value="0x0" default="0x0"></Variable>
 					<Variable name="DiscoveryEnabled" value="0x1" default="0x1"></Variable>
 					<Variable name="MonitoredRegister0" value="0x10" default="0x10"></Variable>
 					<Variable name="ReadingFrequency0" value="0x1" default="0x1"></Variable>
@@ -6438,7 +6457,7 @@
 					<Variable name="InputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="OutputPowerMode" value="0x00" default="0x00"></Variable>
 					<Variable name="PageSupport" value="0x1" default="0x1"></Variable>
-					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved1" value="0x0" default="0x0"></Variable>
 					<Variable name="DiscoveryEnabled" value="0x1" default="0x1"></Variable>
 					<Variable name="MonitoredRegister0" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ReadingFrequency0" value="0x0" default="0x0"></Variable>
@@ -6589,11 +6608,11 @@
 					<Variable name="Logging Interface SMBus" value="true" default="true"></Variable>
 					<Variable name="Logging Interface Flash" value="false" default="false"></Variable>
 					<Variable name="Logging Interface PRAM" value="false" default="false"></Variable>
-					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved1" value="0x0" default="0x0"></Variable>
 					<Variable name="Buffer Size" value="0x10" default="0x10"></Variable>
 					<Variable name="Mdes Buffer Mode" value="0x01" default="0x01"></Variable>
-					<Variable name="Source Ip Addres" value="0x00000000" default="0x00000000"></Variable>
-					<Variable name="Destination Ip Addres" value="0x00000000" default="0x00000000"></Variable>
+					<Variable name="Source Ip Address" value="0x00000000" default="0x00000000"></Variable>
+					<Variable name="Destination Ip Address" value="0x00000000" default="0x00000000"></Variable>
 					<Variable name="Destination Mac byte1" value="0x00" default="0x00"></Variable>
 					<Variable name="Destination Mac byte2" value="0x00" default="0x00"></Variable>
 					<Variable name="Destination Mac byte3" value="0x00" default="0x00"></Variable>
@@ -6602,7 +6621,7 @@
 					<Variable name="Destination Mac byte6" value="0x00" default="0x00"></Variable>
 					<Variable name="SmBus Address enable" value="0x1" default="0x1"></Variable>
 					<Variable name="SmBus Address" value="0x38" default="0x38"></Variable>
-					<Variable name="Reserved" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved2" value="0x00" default="0x00"></Variable>
 					<Variable name="Filter Group0" value="0x00000000" default="0x00000000"></Variable>
 					<Variable name="Filter Group1" value="0x00000000" default="0x00000000"></Variable>
 					<Variable name="Filter Group2" value="0x00000000" default="0x00000000"></Variable>
@@ -6753,14 +6772,14 @@
 					<Variable name="CPU Efficient Power" value="0" default="0"></Variable>
 					<Variable name="Memory Minimum Power" value="0" default="0"></Variable>
 					<Variable name="Memory Maximum Power" value="0" default="0"></Variable>
-					<Variable name="Time Stamp" value="0" default="0"></Variable>
+					<Variable name="Power Reading Timestamp" value="0" default="0"></Variable>
 					<Variable name="Completion Code" value="0" default="0"></Variable>
 				</CollectionClass>
 				<CollectionClass name="CUPS params">
-					<Variable name="CBaseLower" value="0" default="0"></Variable>
-					<Variable name="CBaseUpper" value="2147483648" default="2147483648"></Variable>
-					<Variable name="MBaseLower" value="0" default="0"></Variable>
-					<Variable name="MBaseUpper" value="2147483648" default="2147483648"></Variable>
+					<Variable name="CBase0" value="0" default="0"></Variable>
+					<Variable name="CBase1" value="2147483648" default="2147483648"></Variable>
+					<Variable name="MBase0" value="0" default="0"></Variable>
+					<Variable name="MBase1" value="2147483648" default="2147483648"></Variable>
 					<Variable name="StaticCoreLoadFactor" value="1" default="1"></Variable>
 					<Variable name="StaticMemLoadFactor" value="1" default="1"></Variable>
 					<Variable name="StaticIioLoadFactor" value="1" default="1"></Variable>
@@ -6796,56 +6815,56 @@
 					<Variable name="PulsesPerRev0" value="0x02" default="0x02"></Variable>
 					<Variable name="TachNumber0" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmChannel0" value="0x00" default="0x00"></Variable>
-					<Variable name="MaxRpm0" value="0x0BB8" default="0x0BB8"></Variable>
+					<Variable name="Reserved0" value="0x0BB8" default="0x0BB8"></Variable>
 					<Variable name="InitialPwm0" value="0x32" default="0x32"></Variable>
 					<Variable name="FanSpinupTime0" value="0x02" default="0x02"></Variable>
 					<Variable name="FanType1" value="0x04" default="0x04"></Variable>
 					<Variable name="PulsesPerRev1" value="0x02" default="0x02"></Variable>
 					<Variable name="TachNumber1" value="0x01" default="0x01"></Variable>
 					<Variable name="PwmChannel1" value="0x00" default="0x00"></Variable>
-					<Variable name="MaxRpm1" value="0x0E74" default="0x0E74"></Variable>
+					<Variable name="Reserved1" value="0x0E74" default="0x0E74"></Variable>
 					<Variable name="InitialPwm1" value="0x32" default="0x32"></Variable>
 					<Variable name="FanSpinupTime1" value="0x02" default="0x02"></Variable>
 					<Variable name="FanType2" value="0x04" default="0x04"></Variable>
 					<Variable name="PulsesPerRev2" value="0x02" default="0x02"></Variable>
 					<Variable name="TachNumber2" value="0x02" default="0x02"></Variable>
 					<Variable name="PwmChannel2" value="0x03" default="0x03"></Variable>
-					<Variable name="MaxRpm2" value="0x0E74" default="0x0E74"></Variable>
+					<Variable name="Reserved2" value="0x0E74" default="0x0E74"></Variable>
 					<Variable name="InitialPwm2" value="0x32" default="0x32"></Variable>
 					<Variable name="FanSpinupTime2" value="0x02" default="0x02"></Variable>
 					<Variable name="FanType3" value="0x04" default="0x04"></Variable>
 					<Variable name="PulsesPerRev3" value="0x02" default="0x02"></Variable>
 					<Variable name="TachNumber3" value="0x03" default="0x03"></Variable>
 					<Variable name="PwmChannel3" value="0x01" default="0x01"></Variable>
-					<Variable name="MaxRpm3" value="0x0E74" default="0x0E74"></Variable>
+					<Variable name="Reserved3" value="0x0E74" default="0x0E74"></Variable>
 					<Variable name="InitialPwm3" value="0x32" default="0x32"></Variable>
 					<Variable name="FanSpinupTime3" value="0x02" default="0x02"></Variable>
 					<Variable name="FanType4" value="0x04" default="0x04"></Variable>
 					<Variable name="PulsesPerRev4" value="0x02" default="0x02"></Variable>
 					<Variable name="TachNumber4" value="0x04" default="0x04"></Variable>
 					<Variable name="PwmChannel4" value="0x02" default="0x02"></Variable>
-					<Variable name="MaxRpm4" value="0x0E74" default="0x0E74"></Variable>
+					<Variable name="Reserved4" value="0x0E74" default="0x0E74"></Variable>
 					<Variable name="InitialPwm4" value="0x32" default="0x32"></Variable>
 					<Variable name="FanSpinupTime4" value="0x02" default="0x02"></Variable>
 					<Variable name="FanType5" value="0x04" default="0x04"></Variable>
 					<Variable name="PulsesPerRev5" value="0x02" default="0x02"></Variable>
 					<Variable name="TachNumber5" value="0x05" default="0x05"></Variable>
 					<Variable name="PwmChannel5" value="0x03" default="0x03"></Variable>
-					<Variable name="MaxRpm5" value="0x1388" default="0x1388"></Variable>
+					<Variable name="Reserved5" value="0x1388" default="0x1388"></Variable>
 					<Variable name="InitialPwm5" value="0x32" default="0x32"></Variable>
 					<Variable name="FanSpinupTime5" value="0x02" default="0x02"></Variable>
 					<Variable name="FanType6" value="0x04" default="0x04"></Variable>
 					<Variable name="PulsesPerRev6" value="0x02" default="0x02"></Variable>
 					<Variable name="TachNumber6" value="0x06" default="0x06"></Variable>
 					<Variable name="PwmChannel6" value="0x03" default="0x03"></Variable>
-					<Variable name="MaxRpm6" value="0x1388" default="0x1388"></Variable>
+					<Variable name="Reserved6" value="0x1388" default="0x1388"></Variable>
 					<Variable name="InitialPwm6" value="0x32" default="0x32"></Variable>
 					<Variable name="FanSpinupTime6" value="0x02" default="0x02"></Variable>
 					<Variable name="FanType7" value="0x04" default="0x04"></Variable>
 					<Variable name="PulsesPerRev7" value="0x02" default="0x02"></Variable>
 					<Variable name="TachNumber7" value="0x07" default="0x07"></Variable>
 					<Variable name="PwmChannel7" value="0x03" default="0x03"></Variable>
-					<Variable name="MaxRpm7" value="0x1388" default="0x1388"></Variable>
+					<Variable name="Reserved7" value="0x1388" default="0x1388"></Variable>
 					<Variable name="InitialPwm7" value="0x32" default="0x32"></Variable>
 					<Variable name="FanSpinupTime7" value="0x02" default="0x02"></Variable>
 				</CollectionClass>
@@ -6900,24 +6919,26 @@
 					<Variable name="NegativeHysteresis" value="0x0" default="0x0"></Variable>
 					<Variable name="NumDataSets" value="0x09" default="0x09"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature1" value="0x0A" default="0x0A"></Variable>
-					<Variable name="PwmValue1" value="0x14" default="0x14"></Variable>
-					<Variable name="Temperature2" value="0x14" default="0x14"></Variable>
-					<Variable name="PwmValue2" value="0x1E" default="0x1E"></Variable>
-					<Variable name="Temperature3" value="0x1E" default="0x1E"></Variable>
-					<Variable name="PwmValue3" value="0x28" default="0x28"></Variable>
-					<Variable name="Temperature4" value="0x28" default="0x28"></Variable>
-					<Variable name="PwmValue4" value="0x32" default="0x32"></Variable>
-					<Variable name="Temperature5" value="0x32" default="0x32"></Variable>
-					<Variable name="PwmValue5" value="0x3C" default="0x3C"></Variable>
-					<Variable name="Temperature6" value="0x3C" default="0x3C"></Variable>
-					<Variable name="PwmValue6" value="0x46" default="0x46"></Variable>
-					<Variable name="Temperature7" value="0x46" default="0x46"></Variable>
-					<Variable name="PwmValue7" value="0x50" default="0x50"></Variable>
-					<Variable name="Temperature8" value="0x50" default="0x50"></Variable>
-					<Variable name="PwmValue8" value="0x5A" default="0x5A"></Variable>
-					<Variable name="Temperature9" value="0x5A" default="0x5A"></Variable>
-					<Variable name="PwmValue9" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature0" value="0x0A" default="0x0A"></Variable>
+					<Variable name="PwmValue0" value="0x14" default="0x14"></Variable>
+					<Variable name="Temperature1" value="0x14" default="0x14"></Variable>
+					<Variable name="PwmValue1" value="0x1E" default="0x1E"></Variable>
+					<Variable name="Temperature2" value="0x1E" default="0x1E"></Variable>
+					<Variable name="PwmValue2" value="0x28" default="0x28"></Variable>
+					<Variable name="Temperature3" value="0x28" default="0x28"></Variable>
+					<Variable name="PwmValue3" value="0x32" default="0x32"></Variable>
+					<Variable name="Temperature4" value="0x32" default="0x32"></Variable>
+					<Variable name="PwmValue4" value="0x3C" default="0x3C"></Variable>
+					<Variable name="Temperature5" value="0x3C" default="0x3C"></Variable>
+					<Variable name="PwmValue5" value="0x46" default="0x46"></Variable>
+					<Variable name="Temperature6" value="0x46" default="0x46"></Variable>
+					<Variable name="PwmValue6" value="0x50" default="0x50"></Variable>
+					<Variable name="Temperature7" value="0x50" default="0x50"></Variable>
+					<Variable name="PwmValue7" value="0x5A" default="0x5A"></Variable>
+					<Variable name="Temperature8" value="0x5A" default="0x5A"></Variable>
+					<Variable name="PwmValue8" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature9" value="0x00" default="0x00"></Variable>
+					<Variable name="PwmValue9" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature10" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue10" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature11" value="0x00" default="0x00"></Variable>
@@ -6962,8 +6983,6 @@
 					<Variable name="PwmValue30" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature31" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue31" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature32" value="0x00" default="0x00"></Variable>
-					<Variable name="PwmValue32" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="FSC Stepwise Profiles">
 					<Variable name="ProfileID" value="0x01" default="0x01"></Variable>
@@ -6971,24 +6990,26 @@
 					<Variable name="NegativeHysteresis" value="0x0" default="0x0"></Variable>
 					<Variable name="NumDataSets" value="0x09" default="0x09"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature1" value="0x0A" default="0x0A"></Variable>
-					<Variable name="PwmValue1" value="0x14" default="0x14"></Variable>
-					<Variable name="Temperature2" value="0x14" default="0x14"></Variable>
-					<Variable name="PwmValue2" value="0x1E" default="0x1E"></Variable>
-					<Variable name="Temperature3" value="0x1E" default="0x1E"></Variable>
-					<Variable name="PwmValue3" value="0x28" default="0x28"></Variable>
-					<Variable name="Temperature4" value="0x28" default="0x28"></Variable>
-					<Variable name="PwmValue4" value="0x32" default="0x32"></Variable>
-					<Variable name="Temperature5" value="0x32" default="0x32"></Variable>
-					<Variable name="PwmValue5" value="0x3C" default="0x3C"></Variable>
-					<Variable name="Temperature6" value="0x3C" default="0x3C"></Variable>
-					<Variable name="PwmValue6" value="0x46" default="0x46"></Variable>
-					<Variable name="Temperature7" value="0x46" default="0x46"></Variable>
-					<Variable name="PwmValue7" value="0x50" default="0x50"></Variable>
-					<Variable name="Temperature8" value="0x50" default="0x50"></Variable>
-					<Variable name="PwmValue8" value="0x5A" default="0x5A"></Variable>
-					<Variable name="Temperature9" value="0x5A" default="0x5A"></Variable>
-					<Variable name="PwmValue9" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature0" value="0x0A" default="0x0A"></Variable>
+					<Variable name="PwmValue0" value="0x14" default="0x14"></Variable>
+					<Variable name="Temperature1" value="0x14" default="0x14"></Variable>
+					<Variable name="PwmValue1" value="0x1E" default="0x1E"></Variable>
+					<Variable name="Temperature2" value="0x1E" default="0x1E"></Variable>
+					<Variable name="PwmValue2" value="0x28" default="0x28"></Variable>
+					<Variable name="Temperature3" value="0x28" default="0x28"></Variable>
+					<Variable name="PwmValue3" value="0x32" default="0x32"></Variable>
+					<Variable name="Temperature4" value="0x32" default="0x32"></Variable>
+					<Variable name="PwmValue4" value="0x3C" default="0x3C"></Variable>
+					<Variable name="Temperature5" value="0x3C" default="0x3C"></Variable>
+					<Variable name="PwmValue5" value="0x46" default="0x46"></Variable>
+					<Variable name="Temperature6" value="0x46" default="0x46"></Variable>
+					<Variable name="PwmValue6" value="0x50" default="0x50"></Variable>
+					<Variable name="Temperature7" value="0x50" default="0x50"></Variable>
+					<Variable name="PwmValue7" value="0x5A" default="0x5A"></Variable>
+					<Variable name="Temperature8" value="0x5A" default="0x5A"></Variable>
+					<Variable name="PwmValue8" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature9" value="0x00" default="0x00"></Variable>
+					<Variable name="PwmValue9" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature10" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue10" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature11" value="0x00" default="0x00"></Variable>
@@ -7033,8 +7054,6 @@
 					<Variable name="PwmValue30" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature31" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue31" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature32" value="0x00" default="0x00"></Variable>
-					<Variable name="PwmValue32" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="FSC Stepwise Profiles">
 					<Variable name="ProfileID" value="0x02" default="0x02"></Variable>
@@ -7042,24 +7061,26 @@
 					<Variable name="NegativeHysteresis" value="0x0" default="0x0"></Variable>
 					<Variable name="NumDataSets" value="0x09" default="0x09"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature1" value="0x0A" default="0x0A"></Variable>
-					<Variable name="PwmValue1" value="0x14" default="0x14"></Variable>
-					<Variable name="Temperature2" value="0x14" default="0x14"></Variable>
-					<Variable name="PwmValue2" value="0x1E" default="0x1E"></Variable>
-					<Variable name="Temperature3" value="0x1E" default="0x1E"></Variable>
-					<Variable name="PwmValue3" value="0x28" default="0x28"></Variable>
-					<Variable name="Temperature4" value="0x28" default="0x28"></Variable>
-					<Variable name="PwmValue4" value="0x32" default="0x32"></Variable>
-					<Variable name="Temperature5" value="0x32" default="0x32"></Variable>
-					<Variable name="PwmValue5" value="0x3C" default="0x3C"></Variable>
-					<Variable name="Temperature6" value="0x3C" default="0x3C"></Variable>
-					<Variable name="PwmValue6" value="0x46" default="0x46"></Variable>
-					<Variable name="Temperature7" value="0x46" default="0x46"></Variable>
-					<Variable name="PwmValue7" value="0x50" default="0x50"></Variable>
-					<Variable name="Temperature8" value="0x50" default="0x50"></Variable>
-					<Variable name="PwmValue8" value="0x5A" default="0x5A"></Variable>
-					<Variable name="Temperature9" value="0x5A" default="0x5A"></Variable>
-					<Variable name="PwmValue9" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature0" value="0x0A" default="0x0A"></Variable>
+					<Variable name="PwmValue0" value="0x14" default="0x14"></Variable>
+					<Variable name="Temperature1" value="0x14" default="0x14"></Variable>
+					<Variable name="PwmValue1" value="0x1E" default="0x1E"></Variable>
+					<Variable name="Temperature2" value="0x1E" default="0x1E"></Variable>
+					<Variable name="PwmValue2" value="0x28" default="0x28"></Variable>
+					<Variable name="Temperature3" value="0x28" default="0x28"></Variable>
+					<Variable name="PwmValue3" value="0x32" default="0x32"></Variable>
+					<Variable name="Temperature4" value="0x32" default="0x32"></Variable>
+					<Variable name="PwmValue4" value="0x3C" default="0x3C"></Variable>
+					<Variable name="Temperature5" value="0x3C" default="0x3C"></Variable>
+					<Variable name="PwmValue5" value="0x46" default="0x46"></Variable>
+					<Variable name="Temperature6" value="0x46" default="0x46"></Variable>
+					<Variable name="PwmValue6" value="0x50" default="0x50"></Variable>
+					<Variable name="Temperature7" value="0x50" default="0x50"></Variable>
+					<Variable name="PwmValue7" value="0x5A" default="0x5A"></Variable>
+					<Variable name="Temperature8" value="0x5A" default="0x5A"></Variable>
+					<Variable name="PwmValue8" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature9" value="0x00" default="0x00"></Variable>
+					<Variable name="PwmValue9" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature10" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue10" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature11" value="0x00" default="0x00"></Variable>
@@ -7104,8 +7125,6 @@
 					<Variable name="PwmValue30" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature31" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue31" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature32" value="0x00" default="0x00"></Variable>
-					<Variable name="PwmValue32" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="FSC Stepwise Profiles">
 					<Variable name="ProfileID" value="0x03" default="0x03"></Variable>
@@ -7113,24 +7132,26 @@
 					<Variable name="NegativeHysteresis" value="0x0" default="0x0"></Variable>
 					<Variable name="NumDataSets" value="0x09" default="0x09"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature1" value="0x0A" default="0x0A"></Variable>
-					<Variable name="PwmValue1" value="0x14" default="0x14"></Variable>
-					<Variable name="Temperature2" value="0x14" default="0x14"></Variable>
-					<Variable name="PwmValue2" value="0x1E" default="0x1E"></Variable>
-					<Variable name="Temperature3" value="0x1E" default="0x1E"></Variable>
-					<Variable name="PwmValue3" value="0x28" default="0x28"></Variable>
-					<Variable name="Temperature4" value="0x28" default="0x28"></Variable>
-					<Variable name="PwmValue4" value="0x32" default="0x32"></Variable>
-					<Variable name="Temperature5" value="0x32" default="0x32"></Variable>
-					<Variable name="PwmValue5" value="0x3C" default="0x3C"></Variable>
-					<Variable name="Temperature6" value="0x3C" default="0x3C"></Variable>
-					<Variable name="PwmValue6" value="0x46" default="0x46"></Variable>
-					<Variable name="Temperature7" value="0x46" default="0x46"></Variable>
-					<Variable name="PwmValue7" value="0x50" default="0x50"></Variable>
-					<Variable name="Temperature8" value="0x50" default="0x50"></Variable>
-					<Variable name="PwmValue8" value="0x5A" default="0x5A"></Variable>
-					<Variable name="Temperature9" value="0x5A" default="0x5A"></Variable>
-					<Variable name="PwmValue9" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature0" value="0x0A" default="0x0A"></Variable>
+					<Variable name="PwmValue0" value="0x14" default="0x14"></Variable>
+					<Variable name="Temperature1" value="0x14" default="0x14"></Variable>
+					<Variable name="PwmValue1" value="0x1E" default="0x1E"></Variable>
+					<Variable name="Temperature2" value="0x1E" default="0x1E"></Variable>
+					<Variable name="PwmValue2" value="0x28" default="0x28"></Variable>
+					<Variable name="Temperature3" value="0x28" default="0x28"></Variable>
+					<Variable name="PwmValue3" value="0x32" default="0x32"></Variable>
+					<Variable name="Temperature4" value="0x32" default="0x32"></Variable>
+					<Variable name="PwmValue4" value="0x3C" default="0x3C"></Variable>
+					<Variable name="Temperature5" value="0x3C" default="0x3C"></Variable>
+					<Variable name="PwmValue5" value="0x46" default="0x46"></Variable>
+					<Variable name="Temperature6" value="0x46" default="0x46"></Variable>
+					<Variable name="PwmValue6" value="0x50" default="0x50"></Variable>
+					<Variable name="Temperature7" value="0x50" default="0x50"></Variable>
+					<Variable name="PwmValue7" value="0x5A" default="0x5A"></Variable>
+					<Variable name="Temperature8" value="0x5A" default="0x5A"></Variable>
+					<Variable name="PwmValue8" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature9" value="0x00" default="0x00"></Variable>
+					<Variable name="PwmValue9" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature10" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue10" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature11" value="0x00" default="0x00"></Variable>
@@ -7175,8 +7196,6 @@
 					<Variable name="PwmValue30" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature31" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue31" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature32" value="0x00" default="0x00"></Variable>
-					<Variable name="PwmValue32" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="FSC Stepwise Profiles">
 					<Variable name="ProfileID" value="0x04" default="0x04"></Variable>
@@ -7184,24 +7203,26 @@
 					<Variable name="NegativeHysteresis" value="0x0" default="0x0"></Variable>
 					<Variable name="NumDataSets" value="0x09" default="0x09"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature1" value="0x0A" default="0x0A"></Variable>
-					<Variable name="PwmValue1" value="0x14" default="0x14"></Variable>
-					<Variable name="Temperature2" value="0x14" default="0x14"></Variable>
-					<Variable name="PwmValue2" value="0x1E" default="0x1E"></Variable>
-					<Variable name="Temperature3" value="0x1E" default="0x1E"></Variable>
-					<Variable name="PwmValue3" value="0x28" default="0x28"></Variable>
-					<Variable name="Temperature4" value="0x28" default="0x28"></Variable>
-					<Variable name="PwmValue4" value="0x32" default="0x32"></Variable>
-					<Variable name="Temperature5" value="0x32" default="0x32"></Variable>
-					<Variable name="PwmValue5" value="0x3C" default="0x3C"></Variable>
-					<Variable name="Temperature6" value="0x3C" default="0x3C"></Variable>
-					<Variable name="PwmValue6" value="0x46" default="0x46"></Variable>
-					<Variable name="Temperature7" value="0x46" default="0x46"></Variable>
-					<Variable name="PwmValue7" value="0x50" default="0x50"></Variable>
-					<Variable name="Temperature8" value="0x50" default="0x50"></Variable>
-					<Variable name="PwmValue8" value="0x5A" default="0x5A"></Variable>
-					<Variable name="Temperature9" value="0x5A" default="0x5A"></Variable>
-					<Variable name="PwmValue9" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature0" value="0x0A" default="0x0A"></Variable>
+					<Variable name="PwmValue0" value="0x14" default="0x14"></Variable>
+					<Variable name="Temperature1" value="0x14" default="0x14"></Variable>
+					<Variable name="PwmValue1" value="0x1E" default="0x1E"></Variable>
+					<Variable name="Temperature2" value="0x1E" default="0x1E"></Variable>
+					<Variable name="PwmValue2" value="0x28" default="0x28"></Variable>
+					<Variable name="Temperature3" value="0x28" default="0x28"></Variable>
+					<Variable name="PwmValue3" value="0x32" default="0x32"></Variable>
+					<Variable name="Temperature4" value="0x32" default="0x32"></Variable>
+					<Variable name="PwmValue4" value="0x3C" default="0x3C"></Variable>
+					<Variable name="Temperature5" value="0x3C" default="0x3C"></Variable>
+					<Variable name="PwmValue5" value="0x46" default="0x46"></Variable>
+					<Variable name="Temperature6" value="0x46" default="0x46"></Variable>
+					<Variable name="PwmValue6" value="0x50" default="0x50"></Variable>
+					<Variable name="Temperature7" value="0x50" default="0x50"></Variable>
+					<Variable name="PwmValue7" value="0x5A" default="0x5A"></Variable>
+					<Variable name="Temperature8" value="0x5A" default="0x5A"></Variable>
+					<Variable name="PwmValue8" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature9" value="0x00" default="0x00"></Variable>
+					<Variable name="PwmValue9" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature10" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue10" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature11" value="0x00" default="0x00"></Variable>
@@ -7246,8 +7267,6 @@
 					<Variable name="PwmValue30" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature31" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue31" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature32" value="0x00" default="0x00"></Variable>
-					<Variable name="PwmValue32" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="FSC Stepwise Profiles">
 					<Variable name="ProfileID" value="0x05" default="0x05"></Variable>
@@ -7255,24 +7274,26 @@
 					<Variable name="NegativeHysteresis" value="0x0" default="0x0"></Variable>
 					<Variable name="NumDataSets" value="0x09" default="0x09"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature1" value="0x0A" default="0x0A"></Variable>
-					<Variable name="PwmValue1" value="0x14" default="0x14"></Variable>
-					<Variable name="Temperature2" value="0x14" default="0x14"></Variable>
-					<Variable name="PwmValue2" value="0x1E" default="0x1E"></Variable>
-					<Variable name="Temperature3" value="0x1E" default="0x1E"></Variable>
-					<Variable name="PwmValue3" value="0x28" default="0x28"></Variable>
-					<Variable name="Temperature4" value="0x28" default="0x28"></Variable>
-					<Variable name="PwmValue4" value="0x32" default="0x32"></Variable>
-					<Variable name="Temperature5" value="0x32" default="0x32"></Variable>
-					<Variable name="PwmValue5" value="0x3C" default="0x3C"></Variable>
-					<Variable name="Temperature6" value="0x3C" default="0x3C"></Variable>
-					<Variable name="PwmValue6" value="0x46" default="0x46"></Variable>
-					<Variable name="Temperature7" value="0x46" default="0x46"></Variable>
-					<Variable name="PwmValue7" value="0x50" default="0x50"></Variable>
-					<Variable name="Temperature8" value="0x50" default="0x50"></Variable>
-					<Variable name="PwmValue8" value="0x5A" default="0x5A"></Variable>
-					<Variable name="Temperature9" value="0x5A" default="0x5A"></Variable>
-					<Variable name="PwmValue9" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature0" value="0x0A" default="0x0A"></Variable>
+					<Variable name="PwmValue0" value="0x14" default="0x14"></Variable>
+					<Variable name="Temperature1" value="0x14" default="0x14"></Variable>
+					<Variable name="PwmValue1" value="0x1E" default="0x1E"></Variable>
+					<Variable name="Temperature2" value="0x1E" default="0x1E"></Variable>
+					<Variable name="PwmValue2" value="0x28" default="0x28"></Variable>
+					<Variable name="Temperature3" value="0x28" default="0x28"></Variable>
+					<Variable name="PwmValue3" value="0x32" default="0x32"></Variable>
+					<Variable name="Temperature4" value="0x32" default="0x32"></Variable>
+					<Variable name="PwmValue4" value="0x3C" default="0x3C"></Variable>
+					<Variable name="Temperature5" value="0x3C" default="0x3C"></Variable>
+					<Variable name="PwmValue5" value="0x46" default="0x46"></Variable>
+					<Variable name="Temperature6" value="0x46" default="0x46"></Variable>
+					<Variable name="PwmValue6" value="0x50" default="0x50"></Variable>
+					<Variable name="Temperature7" value="0x50" default="0x50"></Variable>
+					<Variable name="PwmValue7" value="0x5A" default="0x5A"></Variable>
+					<Variable name="Temperature8" value="0x5A" default="0x5A"></Variable>
+					<Variable name="PwmValue8" value="0x64" default="0x64"></Variable>
+					<Variable name="Temperature9" value="0x00" default="0x00"></Variable>
+					<Variable name="PwmValue9" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature10" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue10" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature11" value="0x00" default="0x00"></Variable>
@@ -7317,8 +7338,6 @@
 					<Variable name="PwmValue30" value="0x00" default="0x00"></Variable>
 					<Variable name="Temperature31" value="0x00" default="0x00"></Variable>
 					<Variable name="PwmValue31" value="0x00" default="0x00"></Variable>
-					<Variable name="Temperature32" value="0x00" default="0x00"></Variable>
-					<Variable name="PwmValue32" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="FSC Clamp Profiles">
 					<Variable name="ProfileID" value="0x00" default="0x00"></Variable>
@@ -7389,134 +7408,134 @@
 					<Variable name="CfgPwm" value="0x64" default="0x64"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved01" value="0x00" default="0x00"></Variable>
+					<Variable name="OwnerID0" value="0x20" default="0x20"></Variable>
+					<Variable name="SensorOwnerLUN0" value="0x00" default="0x00"></Variable>
+					<Variable name="SensorNum0" value="0x02" default="0x02"></Variable>
+					<Variable name="ProfileType0" value="0x01" default="0x01"></Variable>
+					<Variable name="ProfileID0" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved10" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved20" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved30" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID1" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN1" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum1" value="0x02" default="0x02"></Variable>
-					<Variable name="ProfileType1" value="0x01" default="0x01"></Variable>
+					<Variable name="ProfileType1" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID1" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved11" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved12" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved13" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved21" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved31" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID2" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN2" value="0x00" default="0x00"></Variable>
-					<Variable name="SensorNum2" value="0x02" default="0x02"></Variable>
+					<Variable name="SensorNum2" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType2" value="0xFF" default="0xFF"></Variable>
-					<Variable name="ProfileID2" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved21" value="0x00" default="0x00"></Variable>
+					<Variable name="ProfileID2" value="0x05" default="0x05"></Variable>
+					<Variable name="Reserved12" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved22" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved23" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved32" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID3" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN3" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum3" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType3" value="0xFF" default="0xFF"></Variable>
-					<Variable name="ProfileID3" value="0x05" default="0x05"></Variable>
-					<Variable name="Reserved31" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved32" value="0x00" default="0x00"></Variable>
+					<Variable name="ProfileID3" value="0x06" default="0x06"></Variable>
+					<Variable name="Reserved13" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved23" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved33" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID4" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN4" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum4" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType4" value="0xFF" default="0xFF"></Variable>
-					<Variable name="ProfileID4" value="0x06" default="0x06"></Variable>
-					<Variable name="Reserved41" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved42" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved43" value="0x00" default="0x00"></Variable>
+					<Variable name="ProfileID4" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved14" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved24" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved34" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID5" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN5" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum5" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType5" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID5" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved51" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved52" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved53" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved15" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved25" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved35" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID6" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN6" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum6" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType6" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID6" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved61" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved62" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved63" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved16" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved26" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved36" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID7" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN7" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum7" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType7" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID7" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved71" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved72" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved73" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved17" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved27" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved37" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID8" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN8" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum8" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType8" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID8" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved81" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved82" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved83" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved18" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved28" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved38" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID9" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN9" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum9" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType9" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID9" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved91" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved92" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved93" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved19" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved29" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved39" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID10" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN10" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum10" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType10" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID10" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved101" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved102" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved103" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved110" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved210" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved310" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID11" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN11" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum11" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType11" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID11" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved111" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved112" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved113" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved211" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved311" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID12" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN12" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum12" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType12" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID12" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved121" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved122" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved123" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved112" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved212" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved312" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID13" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN13" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum13" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType13" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID13" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved131" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved132" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved133" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved113" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved213" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved313" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID14" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN14" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum14" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType14" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID14" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved141" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved142" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved143" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved114" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved214" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved314" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID15" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN15" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum15" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType15" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID15" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved151" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved152" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved153" value="0x00" default="0x00"></Variable>
-					<Variable name="OwnerID16" value="0x20" default="0x20"></Variable>
-					<Variable name="SensorOwnerLUN16" value="0x00" default="0x00"></Variable>
-					<Variable name="SensorNum16" value="0x00" default="0x00"></Variable>
-					<Variable name="ProfileType16" value="0xFF" default="0xFF"></Variable>
-					<Variable name="ProfileID16" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved161" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved162" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved163" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved115" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved215" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved315" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="FSC Domain Profiles">
 					<Variable name="PwmChannel" value="0x01" default="0x01"></Variable>
@@ -7527,134 +7546,134 @@
 					<Variable name="CfgPwm" value="0x64" default="0x64"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved01" value="0x00" default="0x00"></Variable>
+					<Variable name="OwnerID0" value="0x20" default="0x20"></Variable>
+					<Variable name="SensorOwnerLUN0" value="0x00" default="0x00"></Variable>
+					<Variable name="SensorNum0" value="0x01" default="0x01"></Variable>
+					<Variable name="ProfileType0" value="0x01" default="0x01"></Variable>
+					<Variable name="ProfileID0" value="0x01" default="0x01"></Variable>
+					<Variable name="Reserved10" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved20" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved30" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID1" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN1" value="0x00" default="0x00"></Variable>
-					<Variable name="SensorNum1" value="0x01" default="0x01"></Variable>
-					<Variable name="ProfileType1" value="0x01" default="0x01"></Variable>
-					<Variable name="ProfileID1" value="0x01" default="0x01"></Variable>
+					<Variable name="SensorNum1" value="0x00" default="0x00"></Variable>
+					<Variable name="ProfileType1" value="0xFF" default="0xFF"></Variable>
+					<Variable name="ProfileID1" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved11" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved12" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved13" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved21" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved31" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID2" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN2" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum2" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType2" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID2" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved21" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved12" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved22" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved23" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved32" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID3" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN3" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum3" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType3" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID3" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved31" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved32" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved13" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved23" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved33" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID4" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN4" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum4" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType4" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID4" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved41" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved42" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved43" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved14" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved24" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved34" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID5" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN5" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum5" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType5" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID5" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved51" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved52" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved53" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved15" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved25" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved35" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID6" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN6" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum6" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType6" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID6" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved61" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved62" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved63" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved16" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved26" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved36" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID7" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN7" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum7" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType7" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID7" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved71" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved72" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved73" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved17" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved27" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved37" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID8" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN8" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum8" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType8" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID8" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved81" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved82" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved83" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved18" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved28" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved38" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID9" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN9" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum9" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType9" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID9" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved91" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved92" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved93" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved19" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved29" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved39" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID10" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN10" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum10" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType10" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID10" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved101" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved102" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved103" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved110" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved210" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved310" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID11" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN11" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum11" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType11" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID11" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved111" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved112" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved113" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved211" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved311" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID12" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN12" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum12" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType12" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID12" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved121" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved122" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved123" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved112" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved212" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved312" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID13" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN13" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum13" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType13" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID13" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved131" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved132" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved133" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved113" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved213" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved313" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID14" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN14" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum14" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType14" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID14" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved141" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved142" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved143" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved114" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved214" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved314" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID15" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN15" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum15" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType15" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID15" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved151" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved152" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved153" value="0x00" default="0x00"></Variable>
-					<Variable name="OwnerID16" value="0x20" default="0x20"></Variable>
-					<Variable name="SensorOwnerLUN16" value="0x00" default="0x00"></Variable>
-					<Variable name="SensorNum16" value="0x00" default="0x00"></Variable>
-					<Variable name="ProfileType16" value="0xFF" default="0xFF"></Variable>
-					<Variable name="ProfileID16" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved161" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved162" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved163" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved115" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved215" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved315" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="FSC Domain Profiles">
 					<Variable name="PwmChannel" value="0x02" default="0x02"></Variable>
@@ -7665,134 +7684,134 @@
 					<Variable name="CfgPwm" value="0x64" default="0x64"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved01" value="0x00" default="0x00"></Variable>
+					<Variable name="OwnerID0" value="0x20" default="0x20"></Variable>
+					<Variable name="SensorOwnerLUN0" value="0x00" default="0x00"></Variable>
+					<Variable name="SensorNum0" value="0x02" default="0x02"></Variable>
+					<Variable name="ProfileType0" value="0x01" default="0x01"></Variable>
+					<Variable name="ProfileID0" value="0x02" default="0x02"></Variable>
+					<Variable name="Reserved10" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved20" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved30" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID1" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN1" value="0x00" default="0x00"></Variable>
-					<Variable name="SensorNum1" value="0x02" default="0x02"></Variable>
-					<Variable name="ProfileType1" value="0x01" default="0x01"></Variable>
-					<Variable name="ProfileID1" value="0x02" default="0x02"></Variable>
+					<Variable name="SensorNum1" value="0x00" default="0x00"></Variable>
+					<Variable name="ProfileType1" value="0xFF" default="0xFF"></Variable>
+					<Variable name="ProfileID1" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved11" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved12" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved13" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved21" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved31" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID2" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN2" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum2" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType2" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID2" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved21" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved12" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved22" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved23" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved32" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID3" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN3" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum3" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType3" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID3" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved31" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved32" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved13" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved23" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved33" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID4" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN4" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum4" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType4" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID4" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved41" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved42" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved43" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved14" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved24" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved34" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID5" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN5" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum5" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType5" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID5" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved51" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved52" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved53" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved15" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved25" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved35" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID6" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN6" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum6" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType6" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID6" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved61" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved62" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved63" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved16" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved26" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved36" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID7" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN7" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum7" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType7" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID7" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved71" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved72" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved73" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved17" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved27" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved37" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID8" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN8" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum8" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType8" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID8" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved81" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved82" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved83" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved18" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved28" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved38" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID9" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN9" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum9" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType9" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID9" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved91" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved92" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved93" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved19" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved29" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved39" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID10" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN10" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum10" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType10" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID10" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved101" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved102" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved103" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved110" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved210" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved310" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID11" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN11" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum11" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType11" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID11" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved111" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved112" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved113" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved211" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved311" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID12" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN12" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum12" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType12" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID12" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved121" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved122" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved123" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved112" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved212" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved312" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID13" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN13" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum13" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType13" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID13" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved131" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved132" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved133" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved113" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved213" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved313" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID14" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN14" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum14" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType14" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID14" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved141" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved142" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved143" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved114" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved214" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved314" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID15" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN15" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum15" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType15" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID15" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved151" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved152" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved153" value="0x00" default="0x00"></Variable>
-					<Variable name="OwnerID16" value="0x20" default="0x20"></Variable>
-					<Variable name="SensorOwnerLUN16" value="0x00" default="0x00"></Variable>
-					<Variable name="SensorNum16" value="0x00" default="0x00"></Variable>
-					<Variable name="ProfileType16" value="0xFF" default="0xFF"></Variable>
-					<Variable name="ProfileID16" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved161" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved162" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved163" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved115" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved215" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved315" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="FSC Domain Profiles">
 					<Variable name="PwmChannel" value="0x03" default="0x03"></Variable>
@@ -7803,134 +7822,134 @@
 					<Variable name="CfgPwm" value="0x64" default="0x64"></Variable>
 					<Variable name="Reserved00" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved01" value="0x00" default="0x00"></Variable>
+					<Variable name="OwnerID0" value="0x20" default="0x20"></Variable>
+					<Variable name="SensorOwnerLUN0" value="0x00" default="0x00"></Variable>
+					<Variable name="SensorNum0" value="0x02" default="0x02"></Variable>
+					<Variable name="ProfileType0" value="0x01" default="0x01"></Variable>
+					<Variable name="ProfileID0" value="0x03" default="0x03"></Variable>
+					<Variable name="Reserved10" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved20" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved30" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID1" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN1" value="0x00" default="0x00"></Variable>
-					<Variable name="SensorNum1" value="0x02" default="0x02"></Variable>
-					<Variable name="ProfileType1" value="0x01" default="0x01"></Variable>
-					<Variable name="ProfileID1" value="0x03" default="0x03"></Variable>
+					<Variable name="SensorNum1" value="0x00" default="0x00"></Variable>
+					<Variable name="ProfileType1" value="0xFF" default="0xFF"></Variable>
+					<Variable name="ProfileID1" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved11" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved12" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved13" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved21" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved31" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID2" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN2" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum2" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType2" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID2" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved21" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved12" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved22" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved23" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved32" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID3" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN3" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum3" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType3" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID3" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved31" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved32" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved13" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved23" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved33" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID4" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN4" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum4" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType4" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID4" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved41" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved42" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved43" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved14" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved24" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved34" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID5" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN5" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum5" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType5" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID5" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved51" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved52" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved53" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved15" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved25" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved35" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID6" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN6" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum6" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType6" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID6" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved61" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved62" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved63" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved16" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved26" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved36" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID7" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN7" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum7" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType7" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID7" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved71" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved72" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved73" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved17" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved27" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved37" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID8" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN8" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum8" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType8" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID8" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved81" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved82" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved83" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved18" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved28" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved38" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID9" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN9" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum9" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType9" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID9" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved91" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved92" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved93" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved19" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved29" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved39" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID10" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN10" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum10" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType10" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID10" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved101" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved102" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved103" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved110" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved210" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved310" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID11" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN11" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum11" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType11" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID11" value="0x00" default="0x00"></Variable>
 					<Variable name="Reserved111" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved112" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved113" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved211" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved311" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID12" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN12" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum12" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType12" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID12" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved121" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved122" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved123" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved112" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved212" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved312" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID13" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN13" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum13" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType13" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID13" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved131" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved132" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved133" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved113" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved213" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved313" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID14" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN14" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum14" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType14" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID14" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved141" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved142" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved143" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved114" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved214" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved314" value="0x00" default="0x00"></Variable>
 					<Variable name="OwnerID15" value="0x20" default="0x20"></Variable>
 					<Variable name="SensorOwnerLUN15" value="0x00" default="0x00"></Variable>
 					<Variable name="SensorNum15" value="0x00" default="0x00"></Variable>
 					<Variable name="ProfileType15" value="0xFF" default="0xFF"></Variable>
 					<Variable name="ProfileID15" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved151" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved152" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved153" value="0x00" default="0x00"></Variable>
-					<Variable name="OwnerID16" value="0x20" default="0x20"></Variable>
-					<Variable name="SensorOwnerLUN16" value="0x00" default="0x00"></Variable>
-					<Variable name="SensorNum16" value="0x00" default="0x00"></Variable>
-					<Variable name="ProfileType16" value="0xFF" default="0xFF"></Variable>
-					<Variable name="ProfileID16" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved161" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved162" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved163" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved115" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved215" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved315" value="0x00" default="0x00"></Variable>
 				</CollectionClass>
 				<CollectionClass name="User Information">
 					<Variable name="Max Users" value="0x0F" default="0x0F"></Variable>
@@ -8045,7 +8064,7 @@
 					<Variable name="Sensor Number" value="0x08" default="0x08"></Variable>
 					<Variable name="Scan Period" value="2" default="2"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x1F" default="0x1F"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -8202,7 +8221,7 @@
 					<Variable name="Sensor Number" value="0x16" default="0x16"></Variable>
 					<Variable name="Scan Period" value="1" default="1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x02" default="0x02"></Variable>
 					<Variable name="Reading Type" value="0x22" default="0x22"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -8266,7 +8285,7 @@
 					<Variable name="Sensor Number" value="0x17" default="0x17"></Variable>
 					<Variable name="Scan Period" value="1" default="1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x02" default="0x02"></Variable>
 					<Variable name="Reading Type" value="0x24" default="0x24"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -8330,7 +8349,7 @@
 					<Variable name="Sensor Number" value="0x18" default="0x18"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x02" default="0x02"></Variable>
 					<Variable name="Reading Type" value="0xFF" default="0xFF"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -8394,7 +8413,7 @@
 					<Variable name="Sensor Number" value="0x19" default="0x19"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x02" default="0x02"></Variable>
 					<Variable name="Reading Type" value="0xFF" default="0xFF"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -8470,7 +8489,7 @@
 					<Variable name="Sensor Number" value="0xB2" default="0xB2"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x02" default="0x02"></Variable>
 					<Variable name="Reading Type" value="0xFF" default="0xFF"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -8546,7 +8565,7 @@
 					<Variable name="Sensor Number" value="0x1A" default="0x1A"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x02" default="0x02"></Variable>
 					<Variable name="Reading Type" value="0xFF" default="0xFF"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -8610,7 +8629,7 @@
 					<Variable name="Sensor Number" value="0x1B" default="0x1B"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x02" default="0x02"></Variable>
 					<Variable name="Reading Type" value="0xFF" default="0xFF"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -8703,7 +8722,7 @@
 					<Variable name="Sensor Number" value="0x1C" default="0x1C"></Variable>
 					<Variable name="Scan Period" value="1" default="1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x14" default="0x14"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -9394,7 +9413,7 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="SDR CPU 0 T-Control" enabled="false">
+				<SdrClass name="SDR CPU 0 T-Control">
 					<Variable name="Record ID" value="0x0124" default="0x0124"></Variable>
 					<Variable name="SDR Version" value="0x51" default="0x51"></Variable>
 					<Variable name="Record Type" value="0x01" default="0x01"></Variable>
@@ -9441,13 +9460,13 @@
 					<Variable name="ID String Type and Length Code" value="0xD0" default="0xD0"></Variable>
 					<Variable name="ID String Bytes" value="CPU0 T-Control  " default="CPU0 T-Control  "></Variable>
 				</SdrClass>
-				<SdrClass name="PIA CPU 0 T-Control" enabled="false">
+				<SdrClass name="PIA CPU 0 T-Control">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0x24" default="0x24"></Variable>
 					<Variable name="Scan Period" value="1" default="1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x19" default="0x19"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -9766,7 +9785,7 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="SDR CPU 0 T-JMAX" enabled="false">
+				<SdrClass name="SDR CPU 0 T-JMAX">
 					<Variable name="Record ID" value="0x0130" default="0x0130"></Variable>
 					<Variable name="SDR Version" value="0x51" default="0x51"></Variable>
 					<Variable name="Record Type" value="0x01" default="0x01"></Variable>
@@ -9813,13 +9832,13 @@
 					<Variable name="ID String Type and Length Code" value="0xD0" default="0xD0"></Variable>
 					<Variable name="ID String Bytes" value="CPU0 Tjmax      " default="CPU0 Tjmax      "></Variable>
 				</SdrClass>
-				<SdrClass name="PIA CPU 0 T-JMAX" enabled="false">
+				<SdrClass name="PIA CPU 0 T-JMAX">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0x30" default="0x30"></Variable>
 					<Variable name="Scan Period" value="1" default="1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x1A" default="0x1A"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -10516,7 +10535,7 @@
 					<Variable name="Sensor Number" value="0x75" default="0x75"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x02" default="0x02"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -10700,7 +10719,7 @@
 					<Variable name="Sensor Number" value="0x79" default="0x79"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x06" default="0x06"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -10878,7 +10897,7 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="SDR PSU 0 AC Power Input" enabled="false">
+				<SdrClass name="SDR PSU 0 AC Power Input">
 					<Variable name="Record ID" value="0x014E" default="0x014E"></Variable>
 					<Variable name="SDR Version" value="0x51" default="0x51"></Variable>
 					<Variable name="Record Type" value="0x01" default="0x01"></Variable>
@@ -10925,13 +10944,13 @@
 					<Variable name="ID String Type and Length Code" value="0xD0" default="0xD0"></Variable>
 					<Variable name="ID String Bytes" value="AC Power 0      " default="AC Power 0      "></Variable>
 				</SdrClass>
-				<SdrClass name="PIA PSU 0 AC Power Input" enabled="false">
+				<SdrClass name="PIA PSU 0 AC Power Input">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0x4E" default="0x4E"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x00" default="0x00"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -10971,7 +10990,7 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="SDR PSU 1 AC Power Input" enabled="false">
+				<SdrClass name="SDR PSU 1 AC Power Input">
 					<Variable name="Record ID" value="0x014F" default="0x014F"></Variable>
 					<Variable name="SDR Version" value="0x51" default="0x51"></Variable>
 					<Variable name="Record Type" value="0x01" default="0x01"></Variable>
@@ -11018,13 +11037,13 @@
 					<Variable name="ID String Type and Length Code" value="0xD0" default="0xD0"></Variable>
 					<Variable name="ID String Bytes" value="AC Power 1      " default="AC Power 1      "></Variable>
 				</SdrClass>
-				<SdrClass name="PIA PSU 1 AC Power Input" enabled="false">
+				<SdrClass name="PIA PSU 1 AC Power Input">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0x4F" default="0x4F"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x00" default="0x00"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -12366,7 +12385,7 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="SDR PSU 0 Status" enabled="false">
+				<SdrClass name="SDR PSU 0 Status">
 					<Variable name="Record ID" value="0x0266" default="0x0266"></Variable>
 					<Variable name="SDR Version" value="0x51" default="0x51"></Variable>
 					<Variable name="Record Type" value="0x02" default="0x02"></Variable>
@@ -12396,13 +12415,13 @@
 					<Variable name="ID String Type and Length Code" value="0xD0" default="0xD0"></Variable>
 					<Variable name="ID String Bytes" value="PSU1 Status     " default="PSU1 Status     "></Variable>
 				</SdrClass>
-				<SdrClass name="PIA PSU 0 Status" enabled="false">
+				<SdrClass name="PIA PSU 0 Status">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0x66" default="0x66"></Variable>
 					<Variable name="Scan Period" value="3" default="3"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x21" default="0x21"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -12442,7 +12461,7 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="SDR PSU 1 Status" enabled="false">
+				<SdrClass name="SDR PSU 1 Status">
 					<Variable name="Record ID" value="0x0267" default="0x0267"></Variable>
 					<Variable name="SDR Version" value="0x51" default="0x51"></Variable>
 					<Variable name="Record Type" value="0x02" default="0x02"></Variable>
@@ -12472,13 +12491,13 @@
 					<Variable name="ID String Type and Length Code" value="0xD0" default="0xD0"></Variable>
 					<Variable name="ID String Bytes" value="PSU2 Status     " default="PSU2 Status     "></Variable>
 				</SdrClass>
-				<SdrClass name="PIA PSU 1 Status" enabled="false">
+				<SdrClass name="PIA PSU 1 Status">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0x67" default="0x67"></Variable>
 					<Variable name="Scan Period" value="3" default="3"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x21" default="0x21"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -12974,7 +12993,7 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="SDR PSU 0 DC Power Output" enabled="false">
+				<SdrClass name="SDR PSU 0 DC Power Output">
 					<Variable name="Record ID" value="0x01A4" default="0x01A4"></Variable>
 					<Variable name="SDR Version" value="0x51" default="0x51"></Variable>
 					<Variable name="Record Type" value="0x01" default="0x01"></Variable>
@@ -13021,13 +13040,13 @@
 					<Variable name="ID String Type and Length Code" value="0xD0" default="0xD0"></Variable>
 					<Variable name="ID String Bytes" value="DC Power 0      " default="DC Power 0      "></Variable>
 				</SdrClass>
-				<SdrClass name="PIA PSU 0 DC Power Output" enabled="false">
+				<SdrClass name="PIA PSU 0 DC Power Output">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0xA4" default="0xA4"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x2E" default="0x2E"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -13067,7 +13086,7 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="SDR PSU 1 DC Power Output" enabled="false">
+				<SdrClass name="SDR PSU 1 DC Power Output">
 					<Variable name="Record ID" value="0x01A5" default="0x01A5"></Variable>
 					<Variable name="SDR Version" value="0x51" default="0x51"></Variable>
 					<Variable name="Record Type" value="0x01" default="0x01"></Variable>
@@ -13114,13 +13133,13 @@
 					<Variable name="ID String Type and Length Code" value="0xD0" default="0xD0"></Variable>
 					<Variable name="ID String Bytes" value="DC Power 1      " default="DC Power 1      "></Variable>
 				</SdrClass>
-				<SdrClass name="PIA PSU 1 DC Power Output" enabled="false">
+				<SdrClass name="PIA PSU 1 DC Power Output">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0xA5" default="0xA5"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x2E" default="0x2E"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -13754,7 +13773,7 @@
 					<Variable name="Sensor Number" value="0x3A" default="0x3A"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0xFF" default="0xFF"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -13830,7 +13849,7 @@
 					<Variable name="Sensor Number" value="0x3B" default="0x3B"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0xFF" default="0xFF"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -15830,13 +15849,13 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="PIA Platform PSU Efficiency" enabled="false">
+				<SdrClass name="PIA Platform PSU Efficiency">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0xAC" default="0xAC"></Variable>
 					<Variable name="Scan Period" value="-1" default="-1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x2D" default="0x2D"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -16719,7 +16738,7 @@
 					<Variable name="Sensor Number" value="0xAF" default="0xAF"></Variable>
 					<Variable name="Scan Period" value="-1" default="-1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x0B" default="0x0B"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -16765,7 +16784,7 @@
 					<Variable name="Sensor Number" value="0xB0" default="0xB0"></Variable>
 					<Variable name="Scan Period" value="-1" default="-1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x32" default="0x32"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -16811,7 +16830,7 @@
 					<Variable name="Sensor Number" value="0xB1" default="0xB1"></Variable>
 					<Variable name="Scan Period" value="-1" default="-1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x25" default="0x25"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -16857,7 +16876,7 @@
 					<Variable name="Sensor Number" value="0xBB" default="0xBB"></Variable>
 					<Variable name="Scan Period" value="-1" default="-1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x35" default="0x35"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -16921,7 +16940,7 @@
 					<Variable name="Sensor Number" value="0xC1" default="0xC1"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x38" default="0x38"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -17014,7 +17033,7 @@
 					<Variable name="Sensor Number" value="0xBE" default="0xBE"></Variable>
 					<Variable name="Scan Period" value="-1" default="-1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x38" default="0x38"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -17107,7 +17126,7 @@
 					<Variable name="Sensor Number" value="0xC0" default="0xC0"></Variable>
 					<Variable name="Scan Period" value="-1" default="-1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x38" default="0x38"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -17200,7 +17219,7 @@
 					<Variable name="Sensor Number" value="0xBF" default="0xBF"></Variable>
 					<Variable name="Scan Period" value="-1" default="-1"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x01" default="0x01"></Variable>
 					<Variable name="Reading Type" value="0x38" default="0x38"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -17281,13 +17300,13 @@
 					<Variable name="NM Operational Capabilities Sensor" value="0x1A" default="0x1A"></Variable>
 					<Variable name="NM Alert Threshold Exceeded Event Sensor" value="0x1B" default="0x1B"></Variable>
 				</SdrClass>
-				<SdrClass name="PIA Pmbus OEM1 device1" enabled="false">
+				<SdrClass name="PIA Pmbus OEM1 device1">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0x80" default="0x80"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x01" default="0x01"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -17327,13 +17346,13 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="PIA Pmbus OEM1 device2" enabled="false">
+				<SdrClass name="PIA Pmbus OEM1 device2">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0x81" default="0x81"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x03" default="0x03"></Variable>
 					<Variable name="Reading Type" value="0x01" default="0x01"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
@@ -17465,7 +17484,7 @@
 					<Variable name="Device Info 30" value="0x00" default="0x00"></Variable>
 					<Variable name="Device Info 31" value="0x00" default="0x00"></Variable>
 				</SdrClass>
-				<SdrClass name="PIA Pmbus OEM1 device5">
+				<SdrClass name="PIA Pmbus OEM1 device5" enabled="false">
 					<Variable name="Owner ID" default="0x2C"></Variable>
 					<Variable name="Owner LUN" value="0x00" default="0x00"></Variable>
 					<Variable name="Sensor Number" value="0x84" default="0x84"></Variable>
@@ -19516,9 +19535,9 @@
 					<Variable name="Sensor Record Sharing" value="0x0000" default="0x0000"></Variable>
 					<Variable name="Positive-going Threshold Hysteresis value" value="0x00" default="0x00"></Variable>
 					<Variable name="Negative-going Threshold Hysteresis value" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved1" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved2" value="0x00" default="0x00"></Variable>
-					<Variable name="Reserved3" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved" value="0x00" default="0x00"></Variable>
+					<Variable name="Reserved" value="0x00" default="0x00"></Variable>
 					<Variable name="OEM" value="0x00" default="0x00"></Variable>
 					<Variable name="ID String Type and Length Code" value="0xD0" default="0xD0"></Variable>
 					<Variable name="ID String Bytes" value="ME Gl Reset Warn" default="ME Gl Reset Warn"></Variable>
@@ -19529,7 +19548,7 @@
 					<Variable name="Sensor Number" value="0xC5" default="0xC5"></Variable>
 					<Variable name="Scan Period" value="0" default="0"></Variable>
 					<Variable name="HotPlug Attribute" value="false" default="false"></Variable>
-					<Variable name="Reserved7b" value="0x0" default="0x0"></Variable>
+					<Variable name="Reserved" value="0x0" default="0x0"></Variable>
 					<Variable name="Power State" value="0x02" default="0x02"></Variable>
 					<Variable name="Reading Type" value="0xFF" default="0xFF"></Variable>
 					<Variable name="Private Sensor" value="false" default="false"></Variable>
