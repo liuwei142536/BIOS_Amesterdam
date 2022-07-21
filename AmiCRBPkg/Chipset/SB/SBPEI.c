@@ -255,6 +255,7 @@ SBPEI_Init(
     PEI_TRACE((-1, PeiServices, "USE3_SEL = 0x%x\n", USE3_SEL ));
     PEI_TRACE((-1, PeiServices, "IO3_SEL = 0x%x\n", IO3_SEL ));
     PEI_TRACE((-1, PeiServices, "LVL3_SEL = 0x%x\n", LVL3_SEL ));
+	PEI_TRACE((-1, PeiServices, "IoWrite32((UINT16)GPIO_BASE_ADDRESS + 0x18, 0) = 0x%x\n", LVL3_SEL ));
 #endif
 
     // Install the SB Init Policy PPI
