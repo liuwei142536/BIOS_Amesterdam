@@ -146,7 +146,7 @@ PlatformReadSmb (
   PSYSHOST         host,
   UINT8            socket,
   struct smbDevice dev,
-  UINT8            byteOffset,
+  UINT16            byteOffset,
   UINT8            *data
   )
 /*++

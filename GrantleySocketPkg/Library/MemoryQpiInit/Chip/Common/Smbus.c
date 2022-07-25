@@ -47,7 +47,7 @@
 // Local Prototypes
 //
 VOID   ResetSmb(PSYSHOST host, UINT8 socket, struct smbDevice dev, UINT8 byteOffset, UINT8 *data);
-UINT32 ReadSmbWorkerFunction(PSYSHOST host, UINT8 socket, struct smbDevice dev, UINT8 byteOffset, UINT8 *data);
+UINT32 ReadSmbWorkerFunction(PSYSHOST host, UINT8 socket, struct smbDevice dev, UINT16 byteOffset, UINT8 *data);
 UINT32 WriteSmbWorkerFunction(PSYSHOST host, UINT8 socket, struct smbDevice dev, UINT8 byteOffset, UINT8 *data);
 
 
@@ -601,7 +601,7 @@ ReadSmb (
   PSYSHOST         host,
   UINT8            socket,
   struct smbDevice dev,
-  UINT8            byteOffset,
+  UINT16            byteOffset,
   UINT8            *data
   )
 /*++
@@ -689,7 +689,7 @@ ReadSmbWorkerFunction (
   PSYSHOST         host,
   UINT8            socket,
   struct smbDevice dev,
-  UINT8            byteOffset,
+  UINT16            byteOffset,
   UINT8            *data
   )
 /*++
@@ -711,20 +711,20 @@ ReadSmbWorkerFunction (
 
 --*/
 {
-  UINT32                    startCount = 0;
-  UINT32                    rval;
-  UINT32                    smbCntlReg;
-  UINT32                    smbCmdReg;
-  UINT32                    smbStatReg;
-  UINT8                     status = 0;
-  UINT8                     retry;
-  UINT8                     protocol;
-  SMBCMD_0_MC_MAIN_STRUCT   smbCmd;
-  SMB_STAT_0_MC_MAIN_STRUCT smbStat;
-  SMBCNTL_0_MC_MAIN_HSX_BDX_STRUCT  smbCntl;
-  TSOD_CONTROL_PCU_FUN1_STRUCT      pcuTsodCtrlCfg;
+  // UINT32                    startCount = 0;
+  // UINT32                    rval;
+  // UINT32                    smbCntlReg;
+  // UINT32                    smbCmdReg;
+  // UINT32                    smbStatReg;
+  // UINT8                     status = 0;
+  // UINT8                     retry;
+  // UINT8                     protocol;
+  // SMBCMD_0_MC_MAIN_STRUCT   smbCmd;
+  // SMB_STAT_0_MC_MAIN_STRUCT smbStat;
+  // SMBCNTL_0_MC_MAIN_HSX_BDX_STRUCT  smbCntl;
+  // TSOD_CONTROL_PCU_FUN1_STRUCT      pcuTsodCtrlCfg;
 
-  rval    = SUCCESS;
+  // rval    = SUCCESS;
 
 
   //
@@ -750,209 +750,209 @@ ReadSmbWorkerFunction (
       return FAILURE;
   }
 
-  if (dev.address.controller == PROCESSOR) {
+//   if (dev.address.controller == PROCESSOR) {
 
 
-    if ((dev.address.busSegment == 0) || (Is2HA(host))) {
+//     if ((dev.address.busSegment == 0) || (Is2HA(host))) {
 
-        smbCmdReg   = SMBCMD_0_MC_MAIN_REG;
-        smbStatReg  = SMB_STAT_0_MC_MAIN_REG;
-        smbCntlReg  = SMBCNTL_0_MC_MAIN_REG;
-    } else {
-        smbCmdReg   = SMBCMD_1_MC_MAIN_REG;
-        smbStatReg  = SMB_STAT_1_MC_MAIN_REG;
-        smbCntlReg  = SMBCNTL_1_MC_MAIN_REG;
-    }
+//         smbCmdReg   = SMBCMD_0_MC_MAIN_REG;
+//         smbStatReg  = SMB_STAT_0_MC_MAIN_REG;
+//         smbCntlReg  = SMBCNTL_0_MC_MAIN_REG;
+//     } else {
+//         smbCmdReg   = SMBCMD_1_MC_MAIN_REG;
+//         smbStatReg  = SMB_STAT_1_MC_MAIN_REG;
+//         smbCntlReg  = SMBCNTL_1_MC_MAIN_REG;
+//     }
 
-    //
-    // Ensure TSOD polling is disabled before continuing
-    //
-    pcuTsodCtrlCfg.Data = ReadCpuPciCfgEx (host, socket, 0, TSOD_CONTROL_PCU_FUN1_REG);
-    if (pcuTsodCtrlCfg.Bits.tsod_polling_interval > 0) {
-#ifdef SERIAL_DBG_MSG
-      if (checkMsgLevel(host, SDBG_MINMAX)) {
-        rcPrintf ((host, "read CPU SMBUS with TSOD polling enabled!"));
-      }
-#endif  // SERIAL_DBG_MSG
-      FatalError (host, 0, 0);
-    }
-    //
-    // Initialize the smb_dti field if needed
-    //
-    smbCntl.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbCntlReg);
-    if (host->var.mem.socket[socket].smbCntlDti[dev.address.busSegment] != dev.address.deviceType){
-      smbCntl.Bits.smb_dti = dev.address.deviceType;
-      MemWritePciCfgMC (host, socket, dev.mcId, smbCntlReg, smbCntl.Data);
-      host->var.mem.socket[socket].smbCntlDti[dev.address.busSegment] = (UINT8) dev.address.deviceType;
-    }
+//     //
+//     // Ensure TSOD polling is disabled before continuing
+//     //
+//     pcuTsodCtrlCfg.Data = ReadCpuPciCfgEx (host, socket, 0, TSOD_CONTROL_PCU_FUN1_REG);
+//     if (pcuTsodCtrlCfg.Bits.tsod_polling_interval > 0) {
+// #ifdef SERIAL_DBG_MSG
+//       if (checkMsgLevel(host, SDBG_MINMAX)) {
+//         rcPrintf ((host, "read CPU SMBUS with TSOD polling enabled!"));
+//       }
+// #endif  // SERIAL_DBG_MSG
+//       FatalError (host, 0, 0);
+//     }
+//     //
+//     // Initialize the smb_dti field if needed
+//     //
+//     smbCntl.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbCntlReg);
+//     if (host->var.mem.socket[socket].smbCntlDti[dev.address.busSegment] != dev.address.deviceType){
+//       smbCntl.Bits.smb_dti = dev.address.deviceType;
+//       MemWritePciCfgMC (host, socket, dev.mcId, smbCntlReg, smbCntl.Data);
+//       host->var.mem.socket[socket].smbCntlDti[dev.address.busSegment] = (UINT8) dev.address.deviceType;
+//     }
 
-    //
-    // Initialize to 0
-    //
-    smbCmd.Data = 0;
+//     //
+//     // Initialize to 0
+//     //
+//     smbCmd.Data = 0;
 
-    //
-    // Byte to read
-    //
-    smbCmd.Bits.smb_ba = (UINT32) byteOffset;
+//     //
+//     // Byte to read
+//     //
+//     smbCmd.Bits.smb_ba = (UINT32) byteOffset;
 
-    //
-    // Address of device to read
-    //
-    smbCmd.Bits.smb_sa = (UINT32) dev.address.strapAddress;
+//     //
+//     // Address of device to read
+//     //
+//     smbCmd.Bits.smb_sa = (UINT32) dev.address.strapAddress;
 
-    //
-    // clear write command bits for read command
-    //
-    smbCmd.Bits.smb_wrt_cmd = 0;
+//     //
+//     // clear write command bits for read command
+//     //
+//     smbCmd.Bits.smb_wrt_cmd = 0;
 
-    //
-    // Write pointer must be clear on a read
-    //
-    smbCmd.Bits.smb_wrt_pntr = 0;
+//     //
+//     // Write pointer must be clear on a read
+//     //
+//     smbCmd.Bits.smb_wrt_pntr = 0;
 
-    //
-    // set byte or word access bit
-    //
-    if (dev.compId == MTS) {
-      smbCmd.Bits.smb_word_access = 1;
-    } else {
-      smbCmd.Bits.smb_word_access = 0;
-    }
+//     //
+//     // set byte or word access bit
+//     //
+//     if (dev.compId == MTS) {
+//       smbCmd.Bits.smb_word_access = 1;
+//     } else {
+//       smbCmd.Bits.smb_word_access = 0;
+//     }
 
-    //
-    // use "pointer" mode instead of random byte protocol
-    //
-    if (dev.compId == DCP_AD5247) {
-      smbCmd.Bits.smb_pntr_sel = 1;
-    } else {
-      smbCmd.Bits.smb_pntr_sel = 0;
-    }
+//     //
+//     // use "pointer" mode instead of random byte protocol
+//     //
+//     if (dev.compId == DCP_AD5247) {
+//       smbCmd.Bits.smb_pntr_sel = 1;
+//     } else {
+//       smbCmd.Bits.smb_pntr_sel = 0;
+//     }
 
-    //
-    // Set bit to trigger the read
-    //
-    smbCmd.Bits.smb_cmd_trigger = 1;
+//     //
+//     // Set bit to trigger the read
+//     //
+//     smbCmd.Bits.smb_cmd_trigger = 1;
 
-    //
-    // Wait for host not busy
-    //
-    if (!(host->var.common.emulation & (SOFT_SDV_FLAG | VP_FLAG | SIMICS_FLAG))) {
-      startCount = GetCount (host);
-    }
+//     //
+//     // Wait for host not busy
+//     //
+//     if (!(host->var.common.emulation & (SOFT_SDV_FLAG | VP_FLAG | SIMICS_FLAG))) {
+//       startCount = GetCount (host);
+//     }
 
-    if (!(host->var.common.emulation & (SOFT_SDV_FLAG | VP_FLAG | SIMICS_FLAG))) {
-      do {
-        smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
-        if (!smbStat.Bits.smb_busy) break;
-#ifdef RC_SIM_FEEDBACK
-        break;
-#endif
-        // Wait for timeout
-      } while (GetDelay (host, startCount) < SMB_TIMEOUT);
-    } else {
-      do {
-        smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
-        if (!smbStat.Bits.smb_busy) break;
-        // Wait for timeout
-      } while (smbStat.Bits.smb_busy);
-    }
+//     if (!(host->var.common.emulation & (SOFT_SDV_FLAG | VP_FLAG | SIMICS_FLAG))) {
+//       do {
+//         smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
+//         if (!smbStat.Bits.smb_busy) break;
+// #ifdef RC_SIM_FEEDBACK
+//         break;
+// #endif
+//         // Wait for timeout
+//       } while (GetDelay (host, startCount) < SMB_TIMEOUT);
+//     } else {
+//       do {
+//         smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
+//         if (!smbStat.Bits.smb_busy) break;
+//         // Wait for timeout
+//       } while (smbStat.Bits.smb_busy);
+//     }
 
-    //
-    // Send command
-    //
-    MemWritePciCfgMC (host, socket, dev.mcId, smbCmdReg, smbCmd.Data);
+//     //
+//     // Send command
+//     //
+//     MemWritePciCfgMC (host, socket, dev.mcId, smbCmdReg, smbCmd.Data);
 
-    //
-    // Wait for host not busy
-    //
-    if (!(host->var.common.emulation & (SOFT_SDV_FLAG | VP_FLAG | SIMICS_FLAG))) {
-      startCount = GetCount (host);
-    }
+//     //
+//     // Wait for host not busy
+//     //
+//     if (!(host->var.common.emulation & (SOFT_SDV_FLAG | VP_FLAG | SIMICS_FLAG))) {
+//       startCount = GetCount (host);
+//     }
 
-    if (!(host->var.common.emulation & (SOFT_SDV_FLAG | VP_FLAG | SIMICS_FLAG))) {
-      do {
-        smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
-        if (!smbStat.Bits.smb_busy) break;
-#ifdef RC_SIM_FEEDBACK
-        break;
-#endif
-       // Wait for timeout
-      } while (GetDelay (host, startCount) < SMB_TIMEOUT);
-    } else {
-      do {
-        smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
-        if (!smbStat.Bits.smb_busy) break;
-        // Wait for timeout
-      } while (smbStat.Bits.smb_busy);
-    }
-    //
-    // Wait for the data
-    //
-    while (!smbStat.Bits.smb_rdo && !smbStat.Bits.smb_sbe) {
-      smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
-#ifdef RC_SIM_FEEDBACK
-      break;
-#endif
-    }
-    //
-    // If read data is valid
-    //
-    if (smbStat.Bits.smb_rdo && !smbStat.Bits.smb_sbe) {
-      if (dev.compId == MTS) {
-        *data = (UINT8) smbStat.Bits.smb_rdata;  //lsb
-        *(data + 1) = (UINT8) (smbStat.Bits.smb_rdata >> 8); //msb
-      } else {
-        *data = (UINT8) smbStat.Bits.smb_rdata;
-      }
-    } else {
-      rval = RETRY;
-    }
+//     if (!(host->var.common.emulation & (SOFT_SDV_FLAG | VP_FLAG | SIMICS_FLAG))) {
+//       do {
+//         smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
+//         if (!smbStat.Bits.smb_busy) break;
+// #ifdef RC_SIM_FEEDBACK
+//         break;
+// #endif
+//        // Wait for timeout
+//       } while (GetDelay (host, startCount) < SMB_TIMEOUT);
+//     } else {
+//       do {
+//         smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
+//         if (!smbStat.Bits.smb_busy) break;
+//         // Wait for timeout
+//       } while (smbStat.Bits.smb_busy);
+//     }
+//     //
+//     // Wait for the data
+//     //
+//     while (!smbStat.Bits.smb_rdo && !smbStat.Bits.smb_sbe) {
+//       smbStat.Data = MemReadPciCfgMC (host, socket, dev.mcId, smbStatReg);
+// #ifdef RC_SIM_FEEDBACK
+//       break;
+// #endif
+//     }
+//     //
+//     // If read data is valid
+//     //
+//     if (smbStat.Bits.smb_rdo && !smbStat.Bits.smb_sbe) {
+//       if (dev.compId == MTS) {
+//         *data = (UINT8) smbStat.Bits.smb_rdata;  //lsb
+//         *(data + 1) = (UINT8) (smbStat.Bits.smb_rdata >> 8); //msb
+//       } else {
+//         *data = (UINT8) smbStat.Bits.smb_rdata;
+//       }
+//     } else {
+//       rval = RETRY;
+//     }
 
-  } else if (dev.address.controller == PCH) {
-    //
-    // Determine which protocol to use
-    //
-    if (dev.compId == DCP_AD5247) {
-      protocol = SR_DATA;
-    } else protocol = BYTE_DATA;
-    //
-    // Issue the command, handling errors
-    //
-    for (retry = 0; retry < SMB_RETRY_LIMIT; retry++) {
-      //
-      // Program PCH SMBus controller for given protocol
-      //
-      status = SendPchSmbCmd(host, byteOffset, (UINT8)((dev.address.deviceType << 4) | (dev.address.strapAddress << 1) | BIT0), protocol, data);
+//   } else if (dev.address.controller == PCH) {
+//     //
+//     // Determine which protocol to use
+//     //
+//     if (dev.compId == DCP_AD5247) {
+//       protocol = SR_DATA;
+//     } else protocol = BYTE_DATA;
+//     //
+//     // Issue the command, handling errors
+//     //
+//     for (retry = 0; retry < SMB_RETRY_LIMIT; retry++) {
+//       //
+//       // Program PCH SMBus controller for given protocol
+//       //
+//       status = SendPchSmbCmd(host, byteOffset, (UINT8)((dev.address.deviceType << 4) | (dev.address.strapAddress << 1) | BIT0), protocol, data);
 
-      // Check for bus error or host busy
-      if (status & (HST_STS_FAILED | HST_STS_BUS_ERR | HST_STS_HOST_BUSY)) {
-         FixedDelay (host, SMB_TIMEOUT);
-      }
-      else break;
-    }
-    if (status & (HST_STS_FAILED | HST_STS_BUS_ERR | HST_STS_DEV_ERR | HST_STS_HOST_BUSY)) rval = FAILURE;
-  } else {
-    rval = FAILURE;  // supported controller not detected
-  }
-  //
-  // Save the values in these registers for S3 resume.
-  //
-  host->nvram.mem.socket[socket].smbCmd0 = MemReadPciCfgMC (host, socket, 0, SMBCMD_0_MC_MAIN_REG);
+//       // Check for bus error or host busy
+//       if (status & (HST_STS_FAILED | HST_STS_BUS_ERR | HST_STS_HOST_BUSY)) {
+//          FixedDelay (host, SMB_TIMEOUT);
+//       }
+//       else break;
+//     }
+//     if (status & (HST_STS_FAILED | HST_STS_BUS_ERR | HST_STS_DEV_ERR | HST_STS_HOST_BUSY)) rval = FAILURE;
+//   } else {
+//     rval = FAILURE;  // supported controller not detected
+//   }
+//   //
+//   // Save the values in these registers for S3 resume.
+//   //
+//   host->nvram.mem.socket[socket].smbCmd0 = MemReadPciCfgMC (host, socket, 0, SMBCMD_0_MC_MAIN_REG);
 
-  if (Is2HA(host)){
-    host->nvram.mem.socket[socket].smbCmd1 = MemReadPciCfgMC (host, socket, 1, SMBCMD_0_MC_MAIN_REG);
-  } else {
-    host->nvram.mem.socket[socket].smbCmd1 = MemReadPciCfgMC (host, socket, 0, SMBCMD_1_MC_MAIN_REG);
-  }
-#ifdef RC_SIM_SMBUS
-  if (dev.compId == SPD) {
-    *data = tempData;
-    rval = tempRval;
-  }
-#endif // SIM_BUILD
+//   if (Is2HA(host)){
+//     host->nvram.mem.socket[socket].smbCmd1 = MemReadPciCfgMC (host, socket, 1, SMBCMD_0_MC_MAIN_REG);
+//   } else {
+//     host->nvram.mem.socket[socket].smbCmd1 = MemReadPciCfgMC (host, socket, 0, SMBCMD_1_MC_MAIN_REG);
+//   }
+// #ifdef RC_SIM_SMBUS
+//   if (dev.compId == SPD) {
+//     *data = tempData;
+//     rval = tempRval;
+//   }
+// #endif // SIM_BUILD
 
-  return rval;
+  return 0;
 }
 
 /**
