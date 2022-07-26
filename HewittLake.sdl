@@ -3312,7 +3312,7 @@ End
 
 TOKEN
     Name  = "SETUP_PRINT_EVAL_MSG"
-    Value  = "1"
+    Value  = "0"
     Help  = "Enable/Disable Evaluation message in Post screen"
     TokenType = Boolean
     TargetH = Yes
