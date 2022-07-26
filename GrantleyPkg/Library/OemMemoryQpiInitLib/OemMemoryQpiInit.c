@@ -2700,7 +2700,7 @@ VOID OemInitStorageFeatures(
   setup->mem.BlockScTrafficOnAdr = TotalSystemConfigurationPtr->BlockScTrafficOnAdr;
 #endif
 #ifdef GRANGEVILLE_FLAG
-  if (host->nvram.common.platformType == TypeTlaquepaque) {
+  if (host->nvram.common.platformType == TypeEchoCanyon) {
     setup->mem.MemDownConfig = 1;
   }
 #endif
