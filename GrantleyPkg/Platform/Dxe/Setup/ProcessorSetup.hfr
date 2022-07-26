@@ -659,9 +659,9 @@ endif;
     oneof varid     = SYSTEM_CONFIGURATION.DcaEnable,
         prompt      = STRING_TOKEN(STR_DCA),
         help        = STRING_TOKEN(STR_DCA_HELP),
-        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLE),  value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
         option text = STRING_TOKEN(STR_ENABLE),   value = 1, flags = RESET_REQUIRED;
-        option text = STRING_TOKEN(STR_AUTO),     value = 2, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_AUTO),     value = 2, flags = RESET_REQUIRED;
     endoneof;
 
     oneof varid     = SYSTEM_CONFIGURATION.DcaPrefetchDelayValue,

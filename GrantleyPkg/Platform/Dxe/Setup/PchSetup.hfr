@@ -1962,8 +1962,8 @@ endform;
      oneof varid   = SYSTEM_CONFIGURATION.PcieDmiAspm,
         prompt      = STRING_TOKEN(STR_PCH_DMI_ASPM_PROMPT),
         help        = STRING_TOKEN(STR_PCH_DMI_ASPM_HELP),
-        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags =  RESET_REQUIRED;
-        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED_STRING), value = 0, flags =  DEFAULT | MANUFACTURING | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING), value = 1, flags = RESET_REQUIRED;
      endoneof;
       endif;
 
