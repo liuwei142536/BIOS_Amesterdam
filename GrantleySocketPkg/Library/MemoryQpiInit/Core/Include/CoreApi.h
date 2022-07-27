@@ -138,7 +138,7 @@ MemReadSmb(
     PSYSHOST    host,               // Pointer to the system host (root) structure
     UINT8       socket,         // socket number
     struct smbDevice  dev,            // SMB device structure
-    UINT8               byteOffset,     // offset of data to read
+    UINT16               byteOffset,     // offset of data to read
     UINT8               *data           // Pointer to data to be returned
     );
 

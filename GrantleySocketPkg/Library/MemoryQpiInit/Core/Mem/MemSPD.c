@@ -314,7 +314,7 @@ DetectDIMMConfig (
         MemDebugPrint((host, SDBG_MAX, NO_SOCKET, NO_CH, NO_DIMM, NO_RANK, NO_STROBE, NO_BIT,
                        "   %d   |    %2d   |   %d  |      %d       |       %d      - ", socket, ch, dimm,
                        spd.address.busSegment, spd.address.strapAddress));
-        if (ReadSpd (host, socket, ch, dimm, SPD_KEY_BYTE, &SPDReg) == SUCCESS) {
+        if ((ReadSpd (host, socket, ch, dimm, SPD_KEY_BYTE, &SPDReg) == SUCCESS) && (ch == 0)) {
 
           MemDebugPrint((host, SDBG_MAX, NO_SOCKET, NO_CH, NO_DIMM, NO_RANK, NO_STROBE, NO_BIT,
                         "Present\n"));
@@ -423,9 +423,9 @@ ReadSpd (
   )
 {
   struct smbDevice spd;
-  struct smbDevice spa;
+  //struct smbDevice spa;
   INT16 spdOffset = 0;
-  UINT8 temp = 0;
+  //UINT8 temp = 0;
   UINT32 status;
 
   spd.compId = SPD;
@@ -433,46 +433,46 @@ ReadSpd (
   spd.address.deviceType = DTI_EEPROM;
   GetSmbAddress(host, socket, ch, dimm, &spd);
 
-  if (host->nvram.mem.socket[socket].ddr4SpdPageEn) {
-    if (byteOffset > 255) {
+  // if (host->nvram.mem.socket[socket].ddr4SpdPageEn) {
+  //   if (byteOffset > 255) {
 
-      // If current page does not match desired page
-      if (host->nvram.mem.socket[socket].imc[spd.address.busSegment].spdPageAddr != 1) {
+  //     // If current page does not match desired page
+  //     if (host->nvram.mem.socket[socket].imc[spd.address.busSegment].spdPageAddr != 1) {
 
-        // Update current page
-        host->nvram.mem.socket[socket].imc[spd.address.busSegment].spdPageAddr = 1;
+  //       // Update current page
+  //       host->nvram.mem.socket[socket].imc[spd.address.busSegment].spdPageAddr = 1;
 
-        // Set page
-        spa = spd;
-        spa.address.deviceType = DTI_WP_EEPROM;
-        spa.address.strapAddress = SPD_EE_PAGE_SELECT_1;
+  //       // Set page
+  //       spa = spd;
+  //       spa.address.deviceType = DTI_WP_EEPROM;
+  //       spa.address.strapAddress = SPD_EE_PAGE_SELECT_1;
 
-        // Write to SPA
-        WriteSmb (host, socket, spa, 0, &temp);
-      }
-      spdOffset = -256;
+  //       // Write to SPA
+  //       WriteSmb (host, socket, spa, 0, &temp);
+  //     }
+  //     spdOffset = -256;
 
-    } else {
+  //   } else {
 
-      // If current page does not match desired page
-      if (host->nvram.mem.socket[socket].imc[spd.address.busSegment].spdPageAddr != 0) {
+  //     // If current page does not match desired page
+  //     if (host->nvram.mem.socket[socket].imc[spd.address.busSegment].spdPageAddr != 0) {
 
-        // Update current page
-        host->nvram.mem.socket[socket].imc[spd.address.busSegment].spdPageAddr = 0;
+  //       // Update current page
+  //       host->nvram.mem.socket[socket].imc[spd.address.busSegment].spdPageAddr = 0;
 
-        // Set page
-        spa = spd;
-        spa.address.deviceType = DTI_WP_EEPROM;
-        spa.address.strapAddress = SPD_EE_PAGE_SELECT_0;
+  //       // Set page
+  //       spa = spd;
+  //       spa.address.deviceType = DTI_WP_EEPROM;
+  //       spa.address.strapAddress = SPD_EE_PAGE_SELECT_0;
 
-        // Write to SPA
-        WriteSmb (host, socket, spa, 0, &temp);
-      }
-    }
-  }
+  //       // Write to SPA
+  //       WriteSmb (host, socket, spa, 0, &temp);
+  //     }
+  //   }
+  // }
 
   // Read from SPD
-  status = ReadSmb (host, socket, spd, (UINT8)(byteOffset + spdOffset), data);
+  status = ReadSmb (host, socket, spd, byteOffset + spdOffset, data);
 
   return status;
 
@@ -526,7 +526,7 @@ MemReadSmb (
   PSYSHOST         host,
   UINT8            socket,
   struct smbDevice dev,
-  UINT8            byteOffset,
+  UINT16            byteOffset,
   UINT8            *data
   )
 {

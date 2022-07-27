@@ -559,6 +559,14 @@ BOOLEAN ProcessConInAvailability(VOID)
 			PostManagerDisplayPostMessage(text);
 		MemFreePointer( (VOID **)&text );
 #endif
+		text = HiiGetString( gHiiHandle, STRING_TOKEN(STR_F7_ENTER_BOOT_MENU) );
+		if ( text != NULL )
+			PostManagerDisplayPostMessage(text);
+		MemFreePointer( (VOID **)&text );
+		text = HiiGetString( gHiiHandle, STRING_TOKEN(STR_F12_ENTER_PXE_BOOT) );
+		if ( text != NULL )
+			PostManagerDisplayPostMessage(text);
+		MemFreePointer( (VOID **)&text );
 		gPostScreenMsg = TRUE;
 	}
 	// if gPasswordType is not AMI_PASSWORD_NONE, Already got the Password.
@@ -1224,7 +1232,7 @@ VOID CheckForKey (EFI_EVENT Event, VOID *Context)
 		{
 			if(
 				( (SETUP_ENTRY_UNICODE	== AmiKey.Key.UnicodeChar)
-				&&(SETUP_ENTRY_SCAN	== AmiKey.Key.ScanCode)
+				&&(SETUP_ENTRY_SCAN	== AmiKey.Key.ScanCode || SCAN_F2	== AmiKey.Key.ScanCode)
 #if TSE_USE_AMI_EFI_KEYCODE_PROTOCOL
 				&& (TSE_CHECK_SHIFTSTATE(AmiKey.KeyState.KeyShiftState, SETUP_ENTRY_SHIFT_STATE))
 #endif

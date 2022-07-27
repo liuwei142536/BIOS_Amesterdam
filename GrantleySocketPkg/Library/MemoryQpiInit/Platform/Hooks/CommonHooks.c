@@ -146,7 +146,7 @@ PlatformReadSmb (
   PSYSHOST         host,
   UINT8            socket,
   struct smbDevice dev,
-  UINT8            byteOffset,
+  UINT16            byteOffset,
   UINT8            *data
   )
 /*++
@@ -166,15 +166,15 @@ PlatformReadSmb (
 
 --*/
 {
-  if (host->setup.mem.MemDownConfig && dev.compId == SPD) {
-    if (IsDESku(host)) {
+  // if (host->setup.mem.MemDownConfig && dev.compId == SPD) {
+  //   if (IsDESku(host)) {
       // Same data for all channels.
       *data = MT9ASF51272_SPD[byteOffset];
       return 1;
-    }
-  }
+  //   }
+  // }
 
-  return 0;
+  // return 0;
 }
 
 UINT8

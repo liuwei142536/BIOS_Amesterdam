@@ -208,7 +208,7 @@ End
 
 TOKEN
 	Name  = "SETUP_ALT_ENTRY_ENABLE"
-	Value  = "1"
+	Value  = "0"
 	Help  = "Enable or disable the SETUP_ALT_ENTRY"
 	TokenType = Boolean
 	TargetH = Yes

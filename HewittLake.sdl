@@ -146,7 +146,7 @@ End
 #Do not change the order of Platform configurations.
 TOKEN
     Name  = "DEBUG_MODE"
-    Value  = "0"
+    Value  = "1"
     TokenType = Boolean
     TargetMAK = Yes
 End
@@ -580,7 +580,7 @@ End
 
 TOKEN
     Name  = "USE_AMI_GPIO_PROGRAMMING"
-    Value  = "0"
+    Value  = "1"
     Help  = "0 = Use Intel's GPIO programming.  1 = Use AMI SDL GPIO programming."
     TokenType = Integer
     TargetH = Yes
@@ -3312,7 +3312,7 @@ End
 
 TOKEN
     Name  = "SETUP_PRINT_EVAL_MSG"
-    Value  = "1"
+    Value  = "0"
     Help  = "Enable/Disable Evaluation message in Post screen"
     TokenType = Boolean
     TargetH = Yes
