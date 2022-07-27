@@ -592,52 +592,8 @@ GetPlatformInfo (
   )
 {
 
-  EFI_STATUS             Status;
-  CHAR8                  BoardPartNum[FRU_BOARD_PART_NUM_MAX_LENGTH]= {0x00};
-
-  Status = GetGnvBoardPartNum(PeiServices, BoardPartNum);
-   
-  DEBUG ((EFI_D_INFO, "BoardPartNumber: %a\n", BoardPartNum));  
-
-  if (EFI_ERROR(Status)) {
-      DEBUG((EFI_D_ERROR, "Not able to read Board Part Number from EEPROM!\n"));
-      return EFI_DEVICE_ERROR;
-    }
-  else { 
-    //
-    //Compare the Part Number String for Platform Identification.
-    //
-    if (AsciiStrnCmp(BoardPartNum, BCVRDIMM, FRU_BOARD_PART_NUM_CMP_LENGTH) == 0){
-      PlatformInfoHob->BoardId = TypeBeverlyCoveCRB;
-      DEBUG ((EFI_D_ERROR, "Using FRU EEPROM, Board ID = TypeBeverlyCove RDIMM CRB\n"));    
-    }else if (AsciiStrnCmp(BoardPartNum, BCVSODIMM, FRU_BOARD_PART_NUM_CMP_LENGTH) == 0){
-      PlatformInfoHob->BoardId = TypeBeverlyCoveSODimmCRB;
-      DEBUG ((EFI_D_ERROR, "Using FRU EEPROM, Board ID = TypeBeverlyCove SODIMM CRB\n"));
-    }else if (AsciiStrnCmp(BoardPartNum, BCVCOMPACT, FRU_BOARD_PART_NUM_CMP_LENGTH) == 0){
-      PlatformInfoHob->BoardId = TypeBeverlyCoveSODimmCRB;
-      DEBUG ((EFI_D_ERROR, "Using FRU EEPROM  Detected BCV Compact Node, Overriding it with Board ID = TypeBeverlyCove SODIMM CRB\n"));
-    }else if (AsciiStrnCmp(BoardPartNum, TBCCANYON, FRU_BOARD_PART_NUM_CMP_LENGTH) == 0){
-      PlatformInfoHob->BoardId = TypeTrabucoCanyon;
-      DEBUG ((EFI_D_ERROR, "Using FRU EEPROM, Board ID = TypeTrabucoCanyon CRB\n"));
-    }else if (AsciiStrnCmp(BoardPartNum, CBMNTN, FRU_BOARD_PART_NUM_CMP_LENGTH) == 0){
-      PlatformInfoHob->BoardId = TypeCamelbackMountain;
-      DEBUG ((EFI_D_ERROR, "Using FRU EEPROM, Board ID = TypeCamelbackMountain CRB\n"));
-    }else if (AsciiStrnCmp(BoardPartNum, ECHOCANYON, FRU_BOARD_PART_NUM_CMP_LENGTH) == 0){
-      PlatformInfoHob->BoardId = TypeEchoCanyon;
-      DEBUG ((EFI_D_ERROR, "Using FRU EEPROM, Board ID = TypeEchoCanyon CRB\n"));
-    }else if (AsciiStrnCmp(BoardPartNum, TLAQPQ, FRU_BOARD_PART_NUM_CMP_LENGTH) == 0){
-      PlatformInfoHob->BoardId = TypeTlaquepaque;
-      DEBUG ((EFI_D_ERROR, "Using FRU EEPROM, Board ID = TypeTlaquepaque CRB\n"));
-    }else if ((AsciiStrnCmp(BoardPartNum, PTWPEAK, FRU_BOARD_PART_NUM_CMP_LENGTH) == 0)||
-    	(AsciiStrnCmp(BoardPartNum, PTWPEAK_SOLD_down, FRU_BOARD_PART_NUM_CMP_LENGTH) == 0)){  
-      PlatformInfoHob->BoardId = TypePiestewaPeak; 
-      DEBUG ((EFI_D_ERROR, "Using FRU EEPROM, Board ID = TypePiestewaPeak CRB\n"));  
-    }else{
-      DEBUG ((EFI_D_ERROR, "ERROR: FRU EEPROM Platform Identification Failed, using Default 0x%x\n", TypePlatformDefault));      
-      return EFI_DEVICE_ERROR;
-    }
-  } 
-  
+  PlatformInfoHob->BoardId = TypeEchoCanyon;
+  DEBUG ((EFI_D_ERROR, "Using FRU EEPROM, Board ID = TypeEchoCanyon CRB\n"));
   return EFI_SUCCESS;
 }
 

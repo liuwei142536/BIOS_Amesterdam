@@ -314,7 +314,7 @@ DetectDIMMConfig (
         MemDebugPrint((host, SDBG_MAX, NO_SOCKET, NO_CH, NO_DIMM, NO_RANK, NO_STROBE, NO_BIT,
                        "   %d   |    %2d   |   %d  |      %d       |       %d      - ", socket, ch, dimm,
                        spd.address.busSegment, spd.address.strapAddress));
-        if (ReadSpd (host, socket, ch, dimm, SPD_KEY_BYTE, &SPDReg) == SUCCESS) {
+        if ((ReadSpd (host, socket, ch, dimm, SPD_KEY_BYTE, &SPDReg) == SUCCESS) && (ch == 0)) {
 
           MemDebugPrint((host, SDBG_MAX, NO_SOCKET, NO_CH, NO_DIMM, NO_RANK, NO_STROBE, NO_BIT,
                         "Present\n"));

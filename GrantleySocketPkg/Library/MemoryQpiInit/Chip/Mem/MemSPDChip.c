@@ -1838,6 +1838,10 @@ CheckPORCompat (
           }
         } // dimm loop
 
+        if (ch != 0) {
+          mapOutCh = 1;
+        }
+
         //
         // Map out this channel if an invalid DIMM or configuration was detected
         //
