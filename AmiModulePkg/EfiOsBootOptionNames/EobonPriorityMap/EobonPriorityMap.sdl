@@ -1,0 +1,173 @@
+TOKEN
+    Name  = "EobonPriorityMap_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable EobonPriorityMap support in Project"
+    TokenType = Boolean
+End
+
+PATH
+    Name  = "EobonPriorityMap_DIR"
+    Help  = "EobonPriorityMap files source directory"
+End
+
+TOKEN
+    Name  = "CHECK_FILE_TIME_STAMP"
+    Value  = "0"
+    Help  = "1: Create/Remove boot options by file time stamp, 0: disabled."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+ELINK
+    Name  = "CreateBootOptionsByPriorityMap,"
+    Parent = "CREATE_EFI_OS_BOOT_OPTION_FUNCTIONS"
+    Token = "CHECK_FILE_TIME_STAMP" "=" "0"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CreateBootOptionsByPriorityMapWithTimeStamp,"
+    Parent = "CREATE_EFI_OS_BOOT_OPTION_FUNCTIONS"
+    Token = "CHECK_FILE_TIME_STAMP" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "RemoveBootOptionByPriorityMap,"
+    Parent = "ADJUST_EFI_OS_BOOT_ORDER_FUNCTIONS"
+    InvokeOrder = AfterParent
+    Help  = "if boot option with higher priority found, trying to delete the boot option with lower priority."
+End
+
+ELINK
+    Name  = "CheckUefiOsBootOptionByPriorityMap,"
+    Parent = "CHECK_UEFI_OS_BOOT_OPTION_FUNCTIONS"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "EfiOsBootOptionNamesFilePathPriorityItem"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\sles12\\shim.efi>, <sles12-secureboot>}, {<\\EFI\\sles12\\grubx64.efi>, <sles12>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\opensuse\\shim.efi>, <opensuse-secureboot>}, {<\\EFI\\opensuse\\grubx64.efi>, <openSUSE>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\ubuntu\\shimx64.efi>, <ubuntu>}, {<\\EFI\\ubuntu\\grubx64.efi>, <ubuntu>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\Redhat\\shimx64.efi>, <RedHat Boot Manager>}, {<\\EFI\\Redhat\\shim.efi>, <RedHat Boot Manager>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\Centos\\shimx64.efi>, <CentOS>}, {<\\EFI\\Centos\\shim.efi>, <CentOS>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\fedora\\shimx64.efi>, <Fedora>}, {<\\EFI\\fedora\\shim.efi>, <Fedora>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\debian\\shimx64.efi>, <debian>}, {<\\EFI\\debian\\grubx64.efi>, <debian>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "INTEL_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\fedora\\shimaa64.efi>, <Fedora>}, {<\\EFI\\fedora\\shim.efi>, <Fedora>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "ARM_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\sles\\shim.efi>, <SLES>}, {<\\EFI\\sles\\grubaa64.efi>, <SLES>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "ARM_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\opensuse\\shim.efi>, <openSUSE>}, {<\\EFI\\opoensuse\\grubaa64.efi>, <openSUSE>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "ARM_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\ubuntu\\shimaa64.efi>, <ubuntu>}, {<\\EFI\\ubuntu\\grubaa64.efi>, <ubuntu>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "ARM_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\Redhat\\shimaa64.efi>, <RedHat Boot Manager>}, {<\\EFI\\Redhat\\shim.efi>, <RedHat Boot Manager>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "ARM_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "{{{<\\EFI\\Centos\\shimaa64.efi>, <CentOS>}, {<\\EFI\\Centos\\shim.efi>, <CentOS>}}},"
+    Parent = "EfiOsBootOptionNamesFilePathPriorityItem"
+    Token = "ARM_ARCHITECTURE_SUPPORT" "=" "1"
+    Token = "BUILD_UP_BOOT_OPTION_FOR_LINUX_SYSTEM" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(EobonPriorityMap_DIR)/EobonPriorityMap.sdl "
+    Parent = "EfiOsBootOptionNamesMakDependencies"
+    InvokeOrder = AfterParent
+End
+
+LibraryMapping
+	Class  = "NULL"
+	Instance  = "AmiModulePkg.EobonPriorityMap"
+	Override  = "AmiModulePkg.Bds"
+End
+
+INFComponent
+	Name  = "EobonPriorityMap"
+	File  = "EobonPriorityMap.inf"
+	Package  = "AmiModulePkg"
+End

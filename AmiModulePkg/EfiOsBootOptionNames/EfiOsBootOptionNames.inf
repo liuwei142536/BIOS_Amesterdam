@@ -1,0 +1,35 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = EfiOsBootOptionNames
+  FILE_GUID                      = 70a4d159-1f01-4203-a598-7c2794151ce6
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NULL
+
+[Sources]
+  EfiOsBootOrder.c
+  EfiOsBootOptionNames.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+
+  
+[LibraryClasses]
+  AmiDxeLib
+  UefiDriverEntryPoint
+  DebugLib
+  DevicePathLib
+  PrintLib
+#[Protocols] 
+#[Guids]
+#[Depex]
