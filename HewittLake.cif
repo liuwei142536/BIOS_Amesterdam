@@ -166,4 +166,5 @@
 "AmiCompatibilityPkg\Smbios\Smbios.c"
 "AmiCompatibilityPkg\Smbios\SmbiosPeim\SmbiosPei.c"
 "AmiNetworkPkg\UefiNetworkStack\Ipv6\Ip6Dxe\Ip6ConfigImpl.c"
+"AmiModulePkg\EfiOsBootOptionNames\EfiOsBootOrder.c"	
 <endComponent>

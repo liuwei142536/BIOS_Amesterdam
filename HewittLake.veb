@@ -268,6 +268,8 @@
 "IntelFrameworkModulePkg\Universal\Acpi\AcpiS3SaveDxe\S3SaveDxe.cif"= "SS: AptioV;$/AptioV/Source/Modules/ACPI/S3SaveDxe;ACPI_19"
 "UefiCpuPkg\Universal\Acpi\S3Resume2Pei\S3Resume.cif"= "SS: AptioV;$/AptioV/Source/Modules/ACPI/S3Resume;ACPI_19"
 "MdeModulePkg\Universal\Acpi\FirmwarePerformanceDataTable.cif"= "SS: AptioV;$/AptioV/Source/Modules/ACPI/FirmwarePerformanceDataTable;ACPI_19"
+"AmiModulePkg\EfiOsBootOptionNames\EfiOsBootOptionNames.cif"= "SS: AptioV;$/AptioV/Source/Modules/BootOptionPolicies/EfiOsBootOptionNames;EfiOsBootOptionNames_19"
+"AmiModulePkg\EfiOsBootOptionNames\EobonPriorityMap\EobonPriorityMap.cif"= "SS: AptioV;$/AptioV/Source/Modules/BootOptionPolicies/EfiOsBootOptionNames/EobonPriorityMap;EfiOsBootOptionNames_19"
 "AmiModulePkg\GenericSio\GenericSio.cif"= "SS: AptioV;$/AptioV/Source/Modules/GenericSio;GenericSio_12"
 "AmiModulePkg\GenericSio\GenericIoAsl.cif"= "SS: AptioV;$/AptioV/Source/Modules/GenericSio;GenericSio_12"
 "AmiModulePkg\GenericSio\SioStaticSetup.cif"= "SS: AptioV;$/AptioV/Source/Modules/GenericSio;GenericSio_12"
@@ -359,6 +361,7 @@
 "AmiCompatibilityPkg\CmosManager\CmosManagerIncludes.cif"= "SS: AptioV;$/AptioV/Source/Modules/CmosManager;CmosManager_07"
 "AmiCompatibilityPkg\CmosManager\CmosManagerBuild.cif"= "SS: AptioV;$/AptioV/Source/Modules/CmosManager;CmosManager_07"
 "AmiCompatibilityPkg\CmosManager\CmosManagerSec.cif"= "SS: AptioV;$/AptioV/Source/Modules/CmosManager;CmosManager_07"
+"AmiModulePkg\EfiOsBootOptionNames\EfiOsBootOptionNames.cif"= Private
 "FatBinPkg\FatBinPkg.cif"= "SS: AptioV;$/AptioV/Binary/Modules/Fat;FatBin_09"
 "AmiModulePkg\FlashSmi\FlashSmi.cif"= "SS: AptioV;$/AptioV/Source/Modules/FlashSmi;FlashSmi_10"
 "AmiModulePkg\FlashSmi\Elinks\FlashSmiElinks.cif"= "SS: AptioV;$/AptioV/Source/Modules/FlashSmi/Elinks;FlashSmi_10"

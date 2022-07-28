@@ -1,0 +1,23 @@
+<component>
+    name = "EfiOsBootOptionNames"
+    category = eModule
+    LocalRoot = "AmiModulePkg\EfiOsBootOptionNames\"
+    RefName = "AmiModulePkg.EfiOsBootOptionNames"
+[INF]
+"EfiOsBootOptionNames.inf"
+[files]
+"EfiOsBootOptionNames.sdl"	
+"EfiOsBootOptionNames.chm"	
+"EfiOsBootOptionNames.c"	
+"EfiOsBootOptionNames.mak"	
+"EfiOsBootOptionNames.uni"	
+"EfiOsBootOptionNames.sd"	
+[parts]
+"AmiModulePkg.EobonPriorityMap"
+[dependency]
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;AMITSE_1254"
+AmiModulePkg.Bds >= "SS: AptioV;$/AptioV/Source/Modules/Bds;Bds_09"
+AmiModulePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiModulePkg;AmiModulePkg_31"
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;MdePkg_10"
+AmiCompatibilityPkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiCompatibilityPkg;AmiCompatibilityPkg_21"
+<endComponent>

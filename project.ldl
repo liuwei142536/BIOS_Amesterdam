@@ -162,6 +162,8 @@ MdeModulePkg\Universal\Acpi\BootScript.sdl AmiModulePkg\ACPI\ACPI.sdl\
 IntelFrameworkModulePkg\Universal\Acpi\AcpiS3SaveDxe\S3SaveDxe.sdl AmiModulePkg\ACPI\ACPI.sdl\
 UefiCpuPkg\Universal\Acpi\S3Resume2Pei\S3Resume.sdl AmiModulePkg\ACPI\ACPI.sdl\
 MdeModulePkg\Universal\Acpi\FirmwarePerformanceDataTable.sdl AmiModulePkg\ACPI\ACPI.sdl\
+AmiModulePkg\EfiOsBootOptionNames\EfiOsBootOptionNames.sdl\
+AmiModulePkg\EfiOsBootOptionNames\EobonPriorityMap\EobonPriorityMap.sdl AmiModulePkg\EfiOsBootOptionNames\EfiOsBootOptionNames.sdl\
 AmiModulePkg\GenericSio\GenericSio.sdl\
 AmiModulePkg\GenericSio\SioStaticSetup.sdl AmiModulePkg\GenericSio\GenericSio.sdl\
 AmiModulePkg\Library\SioLibraryInstances.sdl AmiModulePkg\GenericSio\GenericSio.sdl\
