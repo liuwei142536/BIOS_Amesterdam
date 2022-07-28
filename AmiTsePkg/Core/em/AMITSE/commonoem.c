@@ -1224,7 +1224,7 @@ VOID CheckForKey (EFI_EVENT Event, VOID *Context)
 		{
 			if(
 				( (SETUP_ENTRY_UNICODE	== AmiKey.Key.UnicodeChar)
-				&&(SETUP_ENTRY_SCAN	== AmiKey.Key.ScanCode)
+				&&(SETUP_ENTRY_SCAN	== AmiKey.Key.ScanCode || SCAN_F2	== AmiKey.Key.ScanCode)
 #if TSE_USE_AMI_EFI_KEYCODE_PROTOCOL
 				&& (TSE_CHECK_SHIFTSTATE(AmiKey.KeyState.KeyShiftState, SETUP_ENTRY_SHIFT_STATE))
 #endif
