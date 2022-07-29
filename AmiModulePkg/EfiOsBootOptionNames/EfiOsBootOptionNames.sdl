@@ -10,7 +10,7 @@ End
 
 TOKEN
 	Name  = "RemoveLegacyGptHddDevice"
-	Value  = "0"
+	Value  = "1"
 	Help  = "On. Filter GPT Format Hard disk of Legacy device."
 	TokenType = Boolean
 	TargetMAK = Yes
@@ -53,7 +53,7 @@ End
 
 TOKEN
     Name  = "NEW_UEFI_OS_OPTION_ORDER_POLICY"
-    Value  = "0"
+    Value  = "1"
     Help  = "Policy about the priority of new added UEFI OS boot option. \0: By BoTagUefi. 1: First. \2: Last."
     TokenType = Integer
     TargetH = Yes
