@@ -10,7 +10,7 @@ End
 
 TOKEN
 	Name  = "RemoveLegacyGptHddDevice"
-	Value  = "0"
+	Value  = "1"
 	Help  = "On. Filter GPT Format Hard disk of Legacy device."
 	TokenType = Boolean
 	TargetMAK = Yes
