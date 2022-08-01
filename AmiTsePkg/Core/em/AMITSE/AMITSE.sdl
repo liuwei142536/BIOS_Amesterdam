@@ -692,7 +692,7 @@ End
 
 TOKEN
 	Name  = "SETUP_SUPPORT_ADD_BOOT_OPTION"
-	Value  = "0"
+	Value  = "1"
 	Help  = "Set to enable Add/Delete boot option."
 	TokenType = Boolean
 	TargetH = Yes
@@ -700,7 +700,7 @@ End
 
 TOKEN
 	Name  = "SETUP_SUPPORT_ADD_DRIVER_OPTION"
-	Value  = "0"
+	Value  = "1"
 	Help  = "Set to enable Add/Delete Driver option."
 	TokenType = Boolean
 	TargetH = Yes
