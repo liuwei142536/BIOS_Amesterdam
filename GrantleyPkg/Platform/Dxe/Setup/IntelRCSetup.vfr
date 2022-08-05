@@ -172,11 +172,11 @@ formset
         //
 // APTIOV_SERVER_OVERRIDE_RC_START : Removing unused Setup options
 // EIP#561658
-/*
+
         goto VFR_RESERVE_MEMORY,
             prompt = STRING_TOKEN(STR_RESERVE_MEMORY_OPTION),
             help   = STRING_TOKEN(STR_RESERVE_MEMORY_OPTION_HELP);
-*/
+
 // APTIOV_SERVER_OVERRIDE_RC_END : Removing unused Setup options
         //
         // Jump to BootAllOptions Form

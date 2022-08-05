@@ -3451,7 +3451,7 @@ End
 
 TOKEN
     Name  = "IScsi_SUPPORT"
-    Value  = "0"
+    Value  = "1"
     Help  = "Main switch to enable IScsi support in Project"
     TokenType = Boolean
     TargetMAK = Yes
