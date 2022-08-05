@@ -4211,7 +4211,7 @@ EFI_STATUS EFIAPI GetDeviceCapabilities(PCI_DEV_INFO *Dev)
         Dev->Capab|=(EFI_PCI_IO_ATTRIBUTE_ISA_MOTHERBOARD_IO | EFI_PCI_IO_ATTRIBUTE_ISA_IO);
     else 
         Dev->Capab&=(~(EFI_PCI_IO_ATTRIBUTE_ISA_MOTHERBOARD_IO | EFI_PCI_IO_ATTRIBUTE_ISA_IO));
-
+    Dev->Capab|=EFI_PCI_IO_ATTRIBUTE_DUAL_ADDRESS_CYCLE;
     DEBUG((DEBUG_INFO, "\n Device Data: -> Supported Attributes -> 0x%lX\n", Dev->Capab));
     return Status;
 }
