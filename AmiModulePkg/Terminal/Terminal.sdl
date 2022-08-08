@@ -580,7 +580,7 @@ End
 
 TOKEN
     Name  = "DONT_SEND_ASCII_CONTROL_PRINTABLE_CHARACTERS"
-    Value  = "0"
+    Value  = "1"
     Help  = "Applications like HyperTerminal supports printable characters in the ASCII control characters value's(0 - 0x1F) but Putty does not. so,to print the printable ASCII control characters we will send the equivalent ASCII printable value(whichever is applicable) if the token is enabled."
     TokenType = Boolean
     TargetH = Yes
