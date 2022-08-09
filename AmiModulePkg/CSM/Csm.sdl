@@ -300,7 +300,7 @@ End
 
 TOKEN
 	Name  = "DEFAULT_BOOT_OPTION_FILTERING_POLICY"
-	Value  = "$(CSMSETUP_ENABLE_ALL_BOOT_OPTIONS)"
+	Value  = "$(CSMSETUP_UEFI_ONLY_BOOT_OPTIONS)"
 	Help  = "Controls default value of Boot Option Filter setup control"
 	TokenType = Integer
 	TargetH = Yes

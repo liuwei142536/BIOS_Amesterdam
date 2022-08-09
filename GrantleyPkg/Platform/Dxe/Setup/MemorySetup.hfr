@@ -145,15 +145,15 @@
     oneof varid  = SYSTEM_CONFIGURATION.promoteWarnings,
         prompt   = STRING_TOKEN (STR_PROMOTE_WARNINGS_PROMPT),
         help     = STRING_TOKEN (STR_PROMOTE_WARNINGS_HELP),
-        option text = STRING_TOKEN (STR_DISABLE), value = 0, flags = RESET_REQUIRED;
-        option text = STRING_TOKEN (STR_ENABLE),  value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLE), value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_ENABLE),  value = 1, flags = RESET_REQUIRED;
     endoneof;
 
     oneof varid = SYSTEM_CONFIGURATION.haltOnMemErr,
         prompt  = STRING_TOKEN(STR_HALT_ON_MEM_TRAINING_ERROR_PROMPT),
         help    = STRING_TOKEN(STR_HALT_ON_MEM_TRAINING_ERROR_HELP),
-        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = RESET_REQUIRED;
-        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = RESET_REQUIRED;
     endoneof;
 
     oneof varid  = SYSTEM_CONFIGURATION.MultiThreaded,
@@ -1394,8 +1394,8 @@ form formid = VFR_FORMID_MEM_THERMAL_ID,
         prompt      = STRING_TOKEN(STR_MEMHOT_THROTTLING_MODE_PROMPT),
         help        = STRING_TOKEN(STR_MEMHOT_THROTTLING_MODE_PROMPT_HELP),
         option text = STRING_TOKEN(STR_DISABLED), value = MEMHOT_DIS, flags = RESET_REQUIRED;
-        option text = STRING_TOKEN(STR_OUTPUT_ONLY),  value = MEMHOT_OUTPUT_ONLY, flags = RESET_REQUIRED;
-        option text = STRING_TOKEN(STR_INPUT_ONLY),  value = MEMHOT_INPUT_ONLY, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_OUTPUT_ONLY),  value = MEMHOT_OUTPUT_ONLY, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+        option text = STRING_TOKEN(STR_INPUT_ONLY),  value = MEMHOT_INPUT_ONLY, flags = RESET_REQUIRED;
         //option text = STRING_TOKEN(STR_INPUT_OUTPUT_ENABLED),  value = MEMHOT_INPUT_OUTPUT_EN, flags = RESET_REQUIRED;
     endoneof;
 
@@ -1442,8 +1442,8 @@ form formid = VFR_FORMID_MEM_THERMAL_ID,
       oneof varid = SYSTEM_CONFIGURATION.ckeThrottling,
           prompt      = STRING_TOKEN(STR_CKE_THROT_PROMPT),
           help        = STRING_TOKEN(STR_CKE_THROT_PROMPT_HELP),
-          option text = STRING_TOKEN(STR_AUTO),     value = CKE_MODE_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
-          option text = STRING_TOKEN(STR_OFF),      value = CKE_MODE_OFF, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_AUTO),     value = CKE_MODE_AUTO, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_OFF),      value = CKE_MODE_OFF, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
           option text = STRING_TOKEN(STR_APD),      value = CKE_APD, flags = RESET_REQUIRED;
           option text = STRING_TOKEN(STR_PPDF_RESVD),     value = CKE_PPDF, flags = RESET_REQUIRED;
           option text = STRING_TOKEN(STR_PPDS_RESVD),     value = CKE_PPDS, flags = RESET_REQUIRED;
@@ -1458,8 +1458,8 @@ form formid = VFR_FORMID_MEM_THERMAL_ID,
       oneof varid = SYSTEM_CONFIGURATION.oppSR,
           prompt      = STRING_TOKEN(STR_OPP_SR_PROMPT),
           help        = STRING_TOKEN(STR_OPP_SR_PROMPT_HELP),
-          option text = STRING_TOKEN(STR_AUTO),     value = OPP_SR_AUTO, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
-          option text = STRING_TOKEN(STR_DISABLED), value = OPP_SR_DIS, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_AUTO),     value = OPP_SR_AUTO, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_DISABLED), value = OPP_SR_DIS, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
           option text = STRING_TOKEN(STR_ENABLED),  value = OPP_SR_EN, flags = RESET_REQUIRED;
       endoneof;
     endif;
@@ -1474,8 +1474,8 @@ form formid = VFR_FORMID_MEM_THERMAL_ID,
       oneof varid   = SYSTEM_CONFIGURATION.XMPMode,
           prompt      = STRING_TOKEN (STR_XMP_PROFILE_PROMPT),
           help        = STRING_TOKEN (STR_XMP_PROFILE_HELP),
-          option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
-          option text = STRING_TOKEN (STR_MANUAL),          value = 1, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN (STR_MANUAL),          value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
       endoneof;
     endif;
 
@@ -1484,8 +1484,8 @@ form formid = VFR_FORMID_MEM_THERMAL_ID,
           questionid  = KEY_XMP_PROFILE,
           prompt      = STRING_TOKEN (STR_XMP_PROFILE_PROMPT),
           help        = STRING_TOKEN (STR_XMP_PROFILE_HELP),
-          option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT | INTERACTIVE;
-          option text = STRING_TOKEN (STR_MANUAL),          value = 1, flags = RESET_REQUIRED | INTERACTIVE;
+          option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | INTERACTIVE;
+          option text = STRING_TOKEN (STR_MANUAL),          value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT | INTERACTIVE;
           option text = STRING_TOKEN (STR_XMP_PROFILE1),    value = 2, flags = RESET_REQUIRED | INTERACTIVE;
       endoneof;
     endif;
@@ -1495,8 +1495,8 @@ form formid = VFR_FORMID_MEM_THERMAL_ID,
           questionid  = KEY_XMP_PROFILE1,
           prompt      = STRING_TOKEN (STR_XMP_PROFILE_PROMPT),
           help        = STRING_TOKEN (STR_XMP_PROFILE_HELP),
-          option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT | INTERACTIVE;
-          option text = STRING_TOKEN (STR_MANUAL),          value = 1, flags = RESET_REQUIRED | INTERACTIVE;
+          option text = STRING_TOKEN (STR_DISABLED_STRING), value = 0, flags = RESET_REQUIRED | INTERACTIVE;
+          option text = STRING_TOKEN (STR_MANUAL),          value = 1, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT | INTERACTIVE;
           option text = STRING_TOKEN (STR_XMP_PROFILE1),    value = 2, flags = RESET_REQUIRED | INTERACTIVE;
           option text = STRING_TOKEN (STR_XMP_PROFILE2),    value = 3, flags = RESET_REQUIRED | INTERACTIVE;
       endoneof;
@@ -1541,9 +1541,9 @@ form formid = VFR_FORMID_MEM_THERMAL_ID,
       oneof varid     = SYSTEM_CONFIGURATION.commandTiming,
           prompt      = STRING_TOKEN(STR_COMMAND_TIMING_PROMPT),
           help        = STRING_TOKEN(STR_COMMAND_TIMING_HELP),
-          option text = STRING_TOKEN(STR_AUTO),               value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_AUTO),               value = 0, flags = RESET_REQUIRED;
           option text = STRING_TOKEN(STR_1N),                 value = 1, flags = RESET_REQUIRED;
-          option text = STRING_TOKEN(STR_2N),                 value = 2, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_2N),                 value = 2, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
           option text = STRING_TOKEN(STR_3N),                 value = 3, flags = RESET_REQUIRED;
       endoneof;
 
