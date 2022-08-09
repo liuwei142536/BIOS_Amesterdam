@@ -97,8 +97,8 @@
         maximum = 0x7FFF,
         step = 1, // Stepping of 0 equates to a manual entering of a value,
         // otherwise it will auto-increment with a left/right arrow
-        default = 0x7FFF,
-        default = 0x7FFF, defaultstore = AmiMfgDefault,
+        default = 0x7D0,
+        default = 0x7D0, defaultstore = AmiMfgDefault,
     endnumeric;
 
     numeric varid = SYSTEM_CONFIGURATION.leakyBktLo,

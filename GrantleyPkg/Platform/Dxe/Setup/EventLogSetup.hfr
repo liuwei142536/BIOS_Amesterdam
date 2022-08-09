@@ -706,8 +706,8 @@ endform;
 	  oneof varid = SYSTEM_CONFIGURATION.WheaSupport,
 			  prompt = STRING_TOKEN(STR_WHEA_SUPPORT_PROMPT),  
 			  help = STRING_TOKEN(STR_WHEA_SUPPORT_HELP),
-			  option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED|DEFAULT;
-			  option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED;
+			  option text = STRING_TOKEN(STR_DISABLE), value = 0, flags = RESET_REQUIRED;
+			  option text = STRING_TOKEN(STR_ENABLE), value = 1, flags = RESET_REQUIRED|DEFAULT;
 	  endoneof;
 
 	  suppressif  ideqval SYSTEM_CONFIGURATION.WheaSupport == 0x00;

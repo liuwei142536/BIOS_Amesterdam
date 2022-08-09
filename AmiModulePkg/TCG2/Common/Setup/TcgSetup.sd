@@ -330,8 +330,8 @@
            oneof varid = SETUP_DATA.InterfaceSel,\
                 prompt       = STRING_TOKEN (STR_TPM_20_INTERFACE),\
                 help         = STRING_TOKEN (STR_TPM_20_INTERFACE_HELP),\
-                option text  = STRING_TOKEN(STR_CRB), value = 0, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
-                option text  = STRING_TOKEN(STR_TIS), value = 1, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN(STR_CRB), value = 0, flags = RESET_REQUIRED;\
+                option text  = STRING_TOKEN(STR_TIS), value = 1, flags = RESET_REQUIRED | DEFAULT | MANUFACTURING;\
             endoneof;
 
 #define TCG_PH_RANDOMIZATION\

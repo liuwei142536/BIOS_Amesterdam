@@ -1899,8 +1899,8 @@ endform;
     oneof varid = SYSTEM_CONFIGURATION.PchPcieGlobalAspm,
           prompt  = STRING_TOKEN(STR_PCH_PCIE_PORT_ASPM_PROMPT),
           help    = STRING_TOKEN(STR_PCH_PCIE_GLOBAL_ASPM_HELP),
-          option text = STRING_TOKEN(STR_DISABLE),      value = 0, flags = RESET_REQUIRED;
-          option text = STRING_TOKEN(STR_L1_ONLY),      value = 2, flags = RESET_REQUIRED| MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_DISABLE),      value = 0, flags = RESET_REQUIRED | MANUFACTURING | DEFAULT;
+          option text = STRING_TOKEN(STR_L1_ONLY),      value = 2, flags = RESET_REQUIRED;
     endoneof;
 
     suppressif TRUE;
