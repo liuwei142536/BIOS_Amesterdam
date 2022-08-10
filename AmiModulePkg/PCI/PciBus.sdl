@@ -537,7 +537,7 @@ End
 
 TOKEN
 	Name  = "ABOVE_4G_PCI_DECODE_DEFAULT_VALUE"
-	Value  = "0"
+	Value  = "1"
 	Help  = "Sets Above 4G Address Space Decode Default option for BIOS Setup."
 	TokenType = Boolean
 	TargetH = Yes
@@ -582,7 +582,7 @@ End
 
 TOKEN
     Name  = "SRIOV_SUPPORT_DEFAULT_VALUE"
-    Value  = "0"
+    Value  = "1"
     Help  = "Sets SRIOV Support Setup Item Default option for BIOS Setup."
     TokenType = Boolean
     TargetH = Yes

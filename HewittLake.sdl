@@ -1150,7 +1150,7 @@ End
 
 TOKEN
     Name  = "ABOVE_4G_PCI_DECODE"
-    Value  = "0"
+    Value  = "1"
     Help  = "Tells if Chipset supports decoding of PCI\resources in Above 4G Address Space.\Sets EFI_PCI_HOST_BRIDGE_MEM64_DECODE in Allocation Attributes."
     TokenType = Boolean
     TargetH = Yes
