@@ -86,7 +86,7 @@ End
 
 TOKEN
     Name  = "PROJECT_MINOR_VERSION"
-    Value  = "12"
+    Value  = "51"
     TokenType = Integer
     TargetEQU = Yes
     TargetMAK = Yes
@@ -95,7 +95,7 @@ End
 
 TOKEN
     Name  = "PROJECT_TAG"
-    Value  = "0ACOH"
+    Value  = "FERWJ"
     TokenType = Expression
     TargetMAK = Yes
     TargetH = Yes
@@ -1522,7 +1522,7 @@ PcdMapping
     Name  = "PcdRecoveryImageName"
     GuidSpace  = "gAmiModulePkgTokenSpaceGuid"
     PcdType  = "PcdsFixedAtBuild"
-    Value  = "$(RECOVERY_ROM)"
+    Value  = '"$(RECOVERY_ROM)"'
     Offset  = 00h
     Length  = 04h
     TargetDSC = Yes

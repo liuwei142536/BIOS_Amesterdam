@@ -63,7 +63,7 @@ End
 
 TOKEN
 	Name  = "SYSTEM_BIOS_VERSION"
-	Value = ""
+	Value = "$(BIOS_TAG)"
 	Help  = "Specifies system BIOS version\BIOS Version = CORE_MAJOR_VERSION.CORE_BUILD_NUMBER when 'Value' is empty\"
 	TokenType = Expression
 	TargetEQU = Yes
