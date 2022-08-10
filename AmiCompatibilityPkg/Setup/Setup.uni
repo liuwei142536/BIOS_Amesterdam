@@ -36,7 +36,7 @@
 #string STR_BIOS_CORE_VERSION_VALUE     #language eng "N/A" //dynamically updated
 #string STR_BIOS_COMPLIANCY_NAME        #language eng "Compliancy"
 #string STR_BIOS_COMPLIANCY_VALUE       #language eng "N/A" //dynamically updated
-#string STR_BIOS_VERSION_NAME           #language eng "Project Version"
+#string STR_BIOS_VERSION_NAME           #language eng "BIOS Version"
 #string STR_BIOS_VERSION_VALUE          #language eng "N/A" //dynamically updated
 #string STR_BIOS_DATE_NAME              #language eng "Build Date and Time"
 #string STR_BIOS_DATE_VALUE             #language eng "N/A" //dynamically updated
