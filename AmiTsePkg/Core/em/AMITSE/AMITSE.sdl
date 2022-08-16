@@ -3569,6 +3569,12 @@ ELINK
 End
 
 ELINK
+	Name  = "PostReport,"
+	Parent  = "ProcessConInAvailabilityHook,"
+	InvokeOrder = AfterParent
+End
+
+ELINK
 	Name  = "ProcessEnterSetup,"
 	Parent  = "ProcessEnterSetupHook,"
 	InvokeOrder = AfterParent
