@@ -374,6 +374,8 @@
 #string STR_DEVICE_GROUP_HELP       #language en-US "Provides Device Group Access"
 
 #string STR_ENCODING_ERROR          #language en-US "Password cannot be encoded due to insufficient variable space."
+
+#string STR_F7_ENTER_BOOTMENU       #language    en-US    "Press <F7> to enter boot menu."
 //**********************************************************************//
 //**********************************************************************//
 //**********************************************************************//

@@ -558,6 +558,11 @@ BOOLEAN ProcessConInAvailability(VOID)
 		if ( text != NULL )
 			PostManagerDisplayPostMessage(text);
 		MemFreePointer( (VOID **)&text );
+		text = HiiGetString(gHiiHandle, STRING_TOKEN(STR_F7_ENTER_BOOTMENU));
+		if (text != NULL) {
+			PostManagerDisplayPostMessage(text);
+			MemFreePointer((VOID **)&text);
+		}
 #endif
 		gPostScreenMsg = TRUE;
 	}
