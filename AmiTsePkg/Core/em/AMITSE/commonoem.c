@@ -262,6 +262,8 @@ extern DXE_MOUSE_PROTOCOL *TSEMouse;
 #define HiiGetString TseHiiGetString
 #endif
 
+#define SMBIOS_TABLE_NOT_POPULATED 0x40
+
 #define SMBIOS_MAX_NUM_SOCKETS          8
 
 #ifndef MAX_CPU_SOCKET
@@ -589,7 +591,6 @@ SmbiosGetOptionalStringByIndex (
   } while (OptionalStrStart[StrSize] != 0 && Index != 0);
 
   if ((Index != 0) || (StrSize == 1)) {
-    //
     // Meet the end of strings set but Index is non-zero
     return EFI_INVALID_PARAMETER;
   } else {
@@ -649,19 +650,25 @@ VOID PostReport(VOID)
     }
 
     SmbiosType4Record = (SMBIOS_TABLE_TYPE4 *) SmbiosRecord;
-    if ((SmbiosType4Record->Status & 0x40) == 0) continue; //Not populated.
+    if ((SmbiosType4Record->Status & SMBIOS_TABLE_NOT_POPULATED) == 0) {
+      continue; //Not populated.
+    }
 
     StrIndex = SmbiosType4Record->Socket;
     Status = SmbiosGetOptionalStringByIndex ((CHAR8*)((UINT8*)SmbiosType4Record + SmbiosType4Record->Hdr.Length), StrIndex, &NewString);
-    if(EFI_ERROR(Status)) {
+    if (EFI_ERROR(Status)) {
       DEBUG((EFI_D_ERROR, "[%a](%d) SmbiosGetOptionalStringByIndex Failed.\n", __FUNCTION__, __LINE__));
       break;
     }
 
     for (SocketIndex = 0; SocketIndex < SMBIOS_MAX_NUM_SOCKETS; ++SocketIndex) {
-        if (StrCmp(gSocketDesgination[SocketIndex], NewString) == 0) break;
+        if (StrCmp(gSocketDesgination[SocketIndex], NewString) == 0) {
+          break;
+        }
     }
-    ASSERT(SocketIndex < SMBIOS_MAX_NUM_SOCKETS);
+    if (SocketIndex >= SMBIOS_MAX_NUM_SOCKETS) {
+      break;
+    };
 
     if (SocketIndex < MAX_CPU_SOCKET) {
       StrIndex = SmbiosType4Record->ProcessorVersion;
@@ -670,7 +677,7 @@ VOID PostReport(VOID)
       }
 
       Freq = SmbiosType4Record->CurrentSpeed;
-      if ( PostCpuInfo != NULL ) {
+      if (PostCpuInfo != NULL) {
         UnicodeSPrint(String, StrSize, L"\nCPU %d: %s, Speed: %dMHz\n", SocketIndex, PostCpuInfo, Freq);
         PostManagerDisplayPostMessage(String);
       }
