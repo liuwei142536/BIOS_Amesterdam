@@ -406,6 +406,7 @@ endif
   gTSEInvalidateBgrtStatusProtocolGuid$(EOL)\
   gEsaInterfacesForTseProtocolGuid$(EOL)\
   gEsaFileBrowserProtocolGuid$(EOL)\
+  gEfiSmbiosProtocolGuid$(EOL)\
   $(subst $(SPACE),$(EOL)$(SPACE),$(ADDITIONAL_AMITSE_Protocols))$(EOL)\
 ">> $(BUILD_DIR)/AMITSE.inf
 ##

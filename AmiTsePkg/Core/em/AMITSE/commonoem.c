@@ -248,7 +248,10 @@ extern DXE_MOUSE_PROTOCOL *TSEMouse;
 #endif
 
 // Build time file generated from AMITSE_OEM_HEADER_LIST elink.
-#include "AMITSEOem.h"		
+#include "AMITSEOem.h"	
+#include <Protocol\Smbios.h>
+#include <Library\MemoryAllocationLib.h>
+#include <Library\PrintLib.h>
 
 #ifndef EFI_DEFAULT_BMP_LOGO_GUID
 #define EFI_DEFAULT_BMP_LOGO_GUID \
@@ -258,6 +261,27 @@ extern DXE_MOUSE_PROTOCOL *TSEMouse;
 #if TSE_CLANG_SUPPORT
 #define HiiGetString TseHiiGetString
 #endif
+
+#define SMBIOS_TABLE_NOT_POPULATED 0x40
+
+#define SMBIOS_MAX_NUM_SOCKETS          8
+
+#ifndef MAX_CPU_SOCKET
+#define MAX_CPU_SOCKET                  4
+#endif
+
+#define NEWSTRING_SIZE                  0x200
+
+CHAR16 *gSocketDesgination[8] = {
+    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_0),
+    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_1),
+    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_2),
+    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_3),
+    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_4),
+    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_5),
+    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_6),
+    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_7)
+};
 
 typedef struct {
 	UINT8 CtrlAction;
@@ -530,6 +554,160 @@ VOID DrawQuietBootLogo(VOID)
 **/
 extern EFI_STATUS InitEsaTseInterfaces (void);	
 extern VOID MouseInit(VOID);
+
+/**
+
+  Acquire the string associated with the Index from SMBIOS structure and return it.
+  The caller is responsible for freeing the string buffer.
+
+  @param    OptionalStrStart  The start position to search the string
+  @param    Index             The index of the string to extract
+  @param    String            The string that is extracted
+
+  @retval   EFI_SUCCESS       The function returns EFI_SUCCESS if successful.
+  @retval   EFI_NOT_FOUND     The function returns EFI_NOT_FOUND if unsuccessful.
+
+**/
+EFI_STATUS
+SmbiosGetOptionalStringByIndex (
+  IN      CHAR8                   *OptionalStrStart,
+  IN      UINT8                   Index,
+  OUT     CHAR16                  **String
+  )
+{
+  UINTN          StrSize;
+
+  if (Index == 0) {
+    return EFI_INVALID_PARAMETER;
+  }
+
+  StrSize = 0;
+  do {
+    Index--;
+    OptionalStrStart += StrSize;
+    StrSize           = AsciiStrSize (OptionalStrStart); // size includes null terminator
+  // SMBIOS strings are NULL terminated, and end of all strings is indicated with NULL
+  // loop until at end of all SMBIOS strings (found NULL terminator at string index past string's NULL), and Index != 0
+  } while (OptionalStrStart[StrSize] != 0 && Index != 0);
+
+  if ((Index != 0) || (StrSize == 1)) {
+    // Meet the end of strings set but Index is non-zero
+    return EFI_INVALID_PARAMETER;
+  } else {
+    AsciiStrToUnicodeStr (OptionalStrStart, *String);
+  }
+
+  return EFI_SUCCESS;
+}
+
+VOID PostReport(VOID)
+{
+  CHAR16                                *PostCpuInfo;
+  CHAR16                                *PostMemInfo;
+  EFI_STATUS                            Status;
+  EFI_SMBIOS_TABLE_HEADER               *SmbiosRecord;
+  SMBIOS_TABLE_TYPE4                    *SmbiosType4Record;
+  SMBIOS_TABLE_TYPE17                   *SmbiosType17Record;
+  EFI_SMBIOS_HANDLE                     SmbiosHandle;
+  EFI_SMBIOS_TYPE                       SmbiosType;
+  UINT32                                i;
+  EFI_SMBIOS_PROTOCOL                   *Smbios;
+  UINTN                                 StrSize;
+  UINTN                                 SocketIndex;
+  CHAR16                                *NewString;
+  UINT8                                 StrIndex;
+  CHAR16                                *VersionString[MAX_CPU_SOCKET];
+  CHAR16                                *String = NULL;
+  UINT32                                Freq;
+
+  //Initialize Variables
+  StrSize = NEWSTRING_SIZE;
+  String = AllocateZeroPool (StrSize);
+  PostMemInfo = AllocateZeroPool (StrSize);
+  PostCpuInfo = AllocateZeroPool (StrSize);
+  for (SocketIndex = 0; SocketIndex < MAX_CPU_SOCKET; SocketIndex++) {
+    VersionString[SocketIndex] = AllocateZeroPool (StrSize);
+  }
+
+  // Get Smbios protocol
+  Status = gBS->LocateProtocol (
+                  &gEfiSmbiosProtocolGuid,
+                  NULL,
+                  (VOID **)&Smbios
+                  );
+  if (EFI_ERROR(Status)) {
+    DEBUG((EFI_D_ERROR, "[%a](%d) LocateProtocol Failed.\n", __FUNCTION__, __LINE__));
+    return;
+  }
+
+  // Get CPU info From Smbios Type 4
+  SmbiosHandle = SMBIOS_HANDLE_PI_RESERVED;
+  SmbiosType = EFI_SMBIOS_TYPE_PROCESSOR_INFORMATION;
+  for (i = 0; ; ++i) {
+    Status = Smbios->GetNext (Smbios, &SmbiosHandle, &SmbiosType, &SmbiosRecord, NULL);
+    if (EFI_ERROR(Status)) {
+      break;
+    }
+
+    SmbiosType4Record = (SMBIOS_TABLE_TYPE4 *) SmbiosRecord;
+    if ((SmbiosType4Record->Status & SMBIOS_TABLE_NOT_POPULATED) == 0) {
+      continue; //Not populated.
+    }
+
+    StrIndex = SmbiosType4Record->Socket;
+    Status = SmbiosGetOptionalStringByIndex ((CHAR8*)((UINT8*)SmbiosType4Record + SmbiosType4Record->Hdr.Length), StrIndex, &NewString);
+    if (EFI_ERROR(Status)) {
+      DEBUG((EFI_D_ERROR, "[%a](%d) SmbiosGetOptionalStringByIndex Failed.\n", __FUNCTION__, __LINE__));
+      break;
+    }
+
+    for (SocketIndex = 0; SocketIndex < SMBIOS_MAX_NUM_SOCKETS; ++SocketIndex) {
+        if (StrCmp(gSocketDesgination[SocketIndex], NewString) == 0) {
+          break;
+        }
+    }
+    if (SocketIndex >= SMBIOS_MAX_NUM_SOCKETS) {
+      break;
+    };
+
+    if (SocketIndex < MAX_CPU_SOCKET) {
+      StrIndex = SmbiosType4Record->ProcessorVersion;
+      if (SmbiosGetOptionalStringByIndex ((CHAR8*)((UINT8*)SmbiosType4Record + SmbiosType4Record->Hdr.Length), StrIndex, &VersionString[SocketIndex]) == EFI_SUCCESS) {
+        PostCpuInfo = VersionString[SocketIndex];
+      }
+
+      Freq = SmbiosType4Record->CurrentSpeed;
+      if (PostCpuInfo != NULL) {
+        UnicodeSPrint(String, StrSize, L"\nCPU %d: %s, Speed: %dMHz\n", SocketIndex, PostCpuInfo, Freq);
+        PostManagerDisplayPostMessage(String);
+      }
+    }
+  }
+
+  // Get Memory info From Smbios Type 17
+  SmbiosType = EFI_SMBIOS_TYPE_MEMORY_DEVICE;
+  Status = Smbios->GetNext (
+            Smbios, 
+            &SmbiosHandle, 
+            &SmbiosType, 
+            (EFI_SMBIOS_TABLE_HEADER **) (&SmbiosType17Record), NULL);
+  if (EFI_ERROR(Status)) {
+    DEBUG((EFI_D_ERROR, "Can not find SMBIOS information.\n"));
+    return;
+  }
+
+  UnicodeSPrint(PostMemInfo, StrSize, L"Total Memory: %dMB (DDR4 %dMHz)\n\n", SmbiosType17Record->Size, SmbiosType17Record->ConfiguredMemoryClockSpeed);
+  PostManagerDisplayPostMessage(PostMemInfo);
+
+  FreePool(PostCpuInfo);
+  FreePool(PostMemInfo);
+  FreePool(String);
+  for (SocketIndex = 0; SocketIndex < MAX_CPU_SOCKET; SocketIndex++) {
+    FreePool (VersionString[SocketIndex]);
+  }
+
+  return;
+}
 
 BOOLEAN ProcessConInAvailability(VOID)
 {
