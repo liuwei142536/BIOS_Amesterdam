@@ -702,6 +702,10 @@ VOID PostReport(VOID)
   FreePool(PostCpuInfo);
   FreePool(PostMemInfo);
   FreePool(String);
+  for (SocketIndex = 0; SocketIndex < MAX_CPU_SOCKET; SocketIndex++) {
+    FreePool (VersionString[SocketIndex]);
+  }
+
   return;
 }
 
