@@ -1,0 +1,51 @@
+TOKEN
+    Name  = "NetBootHotKey_SUPPORT"
+    Value = "1"
+    Help  = "Main switch to enable NetBootHotKey support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    Master = Yes
+End
+
+TOKEN
+	Name  = "SETUP_OEM_KEY1_ENABLE"
+	Value  = "1"
+	Help  = "Enable the SETUP_OEM_KEY1"
+	TokenType = Boolean
+	TargetH = Yes
+	Token = "NetBootHotKey_SUPPORT" "=" "1"
+End
+
+TOKEN
+	Name  = "SETUP_OEM_KEY1_SCAN"
+	Value  = "EFI_SCAN_F12"
+	Help  = "Scan code for F12 key is 0x0016."
+	TokenType = Expression
+	TargetH = Yes
+	Token = "SETUP_OEM_KEY1_ENABLE" "=" "1"
+End
+
+ELINK
+    Name = "NetBootHotKey,"
+    Parent = "OemKey1Hook,"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name = "NetBootHotKey"
+    File = "NetBootHotKey.inf"
+    Package = "AmiModulePkg"
+    ModuleTypes = "DXE_DRIVER"
+End
+
+ELINK
+    Name = "NetBootHotKey"
+    Parent = "ADDITIONAL_AMITSE_LibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+LibraryMapping
+    Class = "NetBootHotKey"
+    Instance = "AmiModulePkg.NetBootHotKey"
+End
+

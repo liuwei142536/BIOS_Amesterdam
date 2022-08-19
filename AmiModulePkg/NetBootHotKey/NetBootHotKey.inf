@@ -1,0 +1,26 @@
+
+
+[Defines]
+    INF_VERSION = 0x00010005
+    BASE_NAME = NetBootHotKey
+    FILE_GUID = 5F65FBA6-522B-4229-BF3D-4EB8A974F5DE
+    VERSION_STRING = 1.0
+    MODULE_TYPE = DXE_DRIVER
+    LIBRARY_CLASS = NULL 
+
+[Sources]
+    NetBootHotKey.c
+
+[Packages]
+    MdePkg/MdePkg.dec
+    IntelFrameworkPkg/IntelFrameworkPkg.dec
+    AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+    AmiModulePkg/AmiModulePkg.dec
+    AmiTsePkg/AmiTsePkg.dec
+
+[LibraryClasses]
+    AmiDxeLib
+    UefiDriverEntryPoint
+
+[Depex]
+    TRUE
