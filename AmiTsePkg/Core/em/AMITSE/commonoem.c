@@ -680,7 +680,7 @@ VOID PostReport(VOID)
         UnicodeSPrint(String, StrSize, L"\nCPU %d: %s, Speed: %dMHz\n", SocketIndex, PostCpuInfo, Freq);
         PostManagerDisplayPostMessage(String);
       }
-      MemFreePointer( (VOID **)&String);
+      MemFreePointer ((VOID **)&String);
     }
   }
 
@@ -698,10 +698,10 @@ VOID PostReport(VOID)
 
   UnicodeSPrint(PostMemInfo, StrSize, L"Total Memory: %dMB (DDR4 %dMHz)\n\n", SmbiosType17Record->Size, SmbiosType17Record->ConfiguredMemoryClockSpeed);
   PostManagerDisplayPostMessage(PostMemInfo);
-  MemFreePointer( (VOID **)&PostMemInfo);
+  MemFreePointer ((VOID **)&PostMemInfo);
 
   for (SocketIndex = 0; SocketIndex < MAX_CPU_SOCKET; SocketIndex++) {
-      MemFreePointer((VOID **)&VersionString[SocketIndex]);
+    MemFreePointer ((VOID **)&VersionString[SocketIndex]);
   }
 
   return;
