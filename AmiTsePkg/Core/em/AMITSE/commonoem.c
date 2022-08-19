@@ -602,7 +602,7 @@ SmbiosGetOptionalStringByIndex (
 
 VOID PostReport(VOID)
 {
-  CHAR16                                *PostCpuInfo;
+  CHAR16                                *PostCpuInfo = NULL;
   CHAR16                                *PostMemInfo;
   EFI_STATUS                            Status;
   EFI_SMBIOS_TABLE_HEADER               *SmbiosRecord;
@@ -624,7 +624,6 @@ VOID PostReport(VOID)
   StrSize = NEWSTRING_SIZE;
   String = AllocateZeroPool (StrSize);
   PostMemInfo = AllocateZeroPool (StrSize);
-  PostCpuInfo = AllocateZeroPool (StrSize);
   for (SocketIndex = 0; SocketIndex < MAX_CPU_SOCKET; SocketIndex++) {
     VersionString[SocketIndex] = AllocateZeroPool (StrSize);
   }
@@ -681,6 +680,7 @@ VOID PostReport(VOID)
         UnicodeSPrint(String, StrSize, L"\nCPU %d: %s, Speed: %dMHz\n", SocketIndex, PostCpuInfo, Freq);
         PostManagerDisplayPostMessage(String);
       }
+      MemFreePointer ((VOID **)&String);
     }
   }
 
@@ -698,12 +698,10 @@ VOID PostReport(VOID)
 
   UnicodeSPrint(PostMemInfo, StrSize, L"Total Memory: %dMB (DDR4 %dMHz)\n\n", SmbiosType17Record->Size, SmbiosType17Record->ConfiguredMemoryClockSpeed);
   PostManagerDisplayPostMessage(PostMemInfo);
+  MemFreePointer ((VOID **)&PostMemInfo);
 
-  FreePool(PostCpuInfo);
-  FreePool(PostMemInfo);
-  FreePool(String);
   for (SocketIndex = 0; SocketIndex < MAX_CPU_SOCKET; SocketIndex++) {
-    FreePool (VersionString[SocketIndex]);
+    MemFreePointer ((VOID **)&VersionString[SocketIndex]);
   }
 
   return;
