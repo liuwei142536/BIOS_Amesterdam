@@ -1,6 +1,6 @@
 TOKEN
     Name  = "PS2Ctl_SUPPORT"
-    Value  = "1"
+    Value  = "0"
     Help  = "Main switch to enable PS2 Controller support in the project."
     TokenType = Boolean
     TargetEQU = Yes

@@ -2407,7 +2407,7 @@ End
 # AptioV server override Start - Eip#433290
 TOKEN
     Name  = "TcoSmiHandler_SUPPORT"
-    Value  = "1"
+    Value  = "0"
     Help  = "Main switch to enable TcoSmiHandler support in Project"
     TokenType = Boolean
 End

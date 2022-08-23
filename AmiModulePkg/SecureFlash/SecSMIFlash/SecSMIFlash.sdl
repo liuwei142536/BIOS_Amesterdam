@@ -1,6 +1,6 @@
 TOKEN
     Name  = "SecSMIFlash_SUPPORT"
-    Value  = "1"
+    Value  = "0"
     Help  = "Main switch to enable Secured SMIFlash support in Project"
     TokenType = Boolean
     TargetMAK = Yes
