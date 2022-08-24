@@ -1,0 +1,13 @@
+<component>
+	name = "NetBootHotKey"
+	category = eModule
+	LocalRoot = "AmiModulePkg\NetBootHotKey\"
+	RefName = "AmiModulePkg.NetBootHotKey"
+[INF]
+"NetBootHotKey.inf"
+[files]
+"NetBootHotKey.sdl"	
+"NetBootHotKey.chm"	
+[dependency]
+AMITSE >= "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;5.004_AmiTse_2_15_1237"
+<endComponent>

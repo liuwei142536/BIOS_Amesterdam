@@ -739,6 +739,11 @@ BOOLEAN ProcessConInAvailability(VOID)
                     PostManagerDisplayPostMessage(text);
                 }
                 MemFreePointer( (VOID **)&text );
+                text = HiiGetString(gHiiHandle, STRING_TOKEN(STR_F12_ENTER_PXE));
+                if (text != NULL) {
+                   PostManagerDisplayPostMessage(text);
+                }
+                MemFreePointer((VOID **)&text);
 #endif
 		gPostScreenMsg = TRUE;
 	}

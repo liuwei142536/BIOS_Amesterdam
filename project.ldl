@@ -170,6 +170,7 @@ AmiModulePkg\Library\SioLibraryInstances.sdl AmiModulePkg\GenericSio\GenericSio.
 AmiModulePkg\Library\AmiSioCommonLib\AmiSioCommonLib.sdl AmiModulePkg\Library\SioLibraryInstances.sdl\
 AmiModulePkg\IdeBus\IdeBusSrc.sdl\
 AmiModulePkg\LegacySerialRedirection\LegacySredir.sdl\
+AmiModulePkg\NetBootHotKey\NetBootHotKey.sdl\
 AmiModulePkg\OemActivation\OA1\OA1.sdl\
 AmiModulePkg\OemActivation\OA2\OA2.sdl\
 AmiModulePkg\OemActivation\OA3\OA3.sdl\

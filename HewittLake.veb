@@ -284,6 +284,7 @@
 "AmiModulePkg\LegacySerialRedirection\LegacySREDIRBin.cif"= "SS: AptioV;$/AptioV/Source/Modules/Legacy Serial Redirection;LegacySreDir_13"
 "AmiModulePkg\Include\Protocol\LegacySredirProtocol.cif"= "SS: AptioV;$/AptioV/Source/Modules/Legacy Serial Redirection;LegacySreDir_13"
 "AmiModulePkg\LegacySerialRedirection\LegacySmmSredir.cif"= "SS: AptioV;$/AptioV/Source/Modules/Legacy Serial Redirection;LegacySreDir_13"
+"AmiModulePkg\NetBootHotKey\NetBootHotKey.cif"= "SS: AptioV;$/AptioV/Source/Modules/NetBootHotKey;NetBootHotKey_03"
 "AmiModulePkg\OemActivation\OemActivation.cif"= "SS: AptioV;$/AptioV/Source/Modules/OemActivation;OemActivation_11"
 "AmiModulePkg\OemActivation\OA1\OA1.cif"= "SS: AptioV;$/AptioV/Source/Modules/OemActivation/OA1;OemActivation_11"
 "AmiModulePkg\OemActivation\OA2\OA2.cif"= "SS: AptioV;$/AptioV/Source/Modules/OemActivation/OA2;OemActivation_11"

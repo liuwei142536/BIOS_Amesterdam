@@ -376,6 +376,8 @@
 #string STR_ENCODING_ERROR          #language en-US "Password cannot be encoded due to insufficient variable space."
 
 #string STR_F7_ENTER_BOOTMENU       #language en-US "Press <F7> to enter boot menu."
+
+#string STR_F12_ENTER_PXE           #language en-US "Press <F12> to enter PXE Boot."
 //**********************************************************************//
 //**********************************************************************//
 //**********************************************************************//
