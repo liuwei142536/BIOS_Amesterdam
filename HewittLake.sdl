@@ -1106,7 +1106,7 @@ End
 #EIP 612469 START
 TOKEN
     Name  = "S3SaveDxe_SUPPORT"
-    Value  = "0"
+    Value  = "1"
     Help  = "Main switch to enable Edk2S3SaveDxe support in Project"
     TokenType = Boolean
     TargetEQU = Yes
@@ -1116,7 +1116,7 @@ End
 
 TOKEN
     Name  = "S3Resume_SUPPORT"
-    Value  = "0"
+    Value  = "1"
     Help  = "Main switch to enable Capsule support in Project"
     TokenType = Boolean
     TargetEQU = Yes
@@ -1486,7 +1486,7 @@ End
 
 TOKEN
     Name  = "SecureMod_SUPPORT"
-    Value  = "1"
+    Value  = "0"
     TokenType = Boolean
     TargetMAK = Yes
     TargetH = Yes
@@ -2555,7 +2555,7 @@ End
 
 TOKEN
     Name = "GRANGEVILLE_PO_ENABLE"
-    Value = "0"
+    Value = "1"
     Help = "Token for enabling setup questions related to Grangeville"
     TokenType = Integer
     TargetH = Yes

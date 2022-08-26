@@ -4212,7 +4212,7 @@ EFI_STATUS EFIAPI GetDeviceCapabilities(PCI_DEV_INFO *Dev)
     else 
         Dev->Capab&=(~(EFI_PCI_IO_ATTRIBUTE_ISA_MOTHERBOARD_IO | EFI_PCI_IO_ATTRIBUTE_ISA_IO));
     
-    Dev->Capab |= EFI_PCI_IO_ATTRIBUTE_DUAL_ADDRESS_CYCLE; // Clear for PCI controllers that can not genrate a DAC
+    //Dev->Capab |= EFI_PCI_IO_ATTRIBUTE_DUAL_ADDRESS_CYCLE; // Clear for PCI controllers that can not genrate a DAC
     
     DEBUG((DEBUG_INFO, "\n Device Data: -> Supported Attributes -> 0x%lX\n", Dev->Capab));
     return Status;

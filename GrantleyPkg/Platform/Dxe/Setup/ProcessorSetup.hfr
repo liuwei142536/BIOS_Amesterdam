@@ -271,7 +271,6 @@ suppressif TRUE;
 endif;
 
 //AptioV Server Override - Suppress test question that end user should not change
-suppressif TRUE;
    oneof varid     = SYSTEM_CONFIGURATION.CheckCpuBist,
           prompt      = STRING_TOKEN(STR_CHECK_BIST_RESULT_PROMPT),
           help        = STRING_TOKEN(STR_CHECK_BIST_RESULT_HELP),
@@ -306,7 +305,6 @@ suppressif TRUE;
       endnumeric;
     endif;
     endif;  
-endif;
 
 //AptioV Server Override - Suppress test question that end user should not change
 suppressif TRUE;
