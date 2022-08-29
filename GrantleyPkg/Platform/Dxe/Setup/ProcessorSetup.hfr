@@ -271,7 +271,6 @@ suppressif TRUE;
 endif;
 
 //AptioV Server Override - Suppress test question that end user should not change
-suppressif TRUE;
    oneof varid     = SYSTEM_CONFIGURATION.CheckCpuBist,
           prompt      = STRING_TOKEN(STR_CHECK_BIST_RESULT_PROMPT),
           help        = STRING_TOKEN(STR_CHECK_BIST_RESULT_HELP),
@@ -304,7 +303,6 @@ suppressif TRUE;
           default = DEFAULT_PROCESSOR_CORE_RATIO,
           default = DEFAULT_PROCESSOR_CORE_RATIO, defaultstore = AmiMfgDefault,
       endnumeric;
-    endif;
     endif;  
 endif;
 

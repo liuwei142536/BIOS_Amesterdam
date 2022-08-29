@@ -80,7 +80,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  CryptoPkg/CryptoPkg.dec
+  AmiCryptoPkg/AmiCryptoPkg.dec
   AmiNetworkPkg/AmiNetworkPkg.dec    		# AMI PORTING.
   AmiTsePkg/AmiTsePkg.dec    			# AMI PORTING.
   AmiCompatibilityPkg/AmiCompatibilityPkg.dec   # AMI PORTING.
@@ -102,7 +102,7 @@
   UefiLib  
   UefiRuntimeServicesTableLib
   UefiHiiServicesLib
-  BaseCryptLib
+  AmiCryptLib
   AmiNetworkPostManagerLib         		# AMI PORTING.
   $(ADDITIONAL_iSCSI_LIB)			# AMI PORTING
 
