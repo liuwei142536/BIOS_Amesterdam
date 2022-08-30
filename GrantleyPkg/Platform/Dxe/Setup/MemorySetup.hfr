@@ -138,8 +138,8 @@
     oneof varid = SYSTEM_CONFIGURATION.promoteMrcWarnings,
         prompt  = STRING_TOKEN(STR_PROMOTE_MRC_WARNING_PROMPT),
         help    = STRING_TOKEN(STR_PROMOTE_MRC_WARNING_HELP),
-        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = RESET_REQUIRED;
-        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_DISABLED_STRING),         value = 0, flags = MANUFACTURING | DEFAULT | RESET_REQUIRED;
+        option text = STRING_TOKEN(STR_ENABLED_STRING),          value = 1, flags = RESET_REQUIRED;
     endoneof;
 
     oneof varid  = SYSTEM_CONFIGURATION.promoteWarnings,
@@ -321,8 +321,8 @@
     oneof varid  = SYSTEM_CONFIGURATION.RankMargin,
         prompt   = STRING_TOKEN (STR_RMT_PROMPT),
         help     = STRING_TOKEN (STR_RMT_HELP),
-        option text = STRING_TOKEN (STR_AUTO),     value = RMT_AUTO, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
-        option text = STRING_TOKEN (STR_DISABLED), value = RMT_DIS, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_AUTO),     value = RMT_AUTO, flags = RESET_REQUIRED;
+        option text = STRING_TOKEN (STR_DISABLED), value = RMT_DIS, flags = DEFAULT | MANUFACTURING | RESET_REQUIRED;
         option text = STRING_TOKEN (STR_ENABLED),  value = RMT_EN, flags = RESET_REQUIRED;
     endoneof;
 
