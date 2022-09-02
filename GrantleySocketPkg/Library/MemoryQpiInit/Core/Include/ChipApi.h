@@ -491,7 +491,7 @@ ReadSmb (
   PSYSHOST    host,                             // Pointer to the system host (root) structure
   UINT8       socket,                           // Processor socket ID
   struct smbDevice  dev,                        // Device address on SMBUS
-  UINT8       byteOffset,                       // Offset in Device
+  UINT16       byteOffset,                       // Offset in Device
   UINT8       *data                             // Pointer to store value
                                                 //   NOTE: For a PCH block read, the array must be 33bytes in length,
                                                 //   and the first data byte pointed to is the number of bytes read.
