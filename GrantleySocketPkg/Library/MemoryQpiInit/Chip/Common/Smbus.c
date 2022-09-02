@@ -47,7 +47,7 @@
 // Local Prototypes
 //
 VOID   ResetSmb(PSYSHOST host, UINT8 socket, struct smbDevice dev, UINT8 byteOffset, UINT8 *data);
-UINT32 ReadSmbWorkerFunction(PSYSHOST host, UINT8 socket, struct smbDevice dev, UINT8 byteOffset, UINT8 *data);
+UINT32 ReadSmbWorkerFunction(PSYSHOST host, UINT8 socket, struct smbDevice dev, UINT16 byteOffset, UINT8 *data);
 UINT32 WriteSmbWorkerFunction(PSYSHOST host, UINT8 socket, struct smbDevice dev, UINT8 byteOffset, UINT8 *data);
 
 
@@ -481,7 +481,7 @@ InitSmb (
 
 UINT8 SendPchSmbCmd (
   PSYSHOST host,
-  UINT8 byteOffset,
+  UINT16 byteOffset,
   UINT8 slaveAddress,
   UINT8 protocolStart,
   UINT8 *data
@@ -520,7 +520,7 @@ UINT8 SendPchSmbCmd (
   //
   if (!(status & (HST_STS_HOST_BUSY | HST_STS_FAILED))) {
     OutPort8(host,(host->var.common.smbBase + HOST_STATUS_REGISTER), SMBUS_B_HSTS_ALL);  // Clear all status bits
-    OutPort8(host,(host->var.common.smbBase + HOST_COMMAND_REGISTER), byteOffset);       // Byte number
+    OutPort8(host,(host->var.common.smbBase + HOST_COMMAND_REGISTER), (UINT8)byteOffset);       // Byte number
     OutPort8(host,(host->var.common.smbBase + XMIT_SLAVE_ADDRESS_REGISTER), slaveAddress);  // Slave address
     // Initialize write data
     if (!(slaveAddress & SMBUS_B_RW_SEL)) {
@@ -601,7 +601,7 @@ ReadSmb (
   PSYSHOST         host,
   UINT8            socket,
   struct smbDevice dev,
-  UINT8            byteOffset,
+  UINT16            byteOffset,
   UINT8            *data
   )
 /*++
@@ -689,7 +689,7 @@ ReadSmbWorkerFunction (
   PSYSHOST         host,
   UINT8            socket,
   struct smbDevice dev,
-  UINT8            byteOffset,
+  UINT16            byteOffset,
   UINT8            *data
   )
 /*++

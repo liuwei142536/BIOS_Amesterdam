@@ -450,7 +450,6 @@ ReadSpd (
         // Write to SPA
         WriteSmb (host, socket, spa, 0, &temp);
       }
-      spdOffset = -256;
 
     } else {
 
@@ -472,7 +471,7 @@ ReadSpd (
   }
 
   // Read from SPD
-  status = ReadSmb (host, socket, spd, (UINT8)(byteOffset + spdOffset), data);
+  status = ReadSmb (host, socket, spd, (byteOffset + spdOffset), data);
 
   return status;
 
@@ -526,7 +525,7 @@ MemReadSmb (
   PSYSHOST         host,
   UINT8            socket,
   struct smbDevice dev,
-  UINT8            byteOffset,
+  UINT16            byteOffset,
   UINT8            *data
   )
 {
