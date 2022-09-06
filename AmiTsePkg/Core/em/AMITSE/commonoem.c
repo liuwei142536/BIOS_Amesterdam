@@ -849,7 +849,7 @@ VOID ProcessEnterSetup(VOID)
       	    }
       	    else
       	    {
-      	    	PasswordType = CheckSystemPassword (AMI_PASSWORD_USER, &NoOfRetries, NULL);
+      	    	PasswordType = CheckSystemPassword (AMI_PASSWORD_NONE, &NoOfRetries, NULL);
       	    }
             if(AMI_PASSWORD_NONE == PasswordType)
             {
