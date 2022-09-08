@@ -38,6 +38,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   MdeModulePkg/MdeModulePkg.dec
+  WellsburgPkg/WellsburgPkg.dec
 
 [LibraryClasses]
   UefiRuntimeServicesTableLib
@@ -52,6 +53,8 @@
   BaseLib
   PcdLib
   ReportStatusCodeLib
+  PciLib
+  PchPlatformLib
 
 [Protocols]
   gEfiRealTimeClockArchProtocolGuid             ## PRODUCES
