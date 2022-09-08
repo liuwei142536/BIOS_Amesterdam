@@ -13,7 +13,8 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 **/
 
 #include "PcRtc.h"
-
+#include <Library/PchPlatformLib.h>
+#include <Library/PciLib.h>
 /**
   Compare the Hour, Minute and Second of the From time and the To time.
   
@@ -228,7 +229,18 @@ PcRtcInit (
     Time.TimeZone = EFI_UNSPECIFIED_TIMEZONE;
     Time.Daylight = 0;
   }
-
+  // load default time when clear cmos
+  if ((PciRead8(PCI_LIB_ADDRESS(DEFAULT_PCI_BUS_NUMBER_PCH, PCI_DEVICE_NUMBER_PCH_LPC, 0, R_PCH_LPC_GEN_PMCON_3)) & B_PCH_LPC_GEN_PMCON_RTC_PWR_STS)) {
+    Time.Second = RTC_INIT_SECOND;
+    Time.Minute = RTC_INIT_MINUTE;
+    Time.Hour   = RTC_INIT_HOUR;
+    Time.Day    = RTC_INIT_DAY;
+    Time.Month  = RTC_INIT_MONTH;
+    Time.Year   = RTC_INIT_YEAR;
+    Time.Nanosecond  = 0;
+    Time.TimeZone = EFI_UNSPECIFIED_TIMEZONE;
+    Time.Daylight = 0;
+  }
   //
   // Reset time value according to new RTC configuration
   //
