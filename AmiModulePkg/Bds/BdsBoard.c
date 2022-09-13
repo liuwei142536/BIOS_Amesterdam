@@ -70,6 +70,7 @@ typedef enum{
     BoTagLegacyUsb,
     BoTagLegacyEmbedNetwork,
     BoTagLegacyBevDevice,
+    BoTagUefiHardDisk,
     BoTagUefi,
     BoTagEmbeddedShell
 } BOOT_OPTION_TAG;
@@ -351,14 +352,24 @@ VOID SetBootOptionTags(){
             BaseTag = LegacyBootOptionTags[BBS_DEVICE_TYPE_TO_INDEX(DeviceType)];
         }else
 #endif
-        if (IsShellDevicePath(Option->FilePathList)) BaseTag = BoTagEmbeddedShell;
-        else BaseTag = BoTagUefi;
+        if (IsShellDevicePath(Option->FilePathList)) {
+            BaseTag = BoTagEmbeddedShell;
+        } else if (Option->FilePathList->Type == MEDIA_DEVICE_PATH && 
+                  Option->FilePathList->SubType == MEDIA_HARDDRIVE_DP) {
+            // [Luxshare-ICT] Add BaseTag for Hdd Boot Options - BoTagUefiHardDisk
+            BaseTag = BoTagUefiHardDisk;
+        } else {
+            // [Luxshare-ICT]：UEFI Network and Other UEFI Boot Option Still BoTagUefi
+            BaseTag = BoTagUefi;
+        }
         if (BaseTag == UNASSIGNED_HIGHEST_TAG) continue;
+        // [Luxshare-ICT]：modified BOOT_OPTION_TAG_PRIORITIES to changed Default BootOrder
         TagPriority = FindTagPriority((UINT16)BaseTag);
         //UEFI boot options must have unique tags, otherwise then will be grouped when
         //GROUP_BOOT_OPTIONS_BY_TAG tokens is enabled
-        if (BaseTag == BoTagUefi || BaseTag == BoTagEmbeddedShell)
+        if (BaseTag == BoTagUefiHardDisk || BaseTag == BoTagUefi || BaseTag == BoTagEmbeddedShell) {
             BaseTag += UefiBootOptionsInc++;
+        }
         Option->Tag = BootOptionTag(BaseTag, TagPriority);
     }
 }
