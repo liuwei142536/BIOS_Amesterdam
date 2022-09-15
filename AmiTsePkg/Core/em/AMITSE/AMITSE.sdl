@@ -564,7 +564,7 @@ End
 
 TOKEN
 	Name  = "TSE_BOOT_NOW_IN_BOOT_ORDER"
-	Value  = "0"
+	Value  = "1"
 	Help  = "Turn on to see boot override/BBS Popup menu with in the devices listed in boot order."
 	TokenType = Boolean
 	TargetH = Yes
