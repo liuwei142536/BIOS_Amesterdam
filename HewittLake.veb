@@ -302,6 +302,7 @@
 "AmiModulePkg\Terminal\Terminal.cif"= "SS: AptioV;$/AptioV/Source/Modules/Terminal;Terminal_18"
 "AmiModulePkg\Include\Protocol\TerminalAmiSerialProtocol.cif"= "SS: AptioV;$/AptioV/Source/Modules/Terminal;Terminal_18"
 "AmiModulePkg\Include\TerminalSetupIncludes.cif"= "SS: AptioV;$/AptioV/Source/Modules/Terminal;Terminal_18"
+"AmiModulePkg\TseDefaultBootOrder\TseDefaultBootOrder.cif"= "SS: AptioV;$/AptioV/Source/Modules/BootOptionPolicies/TseDefaultBootOrder;TseDefaultBootOrder_04"
 "AmiModulePkg\Usb\AmiUsb.cif"= "SS: AptioV;$/AptioV/Source/Modules/Usb;AmiUsb_24"
 "AmiModulePkg\Usb\Rt\UsbRt.cif"= "SS: AptioV;$/AptioV/Source/Modules/Usb/Rt;AmiUsb_24"
 "AmiModulePkg\Usb\Uhcd.cif"= "SS: AptioV;$/AptioV/Source/Modules/Usb;AmiUsb_24"

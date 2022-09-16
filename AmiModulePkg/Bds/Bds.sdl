@@ -95,7 +95,7 @@ End
 
 TOKEN
     Name  = "BOOT_OPTION_TAG_PRIORITIES"
-    Value  = "BoTagEmbeddedShell, BoTagUefi, BoTagLegacyCdrom, BoTagLegacyHardDisk, BoTagLegacyFloppy, BoTagLegacyEmbedNetwork"
+    Value  = "BoTagUefiHardDisk, BoTagUefi, BoTagLegacyCdrom, BoTagLegacyHardDisk, BoTagLegacyFloppy, BoTagLegacyEmbedNetwork, BoTagEmbeddedShell"
     Help  = "List of value of type BOOT_OPTION_TAG that define priorities of the boot option tags.\BOOT_OPTION_TAG is defined in BdsBoard.c\"
     TokenType = Expression
     TargetH = Yes
