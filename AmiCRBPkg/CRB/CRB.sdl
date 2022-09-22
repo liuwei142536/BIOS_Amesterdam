@@ -556,7 +556,7 @@ End
 
 TOKEN
     Name  = "NUMBER_OF_SYSTEM_SLOTS"
-    Value  = "8"
+    Value  = "1"
     Help  = "Identifies the number of system slots available on the platform."
     TokenType = Integer
     TargetEQU = Yes
