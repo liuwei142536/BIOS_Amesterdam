@@ -175,6 +175,7 @@
   DebugAgentLib
   LocalApicLib
   PrintLib
+  PcdLib
 
 [Guids]
   gEfiHtBistHobGuid                             ## CONSUMES  ## HOB

@@ -62,6 +62,8 @@
 #define EFI_IA32_MCG_CAP                      0x179
 #define EFI_IA32_MCG_CTL                      0x17B
 
+#define EFI_MSR_FLEX_RATIO                    0x194
+#define V_FLEX_RATIO_ENABLED                  0x10000
 #define EFI_MSR_IA32_PERF_STS                 0x198
 #define EFI_MSR_IA32_PERF_CTL                 0x199
 #define EFI_MSR_IA32_CLOCK_MODULATION         0x19A
