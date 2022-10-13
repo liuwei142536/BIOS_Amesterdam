@@ -2330,7 +2330,7 @@ End
 
 TOKEN
     Name  = "SMBIOS_TYPE_4_MAX_SPEED"
-    Value  = "4000"
+    Value  = "2500"
     Help  = "Value in MHz."
     TokenType = Integer
     TargetH = Yes

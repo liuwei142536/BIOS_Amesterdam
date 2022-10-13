@@ -44,6 +44,7 @@
 #include <Protocol/MpService.h>
 #include <Library/CpuConfigLib.h>
 #include <Library/DebugLib.h>
+#include <Library/PcdLib.h>
 #include "MpCommon.h"
 
 #define BDX_DE_SKU 0x5066
@@ -641,7 +642,10 @@ VOID CreateSmbiosTable4(IN UINT32 SocketNumber, IN UINT32 PhysSocket)
     if (MaxFreqBrandStr) ProcInfo->CurrentSpeed = MaxFreqBrandStr;
     else ProcInfo->CurrentSpeed = ((UINT16)AsmReadMsr64(EFI_MSR_IA32_PERF_CTL) >> 8) * 100;//AptioV server override:EIP#126818 change made to read correct frequency
     
-   
+    if (((UINT32)AsmReadMsr64 (EFI_MSR_FLEX_RATIO) & BIT16) == 0x10000) {
+      ProcInfo->CurrentSpeed = ((UINT16)AsmReadMsr64 (EFI_MSR_FLEX_RATIO) >> 8) * 100;
+    }
+
     ProcInfo->ExternalClock = SMBIOS_TYPE_4_EXTERNAL_CLOCK;
     ProcInfo->Status = 0x41;    //Populated and enabled.
     ProcInfo->ProcessorUpgrade = SMBIOS_TYPE_4_PROC_UPGRADE;
@@ -665,6 +669,9 @@ VOID CreateSmbiosTable4(IN UINT32 SocketNumber, IN UINT32 PhysSocket)
 
 //Grangeville AptioV override start - Implement according to SMBIOS 3.0
     GetSupportedCoreThreadCounts(ProcessorNumber, &CoreCount, &ThreadCount);
+    if ((PcdGet32 (PcdCpuProcessorFeatureUserConfiguration) & PCD_CPU_HT_BIT) == 0) {
+      ThreadCount /= 2;
+    }
     ThreadPerCore = ThreadCount / CoreCount;
 
     if ((CoreCount > 0x0) && (CoreCount <= 0xFF)) {
