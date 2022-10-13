@@ -183,6 +183,7 @@ AmiModulePkg\PCI\PciRes\PciOutOfResourceSetupPage.sdl AmiModulePkg\PCI\PciBus.sd
 AmiModulePkg\Ps2Ctl\Ps2Ctl.sdl\
 AmiModulePkg\SmiVariable\SmiVariable.sdl\
 AmiModulePkg\Terminal\Terminal.sdl\
+AmiModulePkg\TseDefaultBootOrder\TseDefaultBootOrder.sdl\
 AmiModulePkg\Usb\Usb.sdl\
 AmiModulePkg\Usb\UsbSrc.sdl AmiModulePkg\Usb\Usb.sdl\
 AmiModulePkg\Usb\Int13\UsbInt13.sdl AmiModulePkg\Usb\Usb.sdl\
