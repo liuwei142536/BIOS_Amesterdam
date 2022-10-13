@@ -642,7 +642,7 @@ VOID CreateSmbiosTable4(IN UINT32 SocketNumber, IN UINT32 PhysSocket)
     if (MaxFreqBrandStr) ProcInfo->CurrentSpeed = MaxFreqBrandStr;
     else ProcInfo->CurrentSpeed = ((UINT16)AsmReadMsr64(EFI_MSR_IA32_PERF_CTL) >> 8) * 100;//AptioV server override:EIP#126818 change made to read correct frequency
     
-    if (((UINT32)AsmReadMsr64 (EFI_MSR_FLEX_RATIO) & BIT16) == 0x10000) {
+    if (((UINT32)AsmReadMsr64 (EFI_MSR_FLEX_RATIO) & BIT16) == FLEX_RATIO_ENABLED) {
       ProcInfo->CurrentSpeed = ((UINT16)AsmReadMsr64 (EFI_MSR_FLEX_RATIO) >> 8) * 100;
     }
 
