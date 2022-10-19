@@ -2511,7 +2511,7 @@ OemMemRiserInfo (
 //            if (ch > 1) break;
 //setup->mem.socket[socket].ddrCh[ch].numDimmSlots need re-initial default value from MAX_DIMM to 0.
 //Then ch2~3 numDimmSlots value will not be set for TypeEchoCanyon platform.
-            setup->mem.socket[socket].ddrCh[ch].numDimmSlots = 0;
+            setup->mem.socket[socket].ddrCh[ch].numDimmSlots = 3;
             if (ch > 1) continue;
 // AptioV server override end
 #ifdef GRANGEVILLE_FLAG
