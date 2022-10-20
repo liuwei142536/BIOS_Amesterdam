@@ -877,6 +877,77 @@ VOID ProcessEnterSetup(VOID)
 
 /**
     This function is a hook called when TSE determines
+    that SETUP utility has to be displayed. This function
+    is available as ELINK. In the generic implementation
+    setup password is prompted in this function.
+
+    @param VOID
+
+    @retval VOID
+
+**/
+VOID ProcessEnterPxe(VOID)
+{
+    UINTN NoOfRetries;
+    UINT32 PasswordInstalled = AMI_PASSWORD_NONE;
+    UINTN Index;
+    EFI_INPUT_KEY Key;
+    EFI_TPL OldTpl;
+    
+    if ( gPasswordType == AMI_PASSWORD_NONE )
+    {
+        PasswordInstalled = PasswordCheckInstalled();
+
+        if ( !( PasswordInstalled & AMI_PASSWORD_ADMIN ) )
+        {
+            SetPasswordType( AMI_PASSWORD_ADMIN );
+        }
+        else
+        {
+            EFI_STATUS Status = EFI_SUCCESS;
+            UINT32 PasswordType = 0;
+            NoOfRetries = 3;
+
+            MouseStop ();              //Stopping before clearing the screen
+            CleanUpLogo();
+            MouseRefresh (); 
+         
+            Status = InitEsaTseInterfaces ();
+            
+           
+            
+            if (!EFI_ERROR (Status))
+            {
+                PasswordType = gEsaInterfaceForTSE->CheckSystemPassword (AMI_PASSWORD_USER, &NoOfRetries, NULL);
+                gPasswordType = PasswordType; // setting the gPasswordType in Esa Boot Only.
+            }
+            else
+            {
+                PasswordType = CheckSystemPassword (AMI_PASSWORD_NONE, &NoOfRetries, NULL);
+            }
+            if(AMI_PASSWORD_NONE == PasswordType)
+            {
+                OldTpl = gBS->RaiseTPL (TPL_HIGH_LEVEL);
+                gBS->RestoreTPL (TPL_APPLICATION);
+
+                while(1)
+                {
+                    //Patch
+                    //Ctl-Alt-Del is not recognized by core unless a
+                    //ReadKeyStroke is issued
+                    gBS->WaitForEvent( 1, &(gST->ConIn->WaitForKey), &Index );
+                    gST->ConIn->ReadKeyStroke( gST->ConIn, &Key );
+                }
+                gBS->RaiseTPL (TPL_HIGH_LEVEL);
+                gBS->RestoreTPL (OldTpl);
+                        
+            }
+            
+        }
+    }
+}
+/**
+    This function is a hook called when TSE determines
     that it has to load the boot options in the boot
     order. This function is available as ELINK. OEM
     may decide to prompt for boot password in this
