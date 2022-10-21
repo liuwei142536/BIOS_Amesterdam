@@ -27,6 +27,12 @@ End
 
 ELINK
     Name = "NetBootHotKey,"
+    Parent = "ProcessEnterPxe,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "ProcessEnterPxe,"
     Parent = "OemKey1Hook,"
     InvokeOrder = AfterParent
 End

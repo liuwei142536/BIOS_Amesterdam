@@ -128,6 +128,7 @@ typedef struct {
 VOID DrawQuietBootLogo(VOID);
 BOOLEAN ProcessConInAvailability(VOID);
 VOID ProcessEnterSetup(VOID);
+VOID ProcessEnterPxe(VOID);
 VOID ProcessProceedToBoot(VOID);
 VOID MinisetupDriverEntryHook(VOID);
 VOID PostManagerHandShakeHook(VOID);
