@@ -877,7 +877,7 @@ VOID ProcessEnterSetup(VOID)
 
 /**
     This function is a hook called when TSE determines
-    that SETUP utility has to be displayed. This function
+    that Pxe utility has to be displayed. This function
     is available as ELINK. In the generic implementation
     setup password is prompted in this function.
 
@@ -909,12 +909,10 @@ VOID ProcessEnterPxe(VOID)
             NoOfRetries = 3;
 
             MouseStop ();              //Stopping before clearing the screen
-            CleanUpLogo();
+            CleanUpLogo ();
             MouseRefresh (); 
          
             Status = InitEsaTseInterfaces ();
-            
-           
             
             if (!EFI_ERROR (Status))
             {
