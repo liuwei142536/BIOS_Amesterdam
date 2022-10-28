@@ -1989,7 +1989,6 @@ PchInitBeforeBoot (
         /// Write PCH_BWP_SIGNATURE to IoTrap Address
         ///
         IoWrite32 (PchPlatformPolicy->LockDownConfig->PchBiosLockIoTrapAddress, PCH_BWP_SIGNATURE);
-        DEBUG ((EFI_D_ERROR, "[Yogn]%a(%d)\n", __FUNCTION__, __LINE__));
         S3BootScriptSaveMemWrite (
           S3BootScriptWidthUint8,
           (UINTN) (PciD31F0RegBase + R_PCH_LPC_BIOS_CNTL),
