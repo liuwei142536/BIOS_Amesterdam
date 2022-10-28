@@ -380,7 +380,7 @@ InitializePchDevice (
   UINT16      LpcDeviceId;
   //Aptiov server override start: BLE support
   static EFI_GUID    StartNvramSmiServicesGuid = NVRAM_START_SMI_SERVICES_GUID;  
-  EFI_EVENT  BiosLockEvent;
+  EFI_EVENT   EndOfDxeEvent;
   VOID        *BiosLockReg =  NULL;  
   //Aptiov server override end: BLE support
   
@@ -571,17 +571,18 @@ InitializePchDevice (
     );
   
 //AptioV server override start:: BLE support   
-  Status = gBS->CreateEvent (
+  Status = gBS->CreateEventEx (
                   EVT_NOTIFY_SIGNAL,
                   TPL_CALLBACK,
                   PchBiosLockEnable,
                   NULL,
-                  &BiosLockEvent
+                  &gEfiEndOfDxeEventGroupGuid,
+                  &EndOfDxeEvent
                   );
   if (Status == EFI_SUCCESS) {
     Status = gBS->RegisterProtocolNotify (
                   &StartNvramSmiServicesGuid,
-                  BiosLockEvent,
+                  EndOfDxeEvent,
                   &BiosLockReg
                 );  
   }
@@ -1988,6 +1989,7 @@ PchInitBeforeBoot (
         /// Write PCH_BWP_SIGNATURE to IoTrap Address
         ///
         IoWrite32 (PchPlatformPolicy->LockDownConfig->PchBiosLockIoTrapAddress, PCH_BWP_SIGNATURE);
+        DEBUG ((EFI_D_ERROR, "[Yogn]%a(%d)\n", __FUNCTION__, __LINE__));
         S3BootScriptSaveMemWrite (
           S3BootScriptWidthUint8,
           (UINTN) (PciD31F0RegBase + R_PCH_LPC_BIOS_CNTL),
