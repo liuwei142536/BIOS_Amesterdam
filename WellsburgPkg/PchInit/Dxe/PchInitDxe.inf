@@ -135,6 +135,7 @@ ENTRY_POINT          = PchInitEntryPoint
 
 [Guids]
   gPchInitPeiVariableGuid
+  gEfiEndOfDxeEventGroupGuid
 
 [Depex]
 gEfiSmbusHcProtocolGuid  #AptioV server override: Pci host bridge driver must dispatch before Chipset GCD allocation

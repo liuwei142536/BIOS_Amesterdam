@@ -209,6 +209,7 @@ extern FVI_ELEMENT_AND_FUNCTION       mPchFviElementsData[];
 extern FVI_DATA_HUB_CALLBACK_CONTEXT  mPchFviVersionData;
 extern UINTN                          mPchFviElements;
 extern EFI_GUID  gPchSataEfiLoadProtocolGuid;
+extern EFI_GUID gEfiEndOfDxeEventGroupGuid;
 #ifdef PCH_SERVER_BIOS_FLAG
 extern EFI_GUID  gPchsSataEfiLoadProtocolGuid;
 #endif
