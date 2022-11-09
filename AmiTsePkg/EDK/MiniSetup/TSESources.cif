@@ -1,0 +1,22 @@
+<component>
+    name = "TSE Sources"
+    category = eModule
+    LocalRoot = "AmiTsePkg\EDK\MiniSetup\"
+    RefName = "AMITSESources"
+[files]
+"TSESources.Sdl"	
+"AMITSE.chm"	
+[parts]
+"AMITSESources.TseAdvanced"
+"AMITSESources.Minisetup"
+"AMITSESources.TseLite"
+"AMITSESources.Uefi21"
+"AMITSESources.Ezport"
+"AMITSESources.Legacy"
+"AMITSESources.EzportPlus"
+"AMITSESources.TseEDKIIPkg"
+"AMITSESources.JsonCapsule"
+[dependency]
+AmiTsePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/AmiTsePkg;AmiTsePkg_2_22_1287"
+AMITSE = "SS: AptioV;$/AptioV/Binary/Modules/AMITSE;AMITSE_2_22_1287"
+<endComponent>
