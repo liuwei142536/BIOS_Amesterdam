@@ -1,0 +1,48 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+INF_VERSION = 0x00010015
+VERSION_STRING = 1.0
+FILE_GUID = E22D1A78-A438-47D9-B6D3-72B9BBE45712
+BASE_NAME = AmiCJsonLib
+MODULE_TYPE = BASE
+LIBRARY_CLASS = AmiCJsonLib | UEFI_APPLICATION UEFI_DRIVER DXE_DRIVER
+
+[Sources]
+AmiCJsonLib.c
+
+[LibraryClasses]
+MemoryAllocationLib
+BaseMemoryLib
+PrintLib
+BaseLib
+
+[Packages]
+MdePkg/MdePkg.dec
+AmiDataProcessingPkg/AmiDataProcessingPkg.dec
+
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************

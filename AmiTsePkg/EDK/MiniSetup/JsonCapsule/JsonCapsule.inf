@@ -1,0 +1,69 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+  INF_VERSION = 0x00010015
+  VERSION_STRING = 1.0
+  BASE_NAME = JsonCapsule
+  MODULE_TYPE = BASE
+  LIBRARY_CLASS = JsonCapsule
+    
+[Sources]
+  JsonConfigCapsule.c
+  JsonConfigCapsule.h
+  JsonCapsuleVerification.c
+  JsonCapsuleVerification.h
+
+[Packages]
+  AmiTsePkg/AmiTsePkg.dec
+  AmiTsePkg/AmiTsePrivatePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiDataProcessingPkg/AmiDataProcessingPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCryptoPkg/AmiCryptoPkg.dec
+ 
+[LibraryClasses]
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  AmiJsonLib
+  BaseLib
+  AmiDxeLib
+  
+[Guids]
+  gEfiGlobalVariableGuid
+  gAmiTseSetupEnterGuid
+  gEfiFileSystemInfoGuid
+  gEfiCertPkcs7Guid
+  gEfiImageSecurityDatabaseGuid
+  gEfiCertSha1Guid
+  gEfiCertSha256Guid
+  gEfiCertSha384Guid
+  gEfiCertSha512Guid
+  gEfiCertX509Guid
+  gEfiCertX509Sha256Guid
+  gEfiCertX509Sha384Guid
+  gEfiCertX509Sha512Guid
+  gEfiHashAlgorithmSha1Guid
+  gEfiHashAlgorithmSha256Guid
+  gEfiHashAlgorithmSha384Guid
+  gEfiHashAlgorithmSha512Guid
+  
+  
+[protocols]
+  gEfiFirmwareVolume2ProtocolGuid 
+  gAmiDigitalSignatureProtocolGuid
+  
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdCapsuleMax 
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50  
+  GCC:*_*_*_CC_FLAGS = -DTSE_FOR_APTIO_4_50   

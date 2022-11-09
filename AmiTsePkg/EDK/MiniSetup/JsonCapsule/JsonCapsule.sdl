@@ -1,0 +1,32 @@
+TOKEN
+    Name  = "JSON_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Json sources support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    TargetH = Yes
+    Master = Yes
+    Token = "AMI_DATA_PROCESSING_PKG_VERSION" ">=" "1"
+    Token = "AMI_CRYPTOPACKAGE_MODULE_REVISION" ">=" "29"
+    Token = "ALWAYS_PUBLISH_HII_RESOURCES" "=" "1"
+End
+
+INFComponent
+    Name  = "JsonCapsule"
+    File  = "JsonCapsule.inf"
+    Package  = "AmiTsePkg"
+End
+
+ELINK
+    Name  = "JsonCapsule"
+    Parent  = "JsonCapsuleBin"
+    InvokeOrder = ReplaceParent
+End
+
+
+#   Arch  = "X64"
+LibraryMapping
+    Class  = "JsonCapsule"
+    Instance  = "AmiTsePkg.JsonCapsule"
+End
+

@@ -1,0 +1,14 @@
+<component>
+    name = "TSE Binary - JsonCapsule"
+    category = ModulePart
+    LocalRoot = "AmiTsePkg\EDK\MiniSetup\JsonCapsule\"
+    RefName = "AMITSE.JsonCapsuleBin"
+[INF]
+"JsonCapsuleBin.inf"
+"JsonCapsuleBinBT32.inf"
+[files]
+"JsonCapsuleBin.sdl"	
+"AmiJsonConfig.py"	
+"FwCapsuleHdr.ffs"
+"JsonCapsuleHook.c"	
+<endComponent>

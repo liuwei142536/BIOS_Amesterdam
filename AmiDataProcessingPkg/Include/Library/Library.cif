@@ -1,0 +1,11 @@
+<component>
+	name = "Library"
+	category = ModulePart
+	LocalRoot = "AmiDataProcessingPkg\Include\Library\"
+	RefName = "AmiDataProcessingPkg.Library"
+[files]
+"AmiJsonLib.h"   
+"AmiCJsonLib.h"   
+"AmiBase64Lib.h"   
+"AmiJsonLibCommon.h"   
+<endComponent>

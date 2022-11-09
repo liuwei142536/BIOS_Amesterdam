@@ -1,0 +1,37 @@
+TOKEN
+	Name  = StyleHook_SUPPORT
+	Value  = 1
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetMAK = Yes
+	Master = Yes
+	Help  = "Main switch to enable StyleHook support in Project"
+End
+
+PATH
+	Name  = "TSESTYLEHOOK_DIR"
+End
+
+ELINK
+	Name  = "$(BUILD_DIR)\StyleHook.lib"
+	Parent  = "$(TSELITESRC_DIR)\StyleHook\StyleHook$(ARCH).lib"
+	InvokeOrder = ReplaceParent
+End
+
+ELINK
+	Name  = "StyleHook"
+	Parent  = "StyleHookBin"
+	InvokeOrder = ReplaceParent
+End
+
+INFComponent
+	Name  = "StyleHook"
+	File  = "StyleHook.inf"
+	Package  = "AmiTsePkg"
+End
+
+LibraryMapping
+	Class  = "StyleHook"
+	Instance  = "AmiTsePkg.StyleHook"
+#	Arch  = "X64"
+End

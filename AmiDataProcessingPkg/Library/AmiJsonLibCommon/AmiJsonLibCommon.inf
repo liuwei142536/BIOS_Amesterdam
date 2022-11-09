@@ -1,0 +1,34 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+# @file AmiJsonLibCommon.inf
+#
+# INF description file for AmiJsonLibCommon Library
+#
+
+
+[Defines]
+INF_VERSION = 0x00010005
+VERSION_STRING = 1.0
+BASE_NAME = AmiJsonLibCommon
+MODULE_TYPE = DXE_DRIVER
+LIBRARY_CLASS = AmiJsonLibCommon | DXE_DRIVER UEFI_DRIVER UEFI_APPLICATION
+FILE_GUID = 6e625de7-d64b-4630-a270-f6abcb498231
+
+[Sources]
+AmiJsonLibCommon.c
+
+[LibraryClasses]
+BaseLib
+DebugLib
+
+[Packages]
+MdePkg/MdePkg.dec
+MdeModulePkg/MdeModulePkg.dec
+AmiDataProcessingPkg/AmiDataProcessingPkg.dec
+
+  

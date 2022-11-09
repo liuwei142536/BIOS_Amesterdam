@@ -1,0 +1,81 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+
+[Defines]
+	INF_VERSION  =  0x00010005
+	VERSION_STRING  =  1.0
+	BASE_NAME  = JsonCapsuleBinBT32
+	MODULE_TYPE = BASE
+    LIBRARY_CLASS = JsonCapsuleBin
+    
+[Sources.Common]
+
+[binaries.IA32]
+ LIB | JsonCapsuleLocal.lib|*|*|MYTOOLS  
+ LIB | JsonCapsuleLocal.lib|*|*|MSFT 
+ LIB | JsonCapsuleLocalVS2015.lib|*|*|VS2015 
+[binaries.X64]
+ LIB | JsonCapsuleLocalx64.lib|*|*|MYTOOLS
+ LIB | JsonCapsuleLocalx64.lib|*|*|MSFT
+ LIB | JsonCapsuleLocalVS2015x64.lib|*|*|VS2015
+ LIB | JsonCapsuleLocalGCCx64.lib|*|*|GCC
+ LIB | JsonCapsuleLocalVS2019x64.lib|*|*|VS2019
+[binaries.AARCH64]
+ LIB | JsonCapsuleLocalAarch64.lib
+ 
+ 
+       
+[Packages]
+  AmiTsePkg/AmiTsePkg.dec
+  AmiTsePkg/AmiTsePrivatePkg.dec
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  AmiDataProcessingPkg/AmiDataProcessingPkg.dec
+  AmiModulePkg/AmiModulePkg.dec
+  AmiCryptoPkg/AmiCryptoPkg.dec
+ 
+[LibraryClasses]
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  AmiJsonLib
+  BaseLib
+  AmiDxeLib
+  
+[Guids]
+  gEfiGlobalVariableGuid
+  gAmiTseSetupEnterGuid
+  gEfiFileSystemInfoGuid
+  gEfiCertPkcs7Guid
+  gEfiImageSecurityDatabaseGuid
+  gEfiCertSha1Guid
+  gEfiCertSha256Guid
+  gEfiCertSha384Guid
+  gEfiCertSha512Guid
+  gEfiCertX509Guid
+  gEfiCertX509Sha256Guid
+  gEfiCertX509Sha384Guid
+  gEfiCertX509Sha512Guid
+  gEfiHashAlgorithmSha1Guid
+  gEfiHashAlgorithmSha256Guid
+  gEfiHashAlgorithmSha384Guid
+  gEfiHashAlgorithmSha512Guid
+  
+  
+[protocols]
+  gEfiFirmwareVolume2ProtocolGuid 
+  gAmiDigitalSignatureProtocolGuid
+  
+[Pcd]
+  gEfiMdeModulePkgTokenSpaceGuid.PcdCapsuleMax 
+  
+        
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50  
+  GCC:*_*_*_CC_FLAGS = -DTSE_FOR_APTIO_4_50  

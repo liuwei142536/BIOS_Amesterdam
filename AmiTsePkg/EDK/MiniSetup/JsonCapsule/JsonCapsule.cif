@@ -1,0 +1,10 @@
+<component>
+    name = "TSE Sources - JsonCapsule"
+    category = ModulePart
+    LocalRoot = "AmiTsePkg\EDK\MiniSetup\JsonCapsule\"
+    RefName = "AMITSESources.JsonCapsule"
+[INF]
+"JsonCapsule.inf"
+[files]
+"JsonCapsule.sdl"	
+<endComponent>

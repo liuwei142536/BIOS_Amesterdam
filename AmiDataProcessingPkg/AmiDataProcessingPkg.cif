@@ -1,0 +1,15 @@
+<component>
+    name = "AmiDataProcessingPkg"
+    category = eModule
+    LocalRoot = "AmiDataProcessingPkg\"
+    RefName = "AmiDataProcessingPkg"
+[files]
+"AmiDataProcessingPkg.dec"	
+"AmiDataProcessingPkg.sdl"	
+"AmiDataProcessingPkg.chm"	
+[parts]
+"AmiDataProcessingPkg.Include"
+"AmiDataProcessingPkg.LibraryInstances"
+[dependency]
+MdePkg >= "SS: AptioV;$/AptioV/Source/Interfaces/MdePkg;5.004_MdePkg_04"
+<endComponent>

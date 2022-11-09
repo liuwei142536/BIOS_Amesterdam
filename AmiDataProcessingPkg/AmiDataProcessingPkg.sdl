@@ -1,0 +1,18 @@
+TOKEN
+    Name  = "AmiDataProcessingPkg_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Ami Data Processing support in Project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "AMI_DATA_PROCESSING_PKG_VERSION"
+    Value  = "2"
+    Help  = "AmiDataProcessingPkg version.\Do not change."
+    TokenType = Integer
+    TargetMAK = Yes
+    TargetH = Yes
+    Lock = Yes
+End
+

@@ -1,0 +1,99 @@
+TOKEN
+    Name  = "AmiDataProcessingLib_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AmiRedfishLib support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmiJsonLibCJson_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to enable AmiJsonLibCJson support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmiJsonLibCommon_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to enable AmiJsonLibCommon support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmiCJsonLib_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to enable AmiCJsonLib support in Project"
+    TokenType = Boolean
+End
+
+TOKEN
+    Name  = "AmiBase64Lib_SUPPORT"
+    Value  = "1"
+    Help  = "Switch to enable AmiBase64Lib support in Project"
+    TokenType = Boolean
+End
+
+INFComponent
+    Name  = "AmiJsonLibCJson"
+    File  = "AmiJsonLibCJson\AmiJsonLibCJson.inf"
+    Package  = "AmiDataProcessingPkg"
+    Help  = "Includes AmiJsonLibCJson.inf to Project."
+    Token = "AmiJsonLibCJson_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "AmiJsonLib"
+    Instance  = "AmiDataProcessingPkg.AmiJsonLibCJson"
+    ModuleTypes  = "DXE_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+    Help  = "Library mapping for AmiJsonLibCJson under AmiJsonLibCJson.inf in Platform.dsc"
+    Token = "AmiJsonLibCJson_SUPPORT" "=" "1"
+End
+
+INFComponent
+    Name  = "AmiJsonLibCommon"
+    File  = "AmiJsonLibCommon\AmiJsonLibCommon.inf"
+    Package  = "AmiDataProcessingPkg"
+    Help  = "Includes AmiJsonLibCommon.inf to Project."
+    Token = "AmiJsonLibCommon_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "AmiJsonLibCommon"
+    Instance  = "AmiDataProcessingPkg.AmiJsonLibCommon"
+    ModuleTypes  = "DXE_DRIVER UEFI_APPLICATION UEFI_DRIVER"
+    Help  = "Library mapping for AmiJsonLibCommon under AmiJsonLibCommon.inf in Platform.dsc"
+    Token = "AmiJsonLibCommon_SUPPORT" "=" "1"
+End
+                 
+INFComponent
+    Name  = "AmiCJsonLib"
+    File  = "AmiCJsonLib/AmiCJsonLib.inf"
+    Package  = "AmiDataProcessingPkg"
+    Help  = "Includes AmiCJsonLib.inf to Project."
+    Token = "AmiCJsonLib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "AmiCJsonLib"
+    Instance  = "AmiDataProcessingPkg.AmiCJsonLib"
+    ModuleTypes  = "UEFI_APPLICATION UEFI_DRIVER DXE_DRIVER"
+    Help  = "Library mapping for AmiCJsonLib under AmiJsonLib.inf in Platform.dsc"
+    Token = "AmiCJsonLib_SUPPORT" "=" "1"
+End
+
+
+INFComponent
+    Name  = "AmiBase64Lib"
+    File  = "AmiBase64Lib/AmiBase64Lib.inf"
+    Package  = "AmiDataProcessingPkg"
+    Help  = "Includes AmiBase64Lib.inf to Project."
+    Token = "AmiBase64Lib_SUPPORT" "=" "1"
+End
+
+LibraryMapping
+    Class  = "AmiBase64Lib"
+    Instance  = "AmiDataProcessingPkg.AMIBase64Lib"
+    ModuleTypes  = "UEFI_APPLICATION UEFI_DRIVER DXE_DRIVER"
+    Help  = "Library mapping for AmiBase64Lib under AmiBase64Lib.inf in Platform.dsc"
+    Token = "AmiBase64Lib_SUPPORT" "=" "1"
+End

@@ -1,0 +1,84 @@
+TOKEN
+    Name  = "JSON_BIN_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable Json binary support in Project"
+    TokenType = Boolean
+    TargetMAK = Yes
+    Master = Yes
+    Token = "AMI_DATA_PROCESSING_PKG_VERSION" ">=" "1"
+    Token = "AMI_CRYPTOPACKAGE_MODULE_REVISION" ">=" "29"
+    Token = "ALWAYS_PUBLISH_HII_RESOURCES" "=" "1"
+End
+
+INFComponent
+    Name  = "JsonCapsuleBin"
+    File  = "JsonCapsuleBin.inf"
+    Package  = "AmiTsePkg"
+End
+
+INFComponent
+    Name  = "JsonCapsuleBin"
+    File  = "JsonCapsuleBinBT32.inf"
+    Package  = "AmiTsePkg"
+    Token = "APTIOV_TOOLS_VERSION" ">=" "32"
+End
+
+PATH
+    Name  = "TSE_JSON_DIR"
+End
+
+ELINK
+    Name  = "$(TSE_JSON_DIR)/JsonCapsuleHook.c"
+    Parent  = "TSE_SOURCE_FILES"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "JsonCapsuleBin"
+    Parent  = "ADDITIONAL_AMITSE_LibraryClasses"
+    InvokeOrder = AfterParent
+End
+
+
+#   Arch  = "IA32"
+LibraryMapping
+    Class  = "JsonCapsuleBin"
+    Instance  = "AmiTsePkg.JsonCapsuleBin"
+End
+
+ELINK
+    Name  = "InstallJsonProcessCapsuleProtocol,"
+    Parent  = "MinisetupDriverEntryHookHook,"
+    Token = "ESA_BUILD_AS_SEPARATE_DRIVER" "=" "0"
+    Token = "JSON_CONFIG_CAPSULE_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "JsonCapsuleBin"
+    Parent  = "ADDITIONAL_AMITSE_LibraryClasses"
+    Token = "ESA_BUILD_AS_SEPARATE_DRIVER" "=" "0"
+    Token = "JSON_CONFIG_CAPSULE_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ProcessJsonConfigCapsuleHook,"
+    Parent  = "PostManagerHandShakeHookHook,"
+    Token = "JSON_CONFIG_CAPSULE_SUPPORT" "=" "1"
+    InvokeOrder = AfterParent
+End
+
+PcdMapping
+    Name  = "PcdMaximumAsciiStringLength"
+    GuidSpace  = "gEfiMdePkgTokenSpaceGuid"
+    PcdType  = "PcdsFixedAtBuild"
+    DataType  = "Uint32"
+    Value  = "0x2000000"
+    Override  = "AmiTsePkg.AMITSE"
+    Offset  = 00h
+    Length  = 04h
+    TargetDSC = Yes
+    Token = "DEBUG_MODE" "=" "1"
+End
+

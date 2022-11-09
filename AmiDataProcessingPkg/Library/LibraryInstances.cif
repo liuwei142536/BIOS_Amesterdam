@@ -1,0 +1,15 @@
+<component>
+	name = "LibraryInstances"
+	category = ModulePart
+	LocalRoot = "AmiDataProcessingPkg\Library\"
+	RefName = "AmiDataProcessingPkg.LibraryInstances"
+[INF]
+"AmiCJsonLib\AmiCJsonLib.inf"
+"AmiBase64Lib\AmiBase64Lib.inf"
+"AmiJsonLibCJson\AmiJsonLibCJson.inf"
+"AmiJsonLibCommon\AmiJsonLibCommon.inf"
+
+[files]
+"LibraryInstances.sdl"	
+
+<endComponent>
