@@ -1,0 +1,44 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// TSE Elinks MACROs values
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@elink(AMITSE_Hooks_0, 
+"VOID @replace(@Child, ",", "")(VOID); ", "%n", "")
+
+@elink(AMITSE_Hooks_1, 
+"BOOLEAN @replace(@Child, ",", "")(); ", "%n", "")
+
+@elink(AMITSE_Hooks_2, 
+"CONTROL_ACTION @replace(@Child, ",", "")(AMI_EFI_KEY_DATA key); ", "%n", "")
+
+@elink(AMITSE_Hooks_3, 
+"VOID @replace(@Child, ",", "")(EFI_EVENT Event, VOID *Context); ", "%n", "")
+
+@elink(AMITSE_Hooks_4, 
+"EFI_STATUS @replace(@Child, ",", "")(BOOT_FLOW *bootFlowPtr); ", "%n", "")
+
+@elink(AMITSE_Hooks_5, 
+"VOID @replace(@Child, ",", "")(CHAR16 *Password, UINTN MaxSize); ", "%n", "")
+
+@elink(AMITSE_Hooks_6, 
+"EFI_STATUS @replace(@Child, ",", "")(UINT8 *BGColor, UINT8 *FGColor, UINT8 *SecBGColor, UINT8 *SecFGColor, UINT8 *SelBGColor, UINT8 *SelFGColor, UINT8 *NSelBGColor, UINT8 *NSelFGColor,
+                                 UINT8 *LabelBGColor, UINT8 *LabelFGColor,UINT8 *NSelLabelFGColor, UINT8 *EditBGColor, UINT8 *EditFGColor,
+                                 UINT8 *PopupFGColor, UINT8 *PopupBGColor); ", "%n", "")
+
+@elink(AMITSE_Hooks_7, 
+"VOID @replace(@Child, ",", "")(VOID *MouseInfo); ", "%n", "")
+
+@elink(AMITSE_Hooks_8, 
+"BOOLEAN @replace(@Child, ",", "")(VOID); ", "%n", "")
+
+@elink(AMITSE_Hooks_9, 
+"EFI_STATUS @replace(@Child, ",", "")(); ", "%n", "")
+
+@elink(AMITSE_Hooks_10, 
+"VOID @replace(@Child, ",", "")( NVRAM_VARIABLE *defaults, UINTN data ); ", "%n", "")
+
+@elink(AMITSE_Hooks_11, 
+"VOID @replace(@Child, ",", "")( EFI_GUID* OldPageGuid, UINT16* OldPageFormId, EFI_GUID* NewPageGuid, UINT16* NewPageFormId); ", "%n", "")
+

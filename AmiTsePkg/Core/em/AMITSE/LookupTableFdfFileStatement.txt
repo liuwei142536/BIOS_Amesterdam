@@ -1,0 +1,14 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+/** @file LookupTableFdfFileStatement.txt
+    Publishes the AmiConfigJson.json into FFS
+**/
+
+FILE FREEFORM = 110DC5D3-ED94-49C1-9F2D-13E129BA22F4 $(FFS_FILE_CHECKSUM_KEYWORD){
+     SECTION RAW = $(OUTPUT_DIRECTORY)/AmiConfigJson.json
+  }
