@@ -18,6 +18,7 @@ LIB | MiniSetupLocalx64.lib|*|*|MYTOOLS
 LIB | MiniSetupLocalx64.lib|*|*|MSFT
 LIB | MiniSetupLocalVS2015x64.lib|*|*|VS2015
 LIB | MiniSetupLocalGCCx64.lib|*|*|GCC
+LIB | MiniSetupLocalVS2019x64.lib|*|*|VS2019
 [binaries.AARCH64]
 LIB | MiniSetupLocalAarch64.lib
 
@@ -29,17 +30,17 @@ LIB | MiniSetupLocalAarch64.lib
   MdePkg/MdePkg.dec
   AmiModulePkg/AmiModulePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
-  IntelFrameworkPkg/IntelFrameworkPkg.dec
-  
+
   
   [Protocols]
   gEfiUsbIoProtocolGuid                         
   gEfiDiskIoProtocolGuid
   gEfiLoadFileProtocolGuid
-
+  gEfiPciIoProtocolGuid
+  gRedfishUpdateGuid
+   
 [Guids]
-  gEfiConsoleOutDeviceGuid
+
   
   
 [BuildOptions]
@@ -47,6 +48,6 @@ MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50
 GCC:*_*_*_CC_FLAGS = -DTSE_FOR_APTIO_4_50  
   
 [Pcd]
-   gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdShellFile
    gEfiMdeModulePkgTokenSpaceGuid.PcdProgressCodeOsLoaderLoad
    gEfiMdeModulePkgTokenSpaceGuid.PcdProgressCodeOsLoaderStart
+   gAmiModulePkgTokenSpaceGuid.PcdDefaultCursorState

@@ -33,11 +33,12 @@
 #define _HIILIB_H_
 
 EFI_STATUS HiiInitializeProtocol( VOID );
-#if TSE_CLANG_SUPPORT
+
 CHAR16 *TseHiiGetString( VOID* handle, UINT16 token );
-#else
+#if !TSE_CLANG_SUPPORT
 CHAR16 *HiiGetString( VOID* handle, UINT16 token );
 #endif
+
 UINT16 HiiAddString( VOID* handle, CHAR16 *string );
 UINTN TestPrintLength ( IN CHAR16   *String );
 

@@ -24,17 +24,16 @@ LIB | MiniSetupLocalAarch64.lib
   MdePkg/MdePkg.dec
   AmiModulePkg/AmiModulePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
-  IntelFrameworkPkg/IntelFrameworkPkg.dec
-  
+ 
   
   [Protocols]
   gEfiUsbIoProtocolGuid                         
   gEfiDiskIoProtocolGuid
   gEfiLoadFileProtocolGuid
+  gEfiPciIoProtocolGuid
 
 [Guids]
-  gEfiConsoleOutDeviceGuid
+
   
   
 [BuildOptions]
@@ -42,6 +41,6 @@ MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50
 GCC:*_*_*_CC_FLAGS = -DTSE_FOR_APTIO_4_50  
   
 [Pcd]
-   gEfiIntelFrameworkModulePkgTokenSpaceGuid.PcdShellFile
    gEfiMdeModulePkgTokenSpaceGuid.PcdProgressCodeOsLoaderLoad
    gEfiMdeModulePkgTokenSpaceGuid.PcdProgressCodeOsLoaderStart
+   gAmiModulePkgTokenSpaceGuid.PcdDefaultCursorState

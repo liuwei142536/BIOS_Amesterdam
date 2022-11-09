@@ -1,29 +1,11 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2010, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/Inc/setupdata.h $
-//
-// $Author: Rajashakerg $
-//
-// $Revision: 7 $
-//
-// $Date: 1/20/12 12:46a $
-//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
 /** @file setupdata.h
     Header file for setup data
 
@@ -192,7 +174,8 @@ struct _CONTROL_FLAGS			//Structure containing the attributes for a specific con
 	UINT32	RefreshID : 1;				//TRUE or FALSE to denote RefreshID status
 	UINT32	ControlRWEvaluate : 1; // set 0 if read/write expression is not found otherwise set 1
 	UINT32	ControlReconnect : 1;	//FALSE	Whether or not changing a value requires a system reconnect
-	UINT32	Reserved2 : 13;		//0		Reserved for future use
+	UINT32  BitFieldVarstore : 1;
+	UINT32	Reserved2 : 12;		//0		Reserved for future use
 };
 
 struct _CONTROL_INFO		//Structure containing control data
@@ -317,16 +300,3 @@ struct _PAGE_ID_INFO			//Structure containing page id triplets guid class and su
 #endif /* _SETUPDATA_H_ */
 
 
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**        (C)Copyright 1985-2013, American Megatrends, Inc.         **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**     5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093     **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************

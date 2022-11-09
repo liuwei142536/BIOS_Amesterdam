@@ -201,7 +201,7 @@ End
 
 TOKEN
 	Name  = "RFC_LANGUAGES"
-	Value  = '"$(SUPPORTED_LANGUAGES);x-UEFI-AMI"'
+	Value  = '"$(SUPPORTED_LANGUAGES);x-AMI"'
 	Help  = "Semicolon separated list of human readable and configuration languages. The build process will strip out strings for languages that are not listed here.\Typically should be set to '$(SUPPORTED_LANGUAGES)' (Don't forget the quotes!).\If project uses configuration languages such as x-UEFI-AMI, add them after $(SUPPORTED_LANGUAGES) and before the ending quote.\Do not add human readable languages here. Use SUPPORTED_LANGUAGES instead."
 	TokenType = Expression
 	TargetDSC = Yes

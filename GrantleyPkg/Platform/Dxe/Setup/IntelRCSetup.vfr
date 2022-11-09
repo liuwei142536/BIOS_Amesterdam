@@ -378,11 +378,11 @@ formset
           option text = STRING_TOKEN(STR_SERIAL_DEBUG_MINIMUM),    value = 1, flags = RESET_REQUIRED | DEFAULT;
           option text = STRING_TOKEN(STR_SERIAL_DEBUG_NORMAL),     value = 2, flags = RESET_REQUIRED;
 	  #else
-          option text = STRING_TOKEN(STR_DISABLE),                 value = 0, flags = RESET_REQUIRED | MANUFACTURING| DEFAULT ;
+          option text = STRING_TOKEN(STR_DISABLE),                 value = 0, flags = RESET_REQUIRED;
           option text = STRING_TOKEN(STR_SERIAL_DEBUG_MINIMUM),    value = 1, flags = RESET_REQUIRED;
           option text = STRING_TOKEN(STR_SERIAL_DEBUG_NORMAL),     value = 2, flags = RESET_REQUIRED;
 	  #endif
-          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MAXIMUM),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MAXIMUM),    value = 3, flags = RESET_REQUIRED | MANUFACTURING| DEFAULT ;
         endoneof;
 #else  // SDP_FLAG
   #ifdef DISABLE_TRUE_RELEASE
@@ -390,9 +390,9 @@ formset
           prompt      = STRING_TOKEN(STR_SERIAL_DEBUG_MSG_PROMPT),
           help        = STRING_TOKEN(STR_SERIAL_DEBUG_MSG_HELP),
           option text = STRING_TOKEN(STR_DISABLE),                 value = 0, flags = RESET_REQUIRED | MANUFACTURING ;
-          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MINIMUM),    value = 1, flags = RESET_REQUIRED | DEFAULT;
+          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MINIMUM),    value = 1, flags = RESET_REQUIRED;
           option text = STRING_TOKEN(STR_SERIAL_DEBUG_NORMAL),     value = 2, flags = RESET_REQUIRED;
-          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MAXIMUM),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MAXIMUM),    value = 3, flags = RESET_REQUIRED | DEFAULT;
         endoneof;
   #endif
 
@@ -401,9 +401,9 @@ formset
           prompt      = STRING_TOKEN(STR_SERIAL_DEBUG_MSG_PROMPT),
           help        = STRING_TOKEN(STR_SERIAL_DEBUG_MSG_HELP),
           option text = STRING_TOKEN(STR_DISABLE),                 value = 0, flags = RESET_REQUIRED | MANUFACTURING ;
-          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MINIMUM),    value = 1, flags = RESET_REQUIRED | DEFAULT;
+          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MINIMUM),    value = 1, flags = RESET_REQUIRED;
           option text = STRING_TOKEN(STR_SERIAL_DEBUG_NORMAL),     value = 2, flags = RESET_REQUIRED;
-          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MAXIMUM),    value = 3, flags = RESET_REQUIRED;
+          option text = STRING_TOKEN(STR_SERIAL_DEBUG_MAXIMUM),    value = 3, flags = RESET_REQUIRED | DEFAULT;
         endoneof;
   #endif
 

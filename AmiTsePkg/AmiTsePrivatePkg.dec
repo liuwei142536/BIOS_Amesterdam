@@ -28,7 +28,7 @@
   EDK/MiniSetup/TseAdvanced
   EDK/MiniSetup/TseLite
   EDK/MiniSetup/uefi2.1	
-
+  EDK/MiniSetup/JsonCapsule  
   
 [LibraryClasses]
   ##  @libraryclass  Provides a library function to get a DXE driver name

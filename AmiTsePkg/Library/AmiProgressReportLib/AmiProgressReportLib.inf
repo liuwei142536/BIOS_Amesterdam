@@ -20,9 +20,12 @@ AmiProgressReportLib.c
   UefiBootServicesTableLib
   
 [Protocols]
-  gAmiPostManagerProtocolGuid
-  gEfiGraphicsOutputProtocolGuid
+gAmiPostManagerProtocolGuid
+gEfiGraphicsOutputProtocolGuid
+gTSEScreenMgmtProtocolGuid
   
 [BuildOptions]
 MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50  
 GCC:*_*_*_CC_FLAGS = -DTSE_FOR_APTIO_4_50  
+[Pcd]
+gAmiTsePkgTokenSpaceGuid.AmiTsePcdProgressBar

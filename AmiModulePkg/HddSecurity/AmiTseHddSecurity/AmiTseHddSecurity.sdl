@@ -152,27 +152,6 @@ ELINK
 End
 
 ELINK
-    Name  = "HddSecurityLoadSetupDefaults,"
-    Parent  = "LoadedPreviousValues,"
-    InvokeOrder = AfterParent
-    Token = "SETUP_IDE_SECURITY_SUPPORT" "=" "0"
-End
-
-ELINK
-    Name  = "HddSecurityLoadSetupDefaults,"
-    Parent  = "LoadedBuildDefaults,"
-    InvokeOrder = AfterParent
-    Token = "SETUP_IDE_SECURITY_SUPPORT" "=" "0"
-End
-
-ELINK
-    Name  = "HddSecurityLoadSetupDefaults,"
-    Parent  = "LoadedUserDefaults,"
-    InvokeOrder = AfterParent
-    Token = "SETUP_IDE_SECURITY_SUPPORT" "=" "0"
-End
-
-ELINK
     Name  = "IDEPasswordCheck,"
     Parent  = "IdePasswordCheckHookList"
     InvokeOrder = AfterParent

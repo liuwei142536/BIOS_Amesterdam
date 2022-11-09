@@ -1,41 +1,23 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 //*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**        (C)Copyright 1985-2011, American Megatrends, Inc.    **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/FakeTokens.c $
-//
-// $Author: Rajashakerg $
-//
-// $Revision: 18 $
-//
-// $Date: 9/17/12 5:59a $
-//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**********************************************************************
 /** @file FakeTokens.c
-    This file does not add any code. It has, all the string tokens that
-    are used by Minisetup, to fake the usage to strgather.exe. Add to
-    this list, the new string tokens that are defined in
-    AmiTSEStrstr.uni and to be used by Minisetup
 
 **/
-//**********************************************************************
+//*************************************************************************
+
+//----------------------------------------------------------------------------
 
 
-//Following code is to force strgatherer to include these strings
+/*This file does not add any code. It has, all the string tokens that
+    are used by Minisetup, to fake the usage to strgather.exe. Add to
+    this list, the new string tokens that are defined in
+    AmiTSEStrstr.uni and to be used by Minisetup*/
 #if 0
 STRING_TOKEN(STR_MAIN_TITLE)
 STRING_TOKEN(STR_MAIN_COPYRIGHT)
@@ -168,6 +150,7 @@ STRING_TOKEN(STR_DBG_PRINT_HIIPARSING)
 STRING_TOKEN(STR_DBG_PRINT_HIIFUNCTION)
 STRING_TOKEN(STR_DBG_PRINT_HIICALLBACK) 
 STRING_TOKEN(STR_DBG_PRINT_HIINOTIFICATION)
+STRING_TOKEN(STR_DBG_PRINT_VARIABLE)
 STRING_TOKEN(STR_DBG_PRINT_IFRFORM)
 STRING_TOKEN(STR_DBG_PRINT_VARIABLE_CACHE)
 STRING_TOKEN(STR_OVERRIDE_BOOTNEXT_OPTION_1)						
@@ -192,21 +175,8 @@ STRING_TOKEN(STR_ONBOARD_DEVICE_GROUP)
 STRING_TOKEN(STR_OTHER_DEVICE_GROUP)
 STRING_TOKEN(STR_DEVICE_GROUP_HELP)
 STRING_TOKEN(STR_ENCODING_ERROR)
+STRING_TOKEN(STR_DEFAULT_CHANGE_WARNING)
+STRING_TOKEN(STR_BROWSER_ACTION_OPEN_WARNING)
+STRING_TOKEN(STR_DRIVER_HEALTH_TITLE)
+STRING_TOKEN(STR_DRIVER_HEALTH_MESSAGE)
 #endif
-
-
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**        (C)Copyright 1985-2013, American Megatrends, Inc.    **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**           5555 Oakbrook Pkwy, Norcross, Georgia 30093       **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//

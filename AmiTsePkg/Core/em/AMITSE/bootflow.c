@@ -1,29 +1,10 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2011, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/bootflow.c $
-//
-// $Author: Rajashakerg $
-//
-// $Revision: 17 $
-//
-// $Date: 9/17/12 5:59a $
-//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 /** @file bootflow.c
     This file bootflow related functions and tables
 
@@ -112,6 +93,8 @@ static BOOT_FLOW _gBootFlowTable[] =
 #if FAST_BOOT_SUPPORT
 	{ BOOT_FLOW_CONDITION_FAST_BOOT,	            0,						0,				0,			0,				0,					0,					FALSE,				TRUE,			FALSE,			                            TRUE,			                            TRUE,				&FBBootFlow },
 #endif
+	{ BOOT_FLOW_CONDITION_SECURITY,                MAIN_FORM_SET_CLASS,    0,              SECURITY_MAIN,  0,           0,                  0,                  TRUE,               TRUE,           FALSE,                                      TRUE,                                       FALSE,              NULL },
+	 
 	// this MUST be the last entry in the boot flow table
 	{ BOOT_FLOW_CONDITION_NULL,			            0,						0,				0,			0,				0,					0,					FALSE,				TRUE,			FALSE,			                            TRUE,			                            FALSE,				NULL }
 };
@@ -142,7 +125,6 @@ EFI_STATUS BootFlowManageEntry( VOID )
 
 	BOOT_FLOW *bootFlowPtr;
 
-	SETUP_DEBUG_TSE ("\n[TSE] Entering BootFlowManageEntry");
 	conditionPtr = VarGetNvramName( L"BootFlow", &_gBootFlowGuid, NULL, &size );
 	if ( conditionPtr != NULL )
 		condition = *conditionPtr;
@@ -165,7 +147,7 @@ EFI_STATUS BootFlowManageEntry( VOID )
 	{
 		if ( condition != bootFlowPtr->Condition )
 			continue;
-		SETUP_DEBUG_TSE ("\n[TSE] BootFlow condition is %d", condition);
+		SETUP_DEBUG_TSE ("[TSE] BootFlow condition is %d\n", condition);
 		if ( bootFlowPtr->CallbackFunction != NULL )
 			Status = bootFlowPtr->CallbackFunction( bootFlowPtr );
 		if ( ! bootFlowPtr->ProceedBooting )
@@ -187,7 +169,6 @@ EFI_STATUS BootFlowManageEntry( VOID )
 
 		break;
 	}
-	SETUP_DEBUG_TSE ("\n[TSE] Exiting BootFlowManageEntry");
 	return Status;
 }
 
@@ -213,7 +194,7 @@ EFI_STATUS BootFlowManageExit (VOID)
 
 	BOOT_FLOW *bootFlowPtr;
 	EFI_GUID	AfterLastBootGuid = AMITSE_AFTER_LAST_BOOT_OPTION_GUID;
-	SETUP_DEBUG_TSE ("\n[TSE] Entering BootFlowManageExit");
+	SETUP_DEBUG_TSE ("[TSE] Entering BootFlowManageExit\n");
 	
 	Status = BootFlowExitHookHook();
 	if ((Status == EFI_SUCCESS) || (Status == EFI_NOT_STARTED))
@@ -242,7 +223,7 @@ EFI_STATUS BootFlowManageExit (VOID)
 	{
 		if ( condition != bootFlowPtr->Condition )
 			continue;
-		SETUP_DEBUG_TSE ("\n[TSE] BootFlow condition is %d", condition);
+		SETUP_DEBUG_TSE ("[TSE] BootFlow condition is %d\n", condition);
 
 		if ( bootFlowPtr->PageClass != 0 )
 		{
@@ -268,7 +249,7 @@ EFI_STATUS BootFlowManageExit (VOID)
 		}
 		break;
 	}
-	SETUP_DEBUG_TSE ("\n[TSE] Exiting BootFlowManageExit");
+	SETUP_DEBUG_TSE ("[TSE] Exiting BootFlowManageExit\n");
 	return Status;
 }
 
@@ -302,18 +283,3 @@ BOOLEAN IsBootFlowInfinite()
 	}	
 	return FALSE;
 }
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2011, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//

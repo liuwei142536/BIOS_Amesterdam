@@ -1,28 +1,10 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2011, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/Inc/HookAnchor.h $
-//
-// $Author: Rajashakerg $
-//
-// $Revision: 8 $
-//
-// $Date: 11/20/11 6:33a $
-//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 //*****************************************************************//
 /** @file HookAnchor.h
     TSE hook functions
@@ -86,6 +68,7 @@ VOID SwitchToPostScreenHook(VOID);
 BOOLEAN SetupEntryHook(VOID);
 EFI_STATUS BootFlowExitHookHook(VOID);
 EFI_STATUS SetupReentryHookHook(VOID);
+EFI_STATUS SetupPageChangeHookHook(EFI_GUID* OldPageGuid, UINT16* OldPageFormId, EFI_GUID* NewPageGuid, UINT16* NewPageFormId);
 
 VOID LastTSEHook(VOID);
 
@@ -101,6 +84,7 @@ typedef EFI_STATUS (TSE_HOOK_T6) (UINT8 *BGColor, UINT8 *FGColor, UINT8 *SecBGCo
 								 UINT8 *PopupFGColor, UINT8 *PopupBGColor);
 typedef CONTROL_ACTION (TSE_HOOK_T7) (VOID *MouseInfo);
 typedef EFI_STATUS (TSE_HOOK_T9) ();
+typedef EFI_STATUS (TSE_HOOK_T10) (EFI_GUID* OldPageGuid, UINT16* OldPageFormId, EFI_GUID* NewPageGuid, UINT16* NewPageFormId);
 
 extern TSE_HOOK * AMITSE_HookList [];
 
@@ -147,19 +131,6 @@ extern UINTN gHookBase;
 #define HOOKID38	(gHookBase+38)
 #define HOOKID39	(gHookBase+39)
 #define HOOKID40    (gHookBase+40)
+#define HOOKID41    (gHookBase+41)
 
 #endif /* _HOOKANCHOR_H_ */
-
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**         (C)Copyright 2011, American Megatrends, Inc.             **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093       **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************

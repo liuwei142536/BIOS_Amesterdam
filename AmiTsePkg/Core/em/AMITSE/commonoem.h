@@ -1,29 +1,10 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2014, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/commonoem.h $
-//
-// $Author: Arunsb $
-//
-// $Revision: 15 $
-//
-// $Date: 2/01/12 1:53a $
-//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 /** @file commonoem.h
     header of commonoem.h
 
@@ -128,7 +109,6 @@ typedef struct {
 VOID DrawQuietBootLogo(VOID);
 BOOLEAN ProcessConInAvailability(VOID);
 VOID ProcessEnterSetup(VOID);
-VOID ProcessEnterPxe(VOID);
 VOID ProcessProceedToBoot(VOID);
 VOID MinisetupDriverEntryHook(VOID);
 VOID PostManagerHandShakeHook(VOID);
@@ -164,6 +144,8 @@ VOID SwitchToPostScreen(VOID);
 BOOLEAN DefaultEntryStatus();
 EFI_STATUS BootFlowExitHook(VOID);
 EFI_STATUS SetupReentryHook(VOID);
+EFI_STATUS SetupPageChangeHook(EFI_GUID* OldPageGuid, UINT16* OldPageFormId, EFI_GUID* NewPageGuid, UINT16* NewPageFormId);
+EFI_STATUS SetMaxGopResolution();
 
 #define MODIFIER_DUAL_KEYS 			0x000000FF          //For handling any oTf the two dual(ctrl, alt, shift and logo) keys pressed
 #define RIGHT_LEFT_SHIFT_PRESSED	0x00000003
@@ -224,19 +206,3 @@ BOOLEAN IsTseBuild();
 #define EFI_OS_INDICATIONS_START_PLATFORM_RECOVERY  0x0000000000000040
 VOID SaveGraphicsScreen(VOID);
 #endif
-
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2014, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//

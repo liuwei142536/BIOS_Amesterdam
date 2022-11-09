@@ -1,28 +1,10 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2011, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/Inc/TseCommon.h $
-//
-// $Author: Rajashakerg $
-//
-// $Revision: 5 $
-//
-// $Date: 11/20/11 6:38a $
-//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 //*****************************************************************//
 /** @file TseCommon.h
     Tse Common Helper header file
@@ -78,6 +60,17 @@ extern EFI_BOOT_SERVICES *gBS;
 extern EFI_SYSTEM_TABLE *gST;
 
 //extern EFI_GUID  gEfiDevicePathProtocolGuid;
+
+typedef enum _TSE_SETUP_STATUS {
+TSE_SETUP_STATUS_UNDEFINED, 
+TSE_SETUP_STATUS_INITIAL_FORM_PARSING,
+TSE_SETUP_STATUS_INITIAL_FORM_OPEN,
+TSE_SETUP_STATUS_INITIAL_BUILD_DEFAULTS,
+TSE_SETUP_STATUS_LOAD_VARIABLES,
+TSE_SETUP_STATUS_INITIAL_RETRIEVE,
+TSE_SETUP_STATUS_BOOT_FROM_OVERRIDE,
+TSE_SETUP_STATUS_BLOCK_PACKUPDATEPROCESS,
+}TSE_SETUP_STATUS;
 
 #endif
 

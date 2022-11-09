@@ -1,6 +1,6 @@
 TOKEN
 	Name  = "AMI_MODULE_PKG_VERSION"
-	Value  = "51"
+	Value  = "54"
 	Help  = "AmiModulePkg version.\Do not change."
 	TokenType = Integer
 	TargetMAK = Yes

@@ -1,17 +1,10 @@
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************
-
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 /**
  * @file FileList.c
  * @brief Implements FILENAME file browser menu
@@ -459,7 +452,7 @@ AMI_VECTOR * GetFileMenuList (EFI_FILE_PROTOCOL *dir)
             Status = dir->Read (dir, &FileInfoSize, FileInfo);
         }
         
-        if (!EFI_ERROR (Status) && FileInfoSize != 0 && IsValidFile (FileInfo)) {
+        if (FileInfo && !EFI_ERROR (Status) && FileInfoSize != 0 && IsValidFile (FileInfo)) {
         FILE_MENU_ITEM *mi;
             mi = AllocatePool (sizeof (*mi));
             mi->Info = FileInfo;
@@ -503,7 +496,7 @@ AMI_VECTOR * GetFileList (VOID *Dir)
             Status = dir->Read (dir, &FileInfoSize, FileInfo);
         }
         
-        if (!EFI_ERROR (Status) && FileInfoSize != 0 && IsValidFile (FileInfo))
+        if (FileInfo && !EFI_ERROR (Status) && FileInfoSize != 0 && IsValidFile (FileInfo))
             VectorAdd (fv, &FileInfo);
 
     } while (FileInfoSize != 0 && !EFI_ERROR (Status));
@@ -625,6 +618,10 @@ VOID * GetChildFileSelection (FILE_MENU_ITEM *fm)
 	
 	a = (EFI_FILE_INFO *)r->Info;
 	if (!IsParentDir (a)) {
+	    if((fp_stack_p >= (MAX_NESTED_DIRS-1)) || (fv_stack_p >= (MAX_NESTED_DIRS-1)))
+	    {	        
+	        return NULL;
+	    }
             fp_stack_push (dir);
             fv_stack_push (fv);
 	}
@@ -678,19 +675,3 @@ CHAR16 * GetFileSelection (DEVICE_MENU_ITEM *dev)
 	ClearAll ();
 	return (r != NULL) ? FileMenuTitle : NULL;
 }
-
-
-
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************

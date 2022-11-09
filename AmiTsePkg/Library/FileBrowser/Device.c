@@ -1,16 +1,10 @@
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**        (C)Copyright 1985-2017, American Megatrends, Inc.         **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 
 /** @file
   This file implements DEVICE file browser menu
@@ -136,14 +130,17 @@ CHAR16 * get_volume_name_size (EFI_SIMPLE_FILE_SYSTEM_PROTOCOL *fs, UINT64 *vsz)
         *vsz = 0;
         return NULL;
     }
-    *vsz = info->VolumeSize;
-    if (info->VolumeLabel[0] != 0) {
-        sz = StrSize (info->VolumeLabel);
-        out = AllocatePool (sz);
-        CopyMem (out, info->VolumeLabel, sz);
+    if(info)
+    {
+        *vsz = info->VolumeSize;
+        if (info->VolumeLabel[0] != 0) {
+            sz = StrSize (info->VolumeLabel);
+            out = AllocatePool (sz);
+            CopyMem (out, info->VolumeLabel, sz);
+        }
+        FreePool (info);
     }
     r->Close (r);
-    FreePool (info);
     return out;
 }
 
@@ -282,6 +279,8 @@ AMI_VECTOR * GetDeviceList (VOID)
         } else {
             EFI_DEVICE_PATH_PROTOCOL *dp;
             st = gBS->HandleProtocol (hnd[i], &gEfiDevicePathProtocolGuid, (VOID **)&dp);
+            if (st)
+                continue;
             //To avoid showing unknown / Unsupported DP etc for NT32
             if((get_dp_subtype (dp, MESSAGING_DEVICE_PATH)==0xFF) &&(get_dp_subtype (dp, MEDIA_DEVICE_PATH)==0xFF))
                 copy_name (mi->Name,L"Unknown", 18);

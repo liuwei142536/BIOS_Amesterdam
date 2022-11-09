@@ -8,6 +8,12 @@ TOKEN
 	Master = Yes
 End
 
+ELINK
+    Name  = "gAmiTsePkgTokenSpaceGuid.AmiTsePcdProgressBar"
+    Parent  = "ADDITIONAL_AMITSE_PCDs"
+    InvokeOrder = AfterParent
+End
+
 INFComponent
 	Name  = "AmiFileExplorerLib"
 	File  = "Library/FileBrowser/FileBrowser.inf"

@@ -18,6 +18,7 @@ LIBRARY_CLASS = Uefi21Bin
  LIB | Uefi21Localx64.lib|*|*|MSFT
  LIB | Uefi21LocalVS2015x64.lib|*|*|VS2015
  LIB | Uefi21LocalGCCx64.lib|*|*|GCC
+ LIB | Uefi21LocalVS2019x64.lib|*|*|VS2019
 [binaries.AARCH64]
  LIB | Uefi21LocalAarch64.lib 
 
@@ -28,26 +29,16 @@ LIBRARY_CLASS = Uefi21Bin
   MdePkg/MdePkg.dec
   AmiModulePkg/AmiModulePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
-  IntelFrameworkPkg/IntelFrameworkPkg.dec
-  
 
 [Protocols]
   gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
-  gEfiOEMBadgingProtocolGuid
   gEfiSimpleFileSystemProtocolGuid
-#  gEfiLegacyBiosProtocolGuid
-  gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
   gEfiBlockIoProtocolGuid
-  gEfiFirmwareVolumeProtocolGuid
   gEfiSimpleTextInProtocolGuid
   gEfiLoadedImageProtocolGuid
   gEfiDevicePathFromTextProtocolGuid
 
 [Guids]
-  gEfiConsoleOutDeviceGuid 
   
 [BuildOptions]
 MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50   

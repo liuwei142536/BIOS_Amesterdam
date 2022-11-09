@@ -13,19 +13,6 @@ PATH
 End
 
 ELINK
-	Name  = "$(TSELITESRC_DIR)\StyleHook\StyleHook$(ARCH).lib"
-	Parent  = "MINISETUPLIB"
-	Priority  = 100
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "$(TSELITESRC_DIR)\TseLiteLocal$(ARCH).lib"
-	Parent  = "TSELITELIB"
-	InvokeOrder = AfterParent
-End
-
-ELINK
 	Name  = "HOTKEY_LIST"
 	InvokeOrder = ReplaceParent
 End

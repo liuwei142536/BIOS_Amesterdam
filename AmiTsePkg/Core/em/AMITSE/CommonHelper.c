@@ -1,41 +1,20 @@
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**        (C)Copyright 1985-2015, American Megatrends, Inc.    **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**             5555 Oakbrook Pkwy   , Norcross, GA 30071       **//
-//**                                                             **//
-//**                     Phone: (770)-246-8600                   **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/CommonHelper.c $
-//
-// $Author: Arunsb $
-//
-// $Revision: 97 $
-//
-// $Date: 5/29/12 3:15a $
-//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 /** @file CommonHelper.c
     This file is Helper file for Boot only TSE module
     This functions may be overridden by Other Advanced TSE module.
 
 **/
 
-#ifndef __GNUC__
-#pragma warning( disable : 4028 )
-#endif
-#include "TimeStamp.h"
-#ifdef TSE_FOR_APTIO_4_50
 
+
+#ifdef TSE_FOR_APTIO_4_50
+#include "TimeStamp.h"
 #include "Token.h"  
 #include <Efi.h>
 #include <Protocol/SimpleTextIn.h>
@@ -43,12 +22,8 @@
 #include "AMITSEStrTokens.h"
 #include <Protocol/FirmwareVolume.h>
 #if !TSE_USE_EDK_LIBRARY
-#include "AmiLib.h"				//Added for using CONVERT_TO_STRING macro
 #include "AmiDxeLib.h"
 #include "AutoId.h" 
-#include <Protocol/EfiOemBadging.h>
-#else
-#include <Protocol/OEMBadging.h>
 #endif
 
 VOID *
@@ -56,13 +31,34 @@ EfiLibAllocateZeroPool (
   IN  UINTN   AllocationSize
   );
 
+#if ACPI_SUPPORT    
+#include "AcpiOemElinks.h"
+#endif
+
 #else //#ifdef TSE_FOR_APTIO_4_50
 
-#include "Tiano.h"
 #include "tokens.h"
+
+#if ACPI_SUPPORT    
+//#include "AcpiOemElinks.h"
+#define ACPI_OEM_ID_MAK "ALASKA"
+#define ACPI_OEM_TBL_ID_MAK "A M I "
+#define OEM_LIST 
+#endif
+
+#define END_DEVICE_PATH                 END_DEVICE_PATH_TYPE
+#define END_ENTIRE_SUBTYPE              END_ENTIRE_DEVICE_PATH_SUBTYPE
+#define NODE_LENGTH(pPath) ((pPath)->Length[0]+((pPath)->Length[1]<<8))
+#define NEXT_NODE(pPath) ((EFI_DEVICE_PATH_PROTOCOL*)((UINT8*)(pPath)+NODE_LENGTH(pPath)))
+#define isEndNode(pDp) ((pDp)->Type==END_DEVICE_PATH)
 
 #endif //#ifdef TSE_FOR_APTIO_4_50
 
+#include <Library/BaseLib.h>
+#include <Protocol/UnicodeCollation.h>
+#include <Protocol/FormBrowser2.h>
+#include <Protocol/FirmwareVolume2.h>
+#include <Protocol/DevicePath.h>
 #include "AMITSEElinks.h"
 #include "TseElinks.h" 
 #include <Protocol/AMIPostMgr.h>
@@ -82,16 +78,14 @@ EfiLibAllocateZeroPool (
 #include "Protocol/AmiReflashProtocol.h"
 #endif
 
-#if ACPI_SUPPORT    
-#include "AcpiOemElinks.h"
-#endif
+
 
 #ifdef ACPI_OEM_ID_MAK
 UINT8   OemIdMak [7] = ACPI_OEM_ID_MAK;
 #endif
 
 #ifdef ACPI_OEM_TBL_ID_MAK
-UINT8   OemTblIdMak [8] = ACPI_OEM_TBL_ID_MAK;
+UINT8   OemTblIdMak [9] = ACPI_OEM_TBL_ID_MAK;
 #endif
 
 /////////////OEM_SPECIAL_CONTROL////////////////
@@ -109,16 +103,10 @@ VOID OEMSpecialOneOfFixup( CONTROL_INFO *control , UINT16 value );
 VOID OEMSpecialGotoFixup(CONTROL_INFO *control, UINT16 value );
 #endif //#if SETUP_OEM_SPECIAL_CONTROL_SUPPORT
 
-//#include EFI_PROTOCOL_DEFINITION(LegacyBios)
 #if TSE_CLANG_SUPPORT
 #define HiiGetString TseHiiGetString
 #endif
 
-#if !TSE_APTIO_5_SUPPORT
-#if !TSE_CSM_SUPPORT
-EFI_GUID gEfiLegacyBiosProtocolGuid = EFI_LEGACY_BIOS_PROTOCOL_GUID;
-#endif
-#endif
 
 #define VARIABLE_NAME_LENGTH	40
 #define _CharIsUpper(c) ((c >= L'A') && (c <= L'Z'))
@@ -162,15 +150,8 @@ extern BOOLEAN gQuietBoot;
 VOID *VarGetNvramName( CHAR16 *name, EFI_GUID *guid, UINT32 *attributes, UINTN *size );
 VOID GetTseBuildVersion(UINTN *TseMajor, UINTN *TseMinor, UINTN *TseBuild);
 
-#if !TSE_APTIO_5_SUPPORT
-	#if TSE_FOR_64BIT
-		CHAR16 gBootFileName[]=L"\\EFI\\BOOT\\BOOTX64.EFI";
-	#else
-		CHAR16 gBootFileName[]=L"\\EFI\\BOOT\\BOOTIA32.EFI";
-	#endif //TSE_FOR_64BIT
-#else
+
 	CHAR16 gBootFileName[]=EFI_REMOVABLE_MEDIA_FILE_NAME;
-#endif
 
 #if TSE_CAPITAL_BOOT_OPTION
 CHAR16 gBootFormarSpecifier[]=L"Boot%04X";
@@ -214,8 +195,8 @@ extern EFI_STATUS ConvertJPEGToUgaBlt ( IN VOID *JPEGImage, IN UINT32 JPEGImageS
 extern EFI_STATUS ConvertPCXToUgaBlt ( IN VOID *PCXImage, IN UINT32 PCXImageSize, IN OUT VOID **UgaBlt, 
 		IN OUT UINT32 *UgaBltSize, OUT UINT32 *PixelHeight, OUT UINT32 *PixelWidth);
 
-extern EFI_STATUS ConvertPNGToUgaBlt ( IN VOID *PCXImage, IN UINT32 PCXImageSize, IN OUT VOID **UgaBlt, 
-		IN OUT UINT32 *UgaBltSize, OUT UINT32 *PixelHeight, OUT UINT32 *PixelWidth);
+extern EFI_STATUS ConvertPNGToUgaBlt( IN VOID *PNGImage, IN UINT32 PNGImageSize, IN OUT VOID **Blt, IN OUT UINTN *BltSize, OUT UINT32 *PixelHeight, OUT UINT32 *PixelWidth );
+
 //Functions
 VOID DoAddBootOptionFixup (VOID *ControlInfo);
 VOID SpecialFixupDelBootOption( VOID *ControlInfo);
@@ -337,6 +318,9 @@ VOID EFIAPI SetupDebugPrint(IN CONST CHAR8  *Format, ...) ;
 PASSWORD_ENOCDE_LIST_TEMPLATE gPasswordEncodeList [] = {PASSWORD_ENOCDE_LIST {{ 0, 0, 0, {0, 0, 0, 0, 0, 0, 0, 0 }}, 0, 0}};	//Last structure for avoiding build error.
 UINT32 gEncodeListCount = sizeof (gPasswordEncodeList)/ sizeof (PASSWORD_ENOCDE_LIST_TEMPLATE);
 
+extern VOID StartGIFTimer();
+extern VOID StopGIFTimer();
+extern BOOLEAN GifImageFlag;
 /**
     Function to return the SETUP_SUPPORT_ADD_BOOT_OPTION token value
 
@@ -1310,7 +1294,7 @@ EFI_STATUS ConvertPNGToUgaBltWrapper (
 		PNGImage, 
 		PNGImageSize, 
 		UgaBlt, 
-		UgaBltSize, 
+		(UINTN*)UgaBltSize, 
 		PixelHeight, 
 		PixelWidth);
 #endif
@@ -1474,12 +1458,12 @@ EFI_STATUS InitUnicodeCollectionProtocol(VOID **Protocol)
 // In Aptio UnicodeCollation2 protocol is supported in the same file as
 // UnicodeCollation Protocol depending on EFI_SPECIFICATION_VERSION
 //----------------------------------------------------------------------------
-#include EFI_PROTOCOL_DEFINITION(UnicodeCollation)
+
 
 /**
         Procedure	:	MetaiMatch
 
-        Description	:	Calles MetaiMatch of EFI_UNICODE_COLLATION2_PROTOCOL or EFI_UNICODE_COLLATION_PROTOCOL
+        Description	:	Calles MetaiMatch of EFI_UNICODE_COLLATION2_PROTOCOL 
 
         Input		:	
 
@@ -1496,7 +1480,7 @@ BOOLEAN MetaiMatch(VOID *Protocol,IN CHAR16 *String,IN CHAR16 *Pattern)
 /**
         Procedure	:	StringColl
 
-        Description	:	Calles StriColl of EFI_UNICODE_COLLATION2_PROTOCOL or EFI_UNICODE_COLLATION_PROTOCOL
+        Description	:	Calles StriColl of EFI_UNICODE_COLLATION2_PROTOCOL
 
         Input	:	VOID *Protocol,IN CHAR16 *String1,IN CHAR16 *String2
 
@@ -1779,7 +1763,8 @@ VOID TSEIDEPasswordCheck()
 	VOID *UgaBlt = NULL;
 	UINTN SizeOfX=0, SizeOfY=0;
 	VOID *TempScreenBuffer = (VOID*)NULL;
-
+	if(GifImageFlag)
+		StopGIFTimer();
 	UgaBlt = SavePostScreen(&SizeOfX, &SizeOfY);
 	//Save the contents of Active buffer so password code can use it
 	SaveActiveBuffer(&TempScreenBuffer);
@@ -1787,6 +1772,8 @@ VOID TSEIDEPasswordCheck()
 	//Restore the original active buffer contents
 	RestoreActiveBuffer(&TempScreenBuffer);
 	RestorePostScreen( UgaBlt, SizeOfX, SizeOfY);
+	if(GifImageFlag)
+		StartGIFTimer();
 #endif
 }
 #endif
@@ -1932,9 +1919,6 @@ BOOLEAN CheckSystemPasswordPolicy(UINT32 PasswordInstalled)
 
 #endif
 
-
-extern VOID EfiStrCpy(IN CHAR16 *Destination, IN CHAR16 *Source);
-
 /**
         Procedure	:	GetVariableNameByID
 
@@ -1954,9 +1938,10 @@ CHAR16 *GetVariableNameByID( UINT32 VariableID )
 		{
 			case VARIABLE_ID_LANGUAGE:
 #if SETUP_SUPPORT_PLATFORM_LANG_VAR
-				EfiStrCpy(varName, L"PlatformLang");
+				StrCpyS(varName, VARIABLE_NAME_LENGTH / sizeof(CHAR16), L"PlatformLang");
+				 
 #else
-				EfiStrCpy(varName, L"Lang");
+				StrCpyS(varName, VARIABLE_NAME_LENGTH / sizeof(CHAR16), L"Lang");
 #endif
 				break;
 
@@ -1987,9 +1972,11 @@ CHAR16 *GetGUIDNameByID( UINT32 VariableID )
 		{
 			case VARIABLE_ID_LANGUAGE:
 #if SETUP_SUPPORT_PLATFORM_LANG_VAR
-				EfiStrCpy(guidName, L"PlatformLangCodes");
+			 StrCpyS(guidName, VARIABLE_NAME_LENGTH / sizeof(CHAR16), L"PlatformLangCodes");
+			 
 #else
-				EfiStrCpy(guidName, L"LangCodes");
+			     StrCpyS(guidName, VARIABLE_NAME_LENGTH / sizeof(CHAR16), L"LangCodes");
+				
 #endif
 				break;
 			default:
@@ -2034,11 +2021,7 @@ BOOLEAN IsTseLoadPasswordOnDefaults()
 
 UINT16 GetNoVarStoreBootCountOffset()
 {
-#if NO_VARSTORE_SUPPORT
-	return (UINT16)(TSE_STRUCT_OFFSET(TSE_SETUP_DATA, BootCount));
-#else
 	return 0;
-#endif
 }
 
 
@@ -2177,33 +2160,15 @@ BOOLEAN IsPasswordSupportNonCaseSensitive()
 }
 */
 
-#if !OVERRIDE_NoVarStoreSupport
 BOOLEAN NoVarStoreSupport(VOID)
 {
-	return NO_VARSTORE_SUPPORT;
+	return 0;
 }
-#endif
 
-#if !OVERRIDE_NoVarStoreUpdateSystemAccess
-VOID NoVarStoreUpdateSystemAccess(UINT8 sysAccessValue)
-{
-}
-#endif
-
-#if !OVERRIDE_ItkSupport
 BOOLEAN ItkSupport(VOID)
 {
-	return SETUP_ITK_COMPATIBILITY;
+	return 0;
 }
-#endif
-
-
-#if !OVERRIDE_BbsItkBoot
-EFI_STATUS BbsItkBoot()
-{
-	return EFI_UNSUPPORTED;
-}
-#endif
 
 #if !OVERRIDE_GetAMITSEVariable
 VOID GetAMITSEVariableLocal(VOID **mSysConf, UINT8 **setup, UINTN *VarSize);
@@ -2237,24 +2202,10 @@ UINT16 GetBootTimeOut(UINT16 DefaultValue)
 }
 #endif
 
-#if !OVERRIDE_VarBuildItkDefaults
-VOID VarBuildItkDefaults(VOID)
-{
-}
-#endif
-
-#if !OVERRIDE_SetSystemAccessValueItk
-VOID SetSystemAccessValueItk(UINT8 sysAccessValue)
-{
-}
-#endif
-
-#if !OVERRIDE_FindVarFromITKQuestionId
 UINT32 FindVarFromITKQuestionId(UINT16 QuestionId)
 {
     return 0;
 }
-#endif
 
 #if !OVERRIDE_IsOEMLogoType
 BOOLEAN IsOEMLogoType(UINT8 *ImageData)
@@ -2814,8 +2765,9 @@ VOID LegacyBootFailHook (EFI_STATUS Status)
 		
 		CheckandDeactivateSoftkbd ();
 #if (!(ESA_BINARY_SUPPORT && defined(ESA_TSE_FULL_SUPPORT )&& (ESA_TSE_FULL_SUPPORT ==0)) && !(defined(BUILD_FOR_ESA) && (ESA_TSE_FULL_SUPPORT == 1)))
-		MouseInit();
+	    ClearGrphxScreen ();
 		SetDesiredTextMode();
+	    MouseInit();
 		ClearScreen( EFI_BACKGROUND_BLACK | EFI_LIGHTGRAY );
 #endif		
 	   Title = HiiGetString (gHiiHandle, STRING_TOKEN (STR_SECBOOT_VIOLATION));
@@ -2866,8 +2818,10 @@ VOID UefiBootFailHook (EFI_STATUS Status)
 		CheckandDeactivateSoftkbd ();
 
 #if (!(ESA_BINARY_SUPPORT && defined(ESA_TSE_FULL_SUPPORT )&& (ESA_TSE_FULL_SUPPORT ==0)) && !(defined(BUILD_FOR_ESA) && (ESA_TSE_FULL_SUPPORT == 1)))
-		MouseInit();
+		
+		ClearGrphxScreen ();
 		SetDesiredTextMode();	
+		MouseInit();
 		ClearScreen( EFI_BACKGROUND_BLACK | EFI_LIGHTGRAY );
 		ClearFlushBuffer(EFI_BACKGROUND_BLACK | EFI_LIGHTGRAY);
 #endif
@@ -3141,6 +3095,9 @@ GetGraphicsBitMapFromFV ( IN EFI_GUID *FileNameGuid, OUT VOID **Image, OUT UINTN
 	}
 
 	DXE_Service = (DXE_SERVICES *)GetEfiConfigurationTable(gST,&DxeServicesTableGuid);	
+	if(!DXE_Service){
+	    return EFI_NOT_FOUND;
+	}
 	FvVolume = (EFI_FIRMWARE_VOLUME_HEADER  *)*Image;
 
 	//Raise TPL level to Install FV protocol for ROMHole
@@ -3227,13 +3184,9 @@ GetGraphicsBitMapFromFV ( IN EFI_GUID *FileNameGuid, OUT VOID **Image, OUT UINTN
 **/
 UINT8 *GetACPIOEMID (VOID)
 {
-#ifdef T_ACPI_OEM_ID
 #ifdef ACPI_OEM_ID_MAK
 	return (UINT8 *)&OemIdMak;
 #else   
-    return CONVERT_TO_STRING (T_ACPI_OEM_ID);
-#endif //ACPI_OEM_ID_MAK
-#else
     return 0;
 #endif
 }
@@ -3248,12 +3201,9 @@ UINT8 *GetACPIOEMID (VOID)
 **/
 UINT8 *GetACPIOEMTableID (VOID)
 {
-#ifdef T_ACPI_OEM_TBL_ID
+
 #ifdef ACPI_OEM_TBL_ID_MAK
-    return (UINT8 *)&OemTblIdMak;
-#else   
-    return CONVERT_TO_STRING (T_ACPI_OEM_TBL_ID);
-#endif //ACPI_OEM_TBL_ID_MAK
+    return (UINT8 *)&OemTblIdMak; //ACPI_OEM_TBL_ID_MAK
 #else
     return 0;
 #endif
@@ -3950,6 +3900,7 @@ BOOLEAN  IsTSECursorSupport (VOID)
 TSE_POST_STATUS	EFIAPI PostManagerGetPostStatus(VOID);
 extern EFI_GRAPHICS_OUTPUT_PROTOCOL *gGOP;
 LOGO_TYPE GetLogoType(UINT8 *ImageData);
+extern UINTN gPostStatus;
 //extern VOID StopGIFTimer();
 //extern BOOLEAN GifImageFlag;
 EFI_STATUS OsUpdateCapsuleWrap (BOOT_FLOW *bootFlowPtr)
@@ -3968,7 +3919,6 @@ EFI_STATUS OsUpdateCapsuleWrap (BOOT_FLOW *bootFlowPtr)
     UINTN			LogoType        = 0;
     UINTN			UgaBltSize      = 0;
     UINTN			unBufferWidth   = 0;
-    EFI_BADGING_DISPLAY_ATTRIBUTE Attribute;
     EFI_UGA_PIXEL	            	*UgaBlt = NULL;
     EFI_REFLASH_PROTOCOL        	*ReFlash = NULL;
 
@@ -3978,7 +3928,6 @@ EFI_STATUS OsUpdateCapsuleWrap (BOOT_FLOW *bootFlowPtr)
         Status = ReFlash->GetDisplayImage (ReFlash, &CoordinateX,  &CoordinateY, (VOID**)&ImageData);		//Recovery module have to allocate and send the image data
         if (!EFI_ERROR (Status))																						//TSE wont free the ImageData
         {																														//Recovery module have to provide the X,Y coordinates too
-            Attribute = EfiBadgingDisplayAttributeCustomized;	//and wont free the memory
             Height = 0;
             Width = 0;
             LogoType = GetLogoType (ImageData);
@@ -4038,6 +3987,10 @@ EFI_STATUS OsUpdateCapsuleWrap (BOOT_FLOW *bootFlowPtr)
                             100);
                     }
                     SetProgressBarQuiteBootActive(TRUE);
+                    if(gQuietBoot) 
+                    {
+                        gPostStatus = TSE_POST_STATUS_IN_QUITE_BOOT_SCREEN;
+                    }
                     Status = ReFlash->CapUpdProgress (ReFlash);
                 }
             }
@@ -4246,24 +4199,6 @@ BOOLEAN   gotoExitOnEscKey(EFI_GUID *exitPageGuid, UINT16 *pageClass, UINT16 *pa
 	return FALSE;
 #endif
 }
-
-/**
-    Returns PI_SPECIFICATION_VERSION value
-
-    @param VOID
-
-    @retval UINTN
-
-**/
-UINTN   PISpecVersion(VOID)
-{
-#ifdef PI_SPECIFICATION_VERSION
-	return PI_SPECIFICATION_VERSION;
-#else
-	return 0;
-#endif
-}
-
 
 /**
     Returns token value TSE_SHOW_PROMPT_STRING_AS_TITLE
@@ -4684,16 +4619,21 @@ EFI_STATUS GetCurrentSetupPageID( UINT16 *PageID )
 VOID SetControlDisable(CONTROL_INFO* ControlInfo, BOOLEAN Checkin_gControlInfo)
 {
 }
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**     5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093     **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************
+
+/**
+    Function to return TSE_ENABLE_MULTILINE_FOR_POPUP value
+
+    @param VOID
+
+    @retval BOOLEAN
+**/
+BOOLEAN TseEnablePopupMultilineSupport(VOID)
+{
+
+#ifdef TSE_ENABLE_MULTILINE_FOR_POPUP
+    return TSE_ENABLE_MULTILINE_FOR_POPUP;
+#else
+    return FALSE;
+#endif
+
+}

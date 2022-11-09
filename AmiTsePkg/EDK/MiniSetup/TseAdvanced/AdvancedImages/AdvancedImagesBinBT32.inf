@@ -16,6 +16,7 @@ BIN | TseAdvancedImagesx64.lib|*|*|MYTOOLS
 BIN | TseAdvancedImagesx64.lib|*|*|MSFT
 BIN | TseAdvancedImagesVS2015x64.lib|*|*|VS2015
 BIN | TseAdvancedImagesGCCx64.lib|*|*|GCC
+BIN | TseAdvancedImagesVS2019x64.lib|*|*|VS2019
 [binaries.AARCH64]
 BIN | TseAdvancedImagesAarch64.lib
 
@@ -28,25 +29,15 @@ BIN | TseAdvancedImagesAarch64.lib
   MdePkg/MdePkg.dec
   AmiModulePkg/AmiModulePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
-  IntelFrameworkPkg/IntelFrameworkPkg.dec
-  
 
 [Protocols]
   gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
-  gEfiOEMBadgingProtocolGuid
   gEfiSimpleFileSystemProtocolGuid
-#  gEfiLegacyBiosProtocolGuid
-  gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
   gEfiBlockIoProtocolGuid
-  gEfiFirmwareVolumeProtocolGuid
   gEfiSimpleTextInProtocolGuid
   gEfiLoadedImageProtocolGuid
 
 [Guids]
-  gEfiConsoleOutDeviceGuid
   
 [LibraryClasses]
   MemoryAllocationLib
@@ -58,7 +49,6 @@ BIN | TseAdvancedImagesAarch64.lib
   UefiLib
   PrintLib
   UefiDriverEntryPoint
-#  AmiIntrinsicLib
   ReportStatusCodeLib
   
 [BuildOptions]

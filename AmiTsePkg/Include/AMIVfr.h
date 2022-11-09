@@ -1,29 +1,12 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 //*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2015, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/Include/AMIVfr.h $
-//
-// $Author: Arunsb $
-//
-// $Revision: 10 $
-//
-// $Date: 1/30/12 3:30a $
-//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
+
 //<AMI_FHDR_START>
 //----------------------------------------------------------------------------
 //
@@ -350,10 +333,6 @@
 #define DRIVER_HEALTH_ENB_KEY_ID	    0xF019
 #define DRIVER_HEALTH_KEY_ID		    0xF020
 #define DRIVER_HEALTH_CTRL_KEY_ID	    0xF021
-#define	DRIVER_MANAGER_KEY_ID		    0xF022		
-#define	DRIVER_ORDER_KEY_ID	            0xF023
-#define	NEW_DRIVER_OPTION_KEY_ID	    0xF024
-#define	DEL_DRIVER_OPTION_KEY_ID	    0xF025
 #define DYNAMIC_PAGE_GROUP_COUNT_KEY_ID  0xF026
 #define DYNAMIC_PAGE_DEVICE_COUNT_KEY_ID 0xF027
 #define DYNAMIC_PAGE_GROUP_CLASS_COUNT_KEY_ID  0xF028
@@ -746,16 +725,3 @@ extern EFI_GUID gTseEscOnPwdPromptGuid;
 #pragma pack()
 
 #endif /* _AMI_VFR_H_ */
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**     5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093     **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************

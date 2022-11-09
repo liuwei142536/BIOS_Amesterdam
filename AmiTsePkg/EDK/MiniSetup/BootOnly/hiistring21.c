@@ -1,29 +1,10 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2015, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/BootOnly/hiistring21.c $
-//
-// $Author: Rajashakerg $
-//
-// $Revision: 17 $
-//
-// $Date: 5/28/12 7:27a $
-//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 
 /** @file hiistring21.c
     This file contains code to handle UEFI2.1 supported hii strings.
@@ -37,9 +18,16 @@
 #else
 #include "tokens.h"
 #if TSE_USE_EDK_LIBRARY
-#include "Tiano.h"
+#define ___INTERNAL_CONVERT_TO_STRING___(a) #a 
+#define CONVERT_TO_STRING(a) ___INTERNAL_CONVERT_TO_STRING___(a)
+#define ___INTERNAL_CONVERT_TO_WSTRING___(a) L###a 
+#define CONVERT_TO_WSTRING(a) ___INTERNAL_CONVERT_TO_WSTRING___(a)
+#define SHIFT_STATE_VALID       0x80000000
+#define MENU_KEY_PRESSED        0x00000100
+#define SYS_REQ_PRESSED         0x00000200
+VOID MemCpy(VOID* pDestination, VOID* pSource, UINTN Length);
 #else
-#include "efi.h"
+#include "Efi.h"
 #endif
 #endif
 
@@ -47,24 +35,18 @@
 #include "Library/FileBrowser/FileBrowser.h"
 #endif
 
-
-#ifdef TSE_FOR_APTIO_4_50
-#ifndef EFI_PROTOCOL_DEFINITION
-#define TSE_STRINGIZE(a) #a
-#define EFI_PROTOCOL_DEFINITION(a) TSE_STRINGIZE(Protocol/a.h)
-#endif
-#endif
-
-#include EFI_PROTOCOL_DEFINITION (HiiString)
-#include EFI_PROTOCOL_DEFINITION (HiiDatabase)
-#include EFI_PROTOCOL_DEFINITION (HiiFont)
-#include EFI_PROTOCOL_DEFINITION (LoadedImage)
-#include EFI_PROTOCOL_DEFINITION (SimpleTextIn)
-#include EFI_PROTOCOL_DEFINITION (SimpleTextInEx)
+#include <Protocol/HiiString.h>
+#include <Protocol/HiiDatabase.h>
+#include <Protocol/HiiFont.h>
+#include <Protocol/LoadedImage.h>
+#include <Protocol/SimpleTextIn.h>
+#include <Protocol/SimpleTextInEx.h>
+#include <Library/DebugLib.h>
 #if TSE_USE_AMI_EFI_KEYCODE_PROTOCOL
-#include EFI_PROTOCOL_DEFINITION (AmiKeycode)
+#include <Protocol/AmiKeycode.h>
 #endif
-#include EFI_PROTOCOL_DEFINITION (FormBrowser2)
+#include <Protocol/FormBrowser2.h>
+#include <Library/BaseLib.h>
 
 #include "mem.h"
 #include "HiiLib.h"
@@ -165,9 +147,6 @@ extern EFI_BOOT_SERVICES *gBS;
 extern EFI_RUNTIME_SERVICES	*gRT;
 extern /*EFI_HII_HANDLE*/VOID* gHiiHandle;
 
-#if !TSE_APTIO_5_SUPPORT
-EFI_GUID gEfiHiiFontProtocolGuid = EFI_HII_FONT_PROTOCOL_GUID;
-#endif
 // EFI_GUID gEfiHiiDatabaseProtocolGuid = EFI_HII_DATABASE_PROTOCOL_GUID;
 // EFI_GUID gEfiHiiStringProtocolGuid = EFI_HII_STRING_PROTOCOL_GUID;
 
@@ -189,7 +168,6 @@ extern VOID *EfiLibAllocatePool(IN UINTN AllocationSize);
 extern EFI_STATUS HiiExtendedInitializeProtocol();
 extern CHAR8* StrDup16to8(CHAR16 *String);
 extern VOID *VarGetNvram( UINT32 variable, UINTN *size );
-extern INTN EfiAsciiStrCmp(IN CHAR8 *String, IN CHAR8 *String2);
 extern CHAR8 *StrDup8( CHAR8 *string );
 extern EFI_STATUS ReadImageResource(EFI_HANDLE ImageHandle, EFI_GUID *pGuid,
 					VOID **ppData, UINTN *pDataSize);
@@ -206,6 +184,10 @@ extern UINTN StyleGetTextMode( UINTN Rows, UINTN Cols );
 extern VOID LegacyBootFailHook (EFI_STATUS Status);
 extern VOID UefiBootFailHook (EFI_STATUS Status);
 extern VOID RevertFlushLines();
+BOOLEAN IsSpace(CHAR16 Character);
+BOOLEAN IsHyphen(CHAR16 Character);
+BOOLEAN IsNoBreak(CHAR16 Character);
+BOOLEAN IsUnkonwnGlyphNeedReplaced(CHAR16 Character);
 
 #ifndef SETUP_STYLE_FULL_SCREEN
 #define SETUP_STYLE_FULL_SCREEN  1
@@ -276,6 +258,22 @@ typedef struct {
 
 CHAR16  gPlatformLang [20];			
 CHAR16  gCachePlatformLang[20];//To Save the Current PlatformLang for Cache purpose.
+VOID EFIAPI SetupDebugPrint(IN CONST CHAR8  *Format, ...) ;
+#if SUPPRESS_PRINT
+    #define SETUP_DEBUG_TSE(format,...)
+#else //Else of SUPPRESS_PRINT
+#if BUILD_OS == BUILD_OS_LINUX
+    #define SETUP_DEBUG_TSE(format,...) SetupDebugPrint(format, ##__VA_ARGS__)
+#else //Else of BUILD_OS == BUILD_OS_LINUX
+    #define SETUP_DEBUG_TSE(format,...) SetupDebugPrint(format, __VA_ARGS__)
+#endif //End of BUILD_OS == BUILD_OS_LINUX
+#endif
+
+#ifndef TSE_FIRST_BOOT_GUID
+#define TSE_FIRST_BOOT_GUID \
+    { 0xc5912ed9, 0x83c2, 0x4bff, {0x99, 0x36, 0x23, 0x1f, 0xeb, 0x85, 0xf3, 0xe8 }}
+#endif
+
 /**
 
     @param 
@@ -375,8 +373,8 @@ DONE:
 CHAR8 *
 EFIAPI
 GetBestLanguage (
-  IN CONST CHAR8  *SupportedLanguages, 
-  IN BOOLEAN      Iso639Language,
+  IN CONST CHAR8  *SupportedLanguages,
+  IN UINTN        Iso639Language,
   ...
   );
 
@@ -409,7 +407,7 @@ UINT16 Uefi21HiiChangeStringLanguage(VOID* handle, UINT16 token, CHAR16 *lang, C
 	LangStrings = Languages;
 	if (*LangStrings != 0)
 	{
-		Lang = GetBestLanguage(LangStrings, FALSE, passedLang, NULL );
+		Lang = GetBestLanguage(LangStrings, 0, passedLang, NULL );
 //		_GetNextLanguage (&LangStrings, Lang);
 		if(token)
 		{
@@ -445,7 +443,6 @@ EFI_STATUS HiiLibGetStringEx(
 	IN EFI_HII_HANDLE HiiHandle, IN UINT16 StringId, IN CHAR8 *Language,
 	IN OUT UINTN *StringSize, OUT EFI_STRING String
 );
-VOID EfiStrCpy (IN CHAR16   *Destination, IN CHAR16   *Source);
 #define EfiCopyMem(_Destination, _Source, _Length)  gBS->CopyMem((_Destination), (_Source), (_Length))
 #define EfiZeroMem(_Destination, _Length)  gBS->SetMem((_Destination), (_Length), 0)
   
@@ -465,8 +462,7 @@ CHAR16 *Uefi21HiiGetStringLanguage(EFI_HII_HANDLE handle, UINT16 token, CHAR16 *
 	EFI_STATUS status;
 	CHAR16 *buffer = NULL;
 	UINTN bufferSize = 0,Size=0;
-//  UINT8 *language = NULL;
- CHAR8 *language = NULL;
+    CHAR8 *language = NULL;
 
 	status = HiiInitializeProtocol();
 	if ( EFI_ERROR(status) )
@@ -486,7 +482,8 @@ CHAR16 *Uefi21HiiGetStringLanguage(EFI_HII_HANDLE handle, UINT16 token, CHAR16 *
 			language = EfiLibAllocateZeroPool (20 * sizeof (CHAR16));
 			if (NULL != language)
 			{
-				EfiStrCpy ((CHAR16 *)language, gPlatformLang);
+			StrCpyS ((CHAR16 *)language, 20, gPlatformLang);
+			
 			}
 		}
 		else
@@ -518,7 +515,7 @@ CHAR16 *Uefi21HiiGetStringLanguage(EFI_HII_HANDLE handle, UINT16 token, CHAR16 *
 	}
     else 
     {
-    	TRACE((TRACE_TSE,"\n[TSE] PlatformLang is not defined, falling back to DEFAULT_LANGUAGE_CODE, and then en-US \n"));
+        SETUP_DEBUG_TSE("[TSE] PlatformLang is not defined, falling back to DEFAULT_LANGUAGE_CODE, and then en-US \n");
     	status = EFI_NOT_FOUND;
     }
 	    	
@@ -531,7 +528,7 @@ CHAR16 *Uefi21HiiGetStringLanguage(EFI_HII_HANDLE handle, UINT16 token, CHAR16 *
 		// String not found in Default Language
 		if (( EFI_ERROR(status) )&&(bufferSize==0))
 		{
-			if(EfiAsciiStrCmp(language, "en-US")!=0)
+			if(AsciiStrCmp(language, "en-US")!=0)
 			{
 				MemFreePointer( (VOID **)&language );
 				language = StrDup8("en-US");
@@ -702,10 +699,8 @@ UINTN Uefi21HiiGetGlyphHeight(VOID)
 }
 
 //----------------------------------------------------------------------------
-// Patch to use UnicodeCollation until
-// Aptio supports UnicodeCollation2 protocol
+// Patch to use UnicodeCollation2 protocol
 //----------------------------------------------------------------------------
-#include EFI_PROTOCOL_DEFINITION(UnicodeCollation)
 
 EFI_STATUS GetUnicodeCollection2Protocol(VOID **Protocol)
 {
@@ -715,20 +710,9 @@ EFI_STATUS GetUnicodeCollection2Protocol(VOID **Protocol)
                 &gEfiUnicodeCollation2ProtocolGuid,
                 NULL,
                 Protocol);
-//----------------------------------------------------------------------------
-// Patch to use UnicodeCollation until
-// Aptio supports UnicodeCollation2 protocol
-//----------------------------------------------------------------------------
-	if(EFI_ERROR(Status))
-	{
-		Status = gBS->LocateProtocol(
-                &gEfiUnicodeCollationProtocolGuid,
-                NULL,
-                Protocol);
-	}
-
 	return Status;
 }
+
 CHAR16 *TseSkipEscCode(CHAR16 *String);
 UINTN EfiStrLen(IN CHAR16 *String);
 /**
@@ -821,28 +805,37 @@ UINTN UefiHiiTestPrintLength ( IN CHAR16   *String )
 				// in case EFI_WARN_UNKNOWN_GLYPH Font.c will return BLT buffer with replacement character
 				// port Font.c if another character is needed to be replacement
 				// for EFI_NOT_FOUND - there will be no buffer -> putting space.
-  			    if(Blt == NULL)
+				if((Blt == NULL) || ((Status == EFI_WARN_UNKNOWN_GLYPH) && IsUnkonwnGlyphNeedReplaced(Character) ))
   			    {
   			        CHAR16 SpaceCharacter = L' ';
+  			        
+  			        if (IsHyphen(Character))
+  			        {
+  			          SpaceCharacter = L'-';
+  			        }
+  			        
   			        gHiiFont->GetGlyph(gHiiFont, SpaceCharacter, NULL, &Blt, &Baseline);
-  			        //in the current string replace the missing character with space
-  			        for (i = 0; i < StringLen; i++)
-  				    {
-  				        if(String[i] == Character)
-  				            String[i] = SpaceCharacter;
-  				    }
-  			        // update the BackupString with the string. do not update the size again
-  				    if (BackupString != String)
-  				    {
-                        for (i = 0; i < EfiStrLen(BackupString); i++)
-                        {                   
-                            if(BackupString[i] == Character)
-                                BackupString[i] = SpaceCharacter;
+  			        if(Blt)
+  			        {  
+                        //in the current string replace the missing character with space
+                        for (i = 0; i < StringLen; i++)
+                        {
+                            if(String[i] == Character)
+                                String[i] = SpaceCharacter;
                         }
-  				    }
-  				    //do not update *(GlyphWidthCache+Character) so that if the character is encountered again it gets replaced.
-  				    // update the size once
-  				    Size += (CHAR8) Blt->Width;
+                        // update the BackupString with the string. do not update the size again
+                        if (BackupString != String)
+                        {
+                            for (i = 0; i < EfiStrLen(BackupString); i++)
+                            {                   
+                                if(BackupString[i] == Character)
+                                    BackupString[i] = SpaceCharacter;
+                            }
+                        }
+                        //do not update *(GlyphWidthCache+Character) so that if the character is encountered again it gets replaced.
+                        // update the size once
+                        Size += (CHAR8) Blt->Width;
+  			        }
   			    }
   			    else
   			    {
@@ -859,7 +852,7 @@ UINTN UefiHiiTestPrintLength ( IN CHAR16   *String )
   		    Index++;
   	    }
   	    
-  	    if(String != NULL && gSkipEscCode)
+  	    if(gSkipEscCode)
   	       gBS->FreePool( String );
   	    
   	    Size = ((Size/GLYPH_WIDTH)*NG_SIZE);
@@ -1229,7 +1222,7 @@ BOOLEAN MatchDPHandleWithDrvHlthHndls (EFI_HANDLE DPHandle)
     EFI_GUID    **ppGuid = NULL;
     EFI_OPEN_PROTOCOL_INFORMATION_ENTRY *EntryBuffer = NULL;
     EFI_GUID EfiDriverHealthProtocolGuid = EFI_DRIVER_HEALTH_PROTOCOL_GUID;
-    TRACE ((TRACE_TSE,"\n[TSE]Entering MatchDPHandleWithDrvHlthHndls()"));
+    SETUP_DEBUG_TSE("[TSE]Entering MatchDPHandleWithDrvHlthHndls()\n");
 	Status = gBS->LocateHandleBuffer (
 				ByProtocol,
 				&EfiDriverHealthProtocolGuid,
@@ -1237,7 +1230,7 @@ BOOLEAN MatchDPHandleWithDrvHlthHndls (EFI_HANDLE DPHandle)
 				&NumHandles,
 				&DriverHealthHandles
 				);
-	TRACE ((TRACE_TSE,"\n[TSE]MatchDPHandleWithDrvHlthHndls():gBS->LocateHandleBuffer Status:%r   No of handles:%X",Status,NumHandles));
+	SETUP_DEBUG_TSE("[TSE]MatchDPHandleWithDrvHlthHndls():gBS->LocateHandleBuffer Status:%r   No of handles:%X\n",Status,NumHandles);
 	if (EFI_ERROR (Status))
 	{
 		return FALSE;
@@ -1278,7 +1271,7 @@ BOOLEAN MatchDPHandleWithDrvHlthHndls (EFI_HANDLE DPHandle)
         MemFreePointer ((VOID **)&ppGuid);
     }
 	 MemFreePointer ((VOID **)&DriverHealthHandles);
-	 TRACE((TRACE_TSE,"\n[TSE]Exiting MatchDPHandleWithDrvHlthHndls()\n"));
+	 SETUP_DEBUG_TSE("[TSE]Exiting MatchDPHandleWithDrvHlthHndls()\n");
     return FALSE;
 }
 
@@ -1304,20 +1297,19 @@ EFI_STATUS CheckForDeviceNeedRepair (EFI_DEVICE_PATH_PROTOCOL *DevicePath)
     EFI_GUID    FormBrowserGuid = EFI_FORM_BROWSER2_PROTOCOL_GUID;
     EFI_GUID    DrvHealthFormsetGuid = EFI_HII_DRIVER_HEALTH_FORMSET_GUID;
     EFI_GUID    EfiDriverHealthProtocolGuid = EFI_DRIVER_HEALTH_PROTOCOL_GUID;
-    TRACE((TRACE_TSE,"\n[TSE] Entering CheckForDeviceNeedRepair()"));
-    Status = gBS->LocateDevicePath (
+ 	Status = gBS->LocateDevicePath (
                 &gEfiDevicePathProtocolGuid,
                 &TempDevicePath,
                 &DevHandle
                 );
-    TRACE((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : LocateDevicePath Status :%r",Status));
+    SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : LocateDevicePath Status :%r\n",Status);
 	if (EFI_ERROR (Status))
 	{
         return Status;
     }
     if (FALSE == MatchDPHandleWithDrvHlthHndls (DevHandle))
     {
-   	 TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : MatchDPHandleWithDrvHlthHndls is FALSE For Handle:%X",DevHandle));
+        SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : MatchDPHandleWithDrvHlthHndls is FALSE For Handle:%X\n",DevHandle);
         return EFI_UNSUPPORTED;
     }
     Status = gBS->HandleProtocol (DevHandle, &EfiDriverHealthProtocolGuid, (VOID**)&DrvHealthInstance);
@@ -1330,7 +1322,7 @@ EFI_STATUS CheckForDeviceNeedRepair (EFI_DEVICE_PATH_PROTOCOL *DevicePath)
 	Status = DrvHealthInstance->GetHealthStatus (DrvHealthInstance, DevHandle, NULL, &HealthStatus, NULL, &FormHiiHandle);
 	gEnableDrvNotification = FALSE;     
     gBrowserCallbackEnabled = FALSE; 
-    TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : DrvHealthInstance->GetHealthStatus1 HealthStatus:%r Status:%r FormHiiHandle:[%X] ControllerHandle:[%X] ChildHandle:[0]",HealthStatus,Status,FormHiiHandle,DevHandle));
+    SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : DrvHealthInstance->GetHealthStatus1 HealthStatus:%r Status:%r FormHiiHandle:[%X] ControllerHandle:[%X] ChildHandle:[0]\n",HealthStatus,Status,FormHiiHandle,DevHandle);
     if (EFI_ERROR (Status))
     {
         return Status;
@@ -1343,7 +1335,7 @@ EFI_STATUS CheckForDeviceNeedRepair (EFI_DEVICE_PATH_PROTOCOL *DevicePath)
 DriverRepair:    
     if (EfiDriverHealthStatusRepairRequired == HealthStatus)
     {
-   	 TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : HealthStatus :%r",HealthStatus));
+        SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : HealthStatus :%r\n",HealthStatus);
         Status = DrvHealthInstance->Repair (
             DrvHealthInstance,
             DevHandle,
@@ -1352,7 +1344,7 @@ DriverRepair:
             );
         if (EFI_ERROR (Status))
         {
-      	  TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : DrvHealthInstance->Repair Status:%r ControllerHandle:[%X] ChildHandle:[0]",Status,DevHandle));
+            SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : DrvHealthInstance->Repair Status:%r ControllerHandle:[%X] ChildHandle:[0]\n",Status,DevHandle);
             return EFI_UNSUPPORTED;
         }
     }
@@ -1360,17 +1352,17 @@ DriverRepair:
     {
         gEnableDrvNotification = TRUE;      
         gBrowserCallbackEnabled = TRUE;     
-        TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : AdvancedRepairSupported() is TRUE "));
+        SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : AdvancedRepairSupported() is TRUE \n");
         Status = DrvHealthInstance->GetHealthStatus (DrvHealthInstance, DevHandle, NULL, &HealthStatus, NULL, &FormHiiHandle);
         
         gEnableDrvNotification = FALSE;      
         gBrowserCallbackEnabled = FALSE;    
-        TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : DrvHealthInstance->GetHealthStatus()2  HealthStatus:%r Status:%r FormHiiHandle:[%X] ControllerHandle:[%X] ChildHandle:[0]",HealthStatus,Status,FormHiiHandle,DevHandle));
+        SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : DrvHealthInstance->GetHealthStatus()2  HealthStatus:%r Status:%r FormHiiHandle:[%X] ControllerHandle:[%X] ChildHandle:[0]\n",HealthStatus,Status,FormHiiHandle,DevHandle);
         if (!EFI_ERROR (Status))
         {
             if (EfiDriverHealthStatusConfigurationRequired == HealthStatus)
             {
-            	TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : HealthStatus: %r",HealthStatus));
+                SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : HealthStatus: %r\n",HealthStatus);
                 Status = FormBrowserInterface->SendForm (
                             FormBrowserInterface,
                             &FormHiiHandle,
@@ -1382,14 +1374,14 @@ DriverRepair:
                             );
                 if (EFI_ERROR (Status))
                 {
-               	 TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : FormBrowserInterface->SendForm Status:%r For Form handle:%X Guid:%g",Status,FormHiiHandle,DrvHealthFormsetGuid));
+                    SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : FormBrowserInterface->SendForm Status:%r For Form handle:%X Guid:%g\n",Status,FormHiiHandle,DrvHealthFormsetGuid);
                     return Status;
                 }
                 gEnableDrvNotification = TRUE;       
                 gBrowserCallbackEnabled = TRUE;     
                 
                 Status = DrvHealthInstance->GetHealthStatus (DrvHealthInstance, DevHandle, NULL, &HealthStatus, NULL, &FormHiiHandle);
-                TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() : DrvHealthInstance->GetHealthStatus3 HealthStatus:%r Status:%r FormHiiHandle:[%X] ControllerHandle:[%X] ChildHandle:[0]",HealthStatus,Status,FormHiiHandle,DevHandle));
+                SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() : DrvHealthInstance->GetHealthStatus3 HealthStatus:%r Status:%r FormHiiHandle:[%X] ControllerHandle:[%X] ChildHandle:[0]",HealthStatus,Status,FormHiiHandle,DevHandle);
                 gEnableDrvNotification = FALSE;     
                 gBrowserCallbackEnabled = FALSE;    
                 
@@ -1400,17 +1392,17 @@ DriverRepair:
             }
             if ((EfiDriverHealthStatusRepairRequired == HealthStatus) || (EfiDriverHealthStatusConfigurationRequired == HealthStatus))
             {
-            	TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() :HealthStatus :%r",HealthStatus));
+                SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() :HealthStatus :%r\n",HealthStatus);
                 goto DriverRepair;
             }
             else if (EfiDriverHealthStatusRebootRequired == HealthStatus)
             {
-            	TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() :HealthStatus :%r ",HealthStatus));
+                SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() :HealthStatus :%r\n",HealthStatus);
                 DriverHealthSystemReset ();
             }
             else if (EfiDriverHealthStatusReconnectRequired == HealthStatus)
             {
-            	TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() :HealthStatus :%r ",HealthStatus));
+                SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() :HealthStatus :%r\n",HealthStatus);
                 gBS->DisconnectController (DevHandle, NULL, NULL);
                 gBS->ConnectController (DevHandle, NULL, NULL, TRUE);
             }
@@ -1420,16 +1412,15 @@ DriverRepair:
     gBrowserCallbackEnabled = TRUE;     
     
     Status = DrvHealthInstance->GetHealthStatus (DrvHealthInstance, DevHandle, NULL, &HealthStatus, NULL, &FormHiiHandle);
-    TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() :DrvHealthInstance->GetHealthStatus4 HealthStatus:%r Status:%r FormHiiHandle:[%X] ControllerHandle:[%X] ChildHandle:[0]",HealthStatus,Status,FormHiiHandle,DevHandle));
+    SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() :DrvHealthInstance->GetHealthStatus4 HealthStatus:%r Status:%r FormHiiHandle:[%X] ControllerHandle:[%X] ChildHandle:[0]\n",HealthStatus,Status,FormHiiHandle,DevHandle);
     gEnableDrvNotification = FALSE;     
     gBrowserCallbackEnabled = FALSE;    
     
     if ((!(EFI_ERROR (Status))) && (EfiDriverHealthStatusHealthy == HealthStatus) )
     {
-   	 TRACE ((TRACE_TSE,"\n[TSE] CheckForDeviceNeedRepair() :HealthStatus:%r and Status :EFI_SUCCESS",HealthStatus));
+        SETUP_DEBUG_TSE("[TSE] CheckForDeviceNeedRepair() :HealthStatus:%r and Status :EFI_SUCCESS\n",HealthStatus);
         return EFI_SUCCESS;
     }
-    TRACE ((TRACE_TSE,"\n[TSE] Exiting CheckForDeviceNeedRepair()\n"));
     return EFI_UNSUPPORTED;
 }
 
@@ -1496,18 +1487,17 @@ EFI_STATUS InitEsaTseInterfaces (void)
 #if TSE_BUILD_AS_APPLICATION
 		UpdateGoPUgaDraw ();
 #endif	
-		Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (TSEHANDLE, 1, &gHiiHandle, 0);
-		Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (LANGDATA,1,(void**) &gLanguages, &gLangCount);
-		Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (GOP, 1,(void**) &gGOP, 0);
+		gEsaInterfaceForTSE->EsaTseSetGetVariables (TSEHANDLE, 1, &gHiiHandle, 0);
+		gEsaInterfaceForTSE->EsaTseSetGetVariables (LANGDATA,1,(void**) &gLanguages, &gLangCount);
+		gEsaInterfaceForTSE->EsaTseSetGetVariables (GOP, 1,(void**) &gGOP, 0);
 		if(!gLaunchOtherSetup){
-			Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (PostStatus, 1, 0, &gPostStatus);
+			gEsaInterfaceForTSE->EsaTseSetGetVariables (PostStatus, 1, 0, &gPostStatus);
 		}
-		Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (QuietBoot, 1, 0, (UINTN*)&gQuietBoot);
-		Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (TSEDEBUG, 1, 0, (UINTN*)&gDbgPrint);
-		Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (BOOTDISABLEDOPTION, 1, 0, (UINTN*)&DISABLED_BOOT_OPTION);
-		Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (DRIVERDISABLEDOPTION, 1, 0, (UINTN*)&DISABLED_DRIVER_OPTION);
-		Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (BgrtSafeBuffer, 1, 0, (UINTN*)&gBgrtSafeBuffer);
-		Status = gEsaInterfaceForTSE->EsaTseSetGetVariables (TableKey, 1, 0, (UINTN*)&gTableKey);
+		gEsaInterfaceForTSE->EsaTseSetGetVariables (QuietBoot, 1, 0, (UINTN*)&gQuietBoot);
+		gEsaInterfaceForTSE->EsaTseSetGetVariables (BOOTDISABLEDOPTION, 1, 0, (UINTN*)&DISABLED_BOOT_OPTION);
+		gEsaInterfaceForTSE->EsaTseSetGetVariables (DRIVERDISABLEDOPTION, 1, 0, (UINTN*)&DISABLED_DRIVER_OPTION);
+		gEsaInterfaceForTSE->EsaTseSetGetVariables (BgrtSafeBuffer, 1, 0, (UINTN*)&gBgrtSafeBuffer);
+		gEsaInterfaceForTSE->EsaTseSetGetVariables (TableKey, 1, 0, (UINTN*)&gTableKey);
 		
 		gEsaInterfaceForTSE->InitGraphicsLibEntry (gImageHandle, gST);
 	}
@@ -1539,6 +1529,24 @@ CHAR16 *GetDefaultPasswordFromTokens (UINT32 PasswordType)
 	}
 #endif	
 	return NULL;
+}
+
+/**
+    Returns token SKIP_INPUT_PASSWORD_ON_REDFISH_PWD_UPDATE value
+
+    @param VOID
+
+    @retval BOOLEAN
+
+**/
+
+BOOLEAN   gRedfishUpdateNotifySupported(VOID) 
+{
+#if SKIP_INPUT_PASSWORD_ON_REDFISH_PWD_UPDATE
+    return TRUE;
+#else 
+    return FALSE;
+#endif    
 }
 	
 /**
@@ -1829,6 +1837,21 @@ UINT8 PcdPasswordPolicy()
 {
 return PcdGet8(AmiTsePcdPasswordPolicy);
 }
+
+/**
+    Returns value of the reconnect pxe PCD
+
+    @param VOID
+
+    @retval UINT8
+
+**/
+
+UINT8 PcdReconnectPxe()
+{
+return PcdGet8(AmiTsePcdReconnectPxe);
+}
+
 /**
 	Returns POPUP_MENU_ENTER_SETUP token value
 
@@ -2386,7 +2409,7 @@ EFI_STATUS ExportSetupNVLockPassword(CHAR16* Password)
     
     if ((PwdSize < gSetupNVLockPwdSize)&& gSetupNVLockPwd)
     {
-        EfiStrCpy( gSetupNVLockPwd, Password );
+        StrCpyS( gSetupNVLockPwd, gSetupNVLockPwdSize, Password );
         return EFI_SUCCESS;
     }
     else
@@ -2399,22 +2422,31 @@ EFI_STATUS ExportSetupNVLockPassword(CHAR16* Password)
 
 VOID LegacyBootFailHookWrapper (EFI_STATUS Status)
 {
-
-    if((gMaxBufX != 0) && (gMaxBufY != 0)) 
-     {
-          gMaxRows = gMaxBufX;
-          gMaxCols = gMaxBufY;
-     }  
-     else
-     {
-          gMaxRows = MAX_ROWS;
-          gMaxCols = MAX_COLS;
-      }
-    LegacyBootFailHook(Status);
-    if (gST->ConOut != NULL)
-    gST->ConOut->SetMode( gST->ConOut, StyleGetTextMode( gPSMaxRows, gPSMaxCols ) );  // To set back to post screen resolution
-    SetPostScreenScrollArea(0,0,gPSMaxRows -1,gPSMaxCols); //To display post messages from top
-    RevertFlushLines();
+    if(EFI_SECURITY_VIOLATION == Status)
+    { 
+        if((gMaxBufX != 0) && (gMaxBufY != 0)) 
+        {
+            gMaxRows = gMaxBufX;
+            gMaxCols = gMaxBufY;
+        }  
+        else
+        {
+            gMaxRows = MAX_ROWS;
+            gMaxCols = MAX_COLS;
+        }
+        LegacyBootFailHook(Status);
+#if (!(ESA_BINARY_SUPPORT && defined(ESA_TSE_FULL_SUPPORT )&& (ESA_TSE_FULL_SUPPORT ==0)) && !(defined(BUILD_FOR_ESA) && (ESA_TSE_FULL_SUPPORT == 1)))
+        if (gST->ConOut != NULL)
+        {
+            UINTN ModeCols,ModeRows;
+            gST->ConOut->QueryMode( gST->ConOut, gST->ConOut->Mode->Mode, &ModeCols, &ModeRows );
+            if((ModeCols != gPSMaxCols) || (gPSMaxRows != ModeRows))
+                gST->ConOut->SetMode( gST->ConOut, StyleGetTextMode( gPSMaxRows, gPSMaxCols ) ); // To set back to post screen resolution
+        }
+#endif
+        SetPostScreenScrollArea(0,0,gPSMaxRows -1,gPSMaxCols); //To display post messages from top
+        RevertFlushLines();
+    }
 
 }
 
@@ -2424,22 +2456,35 @@ VOID LegacyBootFailHookWrapper (EFI_STATUS Status)
 
 VOID UefiBootFailHookWrapper(EFI_STATUS Status)
 { 
-    if((gMaxBufX != 0) && (gMaxBufY != 0)) // Update the original Rows and Cols data after returning from boot option.
-    {
-        gMaxRows = gMaxBufX;
-        gMaxCols = gMaxBufY;
-    }  
-    else
-    {
-        gMaxRows = MAX_ROWS;
-        gMaxCols = MAX_COLS;
-     }
-    UefiBootFailHook(Status);
-    if (gST->ConOut != NULL)
-    gST->ConOut->SetMode( gST->ConOut, StyleGetTextMode( gPSMaxRows, gPSMaxCols ) ); // To set back to post screen resolution
-    SetPostScreenScrollArea(0,0,gPSMaxRows -1,gPSMaxCols);  // To display post messages from the top
-    RevertFlushLines();
-	
+    if((EFI_SECURITY_VIOLATION == Status) || (EFI_ACCESS_DENIED == Status))
+    { 
+        if((gMaxBufX != 0) && (gMaxBufY != 0)) // Update the original Rows and Cols data after returning from boot option.
+        {
+            gMaxRows = gMaxBufX;
+            gMaxCols = gMaxBufY;
+           
+        }  
+        else
+        {
+            gMaxRows = MAX_ROWS;
+            gMaxCols = MAX_COLS;
+        
+        }
+        UefiBootFailHook(Status);
+     
+#if (!(ESA_BINARY_SUPPORT && defined(ESA_TSE_FULL_SUPPORT )&& (ESA_TSE_FULL_SUPPORT ==0)) && !(defined(BUILD_FOR_ESA) && (ESA_TSE_FULL_SUPPORT == 1)))
+        if (gST->ConOut != NULL)
+        {
+            UINTN ModeCols,ModeRows;
+            gST->ConOut->QueryMode( gST->ConOut, gST->ConOut->Mode->Mode, &ModeCols, &ModeRows );
+            if((ModeCols != gPSMaxCols) || (gPSMaxRows != ModeRows))
+               gST->ConOut->SetMode( gST->ConOut, StyleGetTextMode( gPSMaxRows, gPSMaxCols ) ); // To set back to post screen resolution
+        }
+#endif
+        SetPostScreenScrollArea(0,0,gPSMaxRows -1,gPSMaxCols);  // To display post messages from the top
+        RevertFlushLines();
+
+      }
 }
 
 /**
@@ -2460,18 +2505,298 @@ BOOLEAN IsSetupUseGopSplitter(void)
 #endif
 }
 
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2015, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
+/**
+    Returns TRUE if space character is found
+    
+    @param CHAR16
+
+    @retval BOOLEAN
+
+**/
+BOOLEAN IsSpace(CHAR16 Character )
+{
+    BOOLEAN ReturnVal;
+    switch(Character)
+    {
+        case 0x1680:
+        case 0x2000:
+        case 0x2001:
+        case 0x2002:
+        case 0x2003:
+        case 0x2004:
+        case 0x2005:
+        case 0x2006:
+        case 0x2007:
+        case 0x2008:
+        case 0x2009:
+        case 0x200A:
+        case 0x205F:
+                    ReturnVal = TRUE;
+                    break;
+        default: 
+                    ReturnVal = FALSE;
+                    break;
+    }
+    return ReturnVal;
+}
+
+/**
+    Returns TRUE if Hyphen character is found
+    
+    @param CHAR16
+
+    @retval BOOLEAN
+
+**/
+BOOLEAN IsHyphen(CHAR16 Character )
+{
+    BOOLEAN ReturnVal;
+    switch(Character)
+    {
+       case 0x058A:
+       case 0x2010:
+       case 0x2013:
+       case 0x2012:
+       case 0x0F0B:
+       case 0x1361:
+       case 0x17D5:
+       case 0x2014:
+       case 0x2011:
+                   ReturnVal = TRUE;
+                   break;
+       default: 
+                   ReturnVal = FALSE;
+                   break;
+    }
+    return ReturnVal;
+}
+
+/**
+    Returns TRUE for characters with non-breaking opportunity
+    
+    @param CHAR16
+
+    @retval BOOLEAN
+
+**/
+BOOLEAN IsNoBreak(CHAR16 Character )
+{
+    BOOLEAN ReturnVal;
+    switch(Character)
+    {
+        case 0x00A0:
+        case 0x202F:
+        case 0x200B:
+        case 0x2011:
+                    ReturnVal = TRUE;
+                    break;
+        default: 
+                    ReturnVal = FALSE;
+                    break;                    
+    }
+    return ReturnVal;
+}
+
+/**
+    Returns TRUE for below 5 characters, These characters are not present in Font file So dont have proper glyph
+    
+    @param CHAR16
+
+    @retval BOOLEAN
+
+**/
+BOOLEAN IsUnkonwnGlyphNeedReplaced(CHAR16 Character)
+{
+    BOOLEAN ReturnVal;
+        switch(Character)
+        {
+            case 0x202F:
+            case 0x205F:
+            case 0x0F0B:
+            case 0x058A:
+            case 0x17D5:
+                        ReturnVal = TRUE;
+                        break;
+            default: 
+                        ReturnVal = FALSE;
+                        break;                    
+        }
+        return ReturnVal;
+}
+
+/**
+    Returns SCREEN_ROTATION_SUPPORT token value
+    
+    @param VOID
+
+    @retval BOOLEAN
+
+**/
+
+BOOLEAN IsScreenRotationEnabled(void)
+{
+#ifdef SCREEN_ROTATION_SUPPORT
+    return SCREEN_ROTATION_SUPPORT;
+#else
+    return 0;
+#endif
+}
+
+#if (!SecureBoot_SUPPORT) || (AMI_SECUREBOOTPKG_MODULE_REVISION < 7)
+/**
+    Dummy function to avoid build error when SecureBoot module is not present.
+    TSE consumes this function during validating Json Capsule signature.
+    But SecureBoot module by defualt they are linking this function to TSE
+    via its library. So we can't duplicate this on our side. 
+**/
+EFI_STATUS
+EFIAPI
+AmiTimeToSec(EFI_TIME *EfiTime, UINT64 *t)
+{
+    return EFI_UNSUPPORTED;
+}
+#endif
+
+/**
+   Wrapper function to return Boot option name, oem can override this function by enabling the token OVERRIDE_BootGetBootOptionNameUEFIAndLegacy in AMITSE.sdl.
+**/
+#if !OVERRIDE_BootGetBootOptionNameUEFIAndLegacy
+CHAR16 *BootGetBootOptionNameUEFIAndLegacy( BOOT_DATA *bootData)
+{
+    return bootData->Name;
+}
+#endif
+
+/**
+    Returns TSE_ALT_DEFAULTS_CONFIGURATION token value
+    
+    @param VOID
+
+    @retval BOOLEAN
+
+**/
+
+BOOLEAN GetDefaultfromAltcfgenabled(VOID)
+{
+#if TSE_ALT_DEFAULTS_CONFIGURATION
+    return 1;
+#else
+    return 0;
+#endif
+}
+
+/**
+    This function is used to get the MonotonicCount
+
+    @param VOID  
+
+    @retval VOID                        
+   .
+**/
+VOID FirstBootVariableCheck(VOID)
+{    
+    UINT64 MonotonicCount =0;
+    EFI_STATUS Status;
+    Status =  gBS->GetNextMonotonicCount(&MonotonicCount);
+    if( EFI_ERROR(Status) )
+        return;
+    MonotonicCount = RShiftU64(MonotonicCount, 32) & 0xffffffff;
+    if(MonotonicCount == 1)
+    {
+        EFI_GUID   BootGuid = TSE_FIRST_BOOT_GUID;
+        Status = VarSetNvramName( L"ConstructDefaults4FirstBoot", &BootGuid, EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_NON_VOLATILE, 0, 0 );
+        Status = VarSetNvramName( L"EvaluateDefaults4FirstBoot", &gEvaluateDefaults4FirstBootGuid, EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_NON_VOLATILE, 0, 0 );
+        Status =VarSetNvramName( L"TseFirstBootFlag", &BootGuid, EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_NON_VOLATILE, 0, 0 );   
+    }
+}
+
+/**
+    Returns TSE_INCONSISTENT_IF_POLICY token value
+    
+    @param VOID
+
+    @retval BOOLEAN
+
+**/
+
+BOOLEAN GetTseInconsistentPolicy(VOID)
+{
+#if TSE_INCONSISTENT_IF_POLICY
+    return 1;
+#else
+    return 0;
+#endif
+}
+
+#ifndef DISABLE_NEW_DEPRECATED_INTERFACES
+/**
+    EfiStrCpy() - should not be used, use StrCpyS instead
+    Keep for backward compatibility
+
+    @param string1 CHAR16* string2
+
+    @retval CHAR16*
+
+**/
+
+VOID
+EfiStrCpy (
+  IN CHAR16   *Destination,
+  IN CHAR16   *Source
+  )
+{
+    StrCpy(Destination,Source);
+}
+#endif
+
+/** GetDateData() returns Default Month Year day MinYear Max Year specified in .sdl 
+
+	@param DATE_DATA
+
+	@retval void
+
+**/
+void GetDateData(UINT8 *DefaultDay, UINT8 *DefaultMonth, UINT16 *DefaultYear,  UINT16 *MinYear, UINT16 *MaxYear)
+{   
+#ifdef DEFAULT_DAY 
+    *DefaultDay = DEFAULT_DAY;
+#else
+    *DefaultDay  = TSE_DEFAULT_DAY; 
+#endif
+#ifdef DEFAULT_MONTH 
+    *DefaultMonth = DEFAULT_MONTH;
+#else
+    *DefaultMonth  = TSE_DEFAULT_MONTH; 
+#endif    
+#ifdef DEFAULT_YEAR 
+    *DefaultYear = DEFAULT_YEAR;
+#else
+    *DefaultYear  = TSE_DEFAULT_YEAR; 
+#endif
+#ifdef MINIMUM_YEAR 
+    *MinYear = MINIMUM_YEAR;
+#else
+    *MinYear  = TSE_MINIMUM_YEAR; 
+#endif
+#ifdef MAXIMUM_YEAR 
+    *MaxYear = MAXIMUM_YEAR;
+#else
+    *MaxYear  = TSE_MAXIMUM_YEAR; 
+#endif
+}
+/**
+    Default implementation for SetupPageChangeHook. The Hook is called during page change. 
+    The user cannot update NewPageGuid / NewPageFormId to change destination page, 
+    however they can block change of the page by returning EFI_ACCESS_DENIED
+    Do NOT use to perform HII pack update or modify HII browser data. 
+    
+    @param EFI_GUID* OldPageGuid, UINT16* OldPageFormId, EFI_GUID* NewPageGuid, UINT16* NewPageFormId
+    
+    @retval EFI_STATUS
+
+**/
+EFI_STATUS SetupPageChangeHook(EFI_GUID* OldPageGuid, UINT16* OldPageFormId, EFI_GUID* NewPageGuid, UINT16* NewPageFormId)
+{
+    return EFI_SUCCESS;
+}
+

@@ -1,24 +1,11 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 //*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2012, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Header: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/TseAdvanced/AddDelBootDrvOpts.sd 1     2/03/12 2:27a Arunsb $
-//
-// $Revision: 1 $
-//
-// $Date: 2/03/12 2:27a $
-//**********************************************************************
 //<AMI_FHDR_START>
 //
 // Name: AMITSE.sd
@@ -33,23 +20,19 @@
 #ifdef FORM_SET_VARSTORE
 
 	varstore DRIVER_MANAGER,
-	key = DRIVER_MANAGER_KEY_ID,
 	name = DriverManager,
 	guid = DRIVER_MANAGER_GUID;
 
 	varstore DRIVER_ORDER,
-	key = DRIVER_ORDER_KEY_ID,
 	name = DriverOrder,
 	guid = EFI_GLOBAL_VARIABLE_GUID;
 
 #if SETUP_SUPPORT_ADD_DRIVER_OPTION
 	varstore NEW_DRIVER_OPTION,
-	key = NEW_DRIVER_OPTION_KEY_ID,
 	name = AddDriverOption,
 	guid = ADD_DRIVER_OPTION_GUID;
 
 	varstore DEL_DRIVER_OPTION,
-	key = DEL_DRIVER_OPTION_KEY_ID,
 	name = DelDriverOption,
 	guid = DEL_DRIVER_OPTION_GUID;
 #endif
@@ -248,19 +231,3 @@
 //Add/Del new driver option ends
 
 #endif //ifdef ADVANCED_FORM_SET
-
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2012, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//

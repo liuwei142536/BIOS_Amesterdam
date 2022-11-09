@@ -16,6 +16,7 @@ LIBRARY_CLASS = TseLiteBin
  LIB | TseLiteLocalx64.lib|*|*|MSFT	
  LIB | TseLiteLocalVS2015x64.lib|*|*|VS2015
  LIB | TseLiteLocalGCCx64.lib|*|*|GCC 
+ LIB | TseLiteLocalVS2019x64.lib|*|*|VS2019
 [binaries.AARCH64]
  LIB | TseLiteLocalAarch64.lib  
 
@@ -27,25 +28,16 @@ LIBRARY_CLASS = TseLiteBin
   MdePkg/MdePkg.dec
   AmiModulePkg/AmiModulePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
-  IntelFrameworkPkg/IntelFrameworkPkg.dec
 
   [Protocols]
   gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
-  gEfiOEMBadgingProtocolGuid
   gEfiSimpleFileSystemProtocolGuid
-#  gEfiLegacyBiosProtocolGuid
-  gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
   gEfiBlockIoProtocolGuid
-  gEfiFirmwareVolumeProtocolGuid
   gEfiSimpleTextInProtocolGuid
   gEfiLoadedImageProtocolGuid
   gEfiDriverHealthProtocolGuid
 
 [Guids]
-  gEfiConsoleOutDeviceGuid
   
   
 [BuildOptions]

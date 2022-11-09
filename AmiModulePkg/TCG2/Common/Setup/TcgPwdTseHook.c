@@ -64,7 +64,9 @@ extern EFI_SYSTEM_TABLE     *gST;
 extern EFI_RUNTIME_SERVICES *gRT;
 
 
-
+#if TSE_CLANG_SUPPORT
+#define HiiGetString TseHiiGetString
+#endif
 
 typedef struct
 {

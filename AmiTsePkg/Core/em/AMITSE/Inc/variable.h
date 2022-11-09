@@ -1,28 +1,10 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2011, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/Inc/variable.h $
-//
-// $Author: Arunsb $
-//
-// $Revision: 9 $
-//
-// $Date: 1/30/12 1:33a $
-//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 //*****************************************************************//
 /** @file variable.h
     Variable handling header
@@ -116,7 +98,7 @@ EFI_STATUS VarBuildDefaults( VOID );
 VOID *VarGetNvramName( CHAR16 *name, EFI_GUID *guid, UINT32 *attributes, UINTN *size );
 EFI_STATUS VarSetNvramName( CHAR16 *name, EFI_GUID *guid, UINT32 attributes, VOID *buffer, UINTN size );
 VOID *VarGetNvram( UINT32 variable, UINTN *size );
-VOID *VarGetNvramQuestionValue(UINT32 variable, UINTN Offset, UINTN Size);
+VOID *VarGetNvramQuestionValue(UINT32 variable, UINT32 Offset, UINTN Size);
 EFI_STATUS VarSetNvram( UINT32 variable, VOID *buffer, UINTN size );
 EFI_STATUS VarGetDefaults( UINT32 variable, UINT32 offset, UINTN size, VOID *buffer );
 EFI_STATUS VarGetValue( UINT32 variable, UINT32 offset, UINTN size, VOID *buffer );
@@ -128,19 +110,9 @@ VOID *VarGetVariable( UINT32 variable, UINTN *size );
 EFI_STATUS _VarGetData( UINT32 variable, UINT32 offset, UINTN size, VOID *buffer, BOOLEAN useDefaults );
 EFI_STATUS _VarGetSetValue( UINTN command, NVRAM_VARIABLE *list, UINT32 variable, UINT32 offset, UINTN size, VOID *buffer );
 
+EFI_STATUS _VarGetSetValueForBitField( UINTN command, NVRAM_VARIABLE *list, UINT32 variable, UINT32 offset, UINTN size, VOID *buffer,VOID * ControlPtr );
+VOID* _VarGetValueForBitFieldNvram(UINT32 variable, UINT32 offset, UINTN size, VOID * ControlPtr );
+EFI_STATUS _VarSetValueForBitFieldNvram(UINT32 variable, UINT32 offset, UINTN size, VOID *buffer, VOID * ControlPtr );
+VOID UefiGetQuestionWidthForBitFieldVariable(VOID *IfrPtr, UINTN *StartBit, UINTN *EndBit, UINTN *Width);
 #define TRACE_TSE 0xFFFFFFFF
 #endif /* _VARIABLE_H_ */
-
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**         (C)Copyright 2011, American Megatrends, Inc.             **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093       **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************

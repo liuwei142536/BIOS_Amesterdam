@@ -25,26 +25,17 @@ LIBRARY_CLASS = StyleHookBin
   MdePkg/MdePkg.dec
   AmiModulePkg/AmiModulePkg.dec
   MdeModulePkg/MdeModulePkg.dec
-  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
-  IntelFrameworkPkg/IntelFrameworkPkg.dec
 
   [Protocols]
   gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
-  gEfiOEMBadgingProtocolGuid
   gEfiSimpleFileSystemProtocolGuid
-#  gEfiLegacyBiosProtocolGuid
-  gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
   gEfiBlockIoProtocolGuid
-  gEfiFirmwareVolumeProtocolGuid
   gEfiSimpleTextInProtocolGuid
   gEfiLoadedImageProtocolGuid
   gEfiDriverHealthProtocolGuid
 
 [Guids]
-  gEfiConsoleOutDeviceGuid
-  
+ 
   
 [BuildOptions]
 MSFT:*_*_*_CC_FLAGS = /DTSE_FOR_APTIO_4_50

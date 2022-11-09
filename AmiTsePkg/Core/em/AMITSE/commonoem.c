@@ -1,29 +1,11 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2015, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/commonoem.c $
-//
-// $Author: Arunsb $
-//
-// $Revision: 39 $
-//
-// $Date: 5/29/12 3:18a $
-//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
 /** @file commonoem.c
     contains default implementation of TSE hooks
 
@@ -39,26 +21,9 @@
 #include "AMITSEStrTokens.h"
 #include "AMITSEElinks.h"
 #if !TSE_USE_EDK_LIBRARY
-#include <Protocol/EfiOemBadging.h>
 #include <AmiDxeLib.h>
-#else
 #include <Protocol/OEMBadging.h>
 #endif
-// AptioV server override - start: Setup forms ordering support
-#if SETUP_GROUP_DYNAMIC_PAGES == 1
-#if defined ServerMgmtSetup_SUPPORT && ServerMgmtSetup_SUPPORT == 1
-#include "ServerAutoId.h"
-#endif
-#endif
-// AptioV server override - end
-
-//GPNV errorlogging - start
-#if SETUP_GROUP_DYNAMIC_PAGES == 1
-#if EventLogsSetupPage_SUPPORT == 1
-#include "EventLogsAutoId.h"
-#endif
-#endif     
-// GPNV errorlogging - end
 
 #if TSE_USE_AMI_EFI_KEYCODE_PROTOCOL
 #include "Protocol/AmiKeycode.h"
@@ -248,10 +213,7 @@ extern DXE_MOUSE_PROTOCOL *TSEMouse;
 #endif
 
 // Build time file generated from AMITSE_OEM_HEADER_LIST elink.
-#include "AMITSEOem.h"	
-#include <Protocol\Smbios.h>
-#include <Library\MemoryAllocationLib.h>
-#include <Library\PrintLib.h>
+#include "AMITSEOem.h"		
 
 #ifndef EFI_DEFAULT_BMP_LOGO_GUID
 #define EFI_DEFAULT_BMP_LOGO_GUID \
@@ -261,27 +223,6 @@ extern DXE_MOUSE_PROTOCOL *TSEMouse;
 #if TSE_CLANG_SUPPORT
 #define HiiGetString TseHiiGetString
 #endif
-
-#define SMBIOS_TABLE_NOT_POPULATED 0x40
-
-#define SMBIOS_MAX_NUM_SOCKETS          8
-
-#ifndef MAX_CPU_SOCKET
-#define MAX_CPU_SOCKET                  4
-#endif
-
-#define NEWSTRING_SIZE                  0x200
-
-CHAR16 *gSocketDesgination[8] = {
-    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_0),
-    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_1),
-    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_2),
-    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_3),
-    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_4),
-    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_5),
-    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_6),
-    CONVERT_TO_WSTRING(SMBIOS_TYPE_4_SOCKET_DESIGINTATION_SOCKET_7)
-};
 
 typedef struct {
 	UINT8 CtrlAction;
@@ -341,6 +282,9 @@ extern UINT16 gDbgPrint ;
 EXIT_PAGE_OPTIONS gExitPageOptions[] = {
 	EXIT_PAGE_OPTIONS_LIST
 };
+EXIT_PAGE_OPTIONS* gpExitPageOptions = (EXIT_PAGE_OPTIONS*) &gExitPageOptions;
+UINTN gExitPageOptionsCount = sizeof(gExitPageOptions)/sizeof(EXIT_PAGE_OPTIONS);
+
 extern BOOLEAN GifImageFlag;	//flag to denote the gif animation
 VOID ContribBGRTTableToAcpi (BOOLEAN);
 extern UINT8 gAddBgrtResolutions;
@@ -366,7 +310,7 @@ BOOLEAN gIsRootPageOrderPresent = FALSE;
 //UINT16 *gRootPageOrder;
 HII_FORM_ADDRESS *gRootPageOrder;
 UINT16 gRootPageOrderIndex = 0;
-UINTN	CurrentScreenresolutionX, CurrentScreenresolutionY;
+UINTN	CurrentScreenresolutionX = 0, CurrentScreenresolutionY = 0;
 extern UINTN gPostStatus;
 extern BOOLEAN gOsRecoverySupported;
 extern BOOLEAN gPlatformRecoverySupported;
@@ -375,6 +319,20 @@ extern BOOLEAN IsTSEGopNotificationSupport();
 extern VOID DecrementDynamicPageCount(UINT16 PageClass);
 extern BOOLEAN FormBrowserHandleValid();
 extern BOOLEAN IsEvaluateDefaultOnFirstBootEnabled();
+extern EFI_STATUS TSEGetValue( EFI_HANDLE VariableHandle,CHAR16 *VariableName, EFI_GUID *VariableGuid, UINT32 offset, UINTN size, VOID *buffer );
+extern EFI_STATUS TSESetValue( EFI_HANDLE VariableHandle,CHAR16 *VariableName, EFI_GUID *VariableGuid, UINT32 offset, UINTN size, VOID *buffer );
+extern VOID StartGIFTimer();
+extern VOID StopGIFTimer();
+VOID  EFIAPI SetupDebugPrint(IN CONST CHAR8  *Format, ...) ;
+#if SUPPRESS_PRINT
+    #define SETUP_DEBUG_TSE(format,...)
+#else //Else of SUPPRESS_PRINT
+#if BUILD_OS == BUILD_OS_LINUX
+    #define SETUP_DEBUG_TSE(format,...) SetupDebugPrint(format, ##__VA_ARGS__)
+#else //Else of BUILD_OS == BUILD_OS_LINUX
+    #define SETUP_DEBUG_TSE(format,...) SetupDebugPrint(format, __VA_ARGS__)
+#endif //End of BUILD_OS == BUILD_OS_LINUX
+#endif
 /**
     This function is the generic implementation of
     drawing quiet boot logo. This function is available
@@ -389,31 +347,24 @@ EFI_STATUS SetNativeResFromEdid (VOID);
 VOID DrawQuietBootLogo(VOID)
 {
     EFI_STATUS 	Status;
-    BOOLEAN 	LogoToDo = TRUE;
-    EFI_OEM_BADGING_PROTOCOL *Badging = NULL;
-    UINT32 		Instance = 0;
-    EFI_BADGING_FORMAT Format;
     UINT8 		*ImageData = NULL;
     UINTN 		ImageSize = 0;
-    EFI_BADGING_DISPLAY_ATTRIBUTE Attribute;
+    CO_ORD_ATTRIBUTE Attribute;
     INTN 		CoordinateX = 0;
     INTN 		CoordinateY = 0;
     EFI_GUID 	LogoFile = EFI_DEFAULT_BMP_LOGO_GUID;
     UINTN 		Width, Height;
     BOOLEAN 	AdjustSize = TRUE;
-	UINTN		NoOfHandles = 0;
-	EFI_HANDLE 	*Handles;
-	UINTN		HandleIndex = 0;
 	BOOLEAN		AddBgrtToAcpi = TRUE;
     CHAR16 *EvalText = NULL;
 	
-	TRACE((TRACE_TSE,"\n[TSE] DrawQuietBootLogo() Entering :\n"));
+    SETUP_DEBUG_TSE("[TSE] DrawQuietBootLogo() Entering :\n");
 	// Draw the Logo
 #if TSE_SUPPORT_NATIVE_RESOLUTION
 	SetNativeResFromEdid ();		
 #endif
 	Status = GetGraphicsBitMapFromFV( &LogoFile, (VOID**)&ImageData, &ImageSize );
-	TRACE((TRACE_TSE,"\n[TSE] GetGraphicsBitMapFromFV : Status = %r  ImageData = %x ImageSize = %d\n",Status,ImageData,ImageSize));
+	SETUP_DEBUG_TSE("[TSE] GetGraphicsBitMapFromFV : Status = %r  ImageData = %x ImageSize = %d\n",Status,ImageData,ImageSize);
 	MouseStop();
   	if ( !EFI_ERROR(Status) )
 	{
@@ -432,7 +383,7 @@ VOID DrawQuietBootLogo(VOID)
                         &Width,
                         &Height
                         );
-        TRACE((TRACE_TSE, "\n[TSE] DrawImage() : Status = %r \n",Status));
+        SETUP_DEBUG_TSE("[TSE] DrawImage() : Status = %r \n",Status);
         AdjustSize = FALSE;
 		if (EFI_SUCCESS != Status)
 		{
@@ -443,69 +394,7 @@ VOID DrawQuietBootLogo(VOID)
         if (!GifImageFlag)
 	        MemFreePointer((VOID **)&ImageData);
 	}
-
-    //Locate Badging protocol Handles
-	Status = gBS->LocateHandleBuffer(ByProtocol,&gEfiOEMBadgingProtocolGuid,NULL,&NoOfHandles,&Handles);
-	TRACE((TRACE_TSE,"\n[TSE] LocateHandleBuffer(gEfiOEMBadgingProtocolGuid) : Status = %r NoOfHandles = %d\n",Status,NoOfHandles));
-	if (!EFI_ERROR (Status))
-	{
-		if (!gAddBgrtResolutions)		//to support oem logo module. If logo.ffs not present from TSE then this wiil set the gAddBgrtResolutions.
-		{
-			gAddBgrtResolutions = 1;
-		}
-		TRACE((TRACE_TSE,"\n[TSE] gAddBgrtResolutions = %d\n",gAddBgrtResolutions));
-
-		// for each badging protocol
-		for(HandleIndex=0; HandleIndex<NoOfHandles;HandleIndex++)
-		{
-			Badging = NULL;
-			Instance = 0;
-			gBS->HandleProtocol(Handles[HandleIndex],&gEfiOEMBadgingProtocolGuid,(VOID**)&Badging);
-			if(Badging != NULL)
-				LogoToDo = TRUE;
-
-		    //Draw all Logo obtained from Badging protocol or FV
-			while ( LogoToDo )
-		    {
-	            Status = Badging->GetImage (
-	                            Badging,
-	                            &Instance,
-	                            &Format,
-	                            &ImageData,
-	                            &ImageSize,
-	                            &Attribute,
-	                            (UINTN*)&CoordinateX,
-	                            (UINTN*)&CoordinateY
-	                            );
-	            if(EFI_ERROR (Status))
-	            {
-	                LogoToDo = FALSE;
-	                break;
-	            }
-		        Status = DrawImage( 
-		                        ImageData,
-		                        ImageSize,
-		                        (CO_ORD_ATTRIBUTE)Attribute,
-		                        CoordinateX,
-		                        CoordinateY,
-		                        AdjustSize,
-		                        &Width,
-		                        &Height
-		                        );
-				if (EFI_SUCCESS != Status)			//Not Adding BGRT table to ACPI
-				{
-					AddBgrtToAcpi = FALSE;
-				}
-		        AdjustSize = FALSE;
-
-		        //In case of gif animation not to clear the image data
-		        if(!GifImageFlag)
-		            MemFreePointer((VOID **)&ImageData);	        
-			}
-	  	}
-		if(NoOfHandles)
-			gBS->FreePool(Handles);
-	}
+  	
 	gAddBgrtResolutions = 0;
 	if (TRUE == AddBgrtToAcpi)
 	{
@@ -513,8 +402,8 @@ VOID DrawQuietBootLogo(VOID)
 	}
 	MouseRefresh();
 	GetScreenResolution(&CurrentScreenresolutionX, &CurrentScreenresolutionY);
-	TRACE((TRACE_TSE,"\n[TSE] CurrentScreenresolutionX = %d  CurrentScreenresolutionY = %d \n",CurrentScreenresolutionX,CurrentScreenresolutionY));
-	TRACE(( TRACE_TSE, "\n[TSE] DrawQuietBootLogo() Exiting :\n"));
+	SETUP_DEBUG_TSE("[TSE] CurrentScreenresolutionX = %d  CurrentScreenresolutionY = %d \n",CurrentScreenresolutionX,CurrentScreenresolutionY);
+	SETUP_DEBUG_TSE("[TSE] DrawQuietBootLogo() Exiting :\n");
 
 	if (IsSetupPrintEvalMessage())
     {
@@ -552,160 +441,8 @@ VOID DrawQuietBootLogo(VOID)
         password.
 
 **/
-extern EFI_STATUS InitEsaTseInterfaces (void);	
+extern EFI_STATUS InitEsaTseInterfaces (void);
 extern VOID MouseInit(VOID);
-
-/**
-
-  Acquire the string associated with the Index from SMBIOS structure and return it.
-  The caller is responsible for freeing the string buffer.
-
-  @param    OptionalStrStart  The start position to search the string
-  @param    Index             The index of the string to extract
-  @param    String            The string that is extracted
-
-  @retval   EFI_SUCCESS       The function returns EFI_SUCCESS if successful.
-  @retval   EFI_NOT_FOUND     The function returns EFI_NOT_FOUND if unsuccessful.
-
-**/
-EFI_STATUS
-SmbiosGetOptionalStringByIndex (
-  IN      CHAR8                   *OptionalStrStart,
-  IN      UINT8                   Index,
-  OUT     CHAR16                  **String
-  )
-{
-  UINTN          StrSize;
-
-  if (Index == 0) {
-    return EFI_INVALID_PARAMETER;
-  }
-
-  StrSize = 0;
-  do {
-    Index--;
-    OptionalStrStart += StrSize;
-    StrSize           = AsciiStrSize (OptionalStrStart); // size includes null terminator
-  // SMBIOS strings are NULL terminated, and end of all strings is indicated with NULL
-  // loop until at end of all SMBIOS strings (found NULL terminator at string index past string's NULL), and Index != 0
-  } while (OptionalStrStart[StrSize] != 0 && Index != 0);
-
-  if ((Index != 0) || (StrSize == 1)) {
-    // Meet the end of strings set but Index is non-zero
-    return EFI_INVALID_PARAMETER;
-  } else {
-    AsciiStrToUnicodeStr (OptionalStrStart, *String);
-  }
-
-  return EFI_SUCCESS;
-}
-
-VOID PostReport(VOID)
-{
-  CHAR16                                *PostCpuInfo = NULL;
-  CHAR16                                *PostMemInfo;
-  EFI_STATUS                            Status;
-  EFI_SMBIOS_TABLE_HEADER               *SmbiosRecord;
-  SMBIOS_TABLE_TYPE4                    *SmbiosType4Record;
-  SMBIOS_TABLE_TYPE17                   *SmbiosType17Record;
-  EFI_SMBIOS_HANDLE                     SmbiosHandle;
-  EFI_SMBIOS_TYPE                       SmbiosType;
-  UINT32                                i;
-  EFI_SMBIOS_PROTOCOL                   *Smbios;
-  UINTN                                 StrSize;
-  UINTN                                 SocketIndex;
-  CHAR16                                *NewString;
-  UINT8                                 StrIndex;
-  CHAR16                                *VersionString[MAX_CPU_SOCKET];
-  CHAR16                                *String = NULL;
-  UINT32                                Freq;
-
-  //Initialize Variables
-  StrSize = NEWSTRING_SIZE;
-  String = AllocateZeroPool (StrSize);
-  PostMemInfo = AllocateZeroPool (StrSize);
-  for (SocketIndex = 0; SocketIndex < MAX_CPU_SOCKET; SocketIndex++) {
-    VersionString[SocketIndex] = AllocateZeroPool (StrSize);
-  }
-
-  // Get Smbios protocol
-  Status = gBS->LocateProtocol (
-                  &gEfiSmbiosProtocolGuid,
-                  NULL,
-                  (VOID **)&Smbios
-                  );
-  if (EFI_ERROR(Status)) {
-    DEBUG((EFI_D_ERROR, "[%a](%d) LocateProtocol Failed.\n", __FUNCTION__, __LINE__));
-    return;
-  }
-
-  // Get CPU info From Smbios Type 4
-  SmbiosHandle = SMBIOS_HANDLE_PI_RESERVED;
-  SmbiosType = EFI_SMBIOS_TYPE_PROCESSOR_INFORMATION;
-  for (i = 0; ; ++i) {
-    Status = Smbios->GetNext (Smbios, &SmbiosHandle, &SmbiosType, &SmbiosRecord, NULL);
-    if (EFI_ERROR(Status)) {
-      break;
-    }
-
-    SmbiosType4Record = (SMBIOS_TABLE_TYPE4 *) SmbiosRecord;
-    if ((SmbiosType4Record->Status & SMBIOS_TABLE_NOT_POPULATED) == 0) {
-      continue; //Not populated.
-    }
-
-    StrIndex = SmbiosType4Record->Socket;
-    Status = SmbiosGetOptionalStringByIndex ((CHAR8*)((UINT8*)SmbiosType4Record + SmbiosType4Record->Hdr.Length), StrIndex, &NewString);
-    if (EFI_ERROR(Status)) {
-      DEBUG((EFI_D_ERROR, "[%a](%d) SmbiosGetOptionalStringByIndex Failed.\n", __FUNCTION__, __LINE__));
-      break;
-    }
-
-    for (SocketIndex = 0; SocketIndex < SMBIOS_MAX_NUM_SOCKETS; ++SocketIndex) {
-        if (StrCmp(gSocketDesgination[SocketIndex], NewString) == 0) {
-          break;
-        }
-    }
-    if (SocketIndex >= SMBIOS_MAX_NUM_SOCKETS) {
-      break;
-    };
-
-    if (SocketIndex < MAX_CPU_SOCKET) {
-      StrIndex = SmbiosType4Record->ProcessorVersion;
-      if (SmbiosGetOptionalStringByIndex ((CHAR8*)((UINT8*)SmbiosType4Record + SmbiosType4Record->Hdr.Length), StrIndex, &VersionString[SocketIndex]) == EFI_SUCCESS) {
-        PostCpuInfo = VersionString[SocketIndex];
-      }
-
-      Freq = SmbiosType4Record->CurrentSpeed;
-      if (PostCpuInfo != NULL) {
-        UnicodeSPrint(String, StrSize, L"\nCPU %d: %s, Speed: %dMHz\n", SocketIndex, PostCpuInfo, Freq);
-        PostManagerDisplayPostMessage(String);
-      }
-      MemFreePointer ((VOID **)&String);
-    }
-  }
-
-  // Get Memory info From Smbios Type 17
-  SmbiosType = EFI_SMBIOS_TYPE_MEMORY_DEVICE;
-  Status = Smbios->GetNext (
-            Smbios, 
-            &SmbiosHandle, 
-            &SmbiosType, 
-            (EFI_SMBIOS_TABLE_HEADER **) (&SmbiosType17Record), NULL);
-  if (EFI_ERROR(Status)) {
-    DEBUG((EFI_D_ERROR, "Can not find SMBIOS information.\n"));
-    return;
-  }
-
-  UnicodeSPrint(PostMemInfo, StrSize, L"Total Memory: %dMB (DDR4 %dMHz)\n\n", SmbiosType17Record->Size, SmbiosType17Record->ConfiguredMemoryClockSpeed);
-  PostManagerDisplayPostMessage(PostMemInfo);
-  MemFreePointer ((VOID **)&PostMemInfo);
-
-  for (SocketIndex = 0; SocketIndex < MAX_CPU_SOCKET; SocketIndex++) {
-    MemFreePointer ((VOID **)&VersionString[SocketIndex]);
-  }
-
-  return;
-}
 
 BOOLEAN ProcessConInAvailability(VOID)
 {
@@ -734,16 +471,6 @@ BOOLEAN ProcessConInAvailability(VOID)
 		if ( text != NULL )
 			PostManagerDisplayPostMessage(text);
 		MemFreePointer( (VOID **)&text );
-                text = HiiGetString(gHiiHandle, STRING_TOKEN(STR_F7_ENTER_BOOTMENU));
-                if (text != NULL) {
-                    PostManagerDisplayPostMessage(text);
-                }
-                MemFreePointer( (VOID **)&text );
-                text = HiiGetString(gHiiHandle, STRING_TOKEN(STR_F12_ENTER_PXE));
-                if (text != NULL) {
-                   PostManagerDisplayPostMessage(text);
-                }
-                MemFreePointer((VOID **)&text);
 #endif
 		gPostScreenMsg = TRUE;
 	}
@@ -762,15 +489,15 @@ BOOLEAN ProcessConInAvailability(VOID)
 			  
 			  
 			  
-#if SETUP_GIF_LOGO_SUPPORT
-			  GifImageFlag = FALSE;
-#endif
+			  if(GifImageFlag)
+			      StopGIFTimer();
 			  					
 			  if (!EFI_ERROR (Status))
 				{
 					PasswordType = gEsaInterfaceForTSE->CheckSystemPassword (AMI_PASSWORD_NONE, &NoOfRetries, NULL);
 					 gPasswordType = PasswordType; // setting the gPasswordType in Esa Boot Only.
-					 MouseInit();
+					 if(AMI_PASSWORD_NONE != PasswordType)
+					     MouseInit();
 				}
 				else{
 					PasswordType = CheckSystemPassword( AMI_PASSWORD_NONE, &NoOfRetries, NULL);
@@ -793,7 +520,8 @@ BOOLEAN ProcessConInAvailability(VOID)
 					gBS->RaiseTPL (TPL_HIGH_LEVEL);
 					gBS->RestoreTPL (OldTpl);
 				}
-				
+				 if(GifImageFlag)
+				     StartGIFTimer();		
 							  
         }
     }
@@ -849,7 +577,7 @@ VOID ProcessEnterSetup(VOID)
       	    }
       	    else
       	    {
-      	    	PasswordType = CheckSystemPassword (AMI_PASSWORD_NONE, &NoOfRetries, NULL);
+      	    	PasswordType = CheckSystemPassword (AMI_PASSWORD_USER, &NoOfRetries, NULL);
       	    }
             if(AMI_PASSWORD_NONE == PasswordType)
             {
@@ -1079,7 +807,7 @@ VOID SupportOSIndication (VOID)
 						&(OsIndicationsSupportAttributes),
 						&DataSize,
 						(VOID *)&OsIndicationsSupported);
-	if(!EFI_ERROR (Status) && DataSize)
+    if(!EFI_ERROR (Status) && DataSize ==  sizeof (UINT64))
 	{
 		OsIndicationsSupported = OsIndicationsSupported|EFI_OS_INDICATIONS_BOOT_TO_FW_UI;
 	}
@@ -1088,7 +816,7 @@ VOID SupportOSIndication (VOID)
 	{
 		DataSize = sizeof (UINT64);
 		Status = pRS->GetVariable (L"OsIndications", &EfiGlobalVariableGuid, &Attributes, &DataSize, (VOID *)&OsIndications);
-		if (!EFI_ERROR (Status))
+        if (!EFI_ERROR (Status) && DataSize ==  sizeof (UINT64))
 		{
 			if(OsIndications & EFI_OS_INDICATIONS_START_OS_RECOVERY)
 			{
@@ -1391,7 +1119,9 @@ VOID CheckForKey (EFI_EVENT Event, VOID *Context)
 		return;
 
     if ( gEnterSetup || gBootFlow )
+    {
         return;
+    }
 	do
 	{
 #if SETUP_SUPPORT_KEY_MONITORING
@@ -1479,7 +1209,7 @@ VOID CheckForKey (EFI_EVENT Event, VOID *Context)
 		{
 			if(
 				( (SETUP_ENTRY_UNICODE	== AmiKey.Key.UnicodeChar)
-				&&(SETUP_ENTRY_SCAN	== AmiKey.Key.ScanCode || SCAN_F2	== AmiKey.Key.ScanCode)
+				&&(SETUP_ENTRY_SCAN	== AmiKey.Key.ScanCode)
 #if TSE_USE_AMI_EFI_KEYCODE_PROTOCOL
 				&& (TSE_CHECK_SHIFTSTATE(AmiKey.KeyState.KeyShiftState, SETUP_ENTRY_SHIFT_STATE))
 #endif
@@ -2225,7 +1955,7 @@ VOID TseUpdateRootPageOrder(VOID)
 		MemFreePointer ((VOID **)&currentBootFlow);
 	}
 
-	if((1 == RootPageOrderCount)&&(EfiCompareGuid(&NullGuid,&RootPageOrder[0].formsetGuid)))
+	if((1 == RootPageOrderCount)||(EfiCompareGuid(&NullGuid,&RootPageOrder[0].formsetGuid)))
 		return;
 
 	if(gRootPageOrder!=NULL)
@@ -2416,8 +2146,7 @@ BOOLEAN HideDynamicFormsets (EFI_GUID *FormSetGuid )
     @retval BOOLEAN. Return TRUE handle matches with elink else FALSE
 
 **/
-CHAR8* StrDup16to8(CHAR16 *String);
-INTN EfiStrCmp (IN CHAR16   *String, IN CHAR16   *String2);
+extern CHAR8* StrDup16to8(CHAR16 *String);
 BOOLEAN VariableHandleSuppressed (EFI_GUID *VariableGuid, CHAR16	*VariableName)
 {
 #if SUPPRESS_HANDLE_FOR_VAR_CREATION	
@@ -2432,7 +2161,7 @@ BOOLEAN VariableHandleSuppressed (EFI_GUID *VariableGuid, CHAR16	*VariableName)
 	}
 	for(i=0; i < HandleSuppressListCount; i++)
 	{
-		if ( (EfiCompareGuid(VariableGuid, &(gHandleSuppressVarList [i].VariableGuid))) && (Strcmp (VariableNameStr8, gHandleSuppressVarList [i].VariableName) ==0) )
+		if ( (EfiCompareGuid(VariableGuid, &(gHandleSuppressVarList [i].VariableGuid))) && (AsciiStrCmp (VariableNameStr8, gHandleSuppressVarList [i].VariableName) ==0) )
 		{
 			return TRUE;
 		}
@@ -2494,42 +2223,45 @@ BOOLEAN IsCallbackForPageAllowed(UINTN Action, PAGE_INFO* PageInfo)
     return TRUE;// Allow callback with current Action for this Page.
 }
 
-#if !TSE_FOR_EDKII_SUPPORT
-#if !defined(MDE_PKG_VERSION) ||  (MDE_PKG_VERSION < 10)
-#if (!(ESA_BINARY_SUPPORT && defined(ESA_TSE_FULL_SUPPORT )&& (ESA_TSE_FULL_SUPPORT ==0)) && !(defined(BUILD_FOR_ESA) && (ESA_TSE_FULL_SUPPORT == 1)))
-VOID EfiStrCpy(IN CHAR16 *Destination, IN CHAR16 *Source);
-UINTN EfiStrLen (IN CHAR16   *String);
-EFI_STATUS EFIAPI StrCpyS (
-  OUT CHAR16       *Destination,
-  IN  UINTN        DestMax,
-  IN  CONST CHAR16 *Source
-  )
-{  
-    if(DestMax <  EfiStrLen((CHAR16 *)Source))
-    {
-        MemCpy(Destination,(VOID*)Source,(DestMax * sizeof(CHAR16)));
-        Destination[DestMax] =L'\0';
-    }
-    else
-        EfiStrCpy(Destination,(CHAR16 *)Source);
+/**
+    This function is used to set the value in the NVRAM
 
-    return EFI_SUCCESS;
-}
-#endif
-#endif
-#endif
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2015, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
+    @param EFI_HANDLE , CHAR16*, EFI_GUID*, UINT32, UINTN, VOID*   
+
+    @retval EFI_STATUS
+    Return EFI_INVALID_PARAMETER, if the variable name, guid matched and handle not matched for
+    the variable with same name and guid present twice.
+    Return EFI_NOT_FOUND,  if the variable name and guid not matched.
+    Return EFI_NOT_FOUND,  if the variable name and guid not matched.
+**/
+EFI_STATUS TSESetValueWrapper( EFI_HANDLE VariableHandle,CHAR16 *VariableName, EFI_GUID *VariableGuid, UINT32 offset, UINTN size, VOID *buffer )
+{
+    EFI_STATUS Status;
+    
+        Status = TSESetValue(VariableHandle,VariableName,VariableGuid,offset,size,buffer);
+    
+    return Status;   
+ }
+
+/**
+    This function is used to get the value from the NVRAM
+
+    @param EFI_HANDLE , CHAR16*, EFI_GUID*, UINT32, UINTN, VOID*   
+
+    @retval EFI_STATUS
+                        Return EFI_INVALID_PARAMETER, if either VariableName or VariableGuid is NULL or 
+                            the requested variable is present more than once the VariableHandle is NULL.
+                        Return EFI_NOT_FOUND,  if the variable name and guid not matched.
+                        Return EFI_SUCCESS, if VariableIndex is found for the variable requested. And VarGetValue is Success.
+                        
+   .
+**/
+EFI_STATUS TSEGetValueWrapper( EFI_HANDLE VariableHandle,CHAR16 *VariableName, EFI_GUID *VariableGuid, UINT32 offset, UINTN size, VOID *buffer )
+{
+    EFI_STATUS Status;
+        
+        Status = TSEGetValue(VariableHandle,VariableName,VariableGuid,offset,size,buffer);
+        
+        return Status;  
+ }
+

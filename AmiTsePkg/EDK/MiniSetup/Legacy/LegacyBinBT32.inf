@@ -16,6 +16,7 @@ LIB | TseStyleLegacyx64.lib|*|*|MYTOOLS
 LIB | TseStyleLegacyx64.lib|*|*|MSFT
 LIB | TseStyleLegacyVS2015x64.lib|*|*|VS2015
 LIB | TseStyleLegacyGCCx64.lib|*|*|GCC
+LIB | TseStyleLegacyVS2019x64.lib|*|*|VS2019
 [binaries.AARCH64]
 LIB | TseStyleLegacyAarch64.lib
 
@@ -28,25 +29,17 @@ LIB | TseStyleLegacyAarch64.lib
   MdeModulePkg/MdeModulePkg.dec
   AmiModulePkg/AmiModulePkg.dec
   AmiCompatibilityPkg/AmiCompatibilityPkg.dec
-  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec
-  IntelFrameworkPkg/IntelFrameworkPkg.dec
-  
+ 
 
 [Protocols]
   gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
-  gEfiOEMBadgingProtocolGuid
   gEfiSimpleFileSystemProtocolGuid
-#  gEfiLegacyBiosProtocolGuid
-  gEfiUnicodeCollation2ProtocolGuid
-  gEfiUnicodeCollationProtocolGuid
   gEfiBlockIoProtocolGuid
-  gEfiFirmwareVolumeProtocolGuid
   gEfiSimpleTextInProtocolGuid
   gEfiLoadedImageProtocolGuid
 
 [Guids]
-  gEfiConsoleOutDeviceGuid
+
   
  [LibraryClasses]
   MemoryAllocationLib
@@ -57,8 +50,6 @@ LIB | TseStyleLegacyAarch64.lib
   DebugLib
   UefiLib
   PrintLib
-#  UefiDriverEntryPoint
-#  AmiIntrinsicLib
   ReportStatusCodeLib
   
   

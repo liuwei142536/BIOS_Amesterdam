@@ -94,21 +94,3 @@ ELINK
 	InvokeOrder = AfterParent
 End
 
-ELINK
-    Name  = "TcgSecurityLoadSetupDefaults,"
-    Parent  = "LoadedPreviousValues,"
-    InvokeOrder = AfterParent
-End
-
-ELINK
-    Name  = "TcgSecurityLoadSetupDefaults,"
-    Parent  = "LoadedBuildDefaults,"
-    InvokeOrder = AfterParent
-End
-
-ELINK
-    Name  = "TcgSecurityLoadSetupDefaults,"
-    Parent  = "LoadedUserDefaults,"
-    InvokeOrder = AfterParent
-End
-

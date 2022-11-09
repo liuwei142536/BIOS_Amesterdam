@@ -218,7 +218,7 @@ End
 
 TOKEN
     Name  = "FV_BB_SIZE"
-    Value  = "0x240000"
+    Value  = "0x170000"
     Help  = "Size of the FV_BB area"
     TokenType = Integer
     TargetEQU = Yes
@@ -2676,14 +2676,6 @@ TOKEN
     TokenType = Boolean
     TargetH = Yes
     TargetMAK = Yes
-End
-
-ELINK
-    Name = "{ { 0x8BEB8C19, 0x3FEC, 0x4fab, 0xA3, 0x78, 0xC9, 0x03, 0xE8, 0x90, 0xFC, 0xAE },EVENT_LOGS_MAIN, NULL},"
-    Parent = "{ SETUP_ROOT_PAGE_ORDER_GUID, BOOT_FLOW_CONDITION_NORMAL, NULL},"
-    Priority = 15
-    Token = "GpnvErrorLogging_SUPPORT" "=" "1"
-    InvokeOrder = AfterParent
 End
 
 PcdMapping

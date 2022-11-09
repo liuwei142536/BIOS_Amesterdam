@@ -16,14 +16,6 @@ TOKEN
 	TargetH = Yes
 End
 
-TOKEN
-	Name  = "TSE_ONEOF_OPTIONS_CONDITION_SUPPORT"
-	Value  = "1"
-	Help  = "The lib provides support for oneof option expression evaluation"
-	TokenType = Boolean
-	TargetH = Yes
-End
-
 PATH
 	Name  = "UEFISRC_DIR"
 End

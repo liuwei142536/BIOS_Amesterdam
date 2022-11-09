@@ -1,39 +1,14 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2010, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/Include/Protocol/AMIPostMgr.h $
-//
-// $Author: Blaines $
-//
-// $Revision: 9 $
-//
-// $Date: 11/10/11 7:17p $
-//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//<AMI_FHDR_START>
-//----------------------------------------------------------------------------
-//
-// Name:		AMIPostMgr.h
-//
-// Description:	AMI post manager protocol related code
-//
-//----------------------------------------------------------------------------
-//<AMI_FHDR_END>
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2021, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 
+/** @file EsaTseInterfaces.h
+*/
+	
 #include "bootflow.h"
 #ifndef _ESA_TSE_INTERFACES_H_
 #define _ESA_TSE_INTERFACES_H_
@@ -57,7 +32,9 @@ typedef enum {
 	CURRSCREENRES_Y,
 	BgrtSafeBuffer,
 	TableKey,
-	EsaPasswordType
+	EsaPasswordType,
+	PostMessageProtocolActive,
+	LaunchOtherSetup
 }BUFFER_IDENTIFIER;
 
 typedef enum {
@@ -280,17 +257,3 @@ extern EFI_GUID	gEsaInterfacesForTseProtocolGuid;
 extern ESA_INTERFACES_FOR_TSE	*gEsaInterfaceForTSE;
 
 #endif /* _ESA_TSE_INTERFACES_H_ */
-
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**     5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093     **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************

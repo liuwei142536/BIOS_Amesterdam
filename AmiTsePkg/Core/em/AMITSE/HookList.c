@@ -1,28 +1,10 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2010, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/HookList.c $
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
 //
-// $Author: Madhans $
-//
-// $Revision: 8 $
-//
-// $Date: 3/28/11 9:06p $
-//
-//*****************************************************************//
-//*****************************************************************//
 //*****************************************************************//
 /** @file HookList.c
     AMITSE Hook definitions
@@ -33,18 +15,65 @@
 #include <Efi.h>
 #include "Token.h"
 #else
-#include "Tiano.h"
 #include "tokens.h"
 #endif
 
+#if TSE_STRICT_MODE_GCC_SUPPORT 
+#include "bootflow.h"
+#include "variable.h"
+
+typedef enum
+{
+    ControlActionUnknown,
+    ControlActionNextLeft,
+    ControlActionNextRight,
+    ControlActionNextUp,
+    ControlActionNextDown,
+    ControlActionPageUp,
+    ControlActionPageDown,
+    ControlActionNextSelection,
+    ControlActionPrevSelection,
+    ControlActionSelect,
+    ControlActionIncreament,
+    ControlActionDecreament,
+    ControlActionBackSpace,
+    ControlActionAbort,
+    ControlActionAlpha,
+    ControlActionNumeric,
+    ControlActionHelpPageUp,
+    ControlActionHelpPageDown,
+
+    ControlActionHome,
+    ControlActionEnd,
+    ControlActionChoose,
+    ControlMouseActionLeftDown,
+    ControlMouseActionLeftUp,
+    ControlActionTimer
+}CONTROL_ACTION;
+
+#if TSE_USE_AMI_EFI_KEYCODE_PROTOCOL
+#include <Protocol/AmiKeycode.h>  
+#else
+#ifndef _AMI_EFI_KEY_DATA_
+#define _AMI_EFI_KEY_DATA_
+typedef struct {
+  EFI_INPUT_KEY  Key;
+} AMI_EFI_KEY_DATA;
+#endif
+#endif
+
+#include "AMITSEElinksHooks.h"
+#endif
 #include "AMITSEElinks.h"
 
 UINTN gHookBase = TSE_HOOKBASE_VALUE;
 
 typedef VOID TSE_HOOK (VOID);
-extern TSE_HOOK HOOK_LIST_FROM_ELINKS;
 
-#define HOOK0	(TSE_HOOK *)((UINTN)TSE_HOOKBASE_VALUE)
+#if !TSE_STRICT_MODE_GCC_SUPPORT 
+TSE_HOOK HOOK_LIST_FROM_ELINKS1;
+#endif
+#define HOOK0   (TSE_HOOK *)((UINTN)TSE_HOOKBASE_VALUE)
 #define HOOK1	(TSE_HOOK *)((UINTN)TSE_HOOKBASE_VALUE+1)
 #define HOOK2	(TSE_HOOK *)((UINTN)TSE_HOOKBASE_VALUE+2)
 #define HOOK3	(TSE_HOOK *)((UINTN)TSE_HOOKBASE_VALUE+3)
@@ -85,19 +114,6 @@ extern TSE_HOOK HOOK_LIST_FROM_ELINKS;
 #define HOOK38	(TSE_HOOK *)((UINTN)TSE_HOOKBASE_VALUE+38)
 #define HOOK39	(TSE_HOOK *)((UINTN)TSE_HOOKBASE_VALUE+39)
 #define HOOK40  (TSE_HOOK *)((UINTN)TSE_HOOKBASE_VALUE+40)
+#define HOOK41  (TSE_HOOK *)((UINTN)TSE_HOOKBASE_VALUE+41)
 
 TSE_HOOK * AMITSE_HookList [] = {HOOK_LIST_FROM_ELINKS, NULL};
-
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**        (C)Copyright 1985-2010, American Megatrends, Inc.         **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**     5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093     **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************

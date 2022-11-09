@@ -19,7 +19,7 @@ End
 
 TOKEN
 	Name  = "TSE_MINOR"
-	Value  = "0x20"
+	Value  = "0x22"
 	Help  = "TSE Minor Version number"
 	TokenType = Expression
 	TargetMAK = Yes
@@ -28,7 +28,7 @@ End
 
 TOKEN
 	Name  = "TSE_BUILD"
-	Value  = "0x1276"
+	Value  = "0x1287"
 	Help  = "TSE Build number"
 	TokenType = Expression
 	TargetMAK = Yes
@@ -138,7 +138,7 @@ End
 TOKEN
 	Name  = "TSE_DEBUG_MESSAGES"
 	Value  = "0x0"
-	Help  = "A switch to enable TSE Debug messages: Bit0: Uefi functions, Bit1: HiiCallbacks, Bit2: HiiNotifications, Bit3: HiiParsing"
+	Help  = "A switch to enable TSE Debug messages: Bit0: Uefi functions, Bit1: HiiCallbacks, Bit2: HiiNotifications, Bit3: HiiParsing, Bit4: HiiVariables"
 	TokenType = Expression
 	TargetH = Yes
 End
@@ -208,7 +208,7 @@ End
 
 TOKEN
 	Name  = "SETUP_ALT_ENTRY_ENABLE"
-	Value  = "0"
+	Value  = "1"
 	Help  = "Enable or disable the SETUP_ALT_ENTRY"
 	TokenType = Boolean
 	TargetH = Yes
@@ -267,7 +267,7 @@ End
 
 TOKEN
 	Name  = "SETUP_BBS_POPUP_ENABLE"
-	Value  = "1"
+	Value  = "0"
 	Help  = "Enable or disable the SETUP_BBS_POPUP_ENABLE."
 	TokenType = Boolean
 	TargetH = Yes
@@ -415,14 +415,6 @@ TOKEN
 End
 
 TOKEN
-	Name  = "TSE_BOOT_ONLY_SPLASH_LOGO_SUPPORT"
-	Value  = "1"
-	Help  = "Turn on the TSE to make boot only driver without UI"
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
 	Name  = "SETUP_RUNTIME_IFR_PROCESSING"
 	Value  = "1"
 	Help  = "Processes IFR data that are added to hii at runtime.  This will cause an increased FW footprint and remove AMIBCP compatibility for those new pages."
@@ -564,7 +556,7 @@ End
 
 TOKEN
 	Name  = "TSE_BOOT_NOW_IN_BOOT_ORDER"
-	Value  = "1"
+	Value  = "0"
 	Help  = "Turn on to see boot override/BBS Popup menu with in the devices listed in boot order."
 	TokenType = Boolean
 	TargetH = Yes
@@ -646,6 +638,7 @@ TOKEN
 	Value  = "0"
 	Help  = "Enable/Disable Evaluation message in Post screen"
 	TokenType = Boolean
+	TargetMAK = Yes
 	TargetH = Yes
 End
 
@@ -692,7 +685,7 @@ End
 
 TOKEN
 	Name  = "SETUP_SUPPORT_ADD_BOOT_OPTION"
-	Value  = "1"
+	Value  = "0"
 	Help  = "Set to enable Add/Delete boot option."
 	TokenType = Boolean
 	TargetH = Yes
@@ -700,7 +693,7 @@ End
 
 TOKEN
 	Name  = "SETUP_SUPPORT_ADD_DRIVER_OPTION"
-	Value  = "1"
+	Value  = "0"
 	Help  = "Set to enable Add/Delete Driver option."
 	TokenType = Boolean
 	TargetH = Yes
@@ -915,14 +908,6 @@ TOKEN
 End
 
 TOKEN
-	Name  = "SETUP_STORE_EFI_KEY_PASSWORD"
-	Value  = "0"
-	Help  = "This Token becomes Obsolete after adding the Token SETUP_STORE_KEYCODE_PASSWORD. / Enables support to store EFI_KEYs as password. TSE Sources should be required to present to Enable this token."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
 	Name  = "TSE_CAPITAL_BOOT_OPTION"
 	Value  = "1"
 	Help  = "This Token Stores/Creates the Boot Option numbers to Capital Hex Numbers"
@@ -1082,15 +1067,6 @@ TOKEN
 End
 
 TOKEN
-	Name  = "TSE_USE_OEM_ACTION_READ_KEY"
-	Value  = "0"
-	Help  = "If user likes to read the key in their own way then enable this token and define _OemActionReadKey function."
-	TokenType = Boolean
-	TargetMAK = Yes
-	TargetH = Yes
-End
-
-TOKEN
 	Name  = "SECONDARY_BOOT_FROM_ENABLED_DEVICES"
 	Value  = "0"
 	Help  = "0-> Loads \EFI\BOOT\BOOT{machine type short-name}.EFI from any of the devices & 1-> Loads the default image only from enabled devices"
@@ -1135,6 +1111,14 @@ TOKEN
     Name  = "OVERRIDE_CheckIsAllowedPasswordCharCombination"
     Value  = "0"
     Help  = "Set to 1 if OEM wants to Override Checking the input Password with Customized character list for Password Controls.The override function is CheckIsAllowedPasswordCharCombination. If 0 TSE will handle this case."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "OVERRIDE_HelperIsPasswordCharValid"
+    Value  = "0"
+    Help  = "Set to 1 if OEM wants to Override Checking the input Password is valid or not.The override function is HelperIsPasswordCharValid."
     TokenType = Boolean
     TargetH = Yes
 End
@@ -1204,38 +1188,6 @@ TOKEN
 End
 
 TOKEN
-	Name  = "OVERRIDE_NoVarStoreSupport"
-	Value  = "0"
-	Help  = "Set to 1 if OEM wants to override the NoVarStoreSupport function from Board module. Obsolete."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "OVERRIDE_NoVarStoreUpdateSystemAccess"
-	Value  = "0"
-	Help  = "Set to 1 if OEM wants to override the NoVarStoreUpdateSystemAccess function from Board module. Obsolete."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "OVERRIDE_ItkSupport"
-	Value  = "0"
-	Help  = "Set to 1 if OEM wants to override the ItkSupport function from Board module. Obsolete."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "OVERRIDE_BbsItkBoot"
-	Value  = "0"
-	Help  = "Set to 1 if OEM wants to override the BbsItkBoot function from Board module. Obsolete."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
 	Name  = "OVERRIDE_GetAMITSEVariable"
 	Value  = "0"
 	Help  = "Set to 1 if OEM wants to override getting the post system password variable. OEM can have their own variable for the system password.The override function is GetAMITSEVariable.If 0 TSE will handle this case."
@@ -1247,30 +1199,6 @@ TOKEN
 	Name  = "OVERRIDE_GetBootTimeOut"
 	Value  = "0"
 	Help  = "Set to 1 if OEM wants to override system Boot timeout value.Post screen will wait for any key based on boot timeout value.The override function is GetBootTimeOut.If 0 TSE will handle this case."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "OVERRIDE_VarBuildItkDefaults"
-	Value  = "0"
-	Help  = "Set to 1 if OEM wants to override the VarBuildItkDefaults function from Board module. Obsolete."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "OVERRIDE_SetSystemAccessValueItk"
-	Value  = "0"
-	Help  = "Set to 1 if OEM wants to override the SetSystemAccessValueItk function from Board module. Obsolete."
-	TokenType = Boolean
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "OVERRIDE_FindVarFromITKQuestionId"
-	Value  = "0"
-	Help  = "Set to 1 if OEM wants to override the FindVarFromITKQuestionId function from Board module. Obsolete."
 	TokenType = Boolean
 	TargetH = Yes
 End
@@ -1812,11 +1740,11 @@ TOKEN
 End
 
 TOKEN
-	Name  = "MSGBOX_PROGRESS_BAR_SEGMENT_COUNT"
-	Value  = "20"
-	Help  = "Mod of 100 with this number should be 0, for example (100 % 20 = 0)."
-	TokenType = Integer
-	TargetH = Yes
+    Name  = "OVERRIDE_BootGetBootOptionNameUEFIAndLegacy"
+    Value  = "0"
+    Help  = "Set to 1 If OEM wants to override Boot options name for UEFI and Legacy.If 0 TSE will handle this case."
+    TokenType = Boolean
+    TargetH = Yes
 End
 
 TOKEN
@@ -1833,14 +1761,6 @@ TOKEN
 	Help  = "BIOS Sign On Message"
 	TokenType = Expression
 	TargetMAK = Yes
-	TargetH = Yes
-End
-
-TOKEN
-	Name  = "TSE_APTIO_5_SUPPORT"
-	Value  = "1"
-	Help  = "Turn on to to build under Aptio 5"
-	TokenType = Boolean
 	TargetH = Yes
 End
 
@@ -2432,7 +2352,7 @@ End
 
 TOKEN
 	Name  = "RT_ACCESS_SUPPORT_IN_HPKTOOL"
-	Value  = "0"
+	Value  = "1"
 	Help  = "0 is default. 0=> Not to set RT flag for Varstore variables. 1=> enable to add RT attribute for Varstore variables, uefisetup.ini attributes persists"
 	TokenType = Expression
 	TargetMAK = Yes
@@ -2441,7 +2361,7 @@ End
 
 TOKEN
 	Name  = "RT_ACCESS_FOR_EFIVARSTORE"
-	Value  = "0"
+	Value  = "1"
 	Help  = "0 is default. 0=> Not to set RT flag for EfiVarstore variables. 1=> enable to add RT attribute for Efivarstore variables, uefisetup.ini attributes persists. It is User's responsibility to secure the variable to which User providing RT attribute."
 	TokenType = Expression
 	TargetMAK = Yes
@@ -2717,6 +2637,14 @@ TOKEN
 End
 
 TOKEN
+    Name  = "TSE_ENFORCE_FDF_PACKAGING"
+    Value  = "0"
+    Help  = "0 is Default. 0=> AMITSE.inf is added to Platform.fdf dynamically. 1=> AMITSE.inf is included in Platform.fdf. Needed for Dynamic PCD to work. ESA update may be needed. Do not enable if TSE_ISOLATE_SETUP_DATA is off."
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
 	Name  = "REPORT_MAPPING_ID_FILE_NAME"
 	Value  = "MissingMappingStrings.txt"
 	TokenType = Expression
@@ -2787,10 +2715,9 @@ End
 Token
     Name = "TSE_CLANG_SUPPORT"
     Value = "0"
-    Help = "0 => Use HiiGetString() from TSE; 1=> CLang build is incompatible with TSE's HiiGetString. TseHiiGetString will be used instead. TSESources needed to change this token"
+    Help = "0 => Use HiiGetString() from TSE; 1=> Use TseHiiGetString(). TseHiiGetString will be used instead. TSESources needed to change this token"
     TokenType = Boolean
     TargetH = Yes
-#    Token = "GENERIC_CORE_CLANG_TOKEN_TBD" "=" "1" 
 End
 
 Token
@@ -2802,11 +2729,23 @@ Token
 End
 
 Token
+    Name  = "JSON_CONFIG_CAPSULE_SUPPORT"
+    Value  = "1"
+    Help  = "0=>Json config capsule is not supported 1=>Json config capsule is supported"
+    TokenType = Boolean
+    TargetH = Yes
+    Token = "AMI_DATA_PROCESSING_PKG_VERSION" ">=" "1"
+    Token = "AMI_CRYPTOPACKAGE_MODULE_REVISION" ">=" "29"
+    Token = "AMI_MODULE_PKG_VERSION" ">=" "54"
+End
+
+Token
     Name = "MAPPING_CONFIG_SUPPORT"
-    Value = "0"
+    Value = "1"
     Help = "Enables Mappinp language configuration support. On enabling this, JSON file with controls and its variable details will be created in the location mentioned in JSON_FILE_PATH token."
     TokenType = Boolean
     TargetMak = Yes
+    TOKEN = "JSON_CONFIG_CAPSULE_SUPPORT" "=" "1"
 End
 
 Token
@@ -2827,6 +2766,44 @@ Token
     Token = "MAPPING_CONFIG_SUPPORT" "=" "1"
 End
 
+Token
+    Name  = "TSE_ALT_DEFAULTS_CONFIGURATION"
+    Value  = "1"
+    Help  = "if 1 - Supports to get the default from altcfg configuration 0 - altcfg defaults are not supported"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+Token
+    Name = "TSE_STRICT_MODE_GCC_SUPPORT"
+    Value = "1"
+    Help = "if 1 - Builds with no warnings in Hooks in GCC 0 - give warning in strict build mode"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TSE_INCONSISTENT_IF_POLICY"
+    Value  = "0"
+    Help  = "0 - Show Inconsistent-if/Warning-if messages during navigation between controls; 1 - Show Inconsistent-if/Warning-if messages when user changes values"
+    TokenType = Expression
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TSE_ENABLE_MULTILINE_FOR_POPUP"
+    Value  = "0"
+    Help  = "1=> is to enable multiline support for popup controls . 0=> is to suppress multiline for popup controls which is defalut behaviour"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+FFS_FILE
+    Name  = "LookupTableFdfFileStatement"
+    FD_AREA  = "FV_MAIN"
+    FILE_Stmt  = "AmiTsePkg/Core/em/AMITSE/LookupTableFdfFileStatement.txt"
+    Token = "MAPPING_CONFIG_SUPPORT" "=" "1"
+End
 
 ELINK
     Name  = "AmiFileBrowserLib"
@@ -3543,21 +3520,6 @@ ELINK
 End
 
 ELINK
-	Name  = "MINISETUPLIB"
-	InvokeOrder = ReplaceParent
-End
-
-ELINK
-	Name  = "TSELITELIB"
-	InvokeOrder = ReplaceParent
-End
-
-ELINK
-	Name  = "AMITSE_Objects"
-	InvokeOrder = ReplaceParent
-End
-
-ELINK
 	Name  = "AMITSE_Hooks"
 	InvokeOrder = ReplaceParent
 End
@@ -3565,12 +3527,6 @@ End
 ELINK
 	Name  = "DrawQuietBootLogo,"
 	Parent  = "DrawQuietBootLogoHook,"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "PostReport,"
-	Parent  = "ProcessConInAvailabilityHook,"
 	InvokeOrder = AfterParent
 End
 
@@ -3713,6 +3669,12 @@ ELINK
 End
 
 ELINK
+    Name  = "SetupPageChangeHook,"
+    Parent  = "SetupPageChangeHookHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
 	Name  = "HOOK38,"
 	Parent  = "AMITSE_Hooks"
 	Priority  = 38
@@ -3753,10 +3715,24 @@ End
 ELINK
     Name  = "SetupReentryHookHook,"
     Parent  = "HOOK40,"
-    Priority  = 39
+    Priority  = 40
     InvokeOrder = AfterParent
 End
 
+ELINK
+    Name  = "HOOK41,"
+    Parent  = "AMITSE_Hooks"
+    Priority  = 41
+    Help  = "Anchor for hook #40 - DO NOT MODIFY."
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SetupPageChangeHookHook,"
+    Parent  = "HOOK41,"
+    Priority  = 41
+    InvokeOrder = AfterParent
+End
 
 ELINK
 	Name  = "LastTSEHook"
@@ -4041,101 +4017,6 @@ ELINK
 	InvokeOrder = ReplaceParent
 End
 
-ELINK
-	Name  = "TSE_LIB_INCLUDES"
-	InvokeOrder = ReplaceParent
-End
-
-ELINK
-	Name  = "-I $(TSEBIN_DIR)"
-	Parent  = "TSE_LIB_INCLUDES"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(TSEBIN_DIR)\Inc"
-	Parent  = "TSE_LIB_INCLUDES"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(TSESRC_DIR)"
-	Parent  = "TSE_LIB_INCLUDES"
-	Token = "MiniSetup_SUPPORT" "=" "1"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(TSESRC_DIR)\AMILOGO"
-	Parent  = "TSE_LIB_INCLUDES"
-	Token = "MiniSetup_SUPPORT" "=" "1"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(UEFISRC_DIR)"
-	Parent  = "TSE_LIB_INCLUDES"
-	Token = "UEFI_SOURCES_SUPPORT" "=" "1"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(TSE_STYLE_DIR)"
-	Parent  = "TSE_LIB_INCLUDES"
-	Token = "TSE_STYLE_EZPORT_SUPPORT" "=" "1"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(TSELITESRC_DIR)"
-	Parent  = "TSE_LIB_INCLUDES"
-	Token = "TseLite_SUPPORT" "=" "1"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(TSE_ADVANCED_DIR)"
-	Parent  = "TSE_LIB_INCLUDES"
-	Token = "TSE_ADVANCED_SUPPORT" "=" "1"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(TSE_BOARD_DIR)"
-	Parent  = "TSE_LIB_INCLUDES"
-	Token = "TSE_BOARD_SOURCE_SUPPORT" "=" "1"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(PROJECT_DIR)"
-	Parent  = "TSE_LIB_INCLUDES"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(PROJECT_DIR)\Include"
-	Parent  = "TSE_LIB_INCLUDES"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(PROJECT_DIR)\Include\Protocol"
-	Parent  = "TSE_LIB_INCLUDES"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(PROJECT_DIR)\Core"
-	Parent  = "TSE_LIB_INCLUDES"
-	InvokeOrder = AfterParent
-End
-
-ELINK
-	Name  = "-I $(BUILD_DIR)"
-	Parent  = "TSE_LIB_INCLUDES"
-	InvokeOrder = AfterParent
-End
 
 ELINK
 	Name  = "AMITSE_OEM_HEADER_LIST"
@@ -4197,6 +4078,361 @@ ELINK
 	InvokeOrder = ReplaceParent
 End
 
+
+ELINK
+    Name  = "DrawQuietBootLogoHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 1
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ProcessConInAvailabilityHook,"
+    Parent  = "AMITSE_Hooks_1"
+    Priority  = 2
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ProcessEnterSetupHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 3
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ProcessProceedToBootHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 4
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "MinisetupDriverEntryHookHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 5
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "PostManagerHandShakeHookHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 6
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "MapControlKeysHook,"
+    Parent  = "AMITSE_Hooks_2"
+    Priority  = 7
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CheckForKeyHook,"
+    Parent  = "AMITSE_Hooks_3"
+    Priority  = 8
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "BeforeLegacyBootLaunchHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 9
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AfterLegacyBootLaunchHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 10
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "BeforeEfiBootLaunchHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 11
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "AfterEfiBootLaunchHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 12
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "SavedConfigChangesHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 13
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "LoadedConfigDefaultsHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 14
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "TimeOutLoopHookHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 15
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "OemKey1HookHook,"
+    Parent  = "AMITSE_Hooks_4"
+    Priority  = 16
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "OemKey2HookHook,"
+    Parent  = "AMITSE_Hooks_4"
+    Priority  = 17
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "OemKey3HookHook,"
+    Parent  = "AMITSE_Hooks_4"
+    Priority  = 18
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "OemKey4HookHook,"
+    Parent  = "AMITSE_Hooks_4"
+    Priority  = 19
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "PasswordEncodeHook,"
+    Parent  = "AMITSE_Hooks_5"
+    Priority  = 20
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SetControlColorsHook,"
+    Parent  = "AMITSE_Hooks_6"
+    Priority  = 21
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "InvalidActionHookHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 22
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "LoadedUserDefaultsHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 23
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "LoadedBuildDefaultsHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 24
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "LoadedPreviousValuesHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 25
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SetupConfigModifiedHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 26
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "DrawPopupMenuHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 27
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "BbsBootHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 28
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "LoadSetupDefaultsHook,"
+    Parent  = "AMITSE_Hooks_10"
+    Priority  = 29
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "PreSystemResetHookHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 30
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "MapControlMouseActionHook,"
+    Parent  = "AMITSE_Hooks_7"
+    Priority  = 31
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ProcessProceedToBootNowHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 32
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ProcessConOutAvailableHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 33
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ProcessUIInitHookHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 34
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AfterInitPostScreenHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 35
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "CheckForClickHook,"
+    Parent  = "AMITSE_Hooks_3"
+    Priority  = 36
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SwitchToPostScreenHook,"
+    Parent  = "AMITSE_Hooks_0"
+    Priority  = 37
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "SetupEntryHook,"
+    Parent  = "AMITSE_Hooks_8"
+    Priority  = 38
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "BootFlowExitHookHook,"
+    Parent  = "AMITSE_Hooks_9"
+    Priority  = 39
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "SetupReentryHookHook,"
+    Parent  = "AMITSE_Hooks_9"
+    Priority  = 40
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "SetupPageChangeHookHook,"
+    Parent  = "AMITSE_Hooks_11"
+    Priority  = 41
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "LastTSEHook"
+    Parent  = "AMITSE_Hooks_0"
+    InvokeOrder = AfterParent
+End
+
+
+ELINK
+    Name  = "AMITSE_Hooks_0"
+    InvokeOrder = ReplaceParent
+End
+ELINK
+    Name  = "AMITSE_Hooks_1"
+    InvokeOrder = ReplaceParent
+End
+ELINK
+    Name  = "AMITSE_Hooks_2"
+    InvokeOrder = ReplaceParent
+End
+ELINK
+    Name  = "AMITSE_Hooks_3"
+    InvokeOrder = ReplaceParent
+End
+ELINK
+    Name  = "AMITSE_Hooks_4"
+    InvokeOrder = ReplaceParent
+End
+ELINK
+    Name  = "AMITSE_Hooks_5"
+    InvokeOrder = ReplaceParent
+End
+ELINK
+    Name  = "AMITSE_Hooks_6"
+    InvokeOrder = ReplaceParent
+End
+ELINK
+    Name  = "AMITSE_Hooks_7"
+    InvokeOrder = ReplaceParent
+End
+ELINK
+    Name  = "AMITSE_Hooks_8"
+    InvokeOrder = ReplaceParent
+End
+ELINK
+    Name  = "AMITSE_Hooks_9"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AMITSE_Hooks_10"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "AMITSE_Hooks_11"
+    InvokeOrder = ReplaceParent
+End
+
 ELINK
 	Name  = "AMITSE_OEM_SKIP_CALLBACK_FORMSET_LIST"
 	InvokeOrder = ReplaceParent
@@ -4211,6 +4447,12 @@ End
 
 ELINK
     Name  = "gAmiTsePkgTokenSpaceGuid.AmiTsePcdPasswordPolicy"
+    Parent  = "ADDITIONAL_AMITSE_PCDs"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "gAmiTsePkgTokenSpaceGuid.AmiTsePcdReconnectPxe"
     Parent  = "ADDITIONAL_AMITSE_PCDs"
     InvokeOrder = AfterParent
 End
@@ -4301,6 +4543,12 @@ ELINK
 End
 
 ELINK
+    Name  = "gAmiTseProcessCapsuleGuid"
+    Parent  = "ADDITIONAL_AMITSE_Guids"
+    InvokeOrder = AfterParent
+End
+
+ELINK
     Name  = '{L"AMITSESetup", {0xc811fa38, 0x42c8, 0x4579, 0xa9, 0xbb, 0x60, 0xe9, 0x4e, 0xdd, 0xfb, 0x34}},'
     Parent  = "NvramPersistentVariables"
     InvokeOrder = AfterParent
@@ -4308,11 +4556,23 @@ ELINK
     Token = "NVRAM_VERSION" ">=" "7" 
 End
 
+ELINK
+    Name  = "FirstBootVariableCheck,"
+    Parent  = "MinisetupDriverEntryHook,"
+    InvokeOrder = AfterParent
+End
 OUTPUTREGISTER
 	Name  = "AUTOGEN_AMITSE_ELINKS"
 	Path  = "Build"
 	File  = "AMITSEElinks.h"
 	Template  = "AMITSEElinks.txt"
+End
+
+OUTPUTREGISTER
+    Name  = "AUTOGEN_AMITSE_HOOKS_ELINKS"
+    Path  = "Build"
+    File  = "AMITSEElinksHooks.h"
+    Template  = "AMITSEElinksHooks.txt"
 End
 
 OUTPUTREGISTER
@@ -4336,13 +4596,25 @@ End
 #	Help  = "Provide GUIDs of variable and Variable name as above formate to suppress while parsing variable if it is present already in other formset."
 #	InvokeOrder = AfterParent
 #End
+
 INFComponent
 	Name  = "AMITSE"
 	File  = "../../../../Build/AMITSE.inf"
 	Package  = "AmiTsePkg"
 	ModuleTypes  = "DXE_DRIVER"
 	Token = "TSE_FOR_EDKII_SUPPORT" "!=" "1"
+	Token = "TSE_ENFORCE_FDF_PACKAGING" "=" "0"
 	Skip_Packaging = Yes
+End
+
+INFComponent
+    Name  = "AMITSE"
+    File  = "../../../../Build/AMITSE.inf"
+    Package  = "AmiTsePkg"
+    ModuleTypes  = "DXE_DRIVER"
+    Token = "TSE_FOR_EDKII_SUPPORT" "!=" "1"
+    Token = "TSE_ISOLATE_SETUP_DATA" "=" "1"
+    Token = "TSE_ENFORCE_FDF_PACKAGING" "=" "1"
 End
 
 INFComponent
@@ -4374,6 +4646,7 @@ FFS_FILE
 	FD_AREA  = "FV_MAIN"
 	FILE_Stmt  = "AmiTsePkg/Core/em/AMITSE/AmiTseFdfFileStatement.txt"
 	Token = "TSE_FOR_EDKII_SUPPORT" "!=" "1"
+	Token = "TSE_ENFORCE_FDF_PACKAGING" "=" "0"
 End
 
 FFS_FILE
@@ -4433,3 +4706,45 @@ FD_AREA
 	Token = "TSE_ROMHOLE_SUPPORT" "=" "1"
 End
 
+TOKEN
+    Name  = "TSE_MAXIMUM_YEAR"
+    Value  = "9999"
+    Help  = "If year, stored in RTC is greater than this value, date will be considered as incorrect"
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TSE_MINIMUM_YEAR"
+    Value  = "1998"
+    Help  = "Minimum allowed year.\If RTC year is less than this value, date will be reset to defaults."
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1998"
+End
+
+TOKEN
+    Name  = "TSE_DEFAULT_YEAR"
+    Value  = "2021"
+    Help  = "Default year. RTC will be reset to this value if current date is invalid."
+    TokenType = Integer
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "TSE_DEFAULT_MONTH"
+    Value  = "1"
+    Help  = "Default month. RTC will be reset to this value if current date is invalid."
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1-12"
+End
+
+TOKEN
+    Name  = "TSE_DEFAULT_DAY"
+    Value  = "1"
+    Help  = "Default day. RTC will be reset to this value if current date is invalid."
+    TokenType = Integer
+    TargetH = Yes
+    Range  = "1-31"
+End

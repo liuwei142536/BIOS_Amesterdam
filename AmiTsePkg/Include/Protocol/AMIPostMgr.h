@@ -1,28 +1,10 @@
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-//**                                                             **//
-//**         (C)Copyright 2015, American Megatrends, Inc.        **//
-//**                                                             **//
-//**                     All Rights Reserved.                    **//
-//**                                                             **//
-//**   5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093  **//
-//**                                                             **//
-//**                     Phone (770)-246-8600                    **//
-//**                                                             **//
-//*****************************************************************//
-//*****************************************************************//
-//*****************************************************************//
-// $Archive: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/Include/Protocol/AMIPostMgr.h $
-//
-// $Author: Blaines $
-//
-// $Revision: 9 $
-//
-// $Date: 11/10/11 7:17p $
-//
-//*****************************************************************//
-//*****************************************************************//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2022, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 //*****************************************************************//
 /** @file AMIPostMgr.h
     AMI post manager protocol related code
@@ -40,8 +22,8 @@
 #define EFI_PROTOCOL_DEFINITION(a) TSE_STRINGIZE(Protocol/a.h)
 #endif
 
-#include EFI_PROTOCOL_DEFINITION(GraphicsOutput)
-#include EFI_PROTOCOL_DEFINITION(SimpleTextIn)
+#include <Protocol/GraphicsOutput.h>
+#include <Protocol/SimpleTextIn.h>
 
 #define AMI_POSTMENU_ATTRIB_FOCUS	0
 #define AMI_POSTMENU_ATTRIB_NON_FOCUS	1
@@ -147,6 +129,7 @@ EFI_STATUS
 #define MSGBOX_TYPE_OKCANCEL	2
 #define MSGBOX_TYPE_YESNO		3
 #define MSGBOX_TYPE_CUSTOM		4
+#define MSGBOX_TYPE_HII_POP     6
 //Message box result buttons
 #define MSGBOX_OK				0
 #define MSGBOX_CANCEL			1
@@ -347,17 +330,3 @@ typedef struct _TSE_INVALIDATE_BGRT_STATUS_PROTOCOL
 extern EFI_GUID	gTSEInvalidateBgrtStatusProtocolGuid;
 
 #endif /* _AMI_POSTMGR_H_ */
-
-//**********************************************************************
-//**********************************************************************
-//**                                                                  **
-//**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
-//**                                                                  **
-//**                       All Rights Reserved.                       **
-//**                                                                  **
-//**     5555 Oakbrook Pkwy, Building 200,Norcross, Georgia 30093     **
-//**                                                                  **
-//**                       Phone: (770)-246-8600                      **
-//**                                                                  **
-//**********************************************************************
-//**********************************************************************

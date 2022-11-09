@@ -1,37 +1,13 @@
-//*************************************************************************
-//*************************************************************************
-//**                                                                     **
-//**        (C)Copyright 1985-2012, American Megatrends, Inc.            **
-//**                                                                     **
-//**                       All Rights Reserved.                          **
-//**                                                                     **
-//**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093           **
-//**                                                                     **
-//**                       Phone: (770)-246-8600                         **
-//**                                                                     **
-//*************************************************************************
-//*************************************************************************
-
-//**********************************************************************
-//
-// $Header: $
-//
-// $Revision:  $
-//
-// $Date: $
-//
-//*****************************************************************************
-
-//<AMI_FHDR_START>
-//----------------------------------------------------------------------------
-//
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
 // Name:        Sign.cbin
-//
 // Description: 
 //  This file the Signon Data Structure definition
-//
-//----------------------------------------------------------------------------
-//<AMI_FHDR_END>
 
 
 // Module specific Includes
@@ -83,7 +59,7 @@ AMI_SIGN_ON Signon= {
 		(UINT8)0x24, (UINT8)'S', (UINT8)'G', (UINT8)'N', (UINT8)0x24,
 		(UINT8)0x2,
 		(UINT16)0x0,
-		CONVERT_TO_STRING(AMITSE_VERSION) " Copyright (C) %04x American Megatrends, Inc. \0" CONVERT_TO_STRING(BIOS_SIGNON_MESSAGE2_STRING) 
+		CONVERT_TO_STRING(AMITSE_VERSION) " Copyright (C) %04x AMI \0" CONVERT_TO_STRING(BIOS_SIGNON_MESSAGE2_STRING) 
 		};
 		
 	

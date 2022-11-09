@@ -3,7 +3,9 @@
 // TSE Elinks MACROs values
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-#define HOOK_LIST_FROM_ELINKS 								@elink(AMITSE_Hooks, "@Child", "", "")
+
+#define HOOK_LIST_FROM_ELINKS 								@elink(AMITSE_Hooks, "@concat( (TSE_HOOK *),@Child)", "", "")
+#define HOOK_LIST_FROM_ELINKS1                              @elink(AMITSE_Hooks, "@Child", "", "")
 #define CONTROL_KEY_MAP_LIST 									@elink(CONTROL_KEY_MAP_LIST, "@Child", "", "")
 #define EXIT_PAGE_OPTIONS_LIST 								@elink(EXIT_PAGE_OPTIONS_LIST, "@Child", "", "")
 #define OEM_KEY_CALLBACK_FN 									@elink(OEM_KEY_CALLBACK_LIST, "@Child", "", "")

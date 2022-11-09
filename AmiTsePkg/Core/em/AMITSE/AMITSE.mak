@@ -1,32 +1,11 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
 #**********************************************************************
-#**********************************************************************
-#**                                                                  **
-#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
-#**                                                                  **
-#**                       All Rights Reserved.                       **
-#**                                                                  **
-#**              5555 Oak brook Pkwy, Norcorss, GA 30093             **
-#**                                                                  **
-#**                       Phone: (770)-246-8600                      **
-#**                                                                  **
-#**********************************************************************
-#**********************************************************************
-
-#**********************************************************************
-# $Header: /Alaska/BIN/Modules/AMITSE2_0/AMITSE/AMITSE.mak 20    7/21/11 2:14a Arunsb $
-#
-# $Revision: 20 $
-#
-# $Date: 7/21/11 2:14a $
-#**********************************************************************
-#<AMI_FHDR_START>
-#
 # Name:	AMITSE.mak
-#
-# Description:	AMI TSE BIN module makefile for Aptio.
-#
-#<AMI_FHDR_END>
-#**********************************************************************
 
 Prepare : $(BUILD_DIR)/SignOn.h $(BUILD_DIR)/AMITSEOem.h $(BUILD_DIR)/AMITSEStrTokens.h
 
@@ -161,6 +140,7 @@ HPKTOOL_COMMAND_LINE+=-mcs
 HPKTOOL_COMMAND_LINE+=-mcd$(MAPPING_CONFIG_DXE_SUPPORT)
 endif
 HPKTOOL_COMMAND_LINE+=-tml$(TSE_MAPPING_LANGUAGE)
+HPKTOOL_COMMAND_LINE2+=-tml$(TSE_MAPPING_LANGUAGE)
 ifeq ($(MANUFACTURING_MODE_SUPPORT),1)
 HPKTOOL_COMMAND_LINE+=-dms
 HPKTOOL_COMMAND_LINE2+=-dms
@@ -358,8 +338,8 @@ endif
   MdePkg/MdePkg.dec$(EOL)\
 #  AmiModulePkg/AmiModulePkg.dec$(EOL)\
   MdeModulePkg/MdeModulePkg.dec$(EOL)\
-  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec$(EOL)\
   IntelFrameworkPkg/IntelFrameworkPkg.dec$(EOL)\
+  IntelFrameworkModulePkg/IntelFrameworkModulePkg.dec$(EOL)\
   $(subst $(SPACE),$(EOL)$(SPACE),$(ADDITIONAL_AMITSE_Packages))$(EOL)\
 ">> $(BUILD_DIR)/AMITSE.inf
 ##
@@ -391,22 +371,15 @@ endif
   gEfiConsoleControlProtocolGuid$(EOL)\
   gEfiFirmwareVolume2ProtocolGuid$(EOL)\
   gEfiUnicodeCollation2ProtocolGuid$(EOL)\
-  gEfiUnicodeCollationProtocolGuid$(EOL)\
-  gEfiOEMBadgingProtocolGuid$(EOL)\
   gEfiSimpleFileSystemProtocolGuid$(EOL)\
-  gEfiUnicodeCollation2ProtocolGuid$(EOL)\
-  gEfiUnicodeCollationProtocolGuid$(EOL)\
   gEfiBlockIoProtocolGuid$(EOL)\
   gEfiLegacyBiosProtocolGuid$(EOL)\
-  gEfiFirmwareVolumeProtocolGuid$(EOL)\
   gEfiSimpleTextInProtocolGuid$(EOL)\
   gEfiLoadedImageProtocolGuid$(EOL)\
-  gEfiFirmwareVolume2ProtocolGuid$(EOL)\
   gAmiPostManagerProtocolGuid$(EOL)\
   gTSEInvalidateBgrtStatusProtocolGuid$(EOL)\
   gEsaInterfacesForTseProtocolGuid$(EOL)\
   gEsaFileBrowserProtocolGuid$(EOL)\
-  gEfiSmbiosProtocolGuid$(EOL)\
   $(subst $(SPACE),$(EOL)$(SPACE),$(ADDITIONAL_AMITSE_Protocols))$(EOL)\
 ">> $(BUILD_DIR)/AMITSE.inf
 ##
@@ -454,7 +427,8 @@ $(EOL)\
 	@$(ECHO) \
 "$(EOL)\
 [Depex]$(EOL)\
-  TRUE$(EOL)\
+  gEfiVariableArchProtocolGuid AND gEfiVariableWriteArchProtocolGuid$(EOL)\
+  $(EOL)\
 ">> $(BUILD_DIR)/AMITSE.inf
 ##
 ## BuildOptions Section
@@ -466,18 +440,3 @@ $(EOL)\
   GCC:*_*_*_CC_FLAGS = -nodefaultlibs -DTSE_FOR_APTIO_4_50$(EOL)\
   *_*_*_BUILD_FLAGS=-s$(EOL)\
 ">> $(BUILD_DIR)/AMITSE.inf
-
-
-#**********************************************************************
-#**********************************************************************
-#**                                                                  **
-#**        (C)Copyright 1985-2015, American Megatrends, Inc.         **
-#**                                                                  **
-#**                       All Rights Reserved.                       **
-#**                                                                  **
-#**             5555 Oakbrook Pkwy, Norcross, Georgia 30093          **
-#**                                                                  **
-#**                       Phone: (770)-246-8600                      **
-#**                                                                  **
-#**********************************************************************
-#**********************************************************************
