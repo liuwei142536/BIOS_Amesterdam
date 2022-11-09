@@ -1,0 +1,35 @@
+TOKEN
+    Name  = "NvLockSmiFlashHook_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable SCE Callback library support in Project"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetMAK = Yes
+    Master = Yes
+End
+
+ELINK
+    Name  = "SmiUpdateStart,"
+    Parent  = "SMIFlashPreUpdateList"
+    InvokeOrder = BeforeParent
+End
+
+ELINK
+    Name  = "SmiUpdateEnd,"
+    Parent  = "SMIFlashEndUpdateList"
+    Priority  = -255
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "NvLockSmiFlashHook"
+    File  = "NVLockSMIFlashHook.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "BASE"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.NvLockSmiFlashHook"
+    Override  = "AmiModulePkg.SmiFlash"
+End

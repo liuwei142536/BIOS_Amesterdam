@@ -1,0 +1,185 @@
+TOKEN
+    Name  = "AmiSetupNvLock_SUPPORT"
+    Value  = "1"
+    Help  = "Main switch to enable AMISetupNVLock support in Project"
+    TokenType = Boolean
+    Master = Yes
+End
+
+TOKEN
+    Name  = "LOCK_SETVAR_AT_ENDOFDXE"
+    Value  = "1"
+    Help  = "Token to enable the support to lock the list of variables at EndOfdxe.1-Enable,0-Disable"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "AMISETUP_NVLOCK_STATUS"
+    Value  = "1"
+    Help  = "Token to set the default value of AMISetupNVLock Support in Setup.1-To enable the support.0-To disable the support"
+    TokenType = Boolean
+    TargetEQU = Yes
+    TargetH = Yes
+End
+
+TOKEN
+    Name  = "ENABLE_AMISETUP_NVLOCK_TRACES"
+    Value  = "0"
+    Help  = "Main token to enable AMISetupNVLock Trace support"
+    TokenType = Integer
+    TargetH = Yes
+    Token = "DEBUG_CODE" "=" "1"
+End
+
+PATH
+    Name  = "AmiSetupNvLock_DIR"
+End
+
+ELINK
+    Name = "$(AmiSetupNvLock_DIR)/AMISetupNVLockSetup.sd"
+    Parent = "SETUP_DEFINITIONS"
+    Priority = 80
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name = "$(AmiSetupNvLock_DIR)/AMISetupNVLockSetupStrings.uni"
+    Parent = "SetupStringFiles"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AmiSetupNvWriteHook,"
+    Parent  = "SetVariableHook"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "ValidateAndLockNvHook"
+    InvokeOrder = ReplaceParent
+End
+
+ELINK
+    Name  = "ValidateAndLockNv,"
+    Parent = "ValidateAndLockNvHook"
+    InvokeOrder = AfterParent
+End
+
+INFComponent
+    Name  = "AmiSetupNvLock"
+    File  = "AMISetupNVLock.inf"
+    Package  = "AmiModulePkg"
+    ModuleTypes  = "DXE_RUNTIME_DRIVER"
+End
+
+LibraryMapping
+    Class  = "LibAmiSetupNvLock"
+    Instance  = "AmiModulePkg.AmiSetupNvLock"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.AmiSetupNvLock"
+    Override  = "AmiModulePkg.NvramSmm"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiModulePkg.AmiSetupNvLock"
+    Override  = "AmiModulePkg.NvramDxe"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiCryptoPkg.AmiCryptLib"
+    Override = "AmiModulePkg.NvramSmm"
+    Token = "TSE_HASH_PASSWORD" "=" "1"    
+    Token = "AmiBaseCryptLib_SUPPORT" "=" "1"
+    Token = "TSE_MINOR" ">" "0x16" 
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "CryptoPkg.BaseCryptLib"
+    Override ="AmiModulePkg.NvramSmm"
+    Token = "TSE_HASH_PASSWORD" "=" "1"    
+    Token = "BaseCryptLib_SUPPORT" "=" "1"
+    Token = "TSE_MINOR" ">" "0x16"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiCryptoPkg.AmiCryptLib"
+    Override = "AmiModulePkg.NvramDxe"
+    Token = "TSE_HASH_PASSWORD" "=" "1"    
+    Token = "AmiBaseCryptLib_SUPPORT" "=" "1"
+    Token = "TSE_MINOR" ">" "0x16"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "CryptoPkg.BaseCryptLib"
+    Override ="AmiModulePkg.NvramDxe"
+    Token = "TSE_HASH_PASSWORD" "=" "1"    
+    Token = "BaseCryptLib_SUPPORT" "=" "1"
+    Token = "TSE_MINOR" ">" "0x16"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiTsePkg.PasswordEncode"
+    Override = "AmiModulePkg.NvramDxe"
+    Token = "TSE_MINOR" ">" "0x16"
+End
+
+LibraryMapping
+    Class  = "NULL"
+    Instance  = "AmiTsePkg.PasswordEncode"
+    Override = "AmiModulePkg.NvramSmm"
+    Token = "TSE_MINOR" ">" "0x16"
+End
+
+OUTPUTREGISTER
+    Name  = "NvLockElink"
+    Path  = "Build"
+    File  = "NvLockElink.h"
+    Template  = "AMISetupNVLock.txt"
+End
+
+ELINK
+    Name  = "ProtectedNvVariableForRuntime"
+    InvokeOrder = ReplaceParent
+    Help  = "The Nvram Variables added to this Elink Protected during Runtime. The access Provided after the Password verification. Format { { VariableName}, {Guid }}" 
+End
+
+#ELINK
+#    Name  = "{{'S','e','t','u','p'}, { 0xEC87D643, 0xEBA4, 0x4BB5, {0xA1, 0xE5, 0x3F, 0x3E, 0x36, 0xB2, 0x0D, 0xA9 }}},"
+#    Parent  = "ProtectedNvVariableForRuntime"
+#    InvokeOrder = AfterParent
+#End
+
+#ELINK
+#    Name  = "{{'A','M','I','T','S','E','S','e','t','u','p'}, { 0xc811fa38, 0x42c8, 0x4579, {0xa9, 0xbb, 0x60, 0xe9, 0x4e, 0xdd, 0xfb, 0x34 }}},"
+#    Parent  = "ProtectedNvVariableForRuntime"
+#    InvokeOrder = AfterParent
+#End
+
+ELINK
+    Name  = "BeforeLegacyBoot,"
+    Parent  = "BeforeLegacyBootLaunchHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "AfterLegacyBoot,"
+    Parent  = "AfterLegacyBootLaunchHook,"
+    InvokeOrder = AfterParent
+End
+
+ELINK
+    Name  = "$(AmiSetupNvLock_DIR)/NVLockLegacyBoot.c"
+    Parent  = "TSE_SOURCE_FILES"
+    InvokeOrder = AfterParent
+End

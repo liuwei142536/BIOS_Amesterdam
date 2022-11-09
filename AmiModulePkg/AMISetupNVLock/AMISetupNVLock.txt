@@ -1,0 +1,15 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+
+/** @file AMISetupNVLock.txt
+    This is the Template file to create NvLockElink.h that contain runtime
+    variable need to be blocked
+**/
+
+#define VALIDATE_AND_LOCK_NV_LIST @Elink(ValidateAndLockNvHook,"@Child", " ", "%n")
+#define PROTECTED_VARIABLE_LIST @Elink(ProtectedNvVariableForRuntime,"@Child", " ", "%n")

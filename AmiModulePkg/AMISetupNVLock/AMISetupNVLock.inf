@@ -1,0 +1,37 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2020, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file AMISetupNVLock.inf
+
+
+[Defines]
+  INF_VERSION    = 0x00010015
+  VERSION_STRING = 1.0
+  BASE_NAME      = AmiSetupNvLock
+  MODULE_TYPE    = BASE
+  LIBRARY_CLASS  = LibAmiSetupNvLock | DXE_SMM_DRIVER DXE_RUNTIME_DRIVER DXE_DRIVER DXE_CORE UEFI_APPLICATION UEFI_DRIVER
+
+[Sources]
+  AMISetupNVLock.c
+  Password.c
+  AMISetupNVLock.h
+
+[Packages]
+  MdePkg/MdePkg.dec   
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec 
+  AmiModulePkg/AmiModulePkg.dec
+  AmiTsePkg/AmiTsePkg.dec
+  
+[Guids]
+  gEfiEndOfDxeEventGroupGuid
+  gAmiTseEventAfterBootGuid
+  gAmiTseSetupEnterGuid  
+  gAmiSetupVariableGuid
+  gAmiTseEventBeforeBootGuid
+  
+[Protocols]
+  gEfiDxeSmmReadyToLockProtocolGuid

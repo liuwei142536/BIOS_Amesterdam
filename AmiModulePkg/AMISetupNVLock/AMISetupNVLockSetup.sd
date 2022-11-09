@@ -1,0 +1,45 @@
+//***********************************************************************
+//*                                                                     *
+//*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+//*                                                                     *
+//*      All rights reserved. Subject to AMI licensing agreement.       *
+//*                                                                     *
+//***********************************************************************
+/* @file AMISetupNVLockSetup.sd
+   contains setup definition for AMISetupNVLock 
+*/
+
+#ifdef SETUP_DATA_DEFINITION
+    UINT8 NvLockSetupControl;
+#endif
+ 
+#ifdef ADVANCED_FORM_SET
+    
+#define AMI_SETUP_NV_LOCK_CONTROL\
+    oneof varid     = SETUP_DATA.NvLockSetupControl,\
+        prompt      = STRING_TOKEN(STR_NVLOCK_FV_LOAD_SUPPORT),\
+        help        = STRING_TOKEN(STR_NVLOCK_FV_LOAD_SUPPORT_HELP),\
+        flags       = RESET_REQUIRED,\
+        option text = STRING_TOKEN(STR_AMISETUPNVLOCK_ENABLE),value=1,flags=RESET_REQUIRED;\
+        option text = STRING_TOKEN(STR_AMISETUPNVLOCK_DISABLE),value=0,flags=RESET_REQUIRED;\
+        default     = AMISETUP_NVLOCK_STATUS,\
+        default     = AMISETUP_NVLOCK_STATUS,defaultstore=AmiMfgDefault,\
+    endoneof;
+    
+#ifdef FORM_SET_GOTO
+    goto AMISETUPNVLOCK_CONTROL_FORM_ID,
+    prompt = STRING_TOKEN(AMISETUPNVLOCK_CONTROL_FORM),
+    help = STRING_TOKEN(AMISETUPNVLOCK_CONTROL_FORM_HELP);
+#endif 
+
+#ifdef FORM_SET_FORM
+      // Define forms
+      form formid = AUTO_ID(AMISETUPNVLOCK_CONTROL_FORM_ID),
+           title = STRING_TOKEN(AMISETUPNVLOCK_CONTROL_FORM); 
+           
+           AMI_SETUP_NV_LOCK_CONTROL
+           
+      endform; 
+     
+#endif
+#endif

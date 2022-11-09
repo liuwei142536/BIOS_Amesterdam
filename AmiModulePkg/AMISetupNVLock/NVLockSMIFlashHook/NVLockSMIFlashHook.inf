@@ -1,0 +1,29 @@
+#***********************************************************************
+#*                                                                     *
+#*   Copyright (c) 1985-2019, American Megatrends International LLC.   *
+#*                                                                     *
+#*      All rights reserved. Subject to AMI licensing agreement.       *
+#*                                                                     *
+#***********************************************************************
+## @file NVLockSMIFlashHook.inf
+#  Module that produces Elink function for Bios Flash driver 
+
+[Defines]
+  INF_VERSION    = 0x00010015
+  VERSION_STRING = 1.0
+  BASE_NAME      = NvLockSmiFlashHook
+  MODULE_TYPE    = BASE
+
+[Sources]
+  NVLockSMIFlashHook.c
+
+[Packages]
+  AmiCompatibilityPkg/AmiCompatibilityPkg.dec
+  MdePkg/MdePkg.dec
+  
+[LibraryClasses]
+  AmiDxeLib
+  BaseMemoryLib
+  
+ [Guids] 
+  gEfiGlobalVariableGuid
