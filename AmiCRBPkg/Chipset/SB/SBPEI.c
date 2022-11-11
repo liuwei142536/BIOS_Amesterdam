@@ -255,6 +255,8 @@ SBPEI_Init(
     PEI_TRACE((-1, PeiServices, "USE3_SEL = 0x%x\n", USE3_SEL ));
     PEI_TRACE((-1, PeiServices, "IO3_SEL = 0x%x\n", IO3_SEL ));
     PEI_TRACE((-1, PeiServices, "LVL3_SEL = 0x%x\n", LVL3_SEL ));
+    // Disable GPIO18 Blink
+    IoWrite32((UINT16)GPIO_BASE_ADDRESS + ICH_GPIO_GPO_BLINK, 0);
 #endif
 
     // Install the SB Init Policy PPI
