@@ -698,6 +698,9 @@ VOID PostReport(VOID)
             (EFI_SMBIOS_TABLE_HEADER **) (&SmbiosType17Record), NULL);
   if (EFI_ERROR(Status)) {
     DEBUG((EFI_D_ERROR, "Can not find SMBIOS information.\n"));
+    if (String != NULL) {
+      MemFreePointer ((VOID **)&String);
+    }
     MemFreePointer ((VOID **)&PostMemInfo);
     for (SocketIndex = 0; SocketIndex < MAX_CPU_SOCKET; SocketIndex++) {
       MemFreePointer ((VOID **)&VersionString[SocketIndex]);
