@@ -1056,7 +1056,7 @@ End
 
 TOKEN
     Name  = "LOAD_DEFAULTS_ON_CMOS_CLEAR"
-    Value  = "0"
+    Value  = "1"
     Help  = "Project level control to enable or disable loading setup defaults when CMOS is cleared."
     TokenType = Boolean
     TargetH = Yes
