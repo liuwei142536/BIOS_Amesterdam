@@ -2907,6 +2907,11 @@ OUT  UINT32 *INV1_SEL
     return EFI_SUCCESS;
 }
 
+VOID DisableGPOBlink(VOID)
+{
+    // Disable GPO Blink
+    IoWrite32((UINT16)GPIO_BASE_ADDRESS + ICH_GPIO_GPO_BLINK, 0);
+}
 
 //<AMI_PHDR_START>
 //----------------------------------------------------------------------------
