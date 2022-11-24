@@ -378,6 +378,10 @@
 #string STR_F7_ENTER_BOOTMENU       #language en-US "Press <F7> to enter boot menu."
 
 #string STR_F12_ENTER_PXE           #language en-US "Press <F12> to enter PXE Boot."
+
+#string STR_ERROR_STATUS            #language en-US "Error Status"
+
+#string STR_PWD_FAILED_THREE_TIMES  #language en-US "Enter Incorrect password 3 times. Please restart system!"
 //**********************************************************************//
 //**********************************************************************//
 //**********************************************************************//
