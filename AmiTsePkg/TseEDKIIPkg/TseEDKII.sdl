@@ -1,0 +1,110 @@
+TOKEN
+	Name  = "TSE_EDKII_PACKAGE_GEN_SUPPORT"
+	Value  = "0"
+	Help  = "0 is DEFAULT. Enable this token to generate EDKII AmiTsePkg. This should not be enabled while building the project. Enable this while running TseEDKII.bat. TseEDKII.bat will generate EDKII AmiTsePkg under Build\TseEDKII."
+	TokenType = Boolean
+	Master = Yes
+End
+
+TOKEN
+	Name  = "TSE_FOR_EDKII_SUPPORT"
+	Value  = "1"
+	Help  = "0 is DEFAULT. TSE source support is mandatory. 0 => No support for building TSE in EDK project. 1 => Support to build TSE in EDK project"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+
+TOKEN
+	Name  = "TSE_USE_EDK_LIBRARY"
+	Value  = "1"
+	Help  = "Turn on to Depend on the EDK Libraries, OFF makes use of Aptio Libaray"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "TSE_HASH_PASSWORD"
+	Value  = "0"
+	Help  = "1 => To encode the entered password using hash algorithm. Make it enabled only when cryptopkg or amicryptopkg is available. 0 => Encode entered password using TSE logic."
+	TokenType = Boolean
+	TargetMAK = Yes
+	TargetH = Yes
+	Token = "TSE_USE_EDK_LIBRARY" "=" "1"
+End
+
+TOKEN
+    Name  = "TSE_USE_FILE_BROWSER_PROTOCOL"
+    Value  = "0"
+    Help  = "1=> Will call File Browser library functions."
+    TokenType = Boolean
+    TargetH = Yes
+END
+
+TOKEN
+	Name  = "TSE_USE_AMI_EFI_KEYCODE_PROTOCOL"
+	Value  = "0"
+	Help  = "AMIKeyCode Protocol support. TSE Sources need to be present to disable this token"
+	TokenType = Boolean
+	TargetEQU = Yes
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "SUPPORT_ESRT"
+	Value  = "0"
+	Help  = "Enable to support ESRT"
+	TokenType = Boolean
+	TargetH = Yes
+End
+
+
+TOKEN
+	Name  = "TSE_NVRAM_DEFAULTS_SUPPORT"
+	Value  = "0"
+	Help  = "To enable NVRAM support in TSE modules. This token requires TSE Sources support"
+	TokenType = Boolean
+	TargetH = Yes
+	TargetMAK = Yes
+End
+
+TOKEN
+	Name  = "RESERVED_ADD_DEL_BOOT_OPTION_NAME"
+	Value  = "UEFI:"
+	Help  = "Reserved names that are not allowed to use for add or delete boot options"
+	TokenType = Expression
+	TargetH = Yes
+	Token = "TSE_USE_EDK_LIBRARY" "=" "1"
+End
+
+TOKEN
+    Name  = "SETUP_GROUP_DYNAMIC_PAGES"
+    Value  = "0"
+    Help  = "Allows Dynamic IFR Pages to be relocated under subpages. Make sure to have the VFR changes to show the dynamic pages"
+    TokenType = Boolean
+    TargetH = Yes
+End
+
+Elink
+	Name = "CryptoPkg/CryptoPkg.dec"
+	Parent = "ADDITIONAL_AMITSE_Packages"
+	Token = "TSE_HASH_PASSWORD" "=" "1"
+End
+
+TOKEN
+	Name  = "EDKII_BUILD_ARCH_PATH"
+	Value  = "Build/NT32IA32/DEBUG_VS2008x86/IA32"
+	Help  = "EDK project platform build arch path. This will be passed to STRING_DEFINES_FILE which be have full EDK project's build path to include AMITSEStrDefs.h. Format : <Build/$(PLATFORM_NAME)$(ARCH)/$(TARGET)_$(TOOL_CHAIN_TAG)/$(ARCH)>"
+	TokenType = Expression
+	TargetH = Yes
+End
+
+TOKEN
+	Name  = "STRING_DEFINES_FILE"
+	Value  = '"../../../../../$(EDKII_BUILD_ARCH_PATH)/AmiTsePkg/AMITSE/DEBUG/AMITSEStrDefs.h"'
+	Help  = "Path to link AMITSEStrDefs.h which will be generated under build folder during EDK project build"
+	TokenType = Expression
+	TargetH = Yes
+End
+	

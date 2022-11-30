@@ -1,0 +1,24 @@
+AmiPkg\Configuration\Core.sdl\
+AmiPkg\Configuration\Configuration.sdl AmiPkg\Configuration\Core.sdl\
+AmiCompatibilityPkg\AmiCompatibilityPkg.sdl\
+AmiCompatibilityPkg\Board\Board.sdl AmiCompatibilityPkg\AmiCompatibilityPkg.sdl\
+AmiTsePkg\Core\em\AMITSE\AMITSE.sdl\
+AmiTsePkg\EDK\MiniSetup\TseAdvanced\TseAdvancedBin.sdl AmiTsePkg\Core\em\AMITSE\AMITSE.sdl\
+AmiTsePkg\EDK\MiniSetup\BootOnly\MiniSetupBin.sdl AmiTsePkg\Core\em\AMITSE\AMITSE.sdl\
+AmiTsePkg\EDK\MiniSetup\TseLite\TseLiteBin.sdl AmiTsePkg\Core\em\AMITSE\AMITSE.sdl\
+AmiTsePkg\EDK\MiniSetup\uefi2.1\uefi21Bin.sdl AmiTsePkg\Core\em\AMITSE\AMITSE.sdl\
+AmiTsePkg\EDK\MiniSetup\Ezport\EzportBin.sdl AmiTsePkg\Core\em\AMITSE\AMITSE.sdl\
+AmiTsePkg\EDK\MiniSetup\Legacy\LegacyBin.sdl AmiTsePkg\Core\em\AMITSE\AMITSE.sdl\
+AmiTsePkg\EDK\MiniSetup\EzportPlus\EzportPlusBin.sdl AmiTsePkg\Core\em\AMITSE\AMITSE.sdl\
+AmiTsePkg\EDK\MiniSetup\TSESources.Sdl\
+AmiTsePkg\EDK\MiniSetup\TseAdvanced\TseAdvanced.sdl AmiTsePkg\EDK\MiniSetup\TSESources.Sdl\
+AmiTsePkg\EDK\MiniSetup\BootOnly\MiniSetup.sdl AmiTsePkg\EDK\MiniSetup\TSESources.Sdl\
+AmiTsePkg\EDK\MiniSetup\TseLite\TseLite.sdl AmiTsePkg\EDK\MiniSetup\TSESources.Sdl\
+AmiTsePkg\EDK\MiniSetup\TseLite\StyleHook\StyleHook.sdl AmiTsePkg\EDK\MiniSetup\TseLite\TseLite.sdl\
+AmiTsePkg\EDK\MiniSetup\uefi2.1\Uefi21.sdl AmiTsePkg\EDK\MiniSetup\TSESources.Sdl\
+AmiTsePkg\EDK\MiniSetup\Ezport\Ezport.sdl AmiTsePkg\EDK\MiniSetup\TSESources.Sdl\
+AmiTsePkg\EDK\MiniSetup\Legacy\Legacy.sdl AmiTsePkg\EDK\MiniSetup\TSESources.Sdl\
+AmiTsePkg\EDK\MiniSetup\EzportPlus\EzportPlus.sdl AmiTsePkg\EDK\MiniSetup\TSESources.Sdl\
+CryptoPkg1\CryptoPkg.sdl
+CryptoPkg\Library\BaseCryptLib\BaseCryptLib.sdl CryptoPkg\CryptoPkg.sdl
+AmiTsePkg\TseEDKIIPkg\TseEDKII.sdl CryptoPkg\Library\BaseCryptLib\BaseCryptLib.sdl

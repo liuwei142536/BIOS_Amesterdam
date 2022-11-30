@@ -1,0 +1,16 @@
+<component>
+	name = "TseEDKIIPkg"
+	category = ModulePart
+	Rank = 50
+	LocalRoot = "AmiTsePkg\TseEDKIIPkg"
+	RefName = "AMITSESources.TseEDKIIPkg"
+[files]
+"TseEDKII.sdl"
+"ReadMe.txt"
+"TseEDKII.bat"
+"AMITSEForEdk2.mak"
+"TseEDKII.ldl"
+"Tiano.h"
+"Languages.uni"
+"VFR.uni"
+<endComponent>
