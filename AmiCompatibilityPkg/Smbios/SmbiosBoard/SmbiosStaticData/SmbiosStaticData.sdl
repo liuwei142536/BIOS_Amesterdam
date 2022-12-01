@@ -460,7 +460,7 @@ End
 
 TOKEN
 	Name  = "SYSTEM_MANUFACTURER"
-	Value  = "$(DEFAULT_STRING)"
+	Value  = "Luxshare-ICT"
 	Help  = "Specifies the System Manufacturer Name."
 	TokenType = Expression
 	TargetEQU = Yes
@@ -572,7 +572,7 @@ End
 ############################################################################
 TOKEN
 	Name  = "BASE_BOARD_MANUFACTURER"
-	Value  = "$(DEFAULT_STRING)"
+	Value  = "Luxshare-ICT"
 	Help  = "Specifies the Board Manufacturer."
 	TokenType = Expression
 	TargetEQU = Yes
@@ -752,7 +752,7 @@ End
 
 TOKEN
 	Name  = "SYS_CHASSIS_MANUFACTURER_1"
-	Value  = "$(DEFAULT_STRING)"
+	Value  = "Luxshare-ICT"
 	Help  = "Specifies the System Chassis Manufacturer."
 	TokenType = Expression
 	TargetEQU = Yes
