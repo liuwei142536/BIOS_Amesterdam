@@ -468,7 +468,7 @@ End
 
 TOKEN
 	Name  = "SYSTEM_PRODUCT_NAME"
-	Value  = "HweittLake"
+	Value  = "HewittLake"
 	Help  = "Specifies the System Product Name"
 	TokenType = Expression
 	TargetEQU = Yes
@@ -582,7 +582,7 @@ End
 
 TOKEN
 	Name  = "BASE_BOARD_PRODUCT_NAME"
-	Value  = "HweittLake"
+	Value  = "HewittLake"
 	Help  = "Specifies the Product Name"
 	TokenType = Expression
 	TargetEQU = Yes
