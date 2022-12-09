@@ -238,6 +238,7 @@ BOOLEAN IsDefaultConditionalExpression(VOID);
 #include "variable.h"
 #include "TseElinks.h"
 #include "AMIVfr.h"
+#include "TseCommon.h"
 #if MINISETUP_MOUSE_SUPPORT
 #include "Include/Protocol/MouseProtocol.h"
 extern DXE_MOUSE_PROTOCOL *TSEMouse;
@@ -719,6 +720,21 @@ VOID PostReport(VOID)
   return;
 }
 
+VOID ReportPasswordFailed(VOID)
+{
+    UINTN CurrXPos, CurrYPos;
+    CHAR16 *Str;
+    UINTN StrSize;
+    
+    Str = HiiGetString(gHiiHandle, STRING_TOKEN(STR_PWD_FAILED_THREE_TIMES));
+    StrSize = StrLen(Str);
+    ClearScreen( EFI_BACKGROUND_BLACK | EFI_LIGHTGRAY );
+    _DrawPasswordWindow(STRING_TOKEN(STR_ERROR_STATUS), StrSize, &CurrXPos, &CurrYPos);
+    _ReportInBox(StrSize, STRING_TOKEN(STR_PWD_FAILED_THREE_TIMES), CurrXPos, CurrYPos, FALSE);
+
+    return;
+}
+
 BOOLEAN ProcessConInAvailability(VOID)
 {
 	UINTN NoOfRetries;
@@ -865,6 +881,7 @@ VOID ProcessEnterSetup(VOID)
       	    }
             if(AMI_PASSWORD_NONE == PasswordType)
             {
+                ReportPasswordFailed();
 			
 				OldTpl = gBS->RaiseTPL (TPL_HIGH_LEVEL);
 				gBS->RestoreTPL (TPL_APPLICATION);
@@ -937,6 +954,7 @@ VOID ProcessEnterPxe(VOID)
             }
             if(AMI_PASSWORD_NONE == PasswordType)
             {
+                ReportPasswordFailed();
                 OldTpl = gBS->RaiseTPL (TPL_HIGH_LEVEL);
                 gBS->RestoreTPL (TPL_APPLICATION);
 
